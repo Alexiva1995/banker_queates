@@ -1,0 +1,131 @@
+{
+    "menu": [
+        {
+            "name": "Inicio",
+            "icon": "home",
+            "slug": "dashboard.index",
+            "url": "/panels"
+        },
+        {
+            "url": "/",
+            "name": "Paquetes",
+            "icon": "grid",
+            "slug": "/",
+            "submenu": [
+                {
+                    "url": "/market/bronce",
+                    "name": "Paquetes Bronce",
+                    "icon": "circle",
+                    "slug": "broncePackages"
+                },
+                {
+                    "url": "/market/plata",
+                    "name": "Paquetes Plata",
+                    "icon": "circle",
+                    "slug": "plataPackages"
+                },
+                {
+                    "url": "/market/oro",
+                    "name": "Paquetes Oro",
+                    "icon": "circle",
+                    "slug": "oroPackages"
+                },
+                {
+                    "url": "/market/platino",
+                    "name": "Paquetes Platino",
+                    "icon": "circle",
+                    "slug": "platinoPackages"
+                }
+            ]
+        },
+        {
+            "name": "Informes",
+            "icon": "list",
+            "slug": "/",
+            "submenu": [
+                {
+                    "url": "/ordenes",
+                    "name": "Ordenes",
+                    "icon": "circle",
+                    "slug": "ordenes.index"
+                },
+                {
+                    "url": "/comisiones",
+                    "name": "Comisiones",
+                    "icon": "circle",
+                    "slug": "reports.comision"
+                },
+                {
+                    "url": "/reports/withdraw",
+                    "name": "Retiros",
+                    "icon": "circle",
+                    "slug": "reports.withdraw"
+                },
+                {
+                    "url": "/reports/utility",
+                    "name": "Utilidades",
+                    "icon": "circle",
+                    "slug": "reports.utility"
+                }
+            ]
+        },
+        {
+            "url": "/wallet",
+            "name": "Billetera",
+            "icon": "credit-card",
+            "slug": "app-chat",
+            "submenu": [
+                {
+                    "url": "/wallet",
+                    "name": "Bonos",
+                    "icon": "circle",
+                    "slug": "wallet.index"
+                },
+                {
+                    "url": "/retirar",
+                    "name": "Retiro",
+                    "icon": "circle",
+                    "slug": "retiro"
+                },
+                {
+                    "url": "/transferencia",
+                    "name": "Transferencias",
+                    "icon": "circle",
+                    "slug": "transferencia"         
+                }
+            ]
+        },
+        {
+            "url": "/investments",
+            "name": "Inversiones",
+            "icon": "dollar-sign",
+            "slug": "investment.user.index"
+        },
+        {
+            "url": "/investments/mypackages",
+            "name": "Mis Paquetes",
+            "icon": "columns",
+            "slug": "investment.user.mypackages"
+        },
+        {
+            "url": "/red/unilevel",
+            "name": "Red",
+            "icon": "users",
+            "slug": "financial.unilevel",
+            "submenu": [
+                {
+                    "url": "/red/unilevel",
+                    "name": "Unilevel",
+                    "icon": "circle",
+                    "slug": "red.unilevel"
+                },
+                {
+                    "url": "/red/referred/tree",
+                    "name": "Arbol de referidos",
+                    "icon": "circle",
+                    "slug": "referred.tree"
+                }
+            ]
+        }   
+    ]
+}

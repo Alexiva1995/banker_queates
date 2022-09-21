@@ -1,0 +1,18 @@
+{
+  "menu": 
+  [
+    {
+      "name": "Solicitudes",
+      "icon": "list",
+      "slug": "subadmin.index",
+      "url": "/panels"
+    }
+  ]
+}
+
+
+
+
+
+
+

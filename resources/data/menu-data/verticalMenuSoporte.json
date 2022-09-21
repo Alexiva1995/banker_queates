@@ -1,0 +1,43 @@
+{
+    "menu": [
+      {
+        "name": "Solicitudes",
+        "icon": "edit",
+        "slug": "subadmin.index",
+        "url": "/panels"
+      },
+       {
+        "name": "Informes",
+        "icon": "list",
+        "slug": "/",
+        "submenu":
+        [
+          {
+            "url": "/ordenes",
+            "name": "Ordenes",
+            "icon": "shopping-cart",
+            "slug": ""
+          },
+          {
+            "url": "/comisiones",
+            "name": "Comisiones",
+            "icon": "credit-card",
+            "slug": "comisiones"
+          },
+          {
+            "url": "/anuales",
+            "name": "Membresias Anuales",
+            "icon": "circle",
+            "slug": "anuales"
+          }
+        ]
+      },   
+      {
+        "url": "/user/user-list",
+        "name": "Usuarios",
+        "icon": "users",
+        "slug": ""
+      }
+    ]
+  }
+  
