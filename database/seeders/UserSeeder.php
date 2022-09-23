@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'admin',
             'last_name' => Str::random(5),
-            'email' => 'admin@project7k.com',
+            'email' => 'admin@takeprofits.com',
             'username'=> 'administrador',
             'admin' => '1',
             'password' => Hash::make('12345678'),
@@ -34,7 +34,7 @@ class UserSeeder extends Seeder
         User::create([
             'name'=> 'user',
             'last_name'=> Str::random(5),
-            'email'=> 'user@project7k.com',
+            'email'=> 'user@takeprofits.com',
             'username'=> 'user1',
             'password' => Hash::make('123456789'),
             'email_verified_at' => '2022-03-08 15:52:21',
@@ -45,7 +45,7 @@ class UserSeeder extends Seeder
         User::create([
             'name'=> 'user2',
             'last_name'=> Str::random(5),
-            'email'=> 'user2@project7k.com',
+            'email'=> 'user2@takeprofits.com',
             'username'=> 'user2',
             'password' => Hash::make('123456789'),
             'status' => '1',
@@ -55,7 +55,7 @@ class UserSeeder extends Seeder
         User::create([
             'name'=> 'user3',
             'last_name'=> Str::random(5),
-            'email'=> 'user3@project7k.com',
+            'email'=> 'user3@takeprofits.com',
             'username'=> 'user3',
             'password' => Hash::make('123456789'),
             'status' => '1',
@@ -65,7 +65,7 @@ class UserSeeder extends Seeder
         User::create([
             'name'=> 'SubAdmin',
             'last_name'=> Str::random(5),
-            'email'=> 'subAdmin@project7k.com',
+            'email'=> 'subAdmin@takeprofits.com',
             'username'=> 'user4',
             'admin' => '2',
             'password' => Hash::make('12345678'),

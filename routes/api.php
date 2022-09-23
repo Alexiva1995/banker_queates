@@ -22,10 +22,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('futswap')->group(function () {
-    Route::post('/payment_confirmation', [FutswapController::class, 'paymentConfirmation']);
-    Route::post('/payment/withdrawal', [FutswapController::class, 'withdrawalConfirmation']);
-});
 
 Route::post('/rent-chart', [DashboardController::class, 'getRentChart'])->name('get.rent.chart');
 Route::post('/days-chart', [DashboardController::class, 'getDaysChart'])->name('get.days.chart');
