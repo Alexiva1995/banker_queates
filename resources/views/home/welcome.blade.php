@@ -9,8 +9,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Connect | Yesterday’s dream, today’s reality
-    </title>
+    <title>Take Profits</title>
 
     <link rel="stylesheet" href="{{ asset(mix('vendors/css/vendors.min.css')) }}" />
     <link rel="stylesheet" href="{{ asset('vendors/css/extensions/nouislider.min.css') }}">
