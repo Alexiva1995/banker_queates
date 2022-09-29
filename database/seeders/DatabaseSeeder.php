@@ -18,8 +18,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(UserSeeder::class);
         $this->call(CountrieSeeder::class);
-        $this->call(MembershipTypeSeeder::class);
-        $this->call(MembershipPackageSeeder::class);
+        $this->call(LicensesTypeSeeder::class);
         $this->call(PrefixSeeder::class);
         $this->call(RangesSeeder::class);
         $this->call(OrdersTableSeeder::class);

@@ -17,7 +17,7 @@ class CreateInvestmentsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained('users');
             $table->foreignId('order_id')->constrained('orders');
-            $table->foreignId('package_id')->constrained('membership_packages');
+            $table->foreignId('package_id')->constrained('licenses_packages');
             $table->tinyInteger('payment_plataform')->default(0)->comment('0 - Coinpayments, 1 - Manual');
             $table->double('invested');
             $table->double('gain')->default(0);
