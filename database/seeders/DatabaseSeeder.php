@@ -21,12 +21,12 @@ class DatabaseSeeder extends Seeder
         $this->call(LicensesTypeSeeder::class);
         $this->call(PrefixSeeder::class);
         $this->call(RangesSeeder::class);
-        $this->call(OrdersTableSeeder::class);
+        // $this->call(OrdersTableSeeder::class);
         $this->call(WalletPaymentSeeder::class);
-        $this->call(WalletComissionSeeder::class);
-        $this->call(InvestmentsTableSeeder::class);
-        $this->call(UtilitiesTableSeeder::class);
-        $this->call(UtilitySeeder::class);
+        // $this->call(WalletComissionSeeder::class);
+        // $this->call(InvestmentsTableSeeder::class);
+        // $this->call(UtilitiesTableSeeder::class);
+        // $this->call(UtilitySeeder::class);
         $this->call(WithdrawalSettingSeeder::class);
         $this->call(BonusSeeder::class);
         $this->call(LiquidactionsTableSeeder::class);
