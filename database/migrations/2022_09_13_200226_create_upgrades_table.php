@@ -16,7 +16,7 @@ class CreateUpgradesTable extends Migration
         Schema::create('upgrades', function (Blueprint $table) {
             $table->id();
             $table->foreignId('investment_id')->nullable()->constrained('investments');
-            $table->foreignId('package_id')->constrained('membership_packages');
+            $table->foreignId('package_id')->constrained('licenses_packages');
             $table->tinyInteger('status_utility')->comment('0 - Inactivo, 1 - Activo');
             $table->timestamps();
         });

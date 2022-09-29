@@ -60,9 +60,9 @@ class Investment extends Model
     {
         return $this->hasMany(Upgrade::class, 'investment_id');
     }
-    public function membershipPackage()
+    public function licensePackage()
     {
-        return $this->belongsTo(MembershipPackage::class, 'package_id');
+        return $this->belongsTo(LicensePackage::class, 'package_id');
     }
     public function utilities() {
         return $this->hasMany(Utility::class);

@@ -349,16 +349,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return floatval($result);
     }
 
-    public function gananciaActual()
-    {
-        if (isset($this->investmentHigh()->gain) && $this->investmentHigh()->gain != null) {
-            return number_format($this->investmentHigh()->gain, 2);
-        } else {
-            return number_format(0, 2);
-        }
-    }
-
-
     public function hasReactivacion()
     {
         $hoy = \Carbon\Carbon::now();
@@ -472,40 +462,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
         return $totalIngresos;
     }
-    public  function membresia()
-    {
-
-        $membresia = OrdenPurchase::where([
-                                            ['user_id', '=', Auth::id()],
-                                            ['type', '=', 'anual'],
-                                            ['status', '=', '0']
-                                           ])->count();
-
-        return $membresia;
-    }
-    public  function membresiaActiva()
-    {
-
-        $membresia = OrdenPurchase::where([
-                                            ['user_id', '=', Auth::id()],
-                                            ['type', '=', 'anual'],
-                                            ['status', '=', '1']
-                                           ])->count();
-
-        return $membresia;
-    }
-
-    public  function membresiaCancelada()
-    {
-
-        $membresiaCancelada = OrdenPurchase::where([
-                                            ['user_id', '=', Auth::id()],
-                                            ['type', '=', 'anual'],
-                                            ['status', '=', '2']
-                                           ])->count();
-
-        return $membresiaCancelada;
-    }
+    
 
     public function range()
     {
@@ -517,25 +474,12 @@ class User extends Authenticatable implements MustVerifyEmail
         return Crypt::decryptString($this->wallet);
     }
 
-    public function formulayRechazado()
-    {
-        $user = Auth::user();
-        $formulary = Formulary::where([['user_id', $user->id],['status', '4']])->count();
-
-        return $formulary;
-    }
     public function walletLogs()
     {
         return $this->hasMany(WalletLog::class, 'user_id');
     }
     public function withdrawalErrors(){
         return $this->hasMany(WithdrawalErrors::class, 'user_id');
-    }
-
-    //saldos totales
-    public function balance()
-    {
-        return $this->hasOne('App\Saldo');
     }
 
     public function orders()

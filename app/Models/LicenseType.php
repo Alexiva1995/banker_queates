@@ -5,15 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MembershipType extends Model
+class LicenseType extends Model
 {
     use HasFactory;
 
+    protected $table = 'licenses_types';
     protected $fillable = ['name'];
 
-    public function MembershipPackage()
+    public function licensePackages()
     {
-        return $this->hasMany(MembershipPackage::class, 'membership_types_id');
+        return $this->hasMany(LicensePackage::class, 'license_type_id');
     }
 
 }

@@ -56,11 +56,6 @@ Route::get('/clear-cache', function() {
     return 'DONE'; //Return anything
 });
 
-Route::get('/set-ranges', function() {
-    Artisan::call('set:ranges');
-    return 'DONE'; //Return anything
-});
-
 /*Route::get('/delete', function() {
     Artisan::call('delete:orden');
     return 'DONE'; //Return anything
@@ -255,7 +250,6 @@ Route::post('/change/color/app', [DashboardController::class, 'changeAppColor'])
 
 
 Auth::routes(['verify' => true]);
-//Route::post('/reset-password', [ResetPasswordController::class, 'updatePassword'])->name('updatePassword');
 /* Route Dashboards */
 Route::group(['prefix' => 'dashboard'], function () {
     Route::get('analytics', [DashboardController::class, 'dashboardAnalytics'])->name('dashboard-analytics');
@@ -294,8 +288,6 @@ Route::post('package-status', [FormularyController::class, 'update'])->name('sta
 Route::get('formulary-update', [FormularyController::class, 'formulario'])->name('formulary.update');
 Route::post('formulary-v2', [FormularyController::class, 'reset'])->name('formulary-v2');
 
-
-/* Route Icons */
 //Ruta de los Tickets
 Route::group(['prefix' => 'tickets'], function () {
     Route::get('ticket-create', [TicketsController::class, 'create'])->name('ticket.create');

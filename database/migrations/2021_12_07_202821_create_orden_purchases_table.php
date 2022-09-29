@@ -21,7 +21,7 @@ class CreateOrdenPurchasesTable extends Migration
             $table->string('image')->nullable();
             $table->enum('type', ['anual', 'Bronce', 'Plata', 'Oro', 'Platino']);
             $table->enum('status', [0, 1, 2])->default(0)->comment('0 - En Espera, 1 - Completada, 2 - Rechazada');
-            $table->foreignId('membership_packages_id')->nullable()->constrained('membership_packages');
+            $table->foreignId('license_packages_id')->nullable()->constrained('licenses_packages');
             $table->timestamps();
         });
     }

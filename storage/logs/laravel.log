@@ -1,0 +1,4 @@
+[2022-09-29 14:40:18] local.ERROR: Cannot declare class CreateMembershipTypesTable, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class CreateMembershipTypesTable, because the name is already in use at C:\\laragon\\www\\take_profits\\database\\migrations\\2021_05_03_195558_create_licenses_types_table.php:7)
+[stacktrace]
+#0 {main}
+"} 
