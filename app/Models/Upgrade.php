@@ -15,8 +15,8 @@ class Upgrade extends Model
     {
         return $this->belongsTo(Investment::class, 'investment_id');
     }
-    public function membershipPackage()
+    public function licensePackage()
     {
-        return $this->belongsTo(MembershipPackage::class, 'package_id');
+        return $this->belongsTo(LicensePackage::class, 'package_id');
     }
 }

@@ -5,28 +5,28 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MembershipPackage extends Model
+class LicensePackage extends Model
 {
     use HasFactory;
     
+    protected $table = 'licenses_packages';
     protected $fillable = [
         'amount',
         'rentability',
-        'membership_types_id',
+        'license_type_id',
         'image',
         'dark_image'
     ];
 
-    public function membershipType()
+    public function licenseType()
     {
-        return $this->belongsTo(MembershipType::class, 'membership_types_id');
+        return $this->belongsTo(LicenseType::class, 'license_type_id');
     }
-
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'package_id');
+    }
     public function investments()
-    {
-        return $this->hasMany(Investment::class, 'package_id');
-    }
-    public function order()
     {
         return $this->hasMany(Investment::class, 'package_id');
     }

@@ -21,7 +21,7 @@ class CreateInvestmentsTable extends Migration
             $table->tinyInteger('payment_plataform')->default(0)->comment('0 - Coinpayments, 1 - Manual');
             $table->double('invested');
             $table->double('gain')->default(0);
-            $table->tinyInteger('type')->default(0)->comment('1 - Bronze, 2 - Silver, 3 - Gold, 4 - Platinum');
+            $table->tinyInteger('type')->default(0)->comment('1 - COLIBRI, 2 - ESCORPION, 3 - ANACONDA, 4 - PANTERA, 5 - TIBURON');
             $table->double('capital');
             $table->tinyInteger('status')->default(0)->comment('0 - On standby ,1 - Active  2 - Inactive');
             $table->tinyInteger('pay_utility')->default(0)->comment('0 - Pay, 1 - No Pay');

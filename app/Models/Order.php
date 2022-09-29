@@ -33,9 +33,9 @@ class Order extends Model
     {
         return $this->hasOne(CoinpaymentTransaction::class);
     }
-    public function membershipPackage()
+    public function licensePackage()
     {
-        return $this->belongsTo(MembershipPackage::class, 'package_id');
+        return $this->belongsTo(LicensePackage::class, 'package_id');
     }
     public function status()
     {
