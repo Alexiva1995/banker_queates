@@ -18,7 +18,6 @@ class DatabaseSeeder extends Seeder
 
         $this->call(UserSeeder::class);
         $this->call(CountrieSeeder::class);
-        $this->call(LicensesTypeSeeder::class);
         $this->call(LicensesPackagesSeeder::class);
         $this->call(PrefixSeeder::class);
         $this->call(RangesSeeder::class);

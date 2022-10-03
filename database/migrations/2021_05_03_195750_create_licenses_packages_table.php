@@ -15,9 +15,9 @@ class CreateLicensesPackagesTable extends Migration
     {
         Schema::create('licenses_packages', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 50);
             $table->double('amount');
             $table->double('rentability');
-            $table->foreignId('license_type_id')->constrained('licenses_types');
             $table->string('image')->nullable();
             $table->string('dark_image')->nullable();
             $table->timestamps();
