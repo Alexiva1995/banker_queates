@@ -18,11 +18,9 @@ class ReportController extends Controller
     {
         $user = auth()->user();
         if($user->admin == 1){
-            $ordenes = Order::orderBy('id', 'desc')->with('coinpaymentTransaccion')->get();
-
+            $ordenes = Order::orderBy('id', 'desc')->get();
         }else{
-            $ordenes = Order::where('user_id', $user->id)->with('coinpaymentTransaccion')->orderBy('id', 'desc')->get();
-
+            $ordenes = Order::where('user_id', $user->id)->orderBy('id', 'desc')->get();
         }
 
         return view('reports.index', compact('ordenes'));

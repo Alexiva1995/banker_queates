@@ -14,15 +14,10 @@ class LicensePackage extends Model
         'name',
         'amount',
         'rentability',
-        'license_type_id',
         'image',
         'dark_image'
     ];
 
-    public function licenseType()
-    {
-        return $this->belongsTo(LicenseType::class, 'license_type_id');
-    }
     public function orders()
     {
         return $this->hasMany(Order::class, 'package_id');

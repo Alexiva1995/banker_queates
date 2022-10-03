@@ -14,7 +14,6 @@ use App\Models\Member;
 use App\Models\Bonus;
 use App\Http\Traits\Tree;
 use Hexters\CoinPayment\CoinPayment;
-use DB;
 use App\Http\Controllers\InversionController;
 use App\Models\User;
 use App\Events\UserEvent;
@@ -25,7 +24,6 @@ use App\Models\WalletPayment;
 use App\Services\BonusService;
 use App\Services\FutswapService;
 use Illuminate\Support\Facades\DB as FacadesDB;
-
 use App\Models\Level;
 use App\Models\LicensePackage;
 
@@ -144,17 +142,16 @@ class TiendaController extends Controller
 
     public function procesarOrden(Request $request)
     {
-
+        
         $user = Auth::user();
-        // try {
-        $orden_pack = Order::where([['user_id', $user->id], ['status', '1']])->count();
+        
         $allOrder = Order::where('user_id', $user->id)->where('status', '0')->get();
         // if($orden_pack > 0) return redirect()->back()->with('error','Usted ya tiene un paquete activo');
-        $package = MembershipPackage::where('id', $request->package)->first();
-        $investment = Investment::where('user_id', $user->id)->where('type', $package->membership_types_id)->where('status', 1)->first();
+        $package = LicensePackage::where('id', $request->package)->first();
+        $investment = Investment::where('user_id', $user->id)->where('type', $package->id)->where('status', 1)->first();
         if ($investment == null) {
             foreach ($allOrder as $order) {
-                if ($order->membershipPackage->membership_types_id == $package->membership_types_id) {
+                if ($order->licensePackage->id == $package->id) {
                     $order->status = '2';
                     $order->save();
                 }
@@ -176,20 +173,13 @@ class TiendaController extends Controller
             $orden->type = '0';
             $orden->save();
 
-            if ($orden->id !== null) {
-                //momentaneo hasta que se enlace la plataforma de pago
-                //  $response = $this->futswap->createOrden($user, intval($data['amount']), $data['idorden']);
-                // if($response[0] != 'error')
-                // {
-                //     //redirecciona a la url del pago
-                //     return redirect()->route('scanQr', $response);
-                // }else{
-                //     return back()->with('error', $response[1] );
-                // }
+            if ($orden->id !== null) 
+            {
                 return redirect()->route('dashboard.index')->with('success', 'Orden Creada, procesando su solicitud...');
-            } else {
-                return redirect()->back()->with('error', 'Hubo un error, intente nuevamente');
             }
+            
+            return redirect()->back()->with('error', 'Hubo un error, intente nuevamente');
+            
         } else {
             $newAmount = $package->amount - $investment->invested;
             foreach ($allOrder as $order) {
@@ -215,9 +205,6 @@ class TiendaController extends Controller
             $orden->type = '0';
             $orden->save();
 
-
-
-
             if ($orden->id !== null) {
                 //momentaneo hasta que se enlace la plataforma de pago
                 return redirect()->route('dashboard.index')->with('success', 'Orden Creada, procesando su solicitud...');
@@ -225,11 +212,7 @@ class TiendaController extends Controller
                 return redirect()->back()->with('error', 'Hubo un error, intente nuevamente');
             }
         }
-
-        // } catch (\Throwable $th) {
-        //   Log::error('Tienda - procesarOrden -> Error: ' . $th);
-        //   abort(403, "Ocurrio un error, contacte con el administrador");
-        //}
+        
     }
 
 
