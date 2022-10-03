@@ -16,7 +16,7 @@ class CreateMembersTable extends Migration
         Schema::create('members', function (Blueprint $table) {
             $table->id();
             $table->foreignId('referred_id')->nullable()->constrained('users')->comment('ID del usuario patrocinador al cual se le da el bono');
-            $table->foreignId('orden_purchase_id')->constrained('orden_purchases');
+            $table->foreignId('orden_id')->constrained('orders');
             $table->enum('status', ['activo', 'por activar', 'inactivo']);
             $table->date('start_date');
             $table->date('end_date');
