@@ -6,15 +6,12 @@ use Coinbase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\View;
 use Carbon\Carbon;
 use App\Models\Order;
 use App\Models\MembershipPackage;
 use App\Models\MembershipType;
 use App\Models\Member;
 use App\Models\Bonus;
-use App\Models\WalletComission;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Traits\Tree;
 use Hexters\CoinPayment\CoinPayment;
 use DB;
@@ -27,13 +24,10 @@ use App\Models\Upgrade;
 use App\Models\WalletPayment;
 use App\Services\BonusService;
 use App\Services\FutswapService;
-use Facade\Ignition\Support\Packagist\Package;
-use Illuminate\Database\Console\DbCommand;
 use Illuminate\Support\Facades\DB as FacadesDB;
-use Illuminate\Support\Str;
 
-use function PHPUnit\Framework\isEmpty;
 use App\Models\Level;
+use App\Models\LicensePackage;
 
 class TiendaController extends Controller
 {
@@ -74,12 +68,12 @@ class TiendaController extends Controller
         }
         return view('shop.index', compact('data', 'order', 'memberships', 'member'));
     }
-    public function broncePackages(Request $request)
+    public function colibriLicenses(Request $request)
     {
         $order = Order::where([['user_id', Auth::id()], ['status', '0']])->first();
 
         $memberships = Investment::where([['user_id', Auth::id()], ['status', '1']])->with('order')->get();
-        $type = MembershipPackage::where('membership_types_id', '1')->orderBy('amount', 'ASC')->get();
+        $type = LicensePackage::where('license_type_id', '1')->orderBy('amount', 'ASC')->get();
 
         foreach ($type as $package) {
             $package->disabled = false;

@@ -13,10 +13,10 @@
             "slug": "/",
             "submenu": [
                 {
-                    "url": "/market/bronce",
+                    "url": "/market/colibri",
                     "name": "Licencias Colibri",
                     "icon": "circle",
-                    "slug": "broncePackages"
+                    "slug": "colibriLicenses"
                 },
                 {
                     "url": "/market/plata",
