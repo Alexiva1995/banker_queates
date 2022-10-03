@@ -29,10 +29,6 @@ class Order extends Model
     {
         return $this->hasOne(Investment::class);
     }
-    public function coinpaymentTransaccion()
-    {
-        return $this->hasOne(CoinpaymentTransaction::class);
-    }
     public function licensePackage()
     {
         return $this->belongsTo(LicensePackage::class, 'package_id');
