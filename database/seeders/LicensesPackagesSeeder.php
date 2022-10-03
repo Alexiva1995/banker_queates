@@ -14,13 +14,49 @@ class LicensesPackagesSeeder extends Seeder
      */
     public function run()
     {
-        $licenses = [
-            ['amount' => 100, 'rentability' => 10, 'license_type_id' => 1, 'image' => '100.png', 'dark_image' => '100.png'],
-            ['amount' => 100, 'rentability' => 10, 'license_type_id' => 1, 'image' => '100.png', 'dark_image' => '100.png'],
-            ['amount' => 100, 'rentability' => 10, 'license_type_id' => 1, 'image' => '100.png', 'dark_image' => '100.png'],
-            ['amount' => 100, 'rentability' => 10, 'license_type_id' => 1, 'image' => '100.png', 'dark_image' => '100.png'],
-            ['amount' => 100, 'rentability' => 10, 'license_type_id' => 1, 'image' => '100.png', 'dark_image' => '100.png'],
-            ['amount' => 100, 'rentability' => 10, 'license_type_id' => 1, 'image' => '100.png', 'dark_image' => '100.png'],
+        $licenses = [  
+            [   
+                'name' => 'Consultant Binary Position',
+                'amount' => 50, 
+                'rentability' => 0, 
+                'image' => null, 
+                'dark_image' => null
+            ],
+            [   
+                'name' => 'Standard License',
+                'amount' => 150, 
+                'rentability' => 0, 
+                'image' => null, 
+                'dark_image' => null
+            ],
+            [   
+                'name' => 'Gold License.',
+                'amount' => 500, 
+                'rentability' => 0, 
+                'image' => null, 
+                'dark_image' => null
+            ],
+            [   
+                'name' => 'Titanium License',
+                'amount' => 1000, 
+                'rentability' => 0, 
+                'image' => null, 
+                'dark_image' => null
+            ],
+            [   
+                'name' => 'Platinum License',
+                'amount' => 2000, 
+                'rentability' => 0, 
+                'image' => null, 
+                'dark_image' => null
+            ],
+            [   
+                'name' => 'Banker Platinum License',
+                'amount' => 5000, 
+                'rentability' => 0, 
+                'image' => null, 
+                'dark_image' => null
+            ],
         ];
 
         DB::table('licenses_packages')->insert($licenses);

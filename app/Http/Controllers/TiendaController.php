@@ -68,128 +68,37 @@ class TiendaController extends Controller
         }
         return view('shop.index', compact('data', 'order', 'memberships', 'member'));
     }
-    public function colibriLicenses(Request $request)
+    public function marketLicences(Request $request)
     {
         $order = Order::where([['user_id', Auth::id()], ['status', '0']])->first();
 
-        $memberships = Investment::where([['user_id', Auth::id()], ['status', '1']])->with('order')->get();
-        $type = LicensePackage::where('license_type_id', '1')->orderBy('amount', 'ASC')->get();
+        $investments = Investment::where([['user_id', Auth::id()], ['status', '1']])->with('order')->get();
+        $licenses = LicensePackage::orderBy('amount', 'ASC')->get();
 
-        foreach ($type as $package) {
-            $package->disabled = false;
-            $package->text = 'Comprar Paquete';
-            foreach ($memberships as $membership) {
-                // dd($membership);
-                if ($package->membership_types_id == $membership->membershipPackage->membership_types_id) {
-                    if ($package->amount <= $membership->invested) {
-                        $package->disabled = true;
-                        $package->text = 'Adquirido';
+        foreach ($licenses as $license) {
+            $license->disabled = false;
+            $license->text = 'Comprar Paquete';
+            foreach ($investments as $investment) {
+                // dd($investment);
+                if ($license->id == $investment->licensePackage->id) {
+                    if ($license->amount <= $investment->invested) {
+                        $license->disabled = true;
+                        $license->text = 'Adquirido';
                     }
-                    if ($package->id == $membership->package_id) {
-                        $package->text = 'Adquirido';
-                        $package->disabled = true;
+                    if ($license->id == $investment->package_id) {
+                        $license->text = 'Adquirido';
+                        $license->disabled = true;
                     }
-                    if ($package->amount > $membership->invested) {
-                        $package->disabled = false;
-                        $package->text = 'Upgrade';
+                    if ($license->amount > $investment->invested) {
+                        $license->disabled = false;
+                        $license->text = 'Upgrade';
                     }
                 }
             }
         }
-        return view('shop.broncePackages', compact('order', 'memberships', 'type'));
+        return view('shop.index', compact('order', 'investments', 'licenses'));
     }
-    public function plataPackages(Request $request)
-    {
-        $order = Order::where([['user_id', Auth::id()], ['status', '0']])->first();
-
-        $memberships = Investment::where([['user_id', Auth::id()], ['status', '1']])->with('order')->get();
-        $type = MembershipPackage::where('membership_types_id', '2')->orderBy('amount', 'ASC')->get();
-
-        foreach ($type as $package) {
-            $package->disabled = false;
-            $package->text = 'Comprar Paquete';
-
-            foreach ($memberships as $membership) {
-                if ($package->membership_types_id === $membership->membershipPackage->membership_types_id) {
-                    // dd($membership->membershipPackage->membership_types_id);
-                    if ($package->amount <= $membership->invested) {
-                        $package->disabled = true;
-                        $package->text = 'Adquirido';
-                    } elseif ($package->id == $membership->package_id) {
-                        $package->text = 'Adquirido';
-                        $package->disabled = true;
-                    } else if ($package->amount > $membership->invested) {
-                        $package->disabled = false;
-                        $package->text = 'Upgrade';
-                    }
-                }
-            }
-        }
-        return view('shop.plataPackages', compact('order', 'memberships', 'type'));
-    }
-    public function oroPackages(Request $request)
-    {
-        $order = Order::where([['user_id', Auth::id()], ['status', '0']])->first();
-
-        $memberships = Investment::where([['user_id', Auth::id()], ['status', '1']])->with('order')->get();
-        $type = MembershipPackage::where('membership_types_id', '3')->orderBy('amount', 'ASC')->get();
-
-        foreach ($type as $package) {
-            $package->disabled = false;
-            $package->text = 'Comprar Paquete';
-            foreach ($memberships as $membership) {
-                // dd($membership);
-                if ($package->membership_types_id == $membership->membershipPackage->membership_types_id) {
-                    if ($package->amount <= $membership->invested) {
-                        $package->disabled = true;
-                        $package->text = 'Adquirido';
-                    }
-                    if ($package->id == $membership->package_id) {
-                        $package->text = 'Adquirido';
-                        $package->disabled = true;
-                    }
-                    if ($package->amount > $membership->invested) {
-                        $package->disabled = false;
-                        $package->text = 'Upgrade';
-                    }
-                }
-            }
-        }
-        return view('shop.oroPackages', compact('order', 'memberships', 'type'));
-    }
-    public function platinoPackages(Request $request)
-    {
-        // $member = Member::where('referred_id', Auth::id())->orderBy('id', 'DESC')->first();
-        // $data = MembershipType::with('MembershipPackage')->get();
-        $order = Order::where([['user_id', Auth::id()], ['status', '0']])->first();
-
-        $memberships = Investment::where([['user_id', Auth::id()], ['status', '1']])->with('order')->get();
-        $type = MembershipPackage::where('membership_types_id', '4')->orderBy('amount', 'ASC')->get();
-
-        foreach ($type as $package) {
-            $package->disabled = false;
-            $package->text = 'Comprar Paquete';
-            foreach ($memberships as $membership) {
-                // dd($membership);
-                if ($package->membership_types_id == $membership->membershipPackage->membership_types_id) {
-                    if ($package->amount <= $membership->invested) {
-                        $package->disabled = true;
-                        $package->text = 'Adquirido';
-                    }
-                    if ($package->id == $membership->package_id) {
-                        $package->text = 'Adquirido';
-                        $package->disabled = true;
-                    }
-                    if ($package->amount > $membership->invested) {
-                        $package->disabled = false;
-                        $package->text = 'Upgrade';
-                    }
-                }
-            }
-        }
-
-        return view('shop.platinoPackages', compact('order', 'memberships', 'type'));
-    }
+    
     public function transaction(Request $request)
     {
         $user = Auth::user();

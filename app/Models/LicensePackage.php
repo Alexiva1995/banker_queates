@@ -11,6 +11,7 @@ class LicensePackage extends Model
     
     protected $table = 'licenses_packages';
     protected $fillable = [
+        'name',
         'amount',
         'rentability',
         'license_type_id',
