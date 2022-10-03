@@ -8,31 +8,37 @@
         },
         {
             "url": "/",
-            "name": "Paquetes",
+            "name": "Licencias",
             "icon": "grid",
             "slug": "/",
             "submenu": [
                 {
-                    "url": "/market/bronce",
-                    "name": "Paquetes Bronce",
+                    "url": "/market/colibri",
+                    "name": "Licencias Colibri",
                     "icon": "circle",
-                    "slug": "broncePackages"
+                    "slug": "colibriLicenses"
                 },
                 {
                     "url": "/market/plata",
-                    "name": "Paquetes Plata",
+                    "name": "Licencias Escorpion",
                     "icon": "circle",
                     "slug": "plataPackages"
                 },
                 {
                     "url": "/market/oro",
-                    "name": "Paquetes Oro",
+                    "name": "Licencias Anaconda",
                     "icon": "circle",
                     "slug": "oroPackages"
                 },
                 {
                     "url": "/market/platino",
-                    "name": "Paquetes Platino",
+                    "name": "Licencias Pantera",
+                    "icon": "circle",
+                    "slug": "platinoPackages"
+                },
+                {
+                    "url": "#",
+                    "name": "Licencias Tiburon",
                     "icon": "circle",
                     "slug": "platinoPackages"
                 }
