@@ -160,10 +160,7 @@ Route::middleware('auth')->group(function () {
         //TIENDA
         Route::prefix('market')->group(function () {
             // Route::get('/', [TiendaController::class, 'index'])->name('shop');
-            Route::get('/colibri', [TiendaController::class, 'colibriLicenses'])->name('colibriLicenses');
-            Route::get('/plata', [TiendaController::class, 'plataPackages'])->name('plataPackages');
-            Route::get('/oro', [TiendaController::class, 'oroPackages'])->name('oroPackages');
-            Route::get('/platino', [TiendaController::class, 'platinoPackages'])->name('platinoPackages');
+            Route::get('/licenses', [TiendaController::class, 'marketLicences'])->name('market.licenses');
             Route::post('/transactionCompra', [TiendaController::class, 'transactionCompra'])->name('shop.transactionCompra');
             Route::post('/procesarOrden', [TiendaController::class, 'procesarOrden'] )->name('shop.proccess');
             Route::post('/reactivacion', [TiendaController::class, 'reactivacion'])->name('reactivacion');
