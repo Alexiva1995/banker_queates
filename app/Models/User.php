@@ -189,11 +189,15 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(OrdenPurchases::class, 'id', 'user_id');
     }
 
-    /* public function ordenes()
+    public function hasActiveLicense()
     {
-        return $this->hasMany('App\Models\OrdenPurchases', 'user_id');
-    } */
-
+        $investment = Investment::where('user_id', $this->id)->where('status', 1)->first();
+        if($investment)
+        {
+            return true;
+        }
+        return false;
+    }
 
     /**
      * Permite obtener las ordenes de servicio asociada a una categoria
@@ -528,9 +532,9 @@ class User extends Authenticatable implements MustVerifyEmail
         foreach($this->investments as $investment)
         {
             $package = new stdClass;
-            $package->name = $investment->membershipPackage->membershipType->name;
-            $package->amount = $investment->membershipPackage->amount;
-            $package->id = $investment->membershipPackage->id;
+            $package->name = $investment->licensePackage->licenseType->name;
+            $package->amount = $investment->licensePackage->amount;
+            $package->id = $investment->licensePackage->id;
             $package->investment_id = $investment->id;
             $user_packages->push($package);
         }

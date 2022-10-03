@@ -63,7 +63,7 @@
     Swal.fire({
       title: "Error",
       icon: 'error',
-      text: "A la espera que tu orden sea Aprobada",
+      text: "Debe tener una licencia activa para poder acceder a su enlace de referidos",
       confirmButtonClass: 'btn btn-outline-primary',
     })
   }

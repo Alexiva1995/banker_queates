@@ -8,11 +8,11 @@
                     <h4 class="mb-1 fw-700">Invitar amigos</h4>
                 </div>
                 <div class="col-sm-12 mt-25">
-                    <a id="btn-copy text-primary "><i class="iconCard text-primary" data-feather='copy'></i><span class="text-primary ms-1 text-decoration-underline fw-700" onclick="getlink()" id="copy-to-clipboard">COPIAR LINK</span></a>
-                    {{-- @if($orden > 0 && Auth::user()->status == 1)
+                    @if(auth()->user()->hasActiveLicense())
+                        <a id="btn-copy text-primary "><i class="iconCard text-primary" data-feather='copy'></i><span class="text-primary ms-1 text-decoration-underline fw-700" onclick="getlink()" id="copy-to-clipboard">COPIAR LINK</span></a>
                     @else
                        <a><i class="iconCard" data-feather='copy'></i><strong class="ms-1 aDecoration fw-700" onclick="orden()">COPIAR LINK</strong></a>
-                    @endif --}}
+                    @endif
 
                 </div>
             </div>
