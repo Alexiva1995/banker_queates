@@ -18,7 +18,7 @@
                           <td class="d-none d-sm-table-cell">
                             {{ $investment->created_at->format('d/m/Y H:i:s') 
                           }}</td>
-                          <td>{{ $investment->licensePackage->licenseType->name }}</td>
+                          <td>{{ $investment->licensePackage->name }}</td>
                           <td style="text-align: right">{{ number_format($investment->licensePackage->amount, 2, ',', '.') }}</td>
                           <td style="text-align: right">{{ number_format($investment->gain, 2, ',', '.') }}</td>
                       </tr>

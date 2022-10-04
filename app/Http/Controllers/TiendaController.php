@@ -77,20 +77,13 @@ class TiendaController extends Controller
             $license->disabled = false;
             $license->text = 'Comprar Paquete';
             foreach ($investments as $investment) {
-                // dd($investment);
-                if ($license->id == $investment->licensePackage->id) {
-                    if ($license->amount <= $investment->invested) {
-                        $license->disabled = true;
-                        $license->text = 'Adquirido';
-                    }
-                    if ($license->id == $investment->package_id) {
-                        $license->text = 'Adquirido';
-                        $license->disabled = true;
-                    }
-                    if ($license->amount > $investment->invested) {
-                        $license->disabled = false;
-                        $license->text = 'Upgrade';
-                    }
+                if ($license->amount <= $investment->invested) {
+                    $license->disabled = true;
+                    $license->text = 'Adquirido';
+                }
+                if ($license->amount > $investment->invested) {
+                    $license->disabled = false;
+                    $license->text = 'Upgrade';
                 }
             }
         }
@@ -214,7 +207,6 @@ class TiendaController extends Controller
         }
         
     }
-
 
     public function saveOrden($data): int
     {

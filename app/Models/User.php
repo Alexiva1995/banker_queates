@@ -532,7 +532,7 @@ class User extends Authenticatable implements MustVerifyEmail
         foreach($this->investments as $investment)
         {
             $package = new stdClass;
-            $package->name = $investment->licensePackage->licenseType->name;
+            $package->name = $investment->licensePackage->name;
             $package->amount = $investment->licensePackage->amount;
             $package->id = $investment->licensePackage->id;
             $package->investment_id = $investment->id;
