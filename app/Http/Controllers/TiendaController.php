@@ -77,20 +77,13 @@ class TiendaController extends Controller
             $license->disabled = false;
             $license->text = 'Comprar Paquete';
             foreach ($investments as $investment) {
-                // dd($investment);
-                if ($license->id == $investment->licensePackage->id) {
-                    if ($license->amount <= $investment->invested) {
-                        $license->disabled = true;
-                        $license->text = 'Adquirido';
-                    }
-                    if ($license->id == $investment->package_id) {
-                        $license->text = 'Adquirido';
-                        $license->disabled = true;
-                    }
-                    if ($license->amount > $investment->invested) {
-                        $license->disabled = false;
-                        $license->text = 'Upgrade';
-                    }
+                if ($license->amount <= $investment->invested) {
+                    $license->disabled = true;
+                    $license->text = 'Adquirido';
+                }
+                if ($license->amount > $investment->invested) {
+                    $license->disabled = false;
+                    $license->text = 'Upgrade';
                 }
             }
         }
@@ -215,7 +208,6 @@ class TiendaController extends Controller
         
     }
 
-
     public function saveOrden($data): int
     {
 
@@ -277,23 +269,17 @@ class TiendaController extends Controller
 
     public function cambiar_status(Request $request)
     {
-
-        // try {
-        FacadesDB::beginTransaction();
-        $bons = Bonus::where('level', 1)->get();
-        $level1 = $bons[0];
         $orden = Order::findOrFail($request->id);
-        $user = $orden->user;
         $orden->status = $request->status;
         $orden->save();
-        // Aqui se cambia el status de una inversion anterior a inactiva si se aprovo un upgrade
+        // Aqui se cambia el status de una inversion anterior a inactiva si se aprobo un upgrade
         if ($request->status == '1') {
-            $investment = Investment::where('user_id', $user->id)->where('status', '1')->where('type', $orden->membershipPackage->membership_types_id)->first();
+            $investment = Investment::where('user_id', $orden->user->id)->where('status', '1')->first();
             if ($investment != null) {
                 //Se crea la inversion al aprobarse la orden
                 $investment->order_id = $orden->id;
                 $investment->package_id = $orden->package_id;
-                $investment->invested = $orden->membershipPackage->amount;
+                $investment->invested = $orden->licensePackage->amount;
                 $investment->save();
                 Upgrade::create([
                     'investment_id' => $investment->id,
@@ -306,7 +292,7 @@ class TiendaController extends Controller
                 $inversion = Investment::create([
                     'invested' => $orden->amount,
                     'package_id' => $orden->package_id,
-                    'type' => $orden->membershipPackage->membership_types_id,
+                    'type' => $orden->licensePackage->id,
                     'user_id' => $orden->user_id,
                     'order_id' => $orden->id,
                     'status' => '1',
@@ -327,22 +313,12 @@ class TiendaController extends Controller
                     $user->status = '1';
                     $user->date_active = Carbon::now();
                     $user->update();
-                event(new UserEvent($user));
+                    event(new UserEvent($user));
                 }
             }
         }
 
-
-
-        FacadesDB::commit();
-
         return back()->with('success', 'Orden actualizada exitosamente');
-        // } catch (\Throwable $th) {
-
-        //    FacadesDB::rollback();
-        //    Log::error('Tienda - cambiar_status -> Error: ' . $th);
-        //   abort(403, "Ocurrio un error, contacte con el administrador");
-        // }
 
     }
     private function callBuildingBonus($orden)

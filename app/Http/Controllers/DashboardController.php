@@ -67,7 +67,7 @@ class DashboardController extends Controller
       $total_referrals = $this->tree->getChildrenCount($user->referidos, 2, 0);
       $indirect_referrals = $total_referrals - $user->referidos->count();
       $investments = Investment::where('user_id', $user->id)->with('licensePackage')->get();
-      $total_available = $user->wallets->where('status', 0)->sum('amount') + $user->getUtilitiesWaitingAmount();
+      $total_available = $user->wallets->where('status', 0)->sum('amount');
       $user_packages = $user->getActivePackages();
       //criptobar
       $cryptos = $this->minApiService->get10Cryptos();

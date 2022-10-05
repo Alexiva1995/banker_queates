@@ -5,19 +5,14 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
-use App\Models\Countrie;
 use App\Models\WalletComission;
-use App\Models\Order;
 use App\Models\Prefix;
 use App\Services\FutswapService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
-use App\Rules\ReCaptchaRule;
-use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -112,14 +107,14 @@ class RegisterController extends Controller
                 'countrie_id' => $request->countrie_id,
                 'status' => '0',
             ]);
-            $dataEmail = [
-                'user' => $user,
-              ];
-            Mail::send('mail.VerificationEmail',  ['data' => $dataEmail,  'logo' => public_path('/images') . '/logo/projecas.png',], function ($msj) use ($user)
-            {
-                $msj->subject('Verificación de correo electrónico.');
-                $msj->to($user->email);
-            });
+            // $dataEmail = [
+            //     'user' => $user,
+            //   ];
+            // Mail::send('mail.VerificationEmail',  ['data' => $dataEmail,  'logo' => public_path('/images') . '/logo/projecas.png',], function ($msj) use ($user)
+            // {
+            //     $msj->subject('Verificación de correo electrónico.');
+            //     $msj->to($user->email);
+            // });
             // return redirect()->route('login')->with('success', 'Se ha enviado un correo de Verificación a su email');
             // return redirect()->route('dashboard.index')->with('success', 'Se ha enviado un correo de Verificación a su email');
             return redirect()->route('auth.verify', $user);
