@@ -596,7 +596,8 @@ class LiquidactionController extends Controller
             $comissionsUtilityTotal = Utility::where('user_id', $user->id)->sum('amount');
             $comissionsRangeAvailable = $user->getWalletRangeAmount();
             $comissionsAvailable= $user->getWalletComissionAmount();
-            $comissionsUtilityAvailable = $user->getUtilitiesWaitingAmount();
+            // $comissionsUtilityAvailable = $user->getUtilitiesWaitingAmount();
+            $comissionsUtilityAvailable = 0;
             $walletsComissions = WalletComission::where('user_id', $user->id)->where('type', 0)->orderBy('id', 'desc')->get();
             $walletsRange = WalletComission::where('user_id', $user->id)->where('type', 1)->orderBy('id', 'desc')->get();
             $rentabilitys = Utility::where('user_id', $user->id)->orderBy('id', 'desc')->get();

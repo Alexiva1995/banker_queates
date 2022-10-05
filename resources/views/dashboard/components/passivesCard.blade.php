@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="texto">
-            <h3 class="fw-700 mb-25">UST {{ number_format($user->getUtilitiesWaitingAmount(), 2, ',', '.') }}</h3>
+            <h3 class="fw-700 mb-25">UST {{ number_format(5000, 2, ',', '.') }}</h3>
 
             <p class="font-medium-2 mb-0" >Pasivos</p>
         </div>
