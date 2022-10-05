@@ -13,7 +13,12 @@ class LicensePackage extends Model
     protected $fillable = [
         'name',
         'amount',
-        'rentability',
+        'commissions',
+        'leadership_points',
+        'binary_points',
+        'level',
+        'deposit_min',
+        'deposit_max',
         'image',
         'dark_image'
     ];
