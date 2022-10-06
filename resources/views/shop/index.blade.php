@@ -88,8 +88,6 @@
                                         @csrf
                                         <input type="hidden" name="package" value="{{ $package->id }}">
                                         <input type="hidden" name="amount" value="{{ $package->amount }}">
-                                        <input type="hidden" name="type" value="1">
-                                       
                                         <button class="btn btn-primary w-100" 
                                             {{ $package->disabled == true ? 'disabled' : '' }}>{{ $package->text }}
                                         </button>

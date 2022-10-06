@@ -117,9 +117,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->name . ' ' . $this->last_name;
     }
 
-    public function Invertido()
+    public function investment()
     {
-        return $this->belongsTo(Investment::class, 'id', 'user_id');
+        return $this->belongsTo(Investment::class,'id', 'user_id');
     }
 
     public function ordenes()

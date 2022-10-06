@@ -110,7 +110,7 @@ class TiendaController extends Controller
         $wallettrc20 = WalletPayment::where('type', 'trc20')->get();
         $walletbnb = WalletPayment::where('type', 'bnb')->get();
         $walletbtc = WalletPayment::where('type', 'btc')->get();
-        $inversion = Investment::where([['user_id', $user->id], ['status', 1], ['type', $request->type]])->first();
+        $inversion = Investment::where([['user_id', $user->id], ['status', 1]])->first();
         if ($inversion != null) {
             $price = $inversion->invested;
             $amount = $request->amount - $inversion->invested;
@@ -118,18 +118,8 @@ class TiendaController extends Controller
             $amount = $request->amount;
         }
 
-
-        if ($request->type == 1) {
-            $type = "bronce";
-        } elseif ($request->type == 2) {
-            $type = "plata";
-        } elseif ($request->type == 3) {
-            $type = "Oro";
-        } elseif ($request->type == 4) {
-            $type = "Platino";
-        }
         $packageId = $request->package;
-        return view('shop.transactionCompra', compact('amount', 'type', 'packageId', 'walletbtc','walletbnb','wallettrc20'));
+        return view('shop.transactionCompra', compact('amount', 'packageId', 'walletbtc','walletbnb','wallettrc20'));
     }
 
 
@@ -139,9 +129,8 @@ class TiendaController extends Controller
         $user = Auth::user();
         
         $allOrder = Order::where('user_id', $user->id)->where('status', '0')->get();
-        // if($orden_pack > 0) return redirect()->back()->with('error','Usted ya tiene un paquete activo');
         $package = LicensePackage::where('id', $request->package)->first();
-        $investment = Investment::where('user_id', $user->id)->where('type', $package->id)->where('status', 1)->first();
+        $investment = Investment::where('user_id', $user->id)->where('status', 1)->first();
         if ($investment == null) {
             foreach ($allOrder as $order) {
                 if ($order->licensePackage->id == $package->id) {
@@ -280,19 +269,19 @@ class TiendaController extends Controller
                 $investment->order_id = $orden->id;
                 $investment->package_id = $orden->package_id;
                 $investment->invested = $orden->licensePackage->amount;
+                $investment->expiration_date = now()->addYear();
                 $investment->save();
                 Upgrade::create([
                     'investment_id' => $investment->id,
                     'package_id' => $investment->package_id,
                     'status_utility' => 0
                 ]);
-                //Se crea la wallet corresondiente
+                //Se crean los bonos o wallet corresondiente
                 $this->callBuildingBonus($orden);
             } else {
                 $inversion = Investment::create([
                     'invested' => $orden->amount,
                     'package_id' => $orden->package_id,
-                    'type' => $orden->licensePackage->id,
                     'user_id' => $orden->user_id,
                     'order_id' => $orden->id,
                     'status' => '1',
@@ -300,6 +289,7 @@ class TiendaController extends Controller
                     'buyer_id' => $orden->user->padre->id,
                     'capital' => 0,
                     'pay_utility' => 0,
+                    'expiration_date' => now()->addYear()
                 ]);
                 Upgrade::create([
                     'investment_id' => $inversion->id,
@@ -309,9 +299,11 @@ class TiendaController extends Controller
                 $user = User::findOrFail($orden->user_id);
                 //Se crea la wallet corresondiente
                 $this->callBuildingBonus($orden);
+
+                // Se cambia el status del usuario a activo
                 if ($user->status == '0') {
                     $user->status = '1';
-                    $user->date_active = Carbon::now();
+                    $user->date_active = now();
                     $user->update();
                     event(new UserEvent($user));
                 }
