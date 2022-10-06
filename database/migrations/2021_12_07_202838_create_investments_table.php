@@ -26,6 +26,7 @@ class CreateInvestmentsTable extends Migration
             $table->tinyInteger('pay_utility')->default(0)->comment('0 - Pay, 1 - No Pay');
             $table->bigInteger('buyer_id')->nullable()->unsigned()->nullable();
             $table->foreign('buyer_id')->references('id')->on('users')->onUpdate('cascade')->nullable();
+            $table->date('expiration_date')->comment('La fecha de expiración de la licencia la cual es anual');
             $table->timestamps();
         });
     }

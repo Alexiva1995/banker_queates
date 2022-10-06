@@ -269,13 +269,14 @@ class TiendaController extends Controller
                 $investment->order_id = $orden->id;
                 $investment->package_id = $orden->package_id;
                 $investment->invested = $orden->licensePackage->amount;
+                $investment->expiration_date = now()->addYear();
                 $investment->save();
                 Upgrade::create([
                     'investment_id' => $investment->id,
                     'package_id' => $investment->package_id,
                     'status_utility' => 0
                 ]);
-                //Se crea la wallet corresondiente
+                //Se crean los bonos o wallet corresondiente
                 $this->callBuildingBonus($orden);
             } else {
                 $inversion = Investment::create([
@@ -288,6 +289,7 @@ class TiendaController extends Controller
                     'buyer_id' => $orden->user->padre->id,
                     'capital' => 0,
                     'pay_utility' => 0,
+                    'expiration_date' => now()->addYear()
                 ]);
                 Upgrade::create([
                     'investment_id' => $inversion->id,
@@ -297,9 +299,11 @@ class TiendaController extends Controller
                 $user = User::findOrFail($orden->user_id);
                 //Se crea la wallet corresondiente
                 $this->callBuildingBonus($orden);
+
+                // Se cambia el status del usuario a activo
                 if ($user->status == '0') {
                     $user->status = '1';
-                    $user->date_active = Carbon::now();
+                    $user->date_active = now();
                     $user->update();
                     event(new UserEvent($user));
                 }
