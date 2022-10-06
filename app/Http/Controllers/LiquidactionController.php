@@ -593,14 +593,16 @@ class LiquidactionController extends Controller
             $user = auth()->user();
             $comissionsRangeTotal = WalletComission::where('user_id', $user->id)->where('type', 1)->sum('amount');
             $comissionsTotal = WalletComission::where('user_id', $user->id)->where('type', 0)->sum('amount');
-            $comissionsUtilityTotal = Utility::where('user_id', $user->id)->sum('amount');
+            // TODO: Modificar estas 2 lineas de comision
+            $rentabilitys = [];
+            $comissionsUtilityTotal = 50;
+
             $comissionsRangeAvailable = $user->getWalletRangeAmount();
             $comissionsAvailable= $user->getWalletComissionAmount();
             // $comissionsUtilityAvailable = $user->getUtilitiesWaitingAmount();
             $comissionsUtilityAvailable = 0;
             $walletsComissions = WalletComission::where('user_id', $user->id)->where('type', 0)->orderBy('id', 'desc')->get();
             $walletsRange = WalletComission::where('user_id', $user->id)->where('type', 1)->orderBy('id', 'desc')->get();
-            $rentabilitys = Utility::where('user_id', $user->id)->orderBy('id', 'desc')->get();
 
             return view('wallet.index', compact('comissionsUtilityTotal', 'comissionsTotal', 'comissionsRangeTotal', 'walletsRange', 'walletsComissions','rentabilitys', 'comissionsUtilityAvailable' ,'comissionsAvailable','comissionsRangeAvailable'));
         } catch (\Throwable $th) {

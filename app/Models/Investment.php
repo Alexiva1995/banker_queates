@@ -20,14 +20,14 @@ class Investment extends Model
         'capital',
         'status',
         'pay_utility',
-        'buyer_id'
+        'buyer_id',
+        'expiration_date'
     ];
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User', 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
-
 
     public function estado()
     {
