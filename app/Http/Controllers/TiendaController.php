@@ -110,7 +110,7 @@ class TiendaController extends Controller
         $wallettrc20 = WalletPayment::where('type', 'trc20')->get();
         $walletbnb = WalletPayment::where('type', 'bnb')->get();
         $walletbtc = WalletPayment::where('type', 'btc')->get();
-        $inversion = Investment::where([['user_id', $user->id], ['status', 1], ['type', $request->type]])->first();
+        $inversion = Investment::where([['user_id', $user->id], ['status', 1]])->first();
         if ($inversion != null) {
             $price = $inversion->invested;
             $amount = $request->amount - $inversion->invested;
@@ -118,18 +118,8 @@ class TiendaController extends Controller
             $amount = $request->amount;
         }
 
-
-        if ($request->type == 1) {
-            $type = "bronce";
-        } elseif ($request->type == 2) {
-            $type = "plata";
-        } elseif ($request->type == 3) {
-            $type = "Oro";
-        } elseif ($request->type == 4) {
-            $type = "Platino";
-        }
         $packageId = $request->package;
-        return view('shop.transactionCompra', compact('amount', 'type', 'packageId', 'walletbtc','walletbnb','wallettrc20'));
+        return view('shop.transactionCompra', compact('amount', 'packageId', 'walletbtc','walletbnb','wallettrc20'));
     }
 
 
@@ -139,9 +129,8 @@ class TiendaController extends Controller
         $user = Auth::user();
         
         $allOrder = Order::where('user_id', $user->id)->where('status', '0')->get();
-        // if($orden_pack > 0) return redirect()->back()->with('error','Usted ya tiene un paquete activo');
         $package = LicensePackage::where('id', $request->package)->first();
-        $investment = Investment::where('user_id', $user->id)->where('type', $package->id)->where('status', 1)->first();
+        $investment = Investment::where('user_id', $user->id)->where('status', 1)->first();
         if ($investment == null) {
             foreach ($allOrder as $order) {
                 if ($order->licensePackage->id == $package->id) {
@@ -292,7 +281,6 @@ class TiendaController extends Controller
                 $inversion = Investment::create([
                     'invested' => $orden->amount,
                     'package_id' => $orden->package_id,
-                    'type' => $orden->licensePackage->id,
                     'user_id' => $orden->user_id,
                     'order_id' => $orden->id,
                     'status' => '1',
