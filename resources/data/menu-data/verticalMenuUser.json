@@ -74,6 +74,12 @@
             "name": "Inversiones",
             "icon": "dollar-sign",
             "slug": "investment.user.index"
+        }, 
+        {
+            "url": "/KYc-verificacion",
+            "name": "KYC",
+            "icon": "dollar-sign",
+            "slug": "KYC-Verify"
         },
         {
             "url": "/investments/mypackages",
