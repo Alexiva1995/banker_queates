@@ -310,6 +310,10 @@ Route::group(['prefix' => 'tickets'], function () {
 Route::get('KYc-verificacion', [KycController::class,'index'])->name('KYC-Verify');
 Route::post('KYC-upload', [KycController::class,'store'])->name('KYC-store');
 
+//auditoria admin
+Route::get('KYc-Admin', [KycController::class,'indexAdmin'])->name('KYC-admin-Verify');
+Route::post('Accion-KYC', [KycController::class,'update'])->name('KYC-accion');
+
 /* Route Pages */
 Route::group(['prefix' => 'page'], function () {
     Route::get('account-settings', [PagesController::class, 'account_settings'])->name('page-account-settings');
