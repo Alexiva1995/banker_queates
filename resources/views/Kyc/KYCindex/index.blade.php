@@ -37,7 +37,7 @@
                                 <div class=" card py-2">
                                     <div class="row">
                                         <div class="col-sm-4 d-flex justify-content-center">
-                                            <i class="fa fa-address-card-o" aria-hidden="true"></i>
+                                            <i class="fa fa-solid fa-id-card"></i>
                                         </div>
                                         <div class="col-sm-8 d-flex align-items-center d-flex justify-content-start">
                                             <div class="form-check selector">
@@ -52,7 +52,7 @@
                                 <div class=" card py-2">
                                     <div class="row">
                                         <div class="col-sm-4 d-flex justify-content-center">
-                                            <i class="fa fa-id-card-o" aria-hidden="true"></i>
+                                            <i class="fa fa-solid fa-address-card"></i>
                                         </div>
                                         <div class="col-sm-8 d-flex align-items-center d-flex justify-content-star">
                                             <div class="form-check selector">
@@ -70,7 +70,7 @@
                         <div class="row">
                     
                             <div class="col-sm-6">
-                                <h3 class="text-center">Carga la parte frontal de su documento</h3>
+                                <h5 class="text-center">Carga la parte frontal de su documento</h5>
                                 <div class="d-flex justify-content-center">
                                     <div class="row">
                                         <div class="col-sm-12 d-flex justify-content-center align-items-center mt-2">
@@ -96,9 +96,10 @@
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <h3 class="text-center">Carga la parte trasera de su documento</h3>
+                                <h5 class="text-center">Carga la parte trasera de su documento</h5>
                                 <div class="d-flex justify-content-center">
                                     <div class="row">
+                                        
                                         <div class="col-sm-12 d-flex justify-content-center align-items-center mt-2">
                                           
                                                 <i data-feather='upload-cloud' class="font-large-4 text-light mt-2"></i>
