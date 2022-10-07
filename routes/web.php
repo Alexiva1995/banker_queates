@@ -128,8 +128,6 @@ Route::middleware('auth')->group(function () {
 
             //Configuracion de wallet del admin
             Route::resource('configurations', ConfigurationController::class);
-            //Pagar bonos por Rangos
-            Route::get('/pay-ranges', [TiendaController::class, 'payRangeBonus'])->name('pay.range.bonus');
 
             //Inversiones
             Route::get('/admin/investments', [InversionController::class, 'adminIndex'])->name('inversion.admin.index');
@@ -137,8 +135,6 @@ Route::middleware('auth')->group(function () {
             Route::get('1', [InversionController::class, 'getPackegeType'])->name('porcentaje.rentabilidad');
             Route::post('porcentaje-rentabilidad', [utilityController::class, 'update'])->name('porcentaje.rentabilidad.update');
         });
-
-
 
         //Ruta para cambiar referido de un user
         Route::post('referred-update', [UserController::class, 'referred'])->name('referred.update');
@@ -160,7 +156,6 @@ Route::middleware('auth')->group(function () {
 
         //TIENDA
         Route::prefix('market')->group(function () {
-            // Route::get('/', [TiendaController::class, 'index'])->name('shop');
             Route::get('/licenses', [TiendaController::class, 'marketLicences'])->name('market.licenses');
             Route::post('/transactionCompra', [TiendaController::class, 'transactionCompra'])->name('shop.transactionCompra');
             Route::post('/procesarOrden', [TiendaController::class, 'procesarOrden'] )->name('shop.proccess');
