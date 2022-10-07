@@ -1,37 +1,38 @@
 <?php
 
-use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LanguageController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\UserInterfaceController;
-use App\Http\Controllers\EducationController;
-use App\Http\Controllers\UtilityController;
+use App\Http\Controllers\KycController;
+use App\Http\Controllers\TreController;
+use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\PagesController;
-use App\Http\Controllers\MiscellaneousController;
-use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\ChartsController;
-use App\Http\Controllers\BusinessController;
-use App\Http\Controllers\ConfigurationController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\TiendaController;
 use App\Http\Controllers\WalletController;
+use App\Http\Controllers\FutswapController;
+use App\Http\Controllers\TicketsController;
+use App\Http\Controllers\UtilityController;
+use App\Http\Controllers\BusinessController;
+use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\SubAdminController;
+
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EducationController;
+use App\Http\Controllers\FormularyController;
+use App\Http\Controllers\InversionController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\PreregisterController;
 use App\Http\Controllers\LiquidactionController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ConfigurationController;
+use App\Http\Controllers\MiscellaneousController;
+use App\Http\Controllers\UserInterfaceController;
+use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\ManualActivationController;
 use App\Http\Controllers\WithdrawalSettingController;
-
-use App\Http\Controllers\TreController;
-use App\Http\Controllers\TiendaController;
-use App\Http\Controllers\ReportController;
-use App\Http\Controllers\TicketsController;
-use App\Http\Controllers\InversionController;
-use App\Http\Controllers\PreregisterController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\SubAdminController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\FutswapController;
-use App\Http\Controllers\FormularyController;
-use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -299,6 +300,14 @@ Route::group(['prefix' => 'tickets'], function () {
  Route::get('member',  [FutswapController::class, 'redirect'])->name('member');
  //ruta para redirecionar al QR cuando la orden fue cancelada
  Route::get('memberActive',  [FutswapController::class, 'redirectCancel'])->name('memberActive');
+
+ //Rutas KYC users
+Route::get('KYc-verificacion', [KycController::class,'index'])->name('KYC-Verify');
+Route::post('KYC-upload', [KycController::class,'store'])->name('KYC-store');
+
+//auditoria admin
+Route::get('KYc-Admin', [KycController::class,'indexAdmin'])->name('KYC-admin-Verify');
+Route::post('Accion-KYC', [KycController::class,'update'])->name('KYC-accion');
 
 /* Route Pages */
 Route::group(['prefix' => 'page'], function () {
