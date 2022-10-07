@@ -75,10 +75,10 @@
                                     <div class="row">
                                         <div class="col-sm-12 d-flex justify-content-center align-items-center mt-2">
                                             <i data-feather='upload-cloud' class="font-large-4 text-light mt-2"></i>
-                                                <label for="hiddenBtn" class="choose-btn capa-interior fw-400 mt-1" id="chooseBtn">
+                                                <label for="frontal" class="choose-btn capa-interior fw-400 mt-1" id="chooseBtn_frontal">
                                                     Arrastre y suelte o <span class="text-primary text-decoration-underline">explore</span> sus archivos
                                                 </label>
-                                                <input type="file" id="hiddenBtn" type="file" class="form-control @error('photo') is-invalid @enderror" name="photo" value="{{ old('photo') }}" style="display: none;">
+                                                <input type="file" id="frontal" type="file" class="form-control @error('frontal') is-invalid @enderror" name="frontal" value="{{ old('frontal') }}" style="display: none;">
                                                 <br>
                         
                                                 @error('image')
@@ -102,10 +102,10 @@
                                         <div class="col-sm-12 d-flex justify-content-center align-items-center mt-2">
                                           
                                                 <i data-feather='upload-cloud' class="font-large-4 text-light mt-2"></i>
-                                                <label for="hiddenBtn" class="choose-btn capa-interior fw-400 mt-1" id="chooseBtn">
+                                                <label for="trasera" class="choose-btn capa-interior fw-400 mt-1" id="chooseBtn_frontal">
                                                     Arrastre y suelte o <span class="text-primary text-decoration-underline">explore</span> sus archivos
                                                 </label>
-                                                <input type="file" id="hiddenBtn" type="file" class="form-control @error('photo') is-invalid @enderror" name="photo" value="{{ old('photo') }}" style="display: none;">
+                                                <input type="file" id="trasera" type="file" class="form-control @error('trasera') is-invalid @enderror" name="trasera" value="{{ old('trasera') }}" style="display: none;">
                                                 <br>
                         
                                                 @error('image')

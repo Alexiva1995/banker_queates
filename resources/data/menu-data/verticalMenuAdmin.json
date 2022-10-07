@@ -54,6 +54,12 @@
             "slug": "inversion.admin.index"
         },
         {
+            "url": "KYc-Admin",
+            "name": "Solicitudes KYC",
+            "icon": "dollar-sign",
+            "slug": "Accion-KYC"
+        },
+        {
             "name": "Paquetes",
             "icon": "grid",
             "slug": "manual.activation",
