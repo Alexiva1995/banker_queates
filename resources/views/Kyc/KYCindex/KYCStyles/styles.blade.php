@@ -27,18 +27,7 @@
     }
     
 
-    input[type='checkbox']:after {
-        width: 15px;
-        height: 15px;
-        border-radius: 1px;
-        top: -2px;
-        left: -1px;
-        position: relative;
-        background-color: #002614;
-        content: '';
-        display: inline-block;
-        visibility: visible;
-    }
+   
 
     input[type=file] {
         font-size: 100px;

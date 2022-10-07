@@ -37,7 +37,7 @@
                                 <div class=" card py-2">
                                     <div class="row">
                                         <div class="col-sm-4 d-flex justify-content-center">
-                                            <i class="fa fa-address-card-o" aria-hidden="true"></i>
+                                            <i class="fa fa-solid fa-id-card"></i>
                                         </div>
                                         <div class="col-sm-8 d-flex align-items-center d-flex justify-content-start">
                                             <div class="form-check selector">
@@ -52,7 +52,7 @@
                                 <div class=" card py-2">
                                     <div class="row">
                                         <div class="col-sm-4 d-flex justify-content-center">
-                                            <i class="fa fa-id-card-o" aria-hidden="true"></i>
+                                            <i class="fa fa-solid fa-address-card"></i>
                                         </div>
                                         <div class="col-sm-8 d-flex align-items-center d-flex justify-content-star">
                                             <div class="form-check selector">
@@ -70,55 +70,77 @@
                         <div class="row">
                     
                             <div class="col-sm-6">
-                                <h3 class="text-center">Carga la parte frontal de su documento</h3>
+                                <h5 class="text-center">Carga la parte frontal de su documento</h5>
                                 <div class="d-flex justify-content-center">
                                     <div class="row">
-                                        <div class="col-sm-12 d-flex justify-content-center align-items-center mt-2">
-                                            <i data-feather='upload-cloud' class="font-large-4 text-light mt-2"></i>
-                                                <label for="frontal" class="choose-btn capa-interior fw-400 mt-1" id="chooseBtn_frontal">
-                                                    Arrastre y suelte o <span class="text-primary text-decoration-underline">explore</span> sus archivos
-                                                </label>
-                                                <input type="file" id="frontal" type="file" class="form-control @error('frontal') is-invalid @enderror" name="frontal" value="{{ old('frontal') }}" style="display: none;">
-                                                <br>
-                        
-                                                @error('image')
-                                                    <small class="text-danger">
-                                                        {{$message}}
-                                                    </small>
-                                                @enderror
-                                            <div class="" id="photo_preview_wrapper">
-                                                <div class="d-flex justify-content-center">
-                                                    <img id="photo_preview" class="img-fluid rounded"/>
+                                        <div class="col-sm-12 ">
+
+                                            <div class="row">
+                                                <div class="col-sm-12 d-flex justify-content-center">
+                                                    <i data-feather='upload-cloud' class="font-large-4 text-light"></i>
                                                 </div>
+                                                <div class="col-sm-12">
+                                                    <label for="frontal" class="choose-btn capa-interior fw-400 d-flex justify-content-center" id="chooseBtn_frontal">
+                                                        Arrastre y suelte o <span class="text-primary text-decoration-underline">explore</span> sus archivos
+                                                    </label>
+                                                    <input type="file" id="frontal" type="file" class="form-control @error('frontal') is-invalid @enderror" name="frontal" value="{{ old('frontal') }}" style="display: none;">
+                                                    <br>
+                            
+                                                    @error('image')
+                                                        <small class="text-danger">
+                                                            {{$message}}
+                                                        </small>
+                                                    @enderror
+                                                    <div class="" id="photo_preview_wrapper">
+                                                        <div class="d-flex justify-content-center">
+                                                            <img id="photo_preview" class="img-fluid rounded"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
                                             </div>
+
+                                                
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <h3 class="text-center">Carga la parte trasera de su documento</h3>
+                                <h5 class="text-center">Carga la parte trasera de su documento</h5>
                                 <div class="d-flex justify-content-center">
                                     <div class="row">
-                                        <div class="col-sm-12 d-flex justify-content-center align-items-center mt-2">
-                                          
-                                                <i data-feather='upload-cloud' class="font-large-4 text-light mt-2"></i>
-                                                <label for="trasera" class="choose-btn capa-interior fw-400 mt-1" id="chooseBtn_frontal">
-                                                    Arrastre y suelte o <span class="text-primary text-decoration-underline">explore</span> sus archivos
-                                                </label>
-                                                <input type="file" id="trasera" type="file" class="form-control @error('trasera') is-invalid @enderror" name="trasera" value="{{ old('trasera') }}" style="display: none;">
-                                                <br>
-                        
-                                                @error('image')
-                                                    <small class="text-danger">
-                                                        {{$message}}
-                                                    </small>
-                                                @enderror
-                                          
-                                            <div class="" id="photo_preview_wrapper">
-                                                <div class="d-flex justify-content-center">
-                                                    <img id="photo_preview2" class="img-fluid rounded"/>
+                                        
+                                        <div class="col-sm-12">
+
+                                            <div class="row">
+                                                <div class="col-sn-12 d-flex justify-content-center">
+                                                    <i data-feather='upload-cloud' class="font-large-4 text-light "></i>
+
                                                 </div>
+                                                <div class="col-sm-12 d-flex justify-content-center">
+                                                    <label for="trasera" class="choose-btn capa-interior fw-400 " id="chooseBtn_frontal">
+                                                        Arrastre y suelte o <span class="text-primary text-decoration-underline">explore</span> sus archivos
+                                                    </label>
+                                                    <input type="file" id="trasera" type="file" class="form-control @error('trasera') is-invalid @enderror" name="trasera" value="{{ old('trasera') }}" style="display: none;">
+                                                    <br>
+                            
+                                                    @error('image')
+                                                        <small class="text-danger">
+                                                            {{$message}}
+                                                        </small>
+                                                    @enderror
+                                              
+                                                    <div class="" id="photo_preview_wrapper">
+                                                        <div class="d-flex justify-content-center">
+                                                            <img id="photo_preview2" class="img-fluid rounded"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                              
                                             </div>
+                                          
+
+                                                
                                         </div>
                                     </div>
                                 </div>
