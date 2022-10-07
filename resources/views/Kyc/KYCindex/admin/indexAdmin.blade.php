@@ -34,7 +34,7 @@
                                                     <button style="font-size: 10px" class="btn btn-success me-1"  type="button" data-bs-toggle="modal" data-bs-target="#frontModal{{ $K->user_id }}"><i class="fa fa-address-card" aria-hidden="true"></i> Frontal del documento</button>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <button style="font-size: 10px" class="btn btn-info"  type="button"  data-bs-toggle="modal" data-bs-target="#frontModal{{ $K->user_id }}"><i class="fa fa-credit-card" aria-hidden="true"></i> Espalda del documento</button>
+                                                    <button style="font-size: 10px" class="btn btn-info"  type="button"  data-bs-toggle="modal" data-bs-target="#backModal{{ $K->user_id }}"><i class="fa fa-credit-card" aria-hidden="true"></i> Espalda del documento</button>
                                                 </div>
                                                 
                                               </div>
