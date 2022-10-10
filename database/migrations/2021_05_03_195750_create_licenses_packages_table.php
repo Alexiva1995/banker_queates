@@ -24,6 +24,7 @@ class CreateLicensesPackagesTable extends Migration
             $table->double('deposit_min')->comment('El deposito minimo que permite la licencia')->nullable();
             $table->double('deposit_max')->comment('El deposito maximo que permite la licencia')->nullable();
             $table->string('image')->nullable();
+            $table->string('emblem')->nullable();
             $table->string('dark_image')->nullable();
             $table->timestamps();
         });
