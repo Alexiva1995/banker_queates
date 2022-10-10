@@ -20,7 +20,8 @@ class LicensePackage extends Model
         'deposit_min',
         'deposit_max',
         'image',
-        'dark_image'
+        'dark_image',
+        'emblem'
     ];
 
     public function orders()

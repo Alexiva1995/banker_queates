@@ -26,7 +26,8 @@ class LicensesPackagesSeeder extends Seeder
                 'deposit_min' => 100,
                 'deposit_max' => 500,
                 'image' => null, 
-                'dark_image' => null
+                'dark_image' => null,
+                'emblem' => '1'
             ],
             [   
                 'name' => 'Standard License',
@@ -38,7 +39,8 @@ class LicensesPackagesSeeder extends Seeder
                 'deposit_min' => 500,
                 'deposit_max' => 1000, 
                 'image' => null, 
-                'dark_image' => null
+                'dark_image' => null,
+                'emblem' => '2'
             ],
             [   
                 'name' => 'Gold License.',
@@ -50,7 +52,8 @@ class LicensesPackagesSeeder extends Seeder
                 'deposit_min' => 1001,
                 'deposit_max' => 3000, 
                 'image' => null, 
-                'dark_image' => null
+                'dark_image' => null,
+                'emblem' => '3'
             ],
             [   
                 'name' => 'Titanium License',
@@ -62,7 +65,8 @@ class LicensesPackagesSeeder extends Seeder
                 'deposit_min' => 3001,
                 'deposit_max' => 10000, 
                 'image' => null, 
-                'dark_image' => null
+                'dark_image' => null,
+                'emblem' => '4'
             ],
             [   
                 'name' => 'Platinum License',
@@ -74,7 +78,8 @@ class LicensesPackagesSeeder extends Seeder
                 'deposit_min' => 10001,
                 'deposit_max' => 50000, 
                 'image' => null, 
-                'dark_image' => null
+                'dark_image' => null,
+                'emblem' => '5'
             ],
             [   
                 'name' => 'Banker Platinum License',
@@ -86,7 +91,8 @@ class LicensesPackagesSeeder extends Seeder
                 'deposit_min' => 10001,
                 'deposit_max' => 100000, 
                 'image' => null, 
-                'dark_image' => null
+                'dark_image' => null,
+                'emblem' => '6'
             ],
         ];
 

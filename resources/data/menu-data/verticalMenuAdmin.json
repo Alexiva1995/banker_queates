@@ -72,6 +72,12 @@
             "url": "user/user-list"
         },
         {
+            "name": "Usuarios Expirados",
+            "icon": "users",
+            "slug": "user.expired.licenses.list",
+            "url": "user/expired/license/list"
+        },
+        {
             "name": "Liquidaciones",
             "icon": "trending-down",
             "slug": "/",

@@ -2,6 +2,7 @@
 
 return [
     "Niveles" => "Niveles",
+    "Usuarios Expirados" => 'Usuarios Expirados', 
     "Asignar Rangos" => "Asignar los Rangos",
     "habilitar bonos Rango" => "habilitar bonos Rango",
     "Asignar bonos 7k" => "Asignar bonos 7k",

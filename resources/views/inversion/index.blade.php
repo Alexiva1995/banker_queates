@@ -44,7 +44,7 @@
                                 @foreach ($investments as $inversion)
                                     <tr class="text-center">
                                         <th>{{ $inversion->id }}</th>
-                                        <th>{{ $inversion->membershipPackage->membershipType->name }}</th>
+                                        <th>{{ $inversion->licensePackage->name }}</th>
                                         <th class="text-end">{{ number_format($inversion->invested, 2, ',', '.') }}</th>
                                         <th class="text-end">{{ number_format($inversion->gain, 2, ',', '.') }}</th>
                                         <th>{{ "{$inversion->getGainPercent()} %" }}</th>
