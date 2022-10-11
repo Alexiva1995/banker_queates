@@ -47,41 +47,42 @@ class LiquidactionController extends Controller
     }
     public function solicitudesRetiros()
     {
+        $user = auth()->user();
+        // Valida si el usuario tiene una wallet enlazada para returar
+        if( !$user->wallet ) {
+            return redirect()->back()->with('warning', 'Debe primero enlazar una wallet');
+        }
+
         $config = WithdrawalSetting::first();
         $date = now('America/Caracas');
-
         $date->subHour(1);
-
         $time_start = Carbon::createFromFormat('H:i:s', $config->time_start)->toTimeString();
         $time_end = Carbon::createFromFormat('H:i:s', $config->time_end)->toTimeString();
 
-        if (($date->dayOfWeek  == $config->day_start || $date->dayOfWeek  == $config->day_end) ) {
-
-            if( $date->toTimeString()  >= $time_start && $date->toTimeString() <= $time_end ){
-                $user = auth()->user();
-                $walletsComision = WalletComission::where([
-                    ['user_id', $user->id],
-                    ['status', 0],
-                    ['type', 3]
-                ])->get();
-
-                $balance = $walletsComision->sum('amount_available');
-
-                $fee = $config->percentage;
-                return view('business.retiro', compact('balance','fee'));
-
-            } else {
-
-                $time_start = Carbon::createFromFormat('H:i:s', $config->time_start)->format('h:i A');
-                $time_end = Carbon::createFromFormat('H:i:s', $config->time_end)->format('h:i A');
-
-                return redirect()->back()->with('warning', 'La solicitud de retiro solo puede realizarse de ' . $time_start .' a ' . $time_end . ' Hora Texas' );
-
-             }
-
-       }else {
+        // Valida si el dia actual esta dentro de los dias condigurados para poder realizar retiros
+        if ( !($date->dayOfWeek  == $config->day_start || $date->dayOfWeek  == $config->day_end) ) {
             return redirect()->back()->with('warning', 'La solicitud de retiro solo puede realizarse los días '.$config->getFirtsDayOfWeek(). ' y '.$config->getLastDayOfWeek().'.');
         }
+
+        // Valida si la hora actual se encuentra entre el rango permitido para realizar retiros 
+        if( !($date->toTimeString()  >= $time_start && $date->toTimeString() <= $time_end) ) {
+
+            $time_start = Carbon::createFromFormat('H:i:s', $config->time_start)->format('h:i A');
+            $time_end = Carbon::createFromFormat('H:i:s', $config->time_end)->format('h:i A');
+
+            return redirect()->back()->with('warning', 'La solicitud de retiro solo puede realizarse de ' . $time_start .' a ' . $time_end . ' Hora Texas' );
+
+        } 
+        
+        $balance = WalletComission::where([
+            ['user_id', $user->id],
+            ['status', 0],
+            ['type', 3]
+        ])->sum('amount_available');
+
+        $fee = $config->percentage;
+        return view('business.retiro', compact('balance','fee'));
+       
     }
 
     public function liquidationValidate() {

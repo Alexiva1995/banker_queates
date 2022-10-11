@@ -540,4 +540,9 @@ class User extends Authenticatable implements MustVerifyEmail
         }
       return $user_packages = $user_packages->sortBy('id');
     }
+
+    public function wallet()
+    {
+        return $this->hasOne(Wallet::class);
+    }
 }
