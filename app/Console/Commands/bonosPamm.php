@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\User;
 use Illuminate\Console\Command;
 
 class bonosPamm extends Command
@@ -37,6 +38,13 @@ class bonosPamm extends Command
      */
     public function handle()
     {
-        return 0;
+        $usuarios = User::all();
+
+        //NIVEL_1 //////////////////////////////////
+
+        foreach($usuarios as $user){
+            
+        }
+
     }
 }
