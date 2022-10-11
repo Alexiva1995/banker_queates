@@ -25,10 +25,12 @@ use BaconQrCode\Renderer\ImageRenderer;
 use BaconQrCode\Writer as BaconQrCodeWriter;
 use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use PhpParser\ErrorHandler\Collecting;
 
 class UserController extends Controller
 {
@@ -72,9 +74,28 @@ class UserController extends Controller
     public function listUser()
     {
 
-        $user = User::where('admin', '0')->orderBy('id', 'desc')->get();
+        $users = User::where('admin', '0')->with('padre', 'countrie')->orderBy('id', 'desc')->get();
 
-        return view('user.list-users', compact('user'));
+        return view('user.list-users', compact('users'));
+    }
+    /**
+     * Retorna la lista con los usuarios que tienen licencias vencidas
+     */
+    public function ExpiredLicenseUserList()
+    {
+        $users = User::where('id', '!=', 1)->with('padre', 'countrie', 'investment')->get();
+        $usersExpired = new Collection();
+        foreach($users as $user) {
+
+            if($user->investment !== null) {
+                
+                if($user->investment->expiration_date <= today()->format('Y-m-d')) {
+                    $usersExpired->push($user);
+                }
+            }
+        }
+
+        return view('user.expiredLicensesUserList', compact('usersExpired'));
     }
 
     public function start(User $user)

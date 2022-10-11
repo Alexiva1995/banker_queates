@@ -23,7 +23,7 @@
       }
 </style>
 <div class="d-flex my-1">
-    <p class="fw-700 mb-0">Usuarios</p>
+    <p class="fw-700 mb-0">Usuarios con Licencias Vencidas</p>
 </div>
 <div class="col-12">
     <div class="card p-2">
@@ -45,7 +45,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($users as $user)
+                            @foreach ($usersExpired as $user)
                             <tr class="text-center">
                                 <td>{{$user->id}}</td>
                                 <td>{{$user->name}}</td>
@@ -66,7 +66,7 @@
                                 @endif
                                 <td>{{$user->padre->name}}</td>
                                 <td>{{$user->padre->id}}</td>
-                                <td>{{$user->countrie !== null ? $user->countrie->name : '-'}}</td>
+                                <td>{{$user->countrie!==null ? $user->countrie->name : '-'}}</td>
 
                                 <td>
                                    {{-- <form action="{{route('user.start', $user)}}" method="POST" class="btn">
@@ -103,7 +103,6 @@
 @endsection
 @section('page-script')
 <script>
-    //datataables ordenes 
    
     $('.myTable').DataTable({
         responsive: false,
@@ -134,16 +133,6 @@
                 }
             }
         },
-        /*buttons: [{
-                //Botón para Excel
-                extend: 'excel',
-                footer: true,
-                title: 'Archivo',
-                filename: 'Listado_de_usuarios',
-                className: 'btn btn-primary',
-                //Aquí es donde generas el botón personalizado
-                text: 'Exportar a Excel <i class="fas fa-file-excel"></i>'
-        }]*/
     })
 </script>
 @endsection

@@ -41,7 +41,7 @@ class InversionController extends Controller
     public function userIndex()
     {
         $user = Auth::user();
-        $investments = Investment::where('user_id', $user->id)->orderBy('id', 'desc')->get();
+        $investments = Investment::where('user_id', $user->id)->with('licensePackage')->orderBy('id', 'desc')->get();
         return view('inversion.index', compact('investments', 'user'));
     }
 
