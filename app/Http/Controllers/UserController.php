@@ -11,26 +11,20 @@ use App\Models\Liquidation;
 use App\Models\WalletComission;
 use App\Models\WalletLog;
 use App\Models\Member;
-use App\Models\Inversion;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Validation\Rule;
 use App\Mail\CodeEmail;
-use App\Mail\Auth2faActive;
 use App\Models\Investment;
 use PragmaRX\Google2FA\Google2FA;
-use BaconQrCode\Renderer\ImageRenderer;
-use BaconQrCode\Writer as BaconQrCodeWriter;
-use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
-use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
-use PhpParser\ErrorHandler\Collecting;
 
 class UserController extends Controller
 {
@@ -419,5 +413,11 @@ class UserController extends Controller
             });
         }
         return 'OK';
+    }
+
+    public function sendSeccurityCode()
+    {
+        $response = 'Oli';
+        return response()->json($response, 200);
     }
 }

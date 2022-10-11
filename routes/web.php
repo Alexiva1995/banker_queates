@@ -183,6 +183,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/comisiones', [WalletController::class, 'comisiones'])->name('reports.comision');
 
 
+        // ruta para el envio del codigo de seguridad para enlazar una wallet
+        Route::post('/send-seccurity-code', [UserController::class, 'sendSeccurityCode'])->name('send.seccurity.code');
+
 
         Route::get('menuRentabilidad', [BusinessController::class, 'rentabilidad'])->name('business.rentabilidad');
 

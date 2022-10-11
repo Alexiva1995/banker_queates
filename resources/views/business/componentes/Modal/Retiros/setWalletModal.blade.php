@@ -10,26 +10,15 @@
                 <div class="container">
                     <div class="row">
 
-                        <div class="col-12">
-                            <div class="alert alert-danger" style="width:100%;">
-                                <div style="padding: 1rem;" class="li">
-                                    <i class="fa fa-lg fa-exclamation-circle" aria-hidden="true"
-                                        style="position: absolute;"></i>
-                                    <li class="li">Para poder editar la wallet debe ingresar el código
-                                    </li>
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="col-12 mt-1">
-                            <label for="google_code">Código de Google Authenticator <span
-                                    class="requerid">*</span></label>
-                            <div class="input-group">
-                                <input type="number" name="google_code" id="google_code"
-                                    placeholder="Ingresa los 6 dígitos" class="form-control" value="">
-                                <p style="font-size: 11px;margin-left: 5px;">Para activarlo precione <a
-                                        href="{{ route('profile.profile') }}" class="azul">aquí</a> y diríjase a la
-                                    opción de Configurar authenticator </p>
+                            <h3>Para poder realizar este proceso es necesario que ingrese un codigo de seguridad </h3>
+                            <h6 class="fw-500 mt-2">El código será enviado a {{substr(Auth::user()->email, 0, 4)}}*****@*****.com</h6>
+
+                            <div class="input-group mb-2 shadow-none">
+                                <div class="input-group input-group-merge shadow-none">
+                                    <input type="text" class="form-control form-control-merge" id="code" name="code" placeholder="Ingresa el código"/>
+                                    <button class="btn input-group-btn btn-primary cursor-pointer border-end input-group-text border-top border-bottom" id="codeButton" onclick="getCode()">Obtener codigo</button>
+                                </div>
                             </div>
                         </div>
 
@@ -49,3 +38,41 @@
         </div>
     </div>
 </div>
+
+@section('page-script')
+    <script>
+        async function getCode() {
+            const codeBtn = document.getElementById('codeButton');
+            const url = '{{route("send.seccurity.code")}}'
+            codeBtn.disabled = true;
+            let seconds = 50;
+
+            try {
+
+                if( !codeBtn.disabled ) return ;
+
+                function segundos(){
+                    codeBtn.textContent =`Reenviar en ${seconds}s`;
+                    seconds--;
+                    if( seconds > 0 ){
+                        // console.log(seconds)
+                        setTimeout(segundos,1000);
+                    }else{
+                        codeBtn.disabled = false;
+                        codeBtn.textContent = 'Obtener codigo';
+                    }
+                }
+                
+                segundos();
+
+                const response = await axios.post(url);
+                console.log(response)
+
+
+            } catch (error) {
+                console.log(error);
+            }
+    
+        }
+    </script>
+@endsection
