@@ -87,6 +87,7 @@ Route::middleware('auth')->group(function () {
 
         //RUTAS ADMIN
         Route::middleware('admin')->group(function () {
+            Route::get('/configurar-retiros', [LiquidactionController::class, 'configurar_retiro'])->name('config.retiros');
             //GENEALOGY
             Route::prefix('red')->group(function () {
                 Route::get('/buscar', [TreController::class, 'buscar'])->name('red.buscar');
@@ -212,9 +213,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/liquidaciones/validacion', [LiquidactionController::class, 'liquidationValidate'])->name('liquidaciones.validate');
         Route::post('/liquidaciones/validacion', [LiquidactionController::class, 'liquidationCheck'])->name('liquidaciones.check');
 
-
-
-        Route::get('/configurar-retiros', [LiquidactionController::class, 'configurar_retiro'])->name('config.retiros');
         Route::post('/guardar-configuracion', [LiquidactionController::class, 'guardar_configuracion'])->name('guardar.configuracion');
 
         Route::post('/trasferencia', [LiquidactionController::class, 'Transferencia_verificada'])->name('Transferencia.verificada');

@@ -42,13 +42,13 @@
                             <span class="input-group-text bg-transparent">De</span>
                             <select class="form-select" aria-label="Default select example" id="dia_desde">
                                 <option selected value="sinvalor">-------</option>
-                                <option value="1">Lunes</option>
-                                <option value="2">Martes</option>
-                                <option value="3">Miercoles</option>
-                                <option value="4">Jueves</option>
-                                <option value="5">Viernes</option>
-                                <option value="6">Sabado</option>
-                                <option value="7">Domingo</option>
+                                <option value="1" {{ $WithdrawalSetting->day_start == '1' ? 'selected' : '' }} >Lunes</option>
+                                <option value="2" {{ $WithdrawalSetting->day_start == '2' ? 'selected' : '' }} >Martes</option>
+                                <option value="3" {{ $WithdrawalSetting->day_start == '3' ? 'selected' : '' }} >Miercoles</option>
+                                <option value="4" {{ $WithdrawalSetting->day_start == '4' ? 'selected' : '' }} >Jueves</option>
+                                <option value="5" {{ $WithdrawalSetting->day_start == '5' ? 'selected' : '' }} >Viernes</option>
+                                <option value="6" {{ $WithdrawalSetting->day_start == '6' ? 'selected' : '' }} >Sabado</option>
+                                <option value="7" {{ $WithdrawalSetting->day_start == '7' ? 'selected' : '' }} >Domingo</option>
                             </select>
                         </div>
                     </div>
@@ -57,13 +57,13 @@
                             <span class="input-group-text bg-transparent">A</span>
                             <select class="form-select" aria-label="Default select example" id="dia_hasta">
                                 <option selected value="sinvalor">-------</option>
-                                <option value="1">Lunes</option>
-                                <option value="2">Martes</option>
-                                <option value="3">Miercoles</option>
-                                <option value="4">Jueves</option>
-                                <option value="5">Viernes</option>
-                                <option value="6">Sabado</option>
-                                <option value="7">Domingo</option>
+                                <option value="1" {{ $WithdrawalSetting->day_end == '1' ? 'selected' : '' }} >Lunes</option>
+                                <option value="2" {{ $WithdrawalSetting->day_end == '2' ? 'selected' : '' }} >Martes</option>
+                                <option value="3" {{ $WithdrawalSetting->day_end == '3' ? 'selected' : '' }} >Miercoles</option>
+                                <option value="4" {{ $WithdrawalSetting->day_end == '4' ? 'selected' : '' }} >Jueves</option>
+                                <option value="5" {{ $WithdrawalSetting->day_end == '5' ? 'selected' : '' }} >Viernes</option>
+                                <option value="6" {{ $WithdrawalSetting->day_end == '6' ? 'selected' : '' }} >Sabado</option>
+                                <option value="7" {{ $WithdrawalSetting->day_end == '7' ? 'selected' : '' }} >Domingo</option>
                             </select>
                         </div>
                     </div>
@@ -101,7 +101,6 @@
                     </div>
                     <div class="col-sm-12 ">
                         <select id="transferencias_entre_users" class="form-select" aria-label="Default select example">
-
                             <option value="1"
                             @if ($transferencias_entre_users == 1)
                             selected

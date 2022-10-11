@@ -47,7 +47,6 @@ class LiquidactionController extends Controller
     }
     public function solicitudesRetiros()
     {
-        $id = Auth::id();
         $config = WithdrawalSetting::first();
         $date = now('America/Caracas');
 
@@ -57,76 +56,28 @@ class LiquidactionController extends Controller
         $time_end = Carbon::createFromFormat('H:i:s', $config->time_end)->toTimeString();
 
         if (($date->dayOfWeek  == $config->day_start || $date->dayOfWeek  == $config->day_end) ) {
-            if(($date->toTimeString()  >= $time_start && $date->toTimeString() <= $time_end)){
+
+            if( $date->toTimeString()  >= $time_start && $date->toTimeString() <= $time_end ){
                 $user = auth()->user();
                 $walletsComision = WalletComission::where([
-                ['user_id', $user->id],
-                ['status', 0],
-                ['type',0]
-            ])->get();
+                    ['user_id', $user->id],
+                    ['status', 0],
+                    ['type', 3]
+                ])->get();
 
-            $date_now = Carbon::now()->format('d');
-             
-            if($date_now >= 01 && $date_now <= 07 ){
-              $day_available = "si";
-              
-            }else{
-               $day_available = "no";
-            }
+                $balance = $walletsComision->sum('amount_available');
 
-            $availableBalanceComision = $walletsComision->sum('amount_available');
-            $utilidad = Utility::where('status','0')->where('user_id', $id)->get();
+                $fee = $config->percentage;
+                return view('business.retiro', compact('balance','fee'));
 
-            $utilidades_array = [];
-            $utilidades = 0;
-            $year_now = Carbon::now();
-            
-            
+            } else {
 
-            foreach($utilidad as $key => $utili){
-                if(!empty($utili)){
-                    if($utili->investment->type == '1' || $utili->investment->type == '2' ){
-                        $utili->type = $utili->investment->type;
-                        array_push($utilidades_array, $utili);
-                        $utilidades = $utilidades + $utili->amount_available;
-                    }
-                    if( $year_now->gt(Carbon::parse($utili->investment->created_at)->addYears(1)->format('d-m-Y'))  ){
-                        if($utili->investment->type == '3'){
-                            $utili->type = $utili->investment->type;
-                            array_push($utilidades_array, $utili);
-                            $utilidades = $utilidades + $utili->amount_available;
-                        }
-                     }
-
-                     //validacion para pquetes platino se vaida si el paquete esta en su 7timo mes 
-                     $mes7 = intval(Carbon::parse($utili->investment->created_at)->addMonth(7)->format('m'));
-                     $Validar_mes = intval($year_now->format('m'));
-
-                     $mes14 = intval(Carbon::parse($utili->investment->created_at)->addMonth(14)->format('m'));
-                     if( $Validar_mes == $mes7 || $Validar_mes == $mes14  ){
-                       
-                        if($utili->investment->type == '4'){    
-                            array_push($utilidades_array, $utili);
-                            $utilidades =  $utilidades + $utili->amount_available;
-                        }
-                     }
-                }
-            }
-            
-            $BonusRange =  WalletComission::where([
-                ['user_id', $user->id],
-                ['status', 0],
-                ['type', 1]
-            ])->sum('amount_available');
-            //$fee = ($config->percentage * $availableBalance)/100;
-            $fee = $config->percentage;
-            return view('business.retiro', compact('availableBalanceComision','day_available','BonusRange','fee','utilidades'));
-            }else{
                 $time_start = Carbon::createFromFormat('H:i:s', $config->time_start)->format('h:i A');
                 $time_end = Carbon::createFromFormat('H:i:s', $config->time_end)->format('h:i A');
+
                 return redirect()->back()->with('warning', 'La solicitud de retiro solo puede realizarse de ' . $time_start .' a ' . $time_end . ' Hora Texas' );
 
-        }
+             }
 
        }else {
             return redirect()->back()->with('warning', 'La solicitud de retiro solo puede realizarse los días '.$config->getFirtsDayOfWeek(). ' y '.$config->getLastDayOfWeek().'.');
@@ -345,38 +296,6 @@ class LiquidactionController extends Controller
             }
         }
     }
-
-//Comentamos esto temporalemente mientras se soluciona lo de coinpayment
-
-    // public function aprobarLiquidacion($idliquidation, $billetera): string
-    // {
-    //     $liquidation = Liquidaction::find($idliquidation);
-    //     //dd($liquidation);
-    //     // creo el arreglo de la transacion en coipayment
-    //     $cmd = 'create_withdrawal';
-    //     $result2 = '';
-    //     $dataPago = [
-    //         'amount' => $liquidation->total,
-    //         'currency' => 'USDT.TRC20',
-    //         'address' => $billetera,
-    //     ];
-    //     // llamo la a la funcion que va a ser la transacion
-    //     $result = $this->coinpayments_api_call($cmd, $dataPago);
-    //     if (!empty($result['result'])) {
-    //         Liquidaction::where('id', $idliquidation)->update([
-    //             'status' => 1,
-    //             'hash' => $result['result']['id'],
-    //             'wallet_used' => $billetera
-    //         ]);
-
-    //         Wallet::where('liquidation_id', $idliquidation)->update(['liquidado' => 1, 'status' => 1]);
-    //         $this->retiroAprobado();
-    //     } else {
-    //         $result2 = 'Error -> ' . $result['error'];
-    //     }
-    //     //dd($result);
-    //     return $result2;
-    // }
 
     /**
      * Permite aprobar las liquidaciones
@@ -773,7 +692,6 @@ class LiquidactionController extends Controller
         //return $weekMap[7];
         $dayOfTheWeek = Carbon::now()->dayOfWeek;
         $transferencias_entre_users = $WithdrawalSetting['transferencias_entre_users'];
-       
 
         return view('business.Config.configurar_retiro',compact('WithdrawalSetting','transferencias_entre_users'));
     }
