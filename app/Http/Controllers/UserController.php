@@ -19,6 +19,7 @@ use Illuminate\Validation\Rule;
 use App\Mail\CodeEmail;
 use App\Mail\CodeSeccurity;
 use App\Models\Investment;
+use Illuminate\Cache\RedisTaggedCache;
 use PragmaRX\Google2FA\Google2FA;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Crypt;
@@ -414,7 +415,9 @@ class UserController extends Controller
         }
         return 'OK';
     }
-
+    /**
+     * Genera un codigo de seguridad, lo envia al correo del usuario y lo guarda encryptado en db
+     */
     public function sendSeccurityCode()
     {
         $code = Str::random(10);
@@ -423,5 +426,30 @@ class UserController extends Controller
         $response = ['status' => 'success'];
         Mail::to(Auth::user()->email)->send(new CodeSeccurity($code));
         return response()->json($response, 200);
+    }
+    /**
+     * Guarda la wallet del usuario en db, encryptada
+     */
+    public function storeWalelt(Request $request)
+    {
+        $request->validate(
+            [
+                'code' => 'required',
+                'wallet' => 'required'
+            ],
+            [
+                'code' => 'El codigo es requerido',
+                'wallet' => 'La wallet es requerida'
+            ]
+        );
+
+        $user = auth()->user();
+
+        if( $request->code !== $user->decryptSeccurityCode())
+        {
+            return back()->with('error', 'El código de seguridad no coincide');
+        }
+        
+        return $request;
     }
 }

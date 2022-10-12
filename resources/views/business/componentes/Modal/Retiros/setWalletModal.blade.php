@@ -6,42 +6,49 @@
                 <button type="button" class="btn btn-danger btn-close" data-bs-dismiss="modal"
                     aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <div class="container">
-                    <div class="row">
+            <form action="{{ route('user.store.wallet') }}" method="POST">
+                @csrf
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 mt-1">
+                                <h3>Para poder realizar este proceso es necesario que ingrese un codigo de seguridad
+                                </h3>
+                                <h6 class="fw-500 mt-2">El código será enviado a {{substr(Auth::user()->email, 0,
+                                    4)}}*****@*****.com</h6>
 
-                        <div class="col-12 mt-1">
-                            <h3>Para poder realizar este proceso es necesario que ingrese un codigo de seguridad </h3>
-                            <h6 class="fw-500 mt-2">El código será enviado a {{substr(Auth::user()->email, 0, 4)}}*****@*****.com</h6>
-
-                            <div class="input-group mb-2 shadow-none">
-                                <div class="input-group input-group-merge shadow-none">
-                                    <input type="text" class="form-control form-control-merge" id="code" name="code" placeholder="Ingresa el código"/>
-                                    <button class="btn input-group-btn btn-primary cursor-pointer border-end input-group-text border-top border-bottom" id="codeButton" onclick="getCode()">Obtener codigo</button>
+                                <div class="input-group mb-2 shadow-none">
+                                    <div class="input-group input-group-merge shadow-none">
+                                        <input type="text" class="form-control form-control-merge" id="code" name="code"
+                                            placeholder="Ingresa el código" required />
+                                        <button
+                                            class="btn input-group-btn btn-primary cursor-pointer border-end input-group-text border-top border-bottom" id="codeButton" onclick="getCode()">Obtener codigo
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-12 mt-1">
-                            <label for="name">Wallet <span class="requerid">*</span></label>
-                            <div class="input-group">
-                                <input type="text" name="wallet" id="wallet" placeholder="Ingresa tu wallet"
-                                    class="form-control">
+                            <div class="col-12 mt-1">
+                                <label for="name">Wallet <span class="requerid">*</span></label>
+                                <div class="input-group">
+                                    <input type="text" name="wallet" id="wallet" placeholder="Ingresa tu wallet"
+                                        class="form-control" required>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="saveWallet()">Guardar</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
 @section('page-script')
-    <script>
-        async function getCode() {
+<script>
+    async function getCode() {
             const codeBtn = document.getElementById('codeButton');
             const url = '{{route("send.seccurity.code")}}'
             codeBtn.disabled = true;
@@ -85,5 +92,5 @@
             }
     
         }
-    </script>
+</script>
 @endsection
