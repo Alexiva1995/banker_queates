@@ -17,11 +17,11 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Validation\Rule;
 use App\Mail\CodeEmail;
+use App\Mail\CodeSeccurity;
 use App\Models\Investment;
 use PragmaRX\Google2FA\Google2FA;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -417,7 +417,11 @@ class UserController extends Controller
 
     public function sendSeccurityCode()
     {
-        $response = 'Oli';
+        $code = Str::random(10);
+        $code_encrypted = Crypt::encryptString($code);
+        Auth::user()->update(['code_security'=> $code_encrypted]);
+        $response = ['status' => 'success'];
+        Mail::to(Auth::user()->email)->send(new CodeSeccurity($code));
         return response()->json($response, 200);
     }
 }

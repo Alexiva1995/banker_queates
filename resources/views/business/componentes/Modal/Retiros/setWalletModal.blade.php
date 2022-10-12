@@ -66,11 +66,22 @@
                 segundos();
 
                 const response = await axios.post(url);
-                console.log(response)
+                const { status } = response.data;
+                if( status === 'success')
+                {
+                    toastr['success']('Por favor revise su correo', '¡Exitoso!', {
+                        closeButton: true,
+                        tapToDismiss: false
+                    });
+                }
 
 
             } catch (error) {
                 console.log(error);
+                toastr['error']('Hubo un error por favor contacte con el administrador', '¡error!', {
+                    closeButton: true,
+                    tapToDismiss: false
+                });
             }
     
         }

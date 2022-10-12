@@ -478,6 +478,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return Crypt::decryptString($this->wallet);
     }
 
+    public function decryptCodeSeccurity()
+    {
+        return Crypt::decryptString($this->code_security);
+    }
+
     public function walletLogs()
     {
         return $this->hasMany(WalletLog::class, 'user_id');
