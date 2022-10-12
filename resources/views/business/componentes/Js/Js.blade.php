@@ -12,7 +12,7 @@
         Monto_a_retirar = Value_Monto;
         ButtonContinue = value_ButtonContinue;
         percentage( Monto_a_retirar);
-        if( wallet.length > 16 &&  Monto_a_retirar > 49 ){
+        if( wallet.length > 16 &&  Monto_a_retirar >= 100 ){
             console.log(Monto_a_retirar);
             ButtonContinue.disabled = false;
         }else{
@@ -27,7 +27,7 @@ function pegar(e){
     let ButtonContinue = document.getElementById('continue-button');
 
     setTimeout(function(){
-        if( e.value.length > 16 &&  Monto_a_retirar > 49 ){
+        if( e.value.length > 16 &&  Monto_a_retirar >= 100 ){
             console.log(e.value.length);
             ButtonContinue.disabled = false;
         }else{
@@ -43,7 +43,7 @@ function activarInput(e){
     Monto_a_retirar = e;
     percentage(Monto_a_retirar);
 
-    if( wallet.length > 16 &&  Monto_a_retirar > 49 ){
+    if( wallet.length > 16 &&  Monto_a_retirar >= 100 ){
 
         ButtonContinue.disabled = false;
 
@@ -59,7 +59,7 @@ function percentage(e){
     let total = document.getElementById('total');
     let avaibleBalanceTotal = document.getElementById('avaibleBalanceTotal').value;
 
-    if(e > 49 ){
+    if(e >= 100 ){
         let n = (e * fee )/100;
 
         total.innerHTML = `${e - n} USD`;
@@ -191,7 +191,7 @@ function email_trasnfer(e){
   });
 }
 function max(){
-    const avaibleBalanceTotal = @json($availableBalanceComision);
+    const avaibleBalanceTotal = @json($balance);
     let Monto_a_retirar =  document.getElementById('Monto_a_retirar');
     Monto_a_retirar.value = avaibleBalanceTotal;
     w();

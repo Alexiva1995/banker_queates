@@ -11,26 +11,21 @@ use App\Models\Liquidation;
 use App\Models\WalletComission;
 use App\Models\WalletLog;
 use App\Models\Member;
-use App\Models\Inversion;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Validation\Rule;
 use App\Mail\CodeEmail;
-use App\Mail\Auth2faActive;
+use App\Mail\CodeSeccurity;
 use App\Models\Investment;
+use Illuminate\Cache\RedisTaggedCache;
 use PragmaRX\Google2FA\Google2FA;
-use BaconQrCode\Renderer\ImageRenderer;
-use BaconQrCode\Writer as BaconQrCodeWriter;
-use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
-use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
-use PhpParser\ErrorHandler\Collecting;
 
 class UserController extends Controller
 {
@@ -419,5 +414,42 @@ class UserController extends Controller
             });
         }
         return 'OK';
+    }
+    /**
+     * Genera un codigo de seguridad, lo envia al correo del usuario y lo guarda encryptado en db
+     */
+    public function sendSeccurityCode()
+    {
+        $code = Str::random(10);
+        $code_encrypted = Crypt::encryptString($code);
+        Auth::user()->update(['code_security'=> $code_encrypted]);
+        $response = ['status' => 'success'];
+        Mail::to(Auth::user()->email)->send(new CodeSeccurity($code));
+        return response()->json($response, 200);
+    }
+    /**
+     * Guarda la wallet del usuario en db, encryptada
+     */
+    public function storeWalelt(Request $request)
+    {
+        $request->validate(
+            [
+                'code' => 'required',
+                'wallet' => 'required'
+            ],
+            [
+                'code' => 'El codigo es requerido',
+                'wallet' => 'La wallet es requerida'
+            ]
+        );
+
+        $user = auth()->user();
+
+        if( $request->code !== $user->decryptSeccurityCode())
+        {
+            return back()->with('error', 'El código de seguridad no coincide');
+        }
+        
+        return $request;
     }
 }

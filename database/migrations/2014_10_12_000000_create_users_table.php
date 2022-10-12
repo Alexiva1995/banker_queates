@@ -34,7 +34,7 @@ class CreateUsersTable extends Migration
             $table->string('phone')->nullable();
             $table->string('activar_2fact')->nullable();
             $table->string('token_auth')->nullable();
-            $table->string('code_security')->nullable();
+            $table->string('code_security', 255)->nullable();
             $table->string('app_mode')->default('light')->comment('El modo de la app si dark o light');
             $table->rememberToken();
             $table->timestamps();
