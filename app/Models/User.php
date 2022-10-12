@@ -478,6 +478,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return Crypt::decryptString($this->wallet);
     }
 
+    public function decryptSeccurityCode()
+    {
+        return Crypt::decryptString($this->code_security);
+    }
+
     public function walletLogs()
     {
         return $this->hasMany(WalletLog::class, 'user_id');
@@ -539,5 +544,10 @@ class User extends Authenticatable implements MustVerifyEmail
             $user_packages->push($package);
         }
       return $user_packages = $user_packages->sortBy('id');
+    }
+
+    public function wallet()
+    {
+        return $this->hasOne(Wallet::class);
     }
 }

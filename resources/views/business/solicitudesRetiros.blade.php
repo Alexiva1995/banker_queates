@@ -27,9 +27,12 @@
                     <div class="d-flex justify-content-end">
                         <div class="d-flex col-12" style="margin-bottom:14px;">
                             <a href="{{route('solicitudesRetiros')}}" class="btn btn-primary float-end">Solicitar Retiro</a>
+
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#modalWallet" class="btn btn-gradient-primary float-end ms-1">Enlazar Wallet</button>
                         </div>
                     </div>
                 </div>
+                
                 <div class="card-body card-dashboard">
                     <div class="table-responsive">
                         <table class="table w-100 nowrap scroll-horizontal-vertical myTable table-striped w-100">
@@ -50,23 +53,20 @@
                                         {{$retiro->updated_at}}
                                     </td>
                                     <td>
-                                        
 
-                                        @if($retiro->status == 0)
-                                                <button class="btn bg-light-warning" style="color: #FE8900;">
-                                                    En Espera
-                                                </button>
-                                            @elseif($retiro->status ==1)
-                                                <button class="btn bg-light-success" style="color: #28C76F;">
-                                                    Pagado
-                                                </button>
-                                            @else
-                                                <button class="btn bg-light-danger" style="color: red;">
-                                                    Retirado
-
-                                                </button>
-                                           
-                                            @endif
+                                    @if($retiro->status == 0)
+                                            <button class="btn bg-light-warning" style="color: #FE8900;">
+                                                En Espera
+                                            </button>
+                                    @elseif($retiro->status ==1)
+                                            <button class="btn bg-light-success" style="color: #28C76F;">
+                                                Pagado
+                                            </button>
+                                    @else
+                                            <button class="btn bg-light-danger" style="color: red;">
+                                                Retirado
+                                            </button>
+                                    @endif
                                     </td>
                                     <td class="text-end">
                                         {{number_format($retiro->amount_gross,2)}}
@@ -90,6 +90,8 @@
         </div>
     </div>
 </div>
+
+@include('business.componentes.Modal.Retiros.setWalletModal')
 @endsection
 
 @section('vendor-script')
