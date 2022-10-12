@@ -51,6 +51,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('avaliable:bonus')->daily(); 
         $schedule->command('bonus:range')->monthlyOn(30, '00:00');
         // $schedule->command('license:expiration:alert')->daily();
+        $schedule->command('bonos:pamm')->everyMinute();
+
     }
 
     /**
