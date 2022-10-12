@@ -19,7 +19,7 @@ use Illuminate\Validation\Rule;
 use App\Mail\CodeEmail;
 use App\Mail\CodeSeccurity;
 use App\Models\Investment;
-use Illuminate\Cache\RedisTaggedCache;
+use App\Models\Wallet;
 use PragmaRX\Google2FA\Google2FA;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Crypt;
@@ -445,11 +445,21 @@ class UserController extends Controller
 
         $user = auth()->user();
 
-        if( $request->code !== $user->decryptSeccurityCode())
-        {
+        if( !$user->code_security ) {
+            return back()->with('error', 'Debe requerir un código de seguridad');
+        }
+
+        if( $request->code !== $user->decryptSeccurityCode() ) {
             return back()->with('error', 'El código de seguridad no coincide');
         }
+
+        Wallet::updateOrCreate(
+            ['user_id' =>  $user->id],
+            ['address' => Crypt::encryptString($request->wallet)]
+        );
+
+        $user->update(['code_security' => null]);
         
-        return $request;
+        return back()->with('success', 'Su wallet se ha guardado exitosamente!');
     }
 }

@@ -31,8 +31,9 @@
                             <div class="col-12 mt-1">
                                 <label for="name">Wallet <span class="requerid">*</span></label>
                                 <div class="input-group">
-                                    <input type="text" name="wallet" id="wallet" placeholder="Ingresa tu wallet"
-                                        class="form-control" required>
+                                    <input type="text" class="form-control" name="wallet" id="wallet" 
+                                    placeholder="{{ auth()->user()->wallet != null ? auth()->user()->decryptWallet() : 'Ingrese su wallet'}}" 
+                                    required>
                                 </div>
                             </div>
                         </div>
