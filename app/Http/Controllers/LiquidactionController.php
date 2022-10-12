@@ -42,15 +42,24 @@ class LiquidactionController extends Controller
     }
 
     public function retiro(){
-        $retiros = Liquidation::where('status',0)->get();
+        
+        $retiros = Liquidation::where('status',0, )->where('user_id', Auth::id() )->get();
+
         return view('business.solicitudesRetiros', compact('retiros'));
     }
+
     public function solicitudesRetiros()
     {
         $user = auth()->user();
-        // Valida si el usuario tiene una wallet enlazada para returar
+        // Valida si el usuario tiene una wallet enlazada para poder retirar
         if( !$user->wallet ) {
             return redirect()->back()->with('warning', 'Debe primero enlazar una wallet');
+        }
+        // Si el usuario hizo un cambio en su wallet no puede retirar durante 15 dias
+        $remaining_days = $user->wallet->updated_at->diffInDays( now() );
+        if( $remaining_days <= 15 ) {
+            $remaining_days = 15 - $remaining_days;
+            return redirect()->back()->with('warning', "Debido a que modifico su wallet debe esperar {$remaining_days} dias para poder solicitar retiros");
         }
 
         $config = WithdrawalSetting::first();

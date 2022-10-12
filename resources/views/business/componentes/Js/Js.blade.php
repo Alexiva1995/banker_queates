@@ -7,7 +7,10 @@
         let value = document.getElementById('wallet').value;
         let Value_Monto = document.getElementById('Monto_a_retirar').value;
         let value_ButtonContinue = document.getElementById('continue-button');
+        const balance = {{ $balance }}
 
+        if( balance === 0 ) return; 
+        
         wallet = value;
         Monto_a_retirar = Value_Monto;
         ButtonContinue = value_ButtonContinue;
@@ -16,10 +19,9 @@
             console.log(Monto_a_retirar);
             ButtonContinue.disabled = false;
         }else{
-        (wallet.value);
-        ButtonContinue.disabled = true;
+            (wallet.value);
+            ButtonContinue.disabled = true;
             console.log(Monto_a_retirar);
-
         }
     }
 
