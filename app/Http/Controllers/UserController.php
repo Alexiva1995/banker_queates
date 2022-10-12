@@ -420,11 +420,12 @@ class UserController extends Controller
      */
     public function sendSeccurityCode()
     {
+        $user = Auth::user();
         $code = Str::random(10);
         $code_encrypted = Crypt::encryptString($code);
-        Auth::user()->update(['code_security'=> $code_encrypted]);
+        $user->update(['code_security'=> $code_encrypted]);
         $response = ['status' => 'success'];
-        Mail::to(Auth::user()->email)->send(new CodeSeccurity($code));
+        Mail::to($user->email)->send(new CodeSeccurity($code));
         return response()->json($response, 200);
     }
     /**
@@ -443,7 +444,7 @@ class UserController extends Controller
             ]
         );
 
-        $user = auth()->user();
+        $user = Auth::user();
 
         if( !$user->code_security ) {
             return back()->with('error', 'Debe requerir un código de seguridad');
