@@ -16,7 +16,7 @@ class CreateCodeSeccuritiesTable extends Migration
         Schema::create('code_seccurities', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->string('encrypted', 300)->comment('id + code_security encrypted');;
+            $table->string('encrypted', 350)->comment('id + code_security encrypted');;
             $table->timestamps();
         });
     }

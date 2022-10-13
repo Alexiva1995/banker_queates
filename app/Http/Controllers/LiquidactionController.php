@@ -2,19 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\CodeEmail;
 use Carbon\Carbon;
 use App\Mail\CodeRetiro;
+use App\Models\CodeSeccurity;
 use App\Models\User;
 use App\Models\Wallet;
-use App\Models\Inversion;
 use App\Models\Liquidation;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Models\LogLiquidation;
 use App\Models\Utility;
 use App\Models\Transactions;
-use App\Models\UtilityLog;
 use App\Models\WalletComission;
 use App\Services\FutswapService;
 use App\Models\WithdrawalSetting;
@@ -602,14 +599,25 @@ class LiquidactionController extends Controller
     }
 
 
-    function getCode(){
+    public function getCode()
+    {
         $code = Str::random(10);
         $user = Auth::user();
-        $user->update(['code_security'=> $code]);
+        $code_encrypted = Crypt::encryptString($code);
+        $user->update(['code_security'=> $code_encrypted]);
+
+        CodeSeccurity::updateOrCreate(
+            ['user_id' =>  $user->id],
+            ['encrypted' => Crypt::encryptString("{$user->id}-{$code}")]
+        );
+
         Mail::to(Auth::user()->email)->send(new CodeRetiro($code));
 
-        return $code;
+        $response = ['status' => 'success'];
+
+        return response()->json($response, 200);
     }
+
     function verificarRetiro(Request $request){
         $id = Auth::id();
         $data = 0;

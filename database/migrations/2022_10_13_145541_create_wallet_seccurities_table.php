@@ -16,7 +16,7 @@ class CreateWalletSeccuritiesTable extends Migration
         Schema::create('wallet_seccurities', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->string('encrypted', 300)->comment('id + wallet encrypted');
+            $table->string('encrypted', 350)->comment('id + wallet encrypted');
             $table->timestamps();
         });
     }

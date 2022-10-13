@@ -1,7 +1,7 @@
 <script>
-     let wallet = 0;
-     let Monto_a_retirar = 0;
-     let ButtonContinue = 0;
+    let wallet = 0;
+    let Monto_a_retirar = 0;
+    let ButtonContinue = 0;
 
     function w(){
         let value = document.getElementById('wallet').value;
@@ -71,131 +71,150 @@ function percentage(e){
 }
 
 
-function getCode(){
-    let codeButton = document.getElementById('codeButton');
-    codeButton.disabled = true;
-    let seconds = 30;
-    function segundos(){
-       codeButton.innerHTML ='Reenviar en '+' '+seconds;
-       seconds--;
-       if(seconds > 0 ){
-        console.log(seconds)
-        setTimeout(segundos,1000);
-       }else{
-        codeButton.disabled = false;
-        codeButton.innerHTML = 'Obtener codigo';
-       }
+    async function getCode(){
+
+        const codeBtn = document.getElementById('codeButton');
+        const url = '{{route("getCode.user.retiro")}}'
+        codeBtn.disabled = true;
+        let seconds = 50;
+
+        try {
+
+            if( !codeBtn.disabled ) return ;
+
+            function segundos(){
+                codeBtn.textContent =`Reenviar en ${seconds}s`;
+                seconds--;
+                if( seconds > 0 ){
+                    // console.log(seconds)
+                    setTimeout(segundos,1000);
+                }else{
+                    codeBtn.disabled = false;
+                    codeBtn.textContent = 'Obtener codigo';
+                }
+            }
+            
+            segundos();
+
+            const response = await axios.post(url);
+            const { status } = response.data;
+
+            if( status === 'success')
+            {
+                toastr['success']('Por favor revise su correo', '¡Exitoso!', {
+                    closeButton: true,
+                    tapToDismiss: false
+                });
+            }
+
+
+        } catch (error) {
+            console.log(error);
+            toastr['error']('Hubo un error por favor contacte con el administrador', '¡error!', {
+                closeButton: true,
+                tapToDismiss: false
+            });
+        }
+        
     }
-    segundos();
 
-    axios.post('{{route("getCode.user.retiro")}}', {
+    function verificarRetiro(){
+        let title = document.getElementById('title');
+        let body = document.getElementById('body');
+        let footer = document.getElementById('footer');
+        let passed = document.getElementById('passed');
+        let contenedorspiner = document.getElementById('contenedorspiner');
+        let spiner = document.getElementById('spiner');
 
+
+        axios.post('{{route("verificar.user.retiro")}}', {
+            code: document.getElementById('code').value,
+            Monto_a_retirar: document.getElementById('Monto_a_retirar').value,
+            wallet: document.getElementById('wallet').value,
+            type:'comissions',
+        })
+        .then(function (response) {
+            if(response.data.value == 1){
+                title.hidden = true;
+                body.hidden = true;
+                footer.hidden = true;
+                spiner.hidden = false;
+                contenedorspiner.hidden = false;
+
+                setTimeout(function(){
+                    spiner.hidden = true;
+                    passed.hidden = false;
+                },1500);
+
+                setTimeout(reload,4000);
+            }
+            if(response.data.value == 0){
+                Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title: 'Codigo incorrecto',
+                showConfirmButton: false,
+                timer: 1500
+                })
+            }
+            if(response.data.value == 2){
+                Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title: 'El monto intruducido supera tu saldo disponible ',
+                showConfirmButton: false,
+                timer: 1500
+                })
+            }
+        })
+        .catch(function (error) {
+                console.log(error);
+        });
+
+
+    }
+
+    function reload(){
+        window.location.reload();
+    }
+
+
+    function email_trasnfer(e){
+        axios.post('{{route("liquidaciones.trasferir")}}', {
+        email: e,
     })
     .then(function (response) {
-            console.log(response);
+        let sin_resultado = document.getElementById('sin_resultado');
+        let resultado = document.getElementById('resultado');
+        let input = document.getElementById('input');
+        let success = document.getElementById('success');
+        let close = document.getElementById('close');
+
+    if( response.data.value != 'sin_resultados'){
+        console.log(response.data.value);
+        resultado.hidden = false;
+        sin_resultado.hidden = true;
+        success.hidden = false;
+        close.hidden = true;
+        input.style.borderColor = "#28C76F";
+        success.style.borderColor = "#28C76F";
+    }else{
+        sin_resultado.hidden = false;
+        resultado.hidden = true;
+        success.hidden = true;
+        close.hidden = false;
+        input.style.borderColor = "#FF4969";
+        close.style.borderColor = "#FF4969";
+    }
     })
     .catch(function (error) {
-            console.log(error);
+        console.log(error);
     });
-}
-
-function verificarRetiro(){
-    let title = document.getElementById('title');
-    let body = document.getElementById('body');
-    let footer = document.getElementById('footer');
-    let passed = document.getElementById('passed');
-    let contenedorspiner = document.getElementById('contenedorspiner');
-    let spiner = document.getElementById('spiner');
-
-
-    axios.post('{{route("verificar.user.retiro")}}', {
-        code: document.getElementById('code').value,
-        Monto_a_retirar: document.getElementById('Monto_a_retirar').value,
-        wallet: document.getElementById('wallet').value,
-        type:'comissions',
-    })
-    .then(function (response) {
-        if(response.data.value == 1){
-            title.hidden = true;
-            body.hidden = true;
-            footer.hidden = true;
-            spiner.hidden = false;
-            contenedorspiner.hidden = false;
-
-            setTimeout(function(){
-                spiner.hidden = true;
-                passed.hidden = false;
-            },1500);
-
-            setTimeout(reload,4000);
-        }
-        if(response.data.value == 0){
-            Swal.fire({
-            position: 'top-end',
-            icon: 'error',
-            title: 'Codigo incorrecto',
-            showConfirmButton: false,
-            timer: 1500
-            })
-        }
-        if(response.data.value == 2){
-            Swal.fire({
-            position: 'top-end',
-            icon: 'error',
-            title: 'El monto intruducido supera tu saldo disponible ',
-            showConfirmButton: false,
-            timer: 1500
-            })
-        }
-    })
-    .catch(function (error) {
-            console.log(error);
-    });
-
-
-}
-
-function reload(){
-    window.location.reload();
-}
-
-
-function email_trasnfer(e){
-    axios.post('{{route("liquidaciones.trasferir")}}', {
-    email: e,
-  })
-  .then(function (response) {
-    let sin_resultado = document.getElementById('sin_resultado');
-    let resultado = document.getElementById('resultado');
-    let input = document.getElementById('input');
-    let success = document.getElementById('success');
-    let close = document.getElementById('close');
-
-   if( response.data.value != 'sin_resultados'){
-    console.log(response.data.value);
-    resultado.hidden = false;
-    sin_resultado.hidden = true;
-    success.hidden = false;
-    close.hidden = true;
-    input.style.borderColor = "#28C76F";
-    success.style.borderColor = "#28C76F";
-   }else{
-    sin_resultado.hidden = false;
-    resultado.hidden = true;
-    success.hidden = true;
-    close.hidden = false;
-    input.style.borderColor = "#FF4969";
-    close.style.borderColor = "#FF4969";
-   }
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-}
-function max(){
-    const avaibleBalanceTotal = @json($balance);
-    let Monto_a_retirar =  document.getElementById('Monto_a_retirar');
-    Monto_a_retirar.value = avaibleBalanceTotal;
-    w();
-}
+    }
+    function max(){
+        const avaibleBalanceTotal = @json($balance);
+        let Monto_a_retirar =  document.getElementById('Monto_a_retirar');
+        Monto_a_retirar.value = avaibleBalanceTotal;
+        w();
+    }
 </script>

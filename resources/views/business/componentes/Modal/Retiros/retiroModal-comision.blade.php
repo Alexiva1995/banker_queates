@@ -14,7 +14,7 @@
                 <div class="input-group mb-2 shadow-none">
                     <div class="input-group input-group-merge shadow-none">
                         <input type="text" class="form-control form-control-merge" id="code" name="code" placeholder="Ingresa el código"/>
-                        <span class="btn input-group-btn text-primary cursor-pointer border-end input-group-text border-top border-bottom" id="codeButton" onclick="getCode();">Obtener codigo</span>
+                        <button class="btn input-group-btn btn-primary cursor-pointer border-end input-group-text border-top border-bottom" id="codeButton" onclick="getCode();">Obtener codigo</button>
                     </div>
                 </div>
             </div>

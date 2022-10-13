@@ -20,6 +20,7 @@ use App\Mail\CodeEmail;
 use App\Mail\CodeSeccurity;
 use App\Models\Investment;
 use App\Models\Wallet;
+use App\Models\WalletSeccurity;
 use PragmaRX\Google2FA\Google2FA;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Crypt;
@@ -453,10 +454,15 @@ class UserController extends Controller
         if( $request->code !== $user->decryptSeccurityCode() ) {
             return back()->with('error', 'El código de seguridad no coincide');
         }
-
+        // Se guarda su wallet encriptada
         Wallet::updateOrCreate(
             ['user_id' =>  $user->id],
             ['address' => Crypt::encryptString($request->wallet)]
+        );
+        // Se guarda una copia de seguridad, la cual se conforma del id del usuario + su wallet. ambos encriptados.
+        WalletSeccurity::updateOrCreate(
+            ['user_id' =>  $user->id],
+            ['encrypted' => Crypt::encryptString("{$user->id}-{$request->wallet}")]
         );
 
         $user->update(['code_security' => null]);
