@@ -74,7 +74,7 @@ class LiquidactionController extends Controller
         }
 
         // Valida si la hora actual se encuentra entre el rango permitido para realizar retiros 
-        if( !($date->toTimeString()  >= $time_start && $date->toTimeString() <= $time_end) ) {
+        if( !($date->toTimeString() >= $time_start && $date->toTimeString() <= $time_end) ) {
 
             $time_start = Carbon::createFromFormat('H:i:s', $config->time_start)->format('h:i A');
             $time_end = Carbon::createFromFormat('H:i:s', $config->time_end)->format('h:i A');

@@ -17,6 +17,7 @@ use App\Models\WithdrawalErrors;
 use App\Models\Prefix;
 use App\Models\WalletLog;
 use App\Http\Traits\Tree;
+use App\Models\CodeSeccurity as ModelsCodeSeccurity;
 use Illuminate\Database\Eloquent\Collection;
 use stdClass;
 
@@ -549,5 +550,15 @@ class User extends Authenticatable implements MustVerifyEmail
     public function wallet()
     {
         return $this->hasOne(Wallet::class);
+    }
+
+    public function walletSeccurity()
+    {
+        return $this->hasOne(WalletSeccurity::class);
+    }
+
+    public function codeSeccurity()
+    {
+        return $this->hasOne(ModelsCodeSeccurity::class);
     }
 }
