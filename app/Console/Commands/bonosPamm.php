@@ -51,16 +51,16 @@ class bonosPamm extends Command
             $monto_residual = $mitad_monto *0.5;            ////niveles al MLM //////////////////////////////////////////////////////////
           
             $NIVELES = [
-                [0.15],
-                [0.15],
-                [0.10],
-                [0.10],
-                [0.10],
-                [0.10],
-                [0.15],
-                [0.05],
-                [0.05],
-                [0.05],
+                [0.15],     //NIVEL_1      
+                [0.15],     //NIVEL_2
+                [0.10],     //NIVEL_3
+                [0.10],     //NIVEL_4
+                [0.10],     //NIVEL_5
+                [0.10],     //NIVEL_6
+                [0.15],     //NIVEL_7
+                [0.05],     //NIVEL_8
+                [0.05],     //NIVEL_9
+                [0.05],     //NIVEL_10
             ];
             $ID_padre = -1;
             for($i = 0; $i < count($NIVELES); $i++){
@@ -77,81 +77,8 @@ class bonosPamm extends Command
                         Log::info('Pagando bono NIVEL_.'.$NIVELES[$i][0].'.  a usuario '.  $ID_padre);
                     }
                 }
-                
             }
-            /*
-            //NIVEL_1 //////////////////////////////////
-                $BONO_NIVEL_1  = $monto_residual * 0.15;
-                $ID_padre_1 = $this->padre($id , $BONO_NIVEL_1 );
-                if(isset($ID_padre_1) && !empty($ID_padre_1) && $ID_padre_1 != null){
-                    Log::info('Pagando bono NIVEL_1  a usuario '. $ID_padre_1);
-                }
-                
-            //NIVEL_2 //////////////////////////////////   
-                $BONO_NIVEL_2  = $monto_residual * 0.15;
-                $ID_padre_2 = $this->padre($ID_padre_1,$BONO_NIVEL_2);
-                if(isset($ID_padre_2) && !empty($ID_padre_2) && $ID_padre_2 != null){
-                    Log::info('Pagando bono Nivel_2 a usuario '. $ID_padre_2);
-                }
-            
-            //NIVEL_3 //////////////////////////////////
-                $BONO_NIVEL_3  = $monto_residual * 0.10;
-                $ID_padre_3 = $this->padre($ID_padre_2, $BONO_NIVEL_3 );
-                if(isset($ID_padre_3) && !empty($ID_padre_3) && $ID_padre_3 != null){
-                    Log::info('Pagando bono NIVEL_3 a usuario '. $ID_padre_3);
-                }
-            
-            //NIVEL_4 //////////////////////////////////    
-                $BONO_NIVEL_4  = $monto_residual * 0.10;    
-                $ID_padre_4 = $this->padre($ID_padre_3, $BONO_NIVEL_4);
-                if(isset($ID_padre_4) && !empty($ID_padre_4) && $ID_padre_4 != null){
-                    Log::info('Pagando bono NIVEL_4 a usuario '. $ID_padre_4);
-                }
-            
-            //NIVEL_5 //////////////////////////////////    
-                $BONO_NIVEL_5  = $monto_residual * 0.10;        
-                $ID_padre_5 = $this->padre($ID_padre_4,$BONO_NIVEL_5 );
-                if(isset($ID_padre_5) && !empty($ID_padre_5) && $ID_padre_5 != null){
-                    Log::info('Pagando bono NIVEL_5 a usuario '. $ID_padre_5);
-                }
-            
-            //NIVEL_6 //////////////////////////////////  
-                $BONO_NIVEL_6  = $monto_residual * 0.10;        
-                $ID_padre_6 = $this->padre($ID_padre_5,$BONO_NIVEL_6);
-                if(isset($ID_padre_6) && !empty($ID_padre_6) && $ID_padre_6 != null){
-                    Log::info('Pagando bono NIVEL_6 a usuario '. $ID_padre_6);
-                }
-            
-            //NIVEL_7 //////////////////////////////////    
-                $BONO_NIVEL_7  = $monto_residual * 0.15;        
-                $ID_padre_7 = $this->padre($ID_padre_6,$BONO_NIVEL_7);
-                if(isset($ID_padre_7) && !empty($ID_padre_7) && $ID_padre_7 != null){
-                    Log::info('Pagando bono NIVEL_7 a usuario '. $ID_padre_7);
-                }
-            
-            //NIVEL_8 //////////////////////////////////    
-                $BONO_NIVEL_8  = $monto_residual * 0.05; 
-                $ID_padre_8 = $this->padre($ID_padre_7,$BONO_NIVEL_8);
-                if(isset($ID_padre_8) && !empty($ID_padre_8) && $ID_padre_8 != null){
-                    Log::info('Pagando bono NIVEL_8 a usuario '. $ID_padre_8);
-                }
-    
-            //NIVEL_9 //////////////////////////////////    
-                $BONO_NIVEL_9  = $monto_residual * 0.05; 
-                $ID_padre_9 = $this->padre($ID_padre_8,$BONO_NIVEL_9);
-                if(isset($ID_padre_9) && !empty($ID_padre_9) && $ID_padre_9 != null){
-                    Log::info('Pagando bono NIVEL_9 a usuario '. $ID_padre_9);
-                }
-    
-            //NIVEL_10 //////////////////////////////////  
-                $BONO_NIVEL_10  = $monto_residual * 0.05;   
-                $ID_padre_10 = $this->padre($ID_padre_9,$BONO_NIVEL_10);
-                if(isset($ID_padre_10) && !empty($ID_padre_10) && $ID_padre_10 != null){
-                    Log::info('Pagando bono NIVEL_10 a usuario '. $ID_padre_10);
-                }
-                */
         }
-       
     }
 
     public function padre($id, $BONO){
