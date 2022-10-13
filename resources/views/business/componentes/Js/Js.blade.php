@@ -16,12 +16,12 @@
         ButtonContinue = value_ButtonContinue;
         percentage( Monto_a_retirar);
         if( wallet.length > 16 &&  Monto_a_retirar >= 100 ){
-            console.log(Monto_a_retirar);
+            // console.log(Monto_a_retirar);
             ButtonContinue.disabled = false;
         }else{
             (wallet.value);
             ButtonContinue.disabled = true;
-            console.log(Monto_a_retirar);
+            // console.log(Monto_a_retirar);
         }
     }
 
@@ -44,16 +44,17 @@ function pegar(e){
 function activarInput(e){
     Monto_a_retirar = e;
     percentage(Monto_a_retirar);
+    w();
 
     if( wallet.length > 16 &&  Monto_a_retirar >= 100 ){
 
         ButtonContinue.disabled = false;
 
-    }else{
+    }else {
         (wallet.value);
         ButtonContinue.disabled = true;
 
-        }
+    }
 }
 
 function percentage(e){
@@ -131,44 +132,44 @@ function percentage(e){
             code: document.getElementById('code').value,
             Monto_a_retirar: document.getElementById('Monto_a_retirar').value,
             wallet: document.getElementById('wallet').value,
-            type:'comissions',
         })
-        .then(function (response) {
-            if(response.data.value == 1){
-                title.hidden = true;
-                body.hidden = true;
-                footer.hidden = true;
-                spiner.hidden = false;
-                contenedorspiner.hidden = false;
+        .then( res => {
+            console.log(res.data);
+            // if(response.data.value == 1){
+            //     title.hidden = true;
+            //     body.hidden = true;
+            //     footer.hidden = true;
+            //     spiner.hidden = false;
+            //     contenedorspiner.hidden = false;
 
-                setTimeout(function(){
-                    spiner.hidden = true;
-                    passed.hidden = false;
-                },1500);
+            //     setTimeout(function(){
+            //         spiner.hidden = true;
+            //         passed.hidden = false;
+            //     },1500);
 
-                setTimeout(reload,4000);
-            }
-            if(response.data.value == 0){
-                Swal.fire({
-                position: 'top-end',
-                icon: 'error',
-                title: 'Codigo incorrecto',
-                showConfirmButton: false,
-                timer: 1500
-                })
-            }
-            if(response.data.value == 2){
-                Swal.fire({
-                position: 'top-end',
-                icon: 'error',
-                title: 'El monto intruducido supera tu saldo disponible ',
-                showConfirmButton: false,
-                timer: 1500
-                })
-            }
+            //     setTimeout(reload,4000);
+            // }
+            // if(response.data.value == 0){
+            //     Swal.fire({
+            //     position: 'top-end',
+            //     icon: 'error',
+            //     title: 'Codigo incorrecto',
+            //     showConfirmButton: false,
+            //     timer: 1500
+            //     })
+            // }
+            // if(response.data.value == 2){
+            //     Swal.fire({
+            //     position: 'top-end',
+            //     icon: 'error',
+            //     title: 'El monto intruducido supera tu saldo disponible ',
+            //     showConfirmButton: false,
+            //     timer: 1500
+            //     })
+            // }
         })
-        .catch(function (error) {
-                console.log(error);
+        .catch( error => {
+            console.log(error);
         });
 
 

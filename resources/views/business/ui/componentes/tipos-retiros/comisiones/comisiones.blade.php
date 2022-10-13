@@ -24,8 +24,9 @@
             <label for="" class="fw-500" style="margin-bottom: 4px">Wallet<label style="color: red;">*</label></label>
             <br>
             <div class="input-group">
-              <input type="text" id="wallet" onkeyup="w();" onpaste="var e = this; pegar(e);" required id="fee"
-                name="wallet" class="form-control" placeholder="Ingresa tu wallet">
+              <input type="text" id="wallet" onpaste="var e = this; pegar(e);" required id="fee"
+                class="form-control" value="{{auth()->user()->decryptWallet()}}" disabled>
+              <input type="hidden" name="wallet" value="{{auth()->user()->decryptWallet()}} ">
             </div>
           </div>
 
