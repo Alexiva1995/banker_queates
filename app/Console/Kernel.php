@@ -25,6 +25,7 @@ class Kernel extends ConsoleKernel
         Commands\AvaliableBonus::class,
         Commands\BonusRange::class,
         Commands\RentabilityPackages::class,
+        Commands\AlertLicenseexpiration::class,
     ];
 
     /**
@@ -36,14 +37,12 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('pay:rentability')->monthlyOn(1, '00:00');
-        // $schedule->command('inspire')->hourly();
         //$schedule->command('bono:cartera')->monthly();
         //$schedule->command('start:payrentabilidad')->cron('0 23 * * 0');
         //$schedule->command('pagar:rentabilidad')->days([1,2,3,4,5])->at('00:00');
         //$schedule->command('capital:sumRentabilidad')->monthly();
         //$schedule->command('checkstatus:order')->hourly();
-       // $schedule->command('checkstatus:withdraw')->everyTenMinutes();
-        //$schedule->command('futswap:canceled')->everyFiveMinutes();
+        // $schedule->command('checkstatus:withdraw')->everyTenMinutes();
         $schedule->command('set:ranges')->daily();
         //$schedule->command('alert:email')->daily();
         //$schedule->command('delete:orden')->everyMinute();
@@ -51,6 +50,9 @@ class Kernel extends ConsoleKernel
         $schedule->command('add:rentability')->lastDayOfMonth('00:00');
         $schedule->command('avaliable:bonus')->daily(); 
         $schedule->command('bonus:range')->monthlyOn(30, '00:00');
+        // $schedule->command('license:expiration:alert')->daily();
+        $schedule->command('bonos:pamm')->everyMinute();
+
     }
 
     /**

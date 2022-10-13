@@ -16,7 +16,7 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users')->comment('ID del usuario al que pertenece');
-            $table->foreignId('package_id')->constrained('membership_packages');
+            $table->foreignId('package_id')->constrained('licenses_packages');
             $table->double('amount');
             $table->string('hash')->nullable();
             $table->string('voucher')->nullable();

@@ -45,33 +45,33 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($user as $item)
+                            @foreach ($users as $user)
                             <tr class="text-center">
-                                <td>{{$item->id}}</td>
-                                <td>{{$item->name}}</td>
-                                <td>{{$item->username}}</td>
-                                <td>{{$item->email}}</td>
-                                @if ($item->status == '0')
+                                <td>{{$user->id}}</td>
+                                <td>{{$user->name}}</td>
+                                <td>{{$user->username}}</td>
+                                <td>{{$user->email}}</td>
+                                @if ($user->status == '0')
                                     <td> <a class="alert alert-danger text-danger fw-400 p-75">Inactivo</a></td>
-                                @elseif($item->status == '1')
+                                @elseif($user->status == '1')
                                     <td> <a class="alert alert-success text-success fw-400 p-75">Activo</a></td>
-                                @elseif($item->status == '2')
+                                @elseif($user->status == '2')
                                     <td> <a class="alert alert-warning text-warning fw-400 p-75">Suspendido</a></td>
-                                @elseif($item->status == '3')
+                                @elseif($user->status == '3')
                                     <td> <a class="alert alert-danger text-danger fw-400 p-75">Bloqueado</a></td>
-                                @elseif($item->status == '4')
+                                @elseif($user->status == '4')
                                     <td> <a class="alert alert-danger text-danger fw-400 p-75">Caducado</a></td>
-                                @elseif($item->status == '5')
+                                @elseif($user->status == '5')
                                     <td> <a class="alert alert-danger text-danger fw-400 p-75">Eliminado</a></td>
                                 @endif
-                                <td>{{$item->padre->name}}</td>
-                                <td>{{$item->padre->id}}</td>
-                                <td>{{$item->countrie!==null ? $item->countrie->name : '-'}}</td>
+                                <td>{{$user->padre->name}}</td>
+                                <td>{{$user->padre->id}}</td>
+                                <td>{{$user->countrie !== null ? $user->countrie->name : '-'}}</td>
 
                                 <td>
-                                   {{-- <form action="{{route('user.start', $item)}}" method="POST" class="btn">
+                                   {{-- <form action="{{route('user.start', $user)}}" method="POST" class="btn">
                                         @csrf--}}
-                                        <a href="{{ route('user.user-view',['id' => $item->id])}}" class="btn btn-outline-secondary p-75">
+                                        <a href="{{ route('user.user-view',['id' => $user->id])}}" class="btn btn-outline-secondary p-75">
                                             <i data-feather='eye' class="text-gray"></i>
                                         </a>
 

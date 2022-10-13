@@ -9,7 +9,11 @@ const { default: axios } = require('axios');
   Author URL: hhttp://www.themeforest.net/user/pixinvent
 ==========================================================================================*/
 window.axios = require('axios');
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+window.axios.defaults.headers.common = {
+    'X-Requested-With': 'XMLHttpRequest',
+    'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+};
 window.colors = {
     solid: {
         primary: '#7367F0',

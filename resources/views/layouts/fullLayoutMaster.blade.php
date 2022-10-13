@@ -19,7 +19,7 @@ data-textdirection="{{ env('MIX_CONTENT_DIRECTION') === 'rtl' ? 'rtl' : 'ltr' }}
   <meta name="description" content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
   <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
   <meta name="author" content="PIXINVENT">
-  <title>Project7k</title>
+  <title>Take Profits</title>
   <link rel="apple-touch-icon" href="{{asset('images/ico/apple-touch-icon.png')}}">
   <link rel="shortcut icon" type="image/x-icon" href="{{asset('images/ico/favicon.ico')}}">
   <link rel="preconnect" href="https://fonts.googleapis.com">

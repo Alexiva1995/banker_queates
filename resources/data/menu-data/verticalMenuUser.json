@@ -7,36 +7,10 @@
             "url": "/panels"
         },
         {
-            "url": "/",
-            "name": "Paquetes",
+            "name": "Licencias",
             "icon": "grid",
-            "slug": "/",
-            "submenu": [
-                {
-                    "url": "/market/bronce",
-                    "name": "Paquetes Bronce",
-                    "icon": "circle",
-                    "slug": "broncePackages"
-                },
-                {
-                    "url": "/market/plata",
-                    "name": "Paquetes Plata",
-                    "icon": "circle",
-                    "slug": "plataPackages"
-                },
-                {
-                    "url": "/market/oro",
-                    "name": "Paquetes Oro",
-                    "icon": "circle",
-                    "slug": "oroPackages"
-                },
-                {
-                    "url": "/market/platino",
-                    "name": "Paquetes Platino",
-                    "icon": "circle",
-                    "slug": "platinoPackages"
-                }
-            ]
+            "slug": "market.licenses",
+            "url": "/market/licenses"
         },
         {
             "name": "Informes",
@@ -91,7 +65,7 @@
                     "url": "/transferencia",
                     "name": "Transferencias",
                     "icon": "circle",
-                    "slug": "transferencia"         
+                    "slug": "transferencia"
                 }
             ]
         },
@@ -100,6 +74,12 @@
             "name": "Inversiones",
             "icon": "dollar-sign",
             "slug": "investment.user.index"
+        },
+        {
+            "url": "/KYc-verificacion",
+            "name": "KYC",
+            "icon": "dollar-sign",
+            "slug": "KYC-Verify"
         },
         {
             "url": "/investments/mypackages",
@@ -126,6 +106,26 @@
                     "slug": "referred.tree"
                 }
             ]
-        }   
+        },
+        {
+            "url": "/tickets",
+            "name": "Soporte",
+            "icon": "help-circle",
+            "slug": "tickets.create",
+            "submenu": [
+                {
+                    "url": "/tickets/ticket-create",
+                    "name": "Crear ticket",
+                    "icon": "circle",
+                    "slug": "ticket.create"
+                },
+                {
+                    "url": "/tickets/ticket-list-user",
+                    "name": "Ver tickets",
+                    "icon": "circle",
+                    "slug": "ticket.list-user"
+                }
+            ]
+        }
     ]
 }

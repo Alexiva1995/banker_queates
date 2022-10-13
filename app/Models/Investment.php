@@ -20,14 +20,14 @@ class Investment extends Model
         'capital',
         'status',
         'pay_utility',
-        'buyer_id'
+        'buyer_id',
+        'expiration_date'
     ];
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User', 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
-
 
     public function estado()
     {
@@ -60,9 +60,9 @@ class Investment extends Model
     {
         return $this->hasMany(Upgrade::class, 'investment_id');
     }
-    public function membershipPackage()
+    public function licensePackage()
     {
-        return $this->belongsTo(MembershipPackage::class, 'package_id');
+        return $this->belongsTo(LicensePackage::class, 'package_id');
     }
     public function utilities() {
         return $this->hasMany(Utility::class);

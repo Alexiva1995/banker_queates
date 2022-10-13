@@ -87,28 +87,32 @@ class AuthenticationController extends Controller
         });  
     return redirect()->back()->with('success', 'Correo de verificación enviado exitosamente');
   }
-  public function verify(Request $request, User $user){
+
+  public function verify(Request $request, User $user)
+  {
     $pageConfigs = ['blankPage' => true];
 
-    if($request!=null){
-      $user=Auth::user();
-      if( $request->has('resend_email') && $request->resend_email == '1' )
-      {
-        $dataEmail = [ 'user' => $user ];
-        Mail::send('mail.VerificationEmail',  ['data' => $dataEmail], function ($msj) use ($user){
-            $msj->subject('Verificación de correo electrónico.');
-            $msj->to($user->email);
-        });  
-        return redirect()->route('auth.verify')->with('resent', true);
-      }
-      return view('auth.verify', ['pageConfigs' => $pageConfigs], compact('user'));
+    if(Auth::user())
+    {
+      $user = Auth::user();
     }
+
+    if( $request->has('resend_email') && $request->resend_email == '1' )
+    {
+      $dataEmail = [ 'user' => $user ];
+      Mail::send('mail.VerificationEmail',  ['data' => $dataEmail], function ($msj) use ($user){
+          $msj->subject('Verificación de correo electrónico.');
+          $msj->to($user->email);
+      });  
+      return redirect()->route('auth.verify', $user)->with('resent', true);
+    }
+    return view('auth.verify', ['pageConfigs' => $pageConfigs], compact('user'));
+    
     
   }
 
-  public function verify_v2(){
-   
-
+  public function verify_v2()
+  {
     return view('auth.verified-reset');
   }
 }

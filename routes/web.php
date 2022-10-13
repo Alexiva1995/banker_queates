@@ -1,37 +1,38 @@
 <?php
 
-use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LanguageController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\UserInterfaceController;
-use App\Http\Controllers\EducationController;
-use App\Http\Controllers\UtilityController;
+use App\Http\Controllers\KycController;
+use App\Http\Controllers\TreController;
+use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\PagesController;
-use App\Http\Controllers\MiscellaneousController;
-use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\ChartsController;
-use App\Http\Controllers\BusinessController;
-use App\Http\Controllers\ConfigurationController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\TiendaController;
 use App\Http\Controllers\WalletController;
+use App\Http\Controllers\FutswapController;
+use App\Http\Controllers\TicketsController;
+use App\Http\Controllers\UtilityController;
+use App\Http\Controllers\BusinessController;
+use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\SubAdminController;
+
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EducationController;
+use App\Http\Controllers\FormularyController;
+use App\Http\Controllers\InversionController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\PreregisterController;
 use App\Http\Controllers\LiquidactionController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ConfigurationController;
+use App\Http\Controllers\MiscellaneousController;
+use App\Http\Controllers\UserInterfaceController;
+use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\ManualActivationController;
 use App\Http\Controllers\WithdrawalSettingController;
-
-use App\Http\Controllers\TreController;
-use App\Http\Controllers\TiendaController;
-use App\Http\Controllers\ReportController;
-use App\Http\Controllers\TicketsController;
-use App\Http\Controllers\InversionController;
-use App\Http\Controllers\PreregisterController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\SubAdminController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\FutswapController;
-use App\Http\Controllers\FormularyController;
-use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,11 +54,6 @@ Route::get('/clear-cache', function() {
     Artisan::call('config:cache');
     Artisan::call('view:clear');
     Artisan::call('route:clear');
-    return 'DONE'; //Return anything
-});
-
-Route::get('/set-ranges', function() {
-    Artisan::call('set:ranges');
     return 'DONE'; //Return anything
 });
 
@@ -91,6 +87,7 @@ Route::middleware('auth')->group(function () {
 
         //RUTAS ADMIN
         Route::middleware('admin')->group(function () {
+            Route::get('/configurar-retiros', [LiquidactionController::class, 'configurar_retiro'])->name('config.retiros');
             //GENEALOGY
             Route::prefix('red')->group(function () {
                 Route::get('/buscar', [TreController::class, 'buscar'])->name('red.buscar');
@@ -126,14 +123,13 @@ Route::middleware('auth')->group(function () {
             //USERS
             Route::prefix('user')->group(function () {
                 Route::get('user-list', [UserController::class, 'listUser'])->name('user.list-user');
+                Route::get('expired/license/list', [UserController::class, 'ExpiredLicenseUserList'])->name('user.expired.licenses.list');
                 Route::get('user-view/{id}', [UserController::class, 'userView'])->name('user.user-view');
                 Route::post('/user/{user}/start', [UserController::class, 'start'])->name('user.start');
             });
 
             //Configuracion de wallet del admin
             Route::resource('configurations', ConfigurationController::class);
-            //Pagar bonos por Rangos
-            Route::get('/pay-ranges', [TiendaController::class, 'payRangeBonus'])->name('pay.range.bonus');
 
             //Inversiones
             Route::get('/admin/investments', [InversionController::class, 'adminIndex'])->name('inversion.admin.index');
@@ -141,8 +137,6 @@ Route::middleware('auth')->group(function () {
             Route::get('1', [InversionController::class, 'getPackegeType'])->name('porcentaje.rentabilidad');
             Route::post('porcentaje-rentabilidad', [utilityController::class, 'update'])->name('porcentaje.rentabilidad.update');
         });
-
-
 
         //Ruta para cambiar referido de un user
         Route::post('referred-update', [UserController::class, 'referred'])->name('referred.update');
@@ -164,11 +158,7 @@ Route::middleware('auth')->group(function () {
 
         //TIENDA
         Route::prefix('market')->group(function () {
-            // Route::get('/', [TiendaController::class, 'index'])->name('shop');
-            Route::get('/bronce', [TiendaController::class, 'broncePackages'])->name('broncePackages');
-            Route::get('/plata', [TiendaController::class, 'plataPackages'])->name('plataPackages');
-            Route::get('/oro', [TiendaController::class, 'oroPackages'])->name('oroPackages');
-            Route::get('/platino', [TiendaController::class, 'platinoPackages'])->name('platinoPackages');
+            Route::get('/licenses', [TiendaController::class, 'marketLicences'])->name('market.licenses');
             Route::post('/transactionCompra', [TiendaController::class, 'transactionCompra'])->name('shop.transactionCompra');
             Route::post('/procesarOrden', [TiendaController::class, 'procesarOrden'] )->name('shop.proccess');
             Route::post('/reactivacion', [TiendaController::class, 'reactivacion'])->name('reactivacion');
@@ -192,6 +182,10 @@ Route::middleware('auth')->group(function () {
         Route::post('wallet-uedit', [WalletController::class, 'edit'])->name('wallet.edit');
         Route::get('/comisiones', [WalletController::class, 'comisiones'])->name('reports.comision');
 
+
+        // ruta para el envio del codigo de seguridad para enlazar una wallet
+        Route::post('/send-seccurity-code', [UserController::class, 'sendSeccurityCode'])->name('send.seccurity.code');
+        Route::post('/save_wallet', [UserController::class, 'storeWalelt'])->name('user.store.wallet');
 
 
         Route::get('menuRentabilidad', [BusinessController::class, 'rentabilidad'])->name('business.rentabilidad');
@@ -223,9 +217,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/liquidaciones/validacion', [LiquidactionController::class, 'liquidationValidate'])->name('liquidaciones.validate');
         Route::post('/liquidaciones/validacion', [LiquidactionController::class, 'liquidationCheck'])->name('liquidaciones.check');
 
-
-
-        Route::get('/configurar-retiros', [LiquidactionController::class, 'configurar_retiro'])->name('config.retiros');
         Route::post('/guardar-configuracion', [LiquidactionController::class, 'guardar_configuracion'])->name('guardar.configuracion');
 
         Route::post('/trasferencia', [LiquidactionController::class, 'Transferencia_verificada'])->name('Transferencia.verificada');
@@ -255,7 +246,6 @@ Route::post('/change/color/app', [DashboardController::class, 'changeAppColor'])
 
 
 Auth::routes(['verify' => true]);
-//Route::post('/reset-password', [ResetPasswordController::class, 'updatePassword'])->name('updatePassword');
 /* Route Dashboards */
 Route::group(['prefix' => 'dashboard'], function () {
     Route::get('analytics', [DashboardController::class, 'dashboardAnalytics'])->name('dashboard-analytics');
@@ -294,8 +284,6 @@ Route::post('package-status', [FormularyController::class, 'update'])->name('sta
 Route::get('formulary-update', [FormularyController::class, 'formulario'])->name('formulary.update');
 Route::post('formulary-v2', [FormularyController::class, 'reset'])->name('formulary-v2');
 
-
-/* Route Icons */
 //Ruta de los Tickets
 Route::group(['prefix' => 'tickets'], function () {
     Route::get('ticket-create', [TicketsController::class, 'create'])->name('ticket.create');
@@ -315,6 +303,14 @@ Route::group(['prefix' => 'tickets'], function () {
  Route::get('member',  [FutswapController::class, 'redirect'])->name('member');
  //ruta para redirecionar al QR cuando la orden fue cancelada
  Route::get('memberActive',  [FutswapController::class, 'redirectCancel'])->name('memberActive');
+
+ //Rutas KYC users
+Route::get('KYc-verificacion', [KycController::class,'index'])->name('KYC-Verify');
+Route::post('KYC-upload', [KycController::class,'store'])->name('KYC-store');
+
+//auditoria admin
+Route::get('KYc-Admin', [KycController::class,'indexAdmin'])->name('KYC-admin-Verify');
+Route::post('Accion-KYC', [KycController::class,'update'])->name('KYC-accion');
 
 /* Route Pages */
 Route::group(['prefix' => 'page'], function () {

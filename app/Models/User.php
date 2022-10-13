@@ -117,9 +117,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->name . ' ' . $this->last_name;
     }
 
-    public function Invertido()
+    public function investment()
     {
-        return $this->belongsTo(Investment::class, 'id', 'user_id');
+        return $this->belongsTo(Investment::class,'id', 'user_id');
     }
 
     public function ordenes()
@@ -189,11 +189,15 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(OrdenPurchases::class, 'id', 'user_id');
     }
 
-    /* public function ordenes()
+    public function hasActiveLicense()
     {
-        return $this->hasMany('App\Models\OrdenPurchases', 'user_id');
-    } */
-
+        $investment = Investment::where('user_id', $this->id)->where('status', 1)->first();
+        if($investment)
+        {
+            return true;
+        }
+        return false;
+    }
 
     /**
      * Permite obtener las ordenes de servicio asociada a una categoria
@@ -349,16 +353,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return floatval($result);
     }
 
-    public function gananciaActual()
-    {
-        if (isset($this->investmentHigh()->gain) && $this->investmentHigh()->gain != null) {
-            return number_format($this->investmentHigh()->gain, 2);
-        } else {
-            return number_format(0, 2);
-        }
-    }
-
-
     public function hasReactivacion()
     {
         $hoy = \Carbon\Carbon::now();
@@ -472,40 +466,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
         return $totalIngresos;
     }
-    public  function membresia()
-    {
-
-        $membresia = OrdenPurchase::where([
-                                            ['user_id', '=', Auth::id()],
-                                            ['type', '=', 'anual'],
-                                            ['status', '=', '0']
-                                           ])->count();
-
-        return $membresia;
-    }
-    public  function membresiaActiva()
-    {
-
-        $membresia = OrdenPurchase::where([
-                                            ['user_id', '=', Auth::id()],
-                                            ['type', '=', 'anual'],
-                                            ['status', '=', '1']
-                                           ])->count();
-
-        return $membresia;
-    }
-
-    public  function membresiaCancelada()
-    {
-
-        $membresiaCancelada = OrdenPurchase::where([
-                                            ['user_id', '=', Auth::id()],
-                                            ['type', '=', 'anual'],
-                                            ['status', '=', '2']
-                                           ])->count();
-
-        return $membresiaCancelada;
-    }
+    
 
     public function range()
     {
@@ -517,25 +478,17 @@ class User extends Authenticatable implements MustVerifyEmail
         return Crypt::decryptString($this->wallet);
     }
 
-    public function formulayRechazado()
+    public function decryptSeccurityCode()
     {
-        $user = Auth::user();
-        $formulary = Formulary::where([['user_id', $user->id],['status', '4']])->count();
-
-        return $formulary;
+        return Crypt::decryptString($this->code_security);
     }
+
     public function walletLogs()
     {
         return $this->hasMany(WalletLog::class, 'user_id');
     }
     public function withdrawalErrors(){
         return $this->hasMany(WithdrawalErrors::class, 'user_id');
-    }
-
-    //saldos totales
-    public function balance()
-    {
-        return $this->hasOne('App\Saldo');
     }
 
     public function orders()
@@ -584,12 +537,17 @@ class User extends Authenticatable implements MustVerifyEmail
         foreach($this->investments as $investment)
         {
             $package = new stdClass;
-            $package->name = $investment->membershipPackage->membershipType->name;
-            $package->amount = $investment->membershipPackage->amount;
-            $package->id = $investment->membershipPackage->id;
+            $package->name = $investment->licensePackage->name;
+            $package->amount = $investment->licensePackage->amount;
+            $package->id = $investment->licensePackage->id;
             $package->investment_id = $investment->id;
             $user_packages->push($package);
         }
       return $user_packages = $user_packages->sortBy('id');
+    }
+
+    public function wallet()
+    {
+        return $this->hasOne(Wallet::class);
     }
 }

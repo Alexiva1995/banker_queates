@@ -1,6 +1,6 @@
 @extends('layouts/contentLayoutMaster')
 
-@section('title', 'Tienda')
+@section('title', 'Tienda Bronce')
 
 @section('vendor-style')
     <!-- vendor css files -->
@@ -11,98 +11,95 @@
     <link rel="stylesheet" href="{{ asset(mix('css/base/plugins/extensions/ext-component-toastr.css')) }}">
 @endsection
 <style>
-    .fw-700 {
-        font-weight: 700 !important;
-    }
+    .wm-27{
+        max-width: 271px!important;
+        min-width: 238px!important;
 
-    @media screen and (max-width: 575px) and (min-width:425px) {
+    }
+    .ico-sm{
+        width: 2rem!important;
+        height: 2rem!important;
+    }
+    @media screen and (max-width: 575px) and (min-width:400px) {
+        .mobile{
+            justify-content: center !important;
+        }
         .width-5 {
             width: 50% !important;
         }
     }
+    @media screen and (max-width: 768px) and (min-width:575px) {
+        .mobile{
+            justify-content: space-around  !important;
+        }
+    }
 </style>
 @section('content')
-    <div id="adminServices">
+<div class="container-fluid container-custom">
+    <div class="d-flex my-1">
+        <p class="fw-700 mb-0">Mercado</p><span class="fw-300 mx-1 text-light">|</span><p class="fw-300 mb-0">Licencias</p>
+    </div>
 
-        @if ($order != null ? $order->status == 0 : false)
+    <div id="adminServices" class="mt-1">
+
+        {{-- @if ($order != null ? $order->status == 0 : false)
             @include('shop.components.paymentPending')
-        @endif
-        <div class="d-flex my-2">
-            <p style="color:#808E9E;" class="fw-700">Paquetes</p><span class="fw-normal mx-1">|</span>
-            <p class="">Adquirir Paquetes</p>
-        </div>
+        @endif --}}
 
-        <p class="mt-2 mb-1">Por favor selecciona un mercado</p>
+        <div class="row justify-content-center">
+            <div class="alert alert-info d-flex p-1 my-75">
+                <i data-feather='info' class="text-info me-75 ico-sm"></i>
+                Tu paquete será llevado al 200%, en donde ese 200% incluye el 100% del capital aportado. Es decir, traes 1.000 y sales con 2.000. Dicho de otra manera: Recibes tus 1.000 y 1.000 de Ganancia, en total recibes 2.000
+            </div>
+            <div class="mobile row mt-2 px-0 match-height">
+                @foreach ($licenses as $package)
 
-        <div>
-            <ul class="nav nav-tabs" role="tablist">
-                @foreach ($data as $type)
-                  
-                        <li class="nav-item">
-                            <a class="nav-link {{ $type->id == 1 ? 'active' : '' }}"
-                                data-bs-toggle="tab" href="#home-{{ $type->id }}" role="tab">{{ $type->name }}</a>
-                        </li>
-                 
-                @endforeach
-            </ul>
-
-            <div class="tab-content">
-
-                @foreach ($data as $type)
-                    <div class="tab-pane {{ $type->id == 1 ? 'active' : '' }} " id="home-{{ $type->id }}"
-                        aria-labelledby="home{{ $type->id }}-tab" role="tabpanel">
-                        <div class="row">
-                            @foreach ($type->MembershipPackage as $package)
-                                <div class="col-12 col-sm-6 col-md-4 col-lg-3 width-5">
-                                    <div class="card">
-                                        <div class="d-flex justify-content-center">
-                                            @if ($package->image != null)
-                                                <div class="card mt-2 rounded-0 mb-1" style="width: 80%; height: 9rem;">
-                                                    <img src="{{ asset('images/membershipsPackage/' . $package->image) }}"
-                                                        alt="{{ $package->image }}" height="125"
-                                                        class="d-block rounded" />
-                                                </div>
-                                            @else
-                                                <div class="card mt-2 rounded-0 mb-1"
-                                                    style="width: 80%; height: 9rem; background-color: #F2F4F8;">
-                                                    <div class="card-body">
-                                                        <div class="d-flex justify-content-center">
-                                                            <a><img src="{{ asset('images/Dashboard/image.svg') }}"
-                                                                    alt="Avatar" height="60" width="50"
-                                                                    class="d-block rounded mt-1"
-                                                                    style="opacity: 0.3;" /></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endif
+                   <div class="col-md-4 col-lg-3 col-sm-4 wm-27">
+                        <div class="card">
+                            <div class="d-flex justify-content-center">
+                                @if ($package->image === null)
+                                    <div class="card rounded-0 mb-0 border-0" style="width: 80%;">
+                                        <div style="height: 161px; width:161px" class="text-center d-flex align-items-center justify-content-center">
+                                            <h4>{{ $package->name }}</h4>
                                         </div>
-                                        <div class="card-body px-sm-2">
-                                        <!--  <p name="member" class="card-text fw-bolder mb-0">Membresía</p>-->
-                                        <h2>{{ $package->amount }} USD</h2>
-                                           <!--    <h2>{{ $package->amount_per_month }} USD</h2>
-                                         <p class="card-text mb-0"><strong>Depósito</strong> {{ $package->amount }}
-                                                USD</p>
-                                            <p class="card-text"><strong>Estimado</strong> {{ $package->percentage }}</p>-->
-                                            <form class="d-grid gap-2" action="{{ route('shop.proccess') }}"
-                                                method="POST">
-                                                @csrf
-                                                <input type="hidden" name="package" value="{{ $package->id }}">
-                                                <input type="hidden" name="title" value="{{ $type->name }}">
-                                                <button class="btn btn-primary"
-                                                    {{ $package->disabled == true ? 'disabled' : '' }}>{{ $package->text }}</button>
-                                            </form>
-                                        </div>
+                                        {{-- <img src="{{ asset('images/MembershipsPackage/Bronce/' . $package->image) }}"
+                                            alt="{{ $package->image }}" height="161" width="161"
+                                            class="d-block rounded mx-auto" /> --}}
+                                        {{-- <h2 class="fw-600 font-large-1 text-switch position-absolute mb-0 top-50 start-50 translate-middle">${{ number_format($package->amount, 0,',' , '.') }}</h2> --}}
+
                                     </div>
-                                </div>
-                            @endforeach
+                                @else
+                                    <div class="card rounded-0 mb-0 border-0" style="width: 80%;">
+    
+                                        <img src="{{ asset('images/MembershipsPackage/Bronce/' . $package->image) }}"
+                                            alt="{{ $package->image }}" height="161" width="161"
+                                            class="d-block rounded mx-auto" />
+                                        {{-- <h2 class="fw-600 font-large-1 text-switch position-absolute mb-0 top-50 start-50 translate-middle">${{ number_format($package->amount, 0,',' , '.') }}</h2> --}}
+
+                                    </div>
+                                @endif
+                            </div>
+                            <div class="card-body px-sm-2">
+                                <small class="text-light">Ganancias</small>
+                                <h2 class="fw-600 mb-75 text-center">{{ "USDT ".$package->amount }}</h2>
+                                
+                                    <form class="d-grid gap-2" action="{{ route('shop.transactionCompra') }}"
+                                        method="POST">
+                                        @csrf
+                                        <input type="hidden" name="package" value="{{ $package->id }}">
+                                        <input type="hidden" name="amount" value="{{ $package->amount }}">
+                                        <button class="btn btn-primary w-100" 
+                                            {{ $package->disabled == true ? 'disabled' : '' }}>{{ $package->text }}
+                                        </button>
+                                   </form>
+                            </div>
                         </div>
                     </div>
                 @endforeach
             </div>
-
         </div>
-
     </div>
+</div>
 @endsection
 
 @section('vendor-script')
@@ -111,4 +108,9 @@
 @endsection
 @section('page-script')
     <!-- Page js files -->
+<script>
+// if($('#staticBackdrop').length != 0) {
+//      $.blockUI();
+// }
+</script>
 @endsection

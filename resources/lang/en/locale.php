@@ -2,6 +2,7 @@
 
 return [
     "Niveles" => "Niveles",
+    "Usuarios Expirados" => 'Usuarios Expirados',
     "Asignar Rangos" => "Asignar los Rangos",
     "habilitar bonos Rango" => "habilitar bonos Rango",
     "Asignar bonos 7k" => "Asignar bonos 7k",
@@ -23,12 +24,13 @@ return [
     "Wallet" => "Wallet",
     "Billetera" => "Billetera",
     "Unilevel" => "Unilevel",
-    "Paquetes" => "Paquetes",
-    "Paquete" => "Paquete",
-    "Paquetes Bronce" => "Paquetes Bronce",
-    "Paquetes Oro" => "Paquetes Oro",
-    "Paquetes Plata" => "Paquetes Plata",
-    "Paquetes Platino" => "Paquetes Platino",
+    "Licencias" => "Licencias",
+    "Licencia" => "Paquete",
+    "Licencias Colibri" => "Licencias Colibri",
+    "Licencias Escorpion" => "Licencias Escorpion",
+    "Licencias Anaconda" => "Licencias Anaconda",
+    "Licencias Pantera" => "Licencias Pantera",
+    "Licencias Tiburon" => "Licencias Tiburon",
     "Mi_IRV" => "Mi IRV",
     "Finanzas"=>"Finanzas",
     "Educacion"=>"Educacion",
@@ -191,5 +193,10 @@ return [
     "Metodos de Pago" => 'Métodos de Pago',
     "Porcentaje de Rentabilidad" => "Porcentaje de Rentabilidad",
     "Configurar retiro"=>"Configurar retiro",
-    "message" => "Cake sesame snaps cupcake gingerbread danish I love gingerbread. Apple pie pie jujubes chupa chups muffin halvah lollipop. Chocolate cake oat cake tiramisu marzipan sugar plum. Donut sweet pie oat cake dragée fruitcake cotton candy lemon drops."
+    "message" => "Cake sesame snaps cupcake gingerbread danish I love gingerbread. Apple pie pie jujubes chupa chups muffin halvah lollipop. Chocolate cake oat cake tiramisu marzipan sugar plum. Donut sweet pie oat cake dragée fruitcake cotton candy lemon drops.",
+    "Crear ticket" => "Crear ticket",
+    "Ver tickets" => "Ver tickets",
+    "KYC" => "KYC",
+    "Solicitudes KYC" => "Solicitudes KYC",
+    "Paquetes" => "Paquetes"
 ];

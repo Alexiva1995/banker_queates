@@ -35,26 +35,6 @@ class LevelsSeeder extends Seeder
                 'name' => 'Nivel 5',
                 'status' => 0
             ],
-            [
-                'name' => 'Nivel 6',
-                'status' => 0
-            ],
-            [
-                'name' => 'Nivel 7',
-                'status' => 0
-            ],
-            [
-                'name' => 'Nivel 8',
-                'status' => 0
-            ],
-            [
-                'name' => 'Nivel 9',
-                'status' => 0
-            ],
-            [
-                'name' => 'Nivel 10',
-                'status' => 0
-            ],
         ];
 
         foreach ($arrayLevels as $level ) {

@@ -6,18 +6,12 @@ use Coinbase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\View;
-use Carbon\Carbon;
 use App\Models\Order;
 use App\Models\MembershipPackage;
 use App\Models\MembershipType;
 use App\Models\Member;
-use App\Models\Bonus;
-use App\Models\WalletComission;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Traits\Tree;
 use Hexters\CoinPayment\CoinPayment;
-use DB;
 use App\Http\Controllers\InversionController;
 use App\Models\User;
 use App\Events\UserEvent;
@@ -27,17 +21,12 @@ use App\Models\Upgrade;
 use App\Models\WalletPayment;
 use App\Services\BonusService;
 use App\Services\FutswapService;
-use Facade\Ignition\Support\Packagist\Package;
-use Illuminate\Database\Console\DbCommand;
-use Illuminate\Support\Facades\DB as FacadesDB;
-use Illuminate\Support\Str;
-
-use function PHPUnit\Framework\isEmpty;
+use Illuminate\Support\Facades\DB;
 use App\Models\Level;
+use App\Models\LicensePackage;
 
 class TiendaController extends Controller
 {
-    //
     use Tree;
 
     public function __construct(FutswapService $futswapService = null)
@@ -46,156 +35,30 @@ class TiendaController extends Controller
         $this->InversionController = new InversionController;
     }
 
-    public function index(Request $request)
-    {
-        $member = Member::where('referred_id', Auth::id())->orderBy('id', 'DESC')->first();
-        $data = MembershipType::with('MembershipPackage')->get();
-        $order = OrdenPurchase::where([['user_id', Auth::id()], ['status', '0']])->first();
-        $memberships = Member::where([['referred_id', Auth::id()], ['status', 'activo']])->with('ordenes')->get();
-        if ($memberships != null) {
-            foreach ($data as $type) {
-                $type->MembershipPackage = $type->MembershipPackage->sortBy('amount');
-            }
-            foreach ($data as $type) {
-                foreach ($type->MembershipPackage as $package) {
-                    $package->disabled = false;
-                    $package->text = 'Adquirir';
-                    foreach ($memberships as $membership) {
-                        if ($package->amount <= $membership->ordenes->membershipPackage->amount) {
-                            $package->disabled = true;
-                            $package->text = 'No se puede adquirir';
-                        }
-                        if ($package->id == $membership->ordenes->membershipPackage->id) {
-                            $package->text = 'Adquirido';
-                        }
-                    }
-                }
-            }
-        }
-        return view('shop.index', compact('data', 'order', 'memberships', 'member'));
-    }
-    public function broncePackages(Request $request)
+    public function marketLicences(Request $request)
     {
         $order = Order::where([['user_id', Auth::id()], ['status', '0']])->first();
 
-        $memberships = Investment::where([['user_id', Auth::id()], ['status', '1']])->with('order')->get();
-        $type = MembershipPackage::where('membership_types_id', '1')->orderBy('amount', 'ASC')->get();
+        $investments = Investment::where([['user_id', Auth::id()], ['status', '1']])->with('order')->get();
+        $licenses = LicensePackage::orderBy('amount', 'ASC')->get();
 
-        foreach ($type as $package) {
-            $package->disabled = false;
-            $package->text = 'Comprar Paquete';
-            foreach ($memberships as $membership) {
-                // dd($membership);
-                if ($package->membership_types_id == $membership->membershipPackage->membership_types_id) {
-                    if ($package->amount <= $membership->invested) {
-                        $package->disabled = true;
-                        $package->text = 'Adquirido';
-                    }
-                    if ($package->id == $membership->package_id) {
-                        $package->text = 'Adquirido';
-                        $package->disabled = true;
-                    }
-                    if ($package->amount > $membership->invested) {
-                        $package->disabled = false;
-                        $package->text = 'Upgrade';
-                    }
+        foreach ($licenses as $license) {
+            $license->disabled = false;
+            $license->text = 'Comprar Paquete';
+            foreach ($investments as $investment) {
+                if ($license->amount <= $investment->invested) {
+                    $license->disabled = true;
+                    $license->text = 'Adquirido';
+                }
+                if ($license->amount > $investment->invested) {
+                    $license->disabled = false;
+                    $license->text = 'Upgrade';
                 }
             }
         }
-        return view('shop.broncePackages', compact('order', 'memberships', 'type'));
+        return view('shop.index', compact('order', 'investments', 'licenses'));
     }
-    public function plataPackages(Request $request)
-    {
-        $order = Order::where([['user_id', Auth::id()], ['status', '0']])->first();
-
-        $memberships = Investment::where([['user_id', Auth::id()], ['status', '1']])->with('order')->get();
-        $type = MembershipPackage::where('membership_types_id', '2')->orderBy('amount', 'ASC')->get();
-
-        foreach ($type as $package) {
-            $package->disabled = false;
-            $package->text = 'Comprar Paquete';
-
-            foreach ($memberships as $membership) {
-                if ($package->membership_types_id === $membership->membershipPackage->membership_types_id) {
-                    // dd($membership->membershipPackage->membership_types_id);
-                    if ($package->amount <= $membership->invested) {
-                        $package->disabled = true;
-                        $package->text = 'Adquirido';
-                    } elseif ($package->id == $membership->package_id) {
-                        $package->text = 'Adquirido';
-                        $package->disabled = true;
-                    } else if ($package->amount > $membership->invested) {
-                        $package->disabled = false;
-                        $package->text = 'Upgrade';
-                    }
-                }
-            }
-        }
-        return view('shop.plataPackages', compact('order', 'memberships', 'type'));
-    }
-    public function oroPackages(Request $request)
-    {
-        $order = Order::where([['user_id', Auth::id()], ['status', '0']])->first();
-
-        $memberships = Investment::where([['user_id', Auth::id()], ['status', '1']])->with('order')->get();
-        $type = MembershipPackage::where('membership_types_id', '3')->orderBy('amount', 'ASC')->get();
-
-        foreach ($type as $package) {
-            $package->disabled = false;
-            $package->text = 'Comprar Paquete';
-            foreach ($memberships as $membership) {
-                // dd($membership);
-                if ($package->membership_types_id == $membership->membershipPackage->membership_types_id) {
-                    if ($package->amount <= $membership->invested) {
-                        $package->disabled = true;
-                        $package->text = 'Adquirido';
-                    }
-                    if ($package->id == $membership->package_id) {
-                        $package->text = 'Adquirido';
-                        $package->disabled = true;
-                    }
-                    if ($package->amount > $membership->invested) {
-                        $package->disabled = false;
-                        $package->text = 'Upgrade';
-                    }
-                }
-            }
-        }
-        return view('shop.oroPackages', compact('order', 'memberships', 'type'));
-    }
-    public function platinoPackages(Request $request)
-    {
-        // $member = Member::where('referred_id', Auth::id())->orderBy('id', 'DESC')->first();
-        // $data = MembershipType::with('MembershipPackage')->get();
-        $order = Order::where([['user_id', Auth::id()], ['status', '0']])->first();
-
-        $memberships = Investment::where([['user_id', Auth::id()], ['status', '1']])->with('order')->get();
-        $type = MembershipPackage::where('membership_types_id', '4')->orderBy('amount', 'ASC')->get();
-
-        foreach ($type as $package) {
-            $package->disabled = false;
-            $package->text = 'Comprar Paquete';
-            foreach ($memberships as $membership) {
-                // dd($membership);
-                if ($package->membership_types_id == $membership->membershipPackage->membership_types_id) {
-                    if ($package->amount <= $membership->invested) {
-                        $package->disabled = true;
-                        $package->text = 'Adquirido';
-                    }
-                    if ($package->id == $membership->package_id) {
-                        $package->text = 'Adquirido';
-                        $package->disabled = true;
-                    }
-                    if ($package->amount > $membership->invested) {
-                        $package->disabled = false;
-                        $package->text = 'Upgrade';
-                    }
-                }
-            }
-        }
-
-        return view('shop.platinoPackages', compact('order', 'memberships', 'type'));
-    }
+    
     public function transaction(Request $request)
     {
         $user = Auth::user();
@@ -206,17 +69,13 @@ class TiendaController extends Controller
         return view('shop.trans', compact('data', 'title'));
     }
 
-    public function comprobante(Request $request)
-    {
-    }
-
     public function transactionCompra(Request $request)
     {
         $user = Auth::user();
         $wallettrc20 = WalletPayment::where('type', 'trc20')->get();
         $walletbnb = WalletPayment::where('type', 'bnb')->get();
         $walletbtc = WalletPayment::where('type', 'btc')->get();
-        $inversion = Investment::where([['user_id', $user->id], ['status', 1], ['type', $request->type]])->first();
+        $inversion = Investment::where([['user_id', $user->id], ['status', 1]])->first();
         if ($inversion != null) {
             $price = $inversion->invested;
             $amount = $request->amount - $inversion->invested;
@@ -224,115 +83,94 @@ class TiendaController extends Controller
             $amount = $request->amount;
         }
 
-
-        if ($request->type == 1) {
-            $type = "bronce";
-        } elseif ($request->type == 2) {
-            $type = "plata";
-        } elseif ($request->type == 3) {
-            $type = "Oro";
-        } elseif ($request->type == 4) {
-            $type = "Platino";
-        }
         $packageId = $request->package;
-        return view('shop.transactionCompra', compact('amount', 'type', 'packageId', 'walletbtc','walletbnb','wallettrc20'));
+        return view('shop.transactionCompra', compact('amount', 'packageId', 'walletbtc','walletbnb','wallettrc20'));
     }
 
-
+    /**
+     * Procesa el pago o la transacción del usuario al momento de
+     * elegir el paquete y enviar su comprobante de pago.
+     */
     public function procesarOrden(Request $request)
     {
-
+        $request->validate([
+            'package' => 'required',
+            'moneda' => 'required',
+            'hash' => 'required',
+            'voucher' => 'required|mimes:jpg,jpeg,png',
+        ]);
+        
         $user = Auth::user();
-        // try {
-        $orden_pack = Order::where([['user_id', $user->id], ['status', '1']])->count();
         $allOrder = Order::where('user_id', $user->id)->where('status', '0')->get();
-        // if($orden_pack > 0) return redirect()->back()->with('error','Usted ya tiene un paquete activo');
-        $package = MembershipPackage::where('id', $request->package)->first();
-        $investment = Investment::where('user_id', $user->id)->where('type', $package->membership_types_id)->where('status', 1)->first();
+        $package = LicensePackage::where('id', $request->package)->first();
+        $investment = Investment::where('user_id', $user->id)->where('status', 1)->first();
+        $orden = new Order();
         if ($investment == null) {
             foreach ($allOrder as $order) {
-                if ($order->membershipPackage->membership_types_id == $package->membership_types_id) {
+                if ($order->licensePackage->id == $package->id) {
                     $order->status = '2';
                     $order->save();
                 }
             }
-            $orden = new Order();
             $orden->user_id = $user->id;
             $orden->package_id = $package->id;
             $orden->amount = $package->amount;
             $orden->hash = $request->hash;
 
             //guardamos comprobante
-            $file = $request->file('voucher');
-            $name = time() . "." . $file->extension();
-            $file->move(public_path('storage') . '/comprobantes/', $name);
+            $name = $this->storeVoucher($request);
             $orden->voucher = '' . $name;
 
             $orden->fee = 15;
             $orden->status = '0';
             $orden->type = '0';
-            $orden->save();
-
-            if ($orden->id !== null) {
-                //momentaneo hasta que se enlace la plataforma de pago
-                //  $response = $this->futswap->createOrden($user, intval($data['amount']), $data['idorden']);
-                // if($response[0] != 'error')
-                // {
-                //     //redirecciona a la url del pago
-                //     return redirect()->route('scanQr', $response);
-                // }else{
-                //     return back()->with('error', $response[1] );
-                // }
-                return redirect()->route('dashboard.index')->with('success', 'Orden Creada, procesando su solicitud...');
-            } else {
-                return redirect()->back()->with('error', 'Hubo un error, intente nuevamente');
-            }
+            
+            
+            
         } else {
             $newAmount = $package->amount - $investment->invested;
             foreach ($allOrder as $order) {
-                if ($order->membershipPackage->membership_types_id == $package->membership_types_id) {
+                if ($order->licensePackage->id == $package->id) {
                     $order->status = '2';
                     $order->save();
                 }
             }
-            $orden = new Order();
+            
             $orden->user_id = $user->id;
             $orden->package_id = $package->id;
             $orden->amount = $newAmount;
             $orden->hash = $request->hash;
 
             //guardamos comprobante
-            $file = $request->file('voucher');
-            $name = time() . "." . $file->extension();
-            $file->move(public_path('storage') . '/comprobantes/', $name);
+            $name = $this->storeVoucher($request);
             $orden->voucher = '' . $name;
 
             $orden->fee = 15;
             $orden->status = '0';
             $orden->type = '0';
-            $orden->save();
-
-
-
-
-            if ($orden->id !== null) {
-                //momentaneo hasta que se enlace la plataforma de pago
-                return redirect()->route('dashboard.index')->with('success', 'Orden Creada, procesando su solicitud...');
-            } else {
-                return redirect()->back()->with('error', 'Hubo un error, intente nuevamente');
-            }
         }
-
-        // } catch (\Throwable $th) {
-        //   Log::error('Tienda - procesarOrden -> Error: ' . $th);
-        //   abort(403, "Ocurrio un error, contacte con el administrador");
-        //}
+        
+        if ($orden->save()) 
+        {
+            return redirect()->route('dashboard.index')->with('success', 'Orden Creada, procesando su solicitud...');
+        }
+        
+        return redirect()->back()->with('error', 'Hubo un error, intente nuevamente');
     }
 
+    /**
+     * Se encarga de guardar en el storage el comprobante de pago
+     */
+    public function storeVoucher(Request $request)
+    {
+        $file = $request->file('voucher');
+        $name = time() . "." . $file->extension();
+        $file->move(public_path('storage') . '/comprobantes/', $name);
+        return $name;
+    }
 
     public function saveOrden($data): int
     {
-
         $orden = Order::create($data);
 
         return $orden->id;
@@ -351,76 +189,32 @@ class TiendaController extends Controller
         }
     }
 
-    private function generalUrlOrden($data): string
-    {
-        try {
-            $charge = Coinbase::createCharge([
-                'name' =>  $data['name'],
-                'description' => $data['descripcion'],
-                'local_price' => [
-                    'amount' =>  $data['total'],
-                    'currency' => 'USD',
-                ],
-                'pricing_type' => 'fixed_price'
-
-            ]);
-            return $charge['data']['hosted_url'];
-            /* $transaction['order_id'] = $data['idorden']; // invoice number
-            $transaction['amountTotal'] = floatval($data['total']);
-            $transaction['note'] = $data['descripcion'];
-            $transaction['buyer_name'] = $data['name'];
-            $transaction['buyer_email'] = $data['email'];
-            $transaction['redirect_url'] = route('dashboard.index'); // When Transaction was comleted
-            $transaction['cancel_url'] = route('shop'); // When user click cancel link
-            $transaction['items'][] = [
-                'itemDescription' => 'Inversion',
-                'itemPrice' => (float) $data['total'], // USD
-                'itemQty' => (int) 1,
-                'itemSubtotalAmount' => (float) $data['total'] // USD
-            ];
-
-            $ruta = CoinPayment::generatelink($transaction);
-            if ($ruta != null) {
-                return $ruta;
-            } */
-        } catch (\Throwable $th) {
-            Log::error('Tienda - generalUrlOrden -> Error: ' . $th);
-            abort(403, "Ocurrio un error, contacte con el administrador");
-        }
-    }
-
     public function cambiar_status(Request $request)
     {
-
-        // try {
-        FacadesDB::beginTransaction();
-        $bons = Bonus::where('level', 1)->get();
-        $level1 = $bons[0];
         $orden = Order::findOrFail($request->id);
-        $user = $orden->user;
         $orden->status = $request->status;
         $orden->save();
-        // Aqui se cambia el status de una inversion anterior a inactiva si se aprovo un upgrade
+        // Aqui se cambia el status de una inversion anterior a inactiva si se aprobo un upgrade
         if ($request->status == '1') {
-            $investment = Investment::where('user_id', $user->id)->where('status', '1')->where('type', $orden->membershipPackage->membership_types_id)->first();
+            $investment = Investment::where('user_id', $orden->user->id)->where('status', '1')->first();
             if ($investment != null) {
                 //Se crea la inversion al aprobarse la orden
                 $investment->order_id = $orden->id;
                 $investment->package_id = $orden->package_id;
-                $investment->invested = $orden->membershipPackage->amount;
+                $investment->invested = $orden->licensePackage->amount;
+                $investment->expiration_date = now()->addYear();
                 $investment->save();
                 Upgrade::create([
                     'investment_id' => $investment->id,
                     'package_id' => $investment->package_id,
                     'status_utility' => 0
                 ]);
-                //Se crea la wallet corresondiente
+                //Se crean los bonos o wallet corresondiente
                 $this->callBuildingBonus($orden);
             } else {
                 $inversion = Investment::create([
                     'invested' => $orden->amount,
                     'package_id' => $orden->package_id,
-                    'type' => $orden->membershipPackage->membership_types_id,
                     'user_id' => $orden->user_id,
                     'order_id' => $orden->id,
                     'status' => '1',
@@ -428,6 +222,7 @@ class TiendaController extends Controller
                     'buyer_id' => $orden->user->padre->id,
                     'capital' => 0,
                     'pay_utility' => 0,
+                    'expiration_date' => now()->addYear()
                 ]);
                 Upgrade::create([
                     'investment_id' => $inversion->id,
@@ -437,28 +232,21 @@ class TiendaController extends Controller
                 $user = User::findOrFail($orden->user_id);
                 //Se crea la wallet corresondiente
                 $this->callBuildingBonus($orden);
+
+                // Se cambia el status del usuario a activo
                 if ($user->status == '0') {
                     $user->status = '1';
-                    $user->date_active = Carbon::now();
+                    $user->date_active = now();
                     $user->update();
-                event(new UserEvent($user));
+                    event(new UserEvent($user));
                 }
             }
         }
 
-
-
-        FacadesDB::commit();
-
         return back()->with('success', 'Orden actualizada exitosamente');
-        // } catch (\Throwable $th) {
-
-        //    FacadesDB::rollback();
-        //    Log::error('Tienda - cambiar_status -> Error: ' . $th);
-        //   abort(403, "Ocurrio un error, contacte con el administrador");
-        // }
 
     }
+
     private function callBuildingBonus($orden)
     {
         // Usuario que compro el paquete
@@ -482,25 +270,6 @@ class TiendaController extends Controller
         $this->InversionController->saveInversion($orden);
     }
 
-
-    /*
-    public function proccess(Request $request)
-    {
-        try {
-            $user = Auth::user();
-            $package = Package::findOrFail($request->idproduct);
-            $orden = OrdenPurchase::create([
-                'user_id' => $user->id,
-                'amount' => $package->price,
-                'fee' => 0,
-                'package_id' => $package->id
-            ]);
-            return view('shop.transaction', compact('user', 'orden'));
-        } catch (\Throwable $th) {
-            Log::error('TiendaController - proccess -> Error: '.$th);
-            abort(500, "Ocurrio un error, contacte con el administrador");
-        }
-    }
     public function store(Request $request)
     {
         $validate = $request->validate([
@@ -530,7 +299,7 @@ class TiendaController extends Controller
             abort(500, "Ocurrio un error, contacte con el administrador");
         }
     }
-    */
+
     public function reactivacionSaldo(Request $request)
     {
         try {
@@ -707,7 +476,6 @@ class TiendaController extends Controller
     {
         try {
 
-
             DB::beginTransaction();
 
             $orden = OrdenPurchase::findOrFail($id);
@@ -754,37 +522,4 @@ class TiendaController extends Controller
         }
     }
 
-    public function payRangeBonus()
-    {
-        app(BonusService::class)->RangeBonus();
-        //Cierra el Pool global actual e inicia uno nuevo
-        $current_pool_global = PoolGlobal::where('active', 'yes')->first();
-        $current_pool_global->active = 'no';
-        $current_pool_global->update();
-        PoolGlobal::create([
-            'total' => 0,
-            'amount' => 0,
-            'cycle_id' => $current_pool_global->cycle_id + 1,
-            'active' => 'yes'
-        ]);
-        return back()->with('success', 'Bonos por Rangos Pagados Exitosamente');
-    }
-    /* public function verificationCode(Request $request){
-
-        $data =[
-            'clase' => $request->clase,
-            'name' => $request->name,
-            'monto' => $request->data_monto,
-            'activacion_manual' => $request->activacion_manual,
-            'montoo' => $request->montoo,
-            'wallet' => $request->wallet,
-            'email' => $request->email,
-            'total' => $request->total,
-            'validation_code' => Str::random(10),
-        ];
-
-
-
-        return view('shop.trans', compact('data'));
-    } */
 }

@@ -54,16 +54,28 @@
             "slug": "inversion.admin.index"
         },
         {
+            "url": "KYc-Admin",
+            "name": "Solicitudes KYC",
+            "icon": "dollar-sign",
+            "slug": "Accion-KYC"
+        },
+        {
+            "url": "/manual/activation",
             "name": "Paquetes",
             "icon": "grid",
-            "slug": "manual.activation",
-            "url": "/manual/activation"
+            "slug": "manual.activation"
         },
         {
             "name": "Usuarios",
             "icon": "users",
             "slug": "user.list-user",
             "url": "user/user-list"
+        },
+        {
+            "name": "Usuarios Expirados",
+            "icon": "users",
+            "slug": "user.expired.licenses.list",
+            "url": "user/expired/license/list"
         },
         {
             "name": "Liquidaciones",
@@ -143,6 +155,20 @@
                     "slug": "cron.set.ranges"
                 }
 
+            ]
+        },
+        {
+            "url": "/tickets",
+            "name": "Soporte",
+            "icon": "help-circle",
+            "slug": "tickets.create",
+            "submenu": [
+                {
+                    "url": "/tickets/ticket-list-admin",
+                    "name": "Ver tickets",
+                    "icon": "circle",
+                    "slug": "ticket.list-admin"
+                }
             ]
         }
 

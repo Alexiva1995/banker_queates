@@ -24,5 +24,3 @@ composer.lock
 .vscode/extensions.json
 public/mix-manifest.json
 storage/logs/laravel.log
-storage/logs/laravel.log
-storage/logs/laravel.log
