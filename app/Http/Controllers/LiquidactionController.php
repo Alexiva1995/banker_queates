@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Mail\CodeRetiro;
+use App\Mail\withdrawRequest;
 use App\Models\CodeSeccurity;
 use App\Models\User;
 use App\Models\Wallet;
@@ -711,6 +712,8 @@ class LiquidactionController extends Controller
         } 
 
         $user->update([ 'code_security' => null ]);
+        
+        Mail::to($user->email)->send(new withdrawRequest($user, $Monto_a_retirar) );
 
         $response = ['status' => 'success', 'message' => 'Su retiro se ha procesado exitosamente!'];
         return response()->json($response, 200);

@@ -67,14 +67,14 @@
                         <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
                             <tr>
                                 <td>
-                                    <h1 style="font-size: 24px; margin: 0;">¡ HOLA !</h1>
+                                    <h1 style="font-size: 24px; margin: 0;">¡ HOLA {{ $user->username }} !</h1>
                                 </td>
                             </tr>
                             <tr>
                                 <td style="font-size: 16px; line-height: 24px; padding: 0px 0 0px 0; display:block; margin-top: 10px;">
                                     <p style="margin: 0;">Tu solicitud de retiro por</p>
-                                    <p style="margin: 0;">5000 USD</p>
-                                    <p style="margin: 0;">a la Wallet sjkdhasuifhsdabfuiasgkjasdhkfjh</p>
+                                    <p style="margin: 0;">{{ $amount }} USD</p>
+                                    <p style="margin: 0;">a la Wallet {{ $user->decryptWallet() }}</p>
                                     <p style="margin: 0;">fue recibida con exito</p>
                                 </td>
                             </tr>
