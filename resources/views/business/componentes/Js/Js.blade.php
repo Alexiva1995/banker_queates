@@ -119,60 +119,44 @@ function percentage(e){
         
     }
 
-    function verificarRetiro(){
+    function verificarRetiro() {
+
         let title = document.getElementById('title');
         let body = document.getElementById('body');
         let footer = document.getElementById('footer');
         let passed = document.getElementById('passed');
         let contenedorspiner = document.getElementById('contenedorspiner');
         let spiner = document.getElementById('spiner');
+        const url = '{{route("verificar.user.retiro")}}'
 
-
-        axios.post('{{route("verificar.user.retiro")}}', {
+        axios.post( url, {
             code: document.getElementById('code').value,
             Monto_a_retirar: document.getElementById('Monto_a_retirar').value,
             wallet: document.getElementById('wallet').value,
         })
         .then( res => {
-            console.log(res.data);
-            // if(response.data.value == 1){
-            //     title.hidden = true;
-            //     body.hidden = true;
-            //     footer.hidden = true;
-            //     spiner.hidden = false;
-            //     contenedorspiner.hidden = false;
 
-            //     setTimeout(function(){
-            //         spiner.hidden = true;
-            //         passed.hidden = false;
-            //     },1500);
+            const { status, message } = res.data;
 
-            //     setTimeout(reload,4000);
-            // }
-            // if(response.data.value == 0){
-            //     Swal.fire({
-            //     position: 'top-end',
-            //     icon: 'error',
-            //     title: 'Codigo incorrecto',
-            //     showConfirmButton: false,
-            //     timer: 1500
-            //     })
-            // }
-            // if(response.data.value == 2){
-            //     Swal.fire({
-            //     position: 'top-end',
-            //     icon: 'error',
-            //     title: 'El monto intruducido supera tu saldo disponible ',
-            //     showConfirmButton: false,
-            //     timer: 1500
-            //     })
-            // }
+            if( status === 'success' ) {
+
+                toastr.success(message, '¡Error!', {
+                    "progressBar": true
+                });
+                
+                setTimeout(() => {
+                    reload();
+                }, 1500);
+
+            } else {
+                toastr.error(message, '¡Error!', {
+                    "progressBar": true
+                });
+            }
         })
         .catch( error => {
             console.log(error);
         });
-
-
     }
 
     function reload(){
