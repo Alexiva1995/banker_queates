@@ -90,7 +90,7 @@ class WalletController extends Controller
     {
         $user = auth()->user();
         if($user->admin == 1){
-            $wallets = WalletComission::where([['type', '=', 0]])->with('user')->orderBy('id', 'desc')->get();
+            $wallets = WalletComission::with('user')->orderBy('id', 'desc')->get();
         } else {
             $wallets = WalletComission::where([['user_id', '=', $user->id],['type', '=', 0]])->with('user')->orderBy('id', 'desc')->get();
         }
