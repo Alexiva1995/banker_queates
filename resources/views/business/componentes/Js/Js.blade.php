@@ -25,51 +25,51 @@
         }
     }
 
-function pegar(e){
-    let ButtonContinue = document.getElementById('continue-button');
+    function pegar(e){
+        let ButtonContinue = document.getElementById('continue-button');
 
-    setTimeout(function(){
-        if( e.value.length > 16 &&  Monto_a_retirar >= 100 ){
-            console.log(e.value.length);
+        setTimeout(function(){
+            if( e.value.length > 16 &&  Monto_a_retirar >= 100 ){
+                console.log(e.value.length);
+                ButtonContinue.disabled = false;
+            }else{
+            (wallet.value);
+            ButtonContinue.disabled = true;
+
+            }
+        }, 4);
+
+    }
+
+    function activarInput(e){
+        Monto_a_retirar = e;
+        percentage(Monto_a_retirar);
+        w();
+
+        if( wallet.length > 16 &&  Monto_a_retirar >= 100 ){
+
             ButtonContinue.disabled = false;
-        }else{
-        (wallet.value);
-        ButtonContinue.disabled = true;
+
+        }else {
+            (wallet.value);
+            ButtonContinue.disabled = true;
 
         }
-    }, 4);
-
-}
-
-function activarInput(e){
-    Monto_a_retirar = e;
-    percentage(Monto_a_retirar);
-    w();
-
-    if( wallet.length > 16 &&  Monto_a_retirar >= 100 ){
-
-        ButtonContinue.disabled = false;
-
-    }else {
-        (wallet.value);
-        ButtonContinue.disabled = true;
-
     }
-}
 
-function percentage(e){
-    const fee = @json($fee);
-    let total = document.getElementById('total');
-    let avaibleBalanceTotal = document.getElementById('avaibleBalanceTotal').value;
+    function percentage(e){
+        const fee = @json($fee);
+        let total = document.getElementById('total');
+        let avaibleBalanceTotal = document.getElementById('avaibleBalanceTotal').value;
 
-    if(e >= 100 ){
-        let n = (e * fee )/100;
+        if(e >= 100 ){
+            let n = (e * fee )/100;
 
-        total.innerHTML = `${e - n} USD`;
-    }else{
-        total.innerHTML ='--------';
+            total.innerHTML = `${e - n} USD`;
+        }else{
+            total.innerHTML ='--------';
+        }
     }
-}
 
 
     async function getCode(){
@@ -128,13 +128,21 @@ function percentage(e){
         let contenedorspiner = document.getElementById('contenedorspiner');
         let spiner = document.getElementById('spiner');
         const url = '{{route("verificar.user.retiro")}}'
+        const btnContinue = document.getElementById('btnContinue');
+        const spinner = document.getElementById('spinner');
 
+        btnContinue.classList.add('d-none');
+        spinner.classList.remove('d-none');
+        
         axios.post( url, {
             code: document.getElementById('code').value,
             Monto_a_retirar: document.getElementById('Monto_a_retirar').value,
             wallet: document.getElementById('wallet').value,
         })
         .then( res => {
+
+            btnContinue.classList.remove('d-none');
+            spinner.classList.add('d-none');
 
             const { status, message } = res.data;
 
@@ -155,6 +163,8 @@ function percentage(e){
             }
         })
         .catch( error => {
+            btnContinue.classList.remove('d-none');
+            spinner.classList.add('d-none');
             console.log(error);
         });
     }

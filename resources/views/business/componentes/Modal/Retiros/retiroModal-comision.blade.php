@@ -48,7 +48,11 @@
 
         <div class="modal-footer" id="footer">
             <button type="button" class="btn border-danger " style="color: red;" data-bs-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-primary" onclick="verificarRetiro();">Continuar</button>
+            <button type="button" id="btnContinue" class="btn btn-primary" onclick="verificarRetiro();">Continuar</button>
+            <button class="btn btn-primary d-none" id="spinner" type="button" disabled>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Procesando...
+            </button>
         </div>
       </div>
     </div>
