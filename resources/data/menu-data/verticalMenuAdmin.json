@@ -60,10 +60,10 @@
             "slug": "Accion-KYC"
         },
         {
+            "url": "/manual/activation",
             "name": "Paquetes",
             "icon": "grid",
-            "slug": "manual.activation",
-            "url": "/manual/activation"
+            "slug": "manual.activation"
         },
         {
             "name": "Usuarios",
@@ -155,6 +155,20 @@
                     "slug": "cron.set.ranges"
                 }
 
+            ]
+        },
+        {
+            "url": "/tickets",
+            "name": "Soporte",
+            "icon": "help-circle",
+            "slug": "tickets.create",
+            "submenu": [
+                {
+                    "url": "/tickets/ticket-list-admin",
+                    "name": "Ver tickets",
+                    "icon": "circle",
+                    "slug": "ticket.list-admin"
+                }
             ]
         }
 

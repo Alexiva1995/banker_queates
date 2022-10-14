@@ -16,7 +16,7 @@
 <div class="card">
     <!--Card Header--->
     <div class="card-header">
-        <h4 class="text-white fw-bold">
+        <h4 class=" fw-bold">
         Listado de Tickets
         </h4>
     </div>
@@ -41,9 +41,9 @@
 
 
                     @if ($item->status == '0')
-                    <td> <a class=" btn text-bold-600 text-white" style="background-color:rgba(5,255,0,0.7);border-radius: 8px;">Abierto</a></td>
+                    <td> <a class=" btn text-bold-600 " style="background-color:rgba(5,255,0,0.7);border-radius: 8px;">Abierto</a></td>
                     @elseif($item->status == '1')
-                    <td> <a class=" btn  text-bold-600 text-white" style="background-color:rgba(255,0,0,0.6);border-radius: 8px;">Cerrado</a></td>
+                    <td> <a class=" btn  text-bold-600 " style="background-color:rgba(255,0,0,0.6);border-radius: 8px;">Cerrado</a></td>
                     @endif
                     @if ($item->send == '')
                     <td>No hay mensaje Disponibles</td>
@@ -52,7 +52,7 @@
                     @endif
                     <td>
                         <a href="{{ route('ticket.edit-admin',$item->id) }}">
-                            <button class=" btn  text-bold-600 text-white" style="background: rgba(0, 246, 225, 0.77);border-radius: 8px;">Revisar</button>
+                            <button class=" btn  text-bold-600 " style="background: rgba(0, 246, 225, 0.77);border-radius: 8px;">Revisar</button>
                         </a>
                     </td>
                 </tr>
