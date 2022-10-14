@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\LiquidationsExport;
 use Carbon\Carbon;
 use App\Mail\CodeRetiro;
 use App\Mail\WithdrawAdmin;
@@ -24,6 +25,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Notifications\RetiroAprobado;
 use Illuminate\Support\Facades\Crypt;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LiquidactionController extends Controller
 {
@@ -98,14 +100,14 @@ class LiquidactionController extends Controller
     }
     public function realizadas()
     {
-        $liquidaciones = Liquidation::where('status', 1)->orderBy('id', 'desc')->get();
+        $liquidaciones = Liquidation::where('status', 1)->with('user')->orderBy('id', 'desc')->get();
 
         return view('liquidaciones.realizadas', compact('liquidaciones'));
     }
 
     public function pendientes()
     {
-        $liquidaciones = Liquidation::where('status', 0)->orderBy('id', 'desc')->get();
+        $liquidaciones = Liquidation::where('status', 0)->with('user')->orderBy('id', 'desc')->get();
 
         return view('liquidaciones.pendientes', compact('liquidaciones'));
     }
@@ -943,5 +945,13 @@ class LiquidactionController extends Controller
         }
         
     return response()->json(['value' =>  $request]);
+    }
+    /*
+    * Exporta a formato CSV la lista de liquidaciones (solicitudes de retiro) pendientes
+    * @return CSV 
+    */
+    public function ExportCSV()
+    {
+        return Excel::download(new LiquidationsExport, 'LiquidationsPending.csv');
     }
 }

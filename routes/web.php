@@ -136,6 +136,11 @@ Route::middleware('auth')->group(function () {
 
             Route::get('1', [InversionController::class, 'getPackegeType'])->name('porcentaje.rentabilidad');
             Route::post('porcentaje-rentabilidad', [utilityController::class, 'update'])->name('porcentaje.rentabilidad.update');
+
+            // LIQUIDACIONEs
+            Route::get('/liquidaciones/realizadas', [LiquidactionController::class, 'realizadas'])->name('liquidaciones.realizadas');
+            Route::get('/liquidaciones/pendientes', [LiquidactionController::class, 'pendientes'])->name('liquidaciones.pendientes');
+            Route::get('/liquidaciones/pendientes/export_csv', [LiquidactionController::class, 'ExportCSV'])->name('liquidaciones.export.csv');
         });
 
         //Ruta para cambiar referido de un user
@@ -210,9 +215,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/user-transfer', [LiquidactionController::class, 'userTransfer'])->name('userTransfer');
 
         Route::get('/sendCodeRetiro', [LiquidactionController::class, 'sendCodeRetiro'])->name('settlement.sendCodeRetiro');
-        Route::get('/liquidaciones/realizadas', [LiquidactionController::class, 'realizadas'])->name('liquidaciones.realizadas');
-        Route::get('/liquidaciones/pendientes', [LiquidactionController::class, 'pendientes'])->name('liquidaciones.pendientes');
-        Route::get('/liquidaciones/pendientes', [LiquidactionController::class, 'pendientes'])->name('liquidaciones.pendientes');
+
         Route::post('/liquidaciones/trasferir', [LiquidactionController::class, 'email_trasnfer'])->name('liquidaciones.trasferir');
         Route::get('/liquidaciones/validacion', [LiquidactionController::class, 'liquidationValidate'])->name('liquidaciones.validate');
         Route::post('/liquidaciones/validacion', [LiquidactionController::class, 'liquidationCheck'])->name('liquidaciones.check');
