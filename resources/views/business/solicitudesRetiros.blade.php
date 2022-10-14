@@ -78,7 +78,7 @@
                                         {{number_format($retiro->amount_net,2)}}
                                     </td>
                                     <td>
-                                        {{$retiro->wallet_used}}
+                                        {{ $retiro->decryptWallet() }}
                                     </td>
                                 </tr>
                                 @endforeach

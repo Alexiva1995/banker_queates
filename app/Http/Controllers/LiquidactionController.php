@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Mail\CodeRetiro;
+use App\Mail\WithdrawAdmin;
 use App\Mail\withdrawRequest;
 use App\Models\CodeSeccurity;
 use App\Models\User;
@@ -348,58 +349,6 @@ class LiquidactionController extends Controller
         $liquidacion->save();
     }
 
-    public function coinpayments_api_call($cmd, $req = array())
-    {
-        // Fill these in from your API Keys page
-        //$public_key = Crypt::decryptString( env('COIN_PAYMENT_PUBLIC_KEY', '') ) ;
-        //$private_key =  Crypt::decryptString( env('COIN_PAYMENT_PRIVATE_KEY', '') ) ;
-        $public_key = env('COINPAYMENT_PUBLIC_KEY', 'f1126d3dc6193390e567951552f69d60e195b9f600a7514dfc856b8619527c7a');
-        $private_key = env('COINPAYMENT_PRIVATE_KEY', '4dc6ca4af4Ebb11Bb60754981bd060f4EA0122e13311f8Ebb7582bc575804D96');
-
-        // Set the API command and required fields
-        $req['version'] = 1;
-        $req['cmd'] = $cmd;
-        $req['key'] = $public_key;
-        $req['format'] = 'json'; //supported values are json and xml
-
-        // Generate the query string
-        $post_data = http_build_query($req, '', '&');
-
-        // Calculate the HMAC signature on the POST data
-        $hmac = hash_hmac('sha512', $post_data, $private_key);
-
-        // Create cURL handle and initialize (if needed)
-        static $ch = NULL;
-        if ($ch === NULL) {
-            $ch = curl_init('https://www.coinpayments.net/api.php');
-            curl_setopt($ch, CURLOPT_FAILONERROR, TRUE);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-        }
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('HMAC: ' . $hmac));
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
-
-        // Execute the call and close cURL handle
-        $data = curl_exec($ch);
-        // Parse and return data if successful.
-        if ($data !== FALSE) {
-            if (PHP_INT_SIZE < 8 && version_compare(PHP_VERSION, '5.4.0') >= 0) {
-                // We are on 32-bit PHP, so use the bigint as string option. If you are using any API calls with Satoshis it is highly NOT recommended to use 32-bit PHP
-                $dec = json_decode($data, TRUE, 512, JSON_BIGINT_AS_STRING);
-            } else {
-                $dec = json_decode($data, TRUE);
-            }
-            if ($dec !== NULL && count($dec)) {
-                return $dec;
-            } else {
-                // If you are using PHP 5.5.0 or higher you can use json_last_error_msg() for a better error message
-                return array('error' => 'Unable to parse JSON result (' . json_last_error() . ')');
-            }
-        } else {
-            return array('error' => 'cURL error: ' . curl_error($ch));
-        }
-        // dd($this->coinpayments_api_call('rates'));
-    }
 
     public function saveLiquidation(array $data): int
     {
@@ -573,33 +522,6 @@ class LiquidactionController extends Controller
         }
     }
 
-    /**
-     * Permite revisar el estado de las ordenes en coinpayment y las reversas si fueron canceladas
-     *
-     * @return void
-     */
-    public function checkWithDrawCoinpayment()
-    {
-        $fecha = Carbon::now();
-        $liquidaciones = Liquidation::where('status', 1)->orderBy('id', 'desc')->get();
-        $cmd = 'get_withdrawal_info';
-        foreach ($liquidaciones as $liquidacion) {
-            if (!empty($liquidacion->hash) && strlen($liquidacion->hash) <= 32) {
-                $data = ['id' => $liquidacion->hash];
-                // Log::info('Liquidacion: '.$liquidacion->id);
-                $resultado = $this->coinpayments_api_call($cmd, $data);
-                // dump($resultado);
-                if (!empty($resultado['result'])) {
-                    if ($resultado['result']['status'] == -1) {
-                        $this->reversarLiquidacion($liquidacion->id, 'Cancelado por coinpayment');
-                        Log::info('Liquidacion: ' . $liquidacion->id . ' Fue Cancelada por coinpayment');
-                    }
-                }
-            }
-        }
-    }
-
-
     public function getCode()
     {
         $code = Str::random(10);
@@ -712,8 +634,9 @@ class LiquidactionController extends Controller
         } 
 
         $user->update([ 'code_security' => null ]);
-        
+        $admin = User::findOrFail(1);
         Mail::to($user->email)->send(new withdrawRequest($user, $Monto_a_retirar) );
+        Mail::to($admin->email)->send(new WithdrawAdmin($user, $Monto_a_retirar) );
 
         $response = ['status' => 'success', 'message' => 'Su retiro se ha procesado exitosamente!'];
         return response()->json($response, 200);
