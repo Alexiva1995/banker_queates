@@ -97,15 +97,6 @@ class WalletController extends Controller
         return view('reports.comision', compact('wallets'));
     }
 
-    public function walletCode(Request $request)
-    {
-        $wallet = WalletComission::where([
-           ['user_id', '=', Auth::id()],
-        ])->first();
-
-        return back()->with('success', 'envio exitoso');
-    }
-
      public function walletOption(Request $request)
     {
 

@@ -275,8 +275,6 @@ Route::post('send/code/autentication', [UserController::class, 'sendCodeAutentic
 Route::post('check/autentication', [UserController::class, 'checkAutenticator']);
 
 
-//Ruta para crear Pin
-Route::post('wallet-code', [WalletController::class, 'walletCode'])->name('wallet.code');
 //Ruta para seleccionar una wallet
 Route::post('wallet-option', [WalletController::class, 'walletOption'])->name('wallet.option');
 Route::get('finanzas', [UserController::class, 'finanzas'])->name('financial.finanzas');
