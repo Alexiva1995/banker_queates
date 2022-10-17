@@ -564,4 +564,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasOne(ModelsCodeSeccurity::class);
     }
+
+    public function binaryPoints()
+    {
+        return $this->hasMany(BinaryPoint::class);
+    }
 }

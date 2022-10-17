@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBinariesTable extends Migration
+class CreateBinaryPointsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateBinariesTable extends Migration
      */
     public function up()
     {
-        Schema::create('binaries', function (Blueprint $table) {
+        Schema::create('binary_points', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->comment('Usuario al que pertenece este registro');
             $table->foreignId('buyer_id')->constrained('users')->comment('El patrocinante del usuario, es quien recibe los puntos');
