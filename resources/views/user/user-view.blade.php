@@ -18,14 +18,7 @@
     <p class="fw-300 mb-0">{{ $user->email }}</p>
 </div>
 <div class="row row col-lg-11 col-md-12 col-sm-12">
-    <nav class="links col-sm-4">
-        <div class="nav nav-tabs flex-column" id="nav-tab" role="tablist">
-            <button class="btn btn-primary rounded active justify-content-start text-start" id="nav-home-tab"
-                data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
-                aria-selected="true"><i data-feather='user' class="mx-lg-2 mx-md-2 me-sm-2"></i>Datos Generales</button>
-
-        </div>
-    </nav>
+    
     <div class="col-sm-8 ">
         {{-- apartado perfil --}}
         <div class="row">
@@ -215,6 +208,40 @@
                                                 <div class="input-group mb-1">
                                                     <input type="text" class="form-control"
                                                         value="{{ $user->padre->email }}" disabled>
+                                                </div>
+                                                @else
+                                                <div class="input-group mb-1">
+                                                    <input type="text" class="form-control" placeholder="No Aplica"
+                                                        disabled>
+                                                </div>
+                                                @endif
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <label for="" class="correo fw-500">
+                                                    licencia<label style="color: red;">*</label>
+                                                </label>
+                                                @if ($user->admin != 1)
+                                                <div class="input-group mb-1">
+                                                    <input type="text" class="form-control"
+                                                        value="{{ $user->licencia}}" disabled>
+                                                </div>
+                                                @else
+                                                <div class="input-group mb-1">
+                                                    <input type="text" class="form-control" placeholder="No Aplica"
+                                                        disabled>
+                                                </div>
+                                                @endif
+                                            </div>
+                                            
+                                            <div class="col-sm-6">
+                                                <label for="" class="correo fw-500">
+                                                    Ganancias recibidas<label style="color: red;">*</label>
+                                                </label>
+                                                @if ($user->admin != 1)
+                                                <div class="input-group mb-1">
+                                                    <input type="text" class="form-control"
+                                                        value="$ {{$user->ganancias}}" disabled>
                                                 </div>
                                                 @else
                                                 <div class="input-group mb-1">

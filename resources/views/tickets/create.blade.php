@@ -14,7 +14,7 @@
             <div class="card">
                 <!--Card Header--->
                 <div class="card-header">
-                    <h4 class="text-white fw-bold">
+                    <h4 class="fw-bold">
                         Crear
                     </h4>
                 </div>
@@ -62,7 +62,7 @@
                             <div class="col-sm-8">
                                 <!--MENSAJE-->
                                 <span class=" text-bold-600">Mensaje:</span>
-                                <textarea class="form-control" type="text" id="message" name="message" required rows="3" style="background-color:#1d1b2f;height: 190px;border: 1px #404656 solid;"></textarea>
+                                <textarea class="form-control" type="text" id="message" name="message" required rows="3" style="height: 25vh;"></textarea>
                                 <!--MENSAJE END-->
                             </div>
 

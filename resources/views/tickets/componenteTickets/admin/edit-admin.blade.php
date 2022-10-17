@@ -12,7 +12,7 @@
             <div class="card">
                 <!--Card Header--->
                 <div class="card-header">
-                    <h4 class="text-white fw-bold">
+                    <h4 class=" fw-bold">
                         Revisando Ticket de: <span><b>{{$ticket->getUser->name}}</b></span>
                     </h4>
                 </div>
@@ -28,15 +28,15 @@
                                 <span class=" text-bold-600">Categoria:</span>
 
                                 @if ($ticket->categories == '0')
-                                <input type="text" class="form-control text-white" value="Ayuda" disabled>
+                                <input type="text" class="form-control " value="Ayuda" disabled>
                                 @elseif($ticket->categories == '1')
-                                <input type="text" class="form-control text-white" value="Soporte técnico" disabled>
+                                <input type="text" class="form-control " value="Soporte técnico" disabled>
                                 @elseif($ticket->categories == '2')
-                                <input type="text" class="form-control text-white" value="Corrección de datos" disabled>
+                                <input type="text" class="form-control " value="Corrección de datos" disabled>
                                 @elseif($ticket->categories == '3')
-                                <input type="text" class="form-control text-white" value="Bonos" disabled>
+                                <input type="text" class="form-control " value="Bonos" disabled>
                                 @elseif($ticket->categories == '4')
-                                <input type="text" class="form-control text-white" value="Inversión total" disabled>
+                                <input type="text" class="form-control " value="Inversión total" disabled>
                                 @endif
                                 <!--SELECT END-->
                             </div>
@@ -45,11 +45,11 @@
                                 <!--INPUT DE PRIORIDADES-->
                                 <label for="">Prioridad:</label>
                                 @if ($ticket->priority == '0')
-                                <input type="text" class="form-control text-white" value="Alta" disabled>
+                                <input type="text" class="form-control " value="Alta" disabled>
                                 @elseif($ticket->priority == '1')
-                                <input type="text" class="form-control text-white" value="Media" disabled>
+                                <input type="text" class="form-control " value="Media" disabled>
                                 @elseif($ticket->priority == '2')
-                                <input type="text" class="form-control text-white" value="Baja" disabled>
+                                <input type="text" class="form-control " value="Baja" disabled>
                                 @endif
                                 <!--INPUT DE PRIORIDADES END-->
                             </div>
@@ -121,7 +121,7 @@
                             <div class="col-sm-8">
                                 <!--MENSAJE-->
                                 <span class=" text-bold-600">Mensaje:</span>
-                                <textarea class="form-control text-white" type="text" id="message" name="message" rows="3" style="background-color:#1d1b2f;height: 190px;border: 1px #404656 solid;"></textarea>
+                                <textarea class="form-control " type="text" id="message" name="message" rows="3" style="height: 25vh;"></textarea>
                                 <!--MENSAJE END-->
                             </div>
 

@@ -472,8 +472,17 @@ class LiquidactionController extends Controller
             $comissionsRangeTotal = WalletComission::where('user_id', $user->id)->where('type', 1)->sum('amount');
             $comissionsTotal = WalletComission::where('user_id', $user->id)->where('type', 0)->sum('amount');
             // TODO: Modificar estas 2 lineas de comision
-            $rentabilitys = [];
-            $comissionsUtilityTotal = 50;
+            $Licencias  = WalletComission::where([['user_id',$user->id ],
+                                                  ['type',2],
+                                                  ['status',0]
+                                                ])->get();
+            $LicenciasUtilityTotal = $Licencias->sum('amount_available');
+            
+            $general =  WalletComission::where([['user_id',$user->id ],
+                                                ['status',0]
+                                            ])->get();
+                                            
+            $generalTotal = $general->sum('amount_available');                                     
 
             $comissionsRangeAvailable = $user->getWalletRangeAmount();
             $comissionsAvailable= $user->getWalletComissionAmount();
@@ -488,7 +497,7 @@ class LiquidactionController extends Controller
                 $daysRemaining = $date1->diffInDays(today()->format('Y-m-d') );
             }
 
-            return view('wallet.index', compact('comissionsUtilityTotal', 'comissionsTotal', 'comissionsRangeTotal', 'walletsRange', 'walletsComissions','rentabilitys', 'comissionsUtilityAvailable' ,'comissionsAvailable','comissionsRangeAvailable', 'daysRemaining'));
+            return view('wallet.index', compact('generalTotal','general','LicenciasUtilityTotal', 'comissionsTotal', 'comissionsRangeTotal', 'walletsRange', 'walletsComissions','Licencias', 'comissionsUtilityAvailable' ,'comissionsAvailable','comissionsRangeAvailable', 'daysRemaining'));
         } catch (\Throwable $th) {
             Log::error('Wallet - Index -> Error: ' . $th);
             abort(403, "Ocurrio un error, contacte con el administrador");

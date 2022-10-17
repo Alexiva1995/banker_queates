@@ -59,7 +59,12 @@ class UserController extends Controller
     {
         // dd($id);
         $invertido = $this->paquete();
-        $user = User::find($id);
+         $user = User::find($id);
+        
+        $user->licencia = $user->investment->licensePackage->name;
+        $user->ganancias = $user->wallets->sum('amount_available');
+        
+
         $country = Countrie::all();
         $wallet = WalletComission::where('user_id', $user->id)->get();
         $prefix = Prefix::orderBy('id', 'asc')->get();
