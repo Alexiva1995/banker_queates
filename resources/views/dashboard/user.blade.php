@@ -283,7 +283,8 @@
             <div class="row">
                 <div class="col-lg-6 h-25">
                     <div class="row match-height">
-                        @include('dashboard.components.referral-link')
+                        {{-- @include('dashboard.components.referral-link') --}}
+                        @include('dashboard.components.referral_binary_side')
                         @include('dashboard.components.referralsCard')
                     </div>
                 </div>
