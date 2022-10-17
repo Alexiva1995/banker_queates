@@ -60,7 +60,7 @@
             <p class="fw-400 mb-0">Solicitar Retiro</p>
 
         </div>
-        <a type="button" class="btn border-primary ms-auto text-primary mt-1" href="{{ route('retiros') }}"><i
+        <a type="button" class="btn border-primary ms-auto text-primary mt-1" href="{{ route('retiro') }}"><i
                 class="fas fa-arrow-left"></i> Volver</a>
     </div>
 
@@ -143,11 +143,6 @@
             const form = document.getElementById('form-withdrawal')
             form.submit()
         }
-
-        let span = document.getElementById('span');
-        let enviar = 'Enviar';
-        let enviado = 'Enviado';
-        span.innerHTML = enviar;
 
         function sendCodeEmail() {
             let url = 'aprobarRetiro'
