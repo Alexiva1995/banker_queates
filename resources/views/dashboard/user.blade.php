@@ -1263,4 +1263,15 @@
                 .catch(err => console.log(err));
         }
     </script>
+    <script>
+        function derecho(){
+            const lado = document.getElementById('binary')
+            lado.setAttribute("value", "R");
+        }
+
+        function izquierdo(){
+            const lado = document.getElementById('binary')
+            lado.setAttribute("value", "L");
+        }
+    </script>
 @endsection

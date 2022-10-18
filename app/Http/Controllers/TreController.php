@@ -12,6 +12,7 @@ use App\Models\Level;
 class TreController extends Controller
 {
     use Tree;
+    protected $position;
 
     public function index()
     {
@@ -206,5 +207,106 @@ class TreController extends Controller
             Log::error('Tree - getData -> Error: '.$th);
             abort(403, "Ocurrio un error, contacte con el administrador");
         }
+    }
+    /**
+     * Asigna la posición del usuario en caso de no tener un link de referido directo
+     */
+    public function getPosition(int $id, $L, $lado)
+    {
+        try {
+            Log::debug('Tree - getPosition');
+            $resul = 0;
+            $ids = $this->getIDs($id, $lado);
+            $limiteFila = 2;
+            if ($lado != '') {
+                if ($lado == 'L') {
+                    if (count($ids) == 0) {
+                        $resul = $id;
+                    }else{
+                        $this->verificarOtraPosition($ids, $limiteFila, $lado);
+                        $resul = $this->position;
+                    }
+                }elseif($lado == 'R'){
+                    if (count($ids) == 0) {
+                        $resul = $id;
+                    }else{
+                        $this->verificarOtraPosition($ids, $limiteFila, $lado);
+                        $resul = $this->position;
+                    }
+                }
+            }else{
+                if (count($ids) == 0) {
+                    $resul = $id;
+                }else{
+                    $this->verificarOtraPosition($ids, $limiteFila, $lado);
+                    $resul = $this->position;
+                }
+            }
+            return $resul;
+        } catch (\Throwable $th) {
+            Log::error('Tree - getPosition -> Error: '.$th);
+            abort(403, "Ocurrio un error, contacte con el administrador");
+        }
+    }
+    /**
+     * Asigna otra posición en caso de no estar disponible la primera.
+     */
+    public function verificarOtraPosition($arregloID, $limitePosicion, $lado)
+    {
+        try {
+            Log::debug('Tree - verificarOtraPosition');
+            foreach ($arregloID as $item) {
+                $ids = $this->getIDs($item['id'], $lado);
+                if ($lado != '') {
+                    if ($lado == 'L') {
+                        if (count($ids) == 0) {
+                            $this->position = $item['id'];
+                            break;
+                        }else{
+                            $this->verificarOtraPosition($ids, $limitePosicion, $lado);
+                        }
+                    }elseif($lado == 'R'){
+                        if (count($ids) == 0) {
+                        $this->position = $item['id'];
+                            break;
+                        }else{
+                            $this->verificarOtraPosition($ids, $limitePosicion, $lado);
+                        }
+                    }
+                }else{
+                    if (count($ids) == 0) {
+                        $this->position = $item['id'];
+                        break;
+                    }else{
+                        $this->verificarOtraPosition($ids, $limitePosicion, $lado);
+                    }
+                }
+            }
+        } catch (\Throwable $th) {
+            Log::error('Tree - verificarOtraPosition -> Error: '.$th);
+            abort(403, "Ocurrio un error, contacte con el administrador");
+        }
+    }
+    /**
+     * Obtiene el id de la persona a la cual se le asigna el lado.
+     */
+    public function getIDs(int $id, string $lado)
+    {
+      try {
+        Log::debug('Tree - getIDs');
+        if ($lado != '') {
+            return User::where([
+                ['binary_id', '=',$id],
+                ['binary_side','=',$lado]
+             ])->select('id')->orderBy('id')->get()->toArray();
+          }else{
+            return User::where([
+                ['binary_id','=', $id],
+             ])->select('id')->orderBy('id')->get()->toArray();
+          }
+      } catch (\Throwable $th) {
+        Log::error('Tree - getIDs -> Error: '.$th);
+        abort(403, "Ocurrio un error, contacte con el administrador");
+      }
     }
 }

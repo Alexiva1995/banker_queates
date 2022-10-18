@@ -38,11 +38,12 @@
                 <span class="azul" style="font-weight:700;font-size:18px;">Comparte tu link</span>
             </div>
             <div class="d-flex">
-                <a onclick="getlink()"><img src="{{asset('images/logo/copy.svg')}}" alt=""> <span
-                        class="text-decoration-underline" style="font-weight: 700;;font-size:14px;">COPIAR
-                        LINK</span></a>
+                <a onclick="getlink()"><img src="{{asset('images/logo/copy.svg')}}" alt="">
+                    <span class="text-decoration-underline" style="font-weight: 700;font-size:14px;">
+                        COPIAR LINK
+                    </span>
+                </a>
             </div>
         </div>
     </div>
-</div>
 </div>

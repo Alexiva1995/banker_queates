@@ -52,7 +52,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'token_auth',
         'activar_2fact',
         'app_mode',
-        'range_id'
+        'range_id',
+        'binary_id',
+        'binary_side'
     ];
 
     /**
