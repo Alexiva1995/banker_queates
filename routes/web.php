@@ -47,7 +47,7 @@ use App\Http\Controllers\WithdrawalSettingController;
 
 // Main Page Route
 // Route::get('/', [DashboardController::class,'dashboardEcommerce'])->name('dashboard-ecommerce')->middleware('verified');
-Route::get('/clear-cache', function() {
+Route::get('/clear-cache', function () {
     Artisan::call('optimize:clear');
     Artisan::call('config:clear');
     Artisan::call('cache:clear');
@@ -68,7 +68,7 @@ Route::get('/massive/mail', [UserController::class, 'massiveMail']);
 
 
 
-Route::get('/futswap_confirmation', function() {
+Route::get('/futswap_confirmation', function () {
     Artisan::call('futswap:canceled');
     return 'DONE'; //Return anything
 });
@@ -136,6 +136,11 @@ Route::middleware('auth')->group(function () {
 
             Route::get('1', [InversionController::class, 'getPackegeType'])->name('porcentaje.rentabilidad');
             Route::post('porcentaje-rentabilidad', [utilityController::class, 'update'])->name('porcentaje.rentabilidad.update');
+
+            // LIQUIDACIONEs
+            Route::get('/liquidaciones/realizadas', [LiquidactionController::class, 'realizadas'])->name('liquidaciones.realizadas');
+            Route::get('/liquidaciones/pendientes', [LiquidactionController::class, 'pendientes'])->name('liquidaciones.pendientes');
+            Route::get('/liquidaciones/pendientes/export_csv', [LiquidactionController::class, 'ExportCSV'])->name('liquidaciones.export.csv');
         });
 
         //Ruta para cambiar referido de un user
@@ -160,7 +165,7 @@ Route::middleware('auth')->group(function () {
         Route::prefix('market')->group(function () {
             Route::get('/licenses', [TiendaController::class, 'marketLicences'])->name('market.licenses');
             Route::post('/transactionCompra', [TiendaController::class, 'transactionCompra'])->name('shop.transactionCompra');
-            Route::post('/procesarOrden', [TiendaController::class, 'procesarOrden'] )->name('shop.proccess');
+            Route::post('/procesarOrden', [TiendaController::class, 'procesarOrden'])->name('shop.proccess');
             Route::post('/reactivacion', [TiendaController::class, 'reactivacion'])->name('reactivacion');
             Route::post('/ipn', [TiendaController::class, 'ipn'])->name('shop.ipn');
             Route::post('/reactivacionSaldo', [TiendaController::class, 'reactivacionSaldo'])->name('reactivacionSaldo');
@@ -210,9 +215,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/user-transfer', [LiquidactionController::class, 'userTransfer'])->name('userTransfer');
 
         Route::get('/sendCodeRetiro', [LiquidactionController::class, 'sendCodeRetiro'])->name('settlement.sendCodeRetiro');
-        Route::get('/liquidaciones/realizadas', [LiquidactionController::class, 'realizadas'])->name('liquidaciones.realizadas');
-        Route::get('/liquidaciones/pendientes', [LiquidactionController::class, 'pendientes'])->name('liquidaciones.pendientes');
-        Route::get('/liquidaciones/pendientes', [LiquidactionController::class, 'pendientes'])->name('liquidaciones.pendientes');
+
         Route::post('/liquidaciones/trasferir', [LiquidactionController::class, 'email_trasnfer'])->name('liquidaciones.trasferir');
         Route::get('/liquidaciones/validacion', [LiquidactionController::class, 'liquidationValidate'])->name('liquidaciones.validate');
         Route::post('/liquidaciones/validacion', [LiquidactionController::class, 'liquidationCheck'])->name('liquidaciones.check');
@@ -228,7 +231,7 @@ Route::middleware('auth')->group(function () {
 
 
         Route::get('/retiros/retiro-capital', [InversionController::class, 'retiroCapital'])->name('retiros.retiro-capital'); //->middleware('primerosCincoDias');
-       // Route::get('/cron-rango', [InversionController::class, 'createBonusRage'])->name('cron.rango');
+        // Route::get('/cron-rango', [InversionController::class, 'createBonusRage'])->name('cron.rango');
         Route::post('/retiros/generar', [InversionController::class, 'generarLiquidacion'])->name('liquidaciones.generar');
         Route::post('/retiros/cambiar-status', [LiquidactionController::class, 'cambiarStatus'])->name('retiros.cambiarStatus');
 
@@ -272,8 +275,6 @@ Route::post('send/code/autentication', [UserController::class, 'sendCodeAutentic
 Route::post('check/autentication', [UserController::class, 'checkAutenticator']);
 
 
-//Ruta para crear Pin
-Route::post('wallet-code', [WalletController::class, 'walletCode'])->name('wallet.code');
 //Ruta para seleccionar una wallet
 Route::post('wallet-option', [WalletController::class, 'walletOption'])->name('wallet.option');
 Route::get('finanzas', [UserController::class, 'finanzas'])->name('financial.finanzas');
@@ -294,23 +295,26 @@ Route::group(['prefix' => 'tickets'], function () {
     Route::get('ticket-list-user', [TicketsController::class, 'listUser'])->name('ticket.list-user');
     Route::get('ticket-show-user/{id}', [TicketsController::class, 'showUser'])->name('ticket.show-user');
     // Para el Admin
-    Route::get('ticket-edit-admin/{id}', [TicketsController::class, 'editAdmin'])->name('ticket.edit-admin');
-    Route::patch('ticket-update-admin/{id}', [TicketsController::class, 'updateAdmin'])->name('ticket.update-admin');
-    Route::get('ticket-list-admin', [TicketsController::class, 'listAdmin'])->name('ticket.list-admin');
-    Route::get('ticket-show-admin/{id}',  [TicketsController::class, 'showAdmin'])->name('ticket.show-admin');
+    Route::middleware('admin')->group(function () {
+        Route::get('ticket-edit-admin/{id}', [TicketsController::class, 'editAdmin'])->name('ticket.edit-admin');
+        Route::patch('ticket-update-admin/{id}', [TicketsController::class, 'updateAdmin'])->name('ticket.update-admin');
+        Route::get('ticket-list-admin', [TicketsController::class, 'listAdmin'])->name('ticket.list-admin');
+        Route::get('ticket-show-admin/{id}',  [TicketsController::class, 'showAdmin'])->name('ticket.show-admin');
+    });
 });
- //ruta para redireccionar a la vista del QR
- Route::get('member',  [FutswapController::class, 'redirect'])->name('member');
- //ruta para redirecionar al QR cuando la orden fue cancelada
- Route::get('memberActive',  [FutswapController::class, 'redirectCancel'])->name('memberActive');
 
- //Rutas KYC users
-Route::get('KYc-verificacion', [KycController::class,'index'])->name('KYC-Verify');
-Route::post('KYC-upload', [KycController::class,'store'])->name('KYC-store');
+//ruta para redireccionar a la vista del QR
+Route::get('member',  [FutswapController::class, 'redirect'])->name('member');
+//ruta para redirecionar al QR cuando la orden fue cancelada
+Route::get('memberActive',  [FutswapController::class, 'redirectCancel'])->name('memberActive');
+
+//Rutas KYC users
+Route::get('KYc-verificacion', [KycController::class, 'index'])->name('KYC-Verify');
+Route::post('KYC-upload', [KycController::class, 'store'])->name('KYC-store');
 
 //auditoria admin
-Route::get('KYc-Admin', [KycController::class,'indexAdmin'])->name('KYC-admin-Verify');
-Route::post('Accion-KYC', [KycController::class,'update'])->name('KYC-accion');
+Route::get('KYc-Admin', [KycController::class, 'indexAdmin'])->name('KYC-admin-Verify');
+Route::post('Accion-KYC', [KycController::class, 'update'])->name('KYC-accion');
 
 /* Route Pages */
 Route::group(['prefix' => 'page'], function () {
@@ -433,7 +437,4 @@ Route::middleware('admin')->group(function () {
         Artisan::call('bonus:range');
         return redirect()->back()->with('success', 'el cron bonus:7k corrio con exito');
     })->name('bonus.7k');
-    
 });
-
-

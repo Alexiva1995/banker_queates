@@ -7,7 +7,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class withdrawRequest extends Mailable
+class WithdrawAdmin extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -35,6 +35,6 @@ class withdrawRequest extends Mailable
     {
         $user = $this->user;
         $amount = $this->amount;
-        return $this->view('mails.withdrawMail', compact('user', 'amount'));
+        return $this->view('mails.WithdrawalNotificationAdmin', compact('user', 'amount'));
     }
 }

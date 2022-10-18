@@ -75,15 +75,19 @@
                                             @endif
                                             @if ($liquidaction->type == 0)
                                                 <td class=" fw-300">
-                                                    <span>Comision</span>
+                                                    <span>PAMM</span>
                                                 </td>
                                             @elseif ($liquidaction->type == 1)
                                                 <td class=" fw-300">
-                                                    <span>Utilidad</span>
+                                                    <span>Rango</span>
+                                                </td>
+                                            @elseif ($liquidaction->type == 2)
+                                                <td class=" fw-300">
+                                                    <span>Licencia</span>
                                                 </td>
                                             @else
                                                 <td class=" fw-300">
-                                                    <span>Rango</span>
+                                                    <span>Retiro</span>
                                                 </td>
                                             @endif
                                             <td class=" fw-300">{{date('Y-m-d', strtotime($liquidaction->created_at))}}</td>

@@ -16,7 +16,7 @@
 <section class="row">
   <!-- Miscellaneous Charts -->
     <!--/ Line Chart -->
-     @if (Auth::user()->admin == 0)
+    @if (Auth::user()->admin == 0)
      <div class="col-12">
       <div class="card card-statistics">
         <div class="card-header">
@@ -28,15 +28,22 @@
       </div>
     </div>
     @endif
-    @if (Auth::user()->admin == 1)
     <div class="col-lg-12 col-12">
-      @else
-      <div class="col-lg-12 col-12">
-    @endif
       <div id="logs-list">
         <div class="col-12">
           <div class="card">
             <div class="card-content">
+              <div class="card-header">
+                <div class="d-flex justify-content-start"><h4 class="fw-700">Liquidaciones Pendientes</h4></div>
+                <div class="d-flex justify-content-end">
+                    <div class="d-flex col-12">
+                        <a href="{{ route('liquidaciones.export.csv') }}" class="btn btn-primary float-end">
+                          Exportar CSV
+                          <i style="font-size: 16px;" class="fas fa-download"></i>
+                        </a>
+                    </div>
+                </div>
+              </div>
               <div class="card-body card-dashboard">
                 <div class="table-responsive" id="tabla">
 

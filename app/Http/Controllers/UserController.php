@@ -19,7 +19,8 @@ use Illuminate\Validation\Rule;
 use App\Mail\CodeEmail;
 use App\Mail\CodeSeccurity;
 use App\Models\Investment;
-use Illuminate\Cache\RedisTaggedCache;
+use App\Models\Wallet;
+use App\Models\WalletSeccurity;
 use PragmaRX\Google2FA\Google2FA;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Crypt;
@@ -58,7 +59,12 @@ class UserController extends Controller
     {
         // dd($id);
         $invertido = $this->paquete();
-        $user = User::find($id);
+         $user = User::find($id);
+        
+        $user->licencia = $user->investment->licensePackage->name;
+        $user->ganancias = $user->wallets->sum('amount_available');
+        
+
         $country = Countrie::all();
         $wallet = WalletComission::where('user_id', $user->id)->get();
         $prefix = Prefix::orderBy('id', 'asc')->get();
@@ -420,11 +426,12 @@ class UserController extends Controller
      */
     public function sendSeccurityCode()
     {
+        $user = Auth::user();
         $code = Str::random(10);
         $code_encrypted = Crypt::encryptString($code);
-        Auth::user()->update(['code_security'=> $code_encrypted]);
+        $user->update(['code_security'=> $code_encrypted]);
         $response = ['status' => 'success'];
-        Mail::to(Auth::user()->email)->send(new CodeSeccurity($code));
+        Mail::to($user->email)->send(new CodeSeccurity($code));
         return response()->json($response, 200);
     }
     /**
@@ -443,13 +450,28 @@ class UserController extends Controller
             ]
         );
 
-        $user = auth()->user();
+        $user = Auth::user();
 
-        if( $request->code !== $user->decryptSeccurityCode())
-        {
+        if( !$user->code_security ) {
+            return back()->with('error', 'Debe requerir un código de seguridad');
+        }
+
+        if( $request->code !== $user->decryptSeccurityCode() ) {
             return back()->with('error', 'El código de seguridad no coincide');
         }
+        // Se guarda su wallet encriptada
+        Wallet::updateOrCreate(
+            ['user_id' =>  $user->id],
+            ['address' => Crypt::encryptString($request->wallet)]
+        );
+        // Se guarda una copia de seguridad, la cual se conforma del id del usuario + su wallet. ambos encriptados.
+        WalletSeccurity::updateOrCreate(
+            ['user_id' =>  $user->id],
+            ['encrypted' => Crypt::encryptString("{$user->id}-{$request->wallet}")]
+        );
+
+        $user->update(['code_security' => null]);
         
-        return $request;
+        return back()->with('success', 'Su wallet se ha guardado exitosamente!');
     }
 }

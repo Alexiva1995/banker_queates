@@ -31,8 +31,9 @@
                             <div class="col-12 mt-1">
                                 <label for="name">Wallet <span class="requerid">*</span></label>
                                 <div class="input-group">
-                                    <input type="text" name="wallet" id="wallet" placeholder="Ingresa tu wallet"
-                                        class="form-control" required>
+                                    <input type="text" class="form-control" name="wallet" id="wallet" 
+                                    placeholder="{{ auth()->user()->wallet != null ? auth()->user()->decryptWallet() : 'Ingrese su wallet'}}" 
+                                    required>
                                 </div>
                             </div>
                         </div>
@@ -49,48 +50,48 @@
 @section('page-script')
 <script>
     async function getCode() {
-            const codeBtn = document.getElementById('codeButton');
-            const url = '{{route("send.seccurity.code")}}'
-            codeBtn.disabled = true;
-            let seconds = 50;
+        const codeBtn = document.getElementById('codeButton');
+        const url = '{{route("send.seccurity.code")}}'
+        codeBtn.disabled = true;
+        let seconds = 50;
 
-            try {
+        try {
 
-                if( !codeBtn.disabled ) return ;
+            if( !codeBtn.disabled ) return ;
 
-                function segundos(){
-                    codeBtn.textContent =`Reenviar en ${seconds}s`;
-                    seconds--;
-                    if( seconds > 0 ){
-                        // console.log(seconds)
-                        setTimeout(segundos,1000);
-                    }else{
-                        codeBtn.disabled = false;
-                        codeBtn.textContent = 'Obtener codigo';
-                    }
+            function segundos(){
+                codeBtn.textContent =`Reenviar en ${seconds}s`;
+                seconds--;
+                if( seconds > 0 ){
+                    // console.log(seconds)
+                    setTimeout(segundos,1000);
+                }else{
+                    codeBtn.disabled = false;
+                    codeBtn.textContent = 'Obtener codigo';
                 }
-                
-                segundos();
+            }
+            
+            segundos();
 
-                const response = await axios.post(url);
-                const { status } = response.data;
-                if( status === 'success')
-                {
-                    toastr['success']('Por favor revise su correo', '¡Exitoso!', {
-                        closeButton: true,
-                        tapToDismiss: false
-                    });
-                }
-
-
-            } catch (error) {
-                console.log(error);
-                toastr['error']('Hubo un error por favor contacte con el administrador', '¡error!', {
+            const response = await axios.post(url);
+            const { status } = response.data;
+            if( status === 'success')
+            {
+                toastr['success']('Por favor revise su correo', '¡Exitoso!', {
                     closeButton: true,
                     tapToDismiss: false
                 });
             }
-    
+
+
+        } catch (error) {
+            console.log(error);
+            toastr['error']('Hubo un error por favor contacte con el administrador', '¡error!', {
+                closeButton: true,
+                tapToDismiss: false
+            });
         }
+    
+    }
 </script>
 @endsection

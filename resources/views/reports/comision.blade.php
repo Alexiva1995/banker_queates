@@ -78,7 +78,24 @@
                                         @elseif($wallet->status == 3)
                                             <td class="fw-300 text-center"> <a class=" btn bg-light-danger fw-300 p-75">Anulada</a></td>
                                         @endif
-                                        <td class="fw-300 text-center"> {{ $wallet->type == 0 ? 'Comision' : 'Rango'}} </td>
+                                        <td class="fw-300 text-center">
+                                            @switch($wallet->type)
+                                                @case( 0 )
+                                                    PAMM
+                                                    @break
+                                                @case( 1 )
+                                                    Rango
+                                                    @break
+                                                @default
+                                                @case( 2 )
+                                                    Licencia
+                                                    @break
+                                                @case( '3' )
+                                                    Retiro
+                                                    @break
+                                            @endswitch
+                                        </td>
+                                         
                                         <td class="fw-300 text-center">{{date('Y-m-d', strtotime($wallet->created_at))}}</td>
                                     </tr>
                                     @endforeach

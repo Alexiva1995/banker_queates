@@ -117,7 +117,7 @@
             "lengthMenu":     "Mostrar _MENU_ entradas",
             "loadingRecords": "Cargando...",
             "processing":     "",
-            "search":         "Buscar:",
+            "search":         "Filtrar: nombre, correo, numero de cuenta bróker:",
             "zeroRecords":    "No se encontraron resultados",
             paginate: {
                 first:    ' ',
