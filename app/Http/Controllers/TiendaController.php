@@ -196,6 +196,7 @@ class TiendaController extends Controller
         $orden->save();
         // Aqui se cambia el status de una inversion anterior a inactiva si se aprobo un upgrade
         if ($request->status == '1') {
+            
             $investment = Investment::where('user_id', $orden->user->id)->where('status', '1')->first();
             if ($investment != null) {
                 //Se crea la inversion al aprobarse la orden
@@ -241,6 +242,9 @@ class TiendaController extends Controller
                     event(new UserEvent($user));
                 }
             }
+            // Genera los puntos binarios
+            app(BonusService::class)->assignPointsbinarioRecursively($orden->user, $orden->amount, $orden->id);
+
         }
 
         return back()->with('success', 'Orden actualizada exitosamente');
