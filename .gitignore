@@ -9,7 +9,7 @@
 /public/css-rtl
 /public/vendors
 /storage/*.key
-/storage/logs/laravel.log
+*.log
 /vendor
 .env
 .env.backup
