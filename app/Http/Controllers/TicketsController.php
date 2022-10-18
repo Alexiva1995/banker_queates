@@ -81,7 +81,7 @@ class TicketsController extends Controller
 
         $validate = $request->validate([
             'image' => 'image|max:2048',
-           // 'message' => 'min:2'
+            // 'message' => 'min:2'
         ]);
 
         if ($validate && $request->hasFile('image')) {
@@ -90,25 +90,25 @@ class TicketsController extends Controller
             $destino = public_path('storage');
             $request->image->move($destino, $nombre);
 
-        MessageTicket::create([
-            'user_id' => $ticket->user_id,
-            'id_admin' => Auth::id(),
-            'id_ticket' => $ticket->id,
-            'type' => '1',
-            'message' => request('message'),
-            'image' => $nombre
-        ]);
-    }else{
-        MessageTicket::create([
-            'user_id' => $ticket->user_id,
-            'id_admin' => Auth::id(),
-            'id_ticket' => $ticket->id,
-            'type' => '1',
-            'message' => request('message'),
-        ]);
-    }
-       
-       
+            MessageTicket::create([
+                'user_id' => $ticket->user_id,
+                'id_admin' => Auth::id(),
+                'id_ticket' => $ticket->id,
+                'type' => '1',
+                'message' => request('message'),
+                'image' => $nombre
+            ]);
+        } else {
+            MessageTicket::create([
+                'user_id' => $ticket->user_id,
+                'id_admin' => Auth::id(),
+                'id_ticket' => $ticket->id,
+                'type' => '1',
+                'message' => request('message'),
+            ]);
+        }
+
+
         return redirect()->route('ticket.list-admin')->with('success', 'El Ticket se actualizo Exitosamente');
     }
 
@@ -232,13 +232,18 @@ class TicketsController extends Controller
     public function editUser($id)
     {
         $ticket = Tickets::find($id);
-        $message = MessageTicket::where('id_ticket', $id)->orderby('created_at', 'ASC')->get();
-        $imagenes = MessageTicket::all('image');
-        $email = User::all()->where('id');
-        $admin = $email[0]->email;
-        return view('tickets.componenteTickets.user.edit-user', compact('imagenes'))
-            ->with('ticket', $ticket)
-            ->with('message', $message)->with('admin', $admin);
+
+        if ($ticket <> null and $ticket->user_id == Auth::user()->id) {
+                $message = MessageTicket::where('id_ticket', $id)->orderby('created_at', 'ASC')->get();
+                $imagenes = MessageTicket::all('image');
+                $email = User::all()->where('id');
+                $admin = $email[0]->email;
+                return view('tickets.componenteTickets.user.edit-user', compact('imagenes'))
+                    ->with('ticket', $ticket)
+                    ->with('message', $message)->with('admin', $admin);
+            } else {
+                return abort(403, "No tienes autorización para ingresar a esta seccion.");
+            }
     }
 
     // permite actualizar el ticket
@@ -307,12 +312,17 @@ class TicketsController extends Controller
     public function showUser($id)
     {
         $ticket = Tickets::find($id);
-        $message = MessageTicket::all()->where('id_ticket', $id);
-        $email = User::find(1);
-        $admin = $email->email;
-        return view('tickets.componenteTickets.user.show-user')
-            ->with('ticket', $ticket)
-            ->with('message', $message)
-            ->with('admin', $admin);
+
+        if ($ticket <> null and $ticket->user_id == Auth::user()->id) {
+            $message = MessageTicket::all()->where('id_ticket', $id);
+            $email = User::find(1);
+            $admin = $email->email;
+            return view('tickets.componenteTickets.user.show-user')
+                ->with('ticket', $ticket)
+                ->with('message', $message)
+                ->with('admin', $admin);
+        } else {
+            return abort(403, "No tienes autorización para ingresar a esta seccion.");
+        }
     }
 }
