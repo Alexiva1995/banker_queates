@@ -323,7 +323,6 @@ class BonusService
             }
         }
     }
-
     /**
     * Elimina los puntos binarios si estan vencidos
     */
