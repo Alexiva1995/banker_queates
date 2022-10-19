@@ -34,8 +34,6 @@ class BinaryController extends Controller
                 
                 $point_right = BinaryPoint::where('user_id', $id)->where('status', 0)->sum('right_points');
 
-                $poits_righ_side = BinaryPoint::where('user_id', $id)->where('status', 0)->get();
-                
                 $point_left = BinaryPoint::where('user_id', $id)->where('status', 0)->sum('left_points');
                 
                 $menber = Investment::where('user_id', $id)->where('status', '1')->first();
@@ -70,11 +68,14 @@ class BinaryController extends Controller
                                 // $this->createBonusBinariRight($id,$bonus_t, $point_right, $user_referred);
                             }
                             // Iteramos los puntos 
-                            $minor_points = $point_right;
                             for($i = 0; $i < count($users); $i++) {
-                                // Evaluamos los distintos resultados de la resta
                                 
-                                Log::debug('USUARIO: '. $users[$i]);
+                                if($users[$i]->right_points === 0) {
+                                    $i = $i++; 
+                                } else {
+                                    $users[$i];
+                                    $this->subtractPoints($users, $users[$i]);
+                                }
 
                                 // if ($point_right != 0 && $point_left != 0) {
                                 //     if (count($users) <= 2) {
@@ -588,8 +589,22 @@ class BinaryController extends Controller
     /**
      * Realiza la resta de los puntos
      */
-    private function subtractPoints()
+    private function subtractPoints($points_array, $binary_point_menor)
     {
-
+        for($i = 0; $i < count($points_array); $i++) {
+            if($points_array[$i]->left_points === 0) {
+                $i = $i++; 
+            } else {
+                $points_array[$i]->left_points = $points_array[$i]->left_points - $binary_point_menor->right_points;
+                
+                if( $points_array[$i]->left_points < 0 ) $points_array[$i]->left_points = 0;
+                
+                $binary_point_menor->update();
+                $points_array[$i]->update();
+                Log::debug('HERE1 :'.$points_array[$i]->left_points);
+                // Log::debug('HERE2 :'.$binary_point_menor);
+                // Log::debug('HERE I:'.$i);
+            }
+        }
     }
 }
