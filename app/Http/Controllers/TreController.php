@@ -267,7 +267,7 @@ class TreController extends Controller
                         }
                     }elseif($lado == 'R'){
                         if (count($ids) == 0) {
-                        $this->position = $item['id'];
+                            $this->position = $item['id'];
                             break;
                         }else{
                             $this->verificarOtraPosition($ids, $limitePosicion, $lado);

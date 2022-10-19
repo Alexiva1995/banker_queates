@@ -269,7 +269,9 @@ class BonusService
             }
         }
     }
-
+    /**
+    * Asigna los puntos binarios de manera recursiva 
+    */ 
     public function assignPointsbinarioRecursively(User $user, $amount, $orden_id)
     {
         Log::debug('assignPointsbinarioRecursively');
@@ -318,6 +320,23 @@ class BonusService
                     }
                 }
                 $this->assignPointsbinarioRecursively($binary, $amount, $orden_id);
+            }
+        }
+    }
+
+    /**
+    * Elimina los puntos binarios si estan vencidos
+    */
+    public function deleteBinaryPoints()
+    {
+        $points = BinaryPoint::all();
+
+        foreach($points as $point)
+        {
+            if($point->limit_date <= now()->format('Y-m-d')) 
+            {
+                Log::debug("Los puntos con id {$point->id} se han vencido ");
+                $point->update(['left_points' => 0, 'right_points' => 0]);
             }
         }
     }

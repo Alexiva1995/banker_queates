@@ -242,6 +242,14 @@ class TiendaController extends Controller
                     event(new UserEvent($user));
                 }
             }
+            // TODO:: Mover a la validación del corte
+            // Valida si el referido tiene un hijo directo por cada lado 
+            $padre_id = $orden->user->padre->id;
+            $referred_left = User::where('binary_id', $padre_id)->where('binary_side', 'L')->exists();
+            $referred_right = User::where('binary_id', $padre_id)->where('binary_side', 'R')->exists();
+
+            if($referred_left && $referred_right) {
+            }
             // Genera los puntos binarios
             app(BonusService::class)->assignPointsbinarioRecursively($orden->user, $orden->amount, $orden->id);
 
