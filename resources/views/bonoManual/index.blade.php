@@ -8,19 +8,36 @@
                
                 <div class="card-body card-dashboard p-0">
                     <div class="table-responsive">
-                        <table class="table w-100 nowrap scroll-horizontal-vertical myTable table-striped w-100">
+                        <table class="table    myTable table-striped ">
                             <thead class="">
-                                <tr class="text-end">
-                                    <th>Fecha aa</th>
-                                    <th>Estado</th>
-                                    <th>Monto Bruto</th>
-                                    <th>Feed</th>
-                                    <th>Monto Total</th>
-                                    <th>wallet</th>
+                                <tr class="text-center">
+                                    <th>ID</th>
+                                    <th>nombre</th>
+                                    <th>Licencia</th>
+                                    <th>accion</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ( $usuarios as $user )
+                                <tr class="text-center">
+                                    <td>
+                                        {{$user->id}}
+                                    </td>
+                                    <td>
+                                        {{$user->name}}
+                                    </td>
+                                    <td>
+                                        #licencia
+                                    </td>
+                                    <td>
+                                        <button class="btn bg-light-info">
+                                            Accion
+                                        </button>
+                                    </td>
+                                </tr>
                                 
+                                    
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -29,6 +46,27 @@
         </div>
     </div>
 </div>
-@endsection
 
+@endsection
+@section('vendor-script')
+<!-- vendor files -->
+<script src="{{ asset(mix('vendors/js/tables/datatable/jquery.dataTables.min.js')) }}"></script>
+<script src="{{ asset(mix('vendors/js/tables/datatable/dataTables.bootstrap5.min.js')) }}"></script>
+<script src="{{ asset(mix('vendors/js/tables/datatable/dataTables.responsive.min.js')) }}"></script>
+
+@endsection
+@section('page-script')
+<script>
+    //datataables ordenes
+    $('.myTable').DataTable({
+        responsive: false,
+        order: [
+            [0, "desc"]
+        ],
+        
+    })
+   
+</script>
+
+@endsection
 
