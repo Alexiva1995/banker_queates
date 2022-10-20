@@ -121,10 +121,10 @@
             ]
         },
         {
-            "name": "Bono manual",
+            "name": "Edicion de saldo",
             "icon": "home",
-            "slug": "bonoManualIndex",
-            "url": "/bono-manual"
+            "slug": "Edicion-SaldoI-ndex",
+            "url": "/Edicion-saldo"
         },
         {
             "name": "Crones",

@@ -30,13 +30,13 @@
                                         #licencia
                                     </td>
                                     <td>
-                                        <button class="btn bg-light-info">
+                                        <button  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$user->id}}">
                                             Accion
                                         </button>
                                     </td>
                                 </tr>
                                 
-                                    
+                                    @include('bonoManual.componentes.modal')
                                 @endforeach
                             </tbody>
                         </table>

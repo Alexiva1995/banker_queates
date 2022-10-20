@@ -144,7 +144,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/liquidaciones/pendientes/export_csv', [LiquidactionController::class, 'ExportCSV'])->name('liquidaciones.export.csv');
         
             //Bono manual
-            Route::get('/bono-manual', [BonoManualController::class, 'index'])->name('bonoManualIndex');
+            Route::get('/Edicion-saldo', [BonoManualController::class, 'index'])->name('Edicion-SaldoI-ndex');
             
         });
 

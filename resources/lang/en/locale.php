@@ -200,5 +200,5 @@ return [
     "Solicitudes KYC" => "Solicitudes KYC",
     "Paquetes" => "Paquetes",
     "bono pamm" => "bono pamm",
-    "Bono manual"=>"Bono manual"
+    "Edicion de saldo"=>"Edicion de saldo"
 ];
