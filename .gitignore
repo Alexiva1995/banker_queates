@@ -9,7 +9,6 @@
 /public/css-rtl
 /public/vendors
 /storage/*.key
-/storage/logs/laravel.log
 /vendor
 .env
 .env.backup
@@ -24,3 +23,6 @@ supervisord.pid
 composer.lock
 .vscode/extensions.json
 public/mix-manifest.json
+storage/logs/laravel.log
+storage/logs/laravel.log
+storage/logs/laravel.log
