@@ -26,9 +26,11 @@
 <!-- END: Page JS-->
 
 <script>
+
   function getlink() {
     var aux = document.createElement("input");
-    aux.setAttribute("value", "{{route('register')}}?buyer_id={{Auth::id()}}");
+    const lado = document.getElementById('binary').value;
+    lado ? aux.setAttribute("value", "{{route('register')}}?buyer_id={{Auth::id()}}&binary="+lado) : aux.setAttribute("value", "{{route('register')}}?referred_id={{Auth::id()}}&binary=L");
     document.body.appendChild(aux);
     aux.select();
     document.execCommand("copy");
@@ -43,22 +45,6 @@
     })
   }
 
-  function getlink() {
-    var aux = document.createElement("input");
-    aux.setAttribute("value", "{{route('register')}}?buyer_id={{Auth::id()}}");
-    document.body.appendChild(aux);
-    aux.select();
-    document.execCommand("copy");
-    document.body.removeChild(aux);
-
-    Swal.fire({
-      title: "Link Copiado",
-      icon: 'success',
-      text: "Ya puedes pegarlo en su navegador",
-      type: "success",
-      confirmButtonClass: 'btn btn-outline-primary',
-    })
-  }
   function orden() {
     Swal.fire({
       title: "Error",

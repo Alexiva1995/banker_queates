@@ -283,7 +283,8 @@
             <div class="row">
                 <div class="col-lg-6 h-25">
                     <div class="row match-height">
-                        @include('dashboard.components.referral-link')
+                        {{-- @include('dashboard.components.referral-link') --}}
+                        @include('dashboard.components.referral_binary_side')
                         @include('dashboard.components.referralsCard')
                     </div>
                 </div>
@@ -1260,6 +1261,17 @@
                     $('#totalProfitsText').text(`USD ${(total).toFixed(2)}`);
                 })
                 .catch(err => console.log(err));
+        }
+    </script>
+    <script>
+        function derecho(){
+            const lado = document.getElementById('binary')
+            lado.setAttribute("value", "R");
+        }
+
+        function izquierdo(){
+            const lado = document.getElementById('binary')
+            lado.setAttribute("value", "L");
         }
     </script>
 @endsection
