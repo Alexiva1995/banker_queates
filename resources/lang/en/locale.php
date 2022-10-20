@@ -198,5 +198,7 @@ return [
     "Ver tickets" => "Ver tickets",
     "KYC" => "KYC",
     "Solicitudes KYC" => "Solicitudes KYC",
-    "Paquetes" => "Paquetes"
+    "Paquetes" => "Paquetes",
+    "bono pamm" => "bono pamm",
+    "Bono manual"=>"Bono manual"
 ];
