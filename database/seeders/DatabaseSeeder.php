@@ -32,5 +32,6 @@ class DatabaseSeeder extends Seeder
         $this->call(LiquidactionsTableSeeder::class);
         $this->call(LevelsSeeder::class);
         $this->call(OrdenesPamm::class);
+        $this->call(TicketsSeeder::class);
     }
 }

@@ -15,6 +15,11 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('buyer_id')->nullable()->references('id')->on('users')->comment('ID del usuario patrocinador');
+            $table->foreignId('countrie_id')->nullable()->constrained('countries')->comment('el id del pais del usuario');
+            $table->foreignId('prefix_id')->nullable()->constrained('prefixes')->comment('el id del prefijo del tlf');
+            $table->bigInteger('binary_id')->default(1)->comment('ID del usuario binario')->nullable();
+            $table->enum('binary_side', ['L', 'R'])->default('L')->comment('Permite saber porque lado va a registrar a un nuevo usuario');
             $table->string('username')->nullable()->unique();
             $table->string('name');
             $table->string('last_name')->nullable();
@@ -25,9 +30,6 @@ class CreateUsersTable extends Migration
             $table->enum('admin', [0, 1])->default(0)->comment('permite saber si un usuario es admin o no');
             $table->enum('status', [0, 1, 2])->default(0)->comment('0 - inactivo, 1 - activo, 2 - eliminado');
             $table->date('date_active')->nullable();
-            $table->foreignId('buyer_id')->nullable()->references('id')->on('users')->comment('ID del usuario patrocinador');
-            $table->foreignId('countrie_id')->nullable()->constrained('countries')->comment('el id del pais del usuario');
-            $table->foreignId('prefix_id')->nullable()->constrained('prefixes')->comment('el id del prefijo del tlf');
             $table->string('birthdate')->nullable()->comment('Fecha de nacimiento del usuario');
             $table->string('type_dni')->nullable()->comment('tipo de identificacion del usuario');
             $table->enum('gender', [0, 1])->nullable()->comment('0 - masculino, 1 - femenino');

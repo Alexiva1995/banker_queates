@@ -115,6 +115,7 @@ $referred = DB::table('users')
                             {{-- <label class="" style="padding-left: 3%">El nombre de su patrocinador es: {{$referred->name}} </label>  --}}
                         </div>
                         <input type="hidden" name="buyer_id" value="{{$referred->id}}">
+                        <input type="hidden" id="binary" name="binary" value="">
                     @endif
                     <p class="fw-300 my-1">Por favor completa los datos solicitados para completar tu registro.</p>
                     
@@ -295,7 +296,13 @@ $referred = DB::table('users')
         }) });
 
         $('#countrie_id').select2();
-        
+
+
+        // Obtener el lado binario del enlace
+        const url = new URL(window.location.href);
+        const paramsBinary = url.searchParams.get("binary");
+        const inputBinary = document.getElementById('binary');
+        inputBinary.value = paramsBinary
     </script>
 @endsection
 

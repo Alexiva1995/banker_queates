@@ -26,6 +26,8 @@ class Kernel extends ConsoleKernel
         Commands\BonusRange::class,
         Commands\RentabilityPackages::class,
         Commands\AlertLicenseexpiration::class,
+        Commands\DeleteBinaryPoints::class,
+        Commands\BinaryProfit::class,
     ];
 
     /**
@@ -50,8 +52,10 @@ class Kernel extends ConsoleKernel
         $schedule->command('add:rentability')->lastDayOfMonth('00:00');
         $schedule->command('avaliable:bonus')->daily(); 
         $schedule->command('bonus:range')->monthlyOn(30, '00:00');
-        // $schedule->command('license:expiration:alert')->daily();
         $schedule->command('bonos:pamm')->everyMinute();
+        $schedule->command('delete:binary:points')->daily();
+        // TODO:: cambiar fecha del cron
+        $schedule->command('corte:ganancias:binarias')->daily();
 
     }
 

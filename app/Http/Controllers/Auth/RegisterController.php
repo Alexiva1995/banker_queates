@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\TreController;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Models\WalletComission;
@@ -36,16 +37,18 @@ class RegisterController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
     protected $error = null;
+    protected $treController;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(FutswapService $futswapService = null)
+    public function __construct(FutswapService $futswapService = null, TreController $treController)
     {
         $this->middleware('guest');
         $this->futswap = $futswapService;
+        $this->treController = $treController;
     }
 
     /**
@@ -79,27 +82,37 @@ class RegisterController extends Controller
      * @return \App\Models\User
      */
     protected function create(Request $request)
-    {   $this->Validator($request);
+    {   
+        // dd(intval($request['buyer_id']));
+        $this->Validator($request);
+        $binary_side = '';
+        $binary_id = 0;
+        if (isset($request->buyer_id)) {
+            $userR = User::findOrFail($request['buyer_id']);
+            $binary_id = $this->treController->getPosition(intval($request['buyer_id']),$request['binary'], $request['binary']);
+
+            $binary_side = $request['binary'];
+        }
 
         //$this->validate($request, ['recaptcha_token' => ['required', new   ReCaptchaRule($request->recaptcha_token)]]);
         $userName = explode(' ', $request->name, 3);
 
-        if(count($userName)>2){
+        if( count($userName) > 2){
             $name=$userName[0].' '.$userName[1];
             $lastname=$userName[2];
-        }else if(count($userName)<2){
+        } else if( count($userName) < 2){
             $name=$userName[0];
             $lastname=null;
-        }
-        else{
+        } else{
             $name=$userName[0];
             $lastname=$userName[1];
         }
-
         try {
             $user = User::create([
                 'username' => $request->username,
                 'name' => $name,
+                'binary_id' => $binary_id,
+                'binary_side' => $binary_side,
                 'last_name' => $lastname,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
