@@ -24,6 +24,7 @@ use App\Http\Controllers\EducationController;
 use App\Http\Controllers\FormularyController;
 use App\Http\Controllers\InversionController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\BonoManualController;
 use App\Http\Controllers\PreregisterController;
 use App\Http\Controllers\LiquidactionController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -141,6 +142,10 @@ Route::middleware('auth')->group(function () {
             Route::get('/liquidaciones/realizadas', [LiquidactionController::class, 'realizadas'])->name('liquidaciones.realizadas');
             Route::get('/liquidaciones/pendientes', [LiquidactionController::class, 'pendientes'])->name('liquidaciones.pendientes');
             Route::get('/liquidaciones/pendientes/export_csv', [LiquidactionController::class, 'ExportCSV'])->name('liquidaciones.export.csv');
+        
+            //Bono manual
+            Route::get('/Edicion-saldo', [BonoManualController::class, 'index'])->name('Edicion-SaldoI-ndex');
+            
         });
 
         //Ruta para cambiar referido de un user
@@ -386,6 +391,11 @@ Route::get('/filter', [EducationController::class, 'filter'])->name('education.f
 // CRONES
 Route::middleware('admin')->group(function () {
 
+    Route::get('/bono-pamm', function () {
+        Artisan::call('bonos:pamm');
+        return redirect()->back()->with('success', 'El cron bono:pamm corrio con exito');
+    })->name('bono.pamm');
+    
     Route::get('/bono-cartera', function () {
         Artisan::call('bono:cartera');
         return redirect()->back()->with('success', 'El cron bono:cartera corrio con exito');
