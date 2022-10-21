@@ -18,7 +18,7 @@ class CreateTicketsTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->string('name')->nullable();
             $table->string('email')->nullable();
-            $table->boolean('categories', [0, 1, 2, 3, 4, 5])->default(0)->comment('0 - Ayuda, 1 - Soporte técnico, 2 - , 3 - Corrección de datos, 4 - Bonos, 5 - Inversión total');
+            $table->boolean('categories', [0, 1, 2, 3, 4])->default(0)->comment('0 - Ayuda, 1 - Soporte técnico, 2 - Corrección de datos, 3 - Bonos, 4 - Inversión total');
             $table->boolean('priority', [0, 1, 2])->default(2)->comment('0 - Alta, 1 - Media, 2 - Baja');
             $table->boolean('status', [0, 1])->default(0)->comment('0 - Abierto, 1 - Cerrado');
             $table->longtext('issue');

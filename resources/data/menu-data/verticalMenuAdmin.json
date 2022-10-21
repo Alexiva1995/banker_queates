@@ -121,10 +121,23 @@
             ]
         },
         {
+            "name": "Edicion de saldo",
+            "icon": "home",
+            "slug": "Edicion-SaldoI-ndex",
+            "url": "/Edicion-saldo"
+        },
+        {
             "name": "Crones",
             "icon": "clock",
             "slug": "",
-            "submenu": [{
+            "submenu": [
+                {
+                    "url": "/bono-pamm",
+                    "name": "bono pamm",
+                    "icon": "circle",
+                    "slug": "bono.pamm"
+                },
+                {
                     "url": "/create-utility",
                     "name": "Crear utilidad",
                     "icon": "circle",

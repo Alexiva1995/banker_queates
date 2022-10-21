@@ -48,6 +48,7 @@ class UserSeeder extends Seeder
             'email'=> 'user2@takeprofits.com',
             'username'=> 'user2',
             'password' => Hash::make('123456789'),
+            'email_verified_at' => '2022-03-08 15:52:21',
             'status' => '1',
             'buyer_id' => '2'
         ]);
@@ -58,6 +59,7 @@ class UserSeeder extends Seeder
             'email'=> 'user3@takeprofits.com',
             'username'=> 'user3',
             'password' => Hash::make('123456789'),
+            'email_verified_at' => '2022-03-08 15:52:21',
             'status' => '1',
             'buyer_id' => '3'
         ]);
@@ -80,6 +82,7 @@ class UserSeeder extends Seeder
             'email'=> 'user5@takeprofits.com',
             'username'=> 'user5',
             'password' => Hash::make('123456789'),
+            'email_verified_at' => '2022-03-08 15:52:21',
             'status' => '1',
             'buyer_id' => '5'
         ]);
@@ -90,6 +93,7 @@ class UserSeeder extends Seeder
             'email'=> 'user6@takeprofits.com',
             'username'=> 'user6',
             'password' => Hash::make('123456789'),
+            'email_verified_at' => '2022-03-08 15:52:21',
             'status' => '1',
             'buyer_id' => '6'
         ]);
@@ -100,6 +104,7 @@ class UserSeeder extends Seeder
             'email'=> 'user7@takeprofits.com',
             'username'=> 'user7',
             'password' => Hash::make('123456789'),
+            'email_verified_at' => '2022-03-08 15:52:21',
             'status' => '1',
             'buyer_id' => '7'
         ]);
@@ -110,6 +115,7 @@ class UserSeeder extends Seeder
             'email'=> 'user8@takeprofits.com',
             'username'=> 'user8',
             'password' => Hash::make('123456789'),
+            'email_verified_at' => '2022-03-08 15:52:21',
             'status' => '1',
             'buyer_id' => '8'
         ]);
@@ -120,6 +126,7 @@ class UserSeeder extends Seeder
             'email'=> 'user9@takeprofits.com',
             'username'=> 'user9',
             'password' => Hash::make('123456789'),
+            'email_verified_at' => '2022-03-08 15:52:21',
             'status' => '1',
             'buyer_id' => '9'
         ]);
@@ -130,6 +137,7 @@ class UserSeeder extends Seeder
             'email'=> 'user10@takeprofits.com',
             'username'=> 'user10',
             'password' => Hash::make('123456789'),
+            'email_verified_at' => '2022-03-08 15:52:21',
             'status' => '1',
             'buyer_id' => '10'
         ]);
@@ -140,6 +148,7 @@ class UserSeeder extends Seeder
             'email'=> 'user11@takeprofits.com',
             'username'=> 'user11',
             'password' => Hash::make('123456789'),
+            'email_verified_at' => '2022-03-08 15:52:21',
             'status' => '1',
             'buyer_id' => '11'
         ]);
@@ -150,6 +159,7 @@ class UserSeeder extends Seeder
             'email'=> 'user12@takeprofits.com',
             'username'=> 'user12',
             'password' => Hash::make('123456789'),
+            'email_verified_at' => '2022-03-08 15:52:21',
             'status' => '1',
             'buyer_id' => '2'
         ]);
