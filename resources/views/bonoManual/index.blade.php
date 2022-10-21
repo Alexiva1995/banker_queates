@@ -46,6 +46,7 @@
         </div>
     </div>
 </div>
+@include('bonoManual.componentes.Js.Js')
 
 @endsection
 @section('vendor-script')

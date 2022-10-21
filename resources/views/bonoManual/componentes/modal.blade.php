@@ -12,15 +12,15 @@
           
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home{{$user->id}}" type="button" role="tab" aria-controls="home" aria-selected="true">Agregar saldo</button>
+                  <button class="nav-link active" id="agregar-saldo-tab" data-bs-toggle="tab" data-bs-target="#agregar-saldo{{$user->id}}" type="button" role="tab" aria-controls="agregar-saldo" aria-selected="true">Agregar saldo</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile{{$user->id}}" type="button" role="tab" aria-controls="profile" aria-selected="false">Sustraer saldo</button>
+                  <button class="nav-link" id="sustraer-saldo-tab" data-bs-toggle="tab" data-bs-target="#sustraer-saldo{{$user->id}}" type="button" role="tab" aria-controls="sustraer-saldo" aria-selected="false">Sustraer saldo</button>
                 </li>
               
               </ul>
               <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="home{{$user->id}}" role="tabpanel" aria-labelledby="home-tab">
+                <div class="tab-pane fade show active" id="agregar-saldo{{$user->id}}" role="tabpanel" aria-labelledby="agregar-saldo-tab">
                     <form>
                         <div class="mb-1">
                             <div class="row">
@@ -35,14 +35,15 @@
                               </div>
                         </div>
                         <div class="mb-1">
-                          <label for="exampleInputPassword1" class="form-label">Agregar saldo</label>
-                          <input type="number" class="form-control" id="exampleInputPassword1">
+                          <label   class="form-label">Agregar saldo</label>
+                          <input id="monto-agregar-saldo" onkeyup="monto(this.value)" type="number" class="form-control" id="exampleInputPassword1">
+                          <input type="hidden" id="user_id{{$user->id}}" value="{{$user->id}}">
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <a onclick="argegar_saldo({{$user->id}})" class="btn btn-primary">Submit</a>
                     </form>
                 </div>
                 
-                <div class="tab-pane fade" id="profile{{$user->id}}" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="tab-pane fade" id="sustraer-saldo{{$user->id}}" role="tabpanel" aria-labelledby="sustraer-saldo-tab">
                     <form>
                         <div class="mb-1">
                             <div class="row">
