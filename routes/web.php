@@ -154,6 +154,7 @@ Route::middleware('auth')->group(function () {
             //Route::get('users/{network}', [TreController::class, 'indexNewtwork'])->name('genealogy_list_network');
             // Ruta para visualizar el arbol o la matriz
             Route::get('/unilevel', [TreController::class, 'index'])->name('red.unilevel');
+            Route::get('/binario', [TreController::class, 'binario'])->name('red.binario');
             Route::get('/referred/tree', [TreController::class, 'referredTree'])->name('referred.tree');
             // Ruta para visualizar el arbol o la matriz de un usuario en especifico
             Route::get('/{id}', [TreController::class, 'moretree'])->name('genealogy_type_id');

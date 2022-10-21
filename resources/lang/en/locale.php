@@ -198,5 +198,6 @@ return [
     "Ver tickets" => "Ver tickets",
     "KYC" => "KYC",
     "Solicitudes KYC" => "Solicitudes KYC",
-    "Paquetes" => "Paquetes"
+    "Paquetes" => "Paquetes",
+    "Binario" => "Binario"
 ];
