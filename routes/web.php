@@ -146,6 +146,9 @@ Route::middleware('auth')->group(function () {
             //Bono manual
             Route::get('/Edicion-saldo', [BonoManualController::class, 'index'])->name('Edicion-SaldoI-ndex');
             
+            //Agragr saldo a usuario
+            Route::post('/agregar-saldo', [BonoManualController::class, 'agregar_saldo'])->name('agregar_saldo');
+
         });
 
         //Ruta para cambiar referido de un user
