@@ -54,7 +54,6 @@ class Kernel extends ConsoleKernel
         $schedule->command('bonus:range')->monthlyOn(30, '00:00');
         $schedule->command('bonos:pamm')->everyMinute();
         $schedule->command('delete:binary:points')->daily();
-        // TODO:: cambiar fecha del cron
         $schedule->command('corte:ganancias:binarias')->daily();
 
     }
