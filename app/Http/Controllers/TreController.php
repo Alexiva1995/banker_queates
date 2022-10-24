@@ -21,7 +21,7 @@ class TreController extends Controller
         $referals_childrens =  $this->getChildren($direct_childres, 1);
         $lastLevelActive = Level::where('status', 1)->orderBy('id', 'desc')->first();
         return view('unilevel.index', compact('referals_childrens', 'lastLevelActive'));
-       
+
 
         // try {
         // /*
@@ -42,14 +42,24 @@ class TreController extends Controller
     {
         try {
             $base = Auth::user();
+            $tree = 1;
             $trees = $this->getDataEstructura(Auth::id());
             $base->logoarbol = asset('images/avatars/1.png');
             $lastLevelActive = Level::where('status', '1')->orderBy('id', 'desc')->first();
-            return view('genealogy.tree', compact('trees', 'base', 'lastLevelActive'));
+            return view('genealogy.tree', compact('trees', 'base', 'lastLevelActive', 'tree'));
         } catch (\Throwable $th) {
             Log::error('Tree - index -> Error: ' . $th);
                 abort(500, "Ocurrio un error, contacte con el administrador");
         }
+    }
+
+    public function binario()
+    {
+        $user = Auth::user();
+        $direct_childres = User::where('buyer_id', $user->id)->get();
+        $referals_childrens =  $this->getChildren($direct_childres, 1);
+        $lastLevelActive = Level::where('status', 1)->orderBy('id', 'desc')->first();
+        return view('binario.index', compact('referals_childrens', 'lastLevelActive'));
     }
 
     public function buscar()
@@ -78,17 +88,17 @@ class TreController extends Controller
     }
 
     public function search(Request $request)
-    {   
-        
+    {
+
         $user = User::find($request->id);
         if($user == null) { return back()->with('error', 'Usuario no Encontrado'); }
-        
+
         $direct_childres = User::where('buyer_id', $user->id)->get();
         $referals_childrens = $this->getChildren($direct_childres, 1);
-    
+
         return view('user.admin-referidos', compact('referals_childrens', 'direct_childres', 'user'));
 
-        /*
+
         try {
             // titulo
             $trees = $this->getDataEstructura($request->id);
@@ -102,7 +112,7 @@ class TreController extends Controller
 
             return back()->with('danger', 'El ID que ingreso no existe');
         }
-        */
+
     }
 
     public function moretree($id)
@@ -127,7 +137,7 @@ class TreController extends Controller
     private function getDataEstructura($id)
     {
         try {
-          
+
             $childres = $this->getData($id, 1);
             $trees = $this->getChildren($childres, 2);
             return $trees;
@@ -139,7 +149,7 @@ class TreController extends Controller
 
     public function getChildren($users, $nivel)
     {
-       
+
         try {
             if (!empty($users)) {
                 foreach ($users as $user) {
@@ -168,7 +178,7 @@ class TreController extends Controller
     public function getChildrenCount($users, $nivel, $count)
     {
         try {
-            if (!empty($users)) 
+            if (!empty($users))
             {
                 foreach ($users as $user) {
                     $user->children = $this->getData($user->id, $nivel);
