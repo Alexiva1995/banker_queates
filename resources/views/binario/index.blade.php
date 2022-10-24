@@ -80,13 +80,13 @@
     <div id="logs-list">
         <div class="d-flex my-1">
             <p class="fw-700 mb-0">Red</p><span class="fw-300 mx-1 text-light">|</span>
-            <p class="fw-400 mb-0">Unilevel</p>
+            <p class="fw-400 mb-0">Binario</p>
         </div>
         <div class="card">
             <div class="card-content p-75">
                 <div class="card-header d-block p-2 pb-0">
                     <div class="d-flex justify-content-between align-item-center flex-wrap  gap-50">
-                        <h4 class="fw-700">Unilevel</h4>
+                        <h4 class="fw-700">Binario</h4>
                         <a id="btn-copy"><i class="iconCard text-primary " data-feather='copy'></i><strong
                                 class="ms-1 aDecoration fw-700" onclick="getlink()" id="copy-to-clipboard">COPIAR LINK
                                 DE REFERIDOS!</strong></a>
@@ -262,7 +262,6 @@
     <script src="{{ asset(mix('vendors/js/tables/datatable/dataTables.responsive.min.js')) }}"></script>
 @endsection
 @section('page-script')
-
     <script>
       function activeIcon(n) {
         $(`#active_icon_${n}`).removeClass('d-none')
