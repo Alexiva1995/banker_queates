@@ -16,7 +16,7 @@ class CreatePointsTable extends Migration
         Schema::create('points', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('referred_id')->constrained('users');
+            $table->foreignId('buyer_id')->constrained('users');
             $table->foreignId('orden_id')->constrained('orders');
             $table->integer('quantity');
             $table->timestamps();

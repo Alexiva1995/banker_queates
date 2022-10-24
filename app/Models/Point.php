@@ -11,7 +11,7 @@ class Point extends Model
 
     protected $fillable = [
         'user_id',
-        'referred_id',
+        'buyer_id',
         'quantity',
         'orden_id'
     ];
