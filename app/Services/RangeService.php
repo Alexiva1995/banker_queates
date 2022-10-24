@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\BinaryPoint;
 use App\Models\User;
 use App\Models\Range;
 use Illuminate\Support\Facades\Log;
@@ -33,15 +34,21 @@ class RangeService
      */
     private function consultantRange(User $user) 
     {
-        foreach($user->referidos as $children) 
+        // Si el usuario no tiene rango, inicia la validación desde el primero. De lo contrario se envia directo a evaluar desde el rango 2
+        if ( $user->range === null ) 
         {
-            if($children->hasActiveLicense()) 
+            foreach($user->referidos as $children) 
             {
-                $user->update(['range_id' => 1]);
-                // Como obtuvo el rango 1 se envia evaluar al rango 2 - Qualified Consultant
-                $this->qualifiedConsultantRange($user);
-                break;
-            };
+                if($children->hasActiveLicense()) 
+                {
+                    $user->update(['range_id' => 1]);
+                    // Como obtuvo el rango 1 se envia evaluar al rango 2 - Qualified Consultant
+                    $this->qualifiedConsultantRange($user);
+                    break;
+                }
+            }
+        } else {
+            $this->qualifiedConsultantRange($user);
         }
     }
     /**
@@ -50,24 +57,41 @@ class RangeService
      */
     private function qualifiedConsultantRange(User $user) 
     {
-        $left_right = false;
-        $right_side = false;
-
-        foreach($user->binaryChildrens as $children) 
+        // Solo se evalua si el usuario es apto para el rango 2 si tiene el rango 1. Si tiene rango 2 o mayor avanza al siguiente directamente.
+        if ( $user->range->id === 1 ) 
         {
-            Log::debug($children);
-            if($children->binary_side === 'L') {
-                $left_right = true;
-            };
-
-            if($children->binary_side === 'R') {
-                $right_side = true;
+            $left_side = false;
+            $right_side = false;
+    
+            foreach($user->binaryChildrens as $children) 
+            {
+                Log::debug($children);
+                if($children->binary_side === 'L') {
+                    $left_side = true;
+                };
+    
+                if($children->binary_side === 'R') {
+                    $right_side = true;
+                }
             }
+    
+            if( $left_side && $right_side ) 
+            {
+                $user->update(['range_id' => 2]);
+                $this->sapphireRange($user);
+            }
+
+        } else {
+            $this->sapphireRange($user);
         }
-        
-        if( $left_right && $right_side ) {
-            $user->update(['range_id' => 2]);
-        }
+    }
+    /**
+     * Verifica si el usuario es apto para el rango 3 - Sapphire y lo asigna. 
+     * Para obtener este requiere: 2 Consultores calificados de cada lado y 75.000 volumen puntos en su organización
+     */
+    private function sapphireRange(User $user) 
+    {
+
     }
 
 }
