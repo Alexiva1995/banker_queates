@@ -52,11 +52,11 @@ class BonoManualController extends Controller
         $saldo =  WalletComission::where('user_id',$id)->where('status','0')->get();
         $total = $saldo->sum('amount_available');
         //return  $total - $monto_a_sustraer ;
-        if($monto_a_sustraer <= $total ){                                                                       //100  
-            for($i = 0; $i < count($saldo); $i++){                                                              //100   - 178
-                $total = $saldo->sum('amount_available');                                                       //100        
-               if(  $saldo[$i]['amount_available'] - $monto_a_sustraer   <= 0){                                //---------------
-                   $monto_a_sustraer =  $monto_a_sustraer - $saldo[$i]['amount_available'] ;                  //
+        if($monto_a_sustraer <= $total ){                                                                       
+            for($i = 0; $i < count($saldo); $i++){                                                             
+                $total = $saldo->sum('amount_available');                                                          
+               if(  $saldo[$i]['amount_available'] - $monto_a_sustraer   <= 0){                              
+                   $monto_a_sustraer =  $monto_a_sustraer - $saldo[$i]['amount_available'] ;                 
                     $saldo[$i]['amount_available'] = 0;
                     $saldo[$i]['status'] = '4';
                     $saldo[$i]->update();
