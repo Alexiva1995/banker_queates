@@ -8,7 +8,7 @@
           <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" id="modal{{$user->id}}">
           
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
@@ -34,17 +34,30 @@
                                 </div>
                               </div>
                         </div>
-                        <div class="mb-1">
-                          <label   class="form-label">Agregar saldo</label>
-                          <input id="monto-agregar-saldo" onkeyup="monto(this.value)" type="number" class="form-control" id="exampleInputPassword1">
-                          <input type="hidden" id="user_id{{$user->id}}" value="{{$user->id}}">
-                        </div>
+                        <div class="row">
+                          <div class="col-6">
+                            <div class="mb-1">
+                              <label   class="form-label">Agregar saldo</label>
+                              <input id="monto-agregar-saldo" onkeyup="monto(this.value)" type="number" class="form-control" >
+                              <input type="hidden" id="user_id{{$user->id}}" value="{{$user->id}}">
+                            </div>
+                          </div>
+                          
+                          <div class="col-6">
+                            <div class="mb-1">
+                              <label   class="form-label">Descripcion</label>
+                              <input  type="text" class="form-control" id="descripcion{{$user->id}}">
+                            </div>
+                          </div>
+
+                      </div>
+
                         <a onclick="argegar_saldo({{$user->id}})" class="btn btn-primary">Submit</a>
                     </form>
                 </div>
                 
                 <div class="tab-pane fade" id="sustraer-saldo{{$user->id}}" role="tabpanel" aria-labelledby="sustraer-saldo-tab">
-                    <form>
+                    <form id="sustraer{{$user->id}}">
                         <div class="mb-1">
                             <div class="row">
                                 <div class="col">
@@ -59,9 +72,12 @@
                         </div>
                         <div class="mb-1">
                           <label for="exampleInputPassword1" class="form-label">Sustraer saldo</label>
-                          <input type="number" class="form-control" id="exampleInputPassword1">
+                          <input id="sustraer-saldo" onkeyup="monto(this.value)" type="number" class="form-control">
+                          <input type="hidden" id="user_id{{$user->id}}" value="{{$user->id}}">
+                          
+                         
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <a onclick="sustraer_saldo({{$user->id}})" class="btn btn-primary">Submit</a>
                     </form>
                 </div>
               </div>
