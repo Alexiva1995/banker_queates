@@ -64,7 +64,7 @@
 #28 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #29 D:\\Desarrollo\\Laragon\\TakeProfits\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #30 {main}
-"} 
+"}
 [2022-10-18 13:15:24] local.ERROR: Target class [Hexters\CoinPayment\Http\Controllers\MakeTransactionController] does not exist. {"exception":"[object] (Illuminate\\Contracts\\Container\\BindingResolutionException(code: 0): Target class [Hexters\\CoinPayment\\Http\\Controllers\\MakeTransactionController] does not exist. at D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php:879)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(758): Illuminate\\Container\\Container->build('Hexters\\\\CoinPay...')
@@ -131,7 +131,7 @@
 #28 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #29 D:\\Desarrollo\\Laragon\\TakeProfits\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #30 {main}
-"} 
+"}
 [2022-10-18 13:15:27] local.ERROR: Target class [Hexters\CoinPayment\Http\Controllers\MakeTransactionController] does not exist. {"exception":"[object] (Illuminate\\Contracts\\Container\\BindingResolutionException(code: 0): Target class [Hexters\\CoinPayment\\Http\\Controllers\\MakeTransactionController] does not exist. at D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php:879)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(758): Illuminate\\Container\\Container->build('Hexters\\\\CoinPay...')
@@ -198,12 +198,12 @@
 #28 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #29 D:\\Desarrollo\\Laragon\\TakeProfits\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #30 {main}
-"} 
-[2022-10-18 13:18:45] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.  
-[2022-10-18 13:18:50] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.  
-[2022-10-18 13:18:59] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.  
-[2022-10-18 13:19:00] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.  
-[2022-10-18 13:19:06] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.  
+"}
+[2022-10-18 13:18:45] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.
+[2022-10-18 13:18:50] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.
+[2022-10-18 13:18:59] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.
+[2022-10-18 13:19:00] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.
+[2022-10-18 13:19:06] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.
 [2022-10-18 13:19:07] local.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'take-profits.utilities' doesn't exist (SQL: select * from `utilities` where `utilities`.`user_id` in (2)) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'take-profits.utilities' doesn't exist (SQL: select * from `utilities` where `utilities`.`user_id` in (2)) at D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:712)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(672): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
@@ -325,7 +325,7 @@
 #56 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #57 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #58 {main}
-"} 
+"}
 [2022-10-18 13:19:07] local.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'take-profits.utilities' doesn't exist (SQL: select sum(`amount`) as aggregate from `utilities` where `user_id` = 2 and month(`created_at`) = 10) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'take-profits.utilities' doesn't exist (SQL: select sum(`amount`) as aggregate from `utilities` where `user_id` = 2 and month(`created_at`) = 10) at D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:712)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(672): Illuminate\\Database\\Connection->runQueryCallback('select sum(`amo...', Array, Object(Closure))
@@ -433,7 +433,7 @@
 #49 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #50 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #51 {main}
-"} 
+"}
 [2022-10-18 13:19:07] local.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'take-profits.utilities' doesn't exist (SQL: select * from `utilities` where `utilities`.`user_id` = 2 and `utilities`.`user_id` is not null) {"userId":2,"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'take-profits.utilities' doesn't exist (SQL: select * from `utilities` where `utilities`.`user_id` = 2 and `utilities`.`user_id` is not null) at D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:712)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(672): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
@@ -567,12 +567,12 @@
 #62 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #63 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #64 {main}
-"} 
-[2022-10-18 13:19:12] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.  
-[2022-10-18 13:19:20] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.  
-[2022-10-18 13:19:27] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.  
-[2022-10-18 13:19:29] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.  
-[2022-10-18 13:19:36] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.  
+"}
+[2022-10-18 13:19:12] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.
+[2022-10-18 13:19:20] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.
+[2022-10-18 13:19:27] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.
+[2022-10-18 13:19:29] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.
+[2022-10-18 13:19:36] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.
 [2022-10-18 13:19:37] local.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'take-profits.utilities' doesn't exist (SQL: select * from `utilities` where `utilities`.`user_id` in (4)) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'take-profits.utilities' doesn't exist (SQL: select * from `utilities` where `utilities`.`user_id` in (4)) at D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:712)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(672): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
@@ -694,7 +694,7 @@
 #56 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #57 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #58 {main}
-"} 
+"}
 [2022-10-18 13:19:37] local.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'take-profits.utilities' doesn't exist (SQL: select sum(`amount`) as aggregate from `utilities` where `user_id` = 4 and month(`created_at`) = 10) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'take-profits.utilities' doesn't exist (SQL: select sum(`amount`) as aggregate from `utilities` where `user_id` = 4 and month(`created_at`) = 10) at D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:712)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(672): Illuminate\\Database\\Connection->runQueryCallback('select sum(`amo...', Array, Object(Closure))
@@ -802,7 +802,7 @@
 #49 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #50 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #51 {main}
-"} 
+"}
 [2022-10-18 13:19:37] local.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'take-profits.utilities' doesn't exist (SQL: select * from `utilities` where `utilities`.`user_id` = 4 and `utilities`.`user_id` is not null) {"userId":4,"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'take-profits.utilities' doesn't exist (SQL: select * from `utilities` where `utilities`.`user_id` = 4 and `utilities`.`user_id` is not null) at D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:712)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(672): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
@@ -936,17 +936,17 @@
 #62 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #63 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #64 {main}
-"} 
-[2022-10-18 13:19:40] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.  
-[2022-10-18 13:19:50] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.  
-[2022-10-18 13:19:55] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.  
-[2022-10-18 13:19:58] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.  
-[2022-10-18 13:20:01] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.  
-[2022-10-18 13:20:15] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.  
-[2022-10-18 13:20:22] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.  
-[2022-10-18 13:20:25] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.  
-[2022-10-18 13:20:26] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.  
-[2022-10-18 13:20:33] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.  
+"}
+[2022-10-18 13:19:40] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.
+[2022-10-18 13:19:50] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.
+[2022-10-18 13:19:55] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.
+[2022-10-18 13:19:58] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.
+[2022-10-18 13:20:01] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.
+[2022-10-18 13:20:15] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.
+[2022-10-18 13:20:22] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.
+[2022-10-18 13:20:25] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.
+[2022-10-18 13:20:26] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.
+[2022-10-18 13:20:33] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.
 [2022-10-18 13:20:34] local.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'take-profits.utilities' doesn't exist (SQL: select * from `utilities` where `utilities`.`user_id` in (6)) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'take-profits.utilities' doesn't exist (SQL: select * from `utilities` where `utilities`.`user_id` in (6)) at D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:712)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(672): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
@@ -1068,7 +1068,7 @@
 #56 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #57 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #58 {main}
-"} 
+"}
 [2022-10-18 13:20:34] local.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'take-profits.utilities' doesn't exist (SQL: select * from `utilities` where `utilities`.`user_id` = 6 and `utilities`.`user_id` is not null) {"userId":6,"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'take-profits.utilities' doesn't exist (SQL: select * from `utilities` where `utilities`.`user_id` = 6 and `utilities`.`user_id` is not null) at D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:712)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(672): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
@@ -1202,7 +1202,7 @@
 #62 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #63 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #64 {main}
-"} 
+"}
 [2022-10-18 13:20:34] local.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'take-profits.utilities' doesn't exist (SQL: select sum(`amount`) as aggregate from `utilities` where `user_id` = 6 and month(`created_at`) = 10) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'take-profits.utilities' doesn't exist (SQL: select sum(`amount`) as aggregate from `utilities` where `user_id` = 6 and month(`created_at`) = 10) at D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:712)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(672): Illuminate\\Database\\Connection->runQueryCallback('select sum(`amo...', Array, Object(Closure))
@@ -1310,15 +1310,15 @@
 #49 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #50 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #51 {main}
-"} 
-[2022-10-18 13:20:39] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.  
-[2022-10-18 13:20:50] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.  
-[2022-10-18 13:20:54] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.  
-[2022-10-18 13:21:00] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.  
-[2022-10-18 13:23:20] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.  
-[2022-10-18 13:28:42] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.  
-[2022-10-18 13:28:56] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.  
-[2022-10-18 13:29:25] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.  
+"}
+[2022-10-18 13:20:39] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.
+[2022-10-18 13:20:50] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.
+[2022-10-18 13:20:54] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.
+[2022-10-18 13:21:00] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.
+[2022-10-18 13:23:20] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.
+[2022-10-18 13:28:42] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.
+[2022-10-18 13:28:56] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.
+[2022-10-18 13:29:25] local.ERROR: Debugbar exception: Route [debugbar.openhandler] not defined.
 [2022-10-18 13:38:18] local.ERROR: Command "optimaze" is not defined.
 
 Did you mean one of these?
@@ -1335,7 +1335,7 @@ Did you mean one of these?
 #3 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #4 D:\\Desarrollo\\Laragon\\TakeProfits\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #5 {main}
-"} 
+"}
 [2022-10-18 13:42:38] local.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'take-profits.utilities' doesn't exist (SQL: select sum(`amount`) as aggregate from `utilities` where `user_id` = 3 and month(`created_at`) = 10) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'take-profits.utilities' doesn't exist (SQL: select sum(`amount`) as aggregate from `utilities` where `user_id` = 3 and month(`created_at`) = 10) at D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:712)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(672): Illuminate\\Database\\Connection->runQueryCallback('select sum(`amo...', Array, Object(Closure))
@@ -1443,7 +1443,7 @@ Did you mean one of these?
 #49 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #50 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #51 {main}
-"} 
+"}
 [2022-10-18 13:42:38] local.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'take-profits.utilities' doesn't exist (SQL: select * from `utilities` where `utilities`.`user_id` in (3)) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'take-profits.utilities' doesn't exist (SQL: select * from `utilities` where `utilities`.`user_id` in (3)) at D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:712)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(672): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
@@ -1565,7 +1565,7 @@ Did you mean one of these?
 #56 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #57 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #58 {main}
-"} 
+"}
 [2022-10-18 13:42:38] local.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'take-profits.utilities' doesn't exist (SQL: select * from `utilities` where `utilities`.`user_id` = 3 and `utilities`.`user_id` is not null) {"userId":3,"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'take-profits.utilities' doesn't exist (SQL: select * from `utilities` where `utilities`.`user_id` = 3 and `utilities`.`user_id` is not null) at D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:712)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(672): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
@@ -1699,7 +1699,7 @@ Did you mean one of these?
 #62 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #63 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #64 {main}
-"} 
+"}
 [2022-10-18 13:57:07] local.ERROR: syntax error, unexpected token "->", expecting variable or "{" or "$" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"->\", expecting variable or \"{\" or \"$\" at D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php:234)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Desarrollo\\\\L...')
@@ -1740,7 +1740,7 @@ Did you mean one of these?
 #35 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #36 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #37 {main}
-"} 
+"}
 [2022-10-18 13:57:08] local.ERROR: syntax error, unexpected token "->", expecting variable or "{" or "$" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"->\", expecting variable or \"{\" or \"$\" at D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php:234)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Desarrollo\\\\L...')
@@ -1773,7 +1773,7 @@ Did you mean one of these?
 #27 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #28 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #29 {main}
-"} 
+"}
 [2022-10-18 14:55:56] local.ERROR: Undefined variable $ticket {"userId":3,"exception":"[object] (ErrorException(code: 0): Undefined variable $ticket at D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php:234)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php(234): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Undefined varia...', 'D:\\\\Desarrollo\\\\L...', 234)
@@ -1826,7 +1826,7 @@ Did you mean one of these?
 #47 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #48 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #49 {main}
-"} 
+"}
 [2022-10-18 14:58:47] local.ERROR: Undefined variable $tickets {"userId":3,"exception":"[object] (ErrorException(code: 0): Undefined variable $tickets at D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php:234)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php(234): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Undefined varia...', 'D:\\\\Desarrollo\\\\L...', 234)
@@ -1879,7 +1879,7 @@ Did you mean one of these?
 #47 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #48 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #49 {main}
-"} 
+"}
 [2022-10-18 16:19:45] local.ERROR: Undefined constant "App\Http\Controllers\id" {"userId":3,"exception":"[object] (Error(code: 0): Undefined constant \"App\\Http\\Controllers\\id\" at D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php:234)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Controller.php(54): App\\Http\\Controllers\\TicketsController->editUser('5')
@@ -1931,7 +1931,7 @@ Did you mean one of these?
 #46 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #47 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #48 {main}
-"} 
+"}
 [2022-10-18 16:24:41] local.ERROR: Call to undefined function _() (View: D:\Desarrollo\Laragon\TakeProfits\resources\views\tickets\componenteTickets\user\edit-user.blade.php) {"view":{"view":"D:\\Desarrollo\\Laragon\\TakeProfits\\resources\\views/tickets/componenteTickets/user/edit-user.blade.php","data":{"menuData":"<pre class=sf-dump id=sf-dump-1783770100 data-indent-pad=\"  \"><span class=sf-dump-note>array:3</span> [<samp data-depth=1 class=sf-dump-expanded>
   <span class=sf-dump-index>0</span> => {<a class=sf-dump-ref>#324</a><samp data-depth=2 class=sf-dump-compact>
     +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">menu</span>\": <span class=sf-dump-note>array:9</span> [<samp data-depth=3 class=sf-dump-compact>
@@ -2537,7 +2537,7 @@ Did you mean one of these?
 #54 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #55 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #56 {main}
-"} 
+"}
 [2022-10-18 16:24:49] local.ERROR: Call to undefined function _() (View: D:\Desarrollo\Laragon\TakeProfits\resources\views\tickets\componenteTickets\user\edit-user.blade.php) {"view":{"view":"D:\\Desarrollo\\Laragon\\TakeProfits\\resources\\views/tickets/componenteTickets/user/edit-user.blade.php","data":{"menuData":"<pre class=sf-dump id=sf-dump-1860001315 data-indent-pad=\"  \"><span class=sf-dump-note>array:3</span> [<samp data-depth=1 class=sf-dump-expanded>
   <span class=sf-dump-index>0</span> => {<a class=sf-dump-ref>#324</a><samp data-depth=2 class=sf-dump-compact>
     +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">menu</span>\": <span class=sf-dump-note>array:9</span> [<samp data-depth=3 class=sf-dump-compact>
@@ -3143,7 +3143,7 @@ Did you mean one of these?
 #54 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #55 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #56 {main}
-"} 
+"}
 [2022-10-18 16:27:32] local.ERROR: Class "Ticket" not found (View: D:\Desarrollo\Laragon\TakeProfits\resources\views\tickets\componenteTickets\user\edit-user.blade.php) {"view":{"view":"D:\\Desarrollo\\Laragon\\TakeProfits\\resources\\views/tickets/componenteTickets/user/edit-user.blade.php","data":{"menuData":"<pre class=sf-dump id=sf-dump-197622138 data-indent-pad=\"  \"><span class=sf-dump-note>array:3</span> [<samp data-depth=1 class=sf-dump-expanded>
   <span class=sf-dump-index>0</span> => {<a class=sf-dump-ref>#324</a><samp data-depth=2 class=sf-dump-compact>
     +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">menu</span>\": <span class=sf-dump-note>array:9</span> [<samp data-depth=3 class=sf-dump-compact>
@@ -3749,7 +3749,7 @@ Did you mean one of these?
 #54 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #55 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #56 {main}
-"} 
+"}
 [2022-10-18 16:27:38] local.ERROR: Class "Tickets" not found (View: D:\Desarrollo\Laragon\TakeProfits\resources\views\tickets\componenteTickets\user\edit-user.blade.php) {"view":{"view":"D:\\Desarrollo\\Laragon\\TakeProfits\\resources\\views/tickets/componenteTickets/user/edit-user.blade.php","data":{"menuData":"<pre class=sf-dump id=sf-dump-1157806425 data-indent-pad=\"  \"><span class=sf-dump-note>array:3</span> [<samp data-depth=1 class=sf-dump-expanded>
   <span class=sf-dump-index>0</span> => {<a class=sf-dump-ref>#324</a><samp data-depth=2 class=sf-dump-compact>
     +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">menu</span>\": <span class=sf-dump-note>array:9</span> [<samp data-depth=3 class=sf-dump-compact>
@@ -4355,7 +4355,7 @@ Did you mean one of these?
 #54 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #55 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #56 {main}
-"} 
+"}
 [2022-10-18 16:28:16] local.ERROR: Class "Tickets" not found (View: D:\Desarrollo\Laragon\TakeProfits\resources\views\tickets\componenteTickets\user\edit-user.blade.php) {"view":{"view":"D:\\Desarrollo\\Laragon\\TakeProfits\\resources\\views/tickets/componenteTickets/user/edit-user.blade.php","data":{"menuData":"<pre class=sf-dump id=sf-dump-301898776 data-indent-pad=\"  \"><span class=sf-dump-note>array:3</span> [<samp data-depth=1 class=sf-dump-expanded>
   <span class=sf-dump-index>0</span> => {<a class=sf-dump-ref>#324</a><samp data-depth=2 class=sf-dump-compact>
     +\"<span class=sf-dump-public title=\"Runtime added dynamic property\">menu</span>\": <span class=sf-dump-note>array:9</span> [<samp data-depth=3 class=sf-dump-compact>
@@ -4961,7 +4961,7 @@ Did you mean one of these?
 #54 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #55 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #56 {main}
-"} 
+"}
 [2022-10-18 16:30:54] local.ERROR: Attempt to read property "user_id" on null {"userId":3,"exception":"[object] (ErrorException(code: 0): Attempt to read property \"user_id\" on null at D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php:236)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php(236): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Attempt to read...', 'D:\\\\Desarrollo\\\\L...', 236)
@@ -5014,7 +5014,7 @@ Did you mean one of these?
 #47 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #48 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #49 {main}
-"} 
+"}
 [2022-10-18 16:32:11] local.ERROR: Attempt to read property "user_id" on null {"userId":3,"exception":"[object] (ErrorException(code: 0): Attempt to read property \"user_id\" on null at D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php:236)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php(236): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Attempt to read...', 'D:\\\\Desarrollo\\\\L...', 236)
@@ -5067,7 +5067,7 @@ Did you mean one of these?
 #47 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #48 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #49 {main}
-"} 
+"}
 [2022-10-18 16:33:18] local.ERROR: Attempt to read property "user_id" on null {"userId":3,"exception":"[object] (ErrorException(code: 0): Attempt to read property \"user_id\" on null at D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php:236)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php(236): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Attempt to read...', 'D:\\\\Desarrollo\\\\L...', 236)
@@ -5120,7 +5120,7 @@ Did you mean one of these?
 #47 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #48 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #49 {main}
-"} 
+"}
 [2022-10-18 16:33:34] local.ERROR: Attempt to read property "user_id" on null {"userId":3,"exception":"[object] (ErrorException(code: 0): Attempt to read property \"user_id\" on null at D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php:236)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php(236): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Attempt to read...', 'D:\\\\Desarrollo\\\\L...', 236)
@@ -5173,7 +5173,7 @@ Did you mean one of these?
 #47 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #48 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #49 {main}
-"} 
+"}
 [2022-10-18 16:33:40] local.ERROR: Attempt to read property "user_id" on null {"userId":3,"exception":"[object] (ErrorException(code: 0): Attempt to read property \"user_id\" on null at D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php:236)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php(236): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Attempt to read...', 'D:\\\\Desarrollo\\\\L...', 236)
@@ -5226,7 +5226,7 @@ Did you mean one of these?
 #47 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #48 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #49 {main}
-"} 
+"}
 [2022-10-18 16:33:44] local.ERROR: Attempt to read property "user_id" on null {"userId":3,"exception":"[object] (ErrorException(code: 0): Attempt to read property \"user_id\" on null at D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php:236)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php(236): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Attempt to read...', 'D:\\\\Desarrollo\\\\L...', 236)
@@ -5279,7 +5279,7 @@ Did you mean one of these?
 #47 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #48 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #49 {main}
-"} 
+"}
 [2022-10-18 16:33:48] local.ERROR: Attempt to read property "user_id" on null {"userId":3,"exception":"[object] (ErrorException(code: 0): Attempt to read property \"user_id\" on null at D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php:236)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php(236): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Attempt to read...', 'D:\\\\Desarrollo\\\\L...', 236)
@@ -5332,7 +5332,7 @@ Did you mean one of these?
 #47 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #48 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #49 {main}
-"} 
+"}
 [2022-10-18 16:35:56] local.ERROR: Attempt to read property "user_id" on null {"userId":3,"exception":"[object] (ErrorException(code: 0): Attempt to read property \"user_id\" on null at D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php:236)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php(236): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Attempt to read...', 'D:\\\\Desarrollo\\\\L...', 236)
@@ -5385,7 +5385,7 @@ Did you mean one of these?
 #47 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #48 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #49 {main}
-"} 
+"}
 [2022-10-18 16:36:46] local.ERROR: Attempt to read property "user_id" on null {"userId":3,"exception":"[object] (ErrorException(code: 0): Attempt to read property \"user_id\" on null at D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php:236)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php(236): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Attempt to read...', 'D:\\\\Desarrollo\\\\L...', 236)
@@ -5438,7 +5438,7 @@ Did you mean one of these?
 #47 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #48 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #49 {main}
-"} 
+"}
 [2022-10-18 16:38:31] local.ERROR: Attempt to read property "user_id" on null {"userId":3,"exception":"[object] (ErrorException(code: 0): Attempt to read property \"user_id\" on null at D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php:236)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php(236): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Attempt to read...', 'D:\\\\Desarrollo\\\\L...', 236)
@@ -5491,7 +5491,7 @@ Did you mean one of these?
 #47 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #48 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #49 {main}
-"} 
+"}
 [2022-10-18 16:39:01] local.ERROR: Attempt to read property "user_id" on null {"userId":3,"exception":"[object] (ErrorException(code: 0): Attempt to read property \"user_id\" on null at D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php:236)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php(236): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Attempt to read...', 'D:\\\\Desarrollo\\\\L...', 236)
@@ -5544,7 +5544,7 @@ Did you mean one of these?
 #47 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #48 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #49 {main}
-"} 
+"}
 [2022-10-18 16:39:12] local.ERROR: Attempt to read property "user_id" on null {"userId":3,"exception":"[object] (ErrorException(code: 0): Attempt to read property \"user_id\" on null at D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php:236)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php(236): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Attempt to read...', 'D:\\\\Desarrollo\\\\L...', 236)
@@ -5597,7 +5597,7 @@ Did you mean one of these?
 #47 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #48 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #49 {main}
-"} 
+"}
 [2022-10-18 16:39:47] local.ERROR: Attempt to read property "user_id" on null {"userId":3,"exception":"[object] (ErrorException(code: 0): Attempt to read property \"user_id\" on null at D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php:236)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php(236): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Attempt to read...', 'D:\\\\Desarrollo\\\\L...', 236)
@@ -5650,7 +5650,7 @@ Did you mean one of these?
 #47 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #48 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #49 {main}
-"} 
+"}
 [2022-10-18 16:40:19] local.ERROR: Attempt to read property "user_id" on null {"userId":3,"exception":"[object] (ErrorException(code: 0): Attempt to read property \"user_id\" on null at D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php:236)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php(236): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Attempt to read...', 'D:\\\\Desarrollo\\\\L...', 236)
@@ -5703,7 +5703,7 @@ Did you mean one of these?
 #47 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #48 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #49 {main}
-"} 
+"}
 [2022-10-18 16:42:54] local.ERROR: Attempt to read property "user_id" on null {"userId":3,"exception":"[object] (ErrorException(code: 0): Attempt to read property \"user_id\" on null at D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php:236)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php(236): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Attempt to read...', 'D:\\\\Desarrollo\\\\L...', 236)
@@ -5756,7 +5756,7 @@ Did you mean one of these?
 #47 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #48 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #49 {main}
-"} 
+"}
 [2022-10-18 16:43:06] local.ERROR: Attempt to read property "user_id" on null {"userId":3,"exception":"[object] (ErrorException(code: 0): Attempt to read property \"user_id\" on null at D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php:236)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php(236): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Attempt to read...', 'D:\\\\Desarrollo\\\\L...', 236)
@@ -5809,7 +5809,7 @@ Did you mean one of these?
 #47 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #48 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #49 {main}
-"} 
+"}
 [2022-10-18 16:43:23] local.ERROR: Attempt to read property "user_id" on null {"userId":3,"exception":"[object] (ErrorException(code: 0): Attempt to read property \"user_id\" on null at D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php:236)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php(236): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Attempt to read...', 'D:\\\\Desarrollo\\\\L...', 236)
@@ -5862,7 +5862,7 @@ Did you mean one of these?
 #47 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #48 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #49 {main}
-"} 
+"}
 [2022-10-18 16:43:51] local.ERROR: Attempt to read property "user_id" on null {"userId":3,"exception":"[object] (ErrorException(code: 0): Attempt to read property \"user_id\" on null at D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php:236)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php(236): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Attempt to read...', 'D:\\\\Desarrollo\\\\L...', 236)
@@ -5915,7 +5915,7 @@ Did you mean one of these?
 #47 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #48 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #49 {main}
-"} 
+"}
 [2022-10-18 16:43:56] local.ERROR: Attempt to read property "user_id" on null {"userId":3,"exception":"[object] (ErrorException(code: 0): Attempt to read property \"user_id\" on null at D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php:236)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php(236): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Attempt to read...', 'D:\\\\Desarrollo\\\\L...', 236)
@@ -5968,7 +5968,7 @@ Did you mean one of these?
 #47 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #48 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #49 {main}
-"} 
+"}
 [2022-10-18 16:44:37] local.ERROR: Attempt to read property "user_id" on null {"userId":3,"exception":"[object] (ErrorException(code: 0): Attempt to read property \"user_id\" on null at D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php:236)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php(236): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Attempt to read...', 'D:\\\\Desarrollo\\\\L...', 236)
@@ -6021,7 +6021,7 @@ Did you mean one of these?
 #47 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #48 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #49 {main}
-"} 
+"}
 [2022-10-18 16:45:33] local.ERROR: Attempt to read property "user_id" on null {"userId":3,"exception":"[object] (ErrorException(code: 0): Attempt to read property \"user_id\" on null at D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php:236)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php(236): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Attempt to read...', 'D:\\\\Desarrollo\\\\L...', 236)
@@ -6074,7 +6074,7 @@ Did you mean one of these?
 #47 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #48 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #49 {main}
-"} 
+"}
 [2022-10-18 16:46:13] local.ERROR: Attempt to read property "user_id" on null {"userId":3,"exception":"[object] (ErrorException(code: 0): Attempt to read property \"user_id\" on null at D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php:236)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php(236): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Attempt to read...', 'D:\\\\Desarrollo\\\\L...', 236)
@@ -6127,7 +6127,7 @@ Did you mean one of these?
 #47 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #48 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #49 {main}
-"} 
+"}
 [2022-10-18 16:49:06] local.ERROR: Attempt to read property "user_id" on null {"userId":3,"exception":"[object] (ErrorException(code: 0): Attempt to read property \"user_id\" on null at D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php:236)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php(236): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Attempt to read...', 'D:\\\\Desarrollo\\\\L...', 236)
@@ -6180,7 +6180,7 @@ Did you mean one of these?
 #47 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #48 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #49 {main}
-"} 
+"}
 [2022-10-18 16:51:19] local.ERROR: Unmatched '}' {"exception":"[object] (ParseError(code: 0): Unmatched '}' at D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php:337)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Desarrollo\\\\L...')
@@ -6221,7 +6221,7 @@ Did you mean one of these?
 #35 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #36 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #37 {main}
-"} 
+"}
 [2022-10-18 16:51:19] local.ERROR: Unmatched '}' {"exception":"[object] (ParseError(code: 0): Unmatched '}' at D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php:337)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('D:\\\\Desarrollo\\\\L...')
@@ -6254,7 +6254,7 @@ Did you mean one of these?
 #27 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #28 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #29 {main}
-"} 
+"}
 [2022-10-18 16:52:03] local.ERROR: Attempt to read property "user_id" on null {"userId":3,"exception":"[object] (ErrorException(code: 0): Attempt to read property \"user_id\" on null at D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php:320)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\app\\Http\\Controllers\\TicketsController.php(320): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Attempt to read...', 'D:\\\\Desarrollo\\\\L...', 320)
@@ -6307,7 +6307,7 @@ Did you mean one of these?
 #47 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #48 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #49 {main}
-"} 
+"}
 [2022-10-18 16:58:37] local.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'take-profits.utilities' doesn't exist (SQL: select sum(`amount`) as aggregate from `utilities` where `user_id` = 3 and month(`created_at`) = 10) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'take-profits.utilities' doesn't exist (SQL: select sum(`amount`) as aggregate from `utilities` where `user_id` = 3 and month(`created_at`) = 10) at D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:712)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(672): Illuminate\\Database\\Connection->runQueryCallback('select sum(`amo...', Array, Object(Closure))
@@ -6415,7 +6415,7 @@ Did you mean one of these?
 #49 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #50 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #51 {main}
-"} 
+"}
 [2022-10-18 16:58:37] local.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'take-profits.utilities' doesn't exist (SQL: select * from `utilities` where `utilities`.`user_id` in (3)) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'take-profits.utilities' doesn't exist (SQL: select * from `utilities` where `utilities`.`user_id` in (3)) at D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:712)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(672): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
@@ -6537,7 +6537,7 @@ Did you mean one of these?
 #56 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #57 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #58 {main}
-"} 
+"}
 [2022-10-18 16:58:38] local.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'take-profits.utilities' doesn't exist (SQL: select * from `utilities` where `utilities`.`user_id` = 3 and `utilities`.`user_id` is not null) {"userId":3,"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'take-profits.utilities' doesn't exist (SQL: select * from `utilities` where `utilities`.`user_id` = 3 and `utilities`.`user_id` is not null) at D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:712)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(672): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
@@ -6671,7 +6671,7 @@ Did you mean one of these?
 #62 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #63 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #64 {main}
-"} 
+"}
 [2022-10-18 16:59:29] local.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'take-profits.utilities' doesn't exist (SQL: select * from `utilities` where `utilities`.`user_id` in (3)) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'take-profits.utilities' doesn't exist (SQL: select * from `utilities` where `utilities`.`user_id` in (3)) at D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:712)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(672): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
@@ -6793,7 +6793,7 @@ Did you mean one of these?
 #56 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #57 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #58 {main}
-"} 
+"}
 [2022-10-18 16:59:29] local.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'take-profits.utilities' doesn't exist (SQL: select sum(`amount`) as aggregate from `utilities` where `user_id` = 3 and month(`created_at`) = 10) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'take-profits.utilities' doesn't exist (SQL: select sum(`amount`) as aggregate from `utilities` where `user_id` = 3 and month(`created_at`) = 10) at D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:712)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(672): Illuminate\\Database\\Connection->runQueryCallback('select sum(`amo...', Array, Object(Closure))
@@ -6901,7 +6901,7 @@ Did you mean one of these?
 #49 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #50 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #51 {main}
-"} 
+"}
 [2022-10-18 16:59:29] local.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'take-profits.utilities' doesn't exist (SQL: select * from `utilities` where `utilities`.`user_id` = 3 and `utilities`.`user_id` is not null) {"userId":3,"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'take-profits.utilities' doesn't exist (SQL: select * from `utilities` where `utilities`.`user_id` = 3 and `utilities`.`user_id` is not null) at D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:712)
 [stacktrace]
 #0 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(672): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
@@ -7035,4 +7035,4 @@ Did you mean one of these?
 #62 D:\\Desarrollo\\Laragon\\TakeProfits\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #63 D:\\Desarrollo\\Laragon\\TakeProfits\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #64 {main}
-"} 
+"}

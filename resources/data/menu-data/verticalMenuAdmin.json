@@ -121,10 +121,23 @@
             ]
         },
         {
+            "name": "Edicion de saldo",
+            "icon": "home",
+            "slug": "Edicion-SaldoI-ndex",
+            "url": "/Edicion-saldo"
+        },
+        {
             "name": "Crones",
             "icon": "clock",
             "slug": "",
-            "submenu": [{
+            "submenu": [
+                {
+                    "url": "/bono-pamm",
+                    "name": "bono pamm",
+                    "icon": "circle",
+                    "slug": "bono.pamm"
+                },
+                {
                     "url": "/create-utility",
                     "name": "Crear utilidad",
                     "icon": "circle",
@@ -155,6 +168,32 @@
                     "slug": "cron.set.ranges"
                 }
 
+            ]
+        },
+        {
+            "url": "/red",
+            "name": "Red",
+            "icon": "users",
+            "slug": "financial.unilevel",
+            "submenu": [
+                {
+                    "url": "/red/unilevel",
+                    "name": "Unilevel",
+                    "icon": "circle",
+                    "slug": "red.unilevel"
+                },
+                {
+                    "url": "/red/binario",
+                    "name": "Binario",
+                    "icon": "circle",
+                    "slug": "red.binario"
+                },
+                {
+                    "url": "/red/referred/tree",
+                    "name": "Arbol de referidos",
+                    "icon": "circle",
+                    "slug": "referred.tree"
+                }
             ]
         },
         {

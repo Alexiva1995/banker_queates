@@ -24,6 +24,7 @@ use App\Http\Controllers\EducationController;
 use App\Http\Controllers\FormularyController;
 use App\Http\Controllers\InversionController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\BonoManualController;
 use App\Http\Controllers\PreregisterController;
 use App\Http\Controllers\LiquidactionController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -141,6 +142,13 @@ Route::middleware('auth')->group(function () {
             Route::get('/liquidaciones/realizadas', [LiquidactionController::class, 'realizadas'])->name('liquidaciones.realizadas');
             Route::get('/liquidaciones/pendientes', [LiquidactionController::class, 'pendientes'])->name('liquidaciones.pendientes');
             Route::get('/liquidaciones/pendientes/export_csv', [LiquidactionController::class, 'ExportCSV'])->name('liquidaciones.export.csv');
+        
+            //Bono manual
+            Route::get('/Edicion-saldo', [BonoManualController::class, 'index'])->name('Edicion-SaldoI-ndex');
+            
+            //Agragr saldo a usuario
+            Route::post('/agregar-saldo', [BonoManualController::class, 'agregar_saldo'])->name('agregar_saldo');
+
         });
 
         //Ruta para cambiar referido de un user
@@ -154,6 +162,7 @@ Route::middleware('auth')->group(function () {
             //Route::get('users/{network}', [TreController::class, 'indexNewtwork'])->name('genealogy_list_network');
             // Ruta para visualizar el arbol o la matriz
             Route::get('/unilevel', [TreController::class, 'index'])->name('red.unilevel');
+            Route::get('/binario', [TreController::class, 'binario'])->name('red.binario');
             Route::get('/referred/tree', [TreController::class, 'referredTree'])->name('referred.tree');
             // Ruta para visualizar el arbol o la matriz de un usuario en especifico
             Route::get('/{id}', [TreController::class, 'moretree'])->name('genealogy_type_id');
@@ -386,6 +395,11 @@ Route::get('/filter', [EducationController::class, 'filter'])->name('education.f
 // CRONES
 Route::middleware('admin')->group(function () {
 
+    Route::get('/bono-pamm', function () {
+        Artisan::call('bonos:pamm');
+        return redirect()->back()->with('success', 'El cron bono:pamm corrio con exito');
+    })->name('bono.pamm');
+    
     Route::get('/bono-cartera', function () {
         Artisan::call('bono:cartera');
         return redirect()->back()->with('success', 'El cron bono:cartera corrio con exito');
