@@ -152,12 +152,27 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function points()
     {
-        return $this->hasMany(Point::class, 'user_id');
+        return $this->hasMany(PointRange::class, 'user_id');
     }
 
-    public function getTotalPoints()
+    public function getTotalRangePoints()
     {
-        return $this->points->sum('quantity');
+        $total = 0;
+        $total += $this->points->sum('points_range_L');
+        $total += $this->points->sum('points_range_R');
+        return $total;
+    }
+
+    public function getRightRangePoints()
+    {
+        $amount = 0;
+        return $amount += $this->points->sum('points_range_R');
+    }
+
+    public function getLeftRangePoints()
+    {
+        $amount = 0;
+        return $amount += $this->points->sum('points_range_L');
     }
 
     public function ganancias()
@@ -399,6 +414,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function padre()
     {
         return $this->belongsTo('App\Models\User', 'buyer_id');
+    }
+
+    public function padre_binario()
+    {
+        return $this->belongsTo('App\Models\User', 'binary_id');
     }
 
     function bonoIndirecto()

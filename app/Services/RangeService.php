@@ -40,9 +40,9 @@ class RangeService
                 if($children->hasActiveLicense()) 
                 {
                     $user->update(['range_id' => 1]);
-                    Log::debug($user->range_id);
                     // Como obtuvo el rango 1 se envia evaluar al rango 2 - Qualified Consultant
                     $this->qualifiedConsultantRange($user);
+                    break;
                 }
             }
         } else {
@@ -63,13 +63,9 @@ class RangeService
     
             foreach($user->binaryChildrens as $children) 
             {
-                if($children->binary_side === 'L') {
-                    $left_side = true;
-                }
+                if($children->binary_side === 'L') $left_side = true;
     
-                if($children->binary_side === 'R') {
-                    $right_side = true;
-                }
+                if($children->binary_side === 'R') $right_side = true;
             }
     
             if( $left_side && $right_side ) 
@@ -102,20 +98,13 @@ class RangeService
                     // De tenerlo preguntamos si es Qualified Consultant
                     if( $children->range_id >= 2) 
                     {
-                        Log::debug($children->binary_side);
-                        if($children->binary_side === 'L') {
-                            $left_side++;
-                        }
+                        if($children->binary_side === 'L') $left_side++;
                         
-                        if($children->binary_side === 'R') {
-                            $right_side++;
-                        }
+                        if($children->binary_side === 'R') $right_side++;
                     }
                 }
             }
-            Log::debug("Contador izquierdo {$left_side}");
-            Log::debug("Contador derecho {$left_side}");
-            if( $left_side >= 2 && $right_side >= 2 && $user->getTotalPoints() >= 75000 ) 
+            if( $left_side >= 2 && $right_side >= 2 && $user->getTotalRangePoints() >= 75000 )
             {
                 $user->update(['range_id' => 3]);
                 $this->rubyRange($user);
@@ -132,6 +121,35 @@ class RangeService
      */
     private function rubyRange(User $user)
     {
+        // Solo se evalua si el usuario es apto para el rango 4 si tiene el rango null, 1, 2, o 3. Si tiene rango 4 o mayor avanza al siguiente directamente.
+        if ( $user->range_id <= 3 || $user->range_id === null ) 
+        {
+            // Contadores para referidos o hijos con licencias sapphire
+            $left_side = 0;
+            $right_side = 0;
 
+            foreach($user->binaryChildrens as $children) 
+            {
+                // Preguntamos si este hijo tiene rango
+                if( $children->range_id !== null ) 
+                {
+                    // De tenerlo preguntamos si es Sapphire
+                    if( $children->range_id >= 3) 
+                    {
+                        if($children->binary_side === 'L') $left_side++;
+                        
+                        if($children->binary_side === 'R') $right_side++;
+                    }
+                }
+            }
+            // TODO: Validaciones para puntos de grupo
+            if( $left_side >= 2 && $right_side >= 2 && $user->getRightRangePoints() == 100000 && $user->getLeftRangePoints() == 100000 ) 
+            {
+                $user->update(['range_id' => 4]);
+            }
+
+        } else {
+            // Llamar al proximo rango
+        }
     }
 }
