@@ -2,34 +2,51 @@
 
 namespace App\Services;
 
-use App\Models\Point;
+use App\Models\Investment;
+use App\Models\PointRange;
 use App\Models\User;
-
 /**
  * Class PointsService que se encarga de lo relacionado con la asignación de puntos.
  */
 class PointsService
 {
     /**
-     * Genera los puntos por compra de paquetes.
+     * Genera los puntos de rango por compra de paquetes de manera recursiva.
      */
-    public function applyPoints(User $user, $amount, $level, $buyer_id, $orden)
+    public function assignPointsRangeRecursively(User $user, $amount, $order)
     {
-        $referred = $user->padre;
-        if ($referred != null && $referred->id < $buyer_id && $amount > 0) {
+        // Si la cantidad de puntos del paquete no es mayor a 0, se cancela la función
+        if($amount <= 0) return;
+        
+        if($user->binary_id != 0 || !empty($user->binary_id))
+        {
+            $referred = $user->padre_binario;
+            //$user->points_pr += $amount;
+            //$user->update();
+            $menberpadre = Investment::where('user_id',$user->binary_id)->where('status', '1')->first();
 
-            Point::create([
-                'user_id' => $referred->id,
-                'buyer_id' => $buyer_id,
-                'orden_id' => $orden->id,
-                'quantity' => $amount,
-            ]);
-
-            $level++;
-            // //El nivel maximo es 15
-            if ($level <= 20) 
+            if ($menberpadre != null) 
             {
-                $this->applyPoints($referred, $amount, $level, $buyer_id, $orden);
+                if($referred->status == 1){
+                    $historial_point = new PointRange;
+                    $historial_point->orden_id = $order->id;
+                    $historial_point->status = 0;
+                    $historial_point->user_id = $user->binary_id;
+                    $historial_point->buyer_id = $order->user_id;
+
+                    if($user->binary_side == 'R') {
+                        $historial_point->right_range_points = $amount;
+                        $historial_point->points_range_R = $amount;
+                    }
+                    elseif($user->binary_side == 'L') {
+                        $historial_point->left_range_points = $amount;
+                        $historial_point->points_range_L = $amount;
+                    }
+
+                    $historial_point->save();
+                }
+
+                $this->assignPointsRangeRecursively($referred, $amount, $order);
             }
         }
     }

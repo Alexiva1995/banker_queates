@@ -246,9 +246,7 @@ class TiendaController extends Controller
             // Genera los puntos binarios
             app(BonusService::class)->assignPointsbinarioRecursively($orden->user, $orden->amount, $orden->id);
             // Genera los puntos por compra de licencias en linea multinivel
-            $this->pointsService->applyPoints($orden->user, $orden->licensePackage->leadership_points, $level = 1, $orden->user->id, $orden);
-
-
+            $this->pointsService->assignPointsRangeRecursively($orden->user, $orden->licensePackage->leadership_points, $orden);
         }
 
         return back()->with('success', 'Orden actualizada exitosamente');

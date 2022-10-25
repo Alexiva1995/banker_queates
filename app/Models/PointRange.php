@@ -5,15 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Point extends Model
+class PointRange extends Model
 {
     use HasFactory;
+
+    protected $table = 'point_range';
 
     protected $fillable = [
         'user_id',
         'buyer_id',
-        'quantity',
-        'orden_id'
+        'orden_id',
+        'right_range_points',
+        'left_range_points',
+        'points_range_L',
+        'points_range_R',
+        'status',
+        'limit'
     ];
 
     public function user()
