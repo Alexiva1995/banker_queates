@@ -150,9 +150,14 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(WalletComission::class, 'buyer_id');
     }
 
-    public function Points()
+    public function points()
     {
         return $this->hasMany(Point::class, 'user_id');
+    }
+
+    public function getTotalPoints()
+    {
+        return $this->points->sum('quantity');
     }
 
     public function ganancias()
