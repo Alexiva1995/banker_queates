@@ -203,7 +203,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function getWallet()
     {
-        return $this->hasMany(WalletComission::class, 'user_id')->orderBy('id', 'desc')->where('type', '!=', '5');
+        return $this->hasMany(WalletComission::class, 'user_id')->orderBy('id', 'desc')->where('status', '0');
     }
 
     /**
