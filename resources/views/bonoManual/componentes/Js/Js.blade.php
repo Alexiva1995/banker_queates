@@ -1,44 +1,62 @@
 <script>
-let monto_agregar_saldo = 0;
+let monto_a_utilizar = 0;
 
 function monto(e){
-    monto_agregar_saldo = e;
+    monto_a_utilizar = e;
 }
 
 function argegar_saldo(e){
     axios.post('{{route("agregar_saldo")}}', {
        user_id :document.getElementById(`user_id${e}`).value,
-       monto_a_agregar :  monto_agregar_saldo,
+       descripcion :document.getElementById(`descripcion${e}`).value,
+       monto_a_agregar :  monto_a_utilizar,
   })
   .then(function (response) {
-    let respuesta = response.data.value;
-    backen_notificacion(respuesta)
-    $( `#agregar-saldo${e}` ).load( ` #agregar-saldo${e}`);
-    monto_agregar_saldo = 0
+    let msj = response.data.msj;
+    let ico = response.data.ico;
+    backend_notificacion(msj,ico)
+    refresh_div(e);
+    
+    monto_a_utilizar = 0
   })
   .catch(function (error) {
     console.log(error);
   });
 }
 
-function backen_notificacion(e){
-    if(e == 'succes'){
-        Swal.fire({
+
+function sustraer_saldo(e){
+    axios.post('{{route("sustraer_saldo")}}', {
+       user_id :document.getElementById(`user_id${e}`).value,
+       monto_a_sustraer :  monto_a_utilizar,
+  })
+  .then(function (response) {
+    let msj = response.data.msj;
+    let ico = response.data.ico;
+    
+    backend_notificacion(msj,ico)
+    refresh_div(e);
+    
+    monto_a_utilizar = 0
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
+
+
+
+function backend_notificacion(msj,ico){
+  Swal.fire({
         position: 'top-end',
-        icon: 'success',
-        title: 'Saldo agregado correctamente',
+        icon: ico,
+        title: msj,
         showConfirmButton: false,
         timer: 1500
 })
-    }else{
-        Swal.fire({
-        position: 'top-end',
-        icon: 'error',
-        title: 'Monto invalido',
-        showConfirmButton: false,
-        timer: 1500
-        })   
-    }
 }
 
+function refresh_div(e){
+  $(`#modal${e}` ).load(` #modal${e}`);
+}
 </script>

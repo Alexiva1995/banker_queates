@@ -14,7 +14,7 @@ class AddRangesToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('range_id')->nullable()->comment('0 - Sin rango, 1 - Diamante I, 2 - Diamante II, 3 - Diamante III');
+            $table->unsignedBigInteger('range_id')->nullable()->after('prefix_id');
             $table->foreign('range_id')->references('id')->on('ranges')->onDelete('cascade');
         });
     }
