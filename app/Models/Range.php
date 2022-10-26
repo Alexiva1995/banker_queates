@@ -11,10 +11,10 @@ class Range extends Model
 
     protected $fillable = [
         'name',
-        'score'
+        'description',
     ];
 
-    public function user()
+    public function users()
     {
         return $this->hasMany(User::class);
     }

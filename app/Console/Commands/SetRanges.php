@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Http\Controllers\RangeController;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use App\Services\RangeService;
@@ -15,6 +14,7 @@ class SetRanges extends Command
      * @var string
      */
     protected $signature = 'set:ranges';
+    protected $rangeService;
 
     /**
      * The console command description.
@@ -28,8 +28,9 @@ class SetRanges extends Command
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(RangeService $rangeService)
     {
+        $this->rangeService = $rangeService;
         parent::__construct();
     }
 
@@ -42,8 +43,9 @@ class SetRanges extends Command
     {
         try {
             Log::info('Inicio asignar rangos a usuarios que cumplan requisitos - '.now());
-            $rangeService = resolve(RangeService::class);
-            $rangeService->setUserRanges();
+
+            $this->rangeService->setUserRanges();
+            
             Log::info('Fin de asignar rangos a usuarios - '.now());
         } catch (\Throwable $th) {
             Log::error('Error Cron Asginar Rangos a Usuarios -> '.$th);

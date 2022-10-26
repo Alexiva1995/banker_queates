@@ -26,7 +26,9 @@ class UserSeeder extends Seeder
             'admin' => '1',
             'password' => Hash::make('12345678'),
             'email_verified_at' => '2022-03-08 15:52:21',
-            'status' => '1'
+            'status' => '1',
+            'binary_id' => 0,
+            'binary_side' => null
         ]);
 
         //usuario normal
