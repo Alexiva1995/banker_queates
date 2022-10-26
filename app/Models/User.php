@@ -115,6 +115,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(User::class, 'buyer_id');
     }
 
+    public function binaryChildrens()
+    {
+        return $this->hasMany(User::class, 'binary_id');
+    }
+
     public function fullName()
     {
         return $this->name . ' ' . $this->last_name;
