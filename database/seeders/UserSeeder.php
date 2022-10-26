@@ -163,5 +163,93 @@ class UserSeeder extends Seeder
             'status' => '1',
             'buyer_id' => '2'
         ]);
+
+        User::create([
+            'name'=> 'user13',
+            'last_name'=> Str::random(5),
+            'email'=> 'user13@takeprofits.com',
+            'username'=> 'user13',
+            'password' => Hash::make('123456789'),
+            'email_verified_at' => '2022-03-08 15:52:21',
+            'status' => '1',
+            'buyer_id' => '2'
+        ]);
+
+        User::create([
+            'name'=> 'user14',
+            'last_name'=> Str::random(5),
+            'email'=> 'user14@takeprofits.com',
+            'username'=> 'user14',
+            'password' => Hash::make('123456789'),
+            'email_verified_at' => '2022-03-08 15:52:21',
+            'status' => '1',
+            'buyer_id' => '2'
+        ]);
+
+        User::create([
+            'name'=> 'user15',
+            'last_name'=> Str::random(5),
+            'email'=> 'user15@takeprofits.com',
+            'username'=> 'user15',
+            'password' => Hash::make('123456789'),
+            'email_verified_at' => '2022-03-08 15:52:21',
+            'status' => '1',
+            'buyer_id' => '2'
+        ]);
+
+        User::create([
+            'name'=> 'user16',
+            'last_name'=> Str::random(5),
+            'email'=> 'user16@takeprofits.com',
+            'username'=> 'user16',
+            'password' => Hash::make('123456789'),
+            'email_verified_at' => '2022-03-08 15:52:21',
+            'status' => '1',
+            'buyer_id' => '2'
+        ]);
+
+        User::create([
+            'name'=> 'user17',
+            'last_name'=> Str::random(5),
+            'email'=> 'user17@takeprofits.com',
+            'username'=> 'user17',
+            'password' => Hash::make('123456789'),
+            'email_verified_at' => '2022-03-08 15:52:21',
+            'status' => '1',
+            'buyer_id' => '2'
+        ]);
+
+        User::create([
+            'name'=> 'user18',
+            'last_name'=> Str::random(5),
+            'email'=> 'user18@takeprofits.com',
+            'username'=> 'user18',
+            'password' => Hash::make('123456789'),
+            'email_verified_at' => '2022-03-08 15:52:21',
+            'status' => '1',
+            'buyer_id' => '2'
+        ]);
+
+        User::create([
+            'name'=> 'user19',
+            'last_name'=> Str::random(5),
+            'email'=> 'user19@takeprofits.com',
+            'username'=> 'user19',
+            'password' => Hash::make('123456789'),
+            'email_verified_at' => '2022-03-08 15:52:21',
+            'status' => '1',
+            'buyer_id' => '2'
+        ]);
+
+        User::create([
+            'name'=> 'user20',
+            'last_name'=> Str::random(5),
+            'email'=> 'user20@takeprofits.com',
+            'username'=> 'user20',
+            'password' => Hash::make('123456789'),
+            'email_verified_at' => '2022-03-08 15:52:21',
+            'status' => '1',
+            'buyer_id' => '2'
+        ]);
     }
 }

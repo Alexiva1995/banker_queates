@@ -177,22 +177,10 @@
             "slug": "financial.unilevel",
             "submenu": [
                 {
-                    "url": "/red/unilevel",
-                    "name": "Unilevel",
+                    "url": "/red/buscar",
+                    "name": "Buscar referido",
                     "icon": "circle",
-                    "slug": "red.unilevel"
-                },
-                {
-                    "url": "/red/binario",
-                    "name": "Binario",
-                    "icon": "circle",
-                    "slug": "red.binario"
-                },
-                {
-                    "url": "/red/referred/tree",
-                    "name": "Arbol de referidos",
-                    "icon": "circle",
-                    "slug": "referred.tree"
+                    "slug": "red.buscar"
                 }
             ]
         },
