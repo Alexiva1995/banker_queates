@@ -3,8 +3,6 @@
 namespace App\Services;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Log;
-
 /**
  * Class RangeService.
  */
@@ -104,6 +102,7 @@ class RangeService
                     }
                 }
             }
+
             if( $left_side >= 2 && $right_side >= 2 && $user->getTotalRangePoints() >= 75000 )
             {
                 $user->update(['range_id' => 3]);
@@ -116,7 +115,7 @@ class RangeService
     }
     /**
      * Verifica si el usuario es apto para el rango 4 - Ruby y lo asigna. 
-     * Para obtener este requiere: 2 Sapphire en cada lado y 200.000 volumen puntos en su organización y 
+     * Para obtener este requiere: 2 Sapphire 1 en cada lado y 200.000 volumen puntos en su organización y 
      * Solo puede obtener 100,000 Puntos máximo de un equipo.
      */
     private function rubyRange(User $user)
@@ -142,14 +141,98 @@ class RangeService
                     }
                 }
             }
-            // TODO: Validaciones para puntos de grupo
-            if( $left_side >= 2 && $right_side >= 2 && $user->getRightRangePoints() == 100000 && $user->getLeftRangePoints() == 100000 ) 
+            // Si tienen mas de 100k de puntos lo limitamos a 100k. Si es menor se deja el valor por defecto.
+            $right_points = $user->getRightRangePoints() > 100000 ? 100000 : $user->getRightRangePoints();
+            $left_points = $user->getLeftRangePoints() > 100000 ? 100000 : $user->getLeftRangePoints();
+
+            if( $left_side >= 1 && $right_side >= 1 && $right_points == 100000 && $left_points == 100000 ) 
             {
                 $user->update(['range_id' => 4]);
+                $this->emeraldRange($user);
             }
 
         } else {
-            // Llamar al proximo rango
+            $this->emeraldRange($user);
+        }
+    }
+    /**
+     * Verifica si el usuario es apto para el rango 5 - Emerald y lo asigna. 
+     * Para obtener este  require 2 Ruby’s 1 de cada lado y 1,000,000 volumen puntos en su organización.
+     * Solo puede obtener 500,000 Puntos máximo de un equipo
+     */
+    private function emeraldRange(User $user)
+    {
+        // Solo se evalua si el usuario es apto para el rango 5 si tiene el rango null, 1, 2, 3, o 4. Si tiene rango 5 o mayor avanza al siguiente directamente.
+        if ( $user->range_id <= 4 || $user->range_id === null ) 
+        {
+            // Contadores para referidos o hijos con licencias Rubys
+            $left_side = 0;
+            $right_side = 0;
+
+            foreach($user->binaryChildrens as $children) 
+            {
+                // Preguntamos si este hijo tiene rango
+                if( $children->range_id !== null ) 
+                {
+                    // De tenerlo preguntamos si es Ruby
+                    if( $children->range_id >= 4) 
+                    {
+                        if($children->binary_side === 'L') $left_side++;
+                        
+                        if($children->binary_side === 'R') $right_side++;
+                    }
+                }
+            }
+
+            // Si tienen mas de 100k de puntos lo limitamos a 100k. Si es menor se deja el valor por defecto.
+            $right_points = $user->getRightRangePoints() > 500000 ? 500000 : $user->getRightRangePoints();
+            $left_points = $user->getLeftRangePoints() > 500000 ? 500000 : $user->getLeftRangePoints();
+
+            if( $left_side >= 1 && $right_side >= 1 && $right_points == 500000 && $left_points == 500000 ) 
+            {
+                $user->update(['range_id' => 5]);
+                $this->diamondRange($user);
+            }
+
+        } else {
+            $this->diamondRange($user);
+        }
+    }
+    /**
+     * Verifica si el usuario es apto para el rango 6 - Diamond y lo asigna. 
+     * Para obtener este requiere 3 Emerald maximo 2 de un lado y
+     * 2,500,000 volumen puntos en su organización. Solo puede obtener 1.250.000 Puntos máximo de un equipo.
+     */
+    private function diamondRange(User $user)
+    {
+        // Contadores para referidos o hijos con licencias Emerald
+        $left_side = 0;
+        $right_side = 0;
+
+        foreach($user->binaryChildrens as $children) 
+        {
+            // Preguntamos si este hijo tiene rango
+            if( $children->range_id !== null ) 
+            {
+                // De tenerlo preguntamos si es Emerald
+                if( $children->range_id >= 5) 
+                {
+                    if($children->binary_side === 'L' && $left_side < 2 ) $left_side++;
+                    
+                    if($children->binary_side === 'R' && $right_side < 2) $right_side++;
+                }
+            }
+        }
+
+        $total = $left_side + $right_side;
+
+        // Si tienen mas de 100k de puntos lo limitamos a 100k. Si es menor se deja el valor por defecto.
+        $right_points = $user->getRightRangePoints() > 1250000 ? 1250000 : $user->getRightRangePoints();
+        $left_points = $user->getLeftRangePoints() > 1250000 ? 1250000 : $user->getLeftRangePoints();
+
+        if( $total >= 3 && $right_points == 1250000 && $left_points == 1250000 ) 
+        {
+            $user->update(['range_id' => 6]);
         }
     }
 }
