@@ -142,10 +142,10 @@ Route::middleware('auth')->group(function () {
             Route::get('/liquidaciones/realizadas', [LiquidactionController::class, 'realizadas'])->name('liquidaciones.realizadas');
             Route::get('/liquidaciones/pendientes', [LiquidactionController::class, 'pendientes'])->name('liquidaciones.pendientes');
             Route::get('/liquidaciones/pendientes/export_csv', [LiquidactionController::class, 'ExportCSV'])->name('liquidaciones.export.csv');
-        
+
             //Bono manual
             Route::get('/Edicion-saldo', [BonoManualController::class, 'index'])->name('Edicion-SaldoI-ndex');
-            
+
             //Agragr saldo a usuario
             Route::post('/agregar-saldo', [BonoManualController::class, 'agregar_saldo'])->name('agregar_saldo');
             Route::post('/sustraer-saldo', [BonoManualController::class, 'sustraer_saldo'])->name('sustraer_saldo');
@@ -164,7 +164,7 @@ Route::middleware('auth')->group(function () {
             // Ruta para visualizar el arbol o la matriz
             Route::get('/unilevel', [TreController::class, 'index'])->name('red.unilevel');
             Route::get('/binario', [TreController::class, 'binario'])->name('red.binario');
-            Route::get('/referred/tree', [TreController::class, 'referredTree'])->name('referred.tree');
+            Route::get('/referred/tree/{tree}', [TreController::class, 'referredTree'])->name('referred.tree');
             // Ruta para visualizar el arbol o la matriz de un usuario en especifico
             Route::get('/{id}', [TreController::class, 'moretree'])->name('genealogy_type_id');
         });
@@ -400,7 +400,7 @@ Route::middleware('admin')->group(function () {
         Artisan::call('bonos:pamm');
         return redirect()->back()->with('success', 'El cron bono:pamm corrio con exito');
     })->name('bono.pamm');
-    
+
     Route::get('/bono-cartera', function () {
         Artisan::call('bono:cartera');
         return redirect()->back()->with('success', 'El cron bono:cartera corrio con exito');

@@ -1,6 +1,6 @@
 @extends('layouts/contentLayoutMaster')
 
-@section('title', 'Unilev1; i <= 15; i++ e
+@section('title', 'Unilev1; i <= 10; i++ e
 {
 }l')
 @section('vendor-style')
@@ -24,39 +24,38 @@
     position: relative;
     display: block;
     cursor: pointer;
-    width: 100px;
   }
   /* Estas reglas se aplicarán a todos los span despues de un input de tipo radio*/
   .content-input input[type=radio]+span {}
   .content-input input[type=radio]+span:before {
-    background-color: #0255b8;
+    background-color: #673DED;
     color: #fff;
   }
   .content-input input[type=radio]:checked+span {
-    background-color: #0255b8 !important;
+    background-color: #673DED !important;
     color: #fff;
     border-radius: 5px;
     opacity: 1;
   }
   .content-input:hover input[type=radio]:not(:checked)+span {
-    background: #0255b8;
+    background: #673DED;
     color: #fff;
     border-radius: 5px;
   }
   .level-content {
     margin-top: 45px;
-    gap: 1rem;
+    gap: 0.5rem;
     row-gap: 1.8rem;
     justify-content: flex-start;
   }
   .level {
-    margin-right: 10px;
+    margin-right: 5px;
     font-size: 15px;
     font-weight: bold;
     padding: 10px 15px;
   }
   .active {
-    background-color: #0255b8;
+    background-color: #673DED;
     color: #fff;
     border-radius: 5px;
   }
@@ -83,82 +82,114 @@
         <div class="d-flex level-content flex-wrap">
           <label class="content-input">
             <input type="radio" name="nivel" id="nivel_1" value="nivel_1" checked>
-            <span class="level">Nivel 1</span>
+            <span class="level">
+                            <svg id="active_icon_1" class="me-50 mb-25" width="15" height="15"
+                                viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M7.5 14.7318L0.375 9.19015L1.6575 8.19265L7.49208 12.7289L13.3346 8.18473L14.625 9.19015L7.5 14.7318ZM7.5 11.3514L1.66542 6.81515L0.375 5.80973L7.5 0.268066L14.625 5.80973L13.3267 6.81515L7.5 11.3514Z"
+                                    fill="white" />
+                            </svg>Nivel 1</span>
           </label>
 
           <label class="content-input">
             <input type="radio" name="nivel" id="nivel_2" value="nivel_2">
-            <span class="level ">Nivel 2</span>
+            <span class="level">
+                            <svg id="active_icon_1" class="me-50 mb-25" width="15" height="15"
+                                viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M7.5 14.7318L0.375 9.19015L1.6575 8.19265L7.49208 12.7289L13.3346 8.18473L14.625 9.19015L7.5 14.7318ZM7.5 11.3514L1.66542 6.81515L0.375 5.80973L7.5 0.268066L14.625 5.80973L13.3267 6.81515L7.5 11.3514Z"
+                                    fill="white" />
+                            </svg>Nivel 2</span>
           </label>
 
           <label class="content-input">
             <input type="radio" name="nivel" id="nivel_3" value="nivel_3">
-            <span class="level ">Nivel 3</span>
+            <span class="level">
+                            <svg id="active_icon_1" class="me-50 mb-25" width="15" height="15"
+                                viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M7.5 14.7318L0.375 9.19015L1.6575 8.19265L7.49208 12.7289L13.3346 8.18473L14.625 9.19015L7.5 14.7318ZM7.5 11.3514L1.66542 6.81515L0.375 5.80973L7.5 0.268066L14.625 5.80973L13.3267 6.81515L7.5 11.3514Z"
+                                    fill="white" />
+                            </svg>Nivel 3</span>
           </label>
 
           <label class="content-input">
             <input type="radio" name="nivel" id="nivel_4" value="nivel_4">
-            <span class="level ">Nivel 4</span>
+            <span class="level">
+                            <svg id="active_icon_1" class="me-50 mb-25" width="15" height="15"
+                                viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M7.5 14.7318L0.375 9.19015L1.6575 8.19265L7.49208 12.7289L13.3346 8.18473L14.625 9.19015L7.5 14.7318ZM7.5 11.3514L1.66542 6.81515L0.375 5.80973L7.5 0.268066L14.625 5.80973L13.3267 6.81515L7.5 11.3514Z"
+                                    fill="white" />
+                            </svg>Nivel 4</span>
           </label>
 
           <label class="content-input">
             <input type="radio" name="nivel" id="nivel_5" value="nivel_5">
-            <span class="level ">Nivel 5</span>
+            <span class="level">
+                            <svg id="active_icon_1" class="me-50 mb-25" width="15" height="15"
+                                viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M7.5 14.7318L0.375 9.19015L1.6575 8.19265L7.49208 12.7289L13.3346 8.18473L14.625 9.19015L7.5 14.7318ZM7.5 11.3514L1.66542 6.81515L0.375 5.80973L7.5 0.268066L14.625 5.80973L13.3267 6.81515L7.5 11.3514Z"
+                                    fill="white" />
+                            </svg>Nivel 5</span>
           </label>
 
           <label class="content-input">
             <input type="radio" name="nivel" id="nivel_6" value="nivel_6">
-            <span class="level ">Nivel 6</span>
+            <span class="level">
+                            <svg id="active_icon_1" class="me-50 mb-25" width="15" height="15"
+                                viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M7.5 14.7318L0.375 9.19015L1.6575 8.19265L7.49208 12.7289L13.3346 8.18473L14.625 9.19015L7.5 14.7318ZM7.5 11.3514L1.66542 6.81515L0.375 5.80973L7.5 0.268066L14.625 5.80973L13.3267 6.81515L7.5 11.3514Z"
+                                    fill="white" />
+                            </svg>Nivel 6</span>
           </label>
 
           <label class="content-input">
             <input type="radio" name="nivel" id="nivel_7" value="nivel_7">
-            <span class="level ">Nivel 7</span>
+            <span class="level">
+                            <svg id="active_icon_1" class="me-50 mb-25" width="15" height="15"
+                                viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M7.5 14.7318L0.375 9.19015L1.6575 8.19265L7.49208 12.7289L13.3346 8.18473L14.625 9.19015L7.5 14.7318ZM7.5 11.3514L1.66542 6.81515L0.375 5.80973L7.5 0.268066L14.625 5.80973L13.3267 6.81515L7.5 11.3514Z"
+                                    fill="white" />
+                            </svg>Nivel 7</span>
           </label>
 
           <label class="content-input">
             <input type="radio" name="nivel" id="nivel_8" value="nivel_8">
-            <span class="level ">Nivel 8</span>
+            <span class="level">
+                            <svg id="active_icon_1" class="me-50 mb-25" width="15" height="15"
+                                viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M7.5 14.7318L0.375 9.19015L1.6575 8.19265L7.49208 12.7289L13.3346 8.18473L14.625 9.19015L7.5 14.7318ZM7.5 11.3514L1.66542 6.81515L0.375 5.80973L7.5 0.268066L14.625 5.80973L13.3267 6.81515L7.5 11.3514Z"
+                                    fill="white" />
+                            </svg>Nivel 8</span>
           </label>
 
           <label class="content-input">
             <input type="radio" name="nivel" id="nivel_9" value="nivel_9">
-            <span class="level ">Nivel 9</span>
+            <span class="level">
+                            <svg id="active_icon_1" class="me-50 mb-25" width="15" height="15"
+                                viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M7.5 14.7318L0.375 9.19015L1.6575 8.19265L7.49208 12.7289L13.3346 8.18473L14.625 9.19015L7.5 14.7318ZM7.5 11.3514L1.66542 6.81515L0.375 5.80973L7.5 0.268066L14.625 5.80973L13.3267 6.81515L7.5 11.3514Z"
+                                    fill="white" />
+                            </svg>Nivel 9</span>
           </label>
 
           <label class="content-input">
             <input type="radio" name="nivel" id="nivel_10" value="nivel_10">
-            <span class="level ">Nivel 10</span>
+            <span class="level">
+                            <svg id="active_icon_1" class="me-50 mb-25" width="15" height="15"
+                                viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M7.5 14.7318L0.375 9.19015L1.6575 8.19265L7.49208 12.7289L13.3346 8.18473L14.625 9.19015L7.5 14.7318ZM7.5 11.3514L1.66542 6.81515L0.375 5.80973L7.5 0.268066L14.625 5.80973L13.3267 6.81515L7.5 11.3514Z"
+                                    fill="white" />
+                            </svg>Nivel 10</span>
           </label>
 
-          <label class="content-input">
-            <input type="radio" name="nivel" id="nivel_11" value="nivel_11">
-            <span class="level ">Nivel 11</span>
-          </label>
-
-          <label class="content-input">
-            <input type="radio" name="nivel" id="nivel_12" value="nivel_12">
-            <span class="level ">Nivel 12</span>
-            <i></i>
-          </label>
-
-          <label class="content-input">
-            <input type="radio" name="nivel" id="nivel_13" value="nivel_13">
-            <span class="level ">Nivel 13</span>
-            <i></i>
-          </label>
-
-          <label class="content-input">
-            <input type="radio" name="nivel" id="nivel_14" value="nivel_14">
-            <span class="level ">Nivel 14</span>
-            <i></i>
-          </label>
-
-          <label class="content-input">
-            <input type="radio" name="nivel" id="nivel_15" value="nivel_15">
-            <span class="level ">Nivel 15</span>
-            <i></i>
-          </label>
         </div>
 
         <div class="tab-body-wrapper mt-2">
@@ -180,7 +211,7 @@
                   <tr>
                     <td>{{"{$user->name} {$user->lastname}"}}</td>
                     <td>{{ $user->email }}</td>
-                    <td>{{$user->prefix->name}}</td>
+                    <td>{{$user->username}}</td>
                     <td>Sin rango</td>
                     <td>Aún No posee</td>
                   </tr>
@@ -208,7 +239,7 @@
                         <tr>
                           <td>{{"{$user->name} {$user->lastname}"}}</td>
                           <td>{{$user->email}}</td>
-                          <td>{{$user->prefix->name}}</td>
+                          <td>{{$user->username}}</td>
                           <td>Sin rango</td>
                           <td>Aún No posee</td>
                         </tr>
@@ -238,7 +269,7 @@
                       <tr>
                         <td>{{"{$user->name} {$user->lastname}"}}</td>
                         <td>{{$user->email}}</td>
-                        <td>{{$user->prefix->name}}</td>
+                        <td>{{$user->username}}</td>
                         <td>Sin rango</td>
                         <td>Aún No posee</td>
                       </tr>
@@ -270,7 +301,7 @@
                         <tr>
                           <td>{{"{$user->name} {$user->lastname}"}}</td>
                           <td>{{$user->email}}</td>
-                          <td>{{$user->prefix->name}}</td>
+                          <td>{{$user->username}}</td>
                           <td>Sin rango</td>
                           <td>Aún No posee</td>
                         </tr>
@@ -304,7 +335,7 @@
                           <tr>
                             <td>{{"{$user->name} {$user->lastname}"}}</td>
                             <td>{{$user->email}}</td>
-                            <td>{{$user->prefix->name}}</td>
+                            <td>{{$user->username}}</td>
                             <td>Sin rango</td>
                             <td>Aún No posee</td>
                           </tr>
@@ -340,7 +371,7 @@
                             <tr>
                               <td>{{"{$user->name} {$user->lastname}"}}</td>
                               <td>{{$user->email}}</td>
-                              <td>{{$user->prefix->name}}</td>
+                              <td>{{$user->username}}</td>
                               <td>Sin rango</td>
                               <td>Aún No posee</td>
                             </tr>
@@ -378,7 +409,7 @@
                               <tr>
                                 <td>{{"{$user->name} {$user->lastname}"}}</td>
                                 <td>{{$user->email}}</td>
-                                <td>{{$user->prefix->name}}</td>
+                                <td>{{$user->username}}</td>
                                 <td>Sin rango</td>
                                 <td>Aún No posee</td>
                               </tr>
@@ -418,7 +449,7 @@
                                 <tr>
                                   <td>{{"{$user->name} {$user->lastname}"}}</td>
                                   <td>{{$user->email}}</td>
-                                  <td>{{$user->prefix->name}}</td>
+                                  <td>{{$user->username}}</td>
                                   <td>Sin rango</td>
                                   <td>Aún No posee</td>
                                 </tr>
@@ -460,7 +491,7 @@
                                   <tr>
                                     <td>{{"{$user->name} {$user->lastname}"}}</td>
                                     <td>{{$user->email}}</td>
-                                    <td>{{$user->prefix->name}}</td>
+                                    <td>{{$user->username}}</td>
                                     <td>Sin rango</td>
                                     <td>Aún No posee</td>
                                   </tr>
@@ -504,7 +535,7 @@
                                     <tr>
                                       <td>{{"{$user->name} {$user->lastname}"}}</td>
                                       <td>{{$user->email}}</td>
-                                      <td>{{$user->prefix->name}}</td>
+                                      <td>{{$user->username}}</td>
                                       <td>Sin rango</td>
                                       <td>Aún No posee</td>
                                     </tr>
@@ -523,260 +554,6 @@
             </div>
           </div>
 
-          <div id="tab-body-11" class="tab-body d-none">
-            <div class="table-responsive">
-              <table class="table  nowrap scroll-horizontal-vertical myTable table-striped w-100">
-                <thead>
-                  <tr>
-                    <th>Nombre y Apellido</th>
-                    <th>Usuario</th>
-                    <th>Pais</th>
-                    <th>Rango</th>
-                    <th>Puntos Grupales</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @foreach ($referals_childrens as $user)
-                    @foreach ($user->children as $user)
-                      @foreach ($user->children as $user)
-                        @foreach ($user->children as $user)
-                          @foreach ($user->children as $user)
-                            @foreach ($user->children as $user)
-                              @foreach ($user->children as $user)
-                                @foreach ($user->children as $user)
-                                  @foreach ($user->children as $user)
-                                    @foreach ($user->children as $user)
-                                      @foreach ($user->children as $user)
-                                      <tr>
-                                        <td>{{"{$user->name} {$user->lastname}"}}</td>
-                                        <td>{{$user->email}}</td>
-                                        <td>{{$user->prefix->name}}</td>
-                                        <td>Sin rango</td>
-                                        <td>Aún No posee</td>
-                                      </tr>
-                                      @endforeach
-                                    @endforeach
-                                  @endforeach
-                                @endforeach
-                              @endforeach
-                            @endforeach
-                          @endforeach
-                        @endforeach
-                      @endforeach
-                    @endforeach
-                  @endforeach
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div id="tab-body-12" class="tab-body d-none">
-            <div class="table-responsive">
-              <table class="table  nowrap scroll-horizontal-vertical myTable table-striped w-100">
-                <thead>
-                  <tr>
-                    <th>Nombre y Apellido</th>
-                    <th>Usuario</th>
-                    <th>Pais</th>
-                    <th>Rango</th>
-                    <th>Puntos Grupales</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @foreach ($referals_childrens as $user)
-                    @foreach ($user->children as $user)
-                      @foreach ($user->children as $user)
-                        @foreach ($user->children as $user)
-                          @foreach ($user->children as $user)
-                            @foreach ($user->children as $user)
-                              @foreach ($user->children as $user)
-                                @foreach ($user->children as $user)
-                                  @foreach ($user->children as $user)
-                                    @foreach ($user->children as $user)
-                                      @foreach ($user->children as $user)
-                                        @foreach ($user->children as $user)
-                                        <tr>
-                                          <td>{{"{$user->name} {$user->lastname}"}}</td>
-                                          <td>{{$user->email}}</td>
-                                          <td>{{$user->prefix->name}}</td>
-                                          <td>Sin rango</td>
-                                          <td>Aún No posee</td>
-                                        </tr>
-                                        @endforeach
-                                      @endforeach
-                                    @endforeach
-                                  @endforeach
-                                @endforeach
-                              @endforeach
-                            @endforeach
-                          @endforeach
-                        @endforeach
-                      @endforeach
-                    @endforeach
-                  @endforeach
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div id="tab-body-13" class="tab-body d-none">
-            <div class="table-responsive">
-              <table class="table  nowrap scroll-horizontal-vertical myTable table-striped w-100">
-                <thead>
-                  <tr>
-                    <th>Nombre y Apellido</th>
-                    <th>Usuario</th>
-                    <th>Pais</th>
-                    <th>Rango</th>
-                    <th>Puntos Grupales</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @foreach ($referals_childrens as $user)
-                    @foreach ($user->children as $user)
-                      @foreach ($user->children as $user)
-                        @foreach ($user->children as $user)
-                          @foreach ($user->children as $user)
-                            @foreach ($user->children as $user)
-                              @foreach ($user->children as $user)
-                                @foreach ($user->children as $user)
-                                  @foreach ($user->children as $user)
-                                    @foreach ($user->children as $user)
-                                      @foreach ($user->children as $user)
-                                        @foreach ($user->children as $user)
-                                          @foreach ($user->children as $user)
-                                          <tr>
-                                            <td>{{"{$user->name} {$user->lastname}"}}</td>
-                                            <td>{{$user->email}}</td>
-                                            <td>{{$user->prefix->name}}</td>
-                                            <td>Sin rango</td>
-                                            <td>Aún No posee</td>
-                                          </tr>
-                                          @endforeach
-                                        @endforeach
-                                      @endforeach
-                                    @endforeach
-                                  @endforeach
-                                @endforeach
-                              @endforeach
-                            @endforeach
-                          @endforeach
-                        @endforeach
-                      @endforeach
-                    @endforeach
-                  @endforeach
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div id="tab-body-14" class="tab-body d-none">
-            <div class="table-responsive">
-              <table class="table  nowrap scroll-horizontal-vertical myTable table-striped w-100">
-                <thead>
-                  <tr>
-                    <th>Nombre y Apellido</th>
-                    <th>Usuario</th>
-                    <th>Pais</th>
-                    <th>Rango</th>
-                    <th>Puntos Grupales</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @foreach ($referals_childrens as $user)
-                    @foreach ($user->children as $user)
-                      @foreach ($user->children as $user)
-                        @foreach ($user->children as $user)
-                          @foreach ($user->children as $user)
-                            @foreach ($user->children as $user)
-                              @foreach ($user->children as $user)
-                                @foreach ($user->children as $user)
-                                  @foreach ($user->children as $user)
-                                    @foreach ($user->children as $user)
-                                      @foreach ($user->children as $user)
-                                        @foreach ($user->children as $user)
-                                          @foreach ($user->children as $user)
-                                            @foreach ($user->children as $user)
-                                            <tr>
-                                              <td>{{"{$user->name} {$user->lastname}"}}</td>
-                                              <td>{{$user->email}}</td>
-                                              <td>{{$user->prefix->name}}</td>
-                                              <td>Sin rango</td>
-                                              <td>Aún No posee</td>
-                                            </tr>
-                                            @endforeach
-                                          @endforeach
-                                        @endforeach
-                                      @endforeach
-                                    @endforeach
-                                  @endforeach
-                                @endforeach
-                              @endforeach
-                            @endforeach
-                          @endforeach
-                        @endforeach
-                      @endforeach
-                    @endforeach
-                  @endforeach
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div id="tab-body-15" class="tab-body d-none">
-            <div class="table-responsive">
-              <table class="table  nowrap scroll-horizontal-vertical myTable table-striped w-100">
-                <thead>
-                  <tr>
-                    <th>Nombre y Apellido</th>
-                    <th>Usuario</th>
-                    <th>Pais</th>
-                    <th>Rango</th>
-                    <th>Puntos Grupales</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @foreach ($referals_childrens as $user)
-                    @foreach ($user->children as $user)
-                      @foreach ($user->children as $user)
-                        @foreach ($user->children as $user)
-                          @foreach ($user->children as $user)
-                            @foreach ($user->children as $user)
-                              @foreach ($user->children as $user)
-                                @foreach ($user->children as $user)
-                                  @foreach ($user->children as $user)
-                                    @foreach ($user->children as $user)
-                                      @foreach ($user->children as $user)
-                                        @foreach ($user->children as $user)
-                                          @foreach ($user->children as $user)
-                                            @foreach ($user->children as $user)
-                                              @foreach ($user->children as $user)
-                                              <tr>
-                                                <td>{{"{$user->name} {$user->lastname}"}}</td>
-                                                <td>{{$user->email}}</td>
-                                                <td>{{$user->prefix->name}}</td>
-                                                <td>Sin rango</td>
-                                                <td>Aún No posee</td>
-                                              </tr>
-                                              @endforeach
-                                            @endforeach
-                                          @endforeach
-                                        @endforeach
-                                      @endforeach
-                                    @endforeach
-                                  @endforeach
-                                @endforeach
-                              @endforeach
-                            @endforeach
-                          @endforeach
-                        @endforeach
-                      @endforeach
-                    @endforeach
-                  @endforeach
-                </tbody>
-              </table>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -795,109 +572,74 @@
 {{-- <script src="{{ asset(mix('js/scripts/cards/card-statistics.js')) }}"></script> --}}
 <script>
   $('#nivel_1').click(()=>{
-    for(i = 1; i <= 15; i++ )
+    for(i = 1; i <= 10; i++ )
     {
       $('#tab-body-'+i).addClass('d-none');
     }
     $('#tab-body-1').removeClass('d-none');
   });
   $('#nivel_2').click(()=>{
-    for(i = 1; i <= 15; i++ )
+    for(i = 1; i <= 10; i++ )
     {
       $('#tab-body-'+i).addClass('d-none');
     }
     $('#tab-body-2').removeClass('d-none');
   });
   $('#nivel_3').click(()=>{
-    for(i = 1; i <= 15; i++ )
+    for(i = 1; i <= 10; i++ )
     {
       $('#tab-body-'+i).addClass('d-none');
     }
     $('#tab-body-3').removeClass('d-none');
   });
   $('#nivel_4').click(()=>{
-    for(i = 1; i <= 15; i++ )
+    for(i = 1; i <= 10; i++ )
     {
       $('#tab-body-'+i).addClass('d-none');
     }
     $('#tab-body-4').removeClass('d-none');
   });
   $('#nivel_5').click(()=>{
-    for(i = 1; i <= 15; i++ )
+    for(i = 1; i <= 10; i++ )
     {
       $('#tab-body-'+i).addClass('d-none');
     }
     $('#tab-body-5').removeClass('d-none');
   });
   $('#nivel_6').click(()=>{
-    for(i = 1; i <= 15; i++ )
+    for(i = 1; i <= 10; i++ )
     {
       $('#tab-body-'+i).addClass('d-none');
     }
     $('#tab-body-6').removeClass('d-none');
   });
   $('#nivel_7').click(()=>{
-    for(i = 1; i <= 15; i++ )
+    for(i = 1; i <= 10; i++ )
     {
       $('#tab-body-'+i).addClass('d-none');
     }
     $('#tab-body-7').removeClass('d-none');
   });
   $('#nivel_8').click(()=>{
-    for(i = 1; i <= 15; i++ )
+    for(i = 1; i <= 10; i++ )
     {
       $('#tab-body-'+i).addClass('d-none');
     }
     $('#tab-body-8').removeClass('d-none');
   });
   $('#nivel_9').click(()=>{
-    for(i = 1; i <= 15; i++ )
+    for(i = 1; i <= 10; i++ )
     {
       $('#tab-body-'+i).addClass('d-none');
     }
     $('#tab-body-9').removeClass('d-none');
   });
   $('#nivel_10').click(()=>{
-    for(i = 1; i <= 15; i++ )
+    for(i = 1; i <= 10; i++ )
     {
       $('#tab-body-'+i).addClass('d-none');
     }
     $('#tab-body-10').removeClass('d-none');
-  });
-  $('#nivel_11').click(()=>{
-    for(i = 1; i <= 15; i++ )
-    {
-      $('#tab-body-'+i).addClass('d-none');
-    }
-    $('#tab-body-11').removeClass('d-none');
-  });
-  $('#nivel_12').click(()=>{
-      for(i = 1; i <= 15; i++ )
-      {
-        $('#tab-body-'+i).addClass('d-none');
-      }
-      $('#tab-body-12').removeClass('d-none');
-  });
-  $('#nivel_13').click(()=>{
-    for(i = 1; i <= 15; i++ )
-    {
-      $('#tab-body-'+i).addClass('d-none');
-    }
-    $('#tab-body-13').removeClass('d-none');
-  });
-  $('#nivel_14').click(()=>{
-    for(i = 1; i <= 15; i++ )
-    {
-      $('#tab-body-'+i).addClass('d-none');
-    }
-    $('#tab-body-14').removeClass('d-none');
-  });
-  $('#nivel_15').click(()=>{
-    for(i = 1; i <= 15; i++ )
-    {
-      $('#tab-body-'+i).addClass('d-none');
-    }
-    $('#tab-body-15').removeClass('d-none');
   });
   $('.myTable').DataTable({
     responsive: true,
@@ -940,7 +682,7 @@
         function IsNumeric(val) {
             return Number(parseFloat(val)) === val;
         }
-        //REESTAURA VALOR DE CAMPOS 
+        //REESTAURA VALOR DE CAMPOS
         $("#restaurar").click(function() {
             setTimeout(function() {
                 window.location = '{{ route('wallet.index') }}';

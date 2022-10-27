@@ -106,7 +106,7 @@
                     "slug": "red.binario"
                 },
                 {
-                    "url": "/red/referred/tree",
+                    "url": "/red/referred/tree/1",
                     "name": "Arbol de referidos",
                     "icon": "circle",
                     "slug": "referred.tree"

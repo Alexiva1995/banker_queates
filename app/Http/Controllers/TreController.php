@@ -38,12 +38,11 @@ class TreController extends Controller
         // */
         // }
     }
-    public function referredTree()
+    public function referredTree($tree)
     {
         try {
             $base = Auth::user();
-            $tree = 1;
-            $trees = $this->getDataEstructura(Auth::id());
+            $trees = $this->getDataEstructura(Auth::id(), $tree);
             $base->logoarbol = asset('images/avatars/1.png');
             $lastLevelActive = Level::where('status', '1')->orderBy('id', 'desc')->first();
             return view('genealogy.tree', compact('trees', 'base', 'lastLevelActive', 'tree'));
@@ -56,7 +55,7 @@ class TreController extends Controller
     public function binario()
     {
         $user = Auth::user();
-        $direct_childres = User::where('buyer_id', $user->id)->get();
+        $direct_childres = User::where('binary_id', $user->id)->get();
         $referals_childrens =  $this->getChildren($direct_childres, 1);
         $lastLevelActive = Level::where('status', 1)->orderBy('id', 'desc')->first();
         return view('binario.index', compact('referals_childrens', 'lastLevelActive'));
@@ -101,7 +100,7 @@ class TreController extends Controller
 
         try {
             // titulo
-            $trees = $this->getDataEstructura($request->id);
+            $trees = $this->getDataEstructura($request->id, null);
             //$type = ucfirst($type);
             $base = User::find($request->id);
             $base->logoarbol = asset('assets/img/sistema/favicon.png');
@@ -120,7 +119,7 @@ class TreController extends Controller
         try {
             // titulo
             $id = base64_decode($id);
-            $trees = $this->getDataEstructura($id);
+            $trees = $this->getDataEstructura($id, null);
             //$type = ucfirst($type);
             $base = User::find($id);
             $base->logoarbol = asset('assets/img/sistema/favicon.png');
@@ -134,11 +133,11 @@ class TreController extends Controller
         }
     }
 
-    private function getDataEstructura($id)
+    private function getDataEstructura($id, $tree)
     {
         try {
 
-            $childres = $this->getData($id, 1);
+            $childres = $this->getData($id, 1, $tree);
             $trees = $this->getChildren($childres, 2);
             return $trees;
         } catch (\Throwable $th) {
@@ -153,7 +152,7 @@ class TreController extends Controller
         try {
             if (!empty($users)) {
                 foreach ($users as $user) {
-                    $user->children = $this->getData($user->id, $nivel);
+                    $user->children = $this->getData($user->id, $nivel, null);
 
                     $this->getChildren($user->children, ($nivel+1));
                 }
@@ -181,7 +180,7 @@ class TreController extends Controller
             if (!empty($users))
             {
                 foreach ($users as $user) {
-                    $user->children = $this->getData($user->id, $nivel);
+                    $user->children = $this->getData($user->id, $nivel, null);
                     $nivel++;
                     $count++;
                     $count = $this->getChildrenCount($user->children, $nivel, $count);
@@ -204,10 +203,13 @@ class TreController extends Controller
      * @param string $typeTree - tipo de arbol a usar
      * @return object
      */
-    private function getData($id, $nivel)
+    private function getData($id, $nivel, $tree)
     {
         try {
             $resul = User::where('buyer_id', $id)->get();
+            if ($tree == 2) {
+            $resul = User::where('binary_id', $id)->get();
+            }
             foreach ($resul as $user) {
                 $user->nivel = $nivel;
                 $user->logoarbol = asset('assets/img/sistema/favicon.png');

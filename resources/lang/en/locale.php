@@ -201,5 +201,6 @@ return [
     "Paquetes" => "Paquetes",
     "bono pamm" => "bono pamm",
     "Edicion de saldo"=>"Edicion de saldo",
-    "Binario" => "Binario"
+    "Binario" => "Binario",
+    "Buscar referido" => "Buscar referido"
 ];
