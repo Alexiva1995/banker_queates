@@ -2,21 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Coinbase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
 use App\Models\MembershipPackage;
 use App\Models\MembershipType;
-use App\Models\Member;
 use App\Http\Traits\Tree;
 use Hexters\CoinPayment\CoinPayment;
 use App\Http\Controllers\InversionController;
 use App\Models\User;
 use App\Events\UserEvent;
 use App\Models\Investment;
-use App\Models\PoolGlobal;
 use App\Models\Upgrade;
 use App\Models\WalletPayment;
 use App\Services\BonusService;
@@ -24,15 +21,18 @@ use App\Services\FutswapService;
 use Illuminate\Support\Facades\DB;
 use App\Models\Level;
 use App\Models\LicensePackage;
+use App\Services\PointsService;
 
 class TiendaController extends Controller
 {
     use Tree;
+    protected $pointsService;
 
-    public function __construct(FutswapService $futswapService = null)
+    public function __construct(FutswapService $futswapService = null, PointsService $pointsService)
     {
         $this->futswap = $futswapService;
         $this->InversionController = new InversionController;
+        $this->pointsService = $pointsService;
     }
 
     public function marketLicences(Request $request)
@@ -244,8 +244,9 @@ class TiendaController extends Controller
             }
             
             // Genera los puntos binarios
-            app(BonusService::class)->assignPointsbinarioRecursively($orden->user, $orden->amount, $orden->id);
-
+            app(BonusService::class)->assignPointsbinarioRecursively($orden->user, $orden->licensePackage->binary_points, $orden->id);
+            // Genera los puntos por compra de licencias en linea multinivel
+            $this->pointsService->assignPointsRangeRecursively($orden->user, $orden->licensePackage->leadership_points, $orden);
         }
 
         return back()->with('success', 'Orden actualizada exitosamente');

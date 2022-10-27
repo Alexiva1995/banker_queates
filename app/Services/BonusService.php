@@ -287,7 +287,6 @@ class BonusService
                                     ->where('package_id', '>=', 2)
                                     ->first();
             if ($user->binary_side == 'R') {
-                dd('derecha');
                 if (isset($order->id)) {
                     if ($menberpadre != null) {
                         BinaryPoint::updateOrCreate([
