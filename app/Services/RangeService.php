@@ -184,7 +184,7 @@ class RangeService
                 }
             }
 
-            // Si tienen mas de 100k de puntos lo limitamos a 100k. Si es menor se deja el valor por defecto.
+            // Si tienen mas de 500k de puntos lo limitamos a 100k. Si es menor se deja el valor por defecto.
             $right_points = $user->getRightRangePoints() > 500000 ? 500000 : $user->getRightRangePoints();
             $left_points = $user->getLeftRangePoints() > 500000 ? 500000 : $user->getLeftRangePoints();
 
@@ -226,7 +226,7 @@ class RangeService
 
         $total = $left_side + $right_side;
 
-        // Si tienen mas de 100k de puntos lo limitamos a 100k. Si es menor se deja el valor por defecto.
+        // Si tienen mas de 1.25m de puntos lo limitamos a 1.25m. Si es menor se deja el valor por defecto.
         $right_points = $user->getRightRangePoints() > 1250000 ? 1250000 : $user->getRightRangePoints();
         $left_points = $user->getLeftRangePoints() > 1250000 ? 1250000 : $user->getLeftRangePoints();
 
