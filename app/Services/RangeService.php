@@ -3,11 +3,25 @@
 namespace App\Services;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
+
 /**
  * Class RangeService.
  */
 class RangeService
 {
+    // Esta variable contiene los usuarios pertenecientes al arbol binario del usuario
+    protected $array_childrens;
+    // Esta variable es un array que contiene a todos los hijos del lado derecho del arbol binario del usuario
+    protected $right_childrens;
+    // Esta variable es un array que contiene a todos los gijos del lado izquierdo del adbol binario del usuario
+    protected $left_childrens;
+    /*
+    *  Variable que sirve para definir en que variable se van a guardar el resutlado del recorrido para obtener el arbol
+    *  0 - Todos, 1 - Lado derecho, 2 - Lado Izquierdo.
+    */
+    protected $case;
+
     /**
      * Asigna el rango correspondiente a los usuarios.
      */
@@ -32,10 +46,37 @@ class RangeService
     {
         // Si el usuario no tiene rango, inicia la validación desde el primero. De lo contrario se envia directo a evaluar desde el rango 2
         if ( $user->range_id === null ) 
-        {
-            foreach($user->referidos as $children) 
+        {   
+            // Seteamos a caso 0 para traer todos los hijos, tanto de izquierda como derecha.
+            $this->case = 0;
+            // Obtenemos la lista de referidos
+            $this->getTreeUsers( $users_array = [], $level = 1, [$user->id] );
+
+            /*
+             - Seteamos a caso 1 para traer los hijos por el lado derecho del arbol
+             - Obtenemos los id de los referidos directos del lado derecho en un array
+             - Incluimos a estos usuarios en el array inicial del lado derecho
+             - Obtenemos la lista de referidos por lado derecho la cual se concadenara con los direchos del lado derecho
+            */
+            $this->case = 1;
+            $right_direct_childrens_array = $user->binaryChildrens->where('binary_side', 'R')->pluck('id')->toArray();
+            $right_childrens = $user->binaryChildrens->whereIn('id', $right_direct_childrens_array)->toArray();
+            $this->getTreeUsers( $right_childrens, $level = 1, $right_direct_childrens_array );
+
+            /*
+             - Seteamos a caso 2 para traer los hijos por el lado derecho del arbol
+             - Obtenemos los id de los referidos directos del lado derecho en un array
+             - Incluimos a estos usuarios en el array inicial del lado derecho
+             - Obtenemos la lista de referidos por lado derecho la cual se concadenara con los direchos del lado derecho
+            */
+            $this->case = 2;
+            $left_direct_childrens_array = $user->binaryChildrens->where('binary_side', 'L')->pluck('id')->toArray();
+            $left_childrens = $user->binaryChildrens->whereIn('id', $left_direct_childrens_array)->toArray();
+            $this->getTreeUsers( $left_childrens, $level = 1, $left_direct_childrens_array );
+            
+            foreach($this->array_childrens as $children) 
             {
-                if($children->hasActiveLicense()) 
+                if( $children->hasActiveLicense() ) 
                 {
                     $user->update(['range_id' => 1]);
                     // Como obtuvo el rango 1 se envia evaluar al rango 2 - Qualified Consultant
@@ -87,18 +128,32 @@ class RangeService
         {
             $left_side = 0;
             $right_side = 0;
-    
-            foreach($user->binaryChildrens as $children) 
+
+
+            // Recorremos la lista de usuarios del lado derecho y comprobamos
+            foreach($this->right_childrens as $children) 
             {
                 // Preguntamos si este hijo tiene rango
-                if( $children->range_id !== null ) 
+                if( $children['range_id'] !== null ) 
                 {
                     // De tenerlo preguntamos si es Qualified Consultant
-                    if( $children->range_id >= 2) 
+                    if( $children['range_id'] >= 2) 
                     {
-                        if($children->binary_side === 'L') $left_side++;
-                        
-                        if($children->binary_side === 'R') $right_side++;
+                        $right_side++;
+                    }
+                }
+            }
+
+            // Recorremos la lista de usuarios del lado izquierdo y comprobamos
+            foreach($this->left_childrens as $children) 
+            {
+                // Preguntamos si este hijo tiene rango
+                if( $children['range_id'] !== null ) 
+                {
+                    // De tenerlo preguntamos si es Qualified Consultant
+                    if( $children['range_id'] >= 2) 
+                    {
+                        $left_side++;
                     }
                 }
             }
@@ -106,11 +161,11 @@ class RangeService
             if( $left_side >= 2 && $right_side >= 2 && $user->getTotalRangePoints() >= 75000 )
             {
                 $user->update(['range_id' => 3]);
-                $this->rubyRange($user);
+                // $this->rubyRange($user);
             }
 
         } else {
-            $this->rubyRange($user);
+            // $this->rubyRange($user);
         }
     }
     /**
@@ -234,5 +289,48 @@ class RangeService
         {
             $user->update(['range_id' => 6]);
         }
+    }
+    /**
+     * Recorre el arbol de referidos de un usuario hasta el nivel 4
+     * @param Array $users - El array que retorna son los usuarios hasta el nivel descrito
+     * @param Integer $nivel -  El nivel hasta el cual se desea hacer el recorrido
+     * @param Array $users_ids - Contiene los ids de los usuarios para buscar sus hijos
+     * @return Array Retorna un array con todos los ids de su arbol
+     */
+    public function getTreeUsers($users = [], $nivel = 1, $users_ids = [])
+    {
+        // Obtenemos los referidos directos de todos los ids que recibimos en el array users_ids
+        $usersLevel = User::whereIn('binary_id', $users_ids)->get();
+
+        // Recorremos el array obtenido y pusheamos cada id en un nuevo array
+        foreach ($usersLevel as $userLevel) 
+        {
+            array_push($users, $userLevel);            
+        }
+
+        $users_ids = [];
+
+        foreach ($usersLevel as $userLevel) 
+        {
+            array_push($users_ids, $userLevel->id);          
+        }
+        // Evaluamos hasta 4 niveles de profundidad
+        if( $nivel == 4 ) 
+        {
+            // Asignamos el resultado a la variable correspondiente y finalizamos el ciclo con el return.
+            if($this->case == 0)
+            {
+                $this->array_childrens = $users;
+            } else if($this->case == 1) 
+            {
+                $this->right_childrens = $users;
+            } else if($this->case == 2) 
+            {
+                $this->left_childrens = $users;
+            }
+            return;
+        }
+
+        $this->getTreeUsers($users, $nivel + 1, $users_ids);
     }
 }
