@@ -3,19 +3,17 @@
 namespace App\Services;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Log;
-
 /**
  * Class RangeService.
  */
 class RangeService
 {
     // Esta variable contiene los usuarios pertenecientes al arbol binario del usuario
-    protected $array_childrens;
+    protected $array_childrens = [];
     // Esta variable es un array que contiene a todos los hijos del lado derecho del arbol binario del usuario
-    protected $right_childrens;
+    protected $right_childrens = [];
     // Esta variable es un array que contiene a todos los gijos del lado izquierdo del adbol binario del usuario
-    protected $left_childrens;
+    protected $left_childrens = [];
     /*
     *  Variable que sirve para definir en que variable se van a guardar el resutlado del recorrido para obtener el arbol
     *  0 - Todos, 1 - Lado derecho, 2 - Lado Izquierdo.
@@ -35,18 +33,6 @@ class RangeService
 
         foreach ($users as $user) 
         {
-            $this->consultantRange($user);
-        }
-    }
-    /**
-     * Verifica si el usuario es apto para el rango 1 - Consultant y lo asigna. 
-     * Para obtener este rango el usuario debe tener un afiliado que tenga una licencia activa
-     */
-    private function consultantRange(User $user) 
-    {
-        // Si el usuario no tiene rango, inicia la validación desde el primero. De lo contrario se envia directo a evaluar desde el rango 2
-        if ( $user->range_id === null ) 
-        {   
             // Seteamos a caso 0 para traer todos los hijos, tanto de izquierda como derecha.
             $this->case = 0;
             // Obtenemos la lista de referidos
@@ -73,7 +59,19 @@ class RangeService
             $left_direct_childrens_array = $user->binaryChildrens->where('binary_side', 'L')->pluck('id')->toArray();
             $left_childrens = $user->binaryChildrens->whereIn('id', $left_direct_childrens_array)->toArray();
             $this->getTreeUsers( $left_childrens, $level = 1, $left_direct_childrens_array );
-            
+
+            $this->consultantRange($user);
+        }
+    }
+    /**
+     * Verifica si el usuario es apto para el rango 1 - Consultant y lo asigna. 
+     * Para obtener este rango el usuario debe tener un afiliado que tenga una licencia activa
+     */
+    private function consultantRange(User $user) 
+    {
+        // Si el usuario no tiene rango, inicia la validación desde el primero. De lo contrario se envia directo a evaluar desde el rango 2
+        if ( $user->range_id === null ) 
+        {   
             foreach($this->array_childrens as $children) 
             {
                 if( $children->hasActiveLicense() ) 
@@ -129,7 +127,6 @@ class RangeService
             $left_side = 0;
             $right_side = 0;
 
-
             // Recorremos la lista de usuarios del lado derecho y comprobamos
             foreach($this->right_childrens as $children) 
             {
@@ -161,11 +158,11 @@ class RangeService
             if( $left_side >= 2 && $right_side >= 2 && $user->getTotalRangePoints() >= 75000 )
             {
                 $user->update(['range_id' => 3]);
-                // $this->rubyRange($user);
+                $this->rubyRange($user);
             }
 
         } else {
-            // $this->rubyRange($user);
+            $this->rubyRange($user);
         }
     }
     /**
@@ -182,20 +179,34 @@ class RangeService
             $left_side = 0;
             $right_side = 0;
 
-            foreach($user->binaryChildrens as $children) 
+            // Recorremos la lista de usuarios del lado derecho y comprobamos
+            foreach($this->right_childrens as $children) 
             {
                 // Preguntamos si este hijo tiene rango
-                if( $children->range_id !== null ) 
+                if( $children['range_id'] !== null ) 
                 {
                     // De tenerlo preguntamos si es Sapphire
-                    if( $children->range_id >= 3) 
+                    if( $children['range_id'] >= 3) 
                     {
-                        if($children->binary_side === 'L') $left_side++;
-                        
-                        if($children->binary_side === 'R') $right_side++;
+                        $right_side++;
                     }
                 }
             }
+
+            // Recorremos la lista de usuarios del lado izquierdo y comprobamos
+            foreach($this->left_childrens as $children) 
+            {
+                // Preguntamos si este hijo tiene rango
+                if( $children['range_id'] !== null ) 
+                {
+                    // De tenerlo preguntamos si es Sapphire
+                    if( $children['range_id'] >= 3) 
+                    {
+                        $left_side++;
+                    }
+                }
+            }
+
             // Si tienen mas de 100k de puntos lo limitamos a 100k. Si es menor se deja el valor por defecto.
             $right_points = $user->getRightRangePoints() > 100000 ? 100000 : $user->getRightRangePoints();
             $left_points = $user->getLeftRangePoints() > 100000 ? 100000 : $user->getLeftRangePoints();
@@ -212,7 +223,7 @@ class RangeService
     }
     /**
      * Verifica si el usuario es apto para el rango 5 - Emerald y lo asigna. 
-     * Para obtener este  require 2 Ruby’s 1 de cada lado y 1,000,000 volumen puntos en su organización.
+     * Para obtener este  require 2 Ruby’s, 1 de cada lado y 1,000,000 volumen puntos en su organización.
      * Solo puede obtener 500,000 Puntos máximo de un equipo
      */
     private function emeraldRange(User $user)
@@ -224,17 +235,30 @@ class RangeService
             $left_side = 0;
             $right_side = 0;
 
-            foreach($user->binaryChildrens as $children) 
+            // Recorremos la lista de usuarios del lado derecho y comprobamos
+            foreach($this->right_childrens as $children) 
             {
                 // Preguntamos si este hijo tiene rango
-                if( $children->range_id !== null ) 
+                if( $children['range_id'] !== null ) 
                 {
-                    // De tenerlo preguntamos si es Ruby
-                    if( $children->range_id >= 4) 
+                    // De tenerlo preguntamos si es Ruby o mayor
+                    if( $children['range_id'] >= 4) 
                     {
-                        if($children->binary_side === 'L') $left_side++;
-                        
-                        if($children->binary_side === 'R') $right_side++;
+                        $right_side++;
+                    }
+                }
+            }
+
+            // Recorremos la lista de usuarios del lado izquierdo y comprobamos
+            foreach($this->left_childrens as $children) 
+            {
+                // Preguntamos si este hijo tiene rango
+                if( $children['range_id'] !== null ) 
+                {
+                    // De tenerlo preguntamos si es Ruby o mayor
+                    if( $children['range_id'] >= 4) 
+                    {
+                        $left_side++;
                     }
                 }
             }
@@ -264,17 +288,30 @@ class RangeService
         $left_side = 0;
         $right_side = 0;
 
-        foreach($user->binaryChildrens as $children) 
+        // Recorremos la lista de usuarios del lado derecho y comprobamos
+        foreach($this->right_childrens as $children) 
         {
             // Preguntamos si este hijo tiene rango
-            if( $children->range_id !== null ) 
+            if( $children['range_id'] !== null ) 
             {
-                // De tenerlo preguntamos si es Emerald
-                if( $children->range_id >= 5) 
+                // De tenerlo preguntamos si es emerald
+                if( $children['range_id'] >= 5 && $right_side < 2) 
                 {
-                    if($children->binary_side === 'L' && $left_side < 2 ) $left_side++;
-                    
-                    if($children->binary_side === 'R' && $right_side < 2) $right_side++;
+                    $right_side++;
+                }
+            }
+        }
+
+        // Recorremos la lista de usuarios del lado izquierdo y comprobamos
+        foreach($this->left_childrens as $children) 
+        {
+            // Preguntamos si este hijo tiene rango
+            if( $children['range_id'] !== null && $left_side < 2 ) 
+            {
+                // De tenerlo preguntamos si es emerald
+                if( $children['range_id'] >= 5 && $left_side < 2) 
+                {
+                    $left_side++;
                 }
             }
         }
@@ -295,7 +332,6 @@ class RangeService
      * @param Array $users - El array que retorna son los usuarios hasta el nivel descrito
      * @param Integer $nivel -  El nivel hasta el cual se desea hacer el recorrido
      * @param Array $users_ids - Contiene los ids de los usuarios para buscar sus hijos
-     * @return Array Retorna un array con todos los ids de su arbol
      */
     public function getTreeUsers($users = [], $nivel = 1, $users_ids = [])
     {
@@ -314,6 +350,7 @@ class RangeService
         {
             array_push($users_ids, $userLevel->id);          
         }
+        
         // Evaluamos hasta 4 niveles de profundidad
         if( $nivel == 4 ) 
         {
