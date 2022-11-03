@@ -220,10 +220,9 @@ class User extends Authenticatable implements MustVerifyEmail
     public function hasActiveLicense()
     {
         $investment = Investment::where('user_id', $this->id)->where('status', 1)->first();
-        if($investment)
-        {
-            return true;
-        }
+        
+        if($investment) return true;
+        
         return false;
     }
 

@@ -73,8 +73,8 @@ class BinaryController extends Controller
                         if ($id != 1) {
                             if ($menber != null) {
                                 // Se aplica el 20%
-                                $bonus_t = $point_right * 0.20;
-                                $this->createBonusBinary($id,$bonus_t, $point_right, $user_referred);
+                                $bonus_t = $point_left * 0.20;
+                                $this->createBonusBinary($id,$bonus_t, $point_left, $user_referred);
                             }
                             // Asignamos cada elemento a la lista en la cual correspondan.
                             foreach ($binary_points as $binary_point) {
@@ -116,7 +116,7 @@ class BinaryController extends Controller
     /**
      * Crea el bono binario por el lado derecho 
      */
-    private function createBonusBinary($id, $bonus_t, $point_right, $user_referred)
+    private function createBonusBinary($id, $bonus_t, $points, $user_referred)
     {
         if ($bonus_t != 0) {
             WalletComission::Create([
@@ -125,7 +125,7 @@ class BinaryController extends Controller
                 'user_id' => $id,
                 'amount' => $bonus_t,
                 'buyer_id' => $user_referred->buyer_id,
-                'description' => "Puntos que se utilizaron para generar el bono {$point_right}"
+                'description' => "Puntos que se utilizaron para generar el bono {$points}"
             ]);
         }
     }
