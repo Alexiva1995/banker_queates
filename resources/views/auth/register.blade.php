@@ -54,13 +54,12 @@ $referred = null;
 @endphp
 @if ( request()->buyer_id != null )
 @php
-$ref_id=request()->buyer_id+0;
+$ref_id=request()->buyer_id;
 $referred = DB::table('users')
 ->where('id', '=', $ref_id)
 ->first();
 @endphp
 @endif
-
 <div id="bg">
     <!--  <img src="{{asset('images/login/bg-login.png')}}" /> -->
  </div>

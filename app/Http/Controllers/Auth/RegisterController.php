@@ -83,10 +83,11 @@ class RegisterController extends Controller
      */
     protected function create(Request $request)
     {   
+        // return $request;
         // dd(intval($request['buyer_id']));
         $this->Validator($request);
-        $binary_side = '';
-        $binary_id = 0;
+        $binary_side = 'R';
+        $binary_id = 1;
         if (isset($request->buyer_id)) {
             $userR = User::findOrFail($request['buyer_id']);
             $binary_id = $this->treController->getPosition(intval($request['buyer_id']),$request['binary'], $request['binary']);
