@@ -149,6 +149,7 @@ class UserController extends Controller
     }
     public function update(Request $request)
     {
+
         $user = User::find(Auth::user()->id);
 
         $data = $request->validate([
@@ -156,12 +157,14 @@ class UserController extends Controller
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id, 'id')],
             'phone' => 'required',
             'last_name' => 'required',
+            'countrie_id' => 'required'
         ]);
 
         $user->name = $data['name'];
         $user->last_name = $data['last_name'];
         $user->email = $data['email'];
         $user->phone = $data['phone'];
+        $user->countrie_id = $data['countrie_id'];
         if ( $request->has('gender') ) $user->gender = $request->input('gender');
         
         $user->save();
@@ -198,7 +201,7 @@ class UserController extends Controller
     {
         $user = User::find(Auth::user()->id);
         $request->validate([
-            'photo' => 'required'
+            'photo' => 'required|image|size:800'
         ]);
 
         $user->update($request->all());

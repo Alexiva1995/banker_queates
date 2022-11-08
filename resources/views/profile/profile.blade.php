@@ -7,6 +7,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 @endsection
 
+@section('vendor-style')
+<link rel="stylesheet" href="{{ asset(mix('vendors/css/forms/select/select2.min.css')) }}">
+@endsection
+
 @section('content')
     <style>
         .fw-700 {
@@ -172,16 +176,23 @@
                                                 <div class="col-sm-6">
                                                     <label for="" class=" fw-500">País <label
                                                             style="color: red;">*</label></label>
-                                                    <div class="input-group mb-1">
-                                                        @if ($user->prefix_id != null)
-                                                            <input type="text" name="prefix_id" class="form-control"
-                                                                placeholder="Bogotá" value="{{ $user->prefix->pais }}"
-                                                                disabled>
-                                                        @else
-                                                            <input type="text" name="prefix_id" class="form-control"
-                                                                placeholder="Bogotá" disabled>
-                                                        @endif
+
+                                                    <div class="input-group mb-2 shadow-none">
+                                                        <select id="countrie_id" class="rounded form-control text-dark shadow-none" name="countrie_id" required>
+
+                                                            @if($user->prefix_id  != null)
+                                                                <option value="{{$user->prefix_id}}" >{ {$user->prefix->pais }}</option>
+                                                            @else
+                                                                <option>Ingresa o selecciona un país</option>
+                                                            @endif
+
+                                                            @foreach($prefix as $prefixes)
+                                                                <option value="{{$prefixes->id}}" {{old('prefixes') == $prefixes->id ? 'selected' : ''}}>{{$prefixes->name}}</option>
+                                                            @endforeach
+
+                                                        </select>
                                                     </div>
+                                                    
                                                 </div>
 
                                                 <div class="col-sm-6">
@@ -292,6 +303,8 @@
     @include('profile.components.style')
     @include('profile.components.modal-photo')
     <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{{ asset(mix('vendors/js/forms/select/select2.full.min.js')) }}"></script>
+
     <script>
         let btnModalphoto = document.querySelector('#btnModalphoto');
         btnModalphoto.addEventListener("click", function(event) {
@@ -318,5 +331,8 @@
                 window.location = '{{ route('profile.profile') }}';
             });
         });
+
+        $('#countrie_id').select2();
+
     </script>
 @endsection
