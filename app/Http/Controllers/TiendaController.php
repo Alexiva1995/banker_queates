@@ -20,7 +20,7 @@ use App\Services\FutswapService;
 use Illuminate\Support\Facades\DB;
 use App\Models\Level;
 use App\Models\LicensePackage;
-use App\Models\WalletPayment;
+use App\Models\walletPayment as WalletPayment;
 use App\Services\PointsService;
 
 class TiendaController extends Controller
