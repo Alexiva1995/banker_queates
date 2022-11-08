@@ -141,31 +141,33 @@ class BinaryController extends Controller
         // For para recorrer cada elemento de la lista del lado menor y realizar la resta
         for ($i = 0; $i < count($lista_saldo_menor); $i++) {
             // Realizamos la resta entre el item de la pierna mayor, menos el item de la pierna menor
-            $lista_saldo_mayor[$contador]->left_points -= $lista_saldo_menor[$i]->right_points;
+            $result = $lista_saldo_mayor[$contador]->left_points -= $lista_saldo_menor[$i]->right_points;
 
             // Si el resultado de la resta es un numero positivo, seguimos restando con ese elemento,
             // Y actualizamos el elemento menor restado a amount 0 y status 1
-            if ($lista_saldo_mayor[$contador]->left_points > 0) {
+            if ($result > 0) {
                 $lista_saldo_menor[$i]->right_points = 0;
                 $lista_saldo_menor[$i]->status = 1;
                 $lista_saldo_mayor[$contador]->update();
+                $lista_saldo_menor[$i]->update();
 
                 //Si el resultado de la resta es un número negativo, asignamos ese resultado
-            } else if ($lista_saldo_mayor[$contador]->left_points <= 0) {
-                // Asignamos el número negativo al elemento de la pierna menor, multiplicandolo por -1 para guardarlo
-                // como positivo.
+            } else if ($result < 0) {
+                // Asignamos el número negativo al elemento de la pierna menor, multiplicandolo por -1 para guardarlo como positivo.
                 // Y actualizamos el elemento de la lista de la pierna mayor a 0 y status 1
-                $lista_saldo_menor[$i]->right_points = $lista_saldo_mayor[$contador]->left_points * -1;
+                $lista_saldo_menor[$i]->right_points = $result * -1;
+                $lista_saldo_menor[$i]->update();
                 $lista_saldo_mayor[$contador]->left_points = 0;
                 $lista_saldo_mayor[$contador]->status = 1;
-
                 $lista_saldo_mayor[$contador]->update();
 
                 $contador++;
-                
                 $i--;
+            } else {
+                $lista_saldo_menor[$i]->update(['status' => 1, 'right_points' => 0]);
+                $lista_saldo_menor[$contador]->status = 1;
+                $lista_saldo_mayor[$contador]->update();
             }
-            $lista_saldo_menor[$i]->update();
         }
     }
     /**
@@ -179,32 +181,36 @@ class BinaryController extends Controller
         $contador = 0;
         // For para recorrer cada elemento de la lista del lado menor y realizar la resta
         for ($i = 0; $i < count($lista_saldo_menor); $i++) {
+
             // Realizamos la resta entre el item de la pierna mayor, menos el item de la pierna menor
-            $lista_saldo_mayor[$contador]->right_points -= $lista_saldo_menor[$i]->left_points;
+            $result = $lista_saldo_mayor[$contador]->right_points -= $lista_saldo_menor[$i]->left_points;
 
             // Si el resultado de la resta es un numero positivo, seguimos restando con ese elemento,
             // Y actualizamos el elemento menor restado a amount 0 y status 1
-            if ($lista_saldo_mayor[$contador]->right_points > 0) {
+            if ($result > 0) {
                 $lista_saldo_menor[$i]->left_points = 0;
                 $lista_saldo_menor[$i]->status = 1;
                 $lista_saldo_mayor[$contador]->update();
+                $lista_saldo_menor[$i]->update();
 
                 //Si el resultado de la resta es un número negativo, asignamos ese resultado
-            } else if ($lista_saldo_mayor[$contador]->right_points <= 0) {
-                // Asignamos el número negativo al elemento de la pierna menor, multiplicandolo por -1 para guardarlo
-                // como positivo.
+            } else if ($result < 0) {
+                // Asignamos el número negativo al elemento de la pierna menor, multiplicandolo por -1 para guardarlo como positivo.
                 // Y actualizamos el elemento de la lista de la pierna mayor a 0 y status 1
-                $lista_saldo_menor[$i]->left_points = $lista_saldo_mayor[$contador]->right_points * -1;
+                $lista_saldo_menor[$i]->left_points = $result * -1;
                 $lista_saldo_mayor[$contador]->right_points = 0;
                 $lista_saldo_mayor[$contador]->status = 1;
-
+                $lista_saldo_menor[$i]->update();
                 $lista_saldo_mayor[$contador]->update();
 
                 $contador++;
-                
                 $i--;
+                // Si el resultado es igual a 0
+            } else {
+                $lista_saldo_menor[$i]->update(['status' => 1, 'left_points' => 0]);
+                $lista_saldo_menor[$contador]->status = 1;
+                $lista_saldo_mayor[$contador]->update();
             }
-            $lista_saldo_menor[$i]->update();
         }
     }
     /**

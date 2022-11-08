@@ -15,12 +15,12 @@ use App\Models\User;
 use App\Events\UserEvent;
 use App\Models\Investment;
 use App\Models\Upgrade;
-use App\Models\WalletPayment;
 use App\Services\BonusService;
 use App\Services\FutswapService;
 use Illuminate\Support\Facades\DB;
 use App\Models\Level;
 use App\Models\LicensePackage;
+use App\Models\walletPayment as WalletPayment;
 use App\Services\PointsService;
 
 class TiendaController extends Controller

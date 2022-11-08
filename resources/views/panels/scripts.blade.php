@@ -30,7 +30,7 @@
   function getlink() {
     var aux = document.createElement("input");
     const lado = document.getElementById('binary').value;
-    lado ? aux.setAttribute("value", "{{route('register')}}?buyer_id={{Auth::id()}}&binary="+lado) : aux.setAttribute("value", "{{route('register')}}?referred_id={{Auth::id()}}&binary=L");
+    lado ? aux.setAttribute("value", "{{route('register')}}?buyer_id={{Auth::id()}}&binary="+lado) : aux.setAttribute("value", "{{route('register')}}?buyer_id={{Auth::id()}}&binary=L");
     document.body.appendChild(aux);
     aux.select();
     document.execCommand("copy");
