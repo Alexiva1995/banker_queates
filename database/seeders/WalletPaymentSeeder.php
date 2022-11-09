@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\WalletPayment;
+use Illuminate\Support\Facades\DB;
 
 class WalletPaymentSeeder extends Seeder
 {
@@ -33,8 +33,7 @@ class WalletPaymentSeeder extends Seeder
 
         ];
 
-        foreach ($arrayWallets as $wallet ) {
-	        WalletPayment::create($wallet);
-	    }
+        DB::table('wallet_payments')->insert($arrayWallets);
+
     }
 }

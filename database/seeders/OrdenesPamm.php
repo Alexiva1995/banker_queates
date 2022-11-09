@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\Orden_pamm;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
 class OrdenesPamm extends Seeder
 {
     /**
@@ -13,25 +15,27 @@ class OrdenesPamm extends Seeder
      */
     public function run()
     {
-        Orden_pamm ::create([
-            'user_id'=>7,
-            'monto'=>100,
-            'status'=>'0',
-            'fecha'=>'2022-03-08 15:52:21'
-        ]);
+        $orders = [
+            [
+                'user_id'=>7,
+                'monto'=>100,
+                'status'=>'0',
+                'fecha'=>'2022-03-08 15:52:21'
+            ],
+            [
+                'user_id'=>4,
+                'monto'=>1000,
+                'status'=>'0',
+                'fecha'=>'2022-03-08 15:52:21'
+            ],
+            [
+                'user_id'=>1,
+                'monto'=>300,
+                'status'=>'0',
+                'fecha'=>'2022-03-08 15:52:21'
+            ]
+        ];
 
-         Orden_pamm ::create([
-            'user_id'=>4,
-            'monto'=>1000,
-            'status'=>'0',
-            'fecha'=>'2022-03-08 15:52:21'
-        ]);
-
-        Orden_pamm ::create([
-            'user_id'=>1,
-            'monto'=>300,
-            'status'=>'0',
-            'fecha'=>'2022-03-08 15:52:21'
-        ]);
+        DB::table('orden_pamms')->insert($orders);
     }
 }
