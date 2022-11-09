@@ -34,12 +34,6 @@
                     "name": "Retiros",
                     "icon": "circle",
                     "slug": "reports.withdraw"
-                },
-                {
-                    "url": "/reports/utility",
-                    "name": "Utilidades",
-                    "icon": "circle",
-                    "slug": "reports.utility"
                 }
             ]
         },
