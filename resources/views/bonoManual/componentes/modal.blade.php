@@ -79,6 +79,12 @@
                                         <input type="hidden" id="user_id{{$user->id}}" value="{{$user->id}}">
                                     </div>
                                 </div>
+                                <div class="col-6">
+                                    <div class="mb-1">
+                                      <label   class="form-label">Descripcion</label>
+                                      <input  type="text" class="form-control" id="description{{$user->id}}">
+                                    </div>
+                                </div>
 
                             </div>
                         </div>
