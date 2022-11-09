@@ -180,14 +180,17 @@
                                                     <div class="input-group mb-2 shadow-none">
                                                         <select id="countrie_id" class="rounded form-control text-dark shadow-none" name="countrie_id" required>
 
-                                                            @if($user->prefix_id  != null)
-                                                                <option value="{{$user->prefix_id}}" >{ {$user->prefix->pais }}</option>
+                                                            
+                                                            @if($user->countrie_id  != null)
+                                                                @foreach($country as $countries)
+                                                                    <option value="{{$countries->id}}" {{$user->countrie_id == $countries->id ? 'selected' : ''}}>{{$countries->name}}</option>
+                                                                @endforeach
                                                             @else
                                                                 <option>Ingresa o selecciona un país</option>
                                                             @endif
 
-                                                            @foreach($prefix as $prefixes)
-                                                                <option value="{{$prefixes->id}}" {{old('prefixes') == $prefixes->id ? 'selected' : ''}}>{{$prefixes->name}}</option>
+                                                            @foreach($country as $countries)
+                                                                <option value="{{$countries->id}}" {{old('countries') == $countries->id ? 'selected' : ''}}>{{$countries->name}}</option>
                                                             @endforeach
 
                                                         </select>
@@ -199,19 +202,47 @@
                                                     <label for="" class="correo  fw-500">
                                                         Correo <label style="color: red;">*</label>
                                                     </label>
+
                                                     <div class="input-group mb-1">
-                                                        <input type="text" name="email"
+                                                        <input type="text" id="email" name="email"
                                                             class="form-control @error('email') is-invalid @enderror"
-                                                            value="{{ $user->email }}">
+                                                            value="{{ $user->email }}" disabled>
+
+                                                        <input type="text" name="emailOrigin" value="{{ $user->email }}" hidden>
+
+                                                        <button type="button" 
+                                                        id="inputPassword"
+                                                        class="btn btn-primary" 
+                                                        data-bs-toggle="tooltip" 
+                                                        data-bs-placement="top" 
+                                                        data-bs-title="Para cambiar su correo, debe colocar su contraseña de Take. De clic aquí">
+                                                        <i class="fal fa-edit" class="mx-lg-2 mx-md-2 me-sm-2"></i>
+                                                        </button>
+
                                                         @error('email')
                                                             <span class="invalid-feedback d-block" role="alert">
                                                                 <strong>{{ $message }}</strong>
                                                             </span>
                                                         @enderror
+
                                                     </div>
+                                                </div>
+
+                                                <div class="col-sm-6 offset-md-6">
+                                                    <input type="hidden" aria-label="contraseña" id="password" name="password"
+                                                        class="form-control @error('password') is-invalid @enderror"
+                                                        placeholder="contraseña Take">
+
+                                                    @error('password')
+                                                        <span class="invalid-feedback d-block" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                    
                                                 </div>
                                                 
                                             </div>
+                                            
                                             <div class="row" style="margin-top: 3%;">
 
                                                 <div class="col-sm-6">
@@ -314,6 +345,16 @@
             myModal.show();
         }, false);
 
+        //let inputPassword = document.querySelector('#inputPassword');
+        inputPassword.addEventListener("click", function(event) {
+            event.preventDefault();
+            document.getElementById('password').setAttribute('type', 'password');
+            document.getElementById('email').removeAttribute("disabled");
+
+            alert(element);
+        }, false);
+
+
 
         $("#boton01").click(function() {
             setTimeout(function() {
@@ -333,6 +374,11 @@
         });
 
         $('#countrie_id').select2();
+
+        //let inputPassowrd = document.querySelector('#password');
+        /*function input(){
+            alert("hola");
+        }*/
 
     </script>
 @endsection

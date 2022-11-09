@@ -154,15 +154,27 @@ class UserController extends Controller
 
         $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id, 'id')],
+            'email' => ['email', 'max:255', Rule::unique('users')->ignore($user->id, 'id')],
             'phone' => 'required',
             'last_name' => 'required',
             'countrie_id' => 'required'
         ]);
 
+        if( ( strcmp($request->input('email'), $request->input('emailOrigin')) !== 0 ) && 
+            ($request->input('email') != null && $request->input('password') == null) ){
+
+                return redirect()->back()->with('error', 'Si desea cambiar su correo electrónico, debe ingresar su contraseña de Take');
+        }
+
+        if( ($request->input('password') != null) && ($request->input('email') != null) ){
+            //verificar contraseña de take para poder actualizar el correo 
+
+            //$user->email = $data['email'];
+        }
+
         $user->name = $data['name'];
         $user->last_name = $data['last_name'];
-        $user->email = $data['email'];
+        //$user->email = $data['email'];
         $user->phone = $data['phone'];
         $user->countrie_id = $data['countrie_id'];
         if ( $request->has('gender') ) $user->gender = $request->input('gender');
@@ -201,7 +213,7 @@ class UserController extends Controller
     {
         $user = User::find(Auth::user()->id);
         $request->validate([
-            'photo' => 'required|image|size:800'
+            'photo' => 'required|mimes:png,jpg|max:800'
         ]);
 
         $user->update($request->all());
