@@ -1,11 +1,11 @@
 @extends('layouts/contentLayoutMaster')
 @section('content')
 <div id="logs-list">
-   
+
     <div class="col-12">
         <div class="card p-2">
             <div class="card-content">
-               
+
                 <div class="card-body card-dashboard p-0">
                     <div class="table-responsive">
                         <table class="table    myTable table-striped ">
@@ -13,6 +13,7 @@
                                 <tr class="text-center">
                                     <th>ID</th>
                                     <th>nombre</th>
+                                    <th>Correo</th>
                                     <th>Licencia</th>
                                     <th>accion</th>
                                 </tr>
@@ -26,6 +27,9 @@
                                     <td>
                                         {{$user->name}}
                                     </td>
+                                     <td>
+                                        {{$user->email}}
+                                    </td>
                                     <td>
                                         #licencia
                                     </td>
@@ -35,7 +39,7 @@
                                         </button>
                                     </td>
                                 </tr>
-                                
+
                                     @include('bonoManual.componentes.modal')
                                 @endforeach
                             </tbody>
@@ -64,9 +68,9 @@
         order: [
             [0, "desc"]
         ],
-        
+
     })
-   
+
 </script>
 
 @endsection
