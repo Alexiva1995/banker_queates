@@ -21,6 +21,7 @@ class CreateLiquidationsTable extends Migration
             $table->double('amount_net')->comment('amount to receive');
             $table->double('amount_fee')->comment('withdrawal commission');
             $table->string('hash')->nullable();
+            $table->string('description')->nullable();
             $table->string('wallet_used', 350)->nullable();
             $table->string('code_correo',15)->nullable();
             $table->timestamp('fecha_code')->nullable();
