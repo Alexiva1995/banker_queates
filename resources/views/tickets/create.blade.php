@@ -39,7 +39,9 @@
                                 <!--SELECT END-->
                             </div>
 
-                            <div class="col-sm-4">
+                           <div class="w-100"></div>
+
+                            {{-- <div class="col-sm-4">
                                 <!--INPUT DE PRIORIDADES-->
                                 <span class=" text-bold-600">Prioridades:</span>
                                 <select class="form-select" name="priority">
@@ -48,7 +50,7 @@
                                     <option value="2">Baja</option>
                                 </select>
                                 <!--INPUT DE PRIORIDADES END-->
-                            </div>
+                            </div> --}}
 
                             <div class="col-sm-8 mb-2 mt-2">
                                 <!--Asunto -->

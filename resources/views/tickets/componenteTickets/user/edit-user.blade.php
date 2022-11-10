@@ -29,20 +29,40 @@
                             <span class=" text-bold-600">Categoria:</span>
 
                             @if ($ticket->categories == '0')
-                            <input type="text" class="form-control " value="Ayuda" disabled>
+                            <h5>Ayuda</h5>
                             @elseif($ticket->categories == '1')
-                            <input type="text" class="form-control " value="Soporte técnico" disabled>
+                            <h5>Soporte técnico</h5>
                             @elseif($ticket->categories == '2')
-                            <input type="text" class="form-control " value="Corrección de datos" disabled>
+                            <h5>Corrección de datos</h5>
                             @elseif($ticket->categories == '3')
-                            <input type="text" class="form-control " value="Bonos" disabled>
+                            <h5>Bonos</h5>
                             @elseif($ticket->categories == '4')
-                            <input type="text" class="form-control " value="Inversión total" disabled>
+                            <h5>Inversión total</h5>
                             @endif
                             <!--SELECT END-->
                         </div>
 
-                        <div class="col-sm-6">
+                        <div class="col-sm-6 mb-2">
+                            <span class=" text-bold-600">Correo:</span>
+                            <h5>{{$emailUser}}</h5>
+                        </div>
+
+                        <div class="col-sm-6 mb-2">
+                            <span class=" text-bold-600"># Ticket:</span>
+                            <h5>{{$ticket->id}}</h5>
+                        </div>
+
+                        <div class="col-sm-6 mb-2">
+                            <label for="">Estado:</label>
+                            @if($ticket->status == '0')
+                            <h5>Abierto</h5>
+                            @endif
+                            @if($ticket->status == '1')
+                            <h5>Cerrado</h5>
+                            @endif
+                        </div>
+
+                        {{-- <div class="col-sm-6">
                             <!--INPUT DE PRIORIDADES-->
                             <label for="">Prioridad:</label>
                             @if ($ticket->priority == '0')
@@ -53,20 +73,20 @@
                             <input type="text" class="form-control " value="Baja" disabled>
                             @endif
                             <!--INPUT DE PRIORIDADES END-->
-                        </div>
+                        </div> --}}
 
                         <div class="col-sm-12 mb-2">
                             <!--Asunto -->
                             <span class=" text-bold-600">Asunto:</span>
-                            <div class="input-group input-group-lg">
-                                <input type="text" class="form-control" value="{{$ticket->issue}}" disabled>
+                            <div class="input-group input-group-lg mb-1">
+                                <h5>{{$ticket->issue}}</h5>
                             </div>
                             <!--Asunto end-->
 
                             <!--Chat-->
                             <span class="text-bold-600">Chat:</span>
 
-                            <div class="card-body msg_card_body">
+                            <div class="card-body msg_card_body mb-1">
                                 @foreach ( $message as $item )
                                 @if ($item->type == 0)
                                 <div class="title1 ml-2 d-flex justify-content-start">

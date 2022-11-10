@@ -26,8 +26,8 @@
         <table class="table w-100 nowrap scroll-horizontal-vertical myTable table-striped w-100">
             <thead>
                 <tr class="text-center">
-                    <th>ID</th>
-                    <th>Sujeto</th>
+                    <th>#</th>
+                    <th>Asunto</th>
                     <th>Estado</th>
                     <th>Última Respuesta</th>
                     <th>Acción</th>
@@ -37,7 +37,7 @@
                 @foreach ($ticket as $item)
                 <tr class="text-center">
                     <td># {{ $item->id}}</td>
-                    <td>[Ticket #{{ $item->user_id}}] {{$item->issue}}</td>
+                    <td class="text-start">[Ticket #{{ $item->user_id}}] {{$item->issue}}</td>
 
 
                     @if ($item->status == '0')
@@ -46,13 +46,13 @@
                     <td> <a class=" btn  text-bold-600 " style="background-color:rgba(255,0,0,0.6);border-radius: 8px;">Cerrado</a></td>
                     @endif
                     @if ($item->send == '')
-                    <td>No hay mensaje Disponibles</td>
+                    <td class="text-start">No hay mensaje Disponibles</td>
                     @else
-                    <td>{{$item->send}}</td>
+                    <td class="text-start">{{$item->send}}</td>
                     @endif
                     <td>
                         <a href="{{ route('ticket.edit-admin',$item->id) }}">
-                            <button class=" btn  text-bold-600 " style="background: rgba(0, 246, 225, 0.77);border-radius: 8px;">Revisar</button>
+                            <button class=" btn  text-bold-600 " style="background: rgba(0, 246, 225, 0.77);border-radius: 8px;">Ver</button>
                         </a>
                     </td>
                 </tr>
@@ -76,7 +76,7 @@
     $('.myTable').DataTable({
         responsive: false,
         order: [
-            [0, "desc"]
+            [3, "desc"]
         ],
         language: {
             lengthMenu: 'Mostrar _MENU_ registros',
