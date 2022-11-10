@@ -51,28 +51,17 @@ class BonoManualController extends Controller
         if($monto_a_sustraer <= $total  && !empty($descripcion)){
             for($i = 0; $i < count($saldo); $i++){
                 $total = $saldo->sum('amount_available');
-               if(  $saldo[$i]['amount_available'] - $monto_a_sustraer   <= 0){
-                   $monto_a_sustraer =  $monto_a_sustraer - $saldo[$i]['amount_available'] ;
+                if(  $saldo[$i]['amount_available'] - $monto_a_sustraer   <= 0){
+                    $monto_a_sustraer =  $monto_a_sustraer - $saldo[$i]['amount_available'] ;
                     $saldo[$i]['amount_available'] = 0;
                     $saldo[$i]['status'] = '4';
                     $saldo[$i]->update();
-
-                    $liquidaction = new Liquidation();
-                    $liquidaction->user_id = 1;
-                    $liquidaction->amount_gross = 1;
-                    $liquidaction->amount_net = 1;
-                    $liquidaction->amount_fee = 1;
-                    $liquidaction->hash = 1;
-                    $liquidaction->wallet_used = 'null';
-                    $liquidaction->code_correo ='null';
-                    $liquidaction->type = 1;
-                    $liquidaction->status = 0;
-                    $liquidaction->save();
-            }else{
-                $saldo[$i]['amount_available'] = $saldo[$i]['amount_available'] - $monto_a_sustraer;
-                $saldo[$i]->update();
-                $i = count($saldo);
-               }
+                    $this->liqui($monto_a_sustraer);
+                }else{
+                    $saldo[$i]['amount_available'] = $saldo[$i]['amount_available'] - $monto_a_sustraer;
+                    $saldo[$i]->update();
+                    $i = count($saldo);
+                }
             }
             return response()->json(['msj' =>  'Saldo sutraido correctamente',
             'ico'=> 'success' ]);
@@ -85,5 +74,18 @@ class BonoManualController extends Controller
             'ico'=> 'error' ]);
         }
 
+    }
+
+    public function liqui($monto)
+    {
+
+        $liquidaction = new Liquidation();
+        $liquidaction->user_id = 2;
+        $liquidaction->amount_gross = $monto;
+        $liquidaction->amount_net = $monto;
+        $liquidaction->amount_fee = $monto;
+        $liquidaction->type = 1;
+        $liquidaction->status = 0;
+        $liquidaction->save();
     }
 }
