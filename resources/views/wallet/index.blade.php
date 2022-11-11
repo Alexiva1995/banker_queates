@@ -78,17 +78,18 @@
 
 <nav class="col-sm-12 lista">
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button"
-            role="tab" aria-controls="nav-home" aria-selected="true">Ganancia por % MLM PAMM</button>
-
-        <button class="nav-link" id="nav-range-tab" data-bs-toggle="tab" data-bs-target="#nav-range" type="button"
-            role="tab" aria-controls="nav-range" aria-selected="false">Balance en cuenta PAMM </button>
+        <button class="nav-link" id="nav-rentability-tab" data-bs-toggle="tab" data-bs-target="#general"
+        type="button" role="tab" aria-controls="nav-rentability" aria-selected="false">General</button>
 
         <button class="nav-link" id="nav-rentability-tab" data-bs-toggle="tab" data-bs-target="#license"
-            type="button" role="tab" aria-controls="nav-rentability" aria-selected="false">Ganancia por Venta de licencias</button>
+        type="button" role="tab" aria-controls="nav-rentability" aria-selected="false">Licencias</button>
 
-        <button class="nav-link" id="nav-rentability-tab" data-bs-toggle="tab" data-bs-target="#general"
-            type="button" role="tab" aria-controls="nav-rentability" aria-selected="false">General</button>
+        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button"
+        role="tab" aria-controls="nav-home" aria-selected="true">MLM PAMM</button>
+
+        <button class="nav-link" id="nav-range-tab" data-bs-toggle="tab" data-bs-target="#nav-range" type="button"
+        role="tab" aria-controls="nav-range" aria-selected="false">Balance en cuenta PAMM </button>
+
     </div>
 </nav>
 <div class="tab-content" id="nav-tabContent">
@@ -115,7 +116,7 @@
                     <span class="text-light">Total de comisiones ganadas</span>
                 </div>
             </div>
-            
+
             <div class="card p-2 entrada-bloc">
                 <div class="avatar bg-light-primary avatar-md me-auto mb-1" style="padding: 0.3rem !important">
                     <div class="avatar-content">
