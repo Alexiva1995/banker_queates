@@ -22,22 +22,10 @@
                     "slug": "comisiones"
                 },
                 {
-                    "url": "/cashflow",
-                    "name": "Flujo de Caja",
-                    "icon": "circle",
-                    "slug": "cashflow"
-                },
-                {
                     "url": "/reports/withdraw",
                     "name": "Retiros",
                     "icon": "circle",
                     "slug": "reports.withdraw"
-                },
-                {
-                    "url": "/reports/utility",
-                    "name": "Utilidades",
-                    "icon": "circle",
-                    "slug": "reports.utility"
                 }
             ]
         },

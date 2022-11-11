@@ -16,7 +16,7 @@ function argegar_saldo(e){
     let ico = response.data.ico;
     backend_notificacion(msj,ico)
     refresh_div(e);
-    
+
     monto_a_utilizar = 0
   })
   .catch(function (error) {
@@ -28,15 +28,16 @@ function argegar_saldo(e){
 function sustraer_saldo(e){
     axios.post('{{route("sustraer_saldo")}}', {
        user_id :document.getElementById(`user_id${e}`).value,
+       description :document.getElementById(`description${e}`).value,
        monto_a_sustraer :  monto_a_utilizar,
   })
   .then(function (response) {
     let msj = response.data.msj;
     let ico = response.data.ico;
-    
+
     backend_notificacion(msj,ico)
     refresh_div(e);
-    
+
     monto_a_utilizar = 0
   })
   .catch(function (error) {

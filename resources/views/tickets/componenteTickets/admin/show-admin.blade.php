@@ -25,7 +25,7 @@
                                         <input class="form-control border  rounded-0" type="text" readonly id="issue" name="issue" value="{{ $ticket->issue }}" rows="3" />
                                     </div>
 
-                                    <div class="col-12 mt-2">
+                                    {{-- <div class="col-12 mt-2">
                                         <div class="form-group">
                                             <div class="controls">
                                                 <label for="priority" class="">Prioridad del
@@ -41,7 +41,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="col-12 mt-2 mb-2">
                                         <label class="form-label  mb-1" for="message"><b>Chat con el
@@ -79,7 +79,7 @@
 
                                                             {{-- admin --}}
                                                             @elseif ($item->type == 1)
-                                                            <div class="chat">   
+                                                            <div class="chat">
                                                                 <div class="chat-body" style="background:rgb(0, 0, 255,0.1)">
                                                                     <div class="chat-content">
                                                                         <div class="name-admin mb-1">{{ $item->getAdmin->firstname}} {{$item->getAdmin->lastname}}</div>
@@ -95,7 +95,7 @@
                                                     </div>
                                                 </div>
                                             </section>
-                                        @else 
+                                        @else
                                             <p class="text-center"> No tiene mensajes disponibles</p>
                                         @endif
                                         <span class="text-danger text-bold-600">Aqui podra escribir el mensaje para el admin</span>
