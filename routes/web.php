@@ -167,6 +167,8 @@ Route::middleware('auth')->group(function () {
             Route::get('/referred/tree/{tree}', [TreController::class, 'referredTree'])->name('referred.tree');
             // Ruta para visualizar el arbol o la matriz de un usuario en especifico
             Route::get('/{id}', [TreController::class, 'moretree'])->name('genealogy_type_id');
+            // Ruta para buscar un id el arbol binario
+            Route::post('/binario', [TreController::class, 'searchBinary'])->name('search.binary');
         });
 
         Route::get('/impersonate/stop', [UserController::class, 'stop'])->name('impersonate.stop');

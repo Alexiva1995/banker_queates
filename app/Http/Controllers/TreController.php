@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Level;
+use App\Models\Investment;
 
 class TreController extends Controller
 {
@@ -52,13 +53,44 @@ class TreController extends Controller
         }
     }
 
-    public function binario()
+    public function binario($base = NULL)
     {
-        $user = Auth::user();
+        /*$user = Auth::user();
         $direct_childres = User::where('binary_id', $user->id)->get();
         $referals_childrens =  $this->getChildren($direct_childres, 1);
         $lastLevelActive = Level::where('status', 1)->orderBy('id', 'desc')->first();
-        return view('binario.index', compact('referals_childrens', 'lastLevelActive'));
+        return view('binario.index', compact('referals_childrens', 'lastLevelActive'));*/
+
+        try {
+            if($base == NULL)
+            {
+                $base = Auth::user();
+            }
+
+            $trees = $this->getDataEstructuraBinary($base->id, $tree = 2);
+            foreach($trees as $tree){
+                $childLicenses =  Investment::where('user_id', $tree->id)->where('status', 1)->first();
+
+                if($childLicenses != NULL){
+                    $tree->licence = $childLicenses->id;
+                }
+            }
+
+            $licenses =  Investment::where('user_id', $base->id)->where('status', 1)->first();
+            if($licenses != NULL){
+                $base->licence = $licenses->LicensePackage->id;
+            }
+
+            $base->logoarbol = asset('images/avatars/1.png');
+            $lastLevelActive = Level::where('status', '1')->orderBy('id', 'desc')->first();
+            
+            return view('binario.binario', compact('trees', 'base', 'lastLevelActive', 'tree'));
+        } catch (\Throwable $th) {
+            Log::error('Tree - index -> Error: ' . $th);
+                abort(500, "Ocurrio un error, contacte con el administrador");
+        }
+
+        
     }
 
     public function buscar()
@@ -114,6 +146,30 @@ class TreController extends Controller
 
     }
 
+    public function searchBinary(Request $request){
+       
+        try{
+            $userCompare = User::find($request->id);
+            $userAuth  = Auth::user();
+            
+            if( ($userCompare !== null) && ($userCompare->binary_id == $userAuth->id)){
+                return $this->binario($userCompare);
+            }
+
+            $direct_children = User::where('binary_id', $userAuth->id)->get();
+
+            $child = $this->binaryChild($direct_children, $nivel = 1, $request->id);
+            if($child == 1){
+               return $this->binario($userCompare);
+            }else{
+                return redirect('/red/binario')->with('error', 'Este usuario no pertenece a su red binaria');
+            }
+
+        }catch(\Throwable $th){
+            //return redirect()->back()->with('error', 'El ID que ingreso no existe');
+        }
+    }
+
     public function moretree($id)
     {
         try {
@@ -146,6 +202,19 @@ class TreController extends Controller
         }
     }
 
+    private function getDataEstructuraBinary($id, $tree)
+    {
+        try {
+
+            $childres = $this->getData($id, 1, $tree);
+            $trees = $this->getChildrenBinary($childres, 2, $tree);
+            return $trees;
+        } catch (\Throwable $th) {
+            Log::error('Tree - getDataEstructura -> Error: '.$th);
+            abort(403, "Ocurrio un error, contacte con el administrador");
+        }
+    }
+
     public function getChildren($users, $nivel)
     {
 
@@ -165,6 +234,55 @@ class TreController extends Controller
             abort(403, "Ocurrio un error, contacte con el administrador");
         }
     }
+
+    public function getChildrenBinary($users, $nivel, $tree)
+    {
+        try {
+            if (!empty($users)) {
+                foreach ($users as $user) {
+                    $user->children = $this->getData($user->id, $nivel, $tree);
+
+                    $this->getChildrenBinary($user->children, ($nivel+1), $tree);
+                }
+                return $users;
+            }else{
+                return $users;
+            }
+        } catch (\Throwable $th) {
+            Log::error('Tree - getChildren -> Error: '.$th);
+            abort(403, "Ocurrio un error, contacte con el administrador");
+        }
+    }
+
+    public function binaryChild($direct_childrens, $nivel, $userToCompare){
+    
+        $userCompare = User::find($userToCompare);
+
+        if($userCompare == null){
+            return redirect()->back()->with('error', 'El usuario no existe');
+            //echo "El usuario no existe";
+        }
+
+        $bool = 0;
+        try{
+            if(count($direct_childrens) !== 0){
+                foreach ($direct_childrens as $childrens){
+                    if($userCompare->binary_id == $childrens->id){
+                        return $bool = 1;
+                    }
+                    $childrens->children = $this->getData($childrens->id, $nivel, $tree = 2);
+                    $this->binaryChild($childrens->children, $nivel+1, $userToCompare);
+                }
+            }else{
+                return $bool = 0;
+            }
+
+        }catch(\Throwable $th){
+            Log::error('Tree - getChildren -> Error: '.$th);
+            abort(403, "Ocurrio un error, contacte con el administrador");
+        }
+    }
+    
 
     /**
      *Cuenta la cantidad de referidos indirectos de un usuario
