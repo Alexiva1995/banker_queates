@@ -6,8 +6,7 @@
                     <th class="fw-600">#</th>
                     <th class="fw-600">Usuario</th>
                     <th class="fw-600">Email</th>
-                    <th class="fw-600">Paquete</th>
-                    <th class="fw-600">Monto</th>
+                    <th class="fw-600">Licencia</th>
                     <th class="fw-600">Estado</th>
                     <th class="fw-600">Fecha</th>
                 </tr>
@@ -38,8 +37,7 @@
                                 </td>
                             @endif
                         @else
-                            <td>No tiene paquetes activos</td>
-                            <td>-</td>
+                            <td>No tiene licencias activas</td>
                             <td>-</td>
                         @endif
                         <td>{{ date('Y-m-d', strtotime($user->created_at)) }}</td>
