@@ -14,7 +14,7 @@
                         <label for="hiddenBtn" class="choose-btn capa-interior fw-400 mt-1" id="chooseBtn">
                             Arrastre y suelte o <span class="text-primary text-decoration-underline">explore</span> sus archivos
                         </label>
-                        <input type="file" id="hiddenBtn" type="file" class="form-control @error('photo') is-invalid @enderror" name="photo" value="{{ old('photo') }}" style="display: none;">
+                        <input type="file" id="hiddenBtn" type="file" class="form-control @error('photo') is-invalid @enderror" name="photo" value="{{ old('photo') }}" style="display: none;" accept="image/png,image/jpeg">
                         <br>
 
                         @error('image')
