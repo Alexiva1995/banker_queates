@@ -95,7 +95,7 @@
                             <div class="col-12 mt-1">
                                 <label for="voucher" class="form-label w-100">{{ __('Comprobante de pago:') }}</>
                                     <input name="voucher" type="file" class="w-100 form-control"
-                                        style="display: block !important;" required>
+                                        style="display: block !important;" accept="image/png, image/jpeg, image/jpg" required >
                             </div>
                             <div class="col-12 mt-1">
                                 <label for="hash" class="form-label w-100">{{ __('Hash:') }}</>

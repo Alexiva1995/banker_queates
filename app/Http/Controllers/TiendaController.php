@@ -13,6 +13,7 @@ use Hexters\CoinPayment\CoinPayment;
 use App\Http\Controllers\InversionController;
 use App\Models\User;
 use App\Events\UserEvent;
+use App\Http\Requests\PurchaseLicenseStoreRequest;
 use App\Models\Investment;
 use App\Models\Upgrade;
 use App\Services\BonusService;
@@ -91,15 +92,8 @@ class TiendaController extends Controller
      * Procesa el pago o la transacción del usuario al momento de
      * elegir el paquete y enviar su comprobante de pago.
      */
-    public function procesarOrden(Request $request)
+    public function procesarOrden(PurchaseLicenseStoreRequest $request)
     {
-        $request->validate([
-            'package' => 'required',
-            'moneda' => 'required',
-            'hash' => 'required',
-            'voucher' => 'required|mimes:jpg,jpeg,png',
-        ]);
-        
         $user = Auth::user();
         $allOrder = Order::where('user_id', $user->id)->where('status', '0')->get();
         $package = LicensePackage::where('id', $request->package)->first();
