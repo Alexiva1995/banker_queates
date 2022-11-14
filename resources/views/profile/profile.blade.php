@@ -216,7 +216,8 @@
                                                         data-bs-toggle="tooltip" 
                                                         data-bs-placement="top" 
                                                         data-bs-title="Para cambiar su correo, debe colocar su contraseña de Take. De clic aquí">
-                                                        <i class="fal fa-edit" class="mx-lg-2 mx-md-2 me-sm-2"></i>
+                                                       <!-- <i class="fal fa-edit" class="mx-lg-2 mx-md-2 me-sm-2"></i>-->
+                                                       <img width="15px" height="15px" src="{{ asset('images/svg/edit.svg') }}">
                                                         </button>
 
                                                         @error('email')
@@ -375,10 +376,6 @@
 
         $('#countrie_id').select2();
 
-        //let inputPassowrd = document.querySelector('#password');
-        /*function input(){
-            alert("hola");
-        }*/
 
     </script>
 @endsection
