@@ -24,15 +24,15 @@
             <div class="card-content">
                 <div class="card-header">
                     <div class="d-flex justify-content-start"><h4 class="fw-700">Últimos retiros</h4></div>
-                    <div class="d-flex justify-content-end">
+                    {{--<div class="d-flex justify-content-end">
                         <div class="d-flex col-12" style="margin-bottom:14px;">
                             <a href="{{route('solicitudesRetiros')}}" class="btn btn-primary float-end">Solicitar Retiro</a>
 
                             <button type="button" data-bs-toggle="modal" data-bs-target="#modalWallet" class="btn btn-gradient-primary float-end ms-1">Enlazar Wallet</button>
                         </div>
-                    </div>
+                    </div>--}}
                 </div>
-                
+
                 <div class="card-body card-dashboard">
                     <div class="table-responsive">
                         <table class="table w-100 nowrap scroll-horizontal-vertical myTable table-striped w-100">
@@ -90,8 +90,6 @@
         </div>
     </div>
 </div>
-
-@include('business.componentes.Modal.Retiros.setWalletModal')
 @endsection
 
 @section('vendor-script')

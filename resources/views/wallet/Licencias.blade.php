@@ -10,7 +10,7 @@
                     </svg>
                 </div>
             </div>
-    
+
             <div class="texto" style="padding-left: 3%">
                 @if (isset($LicenciasUtilityTotal))
                     <span style="font-weight:900; font-size: 21px">USDT {{$LicenciasUtilityTotal}} </span>
@@ -19,6 +19,27 @@
                 @endif
                 <br>
                 <span class="text-light">Total de comisiones pasivas</span>
+            </div>
+        </div>
+        <div class="card p-2 entrada-bloc">
+            <div class="avatar bg-light-primary avatar-md me-auto mb-1" style="padding: 0.3rem !important">
+                <div class="avatar-content">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M16 18H2C0.89543 18 0 17.1046 0 16V2C0 0.89543 0.89543 0 2 0H16C17.1046 0 18 0.89543 18 2V16C18 17.1046 17.1046 18 16 18ZM2 2V16H16V2H2ZM14 14H12V7H14V14ZM10 14H8V4H10V14ZM6 14H4V9H6V14Z"
+                            fill="#673DED" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="texto" style="padding-left: 3%">
+                @if (isset($LicenciasAgain))
+                    <span style="font-weight:900; font-size: 21px">USDT {{$LicenciasAgain}} </span>
+                @else
+                    <span style="font-weight:900; font-size: 21px">USDT 0 </span>
+                @endif
+                <br>
+                <span class="text-light">Total de comisiones ganadas</span>
             </div>
         </div>
 </div>
@@ -38,7 +59,7 @@
                                         <th class="d-none d-sm-table-cell">ID de utilidad</th>
                                         <th>Monto</th>
                                         <th>Estado</th>
-                                        <th class="d-none d-sm-table-cell">Fecha</th>                                                  
+                                        <th class="d-none d-sm-table-cell">Fecha</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -56,7 +77,7 @@
                                                 @endif
                                             </td>
                                             <td class="d-none d-sm-table-cell">
-                                                {{ date('d-m-Y', strtotime($licen->created_at)) 
+                                                {{ date('d-m-Y', strtotime($licen->created_at))
                                             }}</td>
                                         </tr>
                                     @endforeach

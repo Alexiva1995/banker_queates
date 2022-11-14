@@ -45,23 +45,17 @@
             "submenu": [
                 {
                     "url": "/wallet",
-                    "name": "Bonos",
+                    "name": "Wallets",
                     "icon": "circle",
                     "slug": "wallet.index"
-                },
-                {
-                    "url": "/retirar",
-                    "name": "Retiro",
-                    "icon": "circle",
-                    "slug": "retiro"
-                },
-                {
-                    "url": "/transferencia",
-                    "name": "Transferencias",
-                    "icon": "circle",
-                    "slug": "transferencia"
                 }
             ]
+        },
+        {
+            "name": "Retiro",
+            "icon": "grid",
+            "slug": "retiro",
+            "url": "/retirar"
         },
         {
             "url": "/investments",

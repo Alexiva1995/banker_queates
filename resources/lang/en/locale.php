@@ -21,7 +21,7 @@ return [
     "Información Personal" => "Información Personal",
     "Verificación KYC"=> "Verificación KYC",
     "Informes" => "Informes",
-    "Wallet" => "Wallet",
+    "Wallets" => "Wallets",
     "Billetera" => "Billetera",
     "Unilevel" => "Unilevel",
     "Licencias" => "Licencias",
