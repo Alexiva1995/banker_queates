@@ -43,7 +43,7 @@ class LiquidactionController extends Controller
     }
 
     public function retiro(){
-        
+
         $retiros = Liquidation::where('status',0, )->where('user_id', Auth::id() )->get();
 
         return view('business.solicitudesRetiros', compact('retiros'));
@@ -74,7 +74,7 @@ class LiquidactionController extends Controller
             return redirect()->back()->with('warning', 'La solicitud de retiro solo puede realizarse los días '.$config->getFirtsDayOfWeek(). ' y '.$config->getLastDayOfWeek().'.');
         }
 
-        // Valida si la hora actual se encuentra entre el rango permitido para realizar retiros 
+        // Valida si la hora actual se encuentra entre el rango permitido para realizar retiros
         if( !($date->toTimeString() >= $time_start && $date->toTimeString() <= $time_end) ) {
 
             $time_start = Carbon::createFromFormat('H:i:s', $config->time_start)->format('h:i A');
@@ -82,8 +82,8 @@ class LiquidactionController extends Controller
 
             return redirect()->back()->with('warning', 'La solicitud de retiro solo puede realizarse de ' . $time_start .' a ' . $time_end . ' Hora Texas' );
 
-        } 
-        
+        }
+
         $balance = WalletComission::where([
             ['user_id', $user->id],
             ['status', 0],
@@ -92,7 +92,7 @@ class LiquidactionController extends Controller
 
         $fee = $config->percentage;
         return view('business.retiro', compact('balance','fee'));
-       
+
     }
 
     public function liquidationValidate() {
@@ -164,7 +164,7 @@ class LiquidactionController extends Controller
     }
     public function procesarLiquidacion(Request $request)
     {
-       
+
        // try {
             $accion = $request->accion;
             $liquidacion_id = $request->liquidacion_id;
@@ -476,13 +476,20 @@ class LiquidactionController extends Controller
                                                   ['type',2],
                                                   ['status',0]
                                                 ])->get();
+            $LicenciasAgain  = WalletComission::where([['user_id',$user->id ],
+                                                ['type',2],
+                                              ])->sum('amount_available');
             $LicenciasUtilityTotal = $Licencias->sum('amount_available');
-            
+
             $general =  WalletComission::where([['user_id',$user->id ],
                                                 ['status',0]
                                             ])->get();
-                                            
-            $generalTotal = $general->sum('amount_available');                                     
+
+            $generalAvaliable =  WalletComission::where([['user_id',$user->id ],
+                                            ['status',0]
+                                        ])->sum('amount_available');
+
+            $generalTotal = $general->sum('amount_available');
 
             $comissionsRangeAvailable = $user->getWalletRangeAmount();
             $comissionsAvailable= $user->getWalletComissionAmount();
@@ -497,7 +504,7 @@ class LiquidactionController extends Controller
                 $daysRemaining = $date1->diffInDays(today()->format('Y-m-d') );
             }
 
-            return view('wallet.index', compact('generalTotal','general','LicenciasUtilityTotal', 'comissionsTotal', 'comissionsRangeTotal', 'walletsRange', 'walletsComissions','Licencias', 'comissionsUtilityAvailable' ,'comissionsAvailable','comissionsRangeAvailable', 'daysRemaining'));
+            return view('wallet.index', compact('generalAvaliable','LicenciasAgain','generalTotal','general','LicenciasUtilityTotal', 'comissionsTotal', 'comissionsRangeTotal', 'walletsRange', 'walletsComissions','Licencias', 'comissionsUtilityAvailable' ,'comissionsAvailable','comissionsRangeAvailable', 'daysRemaining'));
         } catch (\Throwable $th) {
             Log::error('Wallet - Index -> Error: ' . $th);
             abort(403, "Ocurrio un error, contacte con el administrador");
@@ -642,7 +649,7 @@ class LiquidactionController extends Controller
                 }
 
             }
-        } 
+        }
 
         $user->update([ 'code_security' => null ]);
         $admin = User::findOrFail(1);
@@ -663,7 +670,7 @@ class LiquidactionController extends Controller
             if( intval($code_array[0]) != $user->id || $code_array[1] != $code ) {
                 return true;
             }
-    
+
             return false;
         } catch (\Throwable $th) {
             Log::alert("Error al desencriptar el codigo de seguridad del usaurio: {$user->email} ");
@@ -677,11 +684,11 @@ class LiquidactionController extends Controller
     {
         try {
             $wallet_array = explode('-', Crypt::decryptString( $user->walletSeccurity->encrypted) );
-    
+
             if( intval($wallet_array[0]) != $user->id || $wallet_array[1] != $user->decryptWallet() ) {
                 return true;
             }
-    
+
             return false;
         } catch (\Throwable $th) {
             Log::alert("Error al desencriptar la wallet del usuario: {$user->email} ");
@@ -781,7 +788,7 @@ class LiquidactionController extends Controller
         $data = 0;
         $code = $request->code;
         $Monto_a_retirar = $request->Monto_a_retirar;
-        
+
         $saldo = WalletComission::where([
         ['user_id', $id],
         ['status','0'],
@@ -874,16 +881,16 @@ class LiquidactionController extends Controller
         $fee = WithdrawalSetting::get('percentage');
         $fee = $fee[0]['percentage'];
         $feed = ($Monto_a_retirar *  $fee)/100;
-        
+
         //$total = $utilidad->sum('amount_available');
-        
+
 
             $utilidades = Utility::where('status','0')->where('user_id', $id)->get();
 
             $utilidad = [];
             $total = 0;
             $year_now = Carbon::now();
-            
+
             foreach($utilidades as $key => $utili){
                 if(!empty($utili)){
                     if($utili->investment->type == '1' || $utili->investment->type == '2' ){
@@ -891,12 +898,12 @@ class LiquidactionController extends Controller
                         $total = $total + $utili->amount_available;
                     }
                     if( $year_now->gt(Carbon::parse($utili->investment->created_at)->addYears(1)->format('d-m-Y'))  ){
-                        if($utili->investment->type == '3'){    
+                        if($utili->investment->type == '3'){
                             array_push($utilidad, $utili);
                             $total = $total + $utili->amount_available;
                         }
                      }
-                     
+
                      //validacion para paquetes platino se valida si el paquete esta en su 7timo mes
                     // o 14ceavo mes
                      $mes7 = intval(Carbon::parse($utili->investment->created_at)->addMonth(7)->format('m'));
@@ -904,8 +911,8 @@ class LiquidactionController extends Controller
 
                      $mes14 = intval(Carbon::parse($utili->investment->created_at)->addMonth(14)->format('m'));
                      if( $Validar_mes == $mes7 || $Validar_mes == $mes14  ){
-                       
-                        if($utili->investment->type == '4'){    
+
+                        if($utili->investment->type == '4'){
                             array_push($utilidad, $utili);
                             $total =  $total + $utili->amount_available;
                         }
@@ -927,7 +934,7 @@ class LiquidactionController extends Controller
                             'type'=>1
                         ];
                         $liquidacion = Liquidation::create($data_liquidaction);
-                        
+
                         for($i = 0; $i < count($utilidad); $i++){
                             $data_transaction =[
                                 'liquidation_id' =>$liquidacion['id'],
@@ -945,19 +952,19 @@ class LiquidactionController extends Controller
                     }
                 }else{
                     return response()->json(['value' =>  2]);
-                }            
+                }
             }else{
             return response()->json(['value' =>  0]);
             }
         }else{
             return response()->json(['value' =>  'no_es_paquete_oro_o_plata']);
         }
-        
+
     return response()->json(['value' =>  $request]);
     }
     /*
     * Exporta a formato CSV la lista de liquidaciones (solicitudes de retiro) pendientes
-    * @return CSV 
+    * @return CSV
     */
     public function ExportCSV()
     {

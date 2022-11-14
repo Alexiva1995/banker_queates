@@ -169,6 +169,8 @@ Route::middleware('auth')->group(function () {
             Route::get('/{id}', [TreController::class, 'moretree'])->name('genealogy_type_id');
             // Ruta para buscar un id el arbol binario
             Route::post('/binario', [TreController::class, 'searchBinary'])->name('search.binary');
+            // Ruta para buscar un id el arbol unilevel
+            Route::post('/referred/tree/{tree}', [TreController::class, 'searchUnilevelTree'])->name('search.unilevel');
         });
 
         Route::get('/impersonate/stop', [UserController::class, 'stop'])->name('impersonate.stop');
