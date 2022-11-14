@@ -546,6 +546,16 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->wallets->where('type', 0)->where('status', 0)->sum('amount');
     }
+
+     /**
+     * Obtiene las wallets del tipo comission con status 0
+     * @return double el monto acumulado de sus wallets
+     */
+    public function getWalletComissionAvailable()
+    {
+        return $this->wallets->where('status', 0)->sum('amount');
+    }
+
     /**
      * Relación de User -> Utility
      * @return Relation

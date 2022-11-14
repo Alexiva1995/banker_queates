@@ -35,22 +35,31 @@
                             <tr class="text-center ">
                                 <th class="fw-500">ID</th>
                                 <th class="fw-500">Nombre</th>
-                                <th class="fw-500">Usuario</th>
                                 <th class="fw-500">Email</th>
+                                <th class="fw-500">Licencia</th>
+                                <th class="fw-500">Balance</th>
+                                <th class="fw-500">Ganancias</th>
+                                <th class="fw-500">PAMM</th>
                                 <th class="fw-500">Estado</th>
-                                <th class="fw-500">Patrocinador</th>
                                 <th class="fw-500">ID del <br/>Patrocinador</th>
-                                <th class="fw-500">País</th>
-                                <th class="fw-500">Accion</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($users as $user)
                             <tr class="text-center">
                                 <td>{{$user->id}}</td>
-                                <td>{{$user->name}}</td>
-                                <td>{{$user->username}}</td>
+                                <td>{{$user->name}} {{$user->last_name}}</td>
                                 <td>{{$user->email}}</td>
+
+                                @if($user->investment != null && $user->investment->status == 1 )
+                                    <td>{{ $user->investment->LicensePackage->name }}</td>
+                                @else
+                                    <td>No tiene licencia activa</td>
+                                @endif
+
+                                <td>--</td> <!-- Balance-->
+                                <td>{{ $user->getWalletComissionAvailable() }}</td>
+                                <td>--</td> <!-- PAMM-->
                                 @if ($user->status == '0')
                                     <td> <a class="alert alert-danger text-danger fw-400 p-75">Inactivo</a></td>
                                 @elseif($user->status == '1')
@@ -64,11 +73,10 @@
                                 @elseif($user->status == '5')
                                     <td> <a class="alert alert-danger text-danger fw-400 p-75">Eliminado</a></td>
                                 @endif
-                                <td>{{$user->padre->name}}</td>
                                 <td>{{$user->padre->id}}</td>
-                                <td>{{$user->countrie !== null ? $user->countrie->name : '-'}}</td>
+                                <!--<td>{{$user->countrie !== null ? $user->countrie->name : '-'}}</td>-->
 
-                                <td>
+                                <!--<td>
                                    {{-- <form action="{{route('user.start', $user)}}" method="POST" class="btn">
                                         @csrf--}}
                                         <a href="{{ route('user.user-view',['id' => $user->id])}}" class="btn btn-outline-secondary p-75">
@@ -76,7 +84,7 @@
                                         </a>
 
                                     {{--</form>--}}
-                                </td>
+                                </td>-->
                                 @include('user.components.referred')
                             </tr>
                             @endforeach
