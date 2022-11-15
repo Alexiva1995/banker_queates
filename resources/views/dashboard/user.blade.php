@@ -286,6 +286,7 @@
                         {{-- @include('dashboard.components.referral-link') --}}
                         @include('dashboard.components.referral_binary_side')
                         @include('dashboard.components.referralsCard')
+                        @include('dashboard.components.licenceExpirationDays')
                     </div>
                 </div>
                 @include('dashboard.components.rangeCard')
