@@ -143,6 +143,9 @@ Route::middleware('auth')->group(function () {
             Route::get('/liquidaciones/pendientes', [LiquidactionController::class, 'pendientes'])->name('liquidaciones.pendientes');
             Route::get('/liquidaciones/pendientes/export_csv', [LiquidactionController::class, 'ExportCSV'])->name('liquidaciones.export.csv');
 
+            //buscardor id
+            Route::get('/search', [BonoManualController::class, 'search'])->name('bonoManual.search');
+            Route::post('/search-id', [BonoManualController::class, 'searchPost'])->name('search.id');
             //Bono manual
             Route::get('/Edicion-saldo', [BonoManualController::class, 'index'])->name('Edicion-SaldoI-ndex');
 

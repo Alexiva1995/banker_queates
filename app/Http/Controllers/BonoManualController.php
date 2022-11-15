@@ -10,6 +10,26 @@ use Illuminate\Support\Facades\Log;
 
 class BonoManualController extends Controller
 {
+    public function search(){
+
+        return view('bonoManual.search');
+    }
+    public function searchPost(Request $request)
+    {
+        $usuario = User::where('id', $request->id)->get();
+
+        if ($usuario == null) {
+            return back()->with('error', 'Usuario no existe por favor verifique');
+        }else{
+
+            foreach($usuario as $user){
+                $user->saldo_disponible = $user->getWallet->sum('amount_available');
+            }
+
+            return view('bonoManual.index' , compact('usuario'));
+        }
+    }
+
     public function index(){
         $usuarios = User::where([['status', '1'],['id', '!=', '1']])->get();
 

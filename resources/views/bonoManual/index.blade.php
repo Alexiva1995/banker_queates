@@ -19,7 +19,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ( $usuarios as $user )
+                                @foreach ( $usuario as $user )
                                 <tr class="text-center">
                                     <td>
                                         {{$user->id}}
@@ -31,7 +31,11 @@
                                         {{$user->email}}
                                     </td>
                                     <td>
-                                        #licencia
+                                        @if($user->investment != null)
+                                            {{$user->investment->LicensePackage}}
+                                        @else
+                                            No disponible
+                                        @endif
                                     </td>
                                     <td>
                                         <button  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$user->id}}">
