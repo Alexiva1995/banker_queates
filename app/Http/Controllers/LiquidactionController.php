@@ -497,14 +497,8 @@ class LiquidactionController extends Controller
             $comissionsUtilityAvailable = 0;
             $walletsComissions = WalletComission::where('user_id', $user->id)->where('type', 0)->orderBy('id', 'desc')->get();
             $walletsRange = WalletComission::where('user_id', $user->id)->where('type', 1)->orderBy('id', 'desc')->get();
-            $daysRemaining = 0;
-            if($user->investment)
-            {
-                $date1 = Carbon::parse($user->investment->expiration_date);
-                $daysRemaining = $date1->diffInDays(today()->format('Y-m-d') );
-            }
 
-            return view('wallet.index', compact('generalAvaliable','LicenciasAgain','generalTotal','general','LicenciasUtilityTotal', 'comissionsTotal', 'comissionsRangeTotal', 'walletsRange', 'walletsComissions','Licencias', 'comissionsUtilityAvailable' ,'comissionsAvailable','comissionsRangeAvailable', 'daysRemaining'));
+            return view('wallet.index', compact('generalAvaliable','LicenciasAgain','generalTotal','general','LicenciasUtilityTotal', 'comissionsTotal', 'comissionsRangeTotal', 'walletsRange', 'walletsComissions','Licencias', 'comissionsUtilityAvailable' ,'comissionsAvailable','comissionsRangeAvailable'));
         } catch (\Throwable $th) {
             Log::error('Wallet - Index -> Error: ' . $th);
             abort(403, "Ocurrio un error, contacte con el administrador");

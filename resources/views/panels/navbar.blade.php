@@ -288,15 +288,21 @@
               {{-- <span class="user-name fw-bolder text-capitalize" >{{Auth::user()->last_name}}</span> --}}
 
             </div>
-            @if( auth()->user()->investment !== null && auth()->user()->admin == 0 )
-              <img class="round" src="" alt="{{'emblema'.auth()->user()->investment->licensePackage->emblem}}" height="40" width="40">
-            @endif
             <span class="avatar">
-              @if(Auth::user()->photo == null)
+              @if( auth()->user()->investment !== null && auth()->user()->admin == 0 )
+                <img class="round" src="" alt="{{'emblema'.auth()->user()->investment->licensePackage->emblem}}" height="40" width="40" alt="license_emblem">
+              @elseif($user->admin == 1)
+                @if(Auth::user()->photo == null)
+                  <img class="round" src="{{asset('images/portrait/small/avatar-s-11.jpg')}}" alt="avatar" height="40" width="40">
+                @else
+                  <img class="round" src="{{ asset('storage/photo-profile/'.Auth::user()->photo) }}" alt="avatar" height="40" width="40">
+                @endif
+              @endif
+              {{-- @if(Auth::user()->photo == null)
                 <img class="round" src="{{asset('images/portrait/small/avatar-s-11.jpg')}}" alt="avatar" height="40" width="40">
               @else
                 <img class="round" src="{{ asset('storage/photo-profile/'.Auth::user()->photo) }}" alt="avatar" height="40" width="40">
-              @endif
+              @endif --}}
              {{-- @if(Auth::user()->status == 1)
                  <span class="avatar-status-online"></span>
               @else
