@@ -228,13 +228,13 @@ class TiendaController extends Controller
                 //Se crea la wallet corresondiente
                 $this->callBuildingBonus($orden);
 
-                // Se cambia el status del usuario a activo
-                if ($user->status == '0') {
-                    $user->status = '1';
-                    $user->date_active = now();
-                    $user->update();
-                    event(new UserEvent($user));
-                }
+            }
+            // Se cambia el status del usuario a activo
+            if ($user->status == '0') {
+                $user->status = '1';
+                $user->date_active = now();
+                $user->update();
+                event(new UserEvent($user));
             }
             
             // Genera los puntos binarios
