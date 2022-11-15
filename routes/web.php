@@ -109,7 +109,7 @@ Route::middleware('auth')->group(function () {
 
             //WALLET PAY DIRECT
             Route::get('admin/wallet', [LiquidactionController::class, 'indexAdmin'])->name('ComponentsAdmin.wallet');
-            Route::post("/search/manual/activation", [ManualActivationController::class, "searchEmail"])->name("search.activation");
+            // Route::post("/search/manual/activation", [ManualActivationController::class, "searchEmail"])->name("search.activation");
 
             //RENTABILIDAD
             Route::get('/rentabilidad', [UtilityController::class, 'index'])->name('rentabilidad');

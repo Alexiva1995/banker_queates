@@ -378,7 +378,7 @@ class TreController extends Controller
         try {
             $resul = User::where('buyer_id', $id)->get();
             if ($tree == 2) {
-            $resul = User::where('binary_id', $id)->get();
+            $resul = User::where('binary_id', $id)->orderBy('binary_side', 'asc')->get();
             }
             foreach ($resul as $user) {
                 $user->nivel = $nivel;

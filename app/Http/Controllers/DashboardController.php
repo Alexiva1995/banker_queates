@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Services\MinApiService;
 use App\Services\RangeService;
 use App\Services\ReferalService;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -69,10 +70,18 @@ class DashboardController extends Controller
       $investments = Investment::where('user_id', $user->id)->with('licensePackage')->get();
       $total_available = $user->wallets->where('status', 0)->sum('amount');
       $user_packages = $user->getActivePackages();
+
+      $daysRemaining = 0;
+      if($user->investment)
+      {
+          $date1 = Carbon::parse($user->investment->expiration_date);
+          $daysRemaining = $date1->diffInDays(today()->format('Y-m-d') );
+      }
+
       //criptobar
       $cryptos = $this->minApiService->get10Cryptos();
 
-      return view('dashboard.user', ['pageConfigs' => $pageConfigs], compact('user', 'cryptos', 'investments', 'indirect_referrals', 'total_referrals', 'total_available', 'user_packages'));
+      return view('dashboard.user', ['pageConfigs' => $pageConfigs], compact('user', 'cryptos', 'investments', 'indirect_referrals', 'total_referrals', 'total_available','daysRemaining', 'user_packages'));
     }
   }
 
