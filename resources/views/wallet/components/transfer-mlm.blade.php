@@ -10,8 +10,8 @@
             @csrf
             <div class="modal-body">
             <label for="amount">Monto</label>
-            <input class="form-control" type="hidden" name="amount" value="{{$comissionsAvailable}}">
-            <input class="form-control" type="text" name="amount" value="{{$comissionsAvailable}}" disabled>
+            <input class="form-control" type="hidden" name="amount" value="{{$mlmAvailable}}">
+            <input class="form-control" type="text" name="amount" value="{{$mlmAvailable}}" disabled>
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

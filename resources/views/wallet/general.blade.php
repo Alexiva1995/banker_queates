@@ -63,12 +63,9 @@
                                 <table class="table  nowrap scroll-horizontal-vertical myTable table-striped w-100">
                                     <thead class="">
                                         <tr class="text-center">
-                                            <th class="d-none d-sm-table-cell">ID de utilidad</th>
+                                            <th class="d-none d-sm-table-cell">ID</th>
                                             <th>Descripcion</th>
-                                            <th>Monto real</th>
-                                            <th>Monto Disponible</th>
-                                            <th>Estado</th>
-                                            <th class="d-none d-sm-table-cell">Fecha</th>
+                                            <th>Monto</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -76,20 +73,13 @@
                                             <tr class="text-center">
                                                 <td class="d-none d-sm-table-cell">{{$gen->id}}</td>
                                                 <td> {{ $gen->description }}</td>
-                                                <td> {{ number_format($gen->amount, 2) }}</td>
-                                                <td> {{ number_format($gen->amount_available, 2) }}</td>
-                                                <td>
-                                                    @if ($gen->status == '0')
-                                                        <span class="badge bg-warning">En Espera</span>
-                                                    @elseif($gen->status == '1')
-                                                        <span class="badge bg-success">Completada</span>
-                                                    @elseif($gen->status == '2')
-                                                        <span class="badge bg-danger">Rechazada</span>
-                                                    @endif
-                                                </td>
-                                                <td class="d-none d-sm-table-cell">
-                                                    {{ date('d-m-Y', strtotime($gen->created_at))
-                                                }}</td>
+                                                @if ($gen->type == 0)
+                                                    <td class="text-success"> {{ number_format($gen->amount, 2) }}</td>
+                                                @elseif($gen->type == 6)
+                                                    <td class="text-success"> {{ number_format($gen->amount, 2) }}</td>
+                                                @else
+                                                    <td class="text-success"> {{ number_format($gen->amount, 2) }}</td>
+                                                @endif
                                             </tr>
                                         @endforeach
                                     </tbody>

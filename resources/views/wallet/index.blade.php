@@ -107,8 +107,8 @@
                 </div>
 
                 <div class="texto" style="padding-left: 3%">
-                    @if (isset($comissionsTotal))
-                    <span style="font-weight:900; font-size: 21px">USDT {{ $comissionsTotal }} </span>
+                    @if (isset($mlmTotal))
+                    <span style="font-weight:900; font-size: 21px">USDT {{ $mlmTotal }} </span>
                     @else
                     <span style="font-weight:900; font-size: 21px">USDT 0 </span>
                     @endif
@@ -125,8 +125,8 @@
                 </div>
 
                 <div class="texto" style="padding-left: 3%">
-                    @if (isset($comissionsAvailable))
-                    <span style="font-weight:900; font-size: 21px">USDT {{ $comissionsAvailable }} </span>
+                    @if (isset($mlmAvailable))
+                    <span style="font-weight:900; font-size: 21px">USDT {{ $mlmAvailable }} </span>
                     @else
                     <span style="font-weight:900; font-size: 21px">USDT 0 </span>
                     @endif
@@ -173,7 +173,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($walletsComissions as $wallet)
+                                            @foreach ($mlm as $wallet)
                                             <tr class="text-center">
                                                 <td class="d-none d-sm-table-cell">{{ $wallet->id }}</td>
                                                 <td>{{ $wallet->description }}</td>
