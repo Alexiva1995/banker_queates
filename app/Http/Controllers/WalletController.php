@@ -211,5 +211,17 @@ class WalletController extends Controller
 
     }
 
+    public function transferMlm(Request $request)
+    {
+        //dd($request);
+        $user = Auth::user();
+
+        if($request->amount > 0){
+           return  $walletMlm =  WalletComission::where([['user_id', $user->id],['type', 0],['status', 0]])->get();
+        }
+
+        return back()->with('error' , 'tu saldo tiene que ser mayor a 0');
+    }
+
 
 }

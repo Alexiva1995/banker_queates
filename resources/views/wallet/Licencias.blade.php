@@ -50,6 +50,9 @@
                 <div class="card-content">
                     <div class="card-header my-1 p-0">
                         <h4 class="fw-700">Licencias</h4>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#transferLicencias">
+                            Transferir
+                        </button>
                     </div>
                     <div class="card-body card-dashboard p-0">
                         <div class="table-responsive">
@@ -83,6 +86,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            @include('wallet.components.transfer-licencias')
                         </div>
                     </div>
                 </div>

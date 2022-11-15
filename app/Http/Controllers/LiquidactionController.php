@@ -473,11 +473,11 @@ class LiquidactionController extends Controller
             $comissionsTotal = WalletComission::where('user_id', $user->id)->where('type', 0)->sum('amount');
             // TODO: Modificar estas 2 lineas de comision
             $Licencias  = WalletComission::where([['user_id',$user->id ],
-                                                  ['type',2],
+                                                  ['type',3],
                                                   ['status',0]
                                                 ])->get();
             $LicenciasAgain  = WalletComission::where([['user_id',$user->id ],
-                                                ['type',2],
+                                                ['type',3]
                                               ])->sum('amount_available');
             $LicenciasUtilityTotal = $Licencias->sum('amount_available');
 

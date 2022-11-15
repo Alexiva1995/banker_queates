@@ -20,7 +20,9 @@ class CreateWalletsCommissionsTable extends Migration
             $table->bigInteger('buyer_id')->nullable()->unsigned()->nullable();
             $table->foreign('buyer_id')->references('id')->on('users')->onUpdate('cascade')->nullable();
             $table->bigInteger('order_id')->nullable()->unsigned()->nullable();
-            $table->foreign('order_id')->references('id')->on('orders')->onUpdate('cascade')->nullable(); 
+            $table->foreign('order_id')->references('id')->on('orders')->onUpdate('cascade')->nullable();
+            $table->bigInteger('transfer_id')->nullable()->unsigned()->nullable()->comment('id de wallet a la que se transfirio');
+            $table->foreign('transfer_id')->references('id')->on('wallets_commissions')->onUpdate('cascade')->nullable();
             $table->bigInteger('level');
             $table->string('description',100);
             $table->foreignId('investment_id')->nullable()->constrained('investments')->comment('inversion la cual produce esta wallet');

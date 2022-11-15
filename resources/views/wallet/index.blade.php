@@ -156,6 +156,9 @@
                         <div class="card-content">
                             <div class="card-header my-1 p-0">
                                 <h4 class="fw-700">Comisiones</h4>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#transferMlm">
+                                    Transferir
+                                </button>
                             </div>
                             <div class="card-body card-dashboard p-0">
                                 <div class="table-responsive">
@@ -175,7 +178,7 @@
                                                 <td class="d-none d-sm-table-cell">{{ $wallet->id }}</td>
                                                 <td>{{ $wallet->description }}</td>
                                                 <td style="text-align: right">{{ number_format($wallet->amount, 2, ',',
-                                                    '.') }}</tds>
+                                                    '.') }}</td>
                                                 <td>
                                                     @if ($wallet->status == '0')
                                                     <span class="badge bg-info">Disponible</span>
@@ -194,6 +197,7 @@
                                             @endforeach
                                         </tbody>
                                     </table>
+                                    @include('wallet.components.transfer-mlm')
                                 </div>
                             </div>
                         </div>

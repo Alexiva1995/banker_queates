@@ -197,6 +197,8 @@ Route::middleware('auth')->group(function () {
         Route::get('wallet', [LiquidactionController::class, 'index'])->name('wallet.index');
         //Ruta para actualizar una wallet
         Route::post('wallet-uedit', [WalletController::class, 'edit'])->name('wallet.edit');
+        //Ruta para transferir saldo mlm
+        Route::post('transfer-mlm', [WalletController::class, 'transferMlm'])->name('transfer.mlm');
         Route::get('/comisiones', [WalletController::class, 'comisiones'])->name('reports.comision');
 
 
