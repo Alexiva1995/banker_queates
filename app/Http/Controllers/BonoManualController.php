@@ -71,7 +71,7 @@ class BonoManualController extends Controller
                     'amount_net' => $monto_a_sustraer ,
                     'amount_fee' => 0,
                     'description' => $descripcion,
-                    'type '=> 1,
+                    'type '=> 3,
                     'status' => 0,
                 ];
                 Log::info($data);
