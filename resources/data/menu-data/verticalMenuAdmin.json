@@ -48,12 +48,6 @@
             "slug": "Accion-KYC"
         },
         {
-            "url": "/manual/activation",
-            "name": "Paquetes",
-            "icon": "grid",
-            "slug": "manual.activation"
-        },
-        {
             "name": "Usuarios",
             "icon": "users",
             "slug": "user.list-user",
