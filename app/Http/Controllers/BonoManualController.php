@@ -10,6 +10,26 @@ use Illuminate\Support\Facades\Log;
 
 class BonoManualController extends Controller
 {
+    public function search(){
+
+        return view('bonoManual.search');
+    }
+    public function searchPost(Request $request)
+    {
+        $usuario = User::where('id', $request->id)->get();
+
+        if ($usuario == null) {
+            return back()->with('error', 'Usuario no existe por favor verifique');
+        }else{
+
+            foreach($usuario as $user){
+                $user->saldo_disponible = $user->getWallet->sum('amount_available');
+            }
+
+            return view('bonoManual.index' , compact('usuario'));
+        }
+    }
+
     public function index(){
         $usuarios = User::where([['status', '1'],['id', '!=', '1']])->get();
 
@@ -30,7 +50,8 @@ class BonoManualController extends Controller
                 'amount'=> $monto_a_agregar,
                 'amount_available'=> $monto_a_agregar,
                 'level'=>0,
-                'description'=> $descripcion
+                'description'=> $descripcion,
+                'type' => 6
             ];
             WalletComission::create($data);
             return response()->json(['msj' =>  'Saldo agregado correctamente',
@@ -64,17 +85,15 @@ class BonoManualController extends Controller
                     $saldo[$i]->update();
                     $i = count($saldo);
                 }
-                $data = [
-                    'user_id'=> $id ,
-                    'amount_gross' => $monto_a_sustraer ,
-                    'amount_net' => $monto_a_sustraer ,
-                    'amount_fee' => 0,
-                    'description' => $descripcion,
-                    'type '=> 1,
-                    'status' => 0,
-                ];
-                Log::info($data);
-                Liquidation::create($data);
+                $liqui = new Liquidation();
+                $liqui->user_id = $id;
+                $liqui->amount_gross = $monto_a_sustraer;
+                $liqui->amount_net = $monto_a_sustraer;
+                $liqui->amount_fee = 0;
+                $liqui->description = $descripcion;
+                $liqui->type = 3;
+                $liqui->status = 0;
+                $liqui->save();
             }
             return response()->json(['msj' =>  'Saldo sutraido correctamente',
             'ico'=> 'success' ]);
@@ -89,9 +108,4 @@ class BonoManualController extends Controller
 
     }
 
-    public function liqui($monto)
-    {
-
-
-    }
 }

@@ -106,7 +106,7 @@
             "name": "Edicion de saldo",
             "icon": "home",
             "slug": "Edicion-SaldoI-ndex",
-            "url": "/Edicion-saldo"
+            "url": "/search"
         },
         {
             "name": "Crones",

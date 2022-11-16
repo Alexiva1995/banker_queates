@@ -107,8 +107,8 @@
                 </div>
 
                 <div class="texto" style="padding-left: 3%">
-                    @if (isset($comissionsTotal))
-                    <span style="font-weight:900; font-size: 21px">USDT {{ $comissionsTotal }} </span>
+                    @if (isset($mlmTotal))
+                    <span style="font-weight:900; font-size: 21px">USDT {{ $mlmTotal }} </span>
                     @else
                     <span style="font-weight:900; font-size: 21px">USDT 0 </span>
                     @endif
@@ -125,8 +125,8 @@
                 </div>
 
                 <div class="texto" style="padding-left: 3%">
-                    @if (isset($comissionsAvailable))
-                    <span style="font-weight:900; font-size: 21px">USDT {{ $comissionsAvailable }} </span>
+                    @if (isset($mlmAvailable))
+                    <span style="font-weight:900; font-size: 21px">USDT {{ $mlmAvailable }} </span>
                     @else
                     <span style="font-weight:900; font-size: 21px">USDT 0 </span>
                     @endif
@@ -143,6 +143,9 @@
                         <div class="card-content">
                             <div class="card-header my-1 p-0">
                                 <h4 class="fw-700">Comisiones</h4>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#transferMlm">
+                                    Transferir
+                                </button>
                             </div>
                             <div class="card-body card-dashboard p-0">
                                 <div class="table-responsive">
@@ -157,12 +160,12 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($walletsComissions as $wallet)
+                                            @foreach ($mlm as $wallet)
                                             <tr class="text-center">
                                                 <td class="d-none d-sm-table-cell">{{ $wallet->id }}</td>
                                                 <td>{{ $wallet->description }}</td>
                                                 <td style="text-align: right">{{ number_format($wallet->amount, 2, ',',
-                                                    '.') }}</tds>
+                                                    '.') }}</td>
                                                 <td>
                                                     @if ($wallet->status == '0')
                                                     <span class="badge bg-info">Disponible</span>
@@ -181,6 +184,7 @@
                                             @endforeach
                                         </tbody>
                                     </table>
+                                    @include('wallet.components.transfer-mlm')
                                 </div>
                             </div>
                         </div>

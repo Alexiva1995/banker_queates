@@ -61,7 +61,7 @@
             </div>
           </li>
         </ul> -->
-        
+
       </div>
       <ul class="nav navbar-nav align-items-center ms-auto " >
       {{-- <li class="nav-item dropdown dropdown-language " >
@@ -217,7 +217,7 @@
               </span>
             </label>
           </div>
-{{-- 
+{{--
            <div class="d-flex align-content-around align-item-center">
              <i class="ficonCustom" data-feather='sun' style="margin-right: 0.3rem;"></i>
 
@@ -291,7 +291,7 @@
             <span class="avatar">
               @if( auth()->user()->investment !== null && auth()->user()->admin == 0 )
                 <img class="round" src="" alt="{{'emblema'.auth()->user()->investment->licensePackage->emblem}}" height="40" width="40" alt="license_emblem">
-              @elseif($user->admin == 1)
+              @elseif(Auth::user()->admin == 1)
                 @if(Auth::user()->photo == null)
                   <img class="round" src="{{asset('images/portrait/small/avatar-s-11.jpg')}}" alt="avatar" height="40" width="40">
                 @else
@@ -320,7 +320,7 @@
               <i class="me-1 text-primary" data-feather="user"></i> Mi Perfil
             </a>
             @endif
-           
+
             <!-- <a class="dropdown-item" href="{{url('app/email')}}">
               <i class="me-50" data-feather="mail"></i> Inbox
             </a>
