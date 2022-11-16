@@ -85,17 +85,15 @@ class BonoManualController extends Controller
                     $saldo[$i]->update();
                     $i = count($saldo);
                 }
-                $data = [
-                    'user_id'=> $id ,
-                    'amount_gross' => $monto_a_sustraer ,
-                    'amount_net' => $monto_a_sustraer ,
-                    'amount_fee' => 0,
-                    'description' => $descripcion,
-                    'type '=> 3,
-                    'status' => 0,
-                ];
-                Log::info($data);
-                Liquidation::create($data);
+                $liqui = new Liquidation();
+                $liqui->user_id = $id;
+                $liqui->amount_gross = $monto_a_sustraer;
+                $liqui->amount_net = $monto_a_sustraer;
+                $liqui->amount_fee = 0;
+                $liqui->description = $descripcion;
+                $liqui->type = 3;
+                $liqui->status = 0;
+                $liqui->save();
             }
             return response()->json(['msj' =>  'Saldo sutraido correctamente',
             'ico'=> 'success' ]);
@@ -110,9 +108,4 @@ class BonoManualController extends Controller
 
     }
 
-    public function liqui($monto)
-    {
-
-
-    }
 }

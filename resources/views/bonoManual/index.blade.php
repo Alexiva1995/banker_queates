@@ -32,7 +32,7 @@
                                     </td>
                                     <td>
                                         @if($user->investment != null)
-                                            {{$user->investment->LicensePackage}}
+                                            {{$user->investment->LicensePackage->name}}
                                         @else
                                             No disponible
                                         @endif
