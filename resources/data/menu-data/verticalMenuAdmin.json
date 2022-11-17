@@ -10,12 +10,6 @@
             "icon": "list",
             "slug": "/",
             "submenu": [{
-                    "url": "/ordenes",
-                    "name": "Ordenes",
-                    "icon": "circle",
-                    "slug": "ordenes.index"
-                },
-                {
                     "url": "/comisiones",
                     "name": "Comisiones",
                     "icon": "circle",
@@ -26,38 +20,20 @@
                     "name": "Retiros",
                     "icon": "circle",
                     "slug": "reports.withdraw"
+                },
+                {
+                    "url": "/ordenes",
+                    "name": "Ordenes",
+                    "icon": "circle",
+                    "slug": "ordenes.index"
                 }
             ]
-        },
-        {
-            "url": "/levels",
-            "name": "Niveles",
-            "icon": "arrow-up",
-            "slug": "levels"
-        },
-        {
-            "url": "/admin/investments",
-            "name": "Inversiones",
-            "icon": "dollar-sign",
-            "slug": "inversion.admin.index"
-        },
-        {
-            "url": "KYc-Admin",
-            "name": "Solicitudes KYC",
-            "icon": "dollar-sign",
-            "slug": "Accion-KYC"
         },
         {
             "name": "Usuarios",
             "icon": "users",
             "slug": "user.list-user",
             "url": "user/user-list"
-        },
-        {
-            "name": "Usuarios Expirados",
-            "icon": "users",
-            "slug": "user.expired.licenses.list",
-            "url": "user/expired/license/list"
         },
         {
             "name": "Liquidaciones",
@@ -74,117 +50,25 @@
                     "name": "Realizadas",
                     "icon": "credit-card",
                     "slug": "liquidaciones.realizadas"
-                },
-                {
-                    "url": "configurar-retiros",
-                    "name": "Configurar retiro",
-                    "icon": "credit-card",
-                    "slug": "config.retiros"
-                }
-
-            ]
-        },
-        {
-            "name": "Configuraciones",
-            "icon": "settings",
-            "slug": "",
-            "submenu": [{
-                    "url": "/rentabilidad",
-                    "name": "Rentabilidad",
-                    "icon": "shopping-cart",
-                    "slug": ""
-                },
-                {
-                    "url": "/bonos",
-                    "name": "Bonos",
-                    "icon": "circle",
-                    "slug": "bonos"
                 }
             ]
         },
         {
-            "name": "Edicion de saldo",
+            "url": "configurar-retiros",
+            "name": "Configuración de retiro",
+            "icon": "credit-card",
+            "slug": "config.retiros"
+        },
+        {
+            "name": "Edición de saldo",
             "icon": "home",
-            "slug": "Edicion-SaldoI-ndex",
+            "slug": "Edicion-Saldo-Index",
             "url": "/search"
         },
         {
-            "name": "Crones",
-            "icon": "clock",
-            "slug": "",
-            "submenu": [
-                {
-                    "url": "/bono-pamm",
-                    "name": "bono pamm",
-                    "icon": "circle",
-                    "slug": "bono.pamm"
-                },
-                {
-                    "url": "/create-utility",
-                    "name": "Crear utilidad",
-                    "icon": "circle",
-                    "slug": "create.utility"
-                },
-                {
-                    "url": "/update-utility",
-                    "name": "Actualizar utilidad",
-                    "icon": "circle",
-                    "slug": "add.utility"
-                },
-                {
-                    "url": "/avaliable-bonus",
-                    "name": "habilitar bonos Rango",
-                    "icon": "circle",
-                    "slug": "avaliable.bonus"
-                },
-                {
-                    "url": "/bonus-7k",
-                    "name": "Asignar bonos 7k",
-                    "icon": "circle",
-                    "slug": "bonus.7k"
-                },
-                {
-                    "url": "/set-ranges",
-                    "name": "Asignar Rangos",
-                    "icon": "circle",
-                    "slug": "cron.set.ranges"
-                },
-                {
-                    "url": "/corte-binario",
-                    "name": "Corte Binario",
-                    "icon": "circle",
-                    "slug": ""
-                }
-
-            ]
-        },
-        {
-            "url": "/red",
-            "name": "Red",
-            "icon": "users",
-            "slug": "financial.unilevel",
-            "submenu": [
-                {
-                    "url": "/red/buscar",
-                    "name": "Buscar referido",
-                    "icon": "circle",
-                    "slug": "red.buscar"
-                }
-            ]
-        },
-        {
-            "url": "/tickets",
             "name": "Soporte",
             "icon": "help-circle",
-            "slug": "tickets.create",
-            "submenu": [
-                {
-                    "url": "/tickets/ticket-list-admin",
-                    "name": "Ver tickets",
-                    "icon": "circle",
-                    "slug": "ticket.list-admin"
-                }
-            ]
+            "slug": "ticket.list-admin"
         }
 
     ]
