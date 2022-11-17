@@ -75,7 +75,7 @@ class UserController extends Controller
     public function listUser()
     {
 
-        $users = User::where('admin', '0')->with('padre', 'countrie')->orderBy('id', 'desc')->get();
+        $users = User::where('admin', '0')->with('padre', 'investment.LicensePackage','countrie')->orderBy('id', 'desc')->get();
 
         return view('user.list-users', compact('users'));
     }

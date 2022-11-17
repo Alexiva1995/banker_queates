@@ -109,7 +109,7 @@ Route::middleware('auth')->group(function () {
 
             //WALLET PAY DIRECT
             Route::get('admin/wallet', [LiquidactionController::class, 'indexAdmin'])->name('ComponentsAdmin.wallet');
-            Route::post("/search/manual/activation", [ManualActivationController::class, "searchEmail"])->name("search.activation");
+            // Route::post("/search/manual/activation", [ManualActivationController::class, "searchEmail"])->name("search.activation");
 
             //RENTABILIDAD
             Route::get('/rentabilidad', [UtilityController::class, 'index'])->name('rentabilidad');
@@ -143,6 +143,9 @@ Route::middleware('auth')->group(function () {
             Route::get('/liquidaciones/pendientes', [LiquidactionController::class, 'pendientes'])->name('liquidaciones.pendientes');
             Route::get('/liquidaciones/pendientes/export_csv', [LiquidactionController::class, 'ExportCSV'])->name('liquidaciones.export.csv');
 
+            //buscardor id
+            Route::get('/search', [BonoManualController::class, 'search'])->name('bonoManual.search');
+            Route::post('/search-id', [BonoManualController::class, 'searchPost'])->name('search.id');
             //Bono manual
             Route::get('/Edicion-saldo', [BonoManualController::class, 'index'])->name('Edicion-SaldoI-ndex');
 
@@ -199,6 +202,10 @@ Route::middleware('auth')->group(function () {
         Route::get('wallet', [LiquidactionController::class, 'index'])->name('wallet.index');
         //Ruta para actualizar una wallet
         Route::post('wallet-uedit', [WalletController::class, 'edit'])->name('wallet.edit');
+        //Ruta para transferir saldo mlm
+        Route::post('transfer-mlm', [WalletController::class, 'transferMlm'])->name('transfer.mlm');
+        //Ruta para transferir saldo licencias
+        Route::post('transfer-licencias', [WalletController::class, 'transferLicencias'])->name('transfer.licencias');
         Route::get('/comisiones', [WalletController::class, 'comisiones'])->name('reports.comision');
 
 

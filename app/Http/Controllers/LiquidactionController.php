@@ -469,34 +469,38 @@ class LiquidactionController extends Controller
     {
        try {
             $user = auth()->user();
-            $comissionsRangeTotal = WalletComission::where('user_id', $user->id)->where('type', 1)->sum('amount');
-            $comissionsTotal = WalletComission::where('user_id', $user->id)->where('type', 0)->sum('amount');
-            // TODO: Modificar estas 2 lineas de comision
-            $Licencias  = WalletComission::where([['user_id',$user->id ],
-                                                  ['type',2],
-                                                  ['status',0]
-                                                ])->get();
-            $LicenciasAgain  = WalletComission::where([['user_id',$user->id ],
-                                                ['type',2],
-                                              ])->sum('amount_available');
-            $LicenciasUtilityTotal = $Licencias->sum('amount_available');
 
-            $general =  WalletComission::where([['user_id',$user->id ],
-                                                ['status',0]
-                                            ])->get();
+            //vista pamm
+            $pamm =  WalletComission::where([['user_id',$user->id ],['type',0]])->get();
+            $pammTotal = $pamm->sum('amount_available');
+            $pammAvailable =  $pamm->where('status', 0)->sum('amount_available');
 
-            $generalAvaliable =  WalletComission::where([['user_id',$user->id ],
-                                            ['status',0]
-                                        ])->sum('amount_available');
+            //vista Range
+            $comisionRange = WalletComission::where('user_id', $user->id)->where('type', 1)->get();
+            $rangeTotal = $comisionRange->sum('amount_available');
+            $rangeAvailable = $comisionRange->where('status', 0)->sum('amount_available');
 
+            //vista licencias
+            $licencias  = WalletComission::where([['user_id',$user->id ],['type',2]])->get();
+            $licenciasTotal = $licencias->sum('amount_available');
+            $licenciasAvailable = $licencias->where('status', 0)->sum('amount_available');
+
+            //vista general
+            $general =  WalletComission::where('user_id',$user->id)->get();
             $generalTotal = $general->sum('amount_available');
+            $generalAvailable =  $general->where('status', 0)->sum('amount_available');
+            $subtraction = Liquidation::where([['user_id', $user->id],['type', 3]])->get();
 
-            $comissionsRangeAvailable = $user->getWalletRangeAmount();
-            $comissionsAvailable= $user->getWalletComissionAmount();
-            // $comissionsUtilityAvailable = $user->getUtilitiesWaitingAmount();
-            $comissionsUtilityAvailable = 0;
-            $walletsComissions = WalletComission::where('user_id', $user->id)->where('type', 0)->orderBy('id', 'desc')->get();
-            $walletsRange = WalletComission::where('user_id', $user->id)->where('type', 1)->orderBy('id', 'desc')->get();
+            $balancEdition = WalletComission::where([['user_id', $user->id],['type', 6]])->get();
+
+
+
+            //vista mlm
+
+            $mlm =  WalletComission::where([['user_id',$user->id ],['type',5]])->get();
+            $mlmTotal = $mlm->sum('amount_available');
+            $mlmAvailable =  $mlm->where('status', 0)->sum('amount_available');
+
             $daysRemaining = 0;
             if($user->investment)
             {
@@ -504,7 +508,8 @@ class LiquidactionController extends Controller
                 $daysRemaining = $date1->diffInDays(today()->format('Y-m-d') );
             }
 
-            return view('wallet.index', compact('generalAvaliable','LicenciasAgain','generalTotal','general','LicenciasUtilityTotal', 'comissionsTotal', 'comissionsRangeTotal', 'walletsRange', 'walletsComissions','Licencias', 'comissionsUtilityAvailable' ,'comissionsAvailable','comissionsRangeAvailable', 'daysRemaining'));
+            return view('wallet.index', compact('balancEdition','subtraction','pamm','pammTotal','pammAvailable','comisionRange','rangeTotal','rangeTotal','rangeAvailable','licencias','licenciasTotal','licenciasAvailable',
+            'general','generalTotal','generalAvailable','mlm','mlmTotal','mlmAvailable', 'daysRemaining'));
         } catch (\Throwable $th) {
             Log::error('Wallet - Index -> Error: ' . $th);
             abort(403, "Ocurrio un error, contacte con el administrador");

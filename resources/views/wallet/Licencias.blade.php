@@ -12,13 +12,13 @@
             </div>
 
             <div class="texto" style="padding-left: 3%">
-                @if (isset($LicenciasUtilityTotal))
-                    <span style="font-weight:900; font-size: 21px">USDT {{$LicenciasUtilityTotal}} </span>
+                @if (isset($licenciasAvailable ))
+                    <span style="font-weight:900; font-size: 21px">USDT {{$licenciasAvailable }} </span>
                 @else
                     <span style="font-weight:900; font-size: 21px">USDT 0 </span>
                 @endif
                 <br>
-                <span class="text-light">Total de comisiones pasivas</span>
+                <span class="text-light">Total de licencias Disponibles</span>
             </div>
         </div>
         <div class="card p-2 entrada-bloc">
@@ -33,8 +33,8 @@
             </div>
 
             <div class="texto" style="padding-left: 3%">
-                @if (isset($LicenciasAgain))
-                    <span style="font-weight:900; font-size: 21px">USDT {{$LicenciasAgain}} </span>
+                @if (isset($licenciasTotal ))
+                    <span style="font-weight:900; font-size: 21px">USDT {{$licenciasTotal }} </span>
                 @else
                     <span style="font-weight:900; font-size: 21px">USDT 0 </span>
                 @endif
@@ -50,6 +50,9 @@
                 <div class="card-content">
                     <div class="card-header my-1 p-0">
                         <h4 class="fw-700">Licencias</h4>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#transferLicencias">
+                            Transferir
+                        </button>
                     </div>
                     <div class="card-body card-dashboard p-0">
                         <div class="table-responsive">
@@ -63,7 +66,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($Licencias  as $licen)
+                                    @foreach ($licencias  as $licen)
                                         <tr class="text-center">
                                             <td class="d-none d-sm-table-cell">{{$licen->id}}</td>
                                             <td> {{ number_format($licen->amount, 2) }}</td>
@@ -83,6 +86,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            @include('wallet.components.transfer-licencias')
                         </div>
                     </div>
                 </div>
