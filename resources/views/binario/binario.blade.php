@@ -215,28 +215,6 @@
                                                         @include('genealogy.component.subnivelesBinario', [
                                                             'data' => $child2,
                                                         ])
-                                                        @if(!empty($child1->children))
-                                                            {{-- nivel 4 --}}
-                                                        <ul>
-                                                            @foreach($child2->children as $child3)
-                                                                {{-- genera el lado binario derecho haciendo vacio --}}
-                                                                @if(($child3->binary_side == 'R'))
-                                                                    @include('genealogy.component.sideEmpty', ['side' => 'R', 'cant' => count($child2->children), 'ladouser' => $child3->binary_side])
-                                                                @endif
-                                                                <li>
-                                                                @include('genealogy.component.subnivelesBinario', [
-                                                                    'data' => $child3,
-                                                                ])
-                                                                
-                                                                </li>
-                                                                {{-- genera el lado binario izquierdo haciendo vacio --}}
-                                                                @if(($child3->binary_side == 'L'))
-                                                                    @include('genealogy.component.sideEmpty', ['side' => 'L', 'cant' => count($child2->children),'ladouser' => $child3->binary_side])
-                                                                @endif
-                                                            @endforeach
-                                                        </ul>
-                                                        {{-- nivel 4 --}}
-                                                        @endif
                                                     </li>
                                                     {{-- genera el lado binario izquierdo haciendo vacio --}}
                                                     @if(($child2->binary_side == 'L'))

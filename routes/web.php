@@ -463,4 +463,9 @@ Route::middleware('admin')->group(function () {
         Artisan::call('bonus:range');
         return redirect()->back()->with('success', 'el cron bonus:7k corrio con exito');
     })->name('bonus.7k');
+
+    Route::get('/corte-binario', function () {
+        Artisan::call('corte:ganancias:binarias');
+        return redirect()->back()->with('success', 'el cron corte:ganancias:binarias corrio con exito');
+    });
 });
