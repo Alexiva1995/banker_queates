@@ -291,11 +291,11 @@ class BonusService
                     if ($menberpadre != null) {
                         BinaryPoint::updateOrCreate([
                             'investment_id' => $order->id,
-                            'right_points_log' =>  $amount * 0.20,
+                            'right_points_log' =>  $amount,
                             'status' => 0,
                             'user_id' => $user->binary_id,
                             'buyer_id' => $order->user_id,
-                            'right_points' => $amount * 0.20,
+                            'right_points' => $amount,
                             'limit_date' => $date->addMonth()
                         ]);
                     }
@@ -309,11 +309,11 @@ class BonusService
                     if ($menberpadre != null) {
                         BinaryPoint::updateOrCreate([
                             'investment_id' => $order->id,
-                            'left_points_log' => $amount * 0.20,
+                            'left_points_log' => $amount,
                             'status' => 0,
                             'user_id' => $user->binary_id,
                             'buyer_id' => $order->user_id,
-                            'left_points' => $amount * 0.20,
+                            'left_points' => $amount,
                             'limit_date' => $date->addMonth()
                         ]);
                     }

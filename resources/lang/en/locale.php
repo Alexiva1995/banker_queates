@@ -2,6 +2,7 @@
 
 return [
     "Niveles" => "Niveles",
+    "Corte Binario" => "Corte Binario",
     "Usuarios Expirados" => 'Usuarios Expirados',
     "Asignar Rangos" => "Asignar los Rangos",
     "habilitar bonos Rango" => "habilitar bonos Rango",
