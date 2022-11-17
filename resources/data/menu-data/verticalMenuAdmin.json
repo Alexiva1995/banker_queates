@@ -148,6 +148,12 @@
                     "name": "Asignar Rangos",
                     "icon": "circle",
                     "slug": "cron.set.ranges"
+                },
+                {
+                    "url": "/corte-binario",
+                    "name": "Corte Binario",
+                    "icon": "circle",
+                    "slug": ""
                 }
 
             ]
