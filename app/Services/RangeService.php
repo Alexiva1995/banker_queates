@@ -208,8 +208,8 @@ class RangeService
             }
 
             // Si tienen mas de 100k de puntos lo limitamos a 100k. Si es menor se deja el valor por defecto.
-            $right_points = $user->getRightRangePoints() > 100000 ? 100000 : $user->getRightRangePoints();
-            $left_points = $user->getLeftRangePoints() > 100000 ? 100000 : $user->getLeftRangePoints();
+            $right_points = $user->getRangePoints() > 100000 ? 100000 : $user->getRangePoints();
+            $left_points = $user->getRangePoints() > 100000 ? 100000 : $user->getRangePoints();
 
             if( $left_side >= 1 && $right_side >= 1 && $right_points == 100000 && $left_points == 100000 ) 
             {
@@ -264,8 +264,8 @@ class RangeService
             }
 
             // Si tienen mas de 500k de puntos lo limitamos a 100k. Si es menor se deja el valor por defecto.
-            $right_points = $user->getRightRangePoints() > 500000 ? 500000 : $user->getRightRangePoints();
-            $left_points = $user->getLeftRangePoints() > 500000 ? 500000 : $user->getLeftRangePoints();
+            $right_points = $user->getRangePoints() > 500000 ? 500000 : $user->getRangePoints();
+            $left_points = $user->getRangePoints() > 500000 ? 500000 : $user->getRangePoints();
 
             if( $left_side >= 1 && $right_side >= 1 && $right_points == 500000 && $left_points == 500000 ) 
             {
@@ -319,8 +319,8 @@ class RangeService
         $total = $left_side + $right_side;
 
         // Si tienen mas de 1.25m de puntos lo limitamos a 1.25m. Si es menor se deja el valor por defecto.
-        $right_points = $user->getRightRangePoints() > 1250000 ? 1250000 : $user->getRightRangePoints();
-        $left_points = $user->getLeftRangePoints() > 1250000 ? 1250000 : $user->getLeftRangePoints();
+        $right_points = $user->getRangePoints() > 1250000 ? 1250000 : $user->getRangePoints();
+        $left_points = $user->getRangePoints() > 1250000 ? 1250000 : $user->getRangePoints();
 
         if( $total >= 3 && $right_points == 1250000 && $left_points == 1250000 ) 
         {
