@@ -33,8 +33,15 @@ class PointsService
                     $historial_point->status = 0;
                     $historial_point->user_id = $user->buyer_id;
                     $historial_point->buyer_id = $order->user_id;
-                    $historial_point->quantity = $amount;
-                    $historial_point->quantity_log = $amount;
+
+                    if($user->binary_side == 'R') {
+                        $historial_point->right_range_points = $amount;
+                        $historial_point->points_range_R = $amount;
+                    }
+                    elseif($user->binary_side == 'L') {
+                        $historial_point->left_range_points = $amount;
+                        $historial_point->points_range_L = $amount;
+                    }
 
                     $historial_point->save();
                 }

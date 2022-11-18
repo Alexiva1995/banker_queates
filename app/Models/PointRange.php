@@ -15,8 +15,10 @@ class PointRange extends Model
         'user_id',
         'buyer_id',
         'orden_id',
-        'quantity',
-        'quantity_log',
+        'right_range_points',
+        'left_range_points',
+        'points_range_L',
+        'points_range_R',
         'status',
         'limit'
     ];
