@@ -172,13 +172,8 @@
                         <h5 class="mt-0"> <b>{{ $base->name }}</b></h5>
 
                         {{-- esto se debe quitar cuando ya esten las imagenes, solo es de prueba para saber que llegan los datos--}}
-                        @if( $base->investment != null )
-                            <h5 class="mt-0"> <b>Licencia: {{ $base->licence }}</b></h5>
-                        @endif
-                        @if( $base->range_id != null )
-                            <h5 class="mt-0"> <b>Rango: {{ $base["range_id"] }}</b></h5>
-                        @endif
-
+                        <!--<h5 class="mt-0"> <b>Licencia: </b></h5>-->
+                        <!--<h5 class="mt-0"> <b>Rango: </b></h5>-->
                     </div>
                 </div>
             </a>
