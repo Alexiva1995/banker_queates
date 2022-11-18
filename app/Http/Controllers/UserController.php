@@ -79,6 +79,25 @@ class UserController extends Controller
 
         return view('user.list-users', compact('users'));
     }
+
+    public function searchUsers(Request $request){
+        //buscar por nombre, correo o PAMM 
+             
+        if( !empty($request->input('buscar')) ){
+            $users = User::where('name', 'like', '%'.$request->input('buscar').'%')
+                            ->orWhere('last_name', 'like', '%'.$request->input('buscar').'%')
+                            ->orWhere('email', 'like','%'.$request->input('buscar').'%')
+                            ->orderBy('id', 'desc')
+                            ->get();
+                
+        }else{
+            $users = User::where('admin', '0')->with('padre', 'investment.LicensePackage','countrie')->orderBy('id', 'desc')->get();
+        }
+
+        return view('user.list-users', compact('users')); 
+
+     }
+ 
     /**
      * Retorna la lista con los usuarios que tienen licencias vencidas
      */
