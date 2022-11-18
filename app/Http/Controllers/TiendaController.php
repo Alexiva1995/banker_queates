@@ -13,6 +13,7 @@ use Hexters\CoinPayment\CoinPayment;
 use App\Http\Controllers\InversionController;
 use App\Models\User;
 use App\Events\UserEvent;
+use App\Http\Requests\PurchaseLicenseStoreRequest;
 use App\Models\Investment;
 use App\Models\Upgrade;
 use App\Services\BonusService;
@@ -91,15 +92,8 @@ class TiendaController extends Controller
      * Procesa el pago o la transacción del usuario al momento de
      * elegir el paquete y enviar su comprobante de pago.
      */
-    public function procesarOrden(Request $request)
+    public function procesarOrden(PurchaseLicenseStoreRequest $request)
     {
-        $request->validate([
-            'package' => 'required',
-            'moneda' => 'required',
-            'hash' => 'required',
-            'voucher' => 'required|mimes:jpg,jpeg,png',
-        ]);
-        
         $user = Auth::user();
         $allOrder = Order::where('user_id', $user->id)->where('status', '0')->get();
         $package = LicensePackage::where('id', $request->package)->first();
@@ -234,13 +228,13 @@ class TiendaController extends Controller
                 //Se crea la wallet corresondiente
                 $this->callBuildingBonus($orden);
 
-                // Se cambia el status del usuario a activo
-                if ($user->status == '0') {
-                    $user->status = '1';
-                    $user->date_active = now();
-                    $user->update();
-                    event(new UserEvent($user));
-                }
+            }
+            // Se cambia el status del usuario a activo
+            if ($user->status == '0') {
+                $user->status = '1';
+                $user->date_active = now();
+                $user->update();
+                event(new UserEvent($user));
             }
             
             // Genera los puntos binarios

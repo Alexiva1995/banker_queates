@@ -12,8 +12,8 @@
             </div>
 
             <div class="texto" style="padding-left: 3%">
-                @if (isset($comissionsRangeTotal))
-                <span style="font-weight:900; font-size: 21px">USDT {{ $comissionsRangeTotal }} </span>
+                @if (isset($RangeTotal))
+                <span style="font-weight:900; font-size: 21px">USDT {{ $RangeTotal }} </span>
                 @else
                 <span style="font-weight:900; font-size: 21px">USDT 0 </span>
                 @endif
@@ -29,8 +29,8 @@
             </div>
 
             <div class="texto" style="padding-left: 3%">
-                @if (isset($comissionsRangeAvailable))
-                <span style="font-weight:900; font-size: 21px">USDT {{ $comissionsRangeAvailable }} </span>
+                @if (isset($RangeAvailable))
+                <span style="font-weight:900; font-size: 21px">USDT {{ $RangeAvailable }} </span>
                 @else
                 <span style="font-weight:900; font-size: 21px">USDT 0 </span>
                 @endif
@@ -60,7 +60,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($walletsRange as $wallet)
+                                        @foreach ($comisionRange as $wallet)
                                         <tr class="text-center">
                                             <td class="d-none d-sm-table-cell">{{ $wallet->id }}</td>
                                             <td>{{ $wallet->description }}</td>

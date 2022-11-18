@@ -31,7 +31,11 @@
                                         {{$user->email}}
                                     </td>
                                     <td>
-                                        #licencia
+                                        @if($user->investment != null)
+                                            {{$user->investment->LicensePackage->name}}
+                                        @else
+                                            No disponible
+                                        @endif
                                     </td>
                                     <td>
                                         <button  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$user->id}}">

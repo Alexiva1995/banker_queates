@@ -44,6 +44,20 @@ class TreController extends Controller
         try {
             $base = Auth::user();
             $trees = $this->getDataEstructura(Auth::id(), $tree);
+
+            foreach($trees as $treeChild){
+                $childLicenses =  Investment::where('user_id', $treeChild->id)->where('status', 1)->first();
+
+                if($childLicenses != NULL){
+                    $treeChild->licence = $childLicenses->id;
+                }
+            }
+
+            $licenses =  Investment::where('user_id', $base->id)->where('status', 1)->first();
+            if($licenses != NULL){
+                $base->licence = $licenses->LicensePackage->id;
+            }
+
             $base->logoarbol = asset('images/avatars/1.png');
             $lastLevelActive = Level::where('status', '1')->orderBy('id', 'desc')->first();
             return view('genealogy.tree', compact('trees', 'base', 'lastLevelActive', 'tree'));
@@ -97,12 +111,14 @@ class TreController extends Controller
     {
         return view('genealogy.buscar');
     }
+
     public function levels()
     {
         $levels = Level::all();
         $lastLevelActive = Level::where('status', '1')->orderBy('id', 'desc')->first();
         return view('levels.index', compact('lastLevelActive', 'levels'));
     }
+
     public function activateLevels(Request $request)
     {
         $levels = Level::all();
@@ -185,6 +201,42 @@ class TreController extends Controller
             return view('genealogy.tree', compact('trees', 'base'));
         } catch (\Throwable $th) {
             Log::error('Tree - moretree -> Error: '.$th);
+            abort(403, "Ocurrio un error, contacte con el administrador");
+        }
+    }
+
+    public function searchUnilevelTree(Request $request)
+    {
+        try {
+            // titulo
+            $id = $request->id;
+            $trees = $this->getDataEstructura($id, null);
+            //$type = ucfirst($type);
+            $base = User::find($id);
+            $base->logoarbol = asset('assets/img/sistema/favicon.png');
+
+            foreach($trees as $treeChild){
+                $childLicenses =  Investment::where('user_id', $treeChild->id)->where('status', 1)->first();
+
+                if($childLicenses != NULL){
+                    $treeChild->licence = $childLicenses->id;
+                }
+            }
+
+            $licenses =  Investment::where('user_id', $base->id)->where('status', 1)->first();
+            if($licenses != NULL){
+                $base->licence = $licenses->LicensePackage->id;
+            }
+
+            if($trees !== NULL){
+                $tree = 1;
+                return view('genealogy.tree', compact('trees', 'base', 'tree'));
+            }else{
+                return redirect('/referred/tree/1')->with('error', 'Este usuario no pertenece a su red unilevel');
+            }
+
+        } catch (\Throwable $th) {
+            Log::error('Tree - searchUnilevelTree -> Error: '.$th);
             abort(403, "Ocurrio un error, contacte con el administrador");
         }
     }
@@ -326,7 +378,7 @@ class TreController extends Controller
         try {
             $resul = User::where('buyer_id', $id)->get();
             if ($tree == 2) {
-            $resul = User::where('binary_id', $id)->get();
+            $resul = User::where('binary_id', $id)->orderBy('binary_side', 'asc')->get();
             }
             foreach ($resul as $user) {
                 $user->nivel = $nivel;

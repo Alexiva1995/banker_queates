@@ -75,7 +75,7 @@ class UserController extends Controller
     public function listUser()
     {
 
-        $users = User::where('admin', '0')->with('padre', 'countrie')->orderBy('id', 'desc')->get();
+        $users = User::where('admin', '0')->with('padre', 'investment.LicensePackage','countrie')->orderBy('id', 'desc')->get();
 
         return view('user.list-users', compact('users'));
     }
@@ -163,18 +163,21 @@ class UserController extends Controller
         if( ( strcmp($request->input('email'), $request->input('emailOrigin')) !== 0 ) && 
             ($request->input('email') != null && $request->input('password') == null) ){
 
-                return redirect()->back()->with('error', 'Si desea cambiar su correo electrónico, debe ingresar su contraseña de Take');
+                return redirect()->back()->with('error', 'Si desea cambiar su correo electrónico, debe ingresar su contraseña de Take.');
         }
 
         if( ($request->input('password') != null) && ($request->input('email') != null) ){
             //verificar contraseña de take para poder actualizar el correo 
 
-            //$user->email = $data['email'];
+            if (Hash::check($request->input('password'), Auth::user()->password)) {
+                $user->email = $data['email'];
+            }else{
+                return redirect()->back()->with('error', 'NO coincide la contraseña ingresada, con su contraseña de Take.');
+            }
         }
 
         $user->name = $data['name'];
         $user->last_name = $data['last_name'];
-        //$user->email = $data['email'];
         $user->phone = $data['phone'];
         $user->countrie_id = $data['countrie_id'];
         if ( $request->has('gender') ) $user->gender = $request->input('gender');
@@ -213,7 +216,7 @@ class UserController extends Controller
     {
         $user = User::find(Auth::user()->id);
         $request->validate([
-            'photo' => 'required|mimes:png,jpg|max:800'
+            'photo' => 'required|mimes:jpeg,png|max:800'
         ]);
 
         $user->update($request->all());

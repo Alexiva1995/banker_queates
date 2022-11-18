@@ -12,9 +12,9 @@
                     <div class="col-sm-5 capa-exterior rounded-3 align-items-center d-flex flex-column" style="width: 90%">
                         <i data-feather='upload-cloud' class="font-large-4 text-light mt-2"></i>
                         <label for="hiddenBtn" class="choose-btn capa-interior fw-400 mt-1" id="chooseBtn">
-                            Arrastre y suelte o <span class="text-primary text-decoration-underline">explore</span> sus archivos
+                            <span class="text-primary text-decoration-underline">explore</span> sus archivos
                         </label>
-                        <input type="file" id="hiddenBtn" type="file" class="form-control @error('photo') is-invalid @enderror" name="photo" value="{{ old('photo') }}" style="display: none;">
+                        <input type="file" id="hiddenBtn" type="file" class="form-control @error('photo') is-invalid @enderror" name="photo" value="{{ old('photo') }}" style="display: none;" accept="image/png,image/jpeg">
                         <br>
 
                         @error('image')
