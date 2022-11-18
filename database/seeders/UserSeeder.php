@@ -66,7 +66,7 @@ class UserSeeder extends Seeder
             'email_verified_at' => '2022-03-08 15:52:21',
             'status' => '1',
             'buyer_id' => '3',
-            'binary_id' => 2,
+            'binary_id' => 3,
         ]);
 
         User::create([
@@ -186,7 +186,8 @@ class UserSeeder extends Seeder
             'password' => Hash::make('123456789'),
             'email_verified_at' => '2022-03-08 15:52:21',
             'status' => '1',
-            'buyer_id' => '2'
+            'buyer_id' => '2',
+            'binary_id' => 2,
         ]);
 
         User::create([
@@ -197,7 +198,8 @@ class UserSeeder extends Seeder
             'password' => Hash::make('123456789'),
             'email_verified_at' => '2022-03-08 15:52:21',
             'status' => '1',
-            'buyer_id' => '2'
+            'buyer_id' => '2',
+            'binary_id' => 2,
         ]);
 
         User::create([
@@ -208,7 +210,8 @@ class UserSeeder extends Seeder
             'password' => Hash::make('123456789'),
             'email_verified_at' => '2022-03-08 15:52:21',
             'status' => '1',
-            'buyer_id' => '2'
+            'buyer_id' => '2',
+            'binary_id' => 2,
         ]);
 
         User::create([
@@ -219,7 +222,8 @@ class UserSeeder extends Seeder
             'password' => Hash::make('123456789'),
             'email_verified_at' => '2022-03-08 15:52:21',
             'status' => '1',
-            'buyer_id' => '2'
+            'buyer_id' => '2',
+            'binary_id' => 2,
         ]);
 
         User::create([
@@ -230,7 +234,8 @@ class UserSeeder extends Seeder
             'password' => Hash::make('123456789'),
             'email_verified_at' => '2022-03-08 15:52:21',
             'status' => '1',
-            'buyer_id' => '2'
+            'buyer_id' => '2',
+            'binary_id' => 2,
         ]);
 
         User::create([
@@ -241,7 +246,8 @@ class UserSeeder extends Seeder
             'password' => Hash::make('123456789'),
             'email_verified_at' => '2022-03-08 15:52:21',
             'status' => '1',
-            'buyer_id' => '2'
+            'buyer_id' => '2',
+            'binary_id' => 2,
         ]);
 
         User::create([
@@ -252,7 +258,8 @@ class UserSeeder extends Seeder
             'password' => Hash::make('123456789'),
             'email_verified_at' => '2022-03-08 15:52:21',
             'status' => '1',
-            'buyer_id' => '2'
+            'buyer_id' => '2',
+            'binary_id' => 2,
         ]);
 
         User::create([
@@ -263,7 +270,8 @@ class UserSeeder extends Seeder
             'password' => Hash::make('123456789'),
             'email_verified_at' => '2022-03-08 15:52:21',
             'status' => '1',
-            'buyer_id' => '2'
+            'buyer_id' => '2',
+            'binary_id' => 2,
         ]);
     }
 }

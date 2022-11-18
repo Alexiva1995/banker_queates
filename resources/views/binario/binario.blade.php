@@ -172,13 +172,8 @@
                         <h5 class="mt-0"> <b>{{ $base->name }}</b></h5>
 
                         {{-- esto se debe quitar cuando ya esten las imagenes, solo es de prueba para saber que llegan los datos--}}
-                        @if( $base->investment != null )
-                            <h5 class="mt-0"> <b>Licencia: {{ $base->licence }}</b></h5>
-                        @endif
-                        @if( $base->range_id != null )
-                            <h5 class="mt-0"> <b>Rango: {{ $base["range_id"] }}</b></h5>
-                        @endif
-
+                        <!--<h5 class="mt-0"> <b>Licencia: </b></h5>-->
+                        <!--<h5 class="mt-0"> <b>Rango: </b></h5>-->
                     </div>
                 </div>
             </a>
@@ -215,28 +210,6 @@
                                                         @include('genealogy.component.subnivelesBinario', [
                                                             'data' => $child2,
                                                         ])
-                                                        @if(!empty($child1->children))
-                                                            {{-- nivel 4 --}}
-                                                        <ul>
-                                                            @foreach($child2->children as $child3)
-                                                                {{-- genera el lado binario derecho haciendo vacio --}}
-                                                                @if(($child3->binary_side == 'R'))
-                                                                    @include('genealogy.component.sideEmpty', ['side' => 'R', 'cant' => count($child2->children), 'ladouser' => $child3->binary_side])
-                                                                @endif
-                                                                <li>
-                                                                @include('genealogy.component.subnivelesBinario', [
-                                                                    'data' => $child3,
-                                                                ])
-                                                                
-                                                                </li>
-                                                                {{-- genera el lado binario izquierdo haciendo vacio --}}
-                                                                @if(($child3->binary_side == 'L'))
-                                                                    @include('genealogy.component.sideEmpty', ['side' => 'L', 'cant' => count($child2->children),'ladouser' => $child3->binary_side])
-                                                                @endif
-                                                            @endforeach
-                                                        </ul>
-                                                        {{-- nivel 4 --}}
-                                                        @endif
                                                     </li>
                                                     {{-- genera el lado binario izquierdo haciendo vacio --}}
                                                     @if(($child2->binary_side == 'L'))

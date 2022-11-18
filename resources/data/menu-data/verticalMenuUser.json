@@ -8,7 +8,7 @@
         },
         {
             "name": "Licencias",
-            "icon": "grid",
+            "icon": "file",
             "slug": "market.licenses",
             "url": "/market/licenses"
         },
@@ -18,62 +18,36 @@
             "slug": "/",
             "submenu": [
                 {
-                    "url": "/ordenes",
-                    "name": "Ordenes",
-                    "icon": "circle",
-                    "slug": "ordenes.index"
-                },
-                {
                     "url": "/comisiones",
                     "name": "Comisiones",
                     "icon": "circle",
-                    "slug": "reports.comision"
+                    "slug": "comisiones"
                 },
                 {
                     "url": "/reports/withdraw",
                     "name": "Retiros",
                     "icon": "circle",
                     "slug": "reports.withdraw"
+                },
+                {
+                    "url": "/ordenes",
+                    "name": "Ordenes",
+                    "icon": "circle",
+                    "slug": "ordenes.index"
                 }
             ]
         },
         {
             "url": "/wallet",
-            "name": "Billetera",
+            "name": "Wallet",
             "icon": "credit-card",
-            "slug": "app-chat",
-            "submenu": [
-                {
-                    "url": "/wallet",
-                    "name": "Wallets",
-                    "icon": "circle",
-                    "slug": "wallet.index"
-                }
-            ]
-        },
-        {
-            "name": "Retiro",
-            "icon": "grid",
-            "slug": "retiro",
-            "url": "/retirar"
+            "slug": "wallet"
         },
         {
             "url": "/investments",
-            "name": "Inversiones",
-            "icon": "dollar-sign",
-            "slug": "investment.user.index"
-        },
-        {
-            "url": "/KYc-verificacion",
-            "name": "KYC",
-            "icon": "dollar-sign",
-            "slug": "KYC-Verify"
-        },
-        {
-            "url": "/investments/mypackages",
-            "name": "Mis Paquetes",
+            "name": "Mis licencias",
             "icon": "columns",
-            "slug": "investment.user.mypackages"
+            "slug": "investment.user.index"
         },
         {
             "url": "/red/unilevel",
@@ -95,14 +69,19 @@
                 },
                 {
                     "url": "/red/referred/tree/1",
-                    "name": "Arbol de referidos",
+                    "name": "Arbol de Referidos",
                     "icon": "circle",
                     "slug": "referred.tree"
                 }
             ]
         },
         {
-            "url": "/tickets",
+            "name": "Retiros",
+            "icon": "grid",
+            "slug": "retiro",
+            "url": "/retirar"
+        },
+        {
             "name": "Soporte",
             "icon": "help-circle",
             "slug": "tickets.create",

@@ -11,7 +11,7 @@
         width: 50%;
         display: inline;
     }
-   
+
     .dt-button{
         border: none !important;
         border-radius: 5px !important;
@@ -29,12 +29,42 @@
     <div class="card p-2">
         <div class="card-content">
             <div class="card-body p-0">
+                <div class="card-header d-block p-3 pb-0">
+                    <form action="{{ route('search.users') }}" method="POST">
+                        @csrf
+                        <div class="row justify-content-end">
+                            <div class="col-md-2 col-sm-4">
+                                <div class=" white mt-1">
+                                    <input type="text" placeholder="nombre/apellido" name="name" class="form-control" id="buscar">
+                                </div>
+                            </div>
+                            <div class="col-md-1 col-sm-3">
+                                <div class=" white mt-1">
+                                    <button type="submit" class="btn btn-primary ">Filtrar</button>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2 col-sm-4">
+                                 <div class=" white mt-1">
+                                    <input type="text" placeholder="email" name="email" class="form-control" id="buscar">
+                                </div>
+                            </div>
+                            <div class="col-md-1 col-sm-3">
+                                <div class=" white mt-1">
+                                     <button type="submit" class="btn btn-primary ">Filtrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
                 <div class="table-responsive">
                     <table class="table nowrap scroll-horizontal-vertical myTable w-100">
+                        <div class="card-content p-75">
                         <thead>
                             <tr class="text-center ">
                                 <th class="fw-500">ID</th>
-                                <th class="fw-500">Nombre</th>
+                                <th class="fw-500">Nombre/Apellido</th>
                                 <th class="fw-500">Email</th>
                                 <th class="fw-500">Licencia</th>
                                 <th class="fw-500">Balance</th>
@@ -111,10 +141,11 @@
 @endsection
 @section('page-script')
 <script>
-    //datataables ordenes 
-   
+    //datataables ordenes
+
     $('.myTable').DataTable({
         responsive: false,
+        searching:false,
         order: [
             [0, "asc"]
         ],
@@ -125,7 +156,7 @@
             "lengthMenu":     "Mostrar _MENU_ entradas",
             "loadingRecords": "Cargando...",
             "processing":     "",
-            "search":         "Filtrar: nombre, correo, numero de cuenta bróker:",
+            //"search":         "Filtrar: nombre, correo, numero de cuenta bróker:",
             "zeroRecords":    "No se encontraron resultados",
             paginate: {
                 first:    ' ',

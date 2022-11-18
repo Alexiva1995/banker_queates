@@ -47,7 +47,7 @@ class RangeService
             $this->case = 1;
             $right_direct_childrens_array = $user->binaryChildrens->where('binary_side', 'R')->pluck('id')->toArray();
             $right_childrens = $user->binaryChildrens->whereIn('id', $right_direct_childrens_array)->toArray();
-            $this->getTreeUsers( $right_childrens, $level = 1, $right_direct_childrens_array );
+            $this->getTreeUsers( $right_childrens, $level = 2, $right_direct_childrens_array );
 
             /*
              - Seteamos a caso 2 para traer los hijos por el lado derecho del arbol
@@ -58,7 +58,7 @@ class RangeService
             $this->case = 2;
             $left_direct_childrens_array = $user->binaryChildrens->where('binary_side', 'L')->pluck('id')->toArray();
             $left_childrens = $user->binaryChildrens->whereIn('id', $left_direct_childrens_array)->toArray();
-            $this->getTreeUsers( $left_childrens, $level = 1, $left_direct_childrens_array );
+            $this->getTreeUsers( $left_childrens, $level = 2, $left_direct_childrens_array );
 
             $this->consultantRange($user);
         }
@@ -208,8 +208,8 @@ class RangeService
             }
 
             // Si tienen mas de 100k de puntos lo limitamos a 100k. Si es menor se deja el valor por defecto.
-            $right_points = $user->getRightRangePoints() > 100000 ? 100000 : $user->getRightRangePoints();
-            $left_points = $user->getLeftRangePoints() > 100000 ? 100000 : $user->getLeftRangePoints();
+            $right_points = $user->getRangePoints() > 100000 ? 100000 : $user->getRangePoints();
+            $left_points = $user->getRangePoints() > 100000 ? 100000 : $user->getRangePoints();
 
             if( $left_side >= 1 && $right_side >= 1 && $right_points == 100000 && $left_points == 100000 ) 
             {
@@ -264,8 +264,8 @@ class RangeService
             }
 
             // Si tienen mas de 500k de puntos lo limitamos a 100k. Si es menor se deja el valor por defecto.
-            $right_points = $user->getRightRangePoints() > 500000 ? 500000 : $user->getRightRangePoints();
-            $left_points = $user->getLeftRangePoints() > 500000 ? 500000 : $user->getLeftRangePoints();
+            $right_points = $user->getRangePoints() > 500000 ? 500000 : $user->getRangePoints();
+            $left_points = $user->getRangePoints() > 500000 ? 500000 : $user->getRangePoints();
 
             if( $left_side >= 1 && $right_side >= 1 && $right_points == 500000 && $left_points == 500000 ) 
             {
@@ -319,8 +319,8 @@ class RangeService
         $total = $left_side + $right_side;
 
         // Si tienen mas de 1.25m de puntos lo limitamos a 1.25m. Si es menor se deja el valor por defecto.
-        $right_points = $user->getRightRangePoints() > 1250000 ? 1250000 : $user->getRightRangePoints();
-        $left_points = $user->getLeftRangePoints() > 1250000 ? 1250000 : $user->getLeftRangePoints();
+        $right_points = $user->getRangePoints() > 1250000 ? 1250000 : $user->getRangePoints();
+        $left_points = $user->getRangePoints() > 1250000 ? 1250000 : $user->getRangePoints();
 
         if( $total >= 3 && $right_points == 1250000 && $left_points == 1250000 ) 
         {
@@ -333,7 +333,7 @@ class RangeService
      * @param Integer $nivel -  El nivel hasta el cual se desea hacer el recorrido
      * @param Array $users_ids - Contiene los ids de los usuarios para buscar sus hijos
      */
-    public function getTreeUsers($users = [], $nivel = 1, $users_ids = [])
+    public function getTreeUsers($users = [], $nivel, $users_ids = [])
     {
         // Obtenemos los referidos directos de todos los ids que recibimos en el array users_ids
         $usersLevel = User::whereIn('binary_id', $users_ids)->get();

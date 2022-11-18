@@ -229,7 +229,7 @@ class TicketsController extends Controller
             ]);
         }
 
-        return redirect()->route('ticket.show-user', $id_ticket)->with('success', 'El Ticket se creo Exitosamente');
+        return redirect()->route('ticket.edit-user', $id_ticket)->with('success', 'El Ticket se creo Exitosamente');
     }
 
     // permite editar el ticket

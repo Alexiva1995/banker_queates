@@ -43,11 +43,7 @@
     <div class="media-body">
             <h5 class=""> <b>{{ $data->name }}</b></h5>
             {{-- esto se debe quitar cuando ya esten las imagenes, solo es de prueba para saber que llegan los datos--}}
-            @if( $data->investment != null )
-                <h5 class="mt-0"> <b>Licencia: {{ $data->investment->package_id }}</b></h5>
-            @endif
-            @if( $data->range_id != null )
-                <h5 class="mt-0"> <b>Rango: {{ $data->range_id }}</b></h5>
-            @endif
+            <!-- <h5 class="mt-0"> <b>Licencia: </b></h5>-->
+            <!--<h5 class="mt-0"> <b>Rango: </b></h5>-->
     </div>
 </a>
