@@ -128,7 +128,7 @@
                                      <tr class="text-center">
                                         <td class="d-none d-sm-table-cell">{{$gen->id}}</td>
                                         <td> {{ $gen->description }}</td>
-                                        <td class="text-danger"> {{ number_format($gen->amount_gross, 2) }}</td>
+                                        <td class="text-danger"> {{ number_format($gen->amount_gross                                                                                                              , 2) }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

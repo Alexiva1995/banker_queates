@@ -28,10 +28,10 @@
                                     <label for="disabledTextInput" class="form-label">Usuario :</label>
                                     <input type="text" id="disabledTextInput" class="form-control" placeholder="{{$user->name}}" disabled>
                                 </div>
-                                <div class="col">
+                                {{--<div class="col">
                                     <label for="disabledTextInput" class="form-label">Saldo :</label>
                                     <input type="text" id="disabledTextInput" class="form-control" placeholder="{{$user->saldo_disponible}}$" disabled>
-                                </div>
+                                </div>--}}
                               </div>
                         </div>
                         <div class="row">
@@ -52,7 +52,7 @@
 
                       </div>
 
-                        <a onclick="argegar_saldo({{$user->id}})" class="btn btn-primary">Submit</a>
+                        <a onclick="argegar_saldo({{$user->id}})" class="btn btn-primary">Realizar</a>
                     </form>
                 </div>
 
@@ -67,10 +67,10 @@
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <div class="mb-1">
+                                   {{-- <div class="mb-1">
                                         <label for="disabledTextInput" class="form-label">Saldo :</label>
                                         <input type="text" id="disabledTextInput" class="form-control" placeholder="{{$user->saldo_disponible}}$" disabled>
-                                    </div>
+                                    </div>--}}
                                 </div>
                                 <div class="col-6">
                                     <div class="mb-1">
@@ -88,7 +88,7 @@
 
                             </div>
                         </div>
-                        <a onclick="sustraer_saldo({{$user->id}})" class="btn btn-primary">Submit</a>
+                        <a onclick="sustraer_saldo({{$user->id}})" class="btn btn-primary">Realizar</a>
                     </form>
                 </div>
             </div>
