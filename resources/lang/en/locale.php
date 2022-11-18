@@ -204,5 +204,6 @@ return [
     "Edición de saldo"=>"Edición de saldo",
     "Binario" => "Binario",
     "Buscar referido" => "Buscar referido",
-    "Mis licencias" => "Mis licencias"
+    "Mis licencias" => "Mis licencias",
+    "Arbol de Referidos" => "Arbol de Referidos"
 ];
