@@ -8,6 +8,7 @@
                     <th class="fw-600">Email</th>
                     <th class="fw-600">Licencia</th>
                     <th class="fw-600">Estado</th>
+                    <th class="fw-600">Afiliado por</th>
                     <th class="fw-600">Fecha</th>
                 </tr>
             </thead>
@@ -16,16 +17,17 @@
                     <tr>
                         <td>{{ $user->id }}</td>
                         <td>{{ $user->username }}</td>
-                        <td>{{ $user->email }}</td>
+                        <td>{{$user->email}}</td>
+                        @if($user->investment != null)
+                            <td>{{$user->investment->LicensePackage->name}}</td>
+                        @else
+                            <td>No tiene licencias activas</td>
+                        @endif
 
                         @if ($user->investments->count() > 0)
-                            <td>{{ $user->investments->last()->membershipPackage->membershipType->name }}
-                            </td>
-                            <td class="text-end">{{ number_format($user->investments->last()->invested, 2, ',', '.') }}
-                            </td>
                             @if ($user->investments->last()->status == 0)
                                 <td class="text-center">
-                                    <span class="badge bg-wawning">En espera</span>
+                                    <span class="badge bg-warning">En espera</span>
                                 </td>
                             @elseif ($user->investments->last()->status == 1)
                                 <td class="text-center">
@@ -37,9 +39,9 @@
                                 </td>
                             @endif
                         @else
-                            <td>No tiene licencias activas</td>
                             <td>-</td>
                         @endif
+                        <td>{{ $user->padre->fullName() }}</td>
                         <td>{{ date('Y-m-d', strtotime($user->created_at)) }}</td>
                     </tr>
                 @endforeach
