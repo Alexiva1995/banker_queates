@@ -85,7 +85,7 @@
     .logo-header {
         max-width: 100%;
         height: fit-content;
-        width: 104px;
+        width: 120px;
     }
 
     .slogan:link,
@@ -1260,7 +1260,7 @@
         <nav class="nav-header navbar navbar-expand-lg pt-md-2 pt-sm-2  pt-xxs-3">
             <div class="container-fluid">
                 <a class="navbar-brand slogan" href="{{ route('welcome') }}">
-                    <img src="{{ asset('images/welcome/logoprojectletrasblancas.png') }}" alt="logo connect"
+                    <img src="{{ asset('images/welcome/logo-solid-white.png') }}" alt="logo connect"
                         class="logo-header me-1">
                 </a>
                 <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"

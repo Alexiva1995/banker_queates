@@ -31,7 +31,7 @@
   <div class="auth-inner py-2">
       <div class="card p-2 mb-0 bg-white">
           <div class="card-body mx-1 text-center">
-              <img width="120" class="mb-2" src="{{asset('images/logo/projecas.png')}}" alt="">
+              <img width="120" class="mb-2" src="{{asset('images/logo/logo-deg.png')}}" alt="">
               <h4 class="text-center mb-1 fw-700">¡Para completar tu registro por favor presiona el boton!</h4>
               @if (session('resent'))
                 <div class="alert alert-success" role="alert">

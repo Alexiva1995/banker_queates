@@ -69,9 +69,9 @@ $referred = DB::table('users')
         <div class="card mb-0 p-2 bg-white shadow box-shadow-1">
             <div class="card-body pb-0">
                 <a href="#" class="brand-logo mb-3">
-                    <img width="120" src="{{asset('images/logo/projecas.png')}}" alt="">
+                    <img width="180" src="{{asset('images/logo/logo-deg.png')}}" alt="">
                 </a>
-                <h4 class="fw-700">Regístrate a PROJECT 7K</h4>
+                <h4 class="fw-700">Regístrate en Banker Quotes</h4>
                 <style>
                     .dark-layout .input-group:focus-within .form-control, .dark-layout .input-group:focus-within .input-group-text, .dark-layout input:-webkit-autofill{
                         -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
