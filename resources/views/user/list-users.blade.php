@@ -33,9 +33,20 @@
                     <form action="{{ route('search.users') }}" method="POST">
                         @csrf
                         <div class="row justify-content-end">
-                            <div class="col-md-5 col-sm-4">
+                            <div class="col-md-2 col-sm-4">
                                  <div class=" white mt-1">
-                                    <input type="text" placeholder="nombre/apellido/email del usuario" name="buscar" class="form-control" id="buscar">
+                                    <input type="text" placeholder="nombre/apellido" name="name" class="form-control" id="buscar">
+                                </div>
+                            </div>
+                            <div class="col-md-1 col-sm-3">
+                                <div class=" white mt-1">
+                                     <button type="submit" class="btn btn-primary ">Filtrar</button>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2 col-sm-4">
+                                 <div class=" white mt-1">
+                                    <input type="text" placeholder="email" name="email" class="form-control" id="buscar">
                                 </div>
                             </div>
                             <div class="col-md-1 col-sm-3">
