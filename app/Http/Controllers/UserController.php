@@ -87,18 +87,15 @@ class UserController extends Controller
                            ->orWhere('name',$request->input('name'))
                            ->orWhere('last_name',$request->input('name'))
                            ->orderBy('id', 'desc')
-                           ->get();*/
+                           ->get();*/ 
             return redirect()->back()->with('error', 'Filtre por una opción');
 
         }elseif((!empty($request->input('email'))) && (empty($request->input('name')))){
-            $users = User::where('email', $request->input('email'))
-                            ->orderBy('id', 'desc')
-                            ->get();
+            $users = User::where('email', $request->input('email'))->orderBy('id', 'desc')->get();
+
         }elseif((empty($request->input('email'))) && (!empty($request->input('name')))){
-            $users = User::where('name', $request->input('name'))
-                            ->orWhere('last_name',$request->input('name'))
-                            ->orderBy('id', 'desc')
-                            ->get();
+            $users = User::where('name', $request->input('name'))->orWhere('last_name',$request->input('name'))->orderBy('id', 'desc')->get();
+            
         }else{
             $users = User::where('admin', '0')->with('padre', 'investment.LicensePackage','countrie')->orderBy('id', 'desc')->get();
         }

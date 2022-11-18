@@ -34,13 +34,13 @@
                         @csrf
                         <div class="row justify-content-end">
                             <div class="col-md-2 col-sm-4">
-                                 <div class=" white mt-1">
+                                <div class=" white mt-1">
                                     <input type="text" placeholder="nombre/apellido" name="name" class="form-control" id="buscar">
                                 </div>
                             </div>
                             <div class="col-md-1 col-sm-3">
                                 <div class=" white mt-1">
-                                     <button type="submit" class="btn btn-primary ">Filtrar</button>
+                                    <button type="submit" class="btn btn-primary ">Filtrar</button>
                                 </div>
                             </div>
 
