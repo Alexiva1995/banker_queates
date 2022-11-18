@@ -11,7 +11,7 @@
         width: 50%;
         display: inline;
     }
-   
+
     .dt-button{
         border: none !important;
         border-radius: 5px !important;
@@ -111,8 +111,8 @@
 @endsection
 @section('page-script')
 <script>
-    //datataables ordenes 
-   
+    //datataables ordenes
+
     $('.myTable').DataTable({
         responsive: false,
         order: [
