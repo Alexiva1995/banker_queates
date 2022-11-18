@@ -20,10 +20,10 @@ class PointsService
         
         if($user->binary_id != 0 || !empty($user->binary_id))
         {
-            $referred = $user->padre_binario;
+            $referred = $user->padre;
             //$user->points_pr += $amount;
             //$user->update();
-            $menberpadre = Investment::where('user_id',$user->binary_id)->where('status', '1')->first();
+            $menberpadre = Investment::where('user_id',$user->buyer_id)->where('status', '1')->first();
 
             if ($menberpadre != null) 
             {
@@ -31,17 +31,10 @@ class PointsService
                     $historial_point = new PointRange;
                     $historial_point->orden_id = $order->id;
                     $historial_point->status = 0;
-                    $historial_point->user_id = $user->binary_id;
+                    $historial_point->user_id = $user->buyer_id;
                     $historial_point->buyer_id = $order->user_id;
-
-                    if($user->binary_side == 'R') {
-                        $historial_point->right_range_points = $amount;
-                        $historial_point->points_range_R = $amount;
-                    }
-                    elseif($user->binary_side == 'L') {
-                        $historial_point->left_range_points = $amount;
-                        $historial_point->points_range_L = $amount;
-                    }
+                    $historial_point->quantity = $amount;
+                    $historial_point->quantity_log = $amount;
 
                     $historial_point->save();
                 }
