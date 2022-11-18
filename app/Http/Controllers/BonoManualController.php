@@ -22,16 +22,13 @@ class BonoManualController extends Controller
             return back()->with('error', 'Usuario no existe por favor verifique');
         }else{
 
-            foreach($usuario as $user){
-                $user->saldo_disponible = $user->getWallet->sum('amount_available');
-            }
-
-            return view('bonoManual.index' , compact('usuario'));
+            return $this->index($usuario);
         }
     }
 
-    public function index(){
-        $usuarios = User::where([['status', '1'],['id', '!=', '1']])->get();
+    public function index($user){
+
+        $usuarios = User::where('id', $user[0]->id)->get();
 
         foreach($usuarios as $user){
            $user->saldo_disponible = $user->getWallet->sum('amount_available');

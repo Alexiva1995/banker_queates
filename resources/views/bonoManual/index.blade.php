@@ -19,7 +19,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ( $usuario as $user )
+                                @foreach ( $usuarios as $user )
                                 <tr class="text-center">
                                     <td>
                                         {{$user->id}}
