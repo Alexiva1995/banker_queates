@@ -40,11 +40,5 @@
     </div>
     <div class="media-body">
             <h5 style="font-size: 0.8rem"> <b>{{ $data->name }}</b></h5>
-            @if( $data->investment != null )
-                <h5 style="font-size: 0.8rem"> <b>Licencia: {{ $data->investment->package_id }}</b></h5>
-            @endif
-            @if( $data->range_id != null )
-                <h5 style="font-size: 0.8rem"> <b>Rango: {{ $data->range_id }}</b></h5>
-            @endif
     </div>
 </a>
