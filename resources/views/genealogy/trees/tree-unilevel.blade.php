@@ -84,6 +84,18 @@
             border-top-left-radius: 50%;
             border-bottom-left-radius: 50%;
         }
+
+        .rounded-circle{
+            width: auto;
+            height:auto;
+            max-width: 100%;
+        }
+
+        .rounded-circle-add{
+            width: auto;
+            height:auto;
+            max-width: 115%;
+        }
     </style>
 
     <div class="col-12">
@@ -157,24 +169,14 @@
             {{-- usuario principal --}}
             <a href="#" class="base">
                 <div class="media">
-                    @if ($base->gender == null || $base->gender == '0')
-                        <img src="{{ asset('images/avatars-profile/1.png') }}" height="74" width="74"
-                        class="rounded-circle align-self-center mr-1 di" alt="{{ $base->name }}"
-                        title="{{ $base->name }}">
-                    @else
-                        <img src="{{ asset('images/avatars-profile/2.png') }}" height="74" width="74"
-                        class="rounded-circle align-self-center mr-1 di" alt="{{ $base->name }}"
-                        title="{{ $base->name }}">
-                    @endif
-
-                    {{-- PARA CUANDO SE TENGAN LAS IMAGENES CORRESPONDIENTES--}}
-                    {{--@if( ($base["range_id"] != null) )
-                        <img src="{{ asset('images/ensignRanges/'.$data['range_id'].'.png') }}" height="80" width="80"
-                        class="rounded-circle align-self-center mr-1 di" alt="{{$data['range_id']}}">
+          
+                    @if( ($base["range_id"] != null) )
+                        <img src="{{ asset('images/ensignRanges/'.$base['range_id'].'.png') }}" height="80" width="80"
+                        class="rounded-circle align-self-center mr-1 di" alt="{{$base['range_id']}}">
                     
                     @elseif( ($base["range_id"] == null) && (!empty($base->licence)) )
-                        <img src="{{ asset('images/ensignLicences/'.$data['range_id'].'.png') }}" height="80" width="80"
-                        class="rounded-circle align-self-center mr-1 di" alt="{{$data['range_id']}}">
+                        <img src="{{ asset('images/ensignLicences/'.$base['range_id'].'.png') }}" height="80" width="80"
+                        class="rounded-circle align-self-center mr-1 di" alt="{{$base['range_id']}}">
                     
                     @elseif( ($base["range_id"] == null) && (empty($base->licence)) )
 
@@ -188,7 +190,7 @@
                             title="{{ $base->name }}">
                         @endif
 
-                    @endif--}}
+                    @endif
                     
                     <div class="media-body">
                         <h5 class="mt-0"> <b>{{ $base->name }}</b></h5>
