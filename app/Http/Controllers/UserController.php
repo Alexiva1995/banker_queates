@@ -82,13 +82,55 @@ class UserController extends Controller
 
     public function searchUsers(Request $request){
         //buscar por nombre, correo o PAMM 
-        if((!empty($request->input('email'))) && (!empty($request->input('name')))){
-            /*$users = User::where('email', $request->input('email'))
-                           ->orWhere('name',$request->input('name'))
-                           ->orWhere('last_name',$request->input('name'))
-                           ->orderBy('id', 'desc')
-                           ->get();*/ 
+
+        if(($request->input('select') != "Filtar") && (empty($request->input('filtro')))){
+            return redirect()->back()->with('error', 'Debe colocar la información a filtrar');
+
+        }elseif(!empty($request->input('filtro')) && ($request->input('select') == "id")){
+
+            $validate = $request->validate([
+                'filtro' => 'bail|integer|max:5',
+            ]);
+
+            $users = User::where('id', $request->input('filtro'))->orderBy('id', 'desc')->get();
+
+        }elseif(!empty($request->input('filtro')) && ($request->input('select') == "name")){
+
+            $users = User::where('name', $request->input('filtro'))->orWhere('last_name',$request->input('filtro'))->orderBy('id', 'desc')->get();
+        
+        }elseif(!empty($request->input('filtro')) && ($request->input('select') == "email")){
+            
+            $validate = $request->validate([
+                'filtro' => 'bail|email|max:5',
+            ]);
+
+            $users = User::where('email', $request->input('filtro'))->orderBy('id', 'desc')->get();
+
+        }elseif(!empty($request->input('filtro')) && ($request->input('select') == "pamm")){
+            return redirect()->back()->with('error', 'En proceso');
+
+        }else{
+            $users = User::where('admin', '0')->with('padre', 'investment.LicensePackage','countrie')->orderBy('id', 'desc')->get();
+
+        }
+
+        return view('user.list-users', compact('users'));
+
+
+        /*if((!empty($request->input('email'))) && (!empty($request->input('name'))) && (!empty($request->input('id')))){
             return redirect()->back()->with('error', 'Filtre por una opción');
+
+        }elseif((!empty($request->input('email'))) && (!empty($request->input('name'))) && (empty($request->input('id')))){
+            return redirect()->back()->with('error', 'Filtre por una opción');
+
+        }elseif((empty($request->input('email'))) && (!empty($request->input('name'))) && (!empty($request->input('id')))){
+            return redirect()->back()->with('error', 'Filtre por una opción');
+
+        }elseif((!empty($request->input('email'))) && (empty($request->input('name'))) && (!empty($request->input('id')))){
+            return redirect()->back()->with('error', 'Filtre por una opción');
+
+        }elseif((!empty($request->input('id'))) && (empty($request->input('name')))  && (empty($request->input('email')))){
+            $users = User::where('id', $request->input('id'))->orderBy('id', 'desc')->get();
 
         }elseif((!empty($request->input('email'))) && (empty($request->input('name')))){
             $users = User::where('email', $request->input('email'))->orderBy('id', 'desc')->get();
@@ -100,7 +142,7 @@ class UserController extends Controller
             $users = User::where('admin', '0')->with('padre', 'investment.LicensePackage','countrie')->orderBy('id', 'desc')->get();
         }
 
-        return view('user.list-users', compact('users')); 
+        return view('user.list-users', compact('users'));*/
      }
  
     /**
