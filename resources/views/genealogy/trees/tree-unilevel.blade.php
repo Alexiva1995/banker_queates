@@ -192,12 +192,6 @@
                     
                     <div class="media-body">
                         <h5 class="mt-0"> <b>{{ $base->name }}</b></h5>
-                        @if( $base->investment != null )
-                            <h5 class="mt-0"> <b>Licencia: {{ $base->licence }}</b></h5>
-                        @endif
-                        @if( $base->range_id != null )
-                            <h5 class="mt-0"> <b>Rango: {{ $base["range_id"] }}</b></h5>
-                        @endif
                     </div>
                 </div>
             </a>
