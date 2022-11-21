@@ -18,7 +18,7 @@
     }
     .footer img{
       margin-right: 0;
-      width: 66px;
+      width: 30px;
     }
   }
 </style>
@@ -26,7 +26,7 @@
 <footer class="footer bg-footer footer-light ($configData['footerType'] === 'foote }}r-hidden') ? 'd-none':''}} {{$configData['footerType']}}">
 
   <div class="d-flex justify-content-center align-items-center mt-2 flex-wrap">
-      <img src="{{asset('images/logo/p7k_logo_footer.png')}}" class="me-1"/><span>Project 7K - Todos los Derechos Reservados</span>
+      <img src="{{asset('images/logo/icon-deg.png')}}" style="width: 50; height: 50px;" class="me-1"/><span>Banker Quotes - Todos los Derechos Reservados</span>
   </div>
 
 </footer>

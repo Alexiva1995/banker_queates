@@ -169,12 +169,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return $amount += $this->points->sum('points_range_R');
     }
 
-    public function getRangePoints()
-    {
-        $amount = 0;
-        return $amount += $this->points->sum('quantity');
-    }
-
     public function getLeftRangePoints()
     {
         $amount = 0;

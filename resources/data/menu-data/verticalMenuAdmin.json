@@ -68,7 +68,8 @@
         {
             "name": "Soporte",
             "icon": "help-circle",
-            "slug": "ticket.list-admin"
+            "slug": "ticket.list-admin",
+            "url": "/tickets/ticket-list-admin"
         }
 
     ]

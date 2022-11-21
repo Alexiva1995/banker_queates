@@ -48,9 +48,9 @@
               <div class="card mb-0 p-2 bg-white shadow box-shadow-1" >
             <div class="card-body pb-0">
                 <a href="#" class="brand-logo">
-                    <img width="120" src="{{asset('images/logo/projecas.png')}}" alt="">
+                    <img width="130" src="{{asset('images/logo/logo-deg.png')}}" alt="">
                 </a>
-                <h4 class="fw-700" style="">Bienvenido a PROJECT7K</h4>
+                <h4 class="fw-700" style="">Bienvenido a Banker Quotes</h4>
                 <p class="mb-0 fw-300">Por favor ingresa los datos a continuación e ingresa</p>
 
                 <form class="auth-login-form mt-2" id="login-form" method="POST" action="{{ route('login') }}">
