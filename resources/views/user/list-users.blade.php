@@ -30,31 +30,78 @@
         <div class="card-content">
             <div class="card-body p-0">
                 <div class="card-header d-block p-3 pb-0">
+               
                     <form action="{{ route('search.users') }}" method="POST">
                         @csrf
                         <div class="row justify-content-end">
+                            <div class="col-md-2 col-sm-4">
+                                <select class="form-select" aria-label=".form-select-lg example" name="select">
+                                    <option selected value="Filtar">Filtar por </option>
+                                    <option value="id">ID</option>
+                                    <option value="name">NOMBRE</option>
+                                    <option value="email">EMAIL</option>
+                                    <option value="pamm">PAMM</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-3 col-sm-4">
+                               
+                                    <input type="text" placeholder="..." name="filtro" class="form-control" id="buscar">
+                            </div>
+
+                            <div class="col-md-1 col-sm-3" style="padding-left: 0px">
+                                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                                
+                            </div>
+
+                        </div>
+                
+                        
+                        {{--<div class="row justify-content-end">
+                            <div class="col-md-2 col-sm-4">
+                                <div class=" white mt-1">
+                                    <input type="text" placeholder="id de usuario" name="id" class="form-control" id="buscar">
+                                </div>
+                            </div>
+                            <div class="col-md-1 col-sm-3" style="padding-left: 0px">
+                                <div class=" white mt-1">
+                                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                                </div>
+                            </div>
+
                             <div class="col-md-2 col-sm-4">
                                 <div class=" white mt-1">
                                     <input type="text" placeholder="nombre/apellido" name="name" class="form-control" id="buscar">
                                 </div>
                             </div>
-                            <div class="col-md-1 col-sm-3">
+                            <div class="col-md-1 col-sm-3" style="padding-left: 0px">
                                 <div class=" white mt-1">
-                                    <button type="submit" class="btn btn-primary ">Filtrar</button>
+                                    <button type="submit" class="btn btn-primary" >Filtrar</button>
                                 </div>
                             </div>
 
                             <div class="col-md-2 col-sm-4">
-                                 <div class=" white mt-1">
+                                 <div class=" white mt-1" >
                                     <input type="text" placeholder="email" name="email" class="form-control" id="buscar">
                                 </div>
                             </div>
-                            <div class="col-md-1 col-sm-3">
+                            <div class="col-md-1 col-sm-3" style="padding-left: 0px">
                                 <div class=" white mt-1">
-                                     <button type="submit" class="btn btn-primary ">Filtrar</button>
+                                     <button type="submit" class="btn btn-primary">Filtrar</button>
                                 </div>
                             </div>
-                        </div>
+
+                            <div class="col-md-2 col-sm-4">
+                                 <div class=" white mt-1" >
+                                    <input type="text" placeholder="PAMM" name="pamm" class="form-control" id="buscar" disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-1 col-sm-3" style="padding-left: 0px">
+                                <div class=" white mt-1">
+                                     <button type="submit" class="btn btn-primary">Filtrar</button>
+                                </div>
+                            </div>
+                        </div>--}}
                     </form>
                 </div>
             </div>
