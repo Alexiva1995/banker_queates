@@ -206,9 +206,9 @@
             <ul>
                 @foreach ($trees as $child)
                 {{-- genera el lado binario derecho haciendo vacio --}}
-                @if( ($child->binary_side == 'R') )
+                {{--@if( ($child->binary_side == 'R') )
                     @include('genealogy.component.sideEmpty', ['side' => 'R', 'cant' => count($trees), 'ladouser' => $child->binary_side])
-                @endif
+                @endif--}}
                     <li>
                         @include('genealogy.component.subniveles', ['data' => $child])
                         @if (!empty($child->children))
@@ -216,9 +216,9 @@
                             <ul>
                                 @foreach ($child->children as $child1)
                                     {{-- genera el lado binario derecho haciendo vacio --}}
-                                    @if( ($child1->binary_side == 'R') )
+                                    {{--@if( ($child1->binary_side == 'R') )
                                         @include('genealogy.component.sideEmpty', ['side' => 'R', 'cant' => count($child->children), 'ladouser' => $child1->binary_side])
-                                    @endif
+                                    @endif--}}
                                     <li>
                                         @include('genealogy.component.subniveles', [
                                             'data' => $child1,
@@ -228,9 +228,9 @@
                                             <ul class="d-none d-sm-table-cell">
                                                 @foreach ($child1->children as $child2)
                                                     {{-- genera el lado binario derecho haciendo vacio --}}
-                                                    @if( ($child2->binary_side == 'R') )
+                                                    {{--@if( ($child2->binary_side == 'R') )
                                                         @include('genealogy.component.sideEmpty', ['side' => 'R', 'cant' => count($child1->children), 'ladouser' => $child2->binary_side])
-                                                    @endif
+                                                    @endif--}}
                                                     <li>
                                                         @include('genealogy.component.subniveles', [
                                                             'data' => $child2,
@@ -240,9 +240,9 @@
                                                             <ul>
                                                                 @foreach ($child2->children as $child3)
                                                                 {{-- genera el lado binario derecho haciendo vacio --}}
-                                                                @if(($child3->binary_side == 'R'))
+                                                                {{--@if(($child3->binary_side == 'R'))
                                                                     @include('genealogy.component.sideEmpty', ['side' => 'R', 'cant' => count($child2->children), 'ladouser' => $child3->binary_side])
-                                                                @endif
+                                                                @endif --}}
                                                                     <li>
                                                                         @include('genealogy.component.subniveles',
                                                                             ['data' => $child3])
@@ -336,36 +336,36 @@
                                                                         @endif--}}
                                                                     </li>
                                                                     {{-- genera el lado binario izquierdo haciendo vacio --}}
-                                                                    @if(($child3->binary_side == 'L'))
+                                                                    {{-- @if(($child3->binary_side == 'L'))
                                                                         @include('genealogy.component.sideEmpty', ['side' => 'L', 'cant' => count($child2->children),'ladouser' => $child3->binary_side])
-                                                                    @endif
+                                                                    @endif--}}
                                                                 @endforeach
                                                             </ul>
                                                             {{-- fin nivel 4 --}}
                                                         @endif
                                                     </li>
                                                     {{-- genera el lado binario izquierdo haciendo vacio --}}
-                                                    @if(($child2->binary_side == 'L'))
+                                                    {{--@if(($child2->binary_side == 'L'))
                                                         @include('genealogy.component.sideEmpty', ['side' => 'L', 'cant' => count($child1->children),'ladouser' => $child2->binary_side])
-                                                    @endif
+                                                    @endif--}}
                                                 @endforeach
                                             </ul>
                                             {{-- fin nivel 3 --}}
                                         @endif
                                     </li>
                                     {{-- genera el lado binario izquierdo haciendo vacio --}}
-                                    @if(($child1->binary_side == 'L'))
+                                    {{--@if(($child1->binary_side == 'L'))
                                         @include('genealogy.component.sideEmpty', ['side' => 'L', 'cant' => count($child->children),'ladouser' => $child1->binary_side])
-                                    @endif
+                                    @endif--}}
                                 @endforeach
                             </ul>
                             {{-- fin nivel 2 --}}
                         @endif
                     </li>
                     {{-- genera el lado binario izquierdo haciendo vacio --}}
-                    @if(($child->binary_side == 'L'))
+                    {{--@if(($child->binary_side == 'L'))
                         @include('genealogy.component.sideEmpty', ['side' => 'L', 'cant' => count($trees),'ladouser' => $child->binary_side])
-                    @endif
+                    @endif--}}
                 @endforeach
             </ul>
             {{-- fin nivel 1 --}}

@@ -36,7 +36,7 @@
             <tbody>
                 @foreach ($ticket as $item)
                 <tr class="text-center">
-                    <td># {{ $item->id}}</td>
+                    <td>{{ $item->id}}</td>
                     <td class="text-start">[Ticket #{{ $item->user_id}}] {{$item->issue}}</td>
 
 
