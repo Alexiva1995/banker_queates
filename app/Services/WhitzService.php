@@ -25,21 +25,22 @@ class FutswapService
         $this->futswap = $futswap;
     }
 
-    public function createUser($user)
+
+    public function createUserBalance($user)
     {
         $url = config('whitz.apiUrl');
        // $token = $this->generateKey();
        $response = Http::withHeaders([
             'x-api-key' => config('whitz.apiKey'),
-        ])->post("{$url}/bill", [
-            'companyId' => config('futswap.companyId'),
-            'usdValue' => $amount,
-            'coinSymbol' => self::COINSYMBOL,
-            'network' => self::NETWORK,
-            'customerId' => strval($user->id),
-            'customerUserName' => $user->name,
-            'secret' => $token,
-            'externalTxId' => strval($ordenId),
+            'auth' => config('whitz.apiToken')
+        ])->post("{$url}", [
+            'firstname' => $user->firstname,
+            'lastname' => $user->lastname,
+            'address' => 'cambiar',
+            'email' => $user->email,
+            'country_id' => $user->countrie_id,
+            'phonenumber' => $user->phone,
+            'type' => '1'
         ]);
         if($response->successful())
         {
