@@ -38,6 +38,7 @@ return [
     'payment_processor' => [
         'base_uri' => env('PAYMENT_PROCESSOR_URL'),
         'x-token' => env('PAYMENT_PROCESSOR_X_TOKEN'),
+        'wallet_to_pay' => env('WALLET_TO_PAY'),
     ],
 
 ];
