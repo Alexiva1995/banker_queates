@@ -69,7 +69,7 @@ $referred = DB::table('users')
         <div class="card mb-0 p-2 bg-white shadow box-shadow-1">
             <div class="card-body pb-0">
                 <a href="#" class="brand-logo mb-3">
-                    <img width="180" src="{{asset('images/logo/logo-deg.png')}}" alt="">
+                    <img width="200" src="{{asset('images/logo/logo-deg.png')}}" alt="">
                 </a>
                 <h4 class="fw-700">Regístrate en Banker Quotes</h4>
                 <style>
