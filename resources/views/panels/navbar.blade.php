@@ -294,11 +294,10 @@
                 --}}
                 
                 @if(Auth::user()->admin != 1)
-                  @if(auth()->user()->investment == null)
-                    <img class="round" src="{{asset('images/portrait/small/avatar-s-11.jpg')}}" alt="avatar" height="40" width="40">
+                  @if(auth()->user()->range_id == null)
+                    <img class="round" src="{{asset('images/ico/deg.ico')}}" alt="avatar" height="40" width="40">
                   @else
-                    <!--<img class="round" src="{{ asset('images/ensignLicenses/'.auth()->user()->investment->package_id.'.png') }}" alt="avatar" height="40" width="40">-->
-                    <img class="round" src="{{asset('images/portrait/small/avatar-s-11.jpg')}}" alt="avatar" height="40" width="40">
+                    <img class="round" src="{{ asset('images/ensignRanges/'.auth()->user()->range_id.'.png') }}" height="40" width="40">
                   @endif
 
                 @elseif(Auth::user()->admin == 1)
