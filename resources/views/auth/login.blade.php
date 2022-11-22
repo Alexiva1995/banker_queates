@@ -9,7 +9,7 @@
 
 <style>
     #bg {
-        background-image: url('{{('images/login/bg-login7k.png')}}');
+        background-image: url('{{('images/auth/fondo-auth.png')}}');
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
@@ -25,11 +25,11 @@
     h4{
         color:#544E67!important;
     }
-  
+
     @media(max-width:357px){
         .auth-wrapper.auth-v1{
             padding-left:0.5rem!important;
-            padding-right:0.5rem!important; 
+            padding-right:0.5rem!important;
         }
         .card.mb-0.p-2 {
             padding-right: 3%!important;
@@ -40,7 +40,7 @@
 
 @section('content')
 <div id="bg">
-   <!--  <img src="{{asset('images/login/bg-login.png')}}" /> -->
+    <img src="{{asset('images/auth/fondo-auth.png')}}" />
 </div>
 
 <div class="auth-wrapper auth-v1 px-2">
@@ -116,7 +116,7 @@
                         </div>
                     </div>
                     <input type='hidden' name='recaptcha_token' id='recaptcha_token'>
-                    
+
                     @if($errors->has('recaptcha_token'))
                         <p class="alert alert-danger p-1">
                             {{$errors->first('recaptcha_token')}}
@@ -148,7 +148,7 @@
         document.getElementById('recaptcha_token').value = token;
     }) });
 </script>
-<script> 
-   
+<script>
+
 </script>
 @endsection
