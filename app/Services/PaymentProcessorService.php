@@ -64,11 +64,12 @@ class PaymentProcessorService
             'crypto' => SELF::CURRENCY,
             'external_id' => $order_id,
             'network' => SELF::NETWORK,
-            'amount' => $amount,
+            // 'amount' => $amount,
+            'amount' => 1.00,
             // TODO: Eliminar el envio de wallet a futuro
-            'toAddress' => $this->wallet_to_pay,
+            'toAddress' => 'TYRtXaNf38ruups8bXspTZpo2F271bKYzs',
             // TODO: Obtener esta wallet dinamicamente
-            'wallet' => 'TKVMvt54AqMbrFmeUTpxgbCeenst8YHTrN'
+            'wallet' => 'TMuV3m6AhT1hkqKmTi1ym5cw84dRtSvQhf'
         ];
 
         return $this->makeRequest(
