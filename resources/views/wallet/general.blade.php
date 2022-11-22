@@ -1,4 +1,4 @@
-<div class="tab-pane fade show" id="general" role="tabpanel" aria-labelledby="nav-licen-tab">
+<div class="tab-pane fade show active" id="general" role="tabpanel" aria-labelledby="nav-licen-tab">
     <div class="contenedor">
         <div class="row">
             <div class="col-sm-3">
@@ -48,55 +48,20 @@
                     </div>
                 </div>
             </div>
+            <div class="col-sm-3">
+                <div class="card p-2 entrada-bloc ">
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#modalWallet" class="btn btn-gradient-primary float-end ms-1 mb-2" style="width: 89%;">Enlazar Wallet</button>
 
-            {{--<div class="col-sm-3">
-                <div class="card p-2 entrada-bloc">
-                    <div class="avatar bg-light-primary avatar-md me-auto mb-1" style="padding: 0.3rem !important">
-                        <div class="avatar-content">
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M16 18H2C0.89543 18 0 17.1046 0 16V2C0 0.89543 0.89543 0 2 0H16C17.1046 0 18 0.89543 18 2V16C18 17.1046 17.1046 18 16 18ZM2 2V16H16V2H2ZM14 14H12V7H14V14ZM10 14H8V4H10V14ZM6 14H4V9H6V14Z"
-                                    fill="#673DED" />
-                            </svg>
+
+                    <div class="texto">
+                        <div class="col-sm-12">
+                            <div class="row justify-content-center" style="margin-bottom:3.6%;">
+                                <a href="{{route('solicitudesRetiros')}}" class="btn btn-primary float-end" style=" width: 83%">Solicitar Retiro</a>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="texto" style="padding-left: 3%">
-                        @if ($pammTotal > 0 )
-                            <span style="font-weight:900; font-size: 21px">USDT <span class="text-success">{{ $pammTotal }} </span></span>
-                        @else
-                            <span style="font-weight:900; font-size: 21px">USDT 0 </span>
-                        @endif
-                        <br>
-                        <span class="text-light">Ganancia MLM PAMM</span>
                     </div>
                 </div>
             </div>
-
-            <div class="col-sm-3">
-                <div class="card p-2 entrada-bloc">
-                    <div class="avatar bg-light-primary avatar-md me-auto mb-1" style="padding: 0.3rem !important">
-                        <div class="avatar-content">
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M16 18H2C0.89543 18 0 17.1046 0 16V2C0 0.89543 0.89543 0 2 0H16C17.1046 0 18 0.89543 18 2V16C18 17.1046 17.1046 18 16 18ZM2 2V16H16V2H2ZM14 14H12V7H14V14ZM10 14H8V4H10V14ZM6 14H4V9H6V14Z"
-                                    fill="#673DED" />
-                            </svg>
-                        </div>
-                    </div>
-
-                    <div class="texto" style="padding-left: 3%">
-                        @if ($rangeTotal > 0 )
-                            <span style="font-weight:900; font-size: 21px">USDT <span class="text-success">{{ $rangeTotal }} </span></span>
-                        @else
-                            <span style="font-weight:900; font-size: 21px">USDT 0 </span>
-                        @endif
-                        <br>
-                        <span class="text-light">Ganancia en rango</span>
-                    </div>
-                </div>
-            </div>--}}
-
         </div>
     </div>
     <div class="row">
@@ -107,10 +72,6 @@
                         <div class="col-sm-6 p-2">
                             <h1 class="fw-400" style="font-size: 17px">Sustraccion de saldo</h1>
                         </div>
-                        {{--<div class="col-sm-6">
-                            <a href="{{route('solicitudesRetiros')}}" class="btn btn-primary float-end">Solicitar Retiro</a>
-                            <button type="button" data-bs-toggle="modal" data-bs-target="#modalWallet" class="btn btn-gradient-primary float-end ms-1">Enlazar Wallet</button>
-                        </div>--}}
                     </div>
                 </div>
                 <div class="card-body card-dashboard p-0">

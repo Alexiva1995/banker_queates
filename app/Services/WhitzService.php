@@ -37,8 +37,7 @@ class FutswapService
             'firstname' => $user->firstname,
             'lastname' => $user->lastname,
             'address' => 'cambiar',
-            'city' => '',
-            'email' => strval($user->id),
+            'email' => $user->email,
             'country_id' => $user->countrie_id,
             'phonenumber' => $user->phone,
             'type' => '1'

@@ -93,7 +93,7 @@
     </div>
 </nav>
 <div class="tab-content" id="nav-tabContent">
-    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+    <div class="tab-pane fade show" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
         <div class="contenedor tres-columnas ">
             <div class="card p-2 entrada-bloc">
                 <div class="avatar bg-light-primary avatar-md me-auto mb-1" style="padding: 0.3rem !important">
