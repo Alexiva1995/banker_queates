@@ -55,53 +55,6 @@
                             </div>
 
                         </div>
-                
-                        
-                        {{--<div class="row justify-content-end">
-                            <div class="col-md-2 col-sm-4">
-                                <div class=" white mt-1">
-                                    <input type="text" placeholder="id de usuario" name="id" class="form-control" id="buscar">
-                                </div>
-                            </div>
-                            <div class="col-md-1 col-sm-3" style="padding-left: 0px">
-                                <div class=" white mt-1">
-                                    <button type="submit" class="btn btn-primary">Filtrar</button>
-                                </div>
-                            </div>
-
-                            <div class="col-md-2 col-sm-4">
-                                <div class=" white mt-1">
-                                    <input type="text" placeholder="nombre/apellido" name="name" class="form-control" id="buscar">
-                                </div>
-                            </div>
-                            <div class="col-md-1 col-sm-3" style="padding-left: 0px">
-                                <div class=" white mt-1">
-                                    <button type="submit" class="btn btn-primary" >Filtrar</button>
-                                </div>
-                            </div>
-
-                            <div class="col-md-2 col-sm-4">
-                                 <div class=" white mt-1" >
-                                    <input type="text" placeholder="email" name="email" class="form-control" id="buscar">
-                                </div>
-                            </div>
-                            <div class="col-md-1 col-sm-3" style="padding-left: 0px">
-                                <div class=" white mt-1">
-                                     <button type="submit" class="btn btn-primary">Filtrar</button>
-                                </div>
-                            </div>
-
-                            <div class="col-md-2 col-sm-4">
-                                 <div class=" white mt-1" >
-                                    <input type="text" placeholder="PAMM" name="pamm" class="form-control" id="buscar" disabled>
-                                </div>
-                            </div>
-                            <div class="col-md-1 col-sm-3" style="padding-left: 0px">
-                                <div class=" white mt-1">
-                                     <button type="submit" class="btn btn-primary">Filtrar</button>
-                                </div>
-                            </div>
-                        </div>--}}
                     </form>
                 </div>
             </div>
