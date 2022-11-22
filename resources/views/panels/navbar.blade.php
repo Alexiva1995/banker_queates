@@ -206,7 +206,7 @@
           </ul>
         </li> -->
         <li class="nav-item d-lg-block me-1">
-          <div class="form-check form-switch form-check-light">
+          <!--<div class="form-check form-switch form-check-light">
             <input type="checkbox" class="form-check-input nav-link-style form-check-darkM" checked id="flexSwitchCheckDefault" >
             <label class="form-check-label" for="flexSwitchCheckDefault">
               <span class="switch-icon-right">
@@ -216,7 +216,7 @@
                 <i class="ficonCustom" data-feather='sun'></i>
               </span>
             </label>
-          </div>
+          </div>-->
 {{--
            <div class="d-flex align-content-around align-item-center">
              <i class="ficonCustom" data-feather='sun' style="margin-right: 0.3rem;"></i>
@@ -228,7 +228,7 @@
              <i class="ficonCustom" data-feather='moon' style="margin-left: -1.5rem;"></i>
            </div> --}}
         </li>
-        <li class="nav-item dropdown dropdown-notification me-25 ">
+        <!--<li class="nav-item dropdown dropdown-notification me-25 ">
           <a class="nav-link" href="javascript:void(0);" data-bs-toggle="dropdown">
             <i class="ficon" data-feather="bell"></i>
             @if(count(auth()->user()->unreadNotifications) > 0)
@@ -280,7 +280,7 @@
               </li>
             @endif
           </ul>
-        </li>
+        </li>-->
         <li class="nav-item dropdown dropdown-user">
           <a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="javascript:void(0);" data-bs-toggle="dropdown" aria-haspopup="true">
             <div class="user-nav d-sm-flex d-none">
@@ -289,20 +289,29 @@
 
             </div>
             <span class="avatar">
-              @if( auth()->user()->investment !== null && auth()->user()->admin == 0 )
+              {{-- @if( auth()->user()->investment !== null && auth()->user()->admin == 0 )
                 <img class="round" src="" alt="{{'emblema'.auth()->user()->investment->licensePackage->emblem}}" height="40" width="40" alt="license_emblem">
-              @elseif(Auth::user()->admin == 1)
-                @if(Auth::user()->photo == null)
-                  <img class="round" src="{{asset('images/portrait/small/avatar-s-11.jpg')}}" alt="avatar" height="40" width="40">
-                @else
-                  <img class="round" src="{{ asset('storage/photo-profile/'.Auth::user()->photo) }}" alt="avatar" height="40" width="40">
+                --}}
+                
+                @if(Auth::user()->admin != 1)
+                  @if(auth()->user()->investment == null)
+                    <img class="round" src="{{asset('images/portrait/small/avatar-s-11.jpg')}}" alt="avatar" height="40" width="40">
+                  @else
+                    <!--<img class="round" src="{{ asset('images/ensignLicenses/'.auth()->user()->investment->package_id.'.png') }}" alt="avatar" height="40" width="40">-->
+                    <img class="round" src="{{asset('images/portrait/small/avatar-s-11.jpg')}}" alt="avatar" height="40" width="40">
+                  @endif
+
+                @elseif(Auth::user()->admin == 1)
+                  @if(Auth::user()->photo == null)
+                    <img class="round" src="{{asset('images/portrait/small/avatar-s-11.jpg')}}" alt="avatar" height="40" width="40">
+                  @endif
                 @endif
-              @endif
-              {{-- @if(Auth::user()->photo == null)
+
+              {{--@if(Auth::user()->photo == null)
                 <img class="round" src="{{asset('images/portrait/small/avatar-s-11.jpg')}}" alt="avatar" height="40" width="40">
               @else
                 <img class="round" src="{{ asset('storage/photo-profile/'.Auth::user()->photo) }}" alt="avatar" height="40" width="40">
-              @endif --}}
+              @endif--}}
              {{-- @if(Auth::user()->status == 1)
                  <span class="avatar-status-online"></span>
               @else
