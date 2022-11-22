@@ -83,7 +83,8 @@
                                 <small class="text-light">Ganancias</small>
                                 <h2 class="fw-600 mb-75 text-center">{{ "USDT ".$package->amount }}</h2>
                                 
-                                    <form class="d-grid gap-2" action="{{ route('shop.transactionCompra') }}"
+                                    {{-- <form class="d-grid gap-2" action="{{ route('shop.transactionCompra') }}" --}}
+                                    <form class="d-grid gap-2" action="{{ route('makePurchase') }}"
                                         method="POST">
                                         @csrf
                                         <input type="hidden" name="package" value="{{ $package->id }}">

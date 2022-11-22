@@ -29,6 +29,10 @@ class PaymentProcessorService
      */
     protected $wallet_to_pay;
 
+    const CURRENCY = 'USDT';
+
+    const NETWORK = 'TRX';
+
     public function __construct()
     {
         $this->baseUri = config('services.payment_processor.base_uri');
@@ -54,13 +58,14 @@ class PaymentProcessorService
      * @param String $network The network that will process the transaction (Example: TRX, BEP20, ETH)
      * @var string
     */
-    public function createOrder($order_id, $amount, $currency, $network)
+    public function createOrder($order_id, $amount)
     {
         $request_body = [
-            'crypto' => $currency,
+            'crypto' => SELF::CURRENCY,
             'external_id' => $order_id,
-            'network' => $network,
+            'network' => SELF::NETWORK,
             'amount' => $amount,
+            // TODO: Eliminar el envio de wallet a futuro
             'toAddress' => $this->wallet_to_pay,
             // TODO: Obtener esta wallet dinamicamente
             'wallet' => 'TKVMvt54AqMbrFmeUTpxgbCeenst8YHTrN'
@@ -74,8 +79,6 @@ class PaymentProcessorService
             $headers = ["Content-Type" => "application/json"],
             $isJsonRequest = true,
         );
-
-        // TODO: El QR que recibo para mostrarlo en el front y la wallet address
     }
 
     public function getOrderDetails()
