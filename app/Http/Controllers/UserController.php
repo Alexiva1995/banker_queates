@@ -111,38 +111,9 @@ class UserController extends Controller
 
         }else{
             $users = User::where('admin', '0')->with('padre', 'investment.LicensePackage','countrie')->orderBy('id', 'desc')->get();
-
         }
 
         return view('user.list-users', compact('users'));
-
-
-        /*if((!empty($request->input('email'))) && (!empty($request->input('name'))) && (!empty($request->input('id')))){
-            return redirect()->back()->with('error', 'Filtre por una opción');
-
-        }elseif((!empty($request->input('email'))) && (!empty($request->input('name'))) && (empty($request->input('id')))){
-            return redirect()->back()->with('error', 'Filtre por una opción');
-
-        }elseif((empty($request->input('email'))) && (!empty($request->input('name'))) && (!empty($request->input('id')))){
-            return redirect()->back()->with('error', 'Filtre por una opción');
-
-        }elseif((!empty($request->input('email'))) && (empty($request->input('name'))) && (!empty($request->input('id')))){
-            return redirect()->back()->with('error', 'Filtre por una opción');
-
-        }elseif((!empty($request->input('id'))) && (empty($request->input('name')))  && (empty($request->input('email')))){
-            $users = User::where('id', $request->input('id'))->orderBy('id', 'desc')->get();
-
-        }elseif((!empty($request->input('email'))) && (empty($request->input('name')))){
-            $users = User::where('email', $request->input('email'))->orderBy('id', 'desc')->get();
-
-        }elseif((empty($request->input('email'))) && (!empty($request->input('name')))){
-            $users = User::where('name', $request->input('name'))->orWhere('last_name',$request->input('name'))->orderBy('id', 'desc')->get();
-            
-        }else{
-            $users = User::where('admin', '0')->with('padre', 'investment.LicensePackage','countrie')->orderBy('id', 'desc')->get();
-        }
-
-        return view('user.list-users', compact('users'));*/
      }
  
     /**
