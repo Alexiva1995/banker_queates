@@ -34,7 +34,7 @@
                     <form action="{{ route('search.users') }}" method="POST">
                         @csrf
                         <div class="row justify-content-end">
-                            <div class="col-md-2 col-sm-4">
+                            <div class="col-md-2 col-sm-4" style="padding-top: 5px;">
                                 <select class="form-select" aria-label=".form-select-lg example" name="select">
                                     <option selected value="Filtar">Filtar por </option>
                                     <option value="id">ID</option>
@@ -44,14 +44,14 @@
                                 </select>
                             </div>
 
-                            <div class="col-md-3 col-sm-4">
-                               
-                                    <input type="text" placeholder="..." name="filtro" class="form-control" id="buscar">
+                            <div class="col-md-3 col-sm-4" style="padding-top: 5px;">
+                                <input type="text" placeholder="..." name="filtro" class="form-control" id="buscar">
                             </div>
 
-                            <div class="col-md-1 col-sm-3" style="padding-left: 0px">
-                                    <button type="submit" class="btn btn-primary">Filtrar</button>
-                                
+                            <div class="col-md-1 col-sm-3" style="padding-top: 5px;">
+                                <button type="submit" class="btn btn-primary">
+                                    Filtrar
+                                </button>
                             </div>
 
                         </div>
