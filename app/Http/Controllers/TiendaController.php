@@ -59,7 +59,7 @@ class TiendaController extends Controller
         }
         return view('shop.index', compact('order', 'investments', 'licenses'));
     }
-    
+
     public function transaction(Request $request)
     {
         $user = Auth::user();
@@ -111,16 +111,13 @@ class TiendaController extends Controller
             $orden->amount = $package->amount;
             $orden->hash = $request->hash;
 
-            //guardamos comprobante
-            $name = $this->storeVoucher($request);
-            $orden->voucher = '' . $name;
 
             $orden->fee = 15;
             $orden->status = '0';
             $orden->type = '0';
-            
-            
-            
+
+
+
         } else {
             $newAmount = $package->amount - $investment->invested;
             foreach ($allOrder as $order) {
@@ -129,38 +126,23 @@ class TiendaController extends Controller
                     $order->save();
                 }
             }
-            
+
             $orden->user_id = $user->id;
             $orden->package_id = $package->id;
             $orden->amount = $newAmount;
             $orden->hash = $request->hash;
 
-            //guardamos comprobante
-            $name = $this->storeVoucher($request);
-            $orden->voucher = '' . $name;
-
             $orden->fee = 15;
             $orden->status = '0';
             $orden->type = '0';
         }
-        
-        if ($orden->save()) 
+
+        if ($orden->save())
         {
             return redirect()->route('dashboard.index')->with('success', 'Orden Creada, procesando su solicitud...');
         }
-        
-        return redirect()->back()->with('error', 'Hubo un error, intente nuevamente');
-    }
 
-    /**
-     * Se encarga de guardar en el storage el comprobante de pago
-     */
-    public function storeVoucher(Request $request)
-    {
-        $file = $request->file('voucher');
-        $name = time() . "." . $file->extension();
-        $file->move(public_path('storage') . '/comprobantes/', $name);
-        return $name;
+        return redirect()->back()->with('error', 'Hubo un error, intente nuevamente');
     }
 
     public function saveOrden($data): int
@@ -190,7 +172,7 @@ class TiendaController extends Controller
         $orden->save();
         // Aqui se cambia el status de una inversion anterior a inactiva si se aprobo un upgrade
         if ($request->status == '1') {
-            
+
             $investment = Investment::where('user_id', $orden->user->id)->where('status', '1')->first();
             if ($investment != null) {
                 //Se crea la inversion al aprobarse la orden
@@ -236,7 +218,7 @@ class TiendaController extends Controller
                 $user->update();
                 event(new UserEvent($user));
             }
-            
+
             // Genera los puntos binarios
             app(BonusService::class)->assignPointsbinarioRecursively($orden->user, $orden->licensePackage->binary_points, $orden->id);
             // Genera los puntos por compra de licencias en linea multinivel

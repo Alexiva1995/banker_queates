@@ -4,8 +4,9 @@
 
 @section('content')
 
-<div class="title mb-5">
-    <p class="rosado">Soporte <br> Ticket</p>
+<div class="d-flex my-2">
+    <p style="color:#808E9E;" class="fw-700">Soporte</p><span class="fw-normal mx-1">|</span>
+    <p>Ticket</p>
 </div>
 
 <section id="basic-vertical-layouts">
@@ -93,7 +94,7 @@
                                         <div class="row justify-content-between">
                                             <div class="col-4">
                                                 <!--BOTON ENVIAR-->
-                                                <button class="btn btn-success">Enviar</button>
+                                                <button class="btn btn-primary w-100 waves-effect waves-float waves-light">Enviar</button>
                                             </div>
                     </form>
 

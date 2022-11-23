@@ -79,7 +79,7 @@
                             <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
                                 aria-labelledby="nav-home-tab">
                                 <div class="card-body p-0">
-                                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                                    <!--<div class="row col-lg-12 col-md-12 col-sm-12">
                                         <div class="col-lg-3 col-md-4 col-sm-4">
                                             <div class="p-1 pe-0 pb-0">
                                                 @if (Auth::user()->photo == null)
@@ -133,7 +133,7 @@
                                             <p class="d-flex justify-content-start">JPG o PNG permitidos. Tamaño
                                                 máximo 800kB.</p>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <div class="card-body" style="margin-top: -4%;">
                                         <form method="POST" action="{{ route('profile.update') }}"
                                             enctype="multipart/form-data" novalidate>

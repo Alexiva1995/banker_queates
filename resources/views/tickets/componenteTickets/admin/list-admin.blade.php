@@ -8,8 +8,10 @@
 @endsection
 
 @section('content')
-<div class="title mb-5">
-    <p class="rosado">Soporte <br> Ticket</p>
+
+<div class="d-flex my-2">
+    <p style="color:#808E9E;" class="fw-700">Soporte</p><span class="fw-normal mx-1">|</span>
+    <p>Ticket</p>
 </div>
 
 
@@ -41,9 +43,9 @@
 
 
                     @if ($item->status == '0')
-                    <td> <a class=" btn text-bold-600 " style="background-color:rgba(5,255,0,0.7);border-radius: 8px;">Abierto</a></td>
+                    <td> <a class="btn btn-info text-white text-bold-600">Abierto</a></td>
                     @elseif($item->status == '1')
-                    <td> <a class=" btn  text-bold-600 " style="background-color:rgba(255,0,0,0.6);border-radius: 8px;">Cerrado</a></td>
+                    <td> <a class="btn btn-danger text-white text-bold-600">Cerrado</a></td>
                     @endif
                     @if ($item->send == '')
                     <td class="text-start">No hay mensaje Disponibles</td>
@@ -52,7 +54,7 @@
                     @endif
                     <td>
                         <a href="{{ route('ticket.edit-admin',$item->id) }}">
-                            <button class=" btn  text-bold-600 " style="background: rgba(0, 246, 225, 0.77);border-radius: 8px;">Ver</button>
+                            <button class="btn btn-success text-white text-bold-600">Ver</button>
                         </a>
                     </td>
                 </tr>
