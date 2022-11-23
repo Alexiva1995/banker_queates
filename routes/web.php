@@ -154,7 +154,6 @@ Route::middleware('auth')->group(function () {
             //Agragr saldo a usuario
             Route::post('/agregar-saldo', [BonoManualController::class, 'agregar_saldo'])->name('agregar_saldo');
             Route::post('/sustraer-saldo', [BonoManualController::class, 'sustraer_saldo'])->name('sustraer_saldo');
-
         });
 
         //Ruta para cambiar referido de un user
@@ -213,7 +212,7 @@ Route::middleware('auth')->group(function () {
 
         // ruta para el envio del codigo de seguridad para enlazar una wallet
         Route::post('/send-seccurity-code', [UserController::class, 'sendSeccurityCode'])->name('send.seccurity.code');
-        Route::post('/save_wallet', [UserController::class, 'storeWalelt'])->name('user.store.wallet');
+        Route::post('/save_wallet', [UserController::class, 'storeWallet'])->name('user.store.wallet');
 
 
         Route::get('menuRentabilidad', [BusinessController::class, 'rentabilidad'])->name('business.rentabilidad');
