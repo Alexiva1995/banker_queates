@@ -13,15 +13,15 @@
 
             <div class="texto" style="padding-left: 3%">
                 @if (isset($RangeTotal))
-                <span style="font-weight:900; font-size: 21px">USDT {{ $RangeTotal }} </span>
+                <span style="font-weight:900; font-size: 21px">USDT {{--{{ $RangeTotal }}--}} 0 </span>
                 @else
                 <span style="font-weight:900; font-size: 21px">USDT 0 </span>
                 @endif
                 <br>
-                <span class="text-light">Total de comisiones por rango</span>
+                <span class="text-light">Balance</span>
             </div>
         </div>
-        <div class="card p-2 entrada-bloc">
+        {{--<div class="card p-2 entrada-bloc">
             <div class="avatar bg-light-primary avatar-md me-auto mb-1" style="padding: 0.3rem !important">
                 <div class="avatar-content">
                     <i class="ajust-icon" data-feather='bar-chart-2'></i>
@@ -88,6 +88,6 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>--}}
     </div>
 </div>

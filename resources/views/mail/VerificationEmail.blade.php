@@ -39,12 +39,7 @@
             <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse; border: 1px solid #cccccc; border-radius: 15px;">
                 <tr>
                     <td align="center" bgcolor="#FFFFFF" style="padding: 30px 0 0 0; ">
-                        <img src="{{ asset('/images/logo/projecas.png') }}" alt="PROJECT7K." style="display: block; max-width:150px;" />
-                    </td>
-                </tr>
-                <tr>
-                    <td align="center" bgcolor="#FFFFFF" style="padding: 0 0 0 0; ">
-                        <img src="{{ $message->embed( public_path('/images'). '/mails/cryptolead-gris.png' ) }}" alt="Connect." style="display: block; max-width:500px; max-height:50px" />
+                        <img src="{{ $message->embed( public_path('/images'). '/logo/logo-deg.png' ) }}" alt="Connect." style="display: block; max-width:500px; max-height:50px" />
                     </td>
                 </tr>
                 <tr>
