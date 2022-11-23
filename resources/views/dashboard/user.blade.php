@@ -281,21 +281,15 @@
         </div>
         <div class="col-sm-12 ">
             <div class="row">
-                <div class="col-lg-6 h-25">
-                    <div class="row match-height">
-                        {{-- @include('dashboard.components.referral-link') --}}
-                        @include('dashboard.components.referral_binary_side')
-                        <!--@include('dashboard.components.referralsCard')
-                        @include('dashboard.components.licenceExpirationDays')-->
-                    </div>
+                <div class="row">
+                    @include('dashboard.components.referral_binary_side')
+                    @include('dashboard.components.rangeCard')
                 </div>
-                @include('dashboard.components.rangeCard')
                 <div class="row match-height">
                     @include('dashboard.components.referralsCard')
                     @include('dashboard.components.historyBonusTable')
+                    @include('dashboard.components.gain-chart')
                 </div>
-                <!--@include('dashboard.components.historyPackagesTable')-->
-                <!--@include('dashboard.components.historyBonusTable')-->
             </div>
         </div>       
     </div>
@@ -319,6 +313,7 @@
 @endsection
 @section('page-script')
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
     <script>
         $('.myTable').DataTable({
             responsive: false,
@@ -469,6 +464,7 @@
             getRadialPackageChartData();
             getBonusChartsData();
             getProfitsData();
+            getWalltetData();
             // afilliatesChart();
             // getRentChart(user_id);
         });
@@ -1264,6 +1260,70 @@
                     profitsBarChart(months, amounts);
                     profitsLineChart(months, amounts);
                     $('#totalProfitsText').text(`USD ${(total).toFixed(2)}`);
+                })
+                .catch(err => console.log(err));
+        }
+
+        const salesChart = (amounts, dates) => {
+            const options = {
+                chart: {
+                    id: 'chart1',
+                    type: 'line',
+                    height: '300px',
+                    zoom: {
+                        enabled: false
+                    },
+                    toolbar: {
+                        show: false,
+                    },
+                },
+                series: [{
+                    color: '#07C4D9',
+                    data: amounts,
+                }],
+                grid: {
+                    position: 'back',
+                    yaxis: {
+                        lines: {
+                            show: true,
+                        }
+                    },  
+                },
+                xaxis: {
+                    categories: dates,
+                },
+                noData: {
+                    text: 'Sin Información',
+                    align: 'center',
+                    verticalAlign: 'middle',
+                    offsetX: 0,
+                    offsetY: 0,
+                    style: {
+                    color: undefined,
+                    fontSize: '15px',
+                    fontFamily: undefined
+                    }
+                }
+            }
+
+            var chart = new ApexCharts( document.querySelector("#line-chart-wallet"), options);
+            chart.render();
+        }
+        
+          /* Obtiene la data para el gráfico de ganancias*/
+        const getWalltetData = () => {
+            let url = "{!! route('get.wallets.avaliable.data', 'replace_this') !!}";
+            url = url.replace('replace_this', user_id);
+            /*const url = "{!! route('get.wallets.avaliable.data') !!}";*/
+            const dates = [];
+            const amounts = [];
+            axios.get(url)
+                .then( res => {
+                    res.data.forEach( item =>{
+                        dates.push(item.date + '');
+                        amounts.push(item.amount);
+                    });
+                    salesChart(amounts,dates);
                 })
                 .catch(err => console.log(err));
         }

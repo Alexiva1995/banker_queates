@@ -31,11 +31,3 @@
         </div>
     </div>
 </div>
-
-<div class="col-md-6">
-    <div class="card p-2">
-        <div class="card-body p-0">
-            <h5 class=" fw-bolder">Gráfica</h5>
-        </div>
-    </div>
-</div>

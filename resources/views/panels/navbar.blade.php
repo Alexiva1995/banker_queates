@@ -288,21 +288,22 @@
               {{-- <span class="user-name fw-bolder text-capitalize" >{{Auth::user()->last_name}}</span> --}}
 
             </div>
-            <span class="avatar">
+            <!--<span class="avatar">-->
+            <span>
               {{-- @if( auth()->user()->investment !== null && auth()->user()->admin == 0 )
-                <img class="round" src="" alt="{{'emblema'.auth()->user()->investment->licensePackage->emblem}}" height="40" width="40" alt="license_emblem">
+                <img class="round" src="" alt="{{'emblema'.auth()->user()->investment->licensePackage->emblem}}" height="50" width="50" alt="license_emblem">
                 --}}
                 
                 @if(Auth::user()->admin != 1)
                   @if(auth()->user()->range_id == null)
-                    <img class="round" src="{{asset('images/ico/deg.ico')}}" alt="avatar" height="40" width="40">
+                    <img class="round" src="{{ asset('images/logo/logo-deg-white.png') }}" alt="avatar" height="60" width="60">
                   @else
-                    <img class="round" src="{{ asset('images/ensignRanges/'.auth()->user()->range_id.'.png') }}" height="40" width="40">
+                    <img  class="round" src="{{ asset('images/ensignRanges/'.auth()->user()->range_id.'.png') }}" height="60" width="60">
                   @endif
 
                 @elseif(Auth::user()->admin == 1)
                   @if(Auth::user()->photo == null)
-                    <img class="round" src="{{asset('images/portrait/small/avatar-s-11.jpg')}}" alt="avatar" height="40" width="40">
+                    <img class="round" src="{{asset('images/logo/logo-deg-white.png')}}" alt="avatar" height="60" width="60">
                   @endif
                 @endif
 

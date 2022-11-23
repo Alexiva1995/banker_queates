@@ -37,29 +37,32 @@
             <div class="col-sm-12">
                     <h6 class="card-title customTexto">Licencia Actual</h6>
                 </div>
-                @if(Auth::user()->investiment === null)
+                @if(Auth::user()->investment == null)
                     <div class="col-md-12 d-flex justify-content-between h-100 align-items-center flex-wrap gap-50">
                         <div>
                             <div class="square-active d-flex justify-content-center align-items-center">
                                 <p class="text-center mb-0 no-rank-txt" style="color:#000">Sin licencia</p>
                             </div>
                         </div>
-                        <div class="texto">
-                            <h3 class="fw-700 mb-25">UST {{number_format($user->getWalletRangeAmount(), 2, ',', '.')}}</h3>
-                            <p class="font-medium-2 mb-0" >Disponible</p>
-                        </div>
                     </div>
                 @else
                     <div class="col-md-12 d-flex justify-content-around h-100 align-items-center flex-wrap gap-50">
                         <div>
                             <div class="square-active d-flex justify-content-center align-items-center">
-                                <img src="{{ asset('images/ensignRanges/'.Auth::user()->range_id.'.png') }}" height="90" width="90">
+                                <img src="{{ asset('images/licencias/id/'.Auth::user()->investment->package_id.'.png') }}" height="90" width="90">
                             </div>
-                        
                         </div>
-                        <div class="texto">
-                            <h3 class="fw-700 mb-25">UST {{number_format($user->getWalletRangeAmount(), 2, ',', '.')}}</h3>
-                            <p class="font-medium-2 mb-0" >Disponible</p>
+                        <div class="texto" style="padding-left: 3%">
+
+                        <div class="avatar bg-light-primary avatar-md me-auto mb-1" style="padding: 0.3rem !important">
+                            <div class="avatar-content">
+                                <i class="ajust-icon" data-feather='bar-chart-2'></i>
+                            </div>
+                        </div>
+
+                        <span style="font-weight:900; font-size: 21px; padding: 0.5rem"> Faltan {{ $daysRemaining }} </span>
+                        <br>
+                        <span class="text-light">Días para el vencimiento de su licencia</span>
                         </div>
                 @endif
             </div>

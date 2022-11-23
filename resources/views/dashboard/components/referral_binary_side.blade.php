@@ -26,10 +26,7 @@
             </div>
         </div>
     </div>
-</div>
-<div class="col-sm-8">
-</div>
-<div class="col-sm-4">
+
     <div class="card">
         <img id="clip" src="{{asset('images/logo/clip.svg')}}" alt="">
         <div class="card-body">

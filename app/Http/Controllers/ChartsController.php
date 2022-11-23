@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Investment;
+use App\Models\WalletComission;
 use App\Models\User;
 use App\Models\Utility;
 use Illuminate\Database\Eloquent\Collection;
@@ -142,6 +143,30 @@ class ChartsController extends Controller
             $item->amount = $investment->invested;
             $data->push($item);
         }
+        return $data;
+    }
+    /**
+     * Obtiene los datos de las ganancias del user auntenticado en los ultimos 30 días
+     * @return stdClass
+     */
+    public function wallestAvailable($user_id)
+    {   
+      
+        $data = new Collection();
+        $last30days = now()->subDays(30);
+        $wallets = WalletComission::where('user_id' , $user_id)
+                                ->whereDate('created_at','>=' , $last30days)
+                                ->orderBy('created_at', 'ASC')
+                                ->get();
+
+        foreach($wallets as $wallet)
+        {
+            $item = new stdClass;
+            $item->date = $wallet->created_at->format('d-m-Y');
+            $item->amount = $wallet->amount_available;
+            $data->push($item);
+        }
+
         return $data;
     }
     /**
