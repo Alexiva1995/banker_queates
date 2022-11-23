@@ -66,7 +66,7 @@
             </div>--}}
             <div class="mobile row mt-2 px-0 match-height">
                 @foreach ($licenses as $package)
-                    <div class="col-sm-4" style="width:25.333333% !important">
+                    <div class="col-sm-4">
                         <div class="col-md-4 col-lg-3 col-sm-4 wm-27">
                             <div class="card media">
                                 <div class="d-flex justify-content-center">
