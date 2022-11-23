@@ -113,7 +113,7 @@
                     <span style="font-weight:900; font-size: 21px">USDT 0 </span>
                     @endif
                     <br>
-                    <span class="text-light">Total de comisiones ganadas</span>
+                    <span class="text-light">Total Ganado</span>
                 </div>
             </div>
 
@@ -131,7 +131,7 @@
                     <span style="font-weight:900; font-size: 21px">USDT 0 </span>
                     @endif
                     <br>
-                    <span class="text-light">Total de comisiones ganadas disponibles</span>
+                    <span class="text-light">Saldo Disponibles</span>
                 </div>
             </div>
 
@@ -143,17 +143,15 @@
                         <div class="card-content">
                             <div class="card-header my-1 p-0">
                                 <h4 class="fw-700">Comisiones</h4>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#transferMlm">
+                                {{--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#transferMlm">
                                     Transferir
-                                </button>
+                                </button>--}}
                             </div>
                             <div class="card-body card-dashboard p-0">
                                 <div class="table-responsive">
                                     <table class="table  nowrap scroll-horizontal-vertical myTable table-striped w-100">
                                         <thead class="">
                                             <tr class="text-center">
-                                                <th class="d-none d-sm-table-cell">ID de Wallet</th>
-                                                <th>Descripcion</th>
                                                 <th>Monto</th>
                                                 <th>Estado</th>
                                                 <th class="d-none d-sm-table-cell">Fecha</th>
@@ -162,9 +160,7 @@
                                         <tbody>
                                             @foreach ($mlm as $wallet)
                                             <tr class="text-center">
-                                                <td class="d-none d-sm-table-cell">{{ $wallet->id }}</td>
-                                                <td>{{ $wallet->description }}</td>
-                                                <td style="text-align: right">{{ number_format($wallet->amount, 2, ',',
+                                                <td>{{ number_format($wallet->amount, 2, ',',
                                                     '.') }}</td>
                                                 <td>
                                                     @if ($wallet->status == '0')
