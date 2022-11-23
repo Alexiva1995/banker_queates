@@ -12,7 +12,7 @@
         <div class="texto">
             <h3 class="fw-700 mb-25">UST {{ number_format(5000, 2, ',', '.') }}</h3>
 
-            <p class="font-medium-2 mb-0" >Pasivos</p>
+            <p class="font-medium-2 mb-0" >Balance PAMM</p>
         </div>
     </div>
 </div>

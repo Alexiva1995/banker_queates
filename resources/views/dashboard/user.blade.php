@@ -259,18 +259,18 @@
     <div class="container-fluid container-custom">
         <div class="d-flex my-1">
             <p class="fw-700 mb-0">Dashboard</p><span class="fw-300 mx-1 text-light">|</span>
-            <p class="fw-300 mb-0">Project 7K</p>
+            <p class="fw-300 mb-0">Banker Quotes</p>
         </div>
         <div class="row">
             <div class="col-sm-12">
                 @include('dashboard.components.cryptobar')
-                <div class="row match-height">
+                <!--<div class="row match-height">
                     @include('dashboard.components.totalEarningsChart')
                     @include('dashboard.components.packageProgress')
-                </div>
+                </div>-->
             </div>
         </div>
-        @include('dashboard.components.bonusCharts')
+        <!--@include('dashboard.components.bonusCharts')-->
         <div class="col-12">
             <div class="row match-height">
                 @include('dashboard.components.balanceCard')
@@ -285,13 +285,17 @@
                     <div class="row match-height">
                         {{-- @include('dashboard.components.referral-link') --}}
                         @include('dashboard.components.referral_binary_side')
-                        @include('dashboard.components.referralsCard')
-                        @include('dashboard.components.licenceExpirationDays')
+                        <!--@include('dashboard.components.referralsCard')
+                        @include('dashboard.components.licenceExpirationDays')-->
                     </div>
                 </div>
                 @include('dashboard.components.rangeCard')
-                @include('dashboard.components.historyPackagesTable')
-                @include('dashboard.components.historyBonusTable')
+                <div class="row match-height">
+                    @include('dashboard.components.referralsCard')
+                    @include('dashboard.components.historyBonusTable')
+                </div>
+                <!--@include('dashboard.components.historyPackagesTable')-->
+                <!--@include('dashboard.components.historyBonusTable')-->
             </div>
         </div>       
     </div>
