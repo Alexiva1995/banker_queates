@@ -481,7 +481,7 @@ class LiquidactionController extends Controller
             $rangeAvailable = $comisionRange->where('status', 0)->sum('amount_available');
 
             //vista licencias
-            $licencias  = WalletComission::where([['user_id',$user->id ],['type',2]])->get();
+            $licencias  = WalletComission::where([['user_id',$user->id ],['type',4]])->get();
             $licenciasTotal = $licencias->sum('amount_available');
             $licenciasAvailable = $licencias->where('status', 0)->sum('amount_available');
 
@@ -489,9 +489,8 @@ class LiquidactionController extends Controller
             $general =  WalletComission::where('user_id',$user->id)->get();
             $generalTotal = $general->sum('amount_available');
             $generalAvailable =  $general->where('status', 0)->sum('amount_available');
-            $subtraction = Liquidation::where([['user_id', $user->id],['type', 3]])->get();
 
-            $balancEdition = WalletComission::where([['user_id', $user->id],['type', 6]])->get();
+            $balancEdition = Liquidation::where('user_id', $user->id)->get();
 
 
 
@@ -508,7 +507,7 @@ class LiquidactionController extends Controller
                 $daysRemaining = $date1->diffInDays(today()->format('Y-m-d') );
             }
 
-            return view('wallet.index', compact('balancEdition','subtraction','pamm','pammTotal','pammAvailable','comisionRange','rangeTotal','rangeTotal','rangeAvailable','licencias','licenciasTotal','licenciasAvailable',
+            return view('wallet.index', compact('balancEdition','pamm','pammTotal','pammAvailable','comisionRange','rangeTotal','rangeTotal','rangeAvailable','licencias','licenciasTotal','licenciasAvailable',
             'general','generalTotal','generalAvailable','mlm','mlmTotal','mlmAvailable', 'daysRemaining'));
         } catch (\Throwable $th) {
             Log::error('Wallet - Index -> Error: ' . $th);

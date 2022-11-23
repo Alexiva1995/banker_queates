@@ -94,7 +94,7 @@
         .rounded-circle-add{
             width: auto;
             height:auto;
-            max-width: 115%;
+            max-width: 128%;
         }
     </style>
 
@@ -108,11 +108,11 @@
                 <div class="card-content p-75">
                     <div class="card-header d-block p-2 pb-0">
                         <div class="d-flex justify-content-between align-item-center flex-wrap  gap-50">
-                            <h4 class="fw-700">Tipo de arbol</h4>
+                            <h4 class="fw-700">Arbol de referidos</h4>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6">
+                <!--<div class="col-sm-6">
                     <div class="tabs-wrapper px-2 mb-2">
                         <div class="d-flex level-content flex-wrap mt-1">
                             <form action="{{ route('referred.tree', ['tree' => 1]) }}">
@@ -143,12 +143,13 @@
                             </form>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-6 align-self-end">
+                </div>-->
+                <div class="card-content p-75">
+                <div class="card-header d-block p-3 pb-0">
                     <form action="{{ route('search.unilevel', ['tree' => 1]) }}" method="POST">
                         @csrf
-                        <div class="row justify-content-center">
-                            <div class="col-md-4 col-sm-4">
+                        <div class="row justify-content-end">
+                            <div class="col-md-2 col-sm-4">
                                 <div class=" white mt-1">
                                     <input type="number" placeholder="id del usuario" name="id" class="form-control" id="id">
                                 </div>
@@ -161,6 +162,7 @@
                         </div>
                     </form>
                 </div>
+            </div>
 
 <div id="tree-body-1" class="tab-body">
     <ul>

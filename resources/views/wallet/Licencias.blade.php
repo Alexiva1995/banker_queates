@@ -18,7 +18,7 @@
                     <span style="font-weight:900; font-size: 21px">USDT 0 </span>
                 @endif
                 <br>
-                <span class="text-light">Total de licencias Disponibles</span>
+                <span class="text-light">Saldo Disponibles</span>
             </div>
         </div>
         <div class="card p-2 entrada-bloc">
@@ -39,7 +39,7 @@
                     <span style="font-weight:900; font-size: 21px">USDT 0 </span>
                 @endif
                 <br>
-                <span class="text-light">Total de comisiones ganadas</span>
+                <span class="text-light">Total Ganado</span>
             </div>
         </div>
 </div>
@@ -50,16 +50,15 @@
                 <div class="card-content">
                     <div class="card-header my-1 p-0">
                         <h4 class="fw-700">Licencias</h4>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#transferLicencias">
+                        {{--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#transferLicencias">
                             Transferir
-                        </button>
+                        </button>--}}
                     </div>
                     <div class="card-body card-dashboard p-0">
                         <div class="table-responsive">
                             <table class="table  nowrap scroll-horizontal-vertical myTable table-striped w-100">
                                 <thead class="">
                                     <tr class="text-center">
-                                        <th class="d-none d-sm-table-cell">ID de utilidad</th>
                                         <th>Monto</th>
                                         <th>Estado</th>
                                         <th class="d-none d-sm-table-cell">Fecha</th>
@@ -68,7 +67,6 @@
                                 <tbody>
                                     @foreach ($licencias  as $licen)
                                         <tr class="text-center">
-                                            <td class="d-none d-sm-table-cell">{{$licen->id}}</td>
                                             <td> {{ number_format($licen->amount, 2) }}</td>
                                             <td>
                                                 @if ($licen->status == '0')
