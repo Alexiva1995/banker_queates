@@ -50,7 +50,7 @@
             </div>
             <div class="col-sm-3">
                 <div class="card p-2 entrada-bloc ">
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#modalWallet" class="btn btn-gradient-primary float-end ms-1 mb-2" style="width: 89%;"><span style="font-size: 1.1rem" class="font-weight-bold">{{ auth()->user()->wallet != null ? 'Cambiar Wallet' : 'Enlazar Wallet'}}</span></button>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#modalWallet" class="btn btn-gradient-primary float-end ms-1 mb-2" style="width: 89%;"><span style="font-size: 1.1rem; font-weight: 600;">{{ auth()->user()->wallet != null ? 'Cambiar Wallet' : 'Enlazar Wallet'}}</span></button>
 
 
                     <div class="texto">
