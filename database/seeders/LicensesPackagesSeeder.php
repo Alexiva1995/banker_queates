@@ -61,7 +61,7 @@ class LicensesPackagesSeeder extends Seeder
             [
                 'name' => 'Titanium License',
                 'amount' => 1000,
-                'description' => '$$10,000',
+                'description' => '$10,000',
                 'image' => "Titanium.png",
                 'commissions' => '1',
                 'leadership_points' => 500,
