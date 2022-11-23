@@ -6,21 +6,17 @@
         @else--}}
         
         @if( ($data["range_id"] != null) )
-            <img src="{{ asset('images/ensignRanges/'.$data['range_id'].'.png') }}" height="70" width="64"
-            class="rounded-circle-add" alt="{{$data['range_id']}}">
-        
-        @elseif( ($data["range_id"] == null) && (!empty($data->investment->package_id)) )
-            <img src="{{ asset('images/ensignLicences/'.$data['range_id'].'.png') }}" height="70" width="64"
-            class="rounded-circle-add" alt="{{$data['range_id']}}">
+            <img src="{{ asset('images/ensignRanges/'.$data['range_id'].'.png') }}" height="80" width="70"
+            class="rounded-circle-add"  style="margin-top: -2px" alt="{{$data['range_id']}}">
         
         @elseif( ($data["range_id"] == null) && (empty($data->investment->package_id)) )
 
             @if ($data->gender == null || $data->gender == 0)
-                <img src="{{ asset('images/avatars-profile/1.png') }}" height="70" width="64"
+                <img src="{{ asset('images/avatars-profile/1.png') }}" height="80" width="70"
                 class="rounded-circle"  alt="{{ $data->name }}"
                 title="{{ $data->name }}">
             @else
-                <img src="{{ asset('images/avatars-profile/2.png') }}" height="70" width="64"
+                <img src="{{ asset('images/avatars-profile/2.png') }}" height="80" width="70"
                 class="rounded-circle"  alt="{{ $data->name }}"
                 title="{{ $data->name }}">
             @endif
