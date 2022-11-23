@@ -59,11 +59,11 @@ class UserController extends Controller
     {
         // dd($id);
         $invertido = $this->paquete();
-         $user = User::find($id);
-        
+        $user = User::find($id);
+
         $user->licencia = $user->investment->licensePackage->name;
         $user->ganancias = $user->wallets->sum('amount_available');
-        
+
 
         $country = Countrie::all();
         $wallet = WalletComission::where('user_id', $user->id)->get();
@@ -75,47 +75,43 @@ class UserController extends Controller
     public function listUser()
     {
 
-        $users = User::where('admin', '0')->with('padre', 'investment.LicensePackage','countrie')->orderBy('id', 'desc')->get();
+        $users = User::where('admin', '0')->with('padre', 'investment.LicensePackage', 'countrie')->orderBy('id', 'desc')->get();
 
         return view('user.list-users', compact('users'));
     }
 
-    public function searchUsers(Request $request){
+    public function searchUsers(Request $request)
+    {
         //buscar por nombre, correo o PAMM 
 
-        if(($request->input('select') != "Filtar") && (empty($request->input('filtro')))){
+        if (($request->input('select') != "Filtar") && (empty($request->input('filtro')))) {
             return redirect()->back()->with('error', 'Debe colocar la información a filtrar');
-
-        }elseif(!empty($request->input('filtro')) && ($request->input('select') == "id")){
+        } elseif (!empty($request->input('filtro')) && ($request->input('select') == "id")) {
 
             $validate = $request->validate([
                 'filtro' => 'bail|integer|max:5',
             ]);
 
             $users = User::where('id', $request->input('filtro'))->orderBy('id', 'desc')->get();
+        } elseif (!empty($request->input('filtro')) && ($request->input('select') == "name")) {
 
-        }elseif(!empty($request->input('filtro')) && ($request->input('select') == "name")){
+            $users = User::where('name', $request->input('filtro'))->orWhere('last_name', $request->input('filtro'))->orderBy('id', 'desc')->get();
+        } elseif (!empty($request->input('filtro')) && ($request->input('select') == "email")) {
 
-            $users = User::where('name', $request->input('filtro'))->orWhere('last_name',$request->input('filtro'))->orderBy('id', 'desc')->get();
-        
-        }elseif(!empty($request->input('filtro')) && ($request->input('select') == "email")){
-            
             $validate = $request->validate([
                 'filtro' => 'bail|email|max:5',
             ]);
 
             $users = User::where('email', $request->input('filtro'))->orderBy('id', 'desc')->get();
-
-        }elseif(!empty($request->input('filtro')) && ($request->input('select') == "pamm")){
+        } elseif (!empty($request->input('filtro')) && ($request->input('select') == "pamm")) {
             return redirect()->back()->with('error', 'En proceso');
-
-        }else{
-            $users = User::where('admin', '0')->with('padre', 'investment.LicensePackage','countrie')->orderBy('id', 'desc')->get();
+        } else {
+            $users = User::where('admin', '0')->with('padre', 'investment.LicensePackage', 'countrie')->orderBy('id', 'desc')->get();
         }
 
         return view('user.list-users', compact('users'));
-     }
- 
+    }
+
     /**
      * Retorna la lista con los usuarios que tienen licencias vencidas
      */
@@ -123,11 +119,11 @@ class UserController extends Controller
     {
         $users = User::where('id', '!=', 1)->with('padre', 'countrie', 'investment')->get();
         $usersExpired = new Collection();
-        foreach($users as $user) {
+        foreach ($users as $user) {
 
-            if($user->investment !== null) {
-                
-                if($user->investment->expiration_date <= today()->format('Y-m-d')) {
+            if ($user->investment !== null) {
+
+                if ($user->investment->expiration_date <= today()->format('Y-m-d')) {
                     $usersExpired->push($user);
                 }
             }
@@ -197,18 +193,19 @@ class UserController extends Controller
             'countrie_id' => 'required'
         ]);
 
-        if( ( strcmp($request->input('email'), $request->input('emailOrigin')) !== 0 ) && 
-            ($request->input('email') != null && $request->input('password') == null) ){
+        if ((strcmp($request->input('email'), $request->input('emailOrigin')) !== 0) &&
+            ($request->input('email') != null && $request->input('password') == null)
+        ) {
 
-                return redirect()->back()->with('error', 'Si desea cambiar su correo electrónico, debe ingresar su contraseña de Take.');
+            return redirect()->back()->with('error', 'Si desea cambiar su correo electrónico, debe ingresar su contraseña de Take.');
         }
 
-        if( ($request->input('password') != null) && ($request->input('email') != null) ){
+        if (($request->input('password') != null) && ($request->input('email') != null)) {
             //verificar contraseña de take para poder actualizar el correo 
 
             if (Hash::check($request->input('password'), Auth::user()->password)) {
                 $user->email = $data['email'];
-            }else{
+            } else {
                 return redirect()->back()->with('error', 'NO coincide la contraseña ingresada, con su contraseña de Take.');
             }
         }
@@ -217,8 +214,8 @@ class UserController extends Controller
         $user->last_name = $data['last_name'];
         $user->phone = $data['phone'];
         $user->countrie_id = $data['countrie_id'];
-        if ( $request->has('gender') ) $user->gender = $request->input('gender');
-        
+        if ($request->has('gender')) $user->gender = $request->input('gender');
+
         $user->save();
 
         return back()->with('success', 'Perfil actualizado');
@@ -484,7 +481,7 @@ class UserController extends Controller
         $user = Auth::user();
         $code = Str::random(10);
         $code_encrypted = Crypt::encryptString($code);
-        $user->update(['code_security'=> $code_encrypted]);
+        $user->update(['code_security' => $code_encrypted]);
         $response = ['status' => 'success'];
         Mail::to($user->email)->send(new CodeSeccurity($code));
         return response()->json($response, 200);
@@ -492,27 +489,33 @@ class UserController extends Controller
     /**
      * Guarda la wallet del usuario en db, encryptada
      */
-    public function storeWalelt(Request $request)
+    public function storeWallet(Request $request)
     {
         $request->validate(
             [
                 'code' => 'required',
-                'wallet' => 'required'
+                'wallet' => 'required',
+                'password' => 'required'
             ],
             [
                 'code' => 'El codigo es requerido',
-                'wallet' => 'La wallet es requerida'
+                'wallet' => 'La wallet es requerida',
+                'wallet' => 'Su contraseña es requerida'
             ]
         );
 
         $user = Auth::user();
 
-        if( !$user->code_security ) {
+        if (!$user->code_security) {
             return back()->with('error', 'Debe requerir un código de seguridad');
         }
 
-        if( $request->code !== $user->decryptSeccurityCode() ) {
+        if ($request->code !== $user->decryptSeccurityCode()) {
             return back()->with('error', 'El código de seguridad no coincide');
+        }
+
+        if (!Hash::check($request->password, $user->password)) {
+            return back()->with('error', 'La contraseña es incorrecta');
         }
         // Se guarda su wallet encriptada
         Wallet::updateOrCreate(
@@ -526,7 +529,7 @@ class UserController extends Controller
         );
 
         $user->update(['code_security' => null]);
-        
+
         return back()->with('success', 'Su wallet se ha guardado exitosamente!');
     }
 }
