@@ -166,7 +166,8 @@ class TiendaController extends Controller
     }
 
     public function cambiar_status(Request $request)
-    {
+    {   
+
         $orden = Order::findOrFail($request->id);
         $orden->status = $request->status;
         $orden->save();
@@ -212,10 +213,10 @@ class TiendaController extends Controller
 
             }
             // Se cambia el status del usuario a activo
-            if ($user->status == '0') {
-                $user->status = '1';
-                $user->date_active = now();
-                $user->update();
+            if ($orden->user->status == '0') {
+                $orden->user->status = '1';
+                $orden->user->date_active = now();
+                $orden->user->update();
                 event(new UserEvent($user));
             }
 

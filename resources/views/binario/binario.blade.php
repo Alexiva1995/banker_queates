@@ -107,7 +107,7 @@
                 <p class="fw-400 mb-0">Binario</p>
             </div>
             <div class="card">
-                <div class="card-content p-75">
+                <div class="card-content p-75 w-100">
                 <div class="card-header d-block p-2 pb-0">
                     <div class="d-flex justify-content-between align-item-center flex-wrap  gap-50">
                         <h4 class="fw-700">Binario</h4>
@@ -145,6 +145,12 @@
         <li class="baseli p-0">
 
             {{-- usuario principal --}}
+            @if ( ($base["range_id"] == null) && (empty($base->licence)) )
+                <img src="{{ asset('images/logo/icon-deg.png') }}" height="120" width="104"
+                class="" style="margin-top: -4px" alt="{{ $base->name }}"
+                title="{{ $base->name }}">
+                <h5 class="mt-0"> <b>{{ $base->name }}</b></h5>
+            @else
             <a href="#" class="base">
                 <div class="media">
                    
@@ -155,21 +161,7 @@
                     @elseif( ($base["range_id"] == null) && (!empty($base->licence)) )
                         <img src="{{ asset('images/ensignLicences/'.$base['range_id'].'.png') }}" height="70" width="64"
                         class="rounded-circle-add align-self-center mr-1 di" alt="{{$base['range_id']}}">
-                    
-                    @elseif( ($base["range_id"] == null) && (empty($base->licence)) )
-
-                        @if ($base->gender == null || $base->gender == 0)
-                            <img src="{{ asset('images/avatars-profile/1.png') }}" height="70" width="64"
-                            class="rounded-circle-add" style="margin-top: -4px" alt="{{ $base->name }}"
-                            title="{{ $base->name }}">
-                        @else
-                            <img src="{{ asset('images/avatars-profile/2.png') }}" height="64" width="64"
-                            class="rounded-circle-add " style="margin-top: -4px" alt="{{ $base->name }}"
-                            title="{{ $base->name }}">
-                        @endif
-
                     @endif
-
                     <div class="media-body">
                         <h5 class="mt-0"> <b>{{ $base->name }}</b></h5>
 
@@ -179,6 +171,7 @@
                     </div>
                 </div>
             </a>
+            @endif
             {{-- Nivel 1 --}}
             <ul>
                 @foreach ($trees as $child)
