@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Services\PaymentProcessorService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class PaymentController extends Controller
@@ -52,7 +53,7 @@ class PaymentController extends Controller
             }
             
             $payment_platform = resolve(PaymentProcessorService::class);
-            $qr = QrCode::size(400)->generate('HolA BB');
+            // return $qr = QrCode::size(400)->generate(base64_encode('mi_wallet'));
 
             // return vew('prueba', compact($qr));
             $response = $payment_platform->createOrder($orden->id, $request->amount);
@@ -61,22 +62,39 @@ class PaymentController extends Controller
             // Si va todo bien guardamos la orden creada y se colocan todas las ordenes anteriores a status 2
             $orden->hash = $response->id;
             $orden->save(); 
-
-            foreach ($allOrder as $order) {
-                if ($order->licensePackage->id == $package->id) {
-                    $order->status = '2';
-                    $order->save();
-                }
-            }
+            // Como manejaremos las ordenes anteriores? Se cancelaran, o se esperara a que la pasarela nos envie una peticion
+            // para cambiarles el status
+            // foreach ($allOrder as $order) {
+            //     if ($order->licensePackage->id == $package->id) {
+            //         $order->status = '2';
+            //         $order->save();
+            //     }
+            // }
 
         } catch (\Throwable $th) {
             dd($th);
+            Log::info('Fallo al crear orden de pago con la pasarela');
+            Log::error($th);
+            return back()->with('error', 'No se puede procesar su solicitud por favor contacte con el administrador');
         }
         
-        
+    }
 
-        
+    public function paymentConfirmation(Request $request)
+    {
+        // $request->validate([
+        //     // te valido :D
+        // ]);
 
+        $response = [];
 
+        return 'holi';
+        if( $request->secret_key != $this->secret_key ) {
+            $response['error'] = [
+                'message' => 'the secret key is wrong',
+                'type' => 'auth',
+            ];
+            return response()->json($response, 401);
+        }
     }
 }

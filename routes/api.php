@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InversionController;
 use App\Http\Controllers\FutswapController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::middleware('payment.processor')->group(function(){
+    Route::post('/payment_confirmation', [PaymentController::class, 'paymentConfirmation']);
+});
 
 Route::post('/rent-chart', [DashboardController::class, 'getRentChart'])->name('get.rent.chart');
 Route::post('/days-chart', [DashboardController::class, 'getDaysChart'])->name('get.days.chart');
