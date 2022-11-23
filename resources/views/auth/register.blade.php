@@ -14,7 +14,7 @@
 </script>
 <style>
     #bg {
-        background-image: url('{{('images/login/bg-login7k.png')}}');
+        background-image: url('{{('images/auth/fondo-auth.png')}}');
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
@@ -40,7 +40,7 @@
     @media(max-width:357px){
         .auth-wrapper.auth-v1{
             padding-left:0.5rem;
-            padding-right:0.5rem;   
+            padding-right:0.5rem;
         }
         .card.p-2 {
             padding-right: 3%!important;
@@ -104,20 +104,20 @@ $referred = DB::table('users')
                     }
                 </style>
                 <form class="auth-register-form mt-2" method="POST" action="{{ route('auth-register') }}" enctype="multipart/form-data" >
-                    @csrf  
+                    @csrf
                     @if ( $referred !== null )
                         <div class="alert alert-info p-1 rounded-3 d-flex my-2">
                             <i data-feather='info' class="font-large-1 ms-50 me-75"></i>
                             <label class="fw-400 text-info pe-25">
                                 El nombre de su patrocinador es: <span class="fw-600 text-capitalize">{{ $referred->name.' '.$referred->last_name}} ({{ $referred->username }})</span>
-                            </label> 
+                            </label>
                             {{-- <label class="" style="padding-left: 3%">El nombre de su patrocinador es: {{$referred->name}} </label>  --}}
                         </div>
                         <input type="hidden" name="buyer_id" value="{{$referred->id}}">
                         <input type="hidden" id="binary" name="binary" value="">
                     @endif
                     <p class="fw-300 my-1">Por favor completa los datos solicitados para completar tu registro.</p>
-                    
+
                     <div class="alert alert-secondary border border-2 p-25 px-1 font-small-1">Los campos con <span class="text-danger font-medium-2">*</span> son obligatorios</div>
                     <label for="register-name" class="form-label mt-75 fw-500">Nombres Y Apellidos <span class="text-danger font-medium-2">*</span></label>
                     <div class="input-group mb-2 shadow-none">
@@ -129,7 +129,7 @@ $referred = DB::table('users')
                         @enderror
                     </div>
 
-                    <label for="register-email" class="form-label fw-500">Email <span class="text-danger font-medium-2">*</span></label> 
+                    <label for="register-email" class="form-label fw-500">Email <span class="text-danger font-medium-2">*</span></label>
                     <div class="input-group mb-2 shadow-none">
                         <input type="email" class="form-control @error('email') is-invalid @enderror" id="register-email" name="email" placeholder="Ingresa tu email" aria-describedby="register-email"  style="background-color: white;border-color: #dfdfdf; color: rgb(0, 0, 0);" value="{{ old('email') }}" required/>
                         @error('email')
@@ -139,7 +139,7 @@ $referred = DB::table('users')
                         @enderror
                     </div>
 
-                    <label for="register-email-confirmation" class="form-label fw-500">Confirmar Email<span class="text-danger font-medium-2">*</span></label> 
+                    <label for="register-email-confirmation" class="form-label fw-500">Confirmar Email<span class="text-danger font-medium-2">*</span></label>
                     <div class="input-group mb-2">
                         <input type="email" class="form-control @error('email_confirmation') is-invalid @enderror" id="register-email-confirmation" name="email_confirmation" placeholder="Confirma tu email" aria-describedby="register-email-confirmation"  style="background-color: white;border-color: #dfdfdf; color: rgb(0, 0, 0);" value="{{ old('email_confirmation') }}" required/>
                     </div>
@@ -163,7 +163,7 @@ $referred = DB::table('users')
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                        </div>                       
+                        </div>
                     @endif
 
                     {{-- <label for="register-phone" class="form-label"><strong>Teléfono</strong>  <span style="color:red; font-size:15px">*</span></label>
@@ -181,7 +181,7 @@ $referred = DB::table('users')
                         <select id="countrie_id" class="rounded form-control text-dark shadow-none" name="countrie_id" required>
                             <option disabled selected >Ingresa o selecciona un país</option>
                                 @foreach($countries as $country)
-                                
+
                                 <option value="{{$country->id}}" {{old('countrie_id') == $country->id ? 'selected' : ''}}>{{$country->pais}}</option>
                                 @endforeach
                             </option>
@@ -233,12 +233,12 @@ $referred = DB::table('users')
                     <label for="register-password" class="form-label fw-500">Contraseña <span class="text-danger font-medium-2">*</span></label>
                     <div class="input-group mb-2 shadow-none">
                         <div class="input-group input-group-merge shadow-none form-password-toggle @error('password') is-invalid @enderror">
-                            <input type="password" class="form-control form-control-merge @error('password') is-invalid @enderror" id="register-password" style="background-color: white;border-color: #dfdfdf; color: rgb(0, 0, 0);" name="password" placeholder="Ingresa tu contraseña" aria-describedby="register-password" required/>                            
+                            <input type="password" class="form-control form-control-merge @error('password') is-invalid @enderror" id="register-password" style="background-color: white;border-color: #dfdfdf; color: rgb(0, 0, 0);" name="password" placeholder="Ingresa tu contraseña" aria-describedby="register-password" required/>
                         </div>
                         @error('password')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
-                            </span> 
+                            </span>
                         @enderror
                     </div>
 
@@ -267,8 +267,8 @@ $referred = DB::table('users')
                         </p>
                     @endif
                     <button type="submit" class="btn btn-primary w-100 fw-400 accordion-itemtext-white g-recaptcha" style="letter-spacing: 0.9px">Registrarse</button>
-                </form>       
-                          
+                </form>
+
                 <p class="text-center mt-2">
                     ¿Ya tienes una cuenta?
                     @if (Route::has('login'))
