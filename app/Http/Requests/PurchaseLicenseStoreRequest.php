@@ -28,7 +28,6 @@ class PurchaseLicenseStoreRequest extends FormRequest
             'package' => 'required',
             'moneda' => 'required',
             'hash' => 'required',
-            'voucher' => 'required|mimes:jpg,jpeg,png|max:800',
         ];
     }
 }

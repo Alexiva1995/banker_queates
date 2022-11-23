@@ -95,7 +95,7 @@
                                                     @break
                                             @endswitch
                                         </td>
-                                         
+
                                         <td class="fw-300 text-center">{{date('Y-m-d', strtotime($wallet->created_at))}}</td>
                                     </tr>
                                     @endforeach
