@@ -44,6 +44,7 @@
                                     <th class="fw-600 ">Fee</th>
                                     <th class="fw-600 ">Total</th>
                                     <th class="fw-600 ">Wallet</th>
+                                    <th class="fw-600 ">Hash</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -79,6 +80,9 @@
                                     </td>
                                     <td>
                                         {{ $retiro->decryptWallet() }}
+                                    </td>
+                                    <td>
+                                        {{$retiro->hash}}
                                     </td>
                                 </tr>
                                 @endforeach
