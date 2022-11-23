@@ -19,7 +19,7 @@ class LicensesPackagesSeeder extends Seeder
             [
                 'name' => 'Consultant Binary Position',
                 'amount' => 50,
-                'description' => '$100 a $500',
+                'description' => '$500',
                 'image' => "Consultant.png",
                 'commissions' => '0',
                 'leadership_points' => 0,
@@ -33,7 +33,7 @@ class LicensesPackagesSeeder extends Seeder
             [
                 'name' => 'Standard License',
                 'amount' => 150,
-                'description' => '$500 a $1000',
+                'description' => '$1000',
                 'image' => "Standar.png",
                 'commissions' => '1',
                 'leadership_points' => 75,
@@ -47,7 +47,7 @@ class LicensesPackagesSeeder extends Seeder
             [
                 'name' => 'Gold License.',
                 'amount' => 500,
-                'description' => '$1001 a $3000',
+                'description' => '$3000',
                 'image' => "Golden.png",
                 'commissions' => '1',
                 'leadership_points' => 250,
@@ -61,7 +61,7 @@ class LicensesPackagesSeeder extends Seeder
             [
                 'name' => 'Titanium License',
                 'amount' => 1000,
-                'description' => '$3,001 a $10,000',
+                'description' => '$10,000',
                 'image' => "Titanium.png",
                 'commissions' => '1',
                 'leadership_points' => 500,
@@ -75,7 +75,7 @@ class LicensesPackagesSeeder extends Seeder
             [
                 'name' => 'Platinum License',
                 'amount' => 2000,
-                'description' => '$10,001 a $50,000',
+                'description' => '$50,000',
                 'image' => "Platinium.png",
                 'commissions' => '1',
                 'leadership_points' => 1000,
@@ -89,7 +89,7 @@ class LicensesPackagesSeeder extends Seeder
             [
                 'name' => 'Banker Platinum License',
                 'amount' => 5000,
-                'description' => "$10,001 a $100,000",
+                'description' => "$100,000",
                 'image' => 'Banker.png',
                 'commissions' => '1',
                 'leadership_points' => 2500,
