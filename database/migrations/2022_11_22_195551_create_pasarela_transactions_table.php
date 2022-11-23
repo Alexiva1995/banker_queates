@@ -19,7 +19,12 @@ class CreatePasarelaTransactionsTable extends Migration
             $table->string('status');
             $table->string('crypto');
             $table->decimal('amount', 10,3);
-            $table->string('secret');
+            $table->string('uuid');
+            $table->string('hash')->nullable();
+            $table->float('amount_to_recieve', 10,3)->nullable();
+            $table->float('amount_to_send', 10,3)->nullable();
+            $table->string('wallet_to_transfer')->nullable();
+            
             $table->timestamps();
         });
     }

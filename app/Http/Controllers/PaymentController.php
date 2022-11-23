@@ -59,9 +59,10 @@ class PaymentController extends Controller
             $response = $payment_platform->createOrder($orden->id, $request->amount);
             return $response;
 
-            // Si va todo bien guardamos la orden creada y se colocan todas las ordenes anteriores a status 2
             $orden->hash = $response->id;
             $orden->save(); 
+            
+            // Si va todo bien guardamos la orden creada y se colocan todas las ordenes anteriores a status 2
             // Como manejaremos las ordenes anteriores? Se cancelaran, o se esperara a que la pasarela nos envie una peticion
             // para cambiarles el status
             // foreach ($allOrder as $order) {
@@ -82,19 +83,36 @@ class PaymentController extends Controller
 
     public function paymentConfirmation(Request $request)
     {
-        // $request->validate([
-        //     // te valido :D
-        // ]);
+        $data = $request->validate([
+            // te valido :D
+        ]);
 
-        $response = [];
+        $transaction = PasarelaTransaction::where('uuid', $data['uuid'])->with('order')->first();
+        $user = $transaction->order->user;
+        $orden = $transaction->order;
 
-        return 'holi';
-        if( $request->secret_key != $this->secret_key ) {
-            $response['error'] = [
-                'message' => 'the secret key is wrong',
-                'type' => 'auth',
-            ];
-            return response()->json($response, 401);
+        if ($transaction->status == 'PAID') {
+            return response()->json(['error' => 'This payment has already been confirmed'], 400);
         }
+
+        $transaction->update(['status' => $data['status']]);
+
+        $transaction->order->update(['status' => '1']);
+
+        // Se cambia el status del usuario a activo
+        if ($user->status == '0') {
+            $user->status = '1';
+            $user->date_active = now();
+            $user->update();
+            event(new UserEvent($user));
+        }
+
+        // Genera los puntos binarios
+        app(BonusService::class)->assignPointsbinarioRecursively($orden->user, $orden->licensePackage->binary_points, $orden->id);
+        // Genera los puntos por compra de licencias en linea multinivel
+        $this->pointsService->assignPointsRangeRecursively($orden->user, $orden->licensePackage->leadership_points, $orden);
+
+        return response()->json(['message' => 'Confirmation succesfully'], 201);
+        
     }
 }
