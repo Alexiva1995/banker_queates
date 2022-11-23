@@ -49,7 +49,6 @@
                                         <th class="fw-600">Fee</th>
                                         <th class="fw-600">Hash</th>
                                         <th class="fw-600">Estado</th>
-                                        <th class="fw-600">Tipo</th>
                                         <th class="fw-600">Fecha de <br/>Solicitud</th>
                                         <th class="fw-600">Fecha de <br/>Pago</th>
                                     </tr>
@@ -73,26 +72,8 @@
                                             @elseif($liquidaction->status == '2')
                                                 <td> <a class=" btn bg-light-danger fw-300 p-75">Cancelada</a></td>
                                             @endif
-                                            @if ($liquidaction->type == 0)
-                                                <td class=" fw-300">
-                                                    <span>PAMM</span>
-                                                </td>
-                                            @elseif ($liquidaction->type == 1)
-                                                <td class=" fw-300">
-                                                    <span>Rango</span>
-                                                </td>
-                                            @elseif ($liquidaction->type == 2)
-                                                <td class=" fw-300">
-                                                    <span>Licencia</span>
-                                                </td>
-                                            @else
-                                                <td class=" fw-300">
-                                                    <span>Retiro</span>
-                                                </td>
-                                            @endif
                                             <td class=" fw-300">{{date('Y-m-d', strtotime($liquidaction->created_at))}}</td>
                                             <td class=" fw-300">{{date('Y-m-d', strtotime($liquidaction->updated_at))}}</td>
-                            
                                     </tr>
                                     @endforeach
                                 </tbody>

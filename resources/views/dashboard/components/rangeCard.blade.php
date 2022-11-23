@@ -3,110 +3,103 @@
         {{-- Sin Rango --}}
         <div class="card-body p-0" style="">
             <div class="col-sm-12">
-                <h6 class="card-title customTexto">Rango Actual</h6>
+                <h6 class="card-title customTexto">Rangos</h6>
             </div>
             @if(Auth::user()->range === null)
                 <div class="col-md-12 d-flex justify-content-between h-100 align-items-center flex-wrap gap-50">
                     <div>
                         <div class="square-active d-flex justify-content-center align-items-center">
-                            <p class="text-center mb-0 no-rank-txt" style="color:#000">Sin rango</p>
+                            <img src="{{ asset('images/ensignRanges/1.png') }}" height="90" width="90">
                         </div>
-                        <h5 class="text-center fw-700 mt-1">Rango actual</h5>
-                    </div>
-                    <div class="d-flex flex-wrap justify-content-center flex-column">
-                        <div class="square d-flex justify-content-center align-items-center p-25">
-                            <img src="{{ asset('images/rangos/rango_diamante.png') }}" height="70" width="80">
-                        </div>
-                        <p class="text-center fw-500 mt-1 mb-0">Diamante</p>
+                        <h5 class="text-center fw-700 mt-1 mb-0">Consultant</h5>
                     </div>
 
-                    <div class="d-flex flex-wrap justify-content-center flex-column">
-                        <div class="square d-flex justify-content-center align-items-center p-25">
-                            <img src="{{ asset('images/rangos/rango_doblediamante.png') }}" height="70" width="80">
+                    <div>
+                        <div class="square-active d-flex justify-content-center align-items-center">
+                            <img src="{{ asset('images/ensignRanges/2.png') }}" height="90" width="90">
                         </div>
-                        <p class="text-center fw-500 mt-1 mb-0">Doble Diamante</p>
+                        <h5 class="text-center fw-700 mt-1 mb-0">Qualified Consultant</h5>
                     </div>
 
-                    <div class="d-flex flex-wrap justify-content-center flex-column">
-                        <div class="square d-flex justify-content-center align-items-center p-25">
-                            <img src="{{ asset('images/rangos/rango_triplediamante.png') }}" height="70" width="80">
+                    <div>
+                        <div class="square-active d-flex justify-content-center align-items-center">
+                            <img src="{{ asset('images/ensignRanges/3.png') }}" height="90" width="90">
                         </div>
-                        <p class="text-center fw-500 mt-1 mb-0">Triple Diamante</p>
+                        <h5 class="text-center fw-700 mt-1 mb-0">Sapphire</h5>
                     </div>
                 </div>
-            @elseif(Auth::user()->range_id === 1)
+            @elseif((Auth::user()->range_id !== null) && (Auth::user()->range_id < 5) )
                 <div class="col-md-12 d-flex justify-content-around h-100 align-items-center flex-wrap gap-50">
                     <div>
                         <div class="square-active d-flex justify-content-center align-items-center">
-                            <img src="{{ asset('images/rangos/rango_diamante.png') }}" height="70" width="80">
+                            <img src="{{ asset('images/ensignRanges/'.Auth::user()->range_id.'.png') }}" height="90" width="90">
                         </div>
                         <h5 class="text-center fw-700 mt-1">Rango actual</h5>
                     </div>
 
                     <div class="d-flex flex-wrap justify-content-center flex-column">
                         <div class="square d-flex justify-content-center align-items-center p-25">
-                            <img src="{{ asset('images/rangos/rango_doblediamante.png') }}" height="70" width="80">
+                            @php $nextRange = Auth::user()->range_id + 1; @endphp
+                            <img src="{{ asset('images/ensignRanges/'.$nextRange.'.png') }}" height="80" width="80">
                         </div>
-                        <p class="text-center fw-500 mt-1 mb-0">Doble Diamante</p>
+                        <p class="text-center fw-500 mt-1 mb-0">Próximo rango</p>
                     </div>
 
                     <div class="d-flex flex-wrap justify-content-center flex-column">
                         <div class="square d-flex justify-content-center align-items-center p-25">
-                            <img src="{{ asset('images/rangos/rango_triplediamante.png') }}" height="70" width="80">
+                            @php $nextRange = Auth::user()->range_id + 2; @endphp
+                            <img src="{{ asset('images/ensignRanges/'.$nextRange.'.png') }}" height="70" width="70">
                         </div>
-                        <p class="text-center fw-500 mt-1 mb-0">Triple Diamante</p>
+                        <p class="text-center fw-500 mt-1 mb-0">Siguiente rango</p>
                     </div>
                 </div>
-            @elseif(Auth::user()->range_id === 2)
+            @elseif(Auth::user()->range_id === 5 )
                 <div class="col-md-12 d-flex justify-content-around h-100 align-items-center flex-wrap gap-50">
                     <div>
-                        <div class="square d-flex justify-content-center align-items-center">
-                            <img src="{{ asset('images/rangos/rango_diamante.png') }}" height="70" width="80">
+                        <div class="square-active d-flex justify-content-center align-items-center">
+                            <img src="{{ asset('images/ensignRanges/'.Auth::user()->range_id.'.png') }}" height="90" width="90">
                         </div>
-                        <p class="text-center fw-500 mt-1 mb-0">Diamante</p>
-                    </div>
-
-                    <div class="d-flex flex-wrap justify-content-center flex-column">
-                        <div class="square-active d-flex justify-content-center align-items-center p-25">
-                            <img src="{{ asset('images/rangos/rango_doblediamante.png') }}" height="70" width="80">
-                        </div>
-                        
                         <h5 class="text-center fw-700 mt-1">Rango actual</h5>
                     </div>
 
                     <div class="d-flex flex-wrap justify-content-center flex-column">
                         <div class="square d-flex justify-content-center align-items-center p-25">
-                            <img src="{{ asset('images/rangos/rango_triplediamante.png') }}" height="70" width="80">
+                            @php $nextRange = Auth::user()->range_id + 1; @endphp
+                            <img src="{{ asset('images/ensignRanges/'.$nextRange.'.png') }}" height="80" width="80">
                         </div>
-                        <p class="text-center fw-500 mt-1 mb-0">Triple Diamante</p>
+                        <p class="text-center fw-500 mt-1 mb-0">Próximo rango</p>
                     </div>
                 </div>
-            @elseif(Auth::user()->range_id === 3)
+            @elseif(Auth::user()->range_id === 6 )
                 <div class="col-md-12 d-flex justify-content-around h-100 align-items-center flex-wrap gap-50">
                     <div>
-                        <div class="square d-flex justify-content-center align-items-center">
-                            <img src="{{ asset('images/rangos/rango_diamante.png') }}" height="70" width="80">
-                        </div>
-                        <p class="text-center fw-500 mt-1 mb-0">Diamante</p>
-                    </div>
-
-                    <div class="d-flex flex-wrap justify-content-center flex-column">
-                        <div class="square d-flex justify-content-center align-items-center p-25">
-                            <img src="{{ asset('images/rangos/rango_doblediamante.png') }}" height="70" width="80">
-                        </div>
-                        
-                        <p class="text-center fw-500 mt-1 mb-0">Doble Diamante</p>
-
-                    </div>
-
-                    <div class="d-flex flex-wrap justify-content-center flex-column">
-                        <div class="square-active d-flex justify-content-center align-items-center p-25">
-                            <img src="{{ asset('images/rangos/rango_triplediamante.png') }}" height="70" width="80">
+                        <div class="square-active d-flex justify-content-center align-items-center">
+                            <img src="{{ asset('images/ensignRanges/'.Auth::user()->range_id.'.png') }}" height="90" width="90">
                         </div>
                         <h5 class="text-center fw-700 mt-1">Rango actual</h5>
                     </div>
                 </div>
             @endif
+            <div class="row border-top mt-1 pe-0">
+                <div class="ciclo mt-2 px-0">
+                    <div class="title">
+                        <p class="azul text-primary fw-700" style="font-size: 19px;">
+                            {{ number_format($user->getTotalRangePoints(), 0, '.', '.') }}
+                        </p>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" id="progress-bar-chart" role="progressbar"
+                            style=""
+                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                        </div>
+                    </div>
+                    <div class="mt-1 d-flex justify-content-end">
+                        @if ($user->range_id != 6)
+                            <span class="me-1">Próximo rango: asasasasas</span>
+                        @endif
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

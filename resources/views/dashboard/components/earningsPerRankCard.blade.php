@@ -11,7 +11,7 @@
         </div>
         <div class="texto">
             <h3 class="fw-700 mb-25">UST {{number_format($user->getWalletRangeAmount(), 2, ',', '.')}}</h3>
-            <p class="font-medium-2 mb-0" >Ganancias por rango</p>
+            <p class="font-medium-2 mb-0" >Bono por Licencias</p>
         </div>
     </div>
 </div>

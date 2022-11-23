@@ -8,11 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class LicensePackage extends Model
 {
     use HasFactory;
-    
+
     protected $table = 'licenses_packages';
     protected $fillable = [
         'name',
         'amount',
+        'description',
         'commissions',
         'leadership_points',
         'binary_points',

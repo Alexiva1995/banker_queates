@@ -16,6 +16,7 @@ class CreateLicensesPackagesTable extends Migration
         Schema::create('licenses_packages', function (Blueprint $table) {
             $table->id();
             $table->string('name', 50);
+            $table->string('description', 50);
             $table->double('amount')->comment('El precio al que se vende la licencia');
             $table->enum('commissions', [0,1])->comment('Permite saber si genera o no comissiones (bonos) 0 - No genera, 1 - Si Genera');
             $table->double('leadership_points')->comment('Puntos de liderazgo de la licencia')->nullable();

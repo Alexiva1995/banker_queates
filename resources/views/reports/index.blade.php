@@ -42,7 +42,6 @@
                                     @else
                                     @endif
                                     <th>ID TX</th>
-                                    <th>Comprobante</th>
                                     <th>Monto</th>
                                     <th>Estado</th>
                                     <th>Fecha Creacion</th>
@@ -65,11 +64,6 @@
                                                 MAN-{{$orden->id}}
                                             @endif
                                         </td>
-                                        <td>
-                                        @if($orden->voucher != null)
-                                            <a class="btn btn-danger" target="_blank" href="{{asset('/storage/comprobantes/'.$orden->voucher)}}"><i data-feather='file-text'></i></a>
-                                        @endif
-                                        </td>
                                         <td class="fw-300 text-end">{{number_format($orden->amount, 2)}}</td>
                                         <td class="fw-300">
                                         <button type="button" @if(Auth::user()->admin == '1' && $orden->status == '0')
@@ -79,7 +73,7 @@
 
                                             class="@if ($orden->status == '0') btn btn-warning text-white text-bold-600 @elseif($orden->status == '1') btn btn-info text-white text-bold-600 @elseif($orden->status == '2') btn btn-danger text-white text-bold-600 @elseif($orden->status == '3') btn btn-danger text-white text-bold-600 @endif">{{$orden->status()}}
                                         </button>
-                                         
+
                                         </td>
                                         <div class="modal fade" id="ModalStatus{{$orden->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
