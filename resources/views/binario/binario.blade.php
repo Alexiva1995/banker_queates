@@ -89,7 +89,7 @@
         .rounded-circle{
             width: auto;
             height:auto;
-            max-width: 115%;
+            max-width: 128%;
         }
 
         .rounded-circle-add{
