@@ -300,10 +300,11 @@ class BonusService
                         ]);
                     }
                 }
-
-                $this->assignPointsbinarioRecursively($binary, $amount, $orden_id);
+                if ($binary != null){
+                    
+                    $this->assignPointsbinarioRecursively($binary, $amount, $orden_id);
+                } 
             }
-
             if ($user->binary_side == 'L') {
                 if (isset($order->id)) {
                     if ($menberpadre != null) {
@@ -318,7 +319,9 @@ class BonusService
                         ]);
                     }
                 }
-                $this->assignPointsbinarioRecursively($binary, $amount, $orden_id);
+                if ($binary != null){
+                    $this->assignPointsbinarioRecursively($binary, $amount, $orden_id);
+                }
             }
         }
     }
