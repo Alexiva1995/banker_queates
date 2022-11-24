@@ -274,9 +274,9 @@
         <div class="col-12">
             <div class="row match-height">
                 @include('dashboard.components.balanceCard')
-                @include('dashboard.components.earningsPerRankCard')
-                @include('dashboard.components.comissionsCard')
-                @include('dashboard.components.passivesCard')
+                @include('dashboard.components.licenseBonus')
+                @include('dashboard.components.MLMPAMM')
+                @include('dashboard.components.balancePAMM')
             </div>
         </div>
         <div class="col-sm-12 ">
