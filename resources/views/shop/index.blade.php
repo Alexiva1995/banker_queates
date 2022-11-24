@@ -48,7 +48,7 @@
     }
 </style>
 @section('content')
-<div class="container-fluid container-custom">
+<div class="container-fluid container-custom"> 
     <div class="d-flex my-1">
         <p class="fw-700 mb-0">Mercado</p><span class="fw-300 mx-1 text-light">|</span><p class="fw-300 mb-0">Licencias</p>
     </div>
@@ -67,11 +67,11 @@
             <div class="mobile row mt-2 px-0 match-height">
                 @foreach ($licenses as $package)
                     <div class="col-sm-4">
-                        <div class="col-md-4 col-lg-3 col-sm-4 wm-27">
+                        <div class="">
                             <div class="card media">
                                 <div class="d-flex justify-content-center">
                                     @if ($package->image === null)
-                                        <div class="card rounded-0 mb-0 border-0" style="width: 80%;">
+                                        <div class="card rounded-0 mb-0 border-0" style="width: 100%;">
                                             <div style="height: 161px; width:161px" class="text-center d-flex align-items-center justify-content-center title-mobile">
                                                  <img src="{{ asset('images/licencias/' . $package->image) }}"
                                                 alt="{{ $package->image }}"
@@ -84,7 +84,7 @@
 
                                         </div>
                                     @else
-                                        <div class="card rounded-0 mb-0 border-0" style="width: 80%;">
+                                        <div class="card rounded-0 mb-0 border-0" style="width: 100%;">
 
                                             <img src="{{ asset('images/licencias/' . $package->image) }}"
                                                 alt="{{ $package->image }}"
@@ -97,7 +97,6 @@
                                 <div class="card-body px-sm-2">
                                     <small class="text-light">Depositos Hasta {{$package->description}} USDT</small>
                                     <br>
-                                    <small class="text-light">Capital a Operar</small>
                                     <h2 class="fw-600 mb-75 text-center">{{ "USDT ".$package->amount }}</h2>
 
                                         <form class="d-grid gap-2" action="{{ route('shop.transactionCompra') }}"
