@@ -41,7 +41,8 @@
       icon: 'success',
       text: "Ya puedes pegarlo en su navegador",
       type: "success",
-      confirmButtonClass: 'btn btn-outline-primary',
+      //confirmButtonClass: 'btn btn-outline-primary'
+      confirmButtonColor: '#07B0F2',
     })
   }
 
@@ -50,7 +51,8 @@
       title: "Error",
       icon: 'error',
       text: "Debe tener una licencia activa para poder acceder a su enlace de referidos",
-      confirmButtonClass: 'btn btn-outline-primary',
+      //confirmButtonClass: 'btn btn-outline-primary',
+      confirmButtonColor: '#07B0F2',
     })
   }
 

@@ -14,13 +14,13 @@
                     </div>
 
                     <div class="texto" style="padding-left: 3%">
-                        @if ($licenciasTotal > 0)
-                            <span style="font-weight:600; font-size: 21px ">USDT  <span class="text-success">{{ $licenciasTotal }} </span></span>
+                        @if ($generalTotal > 0)
+                            <span style="font-weight:600; font-size: 21px ">USDT  <span class="text-success">{{ number_format($generalTotal, 2, ',', ' ');  }} </span></span>
                         @else
                             <span style="font-weight:900; font-size: 21px">USDT 0 </span>
                         @endif
                         <br>
-                        <span class="text-light" style="font-size: 13px;">Ganancia Por Licencias</span>
+                        <span class="text-light" style="font-size: 13px;">Total Ganado</span>
                     </div>
                 </div>
             </div>
@@ -38,21 +38,19 @@
                     </div>
 
                     <div class="texto" style="padding-left: 3%">
-                        @if ($pammTotal > 0 )
-                            <span style="font-weight:900; font-size: 21px">USDT <span class="text-success">{{ $pammTotal }} </span></span>
+                        @if ($generalAvailable > 0 )
+                            <span style="font-weight:900; font-size: 21px">USDT <span class="text-success">{{ number_format($generalAvailable, 2, ',', ' '); }} </span></span>
                         @else
                             <span style="font-weight:900; font-size: 21px">USDT 0 </span>
                         @endif
                         <br>
-                        <span class="text-light">Ganancia MLM PAMM</span>
+                        <span class="text-light">Saldo Disponible</span>
                     </div>
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="card p-2 entrada-bloc ">
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#modalWallet" class="btn btn-gradient-primary float-end ms-1 mb-2" style="width: 89%;"><span style="font-size: 1.1rem" class="font-weight-bold">{{ auth()->user()->wallet != null ? 'Cambiar Wallet' : 'Enlazar Wallet'}}</span></button>
-
-
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#modalWallet" class="btn btn-gradient-primary float-end ms-1 mb-2" style="width: 89%;"><span style="font-size: 1.1rem; font-weight: 600;">{{ auth()->user()->wallet != null ? 'Cambiar Wallet' : 'Enlazar Wallet'}}</span></button>
                     <div class="texto">
                         <div class="col-sm-12">
                             <div class="row justify-content-center" style="margin-bottom:3.6%;">
@@ -70,7 +68,7 @@
                 <div class="card-content">
                     <div class="row">
                         <div class="col-sm-6 p-2">
-                            <h1 class="fw-400" style="font-size: 17px">Sustraccion de saldo</h1>
+                            <h1 class="fw-400" style="font-size: 17px">Ganancias</h1>
                         </div>
                     </div>
                 </div>
@@ -79,17 +77,33 @@
                         <table class="table  nowrap scroll-horizontal-vertical myTable table-striped w-100">
                             <thead class="">
                                 <tr class="text-center">
-                                    <th class="d-none d-sm-table-cell">ID</th>
                                     <th>Descripcion</th>
                                     <th>Monto</th>
+                                    <th>Estado</th>
+                                    <th>Fecha</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ( $subtraction  as $gen)
+                                @foreach ( $general  as $gen)
                                      <tr class="text-center">
-                                        <td class="d-none d-sm-table-cell">{{$gen->id}}</td>
                                         <td> {{ $gen->description }}</td>
-                                        <td class="text-danger"> {{ number_format($gen->amount_gross                                                                                                              , 2) }}</td>
+                                        <td> {{ number_format($gen->amount, 2) }}</td>
+                                        <td>
+                                            @if ($gen->status == '0')
+                                                <span class="badge bg-info">Disponible</span>
+                                            @elseif($gen->status == '1')
+                                                <span class="badge bg-warning">Solicitada</span>
+                                            @elseif($gen->status == '2')
+                                                <span class="badge bg-success">Pagado</span>
+                                            @elseif($gen->status == '3')
+                                                <span class="badge bg-danger">Anulada</span>
+                                            @elseif($gen->status == '4')
+                                                <span class="badge bg-danger">Sustraida</span>
+                                            @endif
+                                        </td>
+                                        <td class="d-none d-sm-table-cell">
+                                            {{ date('d-m-Y', strtotime($gen->created_at)) }}
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -104,7 +118,7 @@
                 <div class="card-content">
                     <div class="row">
                         <div class="col-sm-6 p-2">
-                            <h1 class="fw-400" style="font-size: 17px">Edicion de saldo</h1>
+                            <h1 class="fw-400" style="font-size: 17px">Retiros</h1>
                         </div>
                         {{--<div class="col-sm-6">
                             <a href="{{route('solicitudesRetiros')}}" class="btn btn-primary float-end">Solicitar Retiro</a>
@@ -117,18 +131,29 @@
                         <table class="table  nowrap scroll-horizontal-vertical myTable table-striped w-100">
                             <thead class="">
                                 <tr class="text-center">
-                                    <th class="d-none d-sm-table-cell">ID</th>
                                     <th>Descripcion</th>
                                     <th>Monto</th>
+                                    <th>Estado</th>
+                                    <th>Fecha</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ( $balancEdition  as $gen)
                                      <tr class="text-center">
-                                        <td class="d-none d-sm-table-cell">{{$gen->id}}</td>
                                         <td> {{ $gen->description }}</td>
-                                        <td class="text-success"> {{ number_format($gen->amount, 2) }}</td>
-
+                                        <td> {{ number_format($gen->amount, 2) }}</td>
+                                        <td>
+                                            @if ($gen->status == '0')
+                                                <span class="badge bg-info">En Espera</span>
+                                            @elseif($gen->status == '1')
+                                                <span class="badge bg-success">Pagado</span>
+                                            @elseif($gen->status == '2')
+                                                <span class="badge bg-danger">Cancelado</span>
+                                            @endif
+                                        </td>
+                                        <td class="d-none d-sm-table-cell">
+                                            {{ date('d-m-Y', strtotime($gen->created_at)) }}
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

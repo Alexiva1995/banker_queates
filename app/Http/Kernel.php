@@ -65,6 +65,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin' => \App\Http\Middleware\CheckRole::class,
         'primerosCincoDias' => \App\Http\Middleware\primerosCincoDias::class,
-        'futswap' => \App\Http\Middleware\VerifyFutswapAccessKey::class
+        'payment.processor' => \App\Http\Middleware\PaymentProcessor::class,
+        'futswap' => \App\Http\Middleware\VerifyFutswapAccessKey::class,
     ];
 }

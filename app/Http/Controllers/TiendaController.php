@@ -167,6 +167,7 @@ class TiendaController extends Controller
 
     public function cambiar_status(Request $request)
     {
+
         $orden = Order::findOrFail($request->id);
         $orden->status = $request->status;
         $orden->save();
@@ -187,7 +188,7 @@ class TiendaController extends Controller
                     'status_utility' => 0
                 ]);
                 //Se crean los bonos o wallet corresondiente
-                $this->callBuildingBonus($orden);
+                // $this->callBuildingBonus($orden);
             } else {
                 $inversion = Investment::create([
                     'invested' => $orden->amount,
@@ -208,14 +209,14 @@ class TiendaController extends Controller
                 ]);
                 $user = User::findOrFail($orden->user_id);
                 //Se crea la wallet corresondiente
-                $this->callBuildingBonus($orden);
+                // $this->callBuildingBonus($orden);
 
             }
             // Se cambia el status del usuario a activo
-            if ($user->status == '0') {
-                $user->status = '1';
-                $user->date_active = now();
-                $user->update();
+            if ($orden->user->status == '0') {
+                $orden->user->status = '1';
+                $orden->user->date_active = now();
+                $orden->user->update();
                 event(new UserEvent($user));
             }
 
@@ -229,17 +230,17 @@ class TiendaController extends Controller
 
     }
 
-    private function callBuildingBonus($orden)
-    {
-        // Usuario que compro el paquete
-        $levelActive = Level::where('status', 1)->orderBy('id', 'desc')->first();
-        $buyer_id = $orden->user_id;
-        $level = 1;
-        $user = $orden->user;
-        $amount = $orden->amount;
+    // private function callBuildingBonus($orden)
+    // {
+    //     // Usuario que compro el paquete
+    //     $levelActive = Level::where('status', 1)->orderBy('id', 'desc')->first();
+    //     $buyer_id = $orden->user_id;
+    //     $level = 1;
+    //     $user = $orden->user;
+    //     $amount = $orden->amount;
 
-        app(BonusService::class)->BuildingBonus($user, $amount, $level, $buyer_id, $levelActive, $orden);
-    }
+    //     app(BonusService::class)->BuildingBonus($user, $amount, $level, $buyer_id, $levelActive, $orden);
+    // }
 
     /**
      * Permite llamar al funcion que registra los contrato
