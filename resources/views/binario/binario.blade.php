@@ -141,22 +141,22 @@
 
                                 {{-- usuario principal --}}
                                 @if ($base['range_id'] == null && empty($base->licence))
-                                    <img src="{{ asset('images/logo/icon-deg.png') }}" height="120" width="104"
+                                    <img src="{{ asset('images/logo/icon-deg.png') }}" height="110" width="110"
                                         class="" style="margin-top: -4px" alt="{{ $base->name }}"
                                         title="{{ $base->name }}">
                                     <h5 class="mt-0"> <b>{{ $base->name }}</b></h5>
                                 @else
-                                    <a href="#" class="base" style="width: 110px;">
+                                    
                                         <div >
                                             @if ($base['range_id'] != null)
                                                 <img src="{{ asset('images/ensignRanges/' . $base['range_id'] . '.png') }}"
                                                     height="110" width="110"
-                                                    class="rounded-circle-add align-self-center mr-1 di"
+                                                    class="align-self-center mr-1 di"
                                                     alt="{{ $base['range_id'] }}">
                                             @elseif($base['range_id'] == null && !empty($base->licence))
                                                 <img src="{{ asset('images/ensignLicences/' . $base['range_id'] . '.png') }}"
-                                                    height="70" width="64"
-                                                    class="rounded-circle-add align-self-center mr-1 di"
+                                                    height="110" width="110"
+                                                    class="align-self-center mr-1 di"
                                                     alt="{{ $base['range_id'] }}">
                                             @endif
                                             <div class="media-body">
@@ -167,7 +167,7 @@
                                                 <!--<h5 class="mt-0"> <b>Rango: </b></h5>-->
                                             </div>
                                         </div>
-                                    </a>
+                                    
                                 @endif
                                 {{-- Nivel 1 --}}
                                 <ul>
