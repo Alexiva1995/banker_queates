@@ -30,12 +30,30 @@
                         @foreach ($investments as $inversion)
                             <div class="card col-md-4 col-lg-3 col-sm-4">
                                 <div class="d-flex justify-content-center">
-                                    <div class="card rounded-0 mb-0 border-0" style="width: 80%;">
-                                        <div style="height: 161px; width:auto"
-                                            class="text-center d-flex align-items-center justify-content-center">
-                                            <h4>{{ $inversion->licensePackage->name }}</h4>
+                                    @if ($inversion->licensePackage->image === null)
+                                        <div class="card rounded-0 mb-0 border-0" style="width: 80%;">
+                                            <div style="height: 161px; width:161px"
+                                                class="text-center d-flex align-items-center justify-content-center title-mobile">
+                                                <img src="{{ asset('images/licencias/' . $inversion->licensePackage->image) }}"
+                                                    alt="{{ $inversion->licensePackage->image }}"
+                                                    class="d-block rounded mx-auto" />
+                                            </div>
+                                            {{-- <img src="{{ asset('images/MembershipsPackage/Bronce/' . $inversion->licensePackage->image) }}"
+                                            alt="{{ $inversion->licensePackage->image }}" height="161" width="161"
+                                            class="d-block rounded mx-auto" /> --}}
+                                            {{-- <h2 class="fw-600 font-large-1 text-switch position-absolute mb-0 top-50 start-50 translate-middle">${{ number_format($package->amount, 0,',' , '.') }}</h2> --}}
+
                                         </div>
-                                    </div>
+                                    @else
+                                        <div class="card rounded-0 mb-0 border-0" style="width: 80%;">
+
+                                            <img src="{{ asset('images/licencias/' . $inversion->licensePackage->image) }}"
+                                                alt="{{ $inversion->licensePackage->image }}"
+                                                class="d-block rounded mx-auto" style="width: 115px;margin-top: 6%;" />
+                                            {{-- <h2 class="fw-600 font-large-1 text-switch position-absolute mb-0 top-50 start-50 translate-middle">${{ number_format($package->amount, 0,',' , '.') }}</h2> --}}
+
+                                        </div>
+                                    @endif
                                 </div>
                                 <hr>
                                 <div class="card-body px-sm-2">

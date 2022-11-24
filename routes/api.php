@@ -32,6 +32,7 @@ Route::get('/data-packages-bar-chart', [ChartsController::class, 'packagesBarCha
 // Gráficos para el dashboard del usuario
 Route::get('/dashboard-bonus-charts/{user_id?}', [ChartsController::class, 'bonusChartsData'])->name('get.bonus.chart.data');
 Route::get('/dashboard-profit-packages-chart/{user_id?}', [ChartsController::class, 'profitPackageChartData'])->name('get.package.chart.data');
+Route::get('/data-wallets-chart/{user_id?}', [ChartsController::class, 'wallestAvailable'])->name('get.wallets.avaliable.data');
 
 Route::group(['prefix' => 'inversion'], function () {
     Route::post('/solicitar', [InversionController::class, 'solicitar'])->name('inversion.solicitar');
