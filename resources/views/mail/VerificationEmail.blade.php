@@ -53,7 +53,7 @@
                             <tr>
                                 <td>
                                     <div style="text-align: center;">
-                                        <a href="{{ route('verify.account', Crypt::encryptString($data['user']->id)) }}" target="_blank" style="font-family: Poppins, sans-serif; box-sizing: border-box; border-radius: 3px; color: #fff; display: inline-block; text-decoration: none; background-color: #7701E5; border-top: 10px solid #7701E5; border-right: 18px solid #7701E5; border-bottom: 10px solid #7701E5; border-left: 18px solid #7701E5; margin-bottom: 15px;">Verificar correo electrónico</a>
+                                        <a href="{{ route('verify.account', Crypt::encryptString($data['user']->id)) }}" target="_blank" style="font-family: Poppins, sans-serif; box-sizing: border-box; border-radius: 3px; color: #fff; display: inline-block; text-decoration: none; background-color: #07B0F2; border-top: 10px solid #07B0F2; border-right: 18px solid #07B0F2; border-bottom: 10px solid #07B0F2; border-left: 18px solid #07B0F2; margin-bottom: 15px;">Verificar correo electrónico</a>
                                     </div>
                                 </td>
                             </tr>
@@ -66,7 +66,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td bgcolor="#7701E5" style="padding: 30px 30px;">
+                    <td bgcolor="#07B0F2" style="padding: 30px 30px;">
                         <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
                             <tr>
                                 <td style="text-align: center; color: #ffffff; font-family: Arial, sans-serif; font-size: 16px;">
