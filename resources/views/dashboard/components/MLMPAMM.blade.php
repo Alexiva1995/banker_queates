@@ -10,7 +10,8 @@
             </div>
         </div>
         <div class="texto">
-            <h3 class="fw-700 mb-25">USD {{ number_format($user->getWalletComissionAmount(), 2, ',', '.') }}</h3>
+            <!-- wallets_commissions tipo 5 -->
+            <h3 class="fw-700 mb-25">USD {{ number_format($user->rendimiento(), 2, ',', '.') }}</h3>
             <p class="font-medium-2 mb-0">MLM PAMM</p>
         </div>
     </div>
