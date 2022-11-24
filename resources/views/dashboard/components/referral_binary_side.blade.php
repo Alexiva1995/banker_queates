@@ -26,7 +26,6 @@
             </div>
         </div>
     </div>
-
     <div class="card">
         <img id="clip" src="{{asset('images/logo/clip.svg')}}" alt="">
         <div class="card-body">

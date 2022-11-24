@@ -296,14 +296,14 @@
                 
                 @if(Auth::user()->admin != 1)
                   @if(auth()->user()->range_id == null)
-                    <img class="round" src="{{ asset('images/logo/logo-deg-white.png') }}" alt="avatar" height="60" width="60">
+                    <img class="round" src="{{ asset('images/logo/logo-deg-white.png') }}" alt="avatar" style="box-shadow: none;" height="50" width="50">
                   @else
-                    <img  class="round" src="{{ asset('images/ensignRanges/'.auth()->user()->range_id.'.png') }}" height="60" width="60">
+                    <img  class="round" src="{{ asset('images/ensignRanges/'.auth()->user()->range_id.'.png') }}" style="box-shadow: none;" height="50" width="50">
                   @endif
 
                 @elseif(Auth::user()->admin == 1)
                   @if(Auth::user()->photo == null)
-                    <img class="round" src="{{asset('images/logo/logo-deg-white.png')}}" alt="avatar" height="60" width="60">
+                    <img class="round" src="{{asset('images/logo/logo-deg-white.png')}}" style="box-shadow: none;" alt="avatar" height="50" width="50">
                   @endif
                 @endif
 

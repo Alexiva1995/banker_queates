@@ -13,17 +13,17 @@
                     </thead>
                     <tbody>
                         @foreach($user->wallets as $bonus)
-                        <tr>
-                            <td class="px-1 border-top d-none d-sm-table-cell">
-                                {{ $bonus->created_at->format('d/m/Y H:i:s') }}
-                            </td>
-                            <td class="px-1 border-top">
-                                {{ $bonus->description }}
-                            </td>
-                            <td class="px-1 border-top" style="text-align: right">
-                                {{ number_format($bonus->amount, 2, ',', '.') }}
-                            </td>
-                        </tr>
+                            <tr>
+                                <td class="px-1 border-top d-none d-sm-table-cell">
+                                    {{ $bonus->created_at->format('d/m/Y H:i:s') }}
+                                </td>
+                                <td class="px-1 border-top">
+                                    {{ $bonus->description }}
+                                </td>
+                                <td class="px-1 border-top" style="text-align: right">
+                                    {{ number_format($bonus->amount, 2, ',', '.') }}
+                                </td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>

@@ -28,7 +28,7 @@
                         <h5 class="text-center fw-700 mt-1 mb-0">Sapphire</h5>
                     </div>
                 </div>
-            @elseif((Auth::user()->range_id !== null) && (Auth::user()->range_id < 5) )
+            @elseif( (Auth::user()->range_id !== null) && (Auth::user()->range_id < 5) )
                 <div class="col-md-12 d-flex justify-content-around h-100 align-items-center flex-wrap gap-50">
                     <div>
                         <div class="square-active d-flex justify-content-center align-items-center">
@@ -53,7 +53,7 @@
                         <p class="text-center fw-500 mt-1 mb-0">Siguiente rango</p>
                     </div>
                 </div>
-            @elseif(Auth::user()->range_id === 5 )
+            @elseif(Auth::user()->range_id === 5)
                 <div class="col-md-12 d-flex justify-content-around h-100 align-items-center flex-wrap gap-50">
                     <div>
                         <div class="square-active d-flex justify-content-center align-items-center">
@@ -70,7 +70,7 @@
                         <p class="text-center fw-500 mt-1 mb-0">Próximo rango</p>
                     </div>
                 </div>
-            @elseif(Auth::user()->range_id === 6 )
+            @elseif(Auth::user()->range_id === 6)
                 <div class="col-md-12 d-flex justify-content-around h-100 align-items-center flex-wrap gap-50">
                     <div>
                         <div class="square-active d-flex justify-content-center align-items-center">
@@ -81,7 +81,7 @@
                 </div>
             @endif
 
-            @if((Auth::user()->range_id  > 1) && (Auth::user()->range_id  < 6))
+            @if( (Auth::user()->range_id  > 1) && (Auth::user()->range_id  < 6) )
                 <div class="row border-top mt-1 pe-0">
                     <div class="ciclo mt-2 px-0">
                         <div class="title">
@@ -89,7 +89,7 @@
                                 {{ number_format($user->getTotalRangePoints(), 0, '.', '.') }}
                             </p>
                         </div>
-                        @if( Auth::user()->range_id === 2)
+                        @if(Auth::user()->range_id === 2)
                             <div class="progress">
                                 <div class="progress-bar" id="progress-bar-chart" role="progressbar"
                                     style="width: {{ $user->range_id < 6 ? ($user->getTotalRangePoints() * 100) / 75000 : 100 }}%"
@@ -101,7 +101,7 @@
                                         {{ number_format(75000, 0, '.', '.') }}</span>
                                 @endif
                             </div>
-                        @elseif( Auth::user()->range_id === 3)
+                        @elseif(Auth::user()->range_id === 3)
                             <div class="progress">
                                 <div class="progress-bar" id="progress-bar-chart" role="progressbar"
                                     style="width: {{ $user->range_id < 6 ? ($user->getTotalRangePoints() * 100) / 200000 : 100 }}%"
@@ -113,7 +113,7 @@
                                         {{ number_format(200000, 0, '.', '.') }}</span>
                                 @endif
                             </div>
-                        @elseif( Auth::user()->range_id === 4)
+                        @elseif(Auth::user()->range_id === 4)
                             <div class="progress">
                                 <div class="progress-bar" id="progress-bar-chart" role="progressbar"
                                     style="width: {{ $user->range_id < 6 ? ($user->getTotalRangePoints() * 100) / 1000000 : 100 }}%"
@@ -125,7 +125,7 @@
                                         {{ number_format(1000000, 0, '.', '.') }}</span>
                                 @endif
                             </div>
-                        @elseif( Auth::user()->range_id === 5)
+                        @elseif(Auth::user()->range_id === 5)
                             <div class="progress">
                                 <div class="progress-bar" id="progress-bar-chart" role="progressbar"
                                     style="width: {{ $user->range_id < 6 ? ($user->getTotalRangePoints() * 100) / 2500000  : 100 }}%"

@@ -49,7 +49,7 @@
                     <div class="col-md-12 d-flex justify-content-around h-100 align-items-center flex-wrap gap-50">
                         <div>
                             <div class="square-active d-flex justify-content-center align-items-center">
-                                <img src="{{ asset('images/licencias/id/'.Auth::user()->investment->package_id.'.png') }}" height="90" width="90">
+                                <img src="{{ asset('images/licencias/idLicenses/'.Auth::user()->investment->package_id.'.png') }}" height="90" width="90">
                             </div>
                         </div>
                         <div class="texto" style="padding-left: 3%">

@@ -8,7 +8,7 @@
     <div class="card-body p-0">
       <div id="line-chart-wallet"></div>
     </div>
-</div>
+  </div>
 </div>
 
 

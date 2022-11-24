@@ -1241,9 +1241,7 @@
                 })
                 .catch( err => console.log(err) );
         }
-        /*
-         *Obtiene los datos para el gráfico de barras de ganancias mensuales de paquete
-         */
+        /*Obtiene los datos para el gráfico de barras de ganancias mensuales de paquete*/
         const getProfitsData = () => {
             let url = "{!! route('get.package.chart.data', 'replace_this') !!}";
             url = url.replace('replace_this', user_id);
@@ -1310,7 +1308,7 @@
             chart.render();
         }
         
-          /* Obtiene la data para el gráfico de ganancias*/
+        /* Obtiene la data para el gráfico de ganancias*/
         const getWalltetData = () => {
             let url = "{!! route('get.wallets.avaliable.data', 'replace_this') !!}";
             url = url.replace('replace_this', user_id);

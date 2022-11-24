@@ -151,7 +151,6 @@ class ChartsController extends Controller
      */
     public function wallestAvailable($user_id)
     {   
-      
         $data = new Collection();
         $last30days = now()->subDays(30);
         $wallets = WalletComission::where('user_id' , $user_id)
@@ -166,7 +165,6 @@ class ChartsController extends Controller
             $item->amount = $wallet->amount_available;
             $data->push($item);
         }
-
         return $data;
     }
     /**
