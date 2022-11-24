@@ -60,6 +60,12 @@
             "slug": "config.retiros"
         },
         {
+            "url": "licenses",
+            "name": "Licencias",
+            "icon": "bar-chart-2",
+            "slug": "licenses.index"
+        },
+        {
             "name": "Edición de saldo",
             "icon": "home",
             "slug": "Edicion-Saldo-Index",
