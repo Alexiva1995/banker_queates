@@ -137,7 +137,7 @@
                     </div>
                     <div id="tree-body-2" class="tab-body">
                         <ul>
-                            <li class="baseli p-0">
+                            <li class="baseli p-0" style="overflow:scroll">
 
                                 {{-- usuario principal --}}
                                 @if ($base['range_id'] == null && empty($base->licence))
@@ -147,7 +147,7 @@
                                     <h5 class="mt-0"> <b>{{ $base->name }}</b></h5>
                                 @else
                                     
-                                        <div >
+                                        <div style="width:1000px; margin: 0 auto" >
                                             @if ($base['range_id'] != null)
                                                 <img src="{{ asset('images/ensignRanges/' . $base['range_id'] . '.png') }}"
                                                     height="110" width="110"
@@ -170,7 +170,7 @@
                                     
                                 @endif
                                 {{-- Nivel 1 --}}
-                                <ul>
+                                <ul style="width: 1000px; margin: 0 auto;">
                                     @foreach ($trees as $child)
                                         {{-- genera el lado binario derecho haciendo vacio --}}
                                         @if ($child->binary_side == 'R')
