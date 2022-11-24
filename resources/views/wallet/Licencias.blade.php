@@ -12,13 +12,13 @@
             </div>
 
             <div class="texto" style="padding-left: 3%">
-                @if (isset($licenciasAvailable ))
-                    <span style="font-weight:900; font-size: 21px">USDT {{$licenciasAvailable }} </span>
+                @if (isset($licenciasTotal ))
+                    <span style="font-weight:900; font-size: 21px">USDT {{$licenciasTotal }} </span>
                 @else
                     <span style="font-weight:900; font-size: 21px">USDT 0 </span>
                 @endif
                 <br>
-                <span class="text-light">Saldo Disponibles</span>
+                <span class="text-light">Total Ganado</span>
             </div>
         </div>
         <div class="card p-2 entrada-bloc">
@@ -33,63 +33,63 @@
             </div>
 
             <div class="texto" style="padding-left: 3%">
-                @if (isset($licenciasTotal ))
-                    <span style="font-weight:900; font-size: 21px">USDT {{$licenciasTotal }} </span>
+                @if (isset($licenciasAvailable ))
+                    <span style="font-weight:900; font-size: 21px">USDT {{$licenciasAvailable }} </span>
                 @else
                     <span style="font-weight:900; font-size: 21px">USDT 0 </span>
                 @endif
                 <br>
-                <span class="text-light">Total Ganado</span>
+                <span class="text-light">Saldo Disponibles</span>
             </div>
         </div>
-</div>
-<div class="col-lg-12 col-12">
-    <div id="logs-list">
-        <div class="col-12">
-            <div class="card p-2">
-                <div class="card-content">
-                    <div class="card-header my-1 p-0">
-                        <h4 class="fw-700">Licencias</h4>
-                        {{--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#transferLicencias">
-                            Transferir
-                        </button>--}}
-                    </div>
-                    <div class="card-body card-dashboard p-0">
-                        <div class="table-responsive">
-                            <table class="table  nowrap scroll-horizontal-vertical myTable table-striped w-100">
-                                <thead class="">
-                                    <tr class="text-center">
-                                        <th>Monto</th>
-                                        <th>Estado</th>
-                                        <th class="d-none d-sm-table-cell">Fecha</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($licencias  as $licen)
+    </div>
+    <div class="col-lg-12 col-12">
+        <div id="logs-list">
+            <div class="col-12">
+                <div class="card p-2">
+                    <div class="card-content">
+                        <div class="card-header my-1 p-0">
+                            <h4 class="fw-700">Licencias</h4>
+                            {{--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#transferLicencias">
+                                Transferir
+                            </button>--}}
+                        </div>
+                        <div class="card-body card-dashboard p-0">
+                            <div class="table-responsive">
+                                <table class="table  nowrap scroll-horizontal-vertical myTable table-striped w-100">
+                                    <thead class="">
                                         <tr class="text-center">
-                                            <td> {{ number_format($licen->amount, 2) }}</td>
-                                            <td>
-                                                @if ($licen->status == '0')
-                                                    <span class="badge bg-warning">En Espera</span>
-                                                @elseif($licen->status == '1')
-                                                    <span class="badge bg-success">Completada</span>
-                                                @elseif($licen->status == '2')
-                                                    <span class="badge bg-danger">Rechazada</span>
-                                                @endif
-                                            </td>
-                                            <td class="d-none d-sm-table-cell">
-                                                {{ date('d-m-Y', strtotime($licen->created_at))
-                                            }}</td>
+                                            <th>Monto</th>
+                                            <th>Estado</th>
+                                            <th class="d-none d-sm-table-cell">Fecha</th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                            @include('wallet.components.transfer-licencias')
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($licencias  as $licen)
+                                            <tr class="text-center">
+                                                <td> {{ number_format($licen->amount, 2) }}</td>
+                                                <td>
+                                                    @if ($licen->status == '0')
+                                                        <span class="badge bg-warning">En Espera</span>
+                                                    @elseif($licen->status == '1')
+                                                        <span class="badge bg-success">Completada</span>
+                                                    @elseif($licen->status == '2')
+                                                        <span class="badge bg-danger">Rechazada</span>
+                                                    @endif
+                                                </td>
+                                                <td class="d-none d-sm-table-cell">
+                                                    {{ date('d-m-Y', strtotime($licen->created_at))
+                                                }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                @include('wallet.components.transfer-licencias')
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
