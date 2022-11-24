@@ -9,7 +9,7 @@
 
 @section('content')
 <div id="bg">
-    <img src="{{asset('images/auth/fondo-auth.png')}}" />
+    <img src="{{asset('images/auth/fondo-auth.png')}}"/>
 </div>
 
 <div id="bg"></div>
