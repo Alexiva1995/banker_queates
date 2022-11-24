@@ -295,7 +295,7 @@
                 
                 @if(Auth::user()->admin != 1)
                   @if(auth()->user()->range_id == null)
-                    <img class="round" src="{{asset('images/ico/deg.ico')}}" alt="avatar" height="40" width="40">
+                    <img class="round" src="{{asset('images/ico/deg.ico')}}" alt="avatar" height="40" width="40" style="object-fit: contain; background-color: white;">
                   @else
                     <img class="round" src="{{ asset('images/ensignRanges/'.auth()->user()->range_id.'.png') }}" height="40" width="40">
                   @endif
