@@ -9,10 +9,10 @@ trait ConsumesExternalServices {
      * Send a request to any service 
      * @return string
      */    
-    public function makeRequest($method, $requestUrl, $queryPharams = [], $formParams = [], $headers = [])
+    public function makeRequest($method, $requestUrl, $queryPharams = [], $formParams = [], $headers = [], $isJsonRequest = false)
     {
         $client = new Client([
-            'base_uri' => config('services.min_api.base_uri')
+            'base_uri' => $this->baseUri,
         ]);
 
         if(method_exists($this, 'resolveAuthorization'))
@@ -21,11 +21,13 @@ trait ConsumesExternalServices {
         }
 
         $response = $client->request($method, $requestUrl, [
+            $isJsonRequest ? 'json' : 'form_params' => $formParams,
             'query' => $queryPharams,
-            'form_params' => $formParams,
             'headers' => $headers
         ]);
+
         $response = $response->getBody()->getContents();
+
         if(method_exists($this, 'decodeResponse'))
         {
             $response = $this->decodeResponse($response);

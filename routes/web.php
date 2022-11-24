@@ -33,6 +33,7 @@ use App\Http\Controllers\MiscellaneousController;
 use App\Http\Controllers\UserInterfaceController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\ManualActivationController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\WithdrawalSettingController;
 
 /*
@@ -192,6 +193,9 @@ Route::middleware('auth')->group(function () {
             Route::post('/reactivacionSaldo', [TiendaController::class, 'reactivacionSaldo'])->name('reactivacionSaldo');
             Route::get('/getStatus', [TiendaController::class, 'getStatus'])->name('getStatus');
             Route::post('/transaction', [TiendaController::class, 'transaction'])->name('shop.transaction');
+            
+            Route::post('/make-purchase', [PaymentController::class, 'makePurchase'])->name('makePurchase');
+
         });
 
         Route::get('/ordenes', [ReportController::class, 'ordenes'])->name('ordenes.index');
