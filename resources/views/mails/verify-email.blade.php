@@ -46,8 +46,7 @@
           style="border-collapse: collapse; border: 1px solid #cccccc; border-radius: 15px;">
           <tr>
             <td align="center" bgcolor="#FFFFFF" style="padding: 40px 0 30px 0; border-bottom: 1px solid #E5E5E5;">
-              <img src="{{ asset('/images/login/connect.png') }}" alt="Connect." style="display: block;" />
-            </td>
+              <img src="{{ $message->embed( public_path('/images'). '/logo/logo-deg.png' ) }}" alt="Connect." style="display: block; max-width:500px; max-height:50px" />            </td>
           </tr>
           <tr>
             <td bgcolor="#ffffff" style="padding: 40px 30px 40px 30px;">
@@ -67,7 +66,7 @@
                 <tr>
                   <td>
                     <div style="text-align: center;">
-                      <a href="{{ $actionUrl }}" target="_blank" style="font-family: Poppins, sans-serif; box-sizing: border-box; border-radius: 3px; color: #fff; display: inline-block; text-decoration: none; background-color: #0255B8; border-top: 10px solid #0255B8; border-right: 18px solid #0255B8; border-bottom: 10px solid #0255B8; border-left: 18px solid #0255B8; margin-bottom: 10px; margin-top:10px">Restablecer ahora</a>
+                      <a href="{{ $actionUrl }}" target="_blank" style="font-family: Poppins, sans-serif; box-sizing: border-box; border-radius: 3px; color: #fff; display: inline-block; text-decoration: none; background-color: #07B0F2; border-top: 10px solid #07B0F2; border-right: 18px solid #07B0F2; border-bottom: 10px solid #07B0F2; border-left: 18px solid #07B0F2; margin-bottom: 10px; margin-top:10px">Restablecer ahora</a>
                     </div>
                   </td>
                   </tr>
@@ -82,7 +81,7 @@
             </td>
           </tr>
           <tr>
-            <td bgcolor="#0255B8" style="padding: 30px 30px;">
+            <td bgcolor="#07B0F2" style="padding: 30px 30px;">
               <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
                 <tr>
                   <td style="text-align: center; color: #ffffff; font-family: Arial, sans-serif; font-size: 16px;">

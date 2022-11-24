@@ -8,6 +8,10 @@
 @endsection
 
 @section('content')
+<div id="bg">
+    <img src="{{asset('images/auth/fondo-auth.png')}}"/>
+</div>
+
 <div id="bg"></div>
 <div class="auth-wrapper auth-v1 px-2">
     <div class="auth-inner py-2">

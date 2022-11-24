@@ -12,8 +12,9 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12 mt-1">
-                                <h3>Para poder realizar este proceso es necesario que ingrese un codigo de seguridad
-                                </h3>
+                                <div class="alert alert-info p-1" role="alert">
+                                    Al realizar un cambio de wallet, no podrá realizar retiros durante 15 días
+                                  </div>
                                 <h6 class="fw-500 mt-2">El código será enviado a {{substr(Auth::user()->email, 0,
                                     4)}}*****@*****.com</h6>
 
@@ -33,6 +34,15 @@
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="wallet" id="wallet" 
                                     placeholder="{{ auth()->user()->wallet != null ? auth()->user()->decryptWallet() : 'Ingrese su wallet'}}" 
+                                    required>
+                                </div>
+                            </div>
+
+                            <div class="col-12 mt-1">
+                                <label for="name">Contraseña <span class="requerid">*</span></label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="password" id="password" 
+                                    placeholder="Ingrese su contraseña" 
                                     required>
                                 </div>
                             </div>

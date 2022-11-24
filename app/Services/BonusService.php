@@ -26,98 +26,98 @@ class BonusService
         $this->bonus = $bonus;
     }
     //Aplica el building bonus y tambien aplica los puntos para evaluar el rango al final del ciclo trimestral
-    public function BuildingBonus(User $user, $amount, $level, $buyer_id, $levelActive, $orden)
-    {
-        $referred = $user->padre;
-        $bono = Bonus::where('type', '1')->where('level', $level)->first();
-        if ($referred != null && $referred->id < $buyer_id) {
-            // dd($bono);
+    // public function BuildingBonus(User $user, $amount, $level, $buyer_id, $levelActive, $orden)
+    // {
+    //     $referred = $user->padre;
+    //     $bono = Bonus::where('type', '1')->where('level', $level)->first();
+    //     if ($referred != null && $referred->id < $buyer_id) {
+    //         // dd($bono);
 
-            $wallet = WalletComission::create([
-                'user_id' => $referred->id,
-                'buyer_id' => $buyer_id,
-                'investment_id' => $orden->investment->id,
-                'order_id' => $orden->id,
-                'description' => 'Bono inicio rapido',
-                'type' => '0',
-                'level' => $level,
-                'status' => 0,
-                'avaliable_withdraw' => 0
-            ]);
-            // $active_Affiliates = $this->CountActiveAffiliates($referred->id);
+    //         $wallet = WalletComission::create([
+    //             'user_id' => $referred->id,
+    //             'buyer_id' => $buyer_id,
+    //             'investment_id' => $orden->investment->id,
+    //             'order_id' => $orden->id,
+    //             'description' => 'Bono inicio rapido',
+    //             'type' => '0',
+    //             'level' => $level,
+    //             'status' => 0,
+    //             'avaliable_withdraw' => 0
+    //         ]);
+    //         // $active_Affiliates = $this->CountActiveAffiliates($referred->id);
 
-            if ($level == 1) {
-                $gain = $amount * $bono->percentage;
-                $wallet->amount = $gain;
-                $wallet->amount_available = $gain;
-            } elseif ($level == 2) {
-                $gain = $amount * $bono->percentage;
-                $wallet->amount = $gain;
-                $wallet->amount_available = $gain;
-            } elseif ($level == 3) {
-                $gain = $amount *  $bono->percentage;
-                $wallet->amount = $gain;
-                $wallet->amount_available = $gain;
-            } elseif ($level == 4) {
-                $gain = $amount * $bono->percentage;
-                $wallet->amount = $gain;
-                $wallet->amount_available = $gain;
-            } elseif ($level == 5) {
-                $gain = $amount * $bono->percentage;
-                $wallet->amount = $gain;
-                $wallet->amount_available = $gain;
-            } elseif ($level == 6) {
-                $gain = $amount * $bono->percentage;
-                $wallet->amount = $gain;
-                $wallet->amount_available = $gain;
-            } elseif ($level == 7) {
-                $gain = $amount * $bono->percentage;
-                $wallet->amount = $gain;
-                $wallet->amount_available = $gain;
-            } elseif ($level == 8) {
-                $gain = $amount * $bono->percentage;
-                $wallet->amount = $gain;
-                $wallet->amount_available = $gain;
-            } elseif ($level == 9) {
-                $gain = $amount * $bono->percentage;
-                $wallet->amount = $gain;
-                $wallet->amount_available = $gain;
-            } elseif ($level == 10) {
-                $gain = $amount * $bono->percentage;
-                $wallet->amount = $gain;
-                $wallet->amount_available = $gain;
-            }
-            // elseif($level >= 8 && $level <= 9)
-            // {
-            //     $gain = $amount * 0.02;
-            //     $wallet->amount = $gain;
+    //         if ($level == 1) {
+    //             $gain = $amount * $bono->percentage;
+    //             $wallet->amount = $gain;
+    //             $wallet->amount_available = $gain;
+    //         } elseif ($level == 2) {
+    //             $gain = $amount * $bono->percentage;
+    //             $wallet->amount = $gain;
+    //             $wallet->amount_available = $gain;
+    //         } elseif ($level == 3) {
+    //             $gain = $amount *  $bono->percentage;
+    //             $wallet->amount = $gain;
+    //             $wallet->amount_available = $gain;
+    //         } elseif ($level == 4) {
+    //             $gain = $amount * $bono->percentage;
+    //             $wallet->amount = $gain;
+    //             $wallet->amount_available = $gain;
+    //         } elseif ($level == 5) {
+    //             $gain = $amount * $bono->percentage;
+    //             $wallet->amount = $gain;
+    //             $wallet->amount_available = $gain;
+    //         } elseif ($level == 6) {
+    //             $gain = $amount * $bono->percentage;
+    //             $wallet->amount = $gain;
+    //             $wallet->amount_available = $gain;
+    //         } elseif ($level == 7) {
+    //             $gain = $amount * $bono->percentage;
+    //             $wallet->amount = $gain;
+    //             $wallet->amount_available = $gain;
+    //         } elseif ($level == 8) {
+    //             $gain = $amount * $bono->percentage;
+    //             $wallet->amount = $gain;
+    //             $wallet->amount_available = $gain;
+    //         } elseif ($level == 9) {
+    //             $gain = $amount * $bono->percentage;
+    //             $wallet->amount = $gain;
+    //             $wallet->amount_available = $gain;
+    //         } elseif ($level == 10) {
+    //             $gain = $amount * $bono->percentage;
+    //             $wallet->amount = $gain;
+    //             $wallet->amount_available = $gain;
+    //         }
+    //         // elseif($level >= 8 && $level <= 9)
+    //         // {
+    //         //     $gain = $amount * 0.02;
+    //         //     $wallet->amount = $gain;
 
-            // }elseif($level >= 10 && $level <= 11)
-            // {
-            //     $gain = $amount * 0.01;
-            //     $wallet->amount = $gain;
+    //         // }elseif($level >= 10 && $level <= 11)
+    //         // {
+    //         //     $gain = $amount * 0.01;
+    //         //     $wallet->amount = $gain;
 
-            // }elseif($level >= 12 && $level <= 15)
-            // {
-            //     $gain = $amount * 0.005;
-            //     $wallet->amount = $gain;
-            // }
+    //         // }elseif($level >= 12 && $level <= 15)
+    //         // {
+    //         //     $gain = $amount * 0.005;
+    //         //     $wallet->amount = $gain;
+    //         // }
 
-            if ($wallet->amount == null) :
-                $wallet->amount = 0;
-            endif;
+    //         if ($wallet->amount == null) :
+    //             $wallet->amount = 0;
+    //         endif;
 
 
-            $wallet->update();
+    //         $wallet->update();
 
-            $level++;
-            // //El nivel maximo es 15
-            if ($level <= $levelActive->id) {
-                // $this->BuildingBonus($referred, $amount, $level, $points, $buyer_id, $order);
-                $this->BuildingBonus($referred, $amount, $level, $buyer_id, $levelActive, $orden);
-            }
-        }
-    }
+    //         $level++;
+    //         // //El nivel maximo es 15
+    //         if ($level <= $levelActive->id) {
+    //             // $this->BuildingBonus($referred, $amount, $level, $points, $buyer_id, $order);
+    //             $this->BuildingBonus($referred, $amount, $level, $buyer_id, $levelActive, $orden);
+    //         }
+    //     }
+    // }
     //Cuenta la cantidad de afiliados directos activos
     private function CountActiveAffiliates($user_id)
     {
@@ -160,7 +160,7 @@ class BonusService
         }
     }
     /*
-    Crea un registro de pago en la tabla wallets 
+    Crea un registro de pago en la tabla wallets
     Dicha tabla guarda el registro de los bonos, no guarda wallets.
     */
     private function createWalletByRange($user, $range, $amount, $current_pool_global)
@@ -270,8 +270,8 @@ class BonusService
         }
     }
     /**
-    * Asigna los puntos binarios de manera recursiva 
-    */ 
+    * Asigna los puntos binarios de manera recursiva
+    */
     public function assignPointsbinarioRecursively(User $user, $amount, $orden_id)
     {
         Log::debug('assignPointsbinarioRecursively');
@@ -280,8 +280,8 @@ class BonusService
         $date = now();
 
         if ($user->binary_id != 0 || !empty($user->binary_id)) {
-            
-            
+
+
             $menberpadre = Investment::where('user_id', $user->binary_id)
                                     ->where('status', '1')
                                     ->where('package_id', '>=', 2)
@@ -300,10 +300,11 @@ class BonusService
                         ]);
                     }
                 }
+                if ($binary != null){
 
-                $this->assignPointsbinarioRecursively($binary, $amount, $orden_id);
+                    $this->assignPointsbinarioRecursively($binary, $amount, $orden_id);
+                }
             }
-
             if ($user->binary_side == 'L') {
                 if (isset($order->id)) {
                     if ($menberpadre != null) {
@@ -318,7 +319,9 @@ class BonusService
                         ]);
                     }
                 }
-                $this->assignPointsbinarioRecursively($binary, $amount, $orden_id);
+                if ($binary != null){
+                    $this->assignPointsbinarioRecursively($binary, $amount, $orden_id);
+                }
             }
         }
     }
@@ -331,7 +334,7 @@ class BonusService
 
         foreach($points as $point)
         {
-            if($point->limit_date <= now()->format('Y-m-d')) 
+            if($point->limit_date <= now()->format('Y-m-d'))
             {
                 Log::debug("Los puntos con id {$point->id} se han vencido ");
                 $point->update(['left_points' => 0, 'right_points' => 0]);

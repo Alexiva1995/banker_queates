@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Investment;
+use App\Models\WalletComission;
 use App\Models\User;
 use App\Models\Utility;
+use App\Models\Order;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use stdClass;
@@ -130,7 +132,7 @@ class ChartsController extends Controller
      * Obtiene los datos de ventas de los ultimos 4 meses para el dashboard admin
      * @return stdClass
      */
-    public function salesChartData()
+    /*public function salesChartData()
     {
         $data = new Collection();
         $firstDay4MonthsAgo = now()->subMonths(3)->startOfMonth();
@@ -140,6 +142,51 @@ class ChartsController extends Controller
             $item = new stdClass;
             $item->date = $investment->created_at->format('d-m-Y');
             $item->amount = $investment->invested;
+            $data->push($item);
+        }
+        return $data;
+    }*/
+
+      /**
+     * Obtiene los datos de ventas de las ordenes del día para el dashboard admin
+     * @return stdClass
+     */
+    public function salesChartData()
+    {
+        $data = new Collection();
+        $day = now();
+        $orders = Order::whereDate('created_at','>=' , $day)
+                            ->where('status', "1")
+                            ->orderBy('created_at', 'ASC')
+                            ->get();
+        foreach($orders as $order)
+        {
+            $item = new stdClass;
+            $item->date = $order->created_at->format('d-m-Y');
+            $item->amount = $order->amount;
+            $data->push($item);
+        }
+        return $data;
+    }
+
+    /**
+     * Obtiene los datos de las ganancias del user auntenticado en los ultimos 30 días
+     * @return stdClass
+     */
+    public function wallestAvailable($user_id)
+    {   
+        $data = new Collection();
+        $last30days = now()->subDays(30);
+        $wallets = WalletComission::where('user_id' , $user_id)
+                                ->whereDate('created_at','>=' , $last30days)
+                                ->orderBy('created_at', 'ASC')
+                                ->get();
+
+        foreach($wallets as $wallet)
+        {
+            $item = new stdClass;
+            $item->date = $wallet->created_at->format('d-m-Y');
+            $item->amount = $wallet->amount_available;
             $data->push($item);
         }
         return $data;

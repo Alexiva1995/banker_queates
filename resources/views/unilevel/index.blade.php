@@ -30,12 +30,12 @@
         .content-input input[type=radio]+span {}
 
         .content-input input[type=radio]+span:before {
-            background-color: #673DED;
+            background-color: #07B0F2;
             color: #fff;
         }
 
         .content-input input[type=radio]:checked+span {
-            background-color: #673DED !important;
+            background-color: #07B0F2 !important;
             color: #fff;
             border-radius: 5px;
             opacity: 1;
@@ -61,7 +61,7 @@
         }
 
         .active {
-            background-color: #673DED;
+            background-color: #07B0F2;
             color: #fff;
             border-radius: 5px;
         }

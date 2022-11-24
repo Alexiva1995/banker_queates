@@ -33,6 +33,7 @@ use App\Http\Controllers\MiscellaneousController;
 use App\Http\Controllers\UserInterfaceController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\ManualActivationController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\WithdrawalSettingController;
 
 /*
@@ -120,6 +121,9 @@ Route::middleware('auth')->group(function () {
             //Reports
             Route::get('/cashflow', [ReportController::class, 'cashflow'])->name('cashflow');
 
+            //Licences
+            Route::get('/licenses', [InversionController::class, 'licenses'])->name('licenses.index');
+
             Route::get('/anuales', [ReportController::class, 'anuales'])->name('reports.anuales');
             //USERS
             Route::prefix('user')->group(function () {
@@ -154,7 +158,6 @@ Route::middleware('auth')->group(function () {
             //Agragr saldo a usuario
             Route::post('/agregar-saldo', [BonoManualController::class, 'agregar_saldo'])->name('agregar_saldo');
             Route::post('/sustraer-saldo', [BonoManualController::class, 'sustraer_saldo'])->name('sustraer_saldo');
-
         });
 
         //Ruta para cambiar referido de un user
@@ -190,6 +193,9 @@ Route::middleware('auth')->group(function () {
             Route::post('/reactivacionSaldo', [TiendaController::class, 'reactivacionSaldo'])->name('reactivacionSaldo');
             Route::get('/getStatus', [TiendaController::class, 'getStatus'])->name('getStatus');
             Route::post('/transaction', [TiendaController::class, 'transaction'])->name('shop.transaction');
+            
+            Route::post('/make-purchase', [PaymentController::class, 'makePurchase'])->name('makePurchase');
+
         });
 
         Route::get('/ordenes', [ReportController::class, 'ordenes'])->name('ordenes.index');
@@ -213,7 +219,7 @@ Route::middleware('auth')->group(function () {
 
         // ruta para el envio del codigo de seguridad para enlazar una wallet
         Route::post('/send-seccurity-code', [UserController::class, 'sendSeccurityCode'])->name('send.seccurity.code');
-        Route::post('/save_wallet', [UserController::class, 'storeWalelt'])->name('user.store.wallet');
+        Route::post('/save_wallet', [UserController::class, 'storeWallet'])->name('user.store.wallet');
 
 
         Route::get('menuRentabilidad', [BusinessController::class, 'rentabilidad'])->name('business.rentabilidad');
