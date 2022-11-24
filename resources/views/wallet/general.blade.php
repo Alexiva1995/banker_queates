@@ -80,6 +80,7 @@
                                     <th>Descripcion</th>
                                     <th>Monto</th>
                                     <th>Estado</th>
+                                    <th>Fecha</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -100,7 +101,9 @@
                                                 <span class="badge bg-danger">Sustraida</span>
                                             @endif
                                         </td>
-
+                                        <td class="d-none d-sm-table-cell">
+                                            {{ date('d-m-Y', strtotime($gen->created_at)) }}
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -131,6 +134,7 @@
                                     <th>Descripcion</th>
                                     <th>Monto</th>
                                     <th>Estado</th>
+                                    <th>Fecha</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -147,7 +151,9 @@
                                                 <span class="badge bg-danger">Cancelado</span>
                                             @endif
                                         </td>
-
+                                        <td class="d-none d-sm-table-cell">
+                                            {{ date('d-m-Y', strtotime($gen->created_at)) }}
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

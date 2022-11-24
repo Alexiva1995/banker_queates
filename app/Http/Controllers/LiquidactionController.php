@@ -481,7 +481,7 @@ class LiquidactionController extends Controller
             $rangeAvailable = $comisionRange->where('status', 0)->sum('amount_available');
 
             //vista licencias
-            $licencias  = WalletComission::where([['user_id',$user->id ],['type',4]])->get();
+            $licencias  = WalletComission::where([['user_id',$user->id ],['type',2]])->get();
             $licenciasTotal = $licencias->sum('amount_available');
             $licenciasAvailable = $licencias->where('status', 0)->sum('amount_available');
 

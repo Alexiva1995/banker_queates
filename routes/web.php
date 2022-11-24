@@ -120,6 +120,9 @@ Route::middleware('auth')->group(function () {
             //Reports
             Route::get('/cashflow', [ReportController::class, 'cashflow'])->name('cashflow');
 
+            //Licences
+            Route::get('/licenses', [InversionController::class, 'licenses'])->name('licenses.index');
+
             Route::get('/anuales', [ReportController::class, 'anuales'])->name('reports.anuales');
             //USERS
             Route::prefix('user')->group(function () {
