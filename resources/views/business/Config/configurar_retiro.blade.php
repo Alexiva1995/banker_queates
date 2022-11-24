@@ -92,7 +92,7 @@
                 </div>
             </div>
 
-            <div class="col-sm-4 mb-3">
+            {{--<div class="col-sm-4 mb-3">
                 <div class="row">
                     <div class="col-sm-12 ">
                         <div class="d-flex justify-content-center fw-bold mt-1">
@@ -111,7 +111,7 @@
                         </select>
                     <div class="col-sm-12 ">
                 </div>
-            </div>
+            </div>--}}
             <div class="col-sm-12 mb-3 ">
                 <div class="d-flex justify-content-center">
                     <button class="btn btn-primary mt-4" onclick="Guardar_configuracion();">Guardar</button>
