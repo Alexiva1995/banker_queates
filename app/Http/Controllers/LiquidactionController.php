@@ -90,7 +90,9 @@ class LiquidactionController extends Controller
         ])->sum('amount_available');
 
         $fee = $config->percentage;
-        return view('business.retiro', compact('balance', 'fee'));
+
+        $withdrawalSettings = WithdrawalSetting::first();
+        return view('business.retiro', compact('balance', 'fee', 'withdrawalSettings'));
     }
 
     public function liquidationValidate()

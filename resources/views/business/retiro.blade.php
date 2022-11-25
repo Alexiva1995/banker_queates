@@ -93,7 +93,9 @@
 
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                @include('business.ui.componentes.tipos-retiros.comisiones.comisiones')
+                @include('business.ui.componentes.tipos-retiros.comisiones.comisiones', [
+                    'withdrawalSettings' => $withdrawalSettings
+                ])
             </div>
         </div>
 

@@ -1,3 +1,37 @@
+@php
+    function weekDay($day){
+      switch ($day) {
+        case 1:
+          return 'lunes';
+          break;
+        case 2:
+          return 'martes';
+          break;
+        case 3:
+          return 'miercoles';
+          break;
+        case 4:
+          return 'jueves';
+          break;
+        case 5:
+          return 'viernes';
+          break;
+        case 6:
+          return 'sábado';
+          break;
+        case 7:
+          return 'domingo';
+          break;
+        
+        default:
+          # code...
+          break;
+      }
+    }
+
+    $weekDayStart = weekDay($withdrawalSettings->day_start);
+    $weekDayEnd = weekDay($withdrawalSettings->day_end);
+@endphp
 <div class="col-lg-12 col-12 order-2 order-lg-1 mx-0 px-0">
   <div class="card p-2">
     <div class="card-header">
@@ -7,9 +41,9 @@
       <i class="fa-solid fa-circle-info" style="font-size: 1.5rem;"></i>
       <ul class="mb-0 fw-400">
         <li>Se cobrara un {{$fee}}% de lo que se va a retirar</li>
-        <li>Se pondra un boton de retiro y estara disponible los dias lunes y martes de 10.00 AM HORA TEXAS A 5:00 PM
+        <li>Se pondra un boton de retiro y estara disponible los dias {{$weekDayStart}} y {{$weekDayEnd}} de 10.00 AM HORA TEXAS A 5:00 PM
           HORA TEXAS .</li>
-        <li>El minimo de retiro son 50 usd que deben de terner los {{$fee}}% del cobro del retiro.</li>
+        <li>El minimo de retiro son 100 usd que deben de tener los {{$fee}}% del cobro del retiro.</li>
       </ul>
     </div>
     <form action="" id="form-withdrawal" method="post">
