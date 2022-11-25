@@ -9,6 +9,10 @@
 @if ($cant < 2)
     <li class="va">
         <a>
+            <div class="media d-flex justify-content-center ">
+                <img src="{{ asset('images/ensignRanges/sin-referido.png') }}" height="80" width="70"
+                class="rounded-circle-add"  style="margin-top: -2px">
+            </div>
         </a>
     </li>
 @endif
