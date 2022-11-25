@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="texto">
-            <h3 class="fw-700 mb-25">USD {{ number_format($total_available, 2, ',', '.') }} </h3>
+            <h3 class="fw-700 mb-25">USDT {{ number_format($total_available, 2, ',', '.') }} </h3>
             <p class="font-medium-2 mb-0" >Saldo</p>
         </div>
     </div>
