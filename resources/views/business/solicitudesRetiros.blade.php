@@ -82,7 +82,7 @@
                                         {{ $retiro->decryptWallet() }}
                                     </td>
                                     <td class="d-none d-md-table-cell">
-                                        {{$retiro->hash}}
+                                        {{$retiro->hash !== null ? $retiro->hash : 'No disponible'}}
                                     </td>
                                 </tr>
                                 @endforeach

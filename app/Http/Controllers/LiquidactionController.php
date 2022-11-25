@@ -45,7 +45,7 @@ class LiquidactionController extends Controller
     public function retiro()
     {
 
-        $retiros = Liquidation::where('status', 0,)->where('user_id', Auth::id())->get();
+        $retiros = Liquidation::where('user_id', Auth::id())->get();
 
         return view('business.solicitudesRetiros', compact('retiros'));
     }
