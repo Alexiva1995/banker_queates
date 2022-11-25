@@ -468,23 +468,8 @@ class LiquidactionController extends Controller
         try {
             $user = auth()->user();
 
-<<<<<<< HEAD
-            //vista pamm
-            $pamm =  WalletComission::where([['user_id', $user->id], ['type', 0]])->get();
-            $pammTotal = $pamm->sum('amount_available');
-            $pammAvailable =  $pamm->where('status', 0)->sum('amount_available');
-
-            //vista Range
-            $comisionRange = WalletComission::where('user_id', $user->id)->where('type', 1)->get();
-            $rangeTotal = $comisionRange->sum('amount_available');
-            $rangeAvailable = $comisionRange->where('status', 0)->sum('amount_available');
-
             //vista licencias
-            $licencias  = WalletComission::where([['user_id', $user->id], ['type', 2]])->get();
-=======
-            //vista licencias
-            $licencias  = WalletComission::where([['user_id',$user->id ],['type',1]])->get();
->>>>>>> 254beffbde8da5de3711bbd23fbfba4fb1b54eb4
+            $licencias  = WalletComission::where([['user_id', $user->id], ['type', 1]])->get();
             $licenciasTotal = $licencias->sum('amount_available');
             $licenciasAvailable = $licencias->where('status', 0)->sum('amount_available');
 
@@ -499,11 +484,7 @@ class LiquidactionController extends Controller
 
             //vista mlm
 
-<<<<<<< HEAD
-            $mlm =  WalletComission::where([['user_id', $user->id], ['type', 5]])->get();
-=======
-            $mlm =  WalletComission::where([['user_id',$user->id ],['type',0]])->get();
->>>>>>> 254beffbde8da5de3711bbd23fbfba4fb1b54eb4
+            $mlm =  WalletComission::where([['user_id', $user->id], ['type', 0]])->get();
             $mlmTotal = $mlm->sum('amount_available');
             $mlmAvailable =  $mlm->where('status', 0)->sum('amount_available');
 
@@ -513,16 +494,8 @@ class LiquidactionController extends Controller
                 $daysRemaining = $date1->diffInDays(today()->format('Y-m-d'));
             }
 
-<<<<<<< HEAD
             return view('wallet.index', compact(
                 'balancEdition',
-                'pamm',
-                'pammTotal',
-                'pammAvailable',
-                'comisionRange',
-                'rangeTotal',
-                'rangeTotal',
-                'rangeAvailable',
                 'licencias',
                 'licenciasTotal',
                 'licenciasAvailable',
@@ -534,10 +507,6 @@ class LiquidactionController extends Controller
                 'mlmAvailable',
                 'daysRemaining'
             ));
-=======
-            return view('wallet.index', compact('balancEdition','licencias','licenciasTotal','licenciasAvailable',
-            'general','generalTotal','generalAvailable','mlm','mlmTotal','mlmAvailable', 'daysRemaining'));
->>>>>>> 254beffbde8da5de3711bbd23fbfba4fb1b54eb4
         } catch (\Throwable $th) {
             Log::error('Wallet - Index -> Error: ' . $th);
             abort(403, "Ocurrio un error, contacte con el administrador");
