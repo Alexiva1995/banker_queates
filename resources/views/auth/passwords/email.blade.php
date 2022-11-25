@@ -9,7 +9,7 @@
 
 @section('content')
 <div id="bg">
-  <!--  <img src="{{asset('images/login/bg-login.png')}}" /> -->
+    <img src="{{asset('images/auth/fondo-auth.png')}}"/>
 </div>
 <div class="auth-wrapper auth-v1 px-2">
   <div class="auth-inner py-2">
@@ -45,6 +45,9 @@
     </style>
         {{--CARD 1 --}}
         <div class="card mb-0 p-2 bg-white shadow box-shadow-0">
+            <a href="#" class="brand-logo">
+              <img width="200" src="{{asset('images/logo/logo-deg.png')}}"  alt="">
+            </a>
             <h4 class="card-body text-center mb-1 fw-700">Revisa tu correo y sigue las instrucciones</h4>
             <p class="mb-2 text-center">Te enviaremos un enlace a tu correo<br> para que puedas cambiar la contraseña</p>
 
