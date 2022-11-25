@@ -6,6 +6,7 @@ use App\Models\Investment;
 use App\Models\WalletComission;
 use App\Models\User;
 use App\Models\Utility;
+use App\Models\Order;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use stdClass;
@@ -131,7 +132,7 @@ class ChartsController extends Controller
      * Obtiene los datos de ventas de los ultimos 4 meses para el dashboard admin
      * @return stdClass
      */
-    public function salesChartData()
+    /*public function salesChartData()
     {
         $data = new Collection();
         $firstDay4MonthsAgo = now()->subMonths(3)->startOfMonth();
@@ -144,7 +145,30 @@ class ChartsController extends Controller
             $data->push($item);
         }
         return $data;
+    }*/
+
+      /**
+     * Obtiene los datos de ventas de las ordenes del día para el dashboard admin
+     * @return stdClass
+     */
+    public function salesChartData()
+    {
+        $data = new Collection();
+        $day = now();
+        $orders = Order::whereDate('created_at','>=' , $day)
+                            ->where('status', "1")
+                            ->orderBy('created_at', 'ASC')
+                            ->get();
+        foreach($orders as $order)
+        {
+            $item = new stdClass;
+            $item->date = $order->created_at->format('d-m-Y');
+            $item->amount = $order->amount;
+            $data->push($item);
+        }
+        return $data;
     }
+
     /**
      * Obtiene los datos de las ganancias del user auntenticado en los ultimos 30 días
      * @return stdClass

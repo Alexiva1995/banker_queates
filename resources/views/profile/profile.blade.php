@@ -35,7 +35,7 @@
         .nav-tabs .nav-link.active,
         .nav-tabs .nav-item.show .nav-link {
             color: #fff;
-            background-color: #673DED;
+            background-color: #07B0F2;
         }
 
         .nav-tabs .nav-link.active {
@@ -44,7 +44,7 @@
         }
 
         .box {
-            background-color: rgb(152 146 170 / 5%);
+            background-color: rgb(0 191 191 / 5%);
             padding: 1rem 0rem;
             margin-right: 0.25rem;
             margin-left: 0.25rem;

@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="{{ asset(mix('css/core.css')) }}" />
     <link rel="stylesheet" href="{{ asset(mix('css/overrides.css')) }}" />
     <link rel="stylesheet" href="{{ asset(mix('css/style.css')) }}" />
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/ico/favicon.ico') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/ico/favicon1.ico') }}">
 
     {{-- <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/ico/favicon-16x16.png') }}"> --}}
 </head>

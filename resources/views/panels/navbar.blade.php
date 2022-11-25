@@ -296,7 +296,11 @@
                 
                 @if(Auth::user()->admin != 1)
                   @if(auth()->user()->range_id == null)
-                    <img class="round" src="{{ asset('images/logo/logo-deg-white.png') }}" alt="avatar" style="box-shadow: none;" height="50" width="50">
+
+                    <img class="round" src="{{asset('images/ico/deg.ico')}}" alt="avatar" height="40" width="40" style="object-fit: contain; background-color: white;">
+
+                    <!-- <img class="round" src="{{ asset('images/logo/logo-deg-white.png') }}" alt="avatar" style="box-shadow: none;" height="50" width="50"> -->
+
                   @else
                     <img  class="round" src="{{ asset('images/ensignRanges/'.auth()->user()->range_id.'.png') }}" style="box-shadow: none;" height="50" width="50">
                   @endif
