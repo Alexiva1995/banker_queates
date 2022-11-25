@@ -120,7 +120,7 @@ class BinaryController extends Controller
     {
         if ($bonus_t != 0) {
             WalletComission::Create([
-                'type' => 4,
+                'type' => 1,
                 'level' => 0,
                 'user_id' => $id,
                 'amount' => $bonus_t,
