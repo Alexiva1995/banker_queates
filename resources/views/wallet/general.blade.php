@@ -86,7 +86,11 @@
                             <tbody>
                                 @foreach ( $general  as $gen)
                                      <tr class="text-center">
-                                        <td> {{ $gen->description }}</td>
+                                        @if ($gen->type == 1)
+                                            <td>Bono de licencia</td>
+                                        @else
+                                            <td> {{ $gen->description }}</td>
+                                        @endif
                                         <td> {{ number_format($gen->amount, 2) }}</td>
                                         <td>
                                             @if ($gen->status == '0')
