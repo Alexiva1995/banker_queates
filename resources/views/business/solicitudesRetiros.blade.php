@@ -65,7 +65,7 @@
                                             </button>
                                     @else
                                             <button class="btn bg-light-danger" style="color: red;">
-                                                <a href="https://tronscan.org/#/transaction/${{$retiro->hash}}" class="text-decoration-none text-danger">Retirado</a>
+                                                <a href="https://tronscan.org/#/transaction/${{$retiro->hash}}" class="text-decoration-none text-danger">Cancelado</a>
                                             </button>
                                     @endif
                                     </td>

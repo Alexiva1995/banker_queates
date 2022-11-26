@@ -108,7 +108,7 @@ class LiquidactionController extends Controller
 
     public function pendientes()
     {
-        $liquidaciones = Liquidation::where('status', 0)->with('user')->orderBy('id', 'desc')->get();
+        $liquidaciones = Liquidation::where('status', 0)->orWhere('status', 2)->with('user')->orderBy('id', 'desc')->get();
 
         return view('liquidaciones.pendientes', compact('liquidaciones'));
     }

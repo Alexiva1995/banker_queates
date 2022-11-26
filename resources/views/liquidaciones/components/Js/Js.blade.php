@@ -7,15 +7,23 @@ function regresar(id,accion){
 
 function animacion(id,accion){
     let tabla = document.getElementById(`tabla${id}`);
-    tabla .style.opacity = '0';
     if(accion == 'aprobar'){
+        tabla.style.opacity = '0';
         tabla.style.backgroundColor = 'rgb(149, 255, 145)';
+        setTimeout(function(){
+            tabla.remove(tabla);
+        }, 700);
     }else{
         tabla.style.backgroundColor = 'rgb(253, 165, 165)';
+        let actionColumnButtons = document.querySelectorAll(`#tabla${id} .btn`);
+        let badge = document.querySelector(`#tabla${id} .badge`);
+        actionColumnButtons.forEach( btn => {
+            btn.disabled = true;
+        });
+
+        badge.className = 'badge bg-danger';
+        badge.innerHTML = 'Cancelado';
     }
-    setTimeout(function(){
-        tabla.remove(tabla);
-    }, 700);
 }
 
 function procesar(id,accion){
