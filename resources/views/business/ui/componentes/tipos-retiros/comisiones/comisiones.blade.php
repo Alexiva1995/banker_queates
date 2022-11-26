@@ -1,51 +1,9 @@
-@php
-    function weekDay($day){
-      switch ($day) {
-        case 1:
-          return 'lunes';
-          break;
-        case 2:
-          return 'martes';
-          break;
-        case 3:
-          return 'miercoles';
-          break;
-        case 4:
-          return 'jueves';
-          break;
-        case 5:
-          return 'viernes';
-          break;
-        case 6:
-          return 'sábado';
-          break;
-        case 7:
-          return 'domingo';
-          break;
-        
-        default:
-          # code...
-          break;
-      }
-    }
-
-    $weekDayStart = weekDay($withdrawalSettings->day_start);
-    $weekDayEnd = weekDay($withdrawalSettings->day_end);
-@endphp
 <div class="col-lg-12 col-12 order-2 order-lg-1 mx-0 px-0">
   <div class="card p-2">
     <div class="card-header">
       <h5 class="mb-1 fw-700">Solicitud de retiro (comisiones)</h5>
     </div>
-    <div class="alert alert-info mt-0 d-flex p-2 w-100 rounded-3" style="">
-      <i class="fa-solid fa-circle-info" style="font-size: 1.5rem;"></i>
-      <ul class="mb-0 fw-400">
-        <li>Se cobrara un {{$fee}}% de lo que se va a retirar</li>
-        <li>Se pondra un boton de retiro y estara disponible los dias {{$weekDayStart}} y {{$weekDayEnd}} de 10.00 AM HORA TEXAS A 5:00 PM
-          HORA TEXAS .</li>
-        <li>El minimo de retiro son 100 usd que deben de tener los {{$fee}}% del cobro del retiro.</li>
-      </ul>
-    </div>
+  
     <form action="" id="form-withdrawal" method="post">
       @csrf
       <input type="hidden" name="action" value="aproved">
@@ -87,7 +45,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-12">
+                {{-- <div class="col-md-12">
                   <div class="row">
                     <div class="col-md-6">
                       <span>Tarifa</span>
@@ -96,24 +54,24 @@
                       <span>{{ $fee }}%</span>
                     </div>
                   </div>
-                </div>
+                </div> --}}
                 <div class="col-md-12">
                   <div class="row">
                     <div class="col-md-6">
                       <div class="d-flex flex-column">
-                        <span class="text-info fw-500">Monto a recibir</span>
+                        {{-- <span class="text-info fw-500">Monto a recibir</span> --}}
                         <span class="text-info fw-500 mt-1">
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
                             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                             <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
                           </svg>
-                          La wallet debe tener un formato válido para solicitar un retiro
+                          El retiro Mínimo debe ser de 100USDT
                         </span>
                       </div>
                     </div>
-                    <div class="col-md-6 d-flex justify-content-end">
+                    {{-- <div class="col-md-6 d-flex justify-content-end">
                       <span id="total" class="text-info">--------</span>
-                    </div>
+                    </div> --}}
                   </div>
                 </div>
               </div>

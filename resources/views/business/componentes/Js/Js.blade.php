@@ -14,9 +14,9 @@
         wallet = value;
         Monto_a_retirar = Value_Monto;
         ButtonContinue = value_ButtonContinue;
-        percentage( Monto_a_retirar);
+       // percentage( Monto_a_retirar);
         if( wallet.length > 16 &&  Monto_a_retirar >= 100 ){
-            // console.log(Monto_a_retirar);
+            //  console.log(Monto_a_retirar);
             ButtonContinue.disabled = false;
         }else{
             (wallet.value);
@@ -30,7 +30,7 @@
 
         setTimeout(function(){
             if( e.value.length > 16 &&  Monto_a_retirar >= 100 ){
-                console.log(e.value.length);
+                // console.log(e.value.length);
                 ButtonContinue.disabled = false;
             }else{
             (wallet.value);
@@ -43,7 +43,7 @@
 
     function activarInput(e){
         Monto_a_retirar = e;
-        percentage(Monto_a_retirar);
+       // percentage(Monto_a_retirar);
         w();
 
         if( wallet.length > 16 &&  Monto_a_retirar >= 100 ){
