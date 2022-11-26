@@ -59,7 +59,7 @@ class LiquidactionController extends Controller
         }
         // Si el usuario hizo un cambio en su wallet no puede retirar durante 15 dias
         $remaining_days = $user->wallet->updated_at->diffInDays(now());
-        if ($remaining_days <= 15) {
+        if ($remaining_days <= 15 && !$user->wallet->created_at->eq($user->wallet->updated_at)) {
             $remaining_days = 15 - $remaining_days;
             return redirect()->back()->with('warning', "Debido a que modifico su wallet debe esperar {$remaining_days} dias para poder solicitar retiros");
         }
