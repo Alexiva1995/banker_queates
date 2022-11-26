@@ -40,9 +40,9 @@
                                 <tr class=" text-center">
                                     <th class="fw-600">Fecha</th>
                                     <th class="fw-600">Estado</th>
-                                    <th class="fw-600">Monto</th>
+                                    <th class="fw-600 d-none d-md-table-cell">Monto</th>
                                     <th class="fw-600 d-none d-md-table-cell">Fee</th>
-                                    <th class="fw-600 d-none d-md-table-cell">Total</th>
+                                    <th class="fw-600">Total</th>
                                     <th class="fw-600 d-none d-md-table-cell">Wallet</th>
                                     <th class="fw-600 d-none d-md-table-cell">Hash</th>
                                 </tr>
@@ -56,9 +56,9 @@
                                     <td>
 
                                     @if($retiro->status == 0)
-                                            <button class="btn bg-light-warning" style="color: #FE8900;">
+                                            <span class="btn bg-light-warning" style="color: #FE8900;">
                                                 En Espera
-                                            </button>
+                                            </span>
                                     @elseif($retiro->status ==1)
                                             <button class="btn bg-light-success" style="color: #28C76F;">
                                                 <a href="https://tronscan.org/#/transaction/${{$retiro->hash}}" class="text-decoration-none text-success">Pagado</a>
@@ -69,13 +69,13 @@
                                             </button>
                                     @endif
                                     </td>
-                                    <td class="text-end">
+                                    <td class="text-end d-none d-md-table-cell">
                                         {{number_format($retiro->amount_gross,2)}}
                                     </td>
                                     <td class="text-end d-none d-md-table-cell">
                                         {{number_format($retiro->amount_fee,2)}}
                                     </td>
-                                    <td class="text-end d-none d-md-table-cell">
+                                    <td class="text-end">
                                         {{number_format($retiro->amount_net,2)}}
                                     </td>
                                     <td class="d-none d-md-table-cell">
