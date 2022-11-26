@@ -24,13 +24,12 @@ data-textdirection="{{ env('MIX_CONTENT_DIRECTION') === 'rtl' ? 'rtl' : 'ltr' }}
   <meta name="author" content="PIXINVENT">
   <title>Banker Quotes</title>
   <!--<link rel="apple-touch-icon" href="{{asset('images/logo/icon-deg.png')}}">-->
-  <link rel="shortcut icon" type="image/x-icon" href="{{asset('images/ico/deg.ico')}}">
+  <link rel="shortcut icon" type="image/x-icon" href="{{asset('images/ico/favicon1.ico')}}">
   <!--<link rel="shortcut icon" type="image/x-icon" href="{{asset('images/logo/icon-deg.png')}}">-->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
   {{-- Include core + vendor Styles --}}
   @include('panels/styles')
   <script src="{{asset('assets/js/librerias/axios.min.js')}}"></script>

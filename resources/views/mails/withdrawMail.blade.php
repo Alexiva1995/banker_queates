@@ -13,7 +13,7 @@
 <style>
     @media only screen and (max-device-width: 640px) {
         /* mobile-specific CSS styles go here */
-        .tablescale { width: 440px !important; margin: }
+        .tablescale { width: 440px !important; margin: auto }
         .imgscale { width: 100% !important;  }
     }
 
@@ -72,7 +72,7 @@
                                     <p style="margin: 0;">fue recibida con exito</p>
                                 </td>
                             </tr>
-                            <tr>
+                            {{-- <tr>
                                 <td style="font-size: 16px; line-height: 24px; padding: 0px 0 0px 0; display:block; margin-top: 10px;">
                                     <p>Mantente Conectado  
                                         <a target="_blank" href="https://www.instagram.com/project7k.oficial/">
@@ -80,11 +80,11 @@
                                         <a target="_black" href="https://www.facebook.com/Project-7K-106596608758735">
                                             <img src="{{ asset('/images/mails/facebook-project7k.png') }}" alt="Facebook." style="max-width:30px; max-height:30px; padding: 0 0 0 10px" /></a>
                                         <a href="#">
-                                            <img src="{{ $message->embed( public_path('/images/mails/youtube-project7k.png') }}" alt="Youtube." style="max-width:30px; max-height:30px; padding: 0 0 0 10px" /></a>
+                                            <img src="{{ asset(public_path('/images/mails/youtube-project7k.png')) }}" alt="Youtube." style="max-width:30px; max-height:30px; padding: 0 0 0 10px" /></a>
                                     </p>
                                     <a href="#">www.pagina-web.com</a>
                                 </td>
-                            </tr>
+                            </tr> --}}
                         </table>
                     </td>
                 </tr>

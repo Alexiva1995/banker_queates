@@ -83,6 +83,15 @@
             text-align: left;
         }
 
+        .texCustomDeg {
+            color: #07B0F2 !important;
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 27px;
+            letter-spacing: 0em;
+            text-align: left;
+        }
+
 
         .container-custom {
             padding-right: 0px !important;
@@ -287,6 +296,8 @@
                 </div>
                 <div class="row match-height">
                     @include('dashboard.components.referralsCard')
+                </div>
+                <div class="row match-height">
                     @include('dashboard.components.historyBonusTable')
                     @include('dashboard.components.gain-chart')
                 </div>
@@ -461,6 +472,7 @@
         packageRadialChart.render();
 
         $(document).ready(() => {
+            getDaysChart();
             getRadialPackageChartData();
             getBonusChartsData();
             getProfitsData();
@@ -470,9 +482,11 @@
         });
 
         function getDaysChart() {
+            let url = "{!! route('get.days.chart', 'replace_this') !!}";
+            url = url.replace('replace_this', user_id);
             $.ajax({
-                url: 'api/days-chart',
-                type: 'POST',
+                url: url,
+                type: 'GET',
                 datatype: 'json',
                 success: (response) => {
                     let total_days = response[0];
@@ -480,7 +494,7 @@
                     let percentage = (days_remaining / total_days) * 100;
                     let color_chart;
                     if (percentage > 50) {
-                        color_chart = "#14c061";
+                        color_chart = "#04D99D";
                     } else if (percentage <= 50 && percentage > 25) {
                         color_chart = "rgb(241, 145, 0)";
                     } else if (percentage <= 25) {

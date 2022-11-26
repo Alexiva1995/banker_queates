@@ -6,7 +6,7 @@ function Guardar_configuracion(){
         hora_inicial: document.getElementById('hora_inicial').value,
         hora_final: document.getElementById('hora_final').value,
         fee_valor: document.getElementById('fee_valor').value,
-        transferencias_entre_users: document.getElementById('transferencias_entre_users').value,
+   //     transferencias_entre_users: document.getElementById('transferencias_entre_users').value,
     })
     .then(function (response) {
         if(response.data.value == 1){

@@ -87,12 +87,16 @@ class RegisterController extends Controller
         // dd(intval($request['buyer_id']));
         $this->Validator($request);
         $binary_side = 'R';
+        if($request->has('binary')) {
+            $binary_side = $request['binary'];
+        }
+        
         $binary_id = 1;
         if (isset($request->buyer_id)) {
             $userR = User::findOrFail($request['buyer_id']);
-            $binary_id = $this->treController->getPosition(intval($request['buyer_id']),$request['binary'], $request['binary']);
 
-            $binary_side = $request['binary'];
+            $binary_id = $this->treController->getPosition(intval($request['buyer_id']),$binary_side, $binary_side);
+
         }
 
         //$this->validate($request, ['recaptcha_token' => ['required', new   ReCaptchaRule($request->recaptcha_token)]]);
