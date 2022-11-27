@@ -27,10 +27,11 @@ function animacion(id,accion){
 }
 
 function procesar(id,accion){
+
     axios.post('{{route("liquidacion.process")}}', {
         accion: accion,
         liquidacion_id: id,
-        HASH_transaccion:document.getElementById(`HASH_transaccion`).value,
+        HASH_transaccion: document.getElementById(`hash_transaction${id}`).value
   })
   .then(function (response) {
     if(response.data.value == 'liquidacion_regresada'){

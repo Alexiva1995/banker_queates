@@ -203,7 +203,7 @@ class LiquidactionController extends Controller
                 return response()->json(['value' =>  $data]);
             } else {
                 $data = 'sin_hash';
-                return response()->json(['value' =>  $data]);
+                return response()->json(['value' =>  $data, 'hash' => $HASH]);
             }
         } else {
 

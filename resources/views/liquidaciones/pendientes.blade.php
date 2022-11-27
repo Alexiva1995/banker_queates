@@ -79,7 +79,7 @@
                             @endif
                           </td>
                         <td>
-                            <button class="btn btn-primary mr-2" data-bs-toggle="modal" data-bs-target="#aprobarModal{{$liquidacion->id}} {{$liquidacion->status == '2' ? 'disabled' : null}}">Aprobar</button>
+                            <button class="btn btn-primary mr-2" data-bs-toggle="modal" data-bs-target="#aprobarModal{{$liquidacion->id}}"  {{$liquidacion->status == '2' ? 'disabled' : null}}>Aprobar</button>
                             <button class="btn btn-secondary"  data-bs-toggle="modal" data-bs-target="#regresarModal{{$liquidacion->id}}" {{$liquidacion->status == '2' ? 'disabled' : null}}>Rechazar</button>
                         </td>
                       </tr>
