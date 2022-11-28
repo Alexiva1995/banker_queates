@@ -8,10 +8,9 @@
 @endsection
 
 @section('content')
-<div id="bg">
-    <img src="{{asset('images/auth/fondo-auth.png')}}"/>
-</div>
-<div class="auth-wrapper auth-v1 px-2">
+
+<!-- la clase bg1 se encuentra en el archivo _variables.scss-->
+<div class="auth-wrapper auth-v1 px-2 bg1">
   <div class="auth-inner py-2">
     <style>
        .dark-layout .input-group:focus-within .form-control, .dark-layout .input-group:focus-within .input-group-text, .dark-layout input:-webkit-autofill{
@@ -77,23 +76,6 @@
           </div>
       </div>  
 </div>
-<style>
- #bg {
-    background-image: url('{{('/images/login/bg-login7k.png')}}');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: fixed;
-    right: 0;
-    width: auto;
-    height: auto;
-    z-index: -10;
-    min-width: 100%;
-    min-height: 100%;
-    visibility: visible;
-  }
-
-</style>
 <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
   $("#boton01").click(function() {
