@@ -138,6 +138,7 @@
             code: document.getElementById('code').value,
             Monto_a_retirar: document.getElementById('Monto_a_retirar').value,
             wallet: document.getElementById('wallet').value,
+            pin: document.getElementById('pin').value
         })
         .then( res => {
 

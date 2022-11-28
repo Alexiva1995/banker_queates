@@ -127,7 +127,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function investment()
     {
-        return $this->belongsTo(Investment::class,'id', 'user_id');
+        return $this->belongsTo(Investment::class, 'id', 'user_id');
     }
 
     public function ordenes()
@@ -221,7 +221,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $investment = Investment::where('user_id', $this->id)->where('status', 1)->first();
 
-        if($investment) return true;
+        if ($investment) return true;
 
         return false;
     }
@@ -423,7 +423,7 @@ class User extends Authenticatable implements MustVerifyEmail
     function bonoIndirecto()
     {
 
-        $bonoIndirecto = WalletComission::where([['user_id', '=', Auth::id()],['type', '=', 6]])->sum('amount');
+        $bonoIndirecto = WalletComission::where([['user_id', '=', Auth::id()], ['type', '=', 6]])->sum('amount');
 
         return $bonoIndirecto;
     }
@@ -431,7 +431,7 @@ class User extends Authenticatable implements MustVerifyEmail
     function bonoRecompra()
     {
 
-        $bonoRecompra= WalletComission::where([['user_id', '=', Auth::id()],['type', '=', 1]])->sum('amount');
+        $bonoRecompra = WalletComission::where([['user_id', '=', Auth::id()], ['type', '=', 1]])->sum('amount');
 
         return $bonoRecompra;
     }
@@ -439,54 +439,54 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function bonoInicio()
     {
-        $bonoInicio = WalletComission::where([['user_id', '=', Auth::id()],['type', '=', 0]])->sum('amount');
+        $bonoInicio = WalletComission::where([['user_id', '=', Auth::id()], ['type', '=', 0]])->sum('amount');
 
         return $bonoInicio;
     }
 
     public function Activacion()
     {
-        $bonoRecompra = WalletComission::where([['user_id', '=', Auth::id()],['type', '=', 1]])->sum('amount');
+        $bonoRecompra = WalletComission::where([['user_id', '=', Auth::id()], ['type', '=', 1]])->sum('amount');
 
         return $bonoRecompra;
     }
 
     public function cartera()
     {
-        $bonoCartera = WalletComission::where([['user_id', '=', Auth::id()],['type', '=', 2]])->sum('amount');
+        $bonoCartera = WalletComission::where([['user_id', '=', Auth::id()], ['type', '=', 2]])->sum('amount');
 
         return $bonoCartera;
     }
     public function rendimiento()
     {
-        $Rendimiento = WalletComission::where([['user_id', '=', Auth::id()],['type', '=', 5]])->sum('amount');
+        $Rendimiento = WalletComission::where([['user_id', '=', Auth::id()], ['type', '=', 5]])->sum('amount');
 
         return $Rendimiento;
     }
     public function rendimientolist()
     {
-        $list = WalletComission::where([['user_id', '=', Auth::id()],['type', '=', 5]])->get();
+        $list = WalletComission::where([['user_id', '=', Auth::id()], ['type', '=', 5]])->get();
 
         return $list;
     }
 
     public function disponible()
     {
-        $disponible = WalletComission::where([['user_id', '=', Auth::id()],['tipo_transaction', '=', 0], ['type', '!=', 5]])->sum('amount');
+        $disponible = WalletComission::where([['user_id', '=', Auth::id()], ['tipo_transaction', '=', 0], ['type', '!=', 5]])->sum('amount');
 
         return $disponible;
     }
 
     public function disponiblelist()
     {
-        $disponible = WalletComission::where([['user_id', '=', Auth::id()],['tipo_transaction', '=', 0], ['type', '!=', 5]])->get();
+        $disponible = WalletComission::where([['user_id', '=', Auth::id()], ['tipo_transaction', '=', 0], ['type', '!=', 5]])->get();
 
         return $disponible;
     }
 
     public function WalletTotal()
     {
-        $WalletTotal = WalletComission::where([['user_id', '=', Auth::id()],['tipo_transaction', '=', 0], ['type', '!=', 5],['status', '=', 0]])->get();
+        $WalletTotal = WalletComission::where([['user_id', '=', Auth::id()], ['tipo_transaction', '=', 0], ['type', '!=', 5], ['status', '=', 0]])->get();
 
         return $WalletTotal;
     }
@@ -494,7 +494,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function totalIngresos()
     {
-        $totalIngresos = WalletComission::where([['user_id', '=', Auth::id()],['status', '=', 0], ['type', '!=', 5]])->sum('amount');
+        $totalIngresos = WalletComission::where([['user_id', '=', Auth::id()], ['status', '=', 0], ['type', '!=', 5]])->sum('amount');
 
         return $totalIngresos;
     }
@@ -505,14 +505,27 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(Range::class);
     }
 
+    public function pin()
+    {
+        return $this->hasOne(Pin::class);
+    }
+
+
     public function decryptWallet()
     {
         return Crypt::decryptString($this->wallet->address);
     }
 
+    public function decryptPin()
+    {
+        return Crypt::decryptString($this->pin->pin);
+    }
+
+
+
     public function decryptSeccurityCode()
     {
-        if( $this->code_security ) {
+        if ($this->code_security) {
             return Crypt::decryptString($this->code_security);
         }
         return null;
@@ -522,7 +535,8 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(WalletLog::class, 'user_id');
     }
-    public function withdrawalErrors(){
+    public function withdrawalErrors()
+    {
         return $this->hasMany(WithdrawalErrors::class, 'user_id');
     }
 
@@ -547,7 +561,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->wallets->where('type', 0)->where('status', 0)->sum('amount');
     }
 
-     /**
+    /**
      * Obtiene las wallets del tipo comission con status 0
      * @return double el monto acumulado de sus wallets
      */
@@ -579,8 +593,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getActivePackages()
     {
         $user_packages = new Collection();
-        foreach($this->investments as $investment)
-        {
+        foreach ($this->investments as $investment) {
             $package = new stdClass;
             $package->name = $investment->licensePackage->name;
             $package->amount = $investment->licensePackage->amount;
@@ -588,7 +601,7 @@ class User extends Authenticatable implements MustVerifyEmail
             $package->investment_id = $investment->id;
             $user_packages->push($package);
         }
-      return $user_packages = $user_packages->sortBy('id');
+        return $user_packages = $user_packages->sortBy('id');
     }
 
     public function wallet()

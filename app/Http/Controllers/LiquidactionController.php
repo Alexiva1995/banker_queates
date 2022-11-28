@@ -70,9 +70,16 @@ class LiquidactionController extends Controller
         $time_start = Carbon::createFromFormat('H:i:s', $config->time_start)->toTimeString();
         $time_end = Carbon::createFromFormat('H:i:s', $config->time_end)->toTimeString();
 
-        // Valida si el dia actual esta dentro de los dias condigurados para poder realizar retiros
-        if (!($date->dayOfWeek  == $config->day_start || $date->dayOfWeek  == $config->day_end)) {
-            return redirect()->back()->with('warning', 'La solicitud de retiro solo puede realizarse los días ' . $config->getFirtsDayOfWeek() . ' y ' . $config->getLastDayOfWeek() . '.');
+        // Valida si el dia actual esta dentro de los dias condigurados para poder realizar retiros, pero cubriendo el caso especial en que es domingo
+
+        if ($date->dayOfWeek == 0) {
+            if (!($config->day_start == 7 || $config->day_end == 7)) {
+                return redirect()->back()->with('warning', 'La solicitud de retiro solo puede realizarse los días ' . $config->getFirtsDayOfWeek() . ' y ' . $config->getLastDayOfWeek() . '.');
+            }
+        } else {
+            if (!($date->dayOfWeek  == $config->day_start || $date->dayOfWeek  == $config->day_end)) {
+                return redirect()->back()->with('warning', 'La solicitud de retiro solo puede realizarse los días ' . $config->getFirtsDayOfWeek() . ' y ' . $config->getLastDayOfWeek() . '.');
+            }
         }
 
         // Valida si la hora actual se encuentra entre el rango permitido para realizar retiros
@@ -577,6 +584,12 @@ class LiquidactionController extends Controller
         // Validamos si id del usuario y el código ingresado coincide con el guardado en la tabla de respaldo
         if ($this->validateSeccurityCode($user, $code)) {
             $response = ['status' => 'error', 'message' => 'El código de seguridad ingresado no coincide'];
+            return response()->json($response, 200);
+        }
+
+        // Validamos si el PIN de seguridad ingresado coincide con el guardado en el registro de la tabla PIN perteneciente a ese usuario
+        if ($request->pin !== $user->decryptPin()) {
+            $response = ['status' => 'error', 'message' => 'El PIN de seguridad ingresado no coincide'];
             return response()->json($response, 200);
         }
 
