@@ -470,12 +470,12 @@ class LiquidactionController extends Controller
 
             //vista licencias
             $licencias  = WalletComission::where([['user_id', $user->id], ['type', 1]])->get();
-            $licenciasTotal = $licencias->sum('amount_available');
+            $licenciasTotal = $licencias->sum('amount');
             $licenciasAvailable = $licencias->where('status', 0)->sum('amount_available');
 
             //vista general
             $general =  WalletComission::where('user_id', $user->id)->get();
-            $generalTotal = $general->sum('amount_available');
+            $generalTotal = $general->sum('amount');
             $generalAvailable =  $general->where('status', 0)->sum('amount_available');
 
             $balancEdition = Liquidation::where('user_id', $user->id)->get();
@@ -485,7 +485,7 @@ class LiquidactionController extends Controller
             //vista mlm
 
             $mlm =  WalletComission::where([['user_id', $user->id], ['type', 0]])->get();
-            $mlmTotal = $mlm->sum('amount_available');
+            $mlmTotal = $mlm->sum('amount');
             $mlmAvailable =  $mlm->where('status', 0)->sum('amount_available');
 
             $daysRemaining = 0;

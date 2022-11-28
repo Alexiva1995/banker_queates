@@ -70,11 +70,15 @@
                                                 <td> {{ number_format($licen->amount, 2) }}</td>
                                                 <td>
                                                     @if ($licen->status == '0')
-                                                        <span class="badge bg-warning">En Espera</span>
+                                                        <span class="badge bg-info">Disponible</span>
                                                     @elseif($licen->status == '1')
-                                                        <span class="badge bg-success">Completada</span>
+                                                        <span class="badge bg-warning">Solicitada</span>
                                                     @elseif($licen->status == '2')
-                                                        <span class="badge bg-danger">Rechazada</span>
+                                                        <span class="badge bg-success">Pagado</span>
+                                                    @elseif($licen->status == '3')
+                                                        <span class="badge bg-danger">Anulada</span>
+                                                    @elseif($licen->status == '4')
+                                                        <span class="badge bg-danger">Sustraida</span>
                                                     @endif
                                                 </td>
                                                 <td class="d-none d-sm-table-cell">
