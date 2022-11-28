@@ -5,7 +5,6 @@
                 <div class="card p-2 entrada-bloc">
                     <div class="avatar bg-light-primary avatar-md me-auto mb-1" style="padding: 0.3rem !important">
                         <div class="avatar-content">
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M16 18H2C0.89543 18 0 17.1046 0 16V2C0 0.89543 0.89543 0 2 0H16C17.1046 0 18 0.89543 18 2V16C18 17.1046 17.1046 18 16 18ZM2 2V16H16V2H2ZM14 14H12V7H14V14ZM10 14H8V4H10V14ZM6 14H4V9H6V14Z"
                                     fill="#04D99D" />
@@ -49,15 +48,10 @@
                 </div>
             </div>
             <div class="col-sm-3">
-                <div class="card p-2 entrada-bloc ">
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#modalWallet" class="btn btn-gradient-primary float-end ms-1 mb-2" style="width: 89%;"><span style="font-size: 1.1rem; font-weight: 600;">{{ auth()->user()->wallet != null ? 'Cambiar Wallet' : 'Enlazar Wallet'}}</span></button>
-                    <div class="texto">
-                        <div class="col-sm-12">
-                            <div class="row justify-content-center" style="margin-bottom:3.6%;">
-                                <a href="{{route('solicitudesRetiros')}}" class="btn btn-primary float-end" style=" width: 83%">Solicitar Retiro</a>
-                            </div>
-                        </div>
-                    </div>
+                <div class="p-2 entrada-bloc ">
+                     <a href="{{route('solicitudesRetiros')}}" class="btn btn-primary float-end" style=" width: 83% ;margin-bottom:3.6%;">Solicitar Retiro</a>
+                    <a type="button" data-bs-toggle="modal" data-bs-target="#modalWallet" class="btn btn-gradient-primary float-end ms-1 mb-2" style="width: 83%;"><span style="font-size: 1.1rem; font-weight: 600;">{{ auth()->user()->wallet != null ? 'Cambiar Wallet' : 'Enlazar Wallet'}}</span></a>
+
                 </div>
             </div>
         </div>
@@ -144,7 +138,11 @@
                             <tbody>
                                 @foreach ( $balancEdition  as $gen)
                                      <tr class="text-center">
-                                        <td> {{ $gen->description }}</td>
+                                        @if ($gen->type != 3)
+                                            <td> Retiro </td>
+                                        @else
+                                            <td> {{ $gen->description }}</td>
+                                        @endif
                                         <td> {{ number_format($gen->amount, 2) }}</td>
                                         <td>
                                             @if ($gen->status == '0')
