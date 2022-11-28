@@ -71,7 +71,7 @@
                                     <p>Dias restantes: </p>
                                     <h2 class="fw-600 mb-75 text-center">
                                         <p class="text-warning fw-bold">
-                                            {{ $inversion->updated_at->diffInDays($inversion->expiration_date) }}</p>
+                                            {{ now()->diffInDays($inversion->expiration_date) }}</p>
                                     </h2><br>
                                     <p>Fecha Activación: {{ $inversion->updated_at->format('Y-m-d') }}</p>
                                     <p>Fecha Vencimiento: {{ $inversion->expiration_date }}</p>

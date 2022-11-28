@@ -81,9 +81,27 @@ class DashboardController extends Controller
       //criptobar
       $cryptos = $this->minApiService->get10Cryptos();
 
-      return view('dashboard.user', ['pageConfigs' => $pageConfigs], compact('user', 'cryptos', 'investments', 'indirect_referrals', 'total_referrals', 'total_available','daysRemaining', 'user_packages'));
+      return view('dashboard.user', ['pageConfigs' => $pageConfigs], compact('user', 'cryptos', 'investments', 'indirect_referrals', 'total_referrals', 'total_available', 'user_packages'));
     }
   }
+
+  // Dashboard user - para grafico de dias faltantes
+  public function getDaysChart($user_id){
+
+    $user = User::findOrFail($user_id);
+    
+    $investments = Investment::where('user_id', $user_id)->with('licensePackage')->get();
+
+    $date2 = Carbon::parse($user->investment->created_at);
+    $date1 = Carbon::parse($user->investment->expiration_date);
+
+    $total_days = $date2->diffInDays($date1->format('Y-m-d'));
+    $daysRemaining = $date1->diffInDays(today()->format('Y-m-d') ); 
+
+    $data = [$total_days, $daysRemaining];
+
+    return $data;
+}
 
   // Dashboard - Analyticspwalle
   public function dashboardAnalytics()

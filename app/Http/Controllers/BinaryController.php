@@ -124,6 +124,7 @@ class BinaryController extends Controller
                 'level' => 0,
                 'user_id' => $id,
                 'amount' => $bonus_t,
+                'amount_available' => $bonus_t,
                 'buyer_id' => $user_referred->buyer_id,
                 'description' => "Puntos que se utilizaron para generar el bono {$points}"
             ]);

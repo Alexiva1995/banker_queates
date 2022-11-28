@@ -28,7 +28,7 @@ Route::middleware('payment.processor')->group(function(){
 });
 
 Route::post('/rent-chart', [DashboardController::class, 'getRentChart'])->name('get.rent.chart');
-Route::post('/days-chart', [DashboardController::class, 'getDaysChart'])->name('get.days.chart');
+Route::get('/days-chart/{user_id?}', [DashboardController::class, 'getDaysChart'])->name('get.days.chart');
 Route::post('/data-ranges-charts', [DashboardController::class, 'getDataRangesCharts'])->name('get.data.ranges.charts');
 //Gráficos para el dashboard del admin
 Route::get('/data-sales-chart', [ChartsController::class, 'salesChartData'])->name('get.sales.chart.data');

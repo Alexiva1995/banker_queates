@@ -83,9 +83,20 @@ class RegisterController extends Controller
      */
     protected function create(Request $request)
     {   
-        // return $request;
-        // dd(intval($request['buyer_id']));
-        $this->Validator($request);
+        $request->validate(
+            [
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|confirmed|unique:users',
+                'username' => 'required|string|max:10|alpha_dash|unique:users,username',
+                'password' => 'required|string|min:8|confirmed',
+                'countrie_id' => 'required',
+                'buyer_id' => 'nullable|exists:users,id',
+            ],
+            [
+                'buyer_id.exists' => 'El usuario referido no existe.',
+            ]
+        );
+        
         $binary_side = 'R';
         if($request->has('binary')) {
             $binary_side = $request['binary'];

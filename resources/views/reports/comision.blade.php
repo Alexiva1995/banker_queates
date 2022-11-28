@@ -47,7 +47,7 @@
                                             <th class="fw-600">ID del <br/>Referido</th>
                                         @endif
                                         <th class="fw-600">Monto</th>
-                                        <th class="fw-600">Orden</th>
+                                        <th class="fw-600">Comision</th>
                                         <th class="fw-600">Estado</th>
                                         <th class="fw-600">Tipo</th>
                                         <th class="fw-600">Fecha</th>
@@ -61,14 +61,10 @@
                                             <td class="text-center">{{$wallet->user->name}}</td>
                                             <td class="text-center">{{$wallet->user->id}}</td>
                                         @endif
-                                        <td class="fw-300 text-center">{{$wallet->buyer->name}}</td>
-                                        <td class="fw-300 text-center">{{$wallet->buyer->id}}</td>
+                                        <td class="fw-300 text-center">{{$wallet->buyer->name ?? '--'}}</td>
+                                        <td class="fw-300 text-center">{{$wallet->buyer->id ?? '--'}}</td>
                                         <td class="fw-300 text-end">{{number_format($wallet->amount,2)}}</td>
-                                        @if($wallet->investment_id != null)
-                                            <td class="fw-300 text-center">{{$wallet->investment->order->id}}</td>
-                                        @else
-                                            <td class="fw-300 text-center">No Disponible</td>
-                                        @endif
+                                        <td class="fw-300 text-end">{{number_format($wallet->amount - $wallet->amount_available,2)}}</td>
                                         @if ($wallet->status == 0)
                                             <td class="fw-300 text-center"> <a class=" btn bg-light-info  fw-300 p-75">Disponible</a></td>
                                         @elseif($wallet->status == 1)
@@ -81,17 +77,14 @@
                                         <td class="fw-300 text-center">
                                             @switch($wallet->type)
                                                 @case( 0 )
-                                                    PAMM
+                                                    MLM PAMM
                                                     @break
                                                 @case( 1 )
-                                                    Rango
+                                                    Binario
                                                     @break
                                                 @default
                                                 @case( 2 )
-                                                    Licencia
-                                                    @break
-                                                @case( '3' )
-                                                    Retiro
+                                                    Asignado
                                                     @break
                                             @endswitch
                                         </td>
