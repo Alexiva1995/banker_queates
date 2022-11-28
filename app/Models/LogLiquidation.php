@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class LogLiquidation extends Model
 {
     use HasFactory;
-    protected $fillable = ['liquidation_id', 'comentario', 'accion'];
+    protected $fillable = ['liquidation_id', 'email'];
 
     public function liquidation()
     {

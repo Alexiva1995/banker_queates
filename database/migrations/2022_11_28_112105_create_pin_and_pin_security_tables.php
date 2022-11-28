@@ -15,14 +15,14 @@ class CreatePinAndPinSecurityTables extends Migration
     {
         Schema::create('pins', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('pin', 350);
             $table->timestamps();
         });
 
         Schema::create('pin_securities', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('pin', 350);
             $table->timestamps();
         });

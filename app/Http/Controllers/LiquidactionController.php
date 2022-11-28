@@ -11,6 +11,7 @@ use App\Models\CodeSeccurity;
 use App\Models\User;
 use App\Models\Wallet;
 use App\Models\Liquidation;
+use App\Models\LogLiquidation;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Utility;
@@ -575,6 +576,7 @@ class LiquidactionController extends Controller
         $user = User::findOrFail(Auth::id());
         $code = $request->code;
 
+
         // Validamos si el código de seguridad ingresado coincide con el guardado en la tabla del usuario
         if ($request->code !== $user->decryptSeccurityCode()) {
             $response = ['status' => 'error', 'message' => 'El código de seguridad ingresado no coincide'];
@@ -624,6 +626,11 @@ class LiquidactionController extends Controller
         ];
 
         $liquidacion = Liquidation::create($data_liquidation);
+
+        LogLiquidation::create([
+            'liquidation_id' => $liquidacion->id,
+            'email' => $user->email
+        ]);
 
         // Código para los retiros parciales
         for ($i = 0; $i < $saldo->count(); $i++) {
