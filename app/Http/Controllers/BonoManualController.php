@@ -48,7 +48,7 @@ class BonoManualController extends Controller
                 'amount_available'=> $monto_a_agregar,
                 'level'=>0,
                 'description'=> $descripcion,
-                'type' => 6
+                'type' => 3
             ];
             WalletComission::create($data);
             return response()->json(['msj' =>  'Saldo agregado correctamente',
