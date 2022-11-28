@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Orden_pamm;
+use App\Models\OrdenPamm;
 use App\Models\User;
 use App\Models\WalletComission;
 use Illuminate\Console\Command;
@@ -41,7 +41,7 @@ class bonosPamm extends Command
      */
     public function handle()
     {
-        $ordenes_pamm = Orden_pamm::where('status', '0')->get();
+        $ordenes_pamm = OrdenPamm::where('status', '0')->get();
 
         foreach($ordenes_pamm as $pam){
             
