@@ -42,5 +42,4 @@ Route::group(['prefix' => 'inversion'], function () {
     Route::post('/solicitar', [InversionController::class, 'solicitar'])->name('inversion.solicitar');
     Route::post('/cancelar', [InversionController::class, 'cancelar'])->name('solicitud.cancelar');
 });
-//User Create Api
-Route::post('v1/customer', [UserController::class, 'userCreateApi'])->name('userCreate.api');
+
