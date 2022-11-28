@@ -11,7 +11,7 @@
         </div>
         <div class="texto">
             <!-- wallets_commissions tipo 5 -->
-            <h3 class="fw-700 mb-25">USD {{ number_format($user->rendimiento(), 2, ',', '.') }}</h3>
+            <h3 class="fw-700 mb-25">USDT {{ number_format($user->rendimiento(), 2, ',', '.') }}</h3>
             <p class="font-medium-2 mb-0">MLM PAMM</p>
         </div>
     </div>
