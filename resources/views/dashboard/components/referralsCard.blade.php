@@ -1,7 +1,7 @@
 <div class="col-sm-4">
     <div class="card p-2">
         <div class="card-body p-0">
-            <i class="inconDashboar" data-feather='users'></i>
+            <!--<i class="inconDashboar" data-feather='users'></i>-->
             <div class="row">
                 <p class="fw-500">Afiliados</p>
 
