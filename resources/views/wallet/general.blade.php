@@ -15,7 +15,7 @@
 
                     <div class="texto" style="padding-left: 3%">
                         @if ($generalTotal > 0)
-                            <span style="font-weight:600; font-size: 21px ">USDT  <span class="text-success">{{ number_format($generalTotal, 2, ',', ' ');  }} </span></span>
+                            <span style="font-weight:900; font-size: 21px ">USDT  <span class="text-success">{{ number_format($generalTotal, 2, ',', ' ');  }} </span></span>
                         @else
                             <span style="font-weight:900; font-size: 21px">USDT 0 </span>
                         @endif
