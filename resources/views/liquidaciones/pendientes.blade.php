@@ -85,6 +85,9 @@
                       </tr>
                       @include('liquidaciones.components.Modals.regresar')
                       @include('liquidaciones.components.Modals.aprobar')
+                      <script>
+                        $("#aprobarModal{{$liquidacion->id}}").appendTo("body").modal('show');
+                      </script>
                       @endforeach
                       @endif
                     </tbody>
@@ -99,6 +102,7 @@
 
   <!--/ Line Chart Card -->
 </section>
+
 <!--/ Statistics Card section-->
 
 
