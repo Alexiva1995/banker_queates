@@ -10,9 +10,9 @@
         @elseif($base['range_id'] == null && !empty($base->licence))
             <img src="{{ asset('images/ensignLicences/' . $base['range_id'] . '.png') }}"
             height="80" width="70"
-            class="rounded-circle"  style="margin-top: -2px" alt="{{$data['range_id']}}">
+            class="rounded-circle-add"  style="margin-top: -2px" alt="{{$data['range_id']}}">
         @elseif ( ($data["range_id"] == null) && (empty($data->investment->package_id)) )
-            <img src="{{ asset('images/ensignRanges/0.png') }}" height="80" width="70"
+            <img src="{{ asset('images/ensignRanges/0.jpg') }}" height="80" width="70"
             class="rounded-circle-add"  style="margin-top: -2px" alt="{{ $data->name }}"
             title="{{ $data->name }}">
         @endif

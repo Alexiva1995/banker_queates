@@ -150,8 +150,8 @@
                                                 height="110" width="110" class="align-self-center mr-1 di"
                                                 alt="{{ $base['range_id'] }}">
                                         @elseif ($base['range_id'] == null && empty($base->licence))
-                                            <img src="{{ asset('images/ensignRanges/0.png') }}" height="110"
-                                                width="110" class="" style="margin-top: -4px"
+                                            <img src="{{ asset('images/ensignRanges/0.jpg') }}" height="110"
+                                                width="110" class="mt-1" style="margin-top: -4px"
                                                 alt="{{ $base->name }}" title="{{ $base->name }}">
                                         @endif
                                         <div class="media-body">
