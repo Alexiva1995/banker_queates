@@ -93,10 +93,10 @@ class RegisterController extends Controller
                 'buyer_id' => 'nullable|exists:users,id',
             ],
             [
+                'countrie_id.required' => 'El pais es requerido',
                 'buyer_id.exists' => 'El usuario referido no existe.',
             ]
         );
-        
         $binary_side = 'R';
         if($request->has('binary')) {
             $binary_side = $request['binary'];
@@ -107,7 +107,6 @@ class RegisterController extends Controller
             $userR = User::findOrFail($request['buyer_id']);
 
             $binary_id = $this->treController->getPosition(intval($request['buyer_id']),$binary_side, $binary_side);
-
         }
 
         //$this->validate($request, ['recaptcha_token' => ['required', new   ReCaptchaRule($request->recaptcha_token)]]);

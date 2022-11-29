@@ -5,7 +5,7 @@
             <h4 class="texCustomDeg fw-700">Elige tu lado Binario</h4>
             <div class="mt-2 align-items-center">
                 <input class="form-check-input" type="hidden" name="binary" id="binary"
-                value="I">
+                value="L">
                 <div class="d-flex">
                     <div class="me-auto bd-highlight">
                         <input class="form-check-input" type="radio" name="flexRadioDefault"
@@ -14,7 +14,7 @@
                     </div>
                     <div class="mt- bd-highlight" style="padding-right: 25%">
                         <input class="form-check-input" type="radio" name="flexRadioDefault"
-                            id="D" value="D" onclick="derecho()">
+                            id="D" value="R" onclick="derecho()">
                         <label class="form-check-label" for="flexRadioDefault1">Derecha</label>
                     </div>
                 </div>
