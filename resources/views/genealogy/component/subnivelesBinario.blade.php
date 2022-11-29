@@ -7,11 +7,11 @@
         @if( ($data["range_id"] != null) )
             <img src="{{ asset('images/ensignRanges/'.$data['range_id'].'.png') }}" height="80" width="70"
             class="rounded-circle"  style="margin-top: -2px" alt="{{$data['range_id']}}">
-        @elseif($data['range_id'] == null && !empty($data->licence))
+        @elseif($data['range_id'] == null && $data->hasActiveLicense())
             <img src="{{ asset('images/ensignRanges/' . $data->investment->package_id . '.png') }}"
             height="80" width="70"
             class="rounded-circle"  style="margin-top: -2px" alt="{{$data['range_id']}}">
-        @elseif ( ($data["range_id"] == null) && (empty($data->investment->package_id)) )
+        @elseif ( ($data["range_id"] == null) && !$data->hasActiveLicense() )
             <img src="{{ asset('images/ensignRanges/0.jpg') }}" height="80" width="70"
             class="rounded-circle" style="margin-top: -2px" alt="{{$data['range_id']}}">
         @endif
