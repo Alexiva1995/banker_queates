@@ -16,7 +16,7 @@ class CreateLogLiquidationsTable extends Migration
         Schema::create('log_liquidations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreignId('liquidation_id')->constrained('liquidations')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('email');
+            $table->string('email', 250)->comment('ID + email');
             $table->timestamps();
         });
     }
