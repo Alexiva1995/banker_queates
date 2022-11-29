@@ -22,9 +22,8 @@ class BinaryController extends Controller
             $id = $item->user_id;
             $usuario = User::findOrFail($id);
             // Valida si el referido tiene un hijo directo por cada lado 
-            $padre_id = $usuario->padre->id;
-            $referred_left = User::where('binary_id', $padre_id)->where('binary_side', 'L')->exists();
-            $referred_right = User::where('binary_id', $padre_id)->where('binary_side', 'R')->exists();
+            $referred_left = User::where('binary_id', $usuario->id)->where('binary_side', 'L')->exists();
+            $referred_right = User::where('binary_id', $usuario->id)->where('binary_side', 'R')->exists();
 
             if ($referred_left && $referred_right) {
 
