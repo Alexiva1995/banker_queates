@@ -7,8 +7,8 @@
         @if( ($data["range_id"] != null) )
             <img src="{{ asset('images/ensignRanges/'.$data['range_id'].'.png') }}" height="80" width="70"
             class="rounded-circle"  style="margin-top: -2px" alt="{{$data['range_id']}}">
-        @elseif($base['range_id'] == null && !empty($base->licence))
-            <img src="{{ asset('images/ensignLicences/' . $base['range_id'] . '.png') }}"
+        @elseif($data['range_id'] == null && !empty($data->licence))
+            <img src="{{ asset('images/ensignRanges/' . $data->investment->package_id . '.png') }}"
             height="80" width="70"
             class="rounded-circle"  style="margin-top: -2px" alt="{{$data['range_id']}}">
         @elseif ( ($data["range_id"] == null) && (empty($data->investment->package_id)) )
