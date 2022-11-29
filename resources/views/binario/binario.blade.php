@@ -50,10 +50,10 @@
         }
 
         /* .content-input:hover input[type=radio]:not(:checked)+span {
-                    background: #673DED;
-                    color: #fff;
-                    border-radius: 5px;
-                } */
+                        background: #673DED;
+                        color: #fff;
+                        border-radius: 5px;
+                    } */
 
         .level-content {
             gap: 1rem;
@@ -140,35 +140,30 @@
                             <li class="baseli p-0" style="overflow:scroll">
 
                                 {{-- usuario principal --}}
-                                @if ($base['range_id'] == null && empty($base->licence))
-                                    <img src="{{ asset('images/logo/icon-deg.png') }}" height="110" width="110"
-                                        class="" style="margin-top: -4px" alt="{{ $base->name }}"
-                                        title="{{ $base->name }}">
-                                    <h5 class="mt-0"> <b>{{ $base->name }}</b></h5>
-                                @else
-                                    
-                                        <div style="width:1000px; margin: 0 auto" >
-                                            @if ($base['range_id'] != null)
-                                                <img src="{{ asset('images/ensignRanges/' . $base['range_id'] . '.png') }}"
-                                                    height="110" width="110"
-                                                    class="align-self-center mr-1 di"
-                                                    alt="{{ $base['range_id'] }}">
-                                            @elseif($base['range_id'] == null && !empty($base->licence))
-                                                <img src="{{ asset('images/ensignLicences/' . $base['range_id'] . '.png') }}"
-                                                    height="110" width="110"
-                                                    class="align-self-center mr-1 di"
-                                                    alt="{{ $base['range_id'] }}">
-                                            @endif
-                                            <div class="media-body">
-                                                <h5 class="mt-0"> <b>{{ $base->name }}</b></h5>
+                                    <div style="width:1000px; margin: 0 auto">
+                                        @if ($base['range_id'] != null)
+                                            <img src="{{ asset('images/ensignRanges/' . $base['range_id'] . '.png') }}"
+                                                height="110" width="110" class="align-self-center mr-1 di"
+                                                alt="{{ $base['range_id'] }}">
+                                        @elseif($base['range_id'] == null && !empty($base->licence))
+                                            <img src="{{ asset('images/ensignLicences/' . $base['range_id'] . '.png') }}"
+                                                height="110" width="110" class="align-self-center mr-1 di"
+                                                alt="{{ $base['range_id'] }}">
+                                        @elseif ($base['range_id'] == null && empty($base->licence))
+                                            <img src="{{ asset('images/ensignRanges/0.jpg') }}" height="110"
+                                                width="110" class="mt-1" style="margin-top: -4px"
+                                                alt="{{ $base->name }}" title="{{ $base->name }}">
+                                        @endif
+                                        <div class="media-body">
+                                            <h5 class="mt-0"> <b>{{ $base->name }}</b></h5>
 
-                                                {{-- esto se debe quitar cuando ya esten las imagenes, solo es de prueba para saber que llegan los datos --}}
-                                                <!--<h5 class="mt-0"> <b>Licencia: </b></h5>-->
-                                                <!--<h5 class="mt-0"> <b>Rango: </b></h5>-->
-                                            </div>
+                                            {{-- esto se debe quitar cuando ya esten las imagenes, solo es de prueba para saber que llegan los datos --}}
+                                            <!--<h5 class="mt-0"> <b>Licencia: </b></h5>-->
+                                            <!--<h5 class="mt-0"> <b>Rango: </b></h5>-->
                                         </div>
-                                    
-                                @endif
+                                    </div>
+
+            
                                 {{-- Nivel 1 --}}
                                 <ul style="width: 1000px; margin: 0 auto;">
                                     @foreach ($trees as $child)

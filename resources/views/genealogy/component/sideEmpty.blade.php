@@ -7,8 +7,12 @@
 @endif--}}
 
 @if ($cant < 2)
-    <li class="va">
+    <li>
         <a>
+            <div class="media d-flex justify-content-center ">
+                <img src="{{ asset('images/ensignRanges/sin-referido.jpg') }}" height="80" width="70"
+                class="rounded-circle"  style="margin-top: -2px">
+            </div>
         </a>
     </li>
 @endif

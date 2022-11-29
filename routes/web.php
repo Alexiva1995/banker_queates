@@ -193,9 +193,8 @@ Route::middleware('auth')->group(function () {
             Route::post('/reactivacionSaldo', [TiendaController::class, 'reactivacionSaldo'])->name('reactivacionSaldo');
             Route::get('/getStatus', [TiendaController::class, 'getStatus'])->name('getStatus');
             Route::post('/transaction', [TiendaController::class, 'transaction'])->name('shop.transaction');
-            
-            Route::post('/make-purchase', [PaymentController::class, 'makePurchase'])->name('makePurchase');
 
+            Route::post('/make-purchase', [PaymentController::class, 'makePurchase'])->name('makePurchase');
         });
 
         Route::get('/ordenes', [ReportController::class, 'ordenes'])->name('ordenes.index');
@@ -297,6 +296,7 @@ Route::post('update', [UserController::class, 'update'])->name('profile.update')
 Route::post('contacto-update', [UserController::class, 'updateContacto'])->name('contacto.update');
 Route::post('wallet-update', [UserController::class, 'updateWallet'])->name('wallet.update');
 Route::post('contraseña-update', [UserController::class, 'passwordUpdate'])->name('contraseña.update');
+Route::post('pin-update', [UserController::class, 'pinUpdate'])->name('pin.update');
 Route::post('photo-update', [UserController::class, 'photoUpdate'])->name('photo.update');
 Route::post('photo/delete', [UserController::class, 'deletePhoto'])->name('photo.delete');
 Route::post('code-update', [UserController::class, 'CodeUpdate'])->name('code.update');

@@ -171,11 +171,16 @@ class TiendaController extends Controller
         $orden = Order::findOrFail($request->id);
         $orden->status = $request->status;
         $orden->save();
+        $range_points = 0;
+        $binary_points = 0;
         // Aqui se cambia el status de una inversion anterior a inactiva si se aprobo un upgrade
         if ($request->status == '1') {
 
             $investment = Investment::where('user_id', $orden->user->id)->where('status', '1')->first();
             if ($investment != null) {
+                
+                $range_points = $investment->licensePackage->leadership_points;
+                $binary_points = $investment->licensePackage->binary_points;
                 //Se crea la inversion al aprobarse la orden
                 $investment->order_id = $orden->id;
                 $investment->package_id = $orden->package_id;
@@ -221,9 +226,23 @@ class TiendaController extends Controller
             }
 
             // Genera los puntos binarios
-            app(BonusService::class)->assignPointsbinarioRecursively($orden->user, $orden->licensePackage->binary_points, $orden->id);
             // Genera los puntos por compra de licencias en linea multinivel
-            $this->pointsService->assignPointsRangeRecursively($orden->user, $orden->licensePackage->leadership_points, $orden);
+            // Si es un upgrade la cantidad a generar es la de la nueva licencia - la anterior
+            if ($investment != null) {
+                $range_points = $orden->licensePackage->leadership_points - $range_points;
+                $binary_points = $orden->licensePackage->binary_points - $binary_points;
+
+                $this->pointsService->assignPointsRangeRecursively($orden->user, $range_points, $orden);
+                
+                app(BonusService::class)->assignPointsbinarioRecursively($orden->user, $binary_points, $orden->id);
+
+            } else {
+
+                app(BonusService::class)->assignPointsbinarioRecursively($orden->user, $orden->licensePackage->binary_points, $orden->id);
+                
+                $this->pointsService->assignPointsRangeRecursively($orden->user, $orden->licensePackage->leadership_points, $orden);
+            }
+
         }
 
         return back()->with('success', 'Orden actualizada exitosamente');

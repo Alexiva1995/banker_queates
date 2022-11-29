@@ -17,6 +17,11 @@
                         <button class="btn input-group-btn btn-primary cursor-pointer border-end input-group-text border-top border-bottom" id="codeButton" onclick="getCode();">Obtener codigo</button>
                     </div>
                 </div>
+                <div class="input-group mb-2 shadow-none">
+                    <div class="input-group input-group-merge shadow-none">
+                        <input type="text" class="form-control form-control-merge" id="pin" name="pin" placeholder="Ingresa el PIN de seguridad"/>
+                    </div>
+                </div>
             </div>
 
             <div class="d-flex justify-content-center" id="contenedorspiner" hidden>

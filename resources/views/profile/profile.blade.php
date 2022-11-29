@@ -64,7 +64,13 @@
                     data-bs-toggle="tab" data-bs-target="#nav-password" type="button" role="tab"
                     aria-controls="nav-password" aria-selected="false"><i data-feather='lock'
                         class="mx-lg-2 mx-md-2 me-sm-2"></i>Cambiar
-                    contraseña</button>
+                    contraseña
+                </button>
+                <button class="nav-link justify-content-start text-start fw-400 rounded" id="nav-pin-tab"
+                    data-bs-toggle="tab" data-bs-target="#nav-pin" type="button" role="tab"
+                    aria-controls="nav-pin" aria-selected="false"><i data-feather='lock'
+                        class="mx-lg-2 mx-md-2 me-sm-2"></i>Configurar PIN de seguridad
+                </button>
                 @if (Auth::user()->admin != 1)
                     {{-- <button class="nav-link" id="nav-auth-tab" data-bs-toggle="tab" data-bs-target="#nav-auth" type="button" role="tab" aria-controls="nav-auth" aria-selected="false" style="padding-inline-end:10%;"><i data-feather='git-commit'></i>Configurar Authenticator</button> --}}
                 @endif
@@ -274,7 +280,7 @@
                                                         @enderror
                                                     </div>
                                                 </div>
-                                                
+
                                             </div>
 
                                             <div class="row" style="margin-top: 3%;">
@@ -324,6 +330,7 @@
                                 </div>
                             </div>
                             @include('profile.ui.password')
+                            @include('profile.ui.pin')
                             {{-- @include('profile.ui.authenticator') --}}
                             {{-- @include('profile.ui.kyc') --}}
                         </div>
@@ -376,6 +383,12 @@
 
         $('#countrie_id').select2();
 
+        function isNumberKey(evt){
+            var charCode = (evt.which) ? evt.which : evt.keyCode
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+            return true;
+        }
 
     </script>
 @endsection
