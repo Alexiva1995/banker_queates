@@ -143,7 +143,7 @@
                                         @else
                                             <td> {{ $gen->description }}</td>
                                         @endif
-                                        <td> {{ number_format($gen->amount, 2) }}</td>
+                                        <td> {{ number_format($gen->amount_gross, 2) }}</td>
                                         <td>
                                             @if ($gen->status == '0')
                                                 <span class="badge bg-info">En Espera</span>
