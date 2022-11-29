@@ -437,6 +437,13 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
 
+    public function bonoInicioAvailable()
+    {
+        $bonoInicio = WalletComission::where([['user_id', '=', Auth::id()], ['type', '=', 0]])->sum('amount_available');
+
+        return $bonoInicio;
+    }
+
     public function bonoInicio()
     {
         $bonoInicio = WalletComission::where([['user_id', '=', Auth::id()], ['type', '=', 0]])->sum('amount');
@@ -463,6 +470,14 @@ class User extends Authenticatable implements MustVerifyEmail
 
         return $Rendimiento;
     }
+
+    public function rendimientoAvailable()
+    {
+        $rendimiento = WalletComission::where([['user_id', '=', Auth::id()], ['type', '=', 5]])->sum('amount_available');
+
+        return $rendimiento;
+    }
+
     public function rendimientolist()
     {
         $list = WalletComission::where([['user_id', '=', Auth::id()], ['type', '=', 5]])->get();
