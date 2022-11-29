@@ -167,7 +167,7 @@
         .square-active {
             height: 120px;
             width: 120px;
-            background-color: #FAF9FF;
+            /*background-color: #FAF9FF;*/
             border-radius: 10px;
         }
 
@@ -175,7 +175,7 @@
             height: 106 !important;
             width: 87 !important;
             border-radius: 10px;
-            background-color: #886de0;
+            /*background-color: #886de0;*/
         }
 
         .square p,
