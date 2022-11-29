@@ -81,7 +81,7 @@
         <!--ROW 2 END-->
         <div class="modal-footer mt-1" style="border-top: none;">
           <button type="button" id="restaurar" class="btn border-danger " style="color: red;">Cancelar</button>
-          <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModalComision" id="continue-button"
+          <button type="button" data-bs-toggle="modal" data-bs-target="#{{$pin != null ? 'exampleModalComision' : 'configurePin' }}" id="continue-button"
             class="btn btn-primary ms-1" disabled>Continuar</button>
         </div>
       </div>
@@ -89,3 +89,4 @@
   </div>
 </div>
 @include('business.componentes.Modal.Retiros.retiroModal-comision')
+@include('business.componentes.Modal.Retiros.configurarPin')

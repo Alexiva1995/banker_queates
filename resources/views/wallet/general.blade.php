@@ -50,8 +50,8 @@
             </div>
             <div class="col-sm-3">
                 <div class="p-2 entrada-bloc ">
-                     <a href="{{route('solicitudesRetiros')}}" class="btn btn-primary float-end" style=" width: 83% ;margin-bottom:3.6%;">Solicitar Retiro</a>
-                    <a type="button" data-bs-toggle="modal" data-bs-target="#modalWallet" class="btn btn-gradient-primary float-end ms-1 mb-2" style="width: 83%;"><span style="font-size: 1.1rem; font-weight: 600;">{{ auth()->user()->wallet != null ? 'Cambiar Wallet' : 'Enlazar Wallet'}}</span></a>
+                     <a href="{{route('solicitudesRetiros')}}" class="btn btn-primary float-end w-100" style="margin-bottom:3.6%;">Solicitar Retiro</a>
+                    <a type="button" data-bs-toggle="modal" data-bs-target="#modalWallet" class="btn btn-gradient-primary float-end ms-1 mb-2 w-100"><span style="font-size: 1.1rem; font-weight: 600;">{{ auth()->user()->wallet != null ? 'Cambiar Wallet' : 'Enlazar Wallet'}}</span></a>
 
                 </div>
             </div>

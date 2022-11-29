@@ -99,8 +99,10 @@ class LiquidactionController extends Controller
 
         $fee = $config->percentage;
 
+        $pin = $user->pin;
+
         $withdrawalSettings = WithdrawalSetting::first();
-        return view('business.retiro', compact('balance', 'fee', 'withdrawalSettings'));
+        return view('business.retiro', compact('balance', 'fee', 'withdrawalSettings', 'pin'));
     }
 
     public function liquidationValidate()
@@ -629,7 +631,7 @@ class LiquidactionController extends Controller
 
         LogLiquidation::create([
             'liquidation_id' => $liquidacion->id,
-            'email' => $user->email
+            'email' => Crypt::encryptString($user->id . "-" . $user->email)
         ]);
 
         // Código para los retiros parciales

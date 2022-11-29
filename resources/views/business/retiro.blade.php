@@ -46,6 +46,13 @@
     .zoom:active {
         transform: scale(1);
     }
+
+    @media only screen and (max-width: 600px) {
+        .special {
+            margin: 0 auto;
+            width: 100%
+        }
+    }
 </style>
 @section('content')
     @include('business.componentes.Js.Js')
@@ -67,11 +74,11 @@
     <!-- Statistics card section -->
     <div class="container">
 
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item me-2 zoom" role="presentation">
-                <div class=" active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+        <ul class="nav nav-tabs" id="myTab" role="tablist" >
+            <li class="nav-item zoom special" role="presentation">
+                <div class="active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
                     role="tab" aria-controls="home" aria-selected="true">
-                    <div class="card p-1">
+                    <div class="card p-1 ">
                         <div class="avatar bg-light-primary avatar-md me-auto mb-1 custom-avatar-content p-50">
                             <div class="avatar-content">
                                 <svg width="21" height="18" viewBox="0 0 21 18" fill="none"
@@ -94,13 +101,13 @@
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                 @include('business.ui.componentes.tipos-retiros.comisiones.comisiones', [
-                    'withdrawalSettings' => $withdrawalSettings
+                    'withdrawalSettings' => $withdrawalSettings,
+                    'pin' => $pin
                 ])
             </div>
         </div>
 
     </div>
-
 
 
     <!--/ Statistics Card section-->
