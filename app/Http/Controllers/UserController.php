@@ -19,6 +19,8 @@ use Illuminate\Validation\Rule;
 use App\Mail\CodeEmail;
 use App\Mail\CodeSeccurity;
 use App\Models\Investment;
+use App\Models\Pin;
+use App\Models\PinSecurity;
 use App\Models\Wallet;
 use App\Models\WalletSeccurity;
 use PragmaRX\Google2FA\Google2FA;
@@ -193,6 +195,8 @@ class UserController extends Controller
             'countrie_id' => 'required'
         ]);
 
+        dd($request->pin);
+
         if ((strcmp($request->input('email'), $request->input('emailOrigin')) !== 0) &&
             ($request->input('email') != null && $request->input('password') == null)
         ) {
@@ -352,6 +356,28 @@ class UserController extends Controller
         User::find(auth()->user()->id)->update(['password' => Hash::make($request->new_password)]);
 
         return back()->with('success', 'Contraseña actualizada');
+    }
+
+    public function pinUpdate(Request $request)
+    {
+        $request->validate([
+            'current_password' => ['required', new MatchOldPassword],
+            'new_pin' => ['required'],
+            'confirm_pin' => ['same:new_pin'],
+        ]);
+
+        Pin::updateOrCreate(
+            ['user_id' =>  Auth::id()],
+            ['pin' => Crypt::encryptString($request->new_pin)]
+        );
+
+        PinSecurity::updateOrCreate(
+            ['user_id' =>  Auth::id()],
+            ['pin' => Crypt::encryptString($request->new_pin)]
+        );
+
+
+        return back()->with('success', 'PIN actualizado');
     }
 
     public function paquete()

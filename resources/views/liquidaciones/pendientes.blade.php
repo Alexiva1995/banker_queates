@@ -64,7 +64,7 @@
                     <tbody>
                       @if(isset($liquidaciones))
                       @foreach ($liquidaciones as $liquidacion)
-                      <tr class="text-center removeAnimation"  id="tabla{{$liquidacion->id}}" >
+                      <tr class="text-center removeAnimation"  id="tabla{{$liquidacion->id}}" style="{{$liquidacion->status == '2' ? 'background-color: rgb(253, 165, 165)' : null}}">
                         <td>{{$liquidacion->id}}</td>
                         <td>{{$liquidacion->user->email}}</td>
                         <td class="text-end">{{number_format($liquidacion->amount_gross,2)}}</td>
@@ -73,16 +73,21 @@
                         <td>{{$liquidacion->decryptWallet()}}</td>
                         <td>
                             @if ($liquidacion->status == '0')
-                            <span class="badge bg-warning">Pendiente</span>
+                              <span class="badge bg-warning">Pendiente</span>
+                            @else 
+                              <span class="badge bg-danger">Cancelado</span>
                             @endif
                           </td>
                         <td>
-                            <button class="btn btn-primary mr-2" data-bs-toggle="modal" data-bs-target="#aprobarModal{{$liquidacion->id}}">Aprobar</button>
-                            <button class="btn btn-secondary"  data-bs-toggle="modal" data-bs-target="#regresarModal{{$liquidacion->id}}">Rechazar</button>
+                            <button class="btn btn-primary mr-2" data-bs-toggle="modal" data-bs-target="#aprobarModal{{$liquidacion->id}}"  {{$liquidacion->status == '2' ? 'disabled' : null}}>Aprobar</button>
+                            <button class="btn btn-secondary"  data-bs-toggle="modal" data-bs-target="#regresarModal{{$liquidacion->id}}" {{$liquidacion->status == '2' ? 'disabled' : null}}>Rechazar</button>
                         </td>
                       </tr>
                       @include('liquidaciones.components.Modals.regresar')
                       @include('liquidaciones.components.Modals.aprobar')
+                      <script>
+                        $("#aprobarModal{{$liquidacion->id}}").appendTo("body").modal('show');
+                      </script>
                       @endforeach
                       @endif
                     </tbody>
@@ -97,6 +102,7 @@
 
   <!--/ Line Chart Card -->
 </section>
+
 <!--/ Statistics Card section-->
 
 

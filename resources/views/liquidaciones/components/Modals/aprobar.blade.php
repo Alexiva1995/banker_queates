@@ -11,7 +11,7 @@
                 <div class="col-sm-12">
                     <div class="input-group mb-1">
                         <span class="input-group-text" id="basic-addon1">HASH</span>
-                        <input type="text" class="form-control" id="HASH_transaccion" placeholder="HASH de transaccion" aria-label=" " aria-describedby="basic-addon1">
+                        <input type="text" class="form-control" id="hash_transaction{{$liquidacion->id}}" placeholder="HASH de transaccion" aria-label=" " aria-describedby="basic-addon1" name="HASH_transaccion">
                       </div>
                 </div>
                 <div class="col-sm-12">
