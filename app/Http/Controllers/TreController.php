@@ -78,19 +78,18 @@ class TreController extends Controller
         try {
             if($base == NULL)
             {
-                $base = Auth::user();
+                $base = User::findOrFail( Auth::id() )->with('investment')->first();
             }
-
             $trees = $this->getDataEstructuraBinary($base->id, $tree = 2);
             foreach($trees as $tree){
-                $childLicenses =  Investment::where('user_id', $tree->id)->where('status', 1)->first();
+                $childLicenses =  Investment::where('user_id', $tree->id)->where('status', 1)->with('LicensePackage')->first();
 
                 if($childLicenses != NULL){
                     $tree->licence = $childLicenses->id;
                 }
             }
 
-            $licenses =  Investment::where('user_id', $base->id)->where('status', 1)->first();
+            $licenses =  Investment::where('user_id', $base->id)->where('status', 1)->with('LicensePackage')->first();
             if($licenses != NULL){
                 $base->licence = $licenses->LicensePackage->id;
             }
