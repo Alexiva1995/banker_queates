@@ -179,7 +179,7 @@
                                         height="110" width="110" class="align-self-center mr-1 di"
                                         alt="{{ $base['range_id'] }}">
                                 @elseif ($base['range_id'] == null && empty($base->licence))
-                                    <img src="{{ asset('images/ensignRanges/0.jpg') }}" height="110" width="110"
+                                    <img src="{{ asset('images/ensignRanges/0.png') }}" height="110" width="110"
                                         class="mt-1"  alt="{{ $base->name }}"
                                         title="{{ $base->name }}">
                                 @endif
