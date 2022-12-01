@@ -7,6 +7,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 @endsection
 
+@section('vendor-style')
+<link rel="stylesheet" href="{{ asset(mix('vendors/css/forms/select/select2.min.css')) }}">
+@endsection
+
 @section('content')
     <style>
         .fw-700 {
@@ -31,7 +35,7 @@
         .nav-tabs .nav-link.active,
         .nav-tabs .nav-item.show .nav-link {
             color: #fff;
-            background-color: #673DED;
+            background-color: #07B0F2;
         }
 
         .nav-tabs .nav-link.active {
@@ -40,7 +44,7 @@
         }
 
         .box {
-            background-color: rgb(152 146 170 / 5%);
+            background-color: rgb(0 191 191 / 5%);
             padding: 1rem 0rem;
             margin-right: 0.25rem;
             margin-left: 0.25rem;
@@ -60,7 +64,13 @@
                     data-bs-toggle="tab" data-bs-target="#nav-password" type="button" role="tab"
                     aria-controls="nav-password" aria-selected="false"><i data-feather='lock'
                         class="mx-lg-2 mx-md-2 me-sm-2"></i>Cambiar
-                    contraseña</button>
+                    contraseña
+                </button>
+                <button class="nav-link justify-content-start text-start fw-400 rounded" id="nav-pin-tab"
+                    data-bs-toggle="tab" data-bs-target="#nav-pin" type="button" role="tab"
+                    aria-controls="nav-pin" aria-selected="false"><i data-feather='lock'
+                        class="mx-lg-2 mx-md-2 me-sm-2"></i>Configurar PIN de seguridad
+                </button>
                 @if (Auth::user()->admin != 1)
                     {{-- <button class="nav-link" id="nav-auth-tab" data-bs-toggle="tab" data-bs-target="#nav-auth" type="button" role="tab" aria-controls="nav-auth" aria-selected="false" style="padding-inline-end:10%;"><i data-feather='git-commit'></i>Configurar Authenticator</button> --}}
                 @endif
@@ -75,7 +85,7 @@
                             <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
                                 aria-labelledby="nav-home-tab">
                                 <div class="card-body p-0">
-                                    <div class="row col-lg-12 col-md-12 col-sm-12">
+                                    <!--<div class="row col-lg-12 col-md-12 col-sm-12">
                                         <div class="col-lg-3 col-md-4 col-sm-4">
                                             <div class="p-1 pe-0 pb-0">
                                                 @if (Auth::user()->photo == null)
@@ -129,7 +139,7 @@
                                             <p class="d-flex justify-content-start">JPG o PNG permitidos. Tamaño
                                                 máximo 800kB.</p>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <div class="card-body" style="margin-top: -4%;">
                                         <form method="POST" action="{{ route('profile.update') }}"
                                             enctype="multipart/form-data" novalidate>
@@ -172,35 +182,74 @@
                                                 <div class="col-sm-6">
                                                     <label for="" class=" fw-500">País <label
                                                             style="color: red;">*</label></label>
-                                                    <div class="input-group mb-1">
-                                                        @if ($user->prefix_id != null)
-                                                            <input type="text" name="prefix_id" class="form-control"
-                                                                placeholder="Bogotá" value="{{ $user->prefix->pais }}"
-                                                                disabled>
-                                                        @else
-                                                            <input type="text" name="prefix_id" class="form-control"
-                                                                placeholder="Bogotá" disabled>
-                                                        @endif
+
+                                                    <div class="input-group mb-2 shadow-none">
+                                                        <select id="countrie_id" class="rounded form-control text-dark shadow-none" name="countrie_id" required>
+
+                                                            
+                                                            @if($user->countrie_id  != null)
+                                                                @foreach($country as $countries)
+                                                                    <option value="{{$countries->id}}" {{$user->countrie_id == $countries->id ? 'selected' : ''}}>{{$countries->name}}</option>
+                                                                @endforeach
+                                                            @else
+                                                                <option>Ingresa o selecciona un país</option>
+                                                            @endif
+
+                                                            @foreach($country as $countries)
+                                                                <option value="{{$countries->id}}" {{old('countries') == $countries->id ? 'selected' : ''}}>{{$countries->name}}</option>
+                                                            @endforeach
+
+                                                        </select>
                                                     </div>
+                                                    
                                                 </div>
 
                                                 <div class="col-sm-6">
                                                     <label for="" class="correo  fw-500">
                                                         Correo <label style="color: red;">*</label>
                                                     </label>
+
                                                     <div class="input-group mb-1">
-                                                        <input type="text" name="email"
+                                                        <input type="text" id="email" name="email"
                                                             class="form-control @error('email') is-invalid @enderror"
-                                                            value="{{ $user->email }}">
+                                                            value="{{ $user->email }}" disabled>
+
+                                                        <input type="text" name="emailOrigin" value="{{ $user->email }}" hidden>
+
+                                                        <button type="button" 
+                                                        id="inputPassword"
+                                                        class="btn btn-primary" 
+                                                        data-bs-toggle="tooltip" 
+                                                        data-bs-placement="top" 
+                                                        data-bs-title="Para cambiar su correo, debe colocar su contraseña de Take. De clic aquí">
+                                                       <!-- <i class="fal fa-edit" class="mx-lg-2 mx-md-2 me-sm-2"></i>-->
+                                                       <img width="15px" height="15px" src="{{ asset('images/svg/edit.svg') }}">
+                                                        </button>
+
                                                         @error('email')
                                                             <span class="invalid-feedback d-block" role="alert">
                                                                 <strong>{{ $message }}</strong>
                                                             </span>
                                                         @enderror
+
                                                     </div>
+                                                </div>
+
+                                                <div class="col-sm-6 offset-md-6">
+                                                    <input type="hidden" aria-label="contraseña" id="password" name="password"
+                                                        class="form-control @error('password') is-invalid @enderror"
+                                                        placeholder="contraseña Take">
+
+                                                    @error('password')
+                                                        <span class="invalid-feedback d-block" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                    
                                                 </div>
                                                 
                                             </div>
+                                            
                                             <div class="row" style="margin-top: 3%;">
 
                                                 <div class="col-sm-6">
@@ -231,7 +280,7 @@
                                                         @enderror
                                                     </div>
                                                 </div>
-                                                
+
                                             </div>
 
                                             <div class="row" style="margin-top: 3%;">
@@ -281,6 +330,7 @@
                                 </div>
                             </div>
                             @include('profile.ui.password')
+                            @include('profile.ui.pin')
                             {{-- @include('profile.ui.authenticator') --}}
                             {{-- @include('profile.ui.kyc') --}}
                         </div>
@@ -292,6 +342,8 @@
     @include('profile.components.style')
     @include('profile.components.modal-photo')
     <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{{ asset(mix('vendors/js/forms/select/select2.full.min.js')) }}"></script>
+
     <script>
         let btnModalphoto = document.querySelector('#btnModalphoto');
         btnModalphoto.addEventListener("click", function(event) {
@@ -300,6 +352,16 @@
             })
             myModal.show();
         }, false);
+
+        //let inputPassword = document.querySelector('#inputPassword');
+        inputPassword.addEventListener("click", function(event) {
+            event.preventDefault();
+            document.getElementById('password').setAttribute('type', 'password');
+            document.getElementById('email').removeAttribute("disabled");
+
+            alert(element);
+        }, false);
+
 
 
         $("#boton01").click(function() {
@@ -318,5 +380,15 @@
                 window.location = '{{ route('profile.profile') }}';
             });
         });
+
+        $('#countrie_id').select2();
+
+        function isNumberKey(evt){
+            var charCode = (evt.which) ? evt.which : evt.keyCode
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+            return true;
+        }
+
     </script>
 @endsection

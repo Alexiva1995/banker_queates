@@ -8,10 +8,9 @@
 @endsection
 
 @section('content')
-<div id="bg">
-  <!--  <img src="{{asset('images/login/bg-login.png')}}" /> -->
-</div>
-<div class="auth-wrapper auth-v1 px-2">
+
+<!-- la clase bg1 se encuentra en el archivo _variables.scss-->
+<div class="auth-wrapper auth-v1 px-2 bg1">
   <div class="auth-inner py-2">
     <style>
        .dark-layout .input-group:focus-within .form-control, .dark-layout .input-group:focus-within .input-group-text, .dark-layout input:-webkit-autofill{
@@ -45,6 +44,9 @@
     </style>
         {{--CARD 1 --}}
         <div class="card mb-0 p-2 bg-white shadow box-shadow-0">
+            <a href="#" class="brand-logo">
+              <img width="200" src="{{asset('images/logo/logo-deg.png')}}"  alt="">
+            </a>
             <h4 class="card-body text-center mb-1 fw-700">Revisa tu correo y sigue las instrucciones</h4>
             <p class="mb-2 text-center">Te enviaremos un enlace a tu correo<br> para que puedas cambiar la contraseña</p>
 
@@ -74,23 +76,6 @@
           </div>
       </div>  
 </div>
-<style>
- #bg {
-    background-image: url('{{('/images/login/bg-login7k.png')}}');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: fixed;
-    right: 0;
-    width: auto;
-    height: auto;
-    z-index: -10;
-    min-width: 100%;
-    min-height: 100%;
-    visibility: visible;
-  }
-
-</style>
 <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
   $("#boton01").click(function() {

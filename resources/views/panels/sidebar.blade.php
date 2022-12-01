@@ -8,9 +8,9 @@ $configData = Helper::applClasses();
             <li class="nav-item d-flex justify-content-center">
                 <a class="navbar-brand" href="{{ url('/panels') }}">
 
-                    <img class="site-logo-light" src="{{ asset('images/logo/p7k_logo.png')}}"  width="97">
+                    <img class="site-logo-light" src="{{ asset('images/logo/logo-deg.png')}}"  width="164">
 
-                    <img class="site-logo-dark" src="{{ asset('images/logo/p7k_logo_dark.png')}}"  width="97">
+                    <img class="site-logo-dark" src="{{ asset('images/logo/logo-white.png')}}"  width="164">
 
                 </a>
             </li>

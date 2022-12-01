@@ -197,7 +197,7 @@
                 @include('dashboard.admin-components.liquidationsCard')
             </div>
             
-            @include('dashboard.admin-components.market-card')
+            <!--@include('dashboard.admin-components.market-card')-->
 
             <div class="col-lg-6">
                 @include('dashboard.admin-components.lastTenOrders')
@@ -292,7 +292,7 @@
                 },
             },
             series: [{
-                color: '#673DED',
+                color: '#07C4D9',
                 data: amounts,
             }],
             grid: {
@@ -346,7 +346,7 @@
                     colors: undefined
                 }
             },
-            colors: ['#673DED','#beafec'],
+            colors: ['#07C4D9','#04D99D'],
             series: [uActive, uInactive],
             labels: ['Activos', 'Inactivos'],
             legend: {

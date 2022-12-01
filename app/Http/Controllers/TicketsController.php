@@ -31,12 +31,13 @@ class TicketsController extends Controller
 
             $message = MessageTicket::where('id_ticket', '=', $ticke->id)
                 ->where('type', 0)
-                ->select('created_at')
+                ->select('updated_at')
                 ->orderBy('id', 'desc')
                 ->first();
             $ticke->send = '';
             if ($message != null) {
-                $ticke->send = $message->created_at->diffForHumans();
+                // $ticke->send = $message->updated_at->diffForHumans();
+                $ticke->send = $message->updated_at->format('d-m-Y');
             }
         }
         return view('tickets.componenteTickets.admin.list-admin')
@@ -63,11 +64,14 @@ class TicketsController extends Controller
         $ticket = Tickets::find($id);
         $message = MessageTicket::where('id_ticket', $id)->orderby('created_at', 'ASC')->get();
         $email = User::all()->where('id');
+        $findUser = User::find($ticket->user_id);
+        $emailUser = $findUser->email;
 
         $admin = $email[0]->email;
         return view('tickets.componenteTickets.admin.edit-admin')
             ->with('ticket', $ticket)
             ->with('message', $message)
+            ->with('emailUser', $emailUser)
             ->with('admin', $admin);
     }
     // permite actualizar el ticket
@@ -109,7 +113,7 @@ class TicketsController extends Controller
         }
 
 
-        return redirect()->route('ticket.list-admin')->with('success', 'El Ticket se actualizo Exitosamente');
+        return redirect()->route('ticket.edit-admin', $ticket->id)->with('success', 'El Ticket se actualizo Exitosamente');
     }
 
 
@@ -185,8 +189,8 @@ class TicketsController extends Controller
         Tickets::create([
             'user_id' => Auth::id(),
             'issue' => request('issue'),
-            'categories' => request('categories'),
-            'priority' => request('priority')
+            'categories' => request('categories')
+            // 'priority' => request('priority')
         ]);
 
         $ticket_create = Tickets::where('user_id', Auth::id())->orderby('created_at', 'DESC')->take(1)->get();
@@ -225,13 +229,15 @@ class TicketsController extends Controller
             ]);
         }
 
-        return redirect()->route('ticket.list-user')->with('success', 'El Ticket se creo Exitosamente');
+        return redirect()->route('ticket.edit-user', $id_ticket)->with('success', 'El Ticket se creo Exitosamente');
     }
 
     // permite editar el ticket
     public function editUser($id)
     {
         $ticket = Tickets::find($id);
+        $findUser = User::find($ticket->user_id);
+        $emailUser = $findUser->email;
 
         if ($ticket <> null and $ticket->user_id == Auth::user()->id) {
                 $message = MessageTicket::where('id_ticket', $id)->orderby('created_at', 'ASC')->get();
@@ -240,6 +246,7 @@ class TicketsController extends Controller
                 $admin = $email[0]->email;
                 return view('tickets.componenteTickets.user.edit-user', compact('imagenes'))
                     ->with('ticket', $ticket)
+                    ->with('emailUser', $emailUser)
                     ->with('message', $message)->with('admin', $admin);
             } else {
                 return abort(403, "No tienes autorización para ingresar a esta seccion.");
@@ -285,7 +292,7 @@ class TicketsController extends Controller
 
         $ticket->save();
 
-        return redirect()->route('ticket.list-user')->with('success', 'el ticket se Actualizo Correctamente');
+        return redirect()->route('ticket.edit-user', $ticket->id)->with('success', 'el ticket se Actualizo Correctamente');
     }
 
     // permite ver la lista de tickets
@@ -296,12 +303,13 @@ class TicketsController extends Controller
         foreach ($ticket as $ticke) {
             $message = MessageTicket::where('id_ticket', '=', $ticke->id)
                 ->where('type', 1)
-                ->select('created_at')
+                ->select('updated_at')
                 ->orderBy('id', 'desc')
                 ->first();
             $ticke->send = '';
             if ($message != null) {
-                $ticke->send = $message->created_at->diffForHumans();
+                // $ticke->send = $message->updated_at->diffForHumans();
+                $ticke->send = $message->updated_at->format('d-m-Y');
             }
         }
         return view('tickets.componenteTickets.user.list-user')
@@ -317,9 +325,12 @@ class TicketsController extends Controller
             $message = MessageTicket::all()->where('id_ticket', $id);
             $email = User::find(1);
             $admin = $email->email;
+            $findUser = User::find($ticket->user_id);
+            $emailUser = $findUser->email;
             return view('tickets.componenteTickets.user.show-user')
                 ->with('ticket', $ticket)
                 ->with('message', $message)
+                ->with('emailUser', $emailUser)
                 ->with('admin', $admin);
         } else {
             return abort(403, "No tienes autorización para ingresar a esta seccion.");

@@ -1078,4 +1078,10 @@ class InversionController extends Controller
             }
         }
     }
+    public function licenses()
+    {
+
+       $licenses = Investment::where('status', 1)->get();
+        return view('licenses.index',compact('licenses'));
+    }
 }

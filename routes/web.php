@@ -33,6 +33,7 @@ use App\Http\Controllers\MiscellaneousController;
 use App\Http\Controllers\UserInterfaceController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\ManualActivationController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\WithdrawalSettingController;
 
 /*
@@ -109,7 +110,7 @@ Route::middleware('auth')->group(function () {
 
             //WALLET PAY DIRECT
             Route::get('admin/wallet', [LiquidactionController::class, 'indexAdmin'])->name('ComponentsAdmin.wallet');
-            Route::post("/search/manual/activation", [ManualActivationController::class, "searchEmail"])->name("search.activation");
+            // Route::post("/search/manual/activation", [ManualActivationController::class, "searchEmail"])->name("search.activation");
 
             //RENTABILIDAD
             Route::get('/rentabilidad', [UtilityController::class, 'index'])->name('rentabilidad');
@@ -120,10 +121,15 @@ Route::middleware('auth')->group(function () {
             //Reports
             Route::get('/cashflow', [ReportController::class, 'cashflow'])->name('cashflow');
 
+            //Licences
+            Route::get('/licenses', [InversionController::class, 'licenses'])->name('licenses.index');
+
             Route::get('/anuales', [ReportController::class, 'anuales'])->name('reports.anuales');
             //USERS
             Route::prefix('user')->group(function () {
                 Route::get('user-list', [UserController::class, 'listUser'])->name('user.list-user');
+                Route::post('/user-list', [UserController::class, 'searchUsers'])->name('search.users');
+
                 Route::get('expired/license/list', [UserController::class, 'ExpiredLicenseUserList'])->name('user.expired.licenses.list');
                 Route::get('user-view/{id}', [UserController::class, 'userView'])->name('user.user-view');
                 Route::post('/user/{user}/start', [UserController::class, 'start'])->name('user.start');
@@ -143,13 +149,15 @@ Route::middleware('auth')->group(function () {
             Route::get('/liquidaciones/pendientes', [LiquidactionController::class, 'pendientes'])->name('liquidaciones.pendientes');
             Route::get('/liquidaciones/pendientes/export_csv', [LiquidactionController::class, 'ExportCSV'])->name('liquidaciones.export.csv');
 
+            //buscardor id
+            Route::get('/search', [BonoManualController::class, 'search'])->name('bonoManual.search');
+            Route::post('/search-id', [BonoManualController::class, 'searchPost'])->name('search.id');
             //Bono manual
             Route::get('/Edicion-saldo', [BonoManualController::class, 'index'])->name('Edicion-SaldoI-ndex');
 
             //Agragr saldo a usuario
             Route::post('/agregar-saldo', [BonoManualController::class, 'agregar_saldo'])->name('agregar_saldo');
             Route::post('/sustraer-saldo', [BonoManualController::class, 'sustraer_saldo'])->name('sustraer_saldo');
-
         });
 
         //Ruta para cambiar referido de un user
@@ -167,6 +175,10 @@ Route::middleware('auth')->group(function () {
             Route::get('/referred/tree/{tree}', [TreController::class, 'referredTree'])->name('referred.tree');
             // Ruta para visualizar el arbol o la matriz de un usuario en especifico
             Route::get('/{id}', [TreController::class, 'moretree'])->name('genealogy_type_id');
+            // Ruta para buscar un id el arbol binario
+            Route::post('/binario', [TreController::class, 'searchBinary'])->name('search.binary');
+            // Ruta para buscar un id el arbol unilevel
+            Route::post('/referred/tree/{tree}', [TreController::class, 'searchUnilevelTree'])->name('search.unilevel');
         });
 
         Route::get('/impersonate/stop', [UserController::class, 'stop'])->name('impersonate.stop');
@@ -181,6 +193,8 @@ Route::middleware('auth')->group(function () {
             Route::post('/reactivacionSaldo', [TiendaController::class, 'reactivacionSaldo'])->name('reactivacionSaldo');
             Route::get('/getStatus', [TiendaController::class, 'getStatus'])->name('getStatus');
             Route::post('/transaction', [TiendaController::class, 'transaction'])->name('shop.transaction');
+
+            Route::post('/make-purchase', [PaymentController::class, 'makePurchase'])->name('makePurchase');
         });
 
         Route::get('/ordenes', [ReportController::class, 'ordenes'])->name('ordenes.index');
@@ -195,12 +209,16 @@ Route::middleware('auth')->group(function () {
         Route::get('wallet', [LiquidactionController::class, 'index'])->name('wallet.index');
         //Ruta para actualizar una wallet
         Route::post('wallet-uedit', [WalletController::class, 'edit'])->name('wallet.edit');
+        //Ruta para transferir saldo mlm
+        Route::post('transfer-mlm', [WalletController::class, 'transferMlm'])->name('transfer.mlm');
+        //Ruta para transferir saldo licencias
+        Route::post('transfer-licencias', [WalletController::class, 'transferLicencias'])->name('transfer.licencias');
         Route::get('/comisiones', [WalletController::class, 'comisiones'])->name('reports.comision');
 
 
         // ruta para el envio del codigo de seguridad para enlazar una wallet
         Route::post('/send-seccurity-code', [UserController::class, 'sendSeccurityCode'])->name('send.seccurity.code');
-        Route::post('/save_wallet', [UserController::class, 'storeWalelt'])->name('user.store.wallet');
+        Route::post('/save_wallet', [UserController::class, 'storeWallet'])->name('user.store.wallet');
 
 
         Route::get('menuRentabilidad', [BusinessController::class, 'rentabilidad'])->name('business.rentabilidad');
@@ -278,6 +296,7 @@ Route::post('update', [UserController::class, 'update'])->name('profile.update')
 Route::post('contacto-update', [UserController::class, 'updateContacto'])->name('contacto.update');
 Route::post('wallet-update', [UserController::class, 'updateWallet'])->name('wallet.update');
 Route::post('contraseña-update', [UserController::class, 'passwordUpdate'])->name('contraseña.update');
+Route::post('pin-update', [UserController::class, 'pinUpdate'])->name('pin.update');
 Route::post('photo-update', [UserController::class, 'photoUpdate'])->name('photo.update');
 Route::post('photo/delete', [UserController::class, 'deletePhoto'])->name('photo.delete');
 Route::post('code-update', [UserController::class, 'CodeUpdate'])->name('code.update');
@@ -452,4 +471,9 @@ Route::middleware('admin')->group(function () {
         Artisan::call('bonus:range');
         return redirect()->back()->with('success', 'el cron bonus:7k corrio con exito');
     })->name('bonus.7k');
+
+    Route::get('/corte-binario', function () {
+        Artisan::call('corte:ganancias:binarias');
+        return redirect()->back()->with('success', 'el cron corte:ganancias:binarias corrio con exito');
+    });
 });

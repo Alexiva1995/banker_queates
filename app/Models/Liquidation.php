@@ -13,16 +13,17 @@ class Liquidation extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 
-        'amount_gross', 
-        'amount_net', 
-        'monto_bruto', 
-        'amount_fee', 
+        'user_id',
+        'amount_gross',
+        'amount_net',
+        'monto_bruto',
+        'amount_fee',
+        'description',
         'hash',
-        'wallet_used', 
-        'code_correo', 
-        'fecha_code', 
-        'type', 
+        'wallet_used',
+        'code_correo',
+        'fecha_code',
+        'type',
         'status',
     ];
 

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Tickets;
 use App\Models\MessageTicket;
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class TicketsSeeder extends Seeder
 {
@@ -22,11 +23,11 @@ class TicketsSeeder extends Seeder
             'name' => null,
             'email' => null,
             'categories' => '0',
-            'priority' => '0',
+            // 'priority' => '0',
             'status' => '0',
-            'issue' => 'Prueba user2',
-            'created_at' => now(),
-            'updated_at' => now()
+            'issue' => 'Prueba user',
+            'created_at' => Carbon::create('2022', '8', '01', 0, 0, 0 ),
+            'updated_at' => Carbon::create('2022', '8', '01', 0, 0, 0 )
         ]);
 
         MessageTicket::create([
@@ -35,10 +36,10 @@ class TicketsSeeder extends Seeder
             'id_admin' => '1',
             'id_ticket' => '2',
             'type' => '0',
-            'message' => 'Prueba de mensaje de user2',
+            'message' => 'Prueba de mensaje de user',
             'image' => null,
-            'created_at' => now(),
-            'updated_at' => now()
+            'created_at' => Carbon::create('2022', '8', '01', 0, 0, 0 ),
+            'updated_at' => Carbon::create('2022', '8', '01', 0, 0, 0 )
         ]);
 
         Tickets::create([
@@ -47,11 +48,11 @@ class TicketsSeeder extends Seeder
             'name' => null,
             'email' => null,
             'categories' => '1',
-            'priority' => '1',
+            // 'priority' => '1',
             'status' => '1',
-            'issue' => 'Prueba user3',
-            'created_at' => now(),
-            'updated_at' => now()
+            'issue' => 'Prueba user2',
+            'created_at' => Carbon::create('2022', '8', '02', 0, 0, 0 ),
+            'updated_at' => Carbon::create('2022', '8', '02', 0, 0, 0 )
         ]);
 
         MessageTicket::create([
@@ -60,10 +61,10 @@ class TicketsSeeder extends Seeder
             'id_admin' => '1',
             'id_ticket' => '3',
             'type' => '0',
-            'message' => 'Prueba de mensaje de user3',
+            'message' => 'Prueba de mensaje de user2',
             'image' => null,
-            'created_at' => now(),
-            'updated_at' => now()
+            'created_at' => Carbon::create('2022', '8', '02', 0, 0, 0 ),
+            'updated_at' => Carbon::create('2022', '8', '02', 0, 0, 0 )
         ]);
 
         Tickets::create([
@@ -72,11 +73,11 @@ class TicketsSeeder extends Seeder
             'name' => null,
             'email' => null,
             'categories' => '2',
-            'priority' => '2',
+            // 'priority' => '2',
             'status' => '0',
-            'issue' => 'Prueba user5',
-            'created_at' => now(),
-            'updated_at' => now()
+            'issue' => 'Prueba user3',
+            'created_at' => Carbon::create('2022', '8', '03', 0, 0, 0 ),
+            'updated_at' => Carbon::create('2022', '8', '03', 0, 0, 0 )
         ]);
 
         MessageTicket::create([
@@ -85,10 +86,10 @@ class TicketsSeeder extends Seeder
             'id_admin' => '1',
             'id_ticket' => '5',
             'type' => '0',
-            'message' => 'Prueba de mensaje de user5',
+            'message' => 'Prueba de mensaje de user3',
             'image' => null,
-            'created_at' => now(),
-            'updated_at' => now()
+            'created_at' => Carbon::create('2022', '8', '03', 0, 0, 0 ),
+            'updated_at' => Carbon::create('2022', '8', '03', 0, 0, 0 )
         ]);
 
         Tickets::create([
@@ -97,11 +98,11 @@ class TicketsSeeder extends Seeder
             'name' => null,
             'email' => null,
             'categories' => '3',
-            'priority' => '0',
+            // 'priority' => '0',
             'status' => '1',
-            'issue' => 'Prueba user6',
-            'created_at' => now(),
-            'updated_at' => now()
+            'issue' => 'Prueba user5',
+            'created_at' => Carbon::create('2022', '8', '04', 0, 0, 0 ),
+            'updated_at' => Carbon::create('2022', '8', '04', 0, 0, 0 )
         ]);
 
         MessageTicket::create([
@@ -110,10 +111,10 @@ class TicketsSeeder extends Seeder
             'id_admin' => '1',
             'id_ticket' => '6',
             'type' => '0',
-            'message' => 'Prueba de mensaje de user6',
+            'message' => 'Prueba de mensaje de user5',
             'image' => null,
-            'created_at' => now(),
-            'updated_at' => now()
+            'created_at' => Carbon::create('2022', '8', '04', 0, 0, 0 ),
+            'updated_at' => Carbon::create('2022', '8', '04', 0, 0, 0 )
         ]);
 
         Tickets::create([
@@ -122,11 +123,11 @@ class TicketsSeeder extends Seeder
             'name' => null,
             'email' => null,
             'categories' => '4',
-            'priority' => '1',
+            // 'priority' => '1',
             'status' => '0',
-            'issue' => 'Prueba user7',
-            'created_at' => now(),
-            'updated_at' => now()
+            'issue' => 'Prueba user6',
+            'created_at' => Carbon::create('2022', '8', '05', 0, 0, 0 ),
+            'updated_at' => Carbon::create('2022', '8', '05', 0, 0, 0 )
         ]);
 
         MessageTicket::create([
@@ -135,10 +136,10 @@ class TicketsSeeder extends Seeder
             'id_admin' => '1',
             'id_ticket' => '7',
             'type' => '0',
-            'message' => 'Prueba de mensaje de user7',
+            'message' => 'Prueba de mensaje de user6',
             'image' => null,
-            'created_at' => now(),
-            'updated_at' => now()
+            'created_at' => Carbon::create('2022', '8', '05', 0, 0, 0 ),
+            'updated_at' => Carbon::create('2022', '8', '05', 0, 0, 0 )
         ]);
 
         Tickets::create([
@@ -147,11 +148,11 @@ class TicketsSeeder extends Seeder
             'name' => null,
             'email' => null,
             'categories' => '0',
-            'priority' => '2',
+            // 'priority' => '2',
             'status' => '1',
-            'issue' => 'Prueba user8',
-            'created_at' => now(),
-            'updated_at' => now()
+            'issue' => 'Prueba user7',
+            'created_at' => Carbon::create('2022', '8', '06', 0, 0, 0 ),
+            'updated_at' => Carbon::create('2022', '8', '06', 0, 0, 0 )
         ]);
 
         MessageTicket::create([
@@ -160,10 +161,10 @@ class TicketsSeeder extends Seeder
             'id_admin' => '1',
             'id_ticket' => '8',
             'type' => '0',
-            'message' => 'Prueba de mensaje de user8',
+            'message' => 'Prueba de mensaje de user7',
             'image' => null,
-            'created_at' => now(),
-            'updated_at' => now()
+            'created_at' => Carbon::create('2022', '8', '06', 0, 0, 0 ),
+            'updated_at' => Carbon::create('2022', '8', '06', 0, 0, 0 )
         ]);
 
         Tickets::create([
@@ -172,11 +173,11 @@ class TicketsSeeder extends Seeder
             'name' => null,
             'email' => null,
             'categories' => '1',
-            'priority' => '0',
+            // 'priority' => '0',
             'status' => '0',
-            'issue' => 'Prueba user9',
-            'created_at' => now(),
-            'updated_at' => now()
+            'issue' => 'Prueba user8',
+            'created_at' => Carbon::create('2022', '8', '07', 0, 0, 0 ),
+            'updated_at' => Carbon::create('2022', '8', '07', 0, 0, 0 )
         ]);
 
         MessageTicket::create([
@@ -185,10 +186,10 @@ class TicketsSeeder extends Seeder
             'id_admin' => '1',
             'id_ticket' => '9',
             'type' => '0',
-            'message' => 'Prueba de mensaje de user9',
+            'message' => 'Prueba de mensaje de user8',
             'image' => null,
-            'created_at' => now(),
-            'updated_at' => now()
+            'created_at' => Carbon::create('2022', '8', '07', 0, 0, 0 ),
+            'updated_at' => Carbon::create('2022', '8', '07', 0, 0, 0 )
         ]);
 
         Tickets::create([
@@ -197,11 +198,11 @@ class TicketsSeeder extends Seeder
             'name' => null,
             'email' => null,
             'categories' => '2',
-            'priority' => '1',
+            // 'priority' => '1',
             'status' => '1',
-            'issue' => 'Prueba user10',
-            'created_at' => now(),
-            'updated_at' => now()
+            'issue' => 'Prueba user9',
+            'created_at' => Carbon::create('2022', '8', '08', 0, 0, 0 ),
+            'updated_at' => Carbon::create('2022', '8', '08', 0, 0, 0 )
         ]);
 
         MessageTicket::create([
@@ -210,10 +211,10 @@ class TicketsSeeder extends Seeder
             'id_admin' => '1',
             'id_ticket' =>  '10',
             'type' => '0',
-            'message' => 'Prueba de mensaje de user10',
+            'message' => 'Prueba de mensaje de user9',
             'image' => null,
-            'created_at' => now(),
-            'updated_at' => now()
+            'created_at' => Carbon::create('2022', '8', '08', 0, 0, 0 ),
+            'updated_at' => Carbon::create('2022', '8', '08', 0, 0, 0 )
         ]);
 
         Tickets::create([
@@ -222,11 +223,11 @@ class TicketsSeeder extends Seeder
             'name' => null,
             'email' => null,
             'categories' => '3',
-            'priority' => '2',
+            // 'priority' => '2',
             'status' => '0',
-            'issue' => 'Prueba user11',
-            'created_at' => now(),
-            'updated_at' => now()
+            'issue' => 'Prueba user10',
+            'created_at' => Carbon::create('2022', '8', '09', 0, 0, 0 ),
+            'updated_at' => Carbon::create('2022', '8', '09', 0, 0, 0 )
         ]);
 
         MessageTicket::create([
@@ -235,10 +236,10 @@ class TicketsSeeder extends Seeder
             'id_admin' => '1',
             'id_ticket' =>  '11',
             'type' => '0',
-            'message' => 'Prueba de mensaje de user11',
+            'message' => 'Prueba de mensaje de user10',
             'image' => null,
-            'created_at' => now(),
-            'updated_at' => now()
+            'created_at' => Carbon::create('2022', '8', '09', 0, 0, 0 ),
+            'updated_at' => Carbon::create('2022', '8', '09', 0, 0, 0 )
         ]);
 
         Tickets::create([
@@ -247,11 +248,11 @@ class TicketsSeeder extends Seeder
             'name' => null,
             'email' => null,
             'categories' => '4',
-            'priority' => '0',
+            // 'priority' => '0',
             'status' => '1',
-            'issue' => 'Prueba user12',
-            'created_at' => now(),
-            'updated_at' => now()
+            'issue' => 'Prueba user11',
+            'created_at' => Carbon::create('2022', '8', '10', 0, 0, 0 ),
+            'updated_at' => Carbon::create('2022', '8', '10', 0, 0, 0 )
         ]);
 
         MessageTicket::create([
@@ -260,10 +261,10 @@ class TicketsSeeder extends Seeder
             'id_admin' => '1',
             'id_ticket' =>  '12',
             'type' => '0',
-            'message' => 'Prueba de mensaje de user12',
+            'message' => 'Prueba de mensaje de user11',
             'image' => null,
-            'created_at' => now(),
-            'updated_at' => now()
+            'created_at' => Carbon::create('2022', '8', '10', 0, 0, 0 ),
+            'updated_at' => Carbon::create('2022', '8', '10', 0, 0, 0 )
         ]);
 
         Tickets::create([
@@ -272,11 +273,11 @@ class TicketsSeeder extends Seeder
             'name' => null,
             'email' => null,
             'categories' => '0',
-            'priority' => '1',
+            // 'priority' => '1',
             'status' => '0',
-            'issue' => 'Prueba user13',
-            'created_at' => now(),
-            'updated_at' => now()
+            'issue' => 'Prueba user12',
+            'created_at' => Carbon::create('2022', '8', '11', 0, 0, 0 ),
+            'updated_at' => Carbon::create('2022', '8', '11', 0, 0, 0 )
         ]);
 
         MessageTicket::create([
@@ -285,10 +286,10 @@ class TicketsSeeder extends Seeder
             'id_admin' => '1',
             'id_ticket' =>  '13',
             'type' => '0',
-            'message' => 'Prueba de mensaje de user13',
+            'message' => 'Prueba de mensaje de user12',
             'image' => null,
-            'created_at' => now(),
-            'updated_at' => now()
+            'created_at' => Carbon::create('2022', '8', '11', 0, 0, 0 ),
+            'updated_at' => Carbon::create('2022', '8', '11', 0, 0, 0 )
         ]);
     }
 }

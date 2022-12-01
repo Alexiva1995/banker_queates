@@ -20,7 +20,9 @@ class CreateWalletsCommissionsTable extends Migration
             $table->bigInteger('buyer_id')->nullable()->unsigned()->nullable();
             $table->foreign('buyer_id')->references('id')->on('users')->onUpdate('cascade')->nullable();
             $table->bigInteger('order_id')->nullable()->unsigned()->nullable();
-            $table->foreign('order_id')->references('id')->on('orders')->onUpdate('cascade')->nullable(); 
+            $table->foreign('order_id')->references('id')->on('orders')->onUpdate('cascade')->nullable();
+            $table->bigInteger('transfer_id')->nullable()->unsigned()->nullable()->comment('id de wallet a la que se transfirio');
+            $table->foreign('transfer_id')->references('id')->on('wallets_commissions')->onUpdate('cascade')->nullable();
             $table->bigInteger('level');
             $table->string('description',100);
             $table->foreignId('investment_id')->nullable()->constrained('investments')->comment('inversion la cual produce esta wallet');
@@ -28,7 +30,7 @@ class CreateWalletsCommissionsTable extends Migration
             $table->double('amount_retired')->nullable()->comment('amount retired for calculations');
             $table->double('amount_available')->nullable()->comment('amount for calculations');
             $table->double('amount_last_liquidation')->nullable()->comment('amount last settlement');
-            $table->tinyInteger('type')->default(0)->comment('0 - pamm, 1 - Range, 2 - license, 3 - withdrawable, 4 - binario');
+            $table->tinyInteger('type')->default(0)->comment('0 - MLM PAMM, 1 - Binario, 2 - Asignado');
             $table->bigInteger('liquidation_id')->unsigned()->nullable();
             $table->tinyInteger('status')->default(0)->comment('0 - Available, 1 - Requested, 2 - Paid, 3 - Voided, 4 - sutraido' );
             $table->tinyInteger('avaliable_withdraw')->default(0)->comment('0 - no Disponible, 1 - Disponible');

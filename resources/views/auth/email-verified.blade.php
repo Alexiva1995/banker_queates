@@ -8,13 +8,17 @@
 @endsection
 
 @section('content')
+<div id="bg">
+    <img src="{{asset('images/auth/fondo-auth.png')}}"/>
+</div>
+
 <div id="bg"></div>
 <div class="auth-wrapper auth-v1 px-2">
     <div class="auth-inner py-2">
         <!-- Login v1 -->
         <div class="card p-2 mb-0 bg-white">
             <div class="card-body mx-1 text-center">
-                <img width="120" class="mb-2" src="{{asset('images/logo/projecas.png')}}" alt="">
+                <img width="120" class="mb-2" src="{{asset('images/logo/logo-deg.png')}}" alt="">
                 <h4 class="text-center mb-1 fw-700">¡Correo Electrónico Verificado!</h4>
                 <p class="card-text mb-0 text-centert">Su verificación de email ha sido realizada correctamente</p>
                <div>

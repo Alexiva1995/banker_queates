@@ -11,6 +11,7 @@ use App\Models\CodeSeccurity;
 use App\Models\User;
 use App\Models\Wallet;
 use App\Models\Liquidation;
+use App\Models\LogLiquidation;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Utility;
@@ -42,9 +43,10 @@ class LiquidactionController extends Controller
         return view('business.retiros', compact('withdrawals'));
     }
 
-    public function retiro(){
-        
-        $retiros = Liquidation::where('status',0, )->where('user_id', Auth::id() )->get();
+    public function retiro()
+    {
+
+        $retiros = Liquidation::where('user_id', Auth::id())->get();
 
         return view('business.solicitudesRetiros', compact('retiros'));
     }
@@ -53,12 +55,12 @@ class LiquidactionController extends Controller
     {
         $user = auth()->user();
         // Valida si el usuario tiene una wallet enlazada para poder retirar
-        if( !$user->wallet ) {
+        if (!$user->wallet) {
             return redirect()->back()->with('warning', 'Debe primero enlazar una wallet');
         }
         // Si el usuario hizo un cambio en su wallet no puede retirar durante 15 dias
-        $remaining_days = $user->wallet->updated_at->diffInDays( now() );
-        if( $remaining_days <= 15 ) {
+        $remaining_days = $user->wallet->updated_at->diffInDays(now());
+        if ($remaining_days <= 15 && !$user->wallet->created_at->eq($user->wallet->updated_at)) {
             $remaining_days = 15 - $remaining_days;
             return redirect()->back()->with('warning', "Debido a que modifico su wallet debe esperar {$remaining_days} dias para poder solicitar retiros");
         }
@@ -69,33 +71,42 @@ class LiquidactionController extends Controller
         $time_start = Carbon::createFromFormat('H:i:s', $config->time_start)->toTimeString();
         $time_end = Carbon::createFromFormat('H:i:s', $config->time_end)->toTimeString();
 
-        // Valida si el dia actual esta dentro de los dias condigurados para poder realizar retiros
-        if ( !($date->dayOfWeek  == $config->day_start || $date->dayOfWeek  == $config->day_end) ) {
-            return redirect()->back()->with('warning', 'La solicitud de retiro solo puede realizarse los días '.$config->getFirtsDayOfWeek(). ' y '.$config->getLastDayOfWeek().'.');
+        // Valida si el dia actual esta dentro de los dias condigurados para poder realizar retiros, pero cubriendo el caso especial en que es domingo
+
+        if ($date->dayOfWeek == 0) {
+            if (!($config->day_start == 7 || $config->day_end == 7)) {
+                return redirect()->back()->with('warning', 'La solicitud de retiro solo puede realizarse los días ' . $config->getFirtsDayOfWeek() . ' y ' . $config->getLastDayOfWeek() . '.');
+            }
+        } else {
+            if (!($date->dayOfWeek  == $config->day_start || $date->dayOfWeek  == $config->day_end)) {
+                return redirect()->back()->with('warning', 'La solicitud de retiro solo puede realizarse los días ' . $config->getFirtsDayOfWeek() . ' y ' . $config->getLastDayOfWeek() . '.');
+            }
         }
 
-        // Valida si la hora actual se encuentra entre el rango permitido para realizar retiros 
-        if( !($date->toTimeString() >= $time_start && $date->toTimeString() <= $time_end) ) {
+        // Valida si la hora actual se encuentra entre el rango permitido para realizar retiros
+        if (!($date->toTimeString() >= $time_start && $date->toTimeString() <= $time_end)) {
 
             $time_start = Carbon::createFromFormat('H:i:s', $config->time_start)->format('h:i A');
             $time_end = Carbon::createFromFormat('H:i:s', $config->time_end)->format('h:i A');
 
-            return redirect()->back()->with('warning', 'La solicitud de retiro solo puede realizarse de ' . $time_start .' a ' . $time_end . ' Hora Texas' );
+            return redirect()->back()->with('warning', 'La solicitud de retiro solo puede realizarse de ' . $time_start . ' a ' . $time_end . ' Hora Texas');
+        }
 
-        } 
-        
         $balance = WalletComission::where([
             ['user_id', $user->id],
-            ['status', 0],
-            ['type', 3]
+            ['status', 0]
         ])->sum('amount_available');
 
         $fee = $config->percentage;
-        return view('business.retiro', compact('balance','fee'));
-       
+
+        $pin = $user->pin;
+
+        $withdrawalSettings = WithdrawalSetting::first();
+        return view('business.retiro', compact('balance', 'fee', 'withdrawalSettings', 'pin'));
     }
 
-    public function liquidationValidate() {
+    public function liquidationValidate()
+    {
         return view("liquidaciones.validacion");
     }
     public function realizadas()
@@ -107,11 +118,12 @@ class LiquidactionController extends Controller
 
     public function pendientes()
     {
-        $liquidaciones = Liquidation::where('status', 0)->with('user')->orderBy('id', 'desc')->get();
+        $liquidaciones = Liquidation::where('status', 0)->orWhere('status', 2)->with('user')->orderBy('id', 'desc')->get();
 
         return view('liquidaciones.pendientes', compact('liquidaciones'));
     }
-    public function codeEmail() {
+    public function codeEmail()
+    {
         $code = Crypt::encrypt(Str::random(10));
         $user = User::where("id", Auth::id())->first();
         $user->update(['token_sistem' => $code]);
@@ -127,7 +139,8 @@ class LiquidactionController extends Controller
         });
         return json_encode("success");
     }
-    public function liquidationCheck(Request $request) {
+    public function liquidationCheck(Request $request)
+    {
 
         $user = User::where("id", Auth::id())->first();
         $desincryptarDB =  Crypt::decrypt($user->token_sistem);
@@ -164,87 +177,84 @@ class LiquidactionController extends Controller
     }
     public function procesarLiquidacion(Request $request)
     {
-       
-       // try {
-            $accion = $request->accion;
-            $liquidacion_id = $request->liquidacion_id;
 
-            if($accion == 'aprobar'){
-                $HASH = $request->HASH_transaccion;
+        // try {
+        $accion = $request->accion;
+        $liquidacion_id = $request->liquidacion_id;
 
-                if($HASH != null && !empty($HASH)){
-                    $transaccion = Transactions::where([['liquidation_id',$liquidacion_id],['status',0]])->get();
-                    for($j = 0; $j < count($transaccion); $j++){
-                        if(isset($transaccion[$j])){
-                            $wallets_id = $transaccion[$j]['wallets_commissions_id'];
-                            $transaccion[$j]['status'] = 1;
-                            $transaccion[$j]->update();
-                            $wallets = WalletComission::where('id',$wallets_id)->get();
-                            for($l = 0; $l < count($wallets); $l++){
-                                if(!empty($wallets[$l])){
-                                    if($wallets[$l]['amount_available']== 0){
-                                        $wallets[$l]['status'] = 1;
-                                        }
-                                        $wallets[$l]->update();
+        if ($accion == 'aprobar') {
+            $HASH = $request->HASH_transaccion;
+
+            if ($HASH != null && !empty($HASH)) {
+                $transaccion = Transactions::where([['liquidation_id', $liquidacion_id], ['status', 0]])->get();
+                for ($j = 0; $j < count($transaccion); $j++) {
+                    if (isset($transaccion[$j])) {
+                        $wallets_id = $transaccion[$j]['wallets_commissions_id'];
+                        $transaccion[$j]['status'] = 1;
+                        $transaccion[$j]->update();
+                        $wallets = WalletComission::where('id', $wallets_id)->get();
+                        for ($l = 0; $l < count($wallets); $l++) {
+                            if (!empty($wallets[$l])) {
+                                if ($wallets[$l]['amount_available'] == 0) {
+                                    $wallets[$l]['status'] = 1;
                                 }
-                            }
-                        }
-                    }
-                    $data = 'Liquidacion_aprobada';
-
-                    $Liquidation = Liquidation::where('id', $liquidacion_id )->first();
-                    $Liquidation['status'] =1;
-                    $Liquidation['hash'] = $HASH;
-                    $Liquidation->update();
-
-                    return response()->json(['value' =>  $data]);
-                }else{
-                    $data = 'sin_hash';
-                    return response()->json(['value' =>  $data]);
-                }
-
-
-            }else{
-
-                $transaccion = Transactions::where([['liquidation_id',$liquidacion_id],['status',0]])->get();
-                for($i = 0; $i < count($transaccion); $i++){
-                    if(isset($transaccion[$i])){
-                        if($transaccion[$i]['utilies_id']==null){
-                            $wallets_id = $transaccion[$i]['wallets_commissions_id'];
-                            $transaccion[$i]['status'] = 2;
-                            $transaccion[$i]->update();
-                            $wallets = WalletComission::where('id',$wallets_id)->get();
-                            for($u = 0; $u < count($wallets); $u++){
-                                if(!empty($wallets[$u])){
-                                    $wallets[$u]['amount_available'] =  $wallets[$u]['amount_available'] + $wallets[$u]['amount_retired'];
-                                    $wallets[$u]['amount_retired'] = 0;
-                                    $wallets[$u]['status'] = 0;
-                                    $wallets[$u]->update();
-                                }
-                            }
-                        }else{
-                            $utility_id = $transaccion[$i]['utilies_id'];
-                            $transaccion[$i]['status'] = 2;
-                            $transaccion[$i]->update();
-                            $utilidad = Utility::where('id',$utility_id)->get();
-                            for($j = 0; $j < count($utilidad); $j++){
-                                if(!empty($utilidad[$j])){
-                                    $utilidad[$j]['amount_available'] =  $utilidad[$j]['amount_available'] + $utilidad[$j]['amount_retired'];
-                                    $utilidad[$j]['amount_retired'] = 0;
-                                    $utilidad[$j]['status'] = 0;
-                                    $utilidad[$j]->update();
-                                }
+                                $wallets[$l]->update();
                             }
                         }
                     }
                 }
-                $data = 'liquidacion_regresada';
-                Liquidation::where('id', $liquidacion_id )->update(['status'=>2]);
+                $data = 'Liquidacion_aprobada';
+
+                $Liquidation = Liquidation::where('id', $liquidacion_id)->first();
+                $Liquidation['status'] = 1;
+                $Liquidation['hash'] = $HASH;
+                $Liquidation->update();
+
                 return response()->json(['value' =>  $data]);
-
+            } else {
+                $data = 'sin_hash';
+                return response()->json(['value' =>  $data, 'hash' => $HASH]);
             }
+        } else {
 
-      /*  } catch (\Throwable $th) {
+            $transaccion = Transactions::where([['liquidation_id', $liquidacion_id], ['status', 0]])->get();
+            for ($i = 0; $i < count($transaccion); $i++) {
+                if (isset($transaccion[$i])) {
+                    if ($transaccion[$i]['utilies_id'] == null) {
+                        $wallets_id = $transaccion[$i]['wallets_commissions_id'];
+                        $transaccion[$i]['status'] = 2;
+                        $transaccion[$i]->update();
+                        $wallets = WalletComission::where('id', $wallets_id)->get();
+                        for ($u = 0; $u < count($wallets); $u++) {
+                            if (!empty($wallets[$u])) {
+                                $wallets[$u]['amount_available'] =  $wallets[$u]['amount_available'] + $wallets[$u]['amount_retired'];
+                                $wallets[$u]['amount_retired'] = 0;
+                                $wallets[$u]['status'] = 0;
+                                $wallets[$u]->update();
+                            }
+                        }
+                    } else {
+                        $utility_id = $transaccion[$i]['utilies_id'];
+                        $transaccion[$i]['status'] = 2;
+                        $transaccion[$i]->update();
+                        $utilidad = Utility::where('id', $utility_id)->get();
+                        for ($j = 0; $j < count($utilidad); $j++) {
+                            if (!empty($utilidad[$j])) {
+                                $utilidad[$j]['amount_available'] =  $utilidad[$j]['amount_available'] + $utilidad[$j]['amount_retired'];
+                                $utilidad[$j]['amount_retired'] = 0;
+                                $utilidad[$j]['status'] = 0;
+                                $utilidad[$j]->update();
+                            }
+                        }
+                    }
+                }
+            }
+            $data = 'liquidacion_regresada';
+            Liquidation::where('id', $liquidacion_id)->update(['status' => 2]);
+            return response()->json(['value' =>  $data]);
+        }
+
+        /*  } catch (\Throwable $th) {
             Log::error('Liquidaction - saveLiquidation -> Error: ' . $th);
             abort(403, "Ocurrio un error, contacte con el administrador");
         } */
@@ -467,37 +477,48 @@ class LiquidactionController extends Controller
      */
     public function index(Request $request)
     {
-       try {
+        try {
             $user = auth()->user();
-            $comissionsRangeTotal = WalletComission::where('user_id', $user->id)->where('type', 1)->sum('amount');
-            $comissionsTotal = WalletComission::where('user_id', $user->id)->where('type', 0)->sum('amount');
-            // TODO: Modificar estas 2 lineas de comision
-            $Licencias  = WalletComission::where([['user_id',$user->id ],
-                                                  ['type',2],
-                                                  ['status',0]
-                                                ])->get();
-            $LicenciasUtilityTotal = $Licencias->sum('amount_available');
-            
-            $general =  WalletComission::where([['user_id',$user->id ],
-                                                ['status',0]
-                                            ])->get();
-                                            
-            $generalTotal = $general->sum('amount_available');                                     
 
-            $comissionsRangeAvailable = $user->getWalletRangeAmount();
-            $comissionsAvailable= $user->getWalletComissionAmount();
-            // $comissionsUtilityAvailable = $user->getUtilitiesWaitingAmount();
-            $comissionsUtilityAvailable = 0;
-            $walletsComissions = WalletComission::where('user_id', $user->id)->where('type', 0)->orderBy('id', 'desc')->get();
-            $walletsRange = WalletComission::where('user_id', $user->id)->where('type', 1)->orderBy('id', 'desc')->get();
+            //vista licencias
+            $licencias  = WalletComission::where([['user_id', $user->id], ['type', 1]])->get();
+            $licenciasTotal = $licencias->sum('amount');
+            $licenciasAvailable = $licencias->where('status', 0)->sum('amount_available');
+
+            //vista general
+            $general =  WalletComission::where('user_id', $user->id)->get();
+            $generalTotal = $general->sum('amount');
+            $generalAvailable =  $general->where('status', 0)->sum('amount_available');
+
+            $balancEdition = Liquidation::where('user_id', $user->id)->get();
+
+
+
+            //vista mlm
+
+            $mlm =  WalletComission::where([['user_id', $user->id], ['type', 0]])->get();
+            $mlmTotal = $mlm->sum('amount');
+            $mlmAvailable =  $mlm->where('status', 0)->sum('amount_available');
+
             $daysRemaining = 0;
-            if($user->investment)
-            {
+            if ($user->investment) {
                 $date1 = Carbon::parse($user->investment->expiration_date);
-                $daysRemaining = $date1->diffInDays(today()->format('Y-m-d') );
+                $daysRemaining = $date1->diffInDays(today()->format('Y-m-d'));
             }
 
-            return view('wallet.index', compact('generalTotal','general','LicenciasUtilityTotal', 'comissionsTotal', 'comissionsRangeTotal', 'walletsRange', 'walletsComissions','Licencias', 'comissionsUtilityAvailable' ,'comissionsAvailable','comissionsRangeAvailable', 'daysRemaining'));
+            return view('wallet.index', compact(
+                'balancEdition',
+                'licencias',
+                'licenciasTotal',
+                'licenciasAvailable',
+                'general',
+                'generalTotal',
+                'generalAvailable',
+                'mlm',
+                'mlmTotal',
+                'mlmAvailable',
+                'daysRemaining'
+            ));
         } catch (\Throwable $th) {
             Log::error('Wallet - Index -> Error: ' . $th);
             abort(403, "Ocurrio un error, contacte con el administrador");
@@ -538,7 +559,7 @@ class LiquidactionController extends Controller
         $code = Str::random(10);
         $user = Auth::user();
         $code_encrypted = Crypt::encryptString($code);
-        $user->update(['code_security'=> $code_encrypted]);
+        $user->update(['code_security' => $code_encrypted]);
 
         CodeSeccurity::updateOrCreate(
             ['user_id' =>  $user->id],
@@ -557,27 +578,33 @@ class LiquidactionController extends Controller
         $user = User::findOrFail(Auth::id());
         $code = $request->code;
 
+
         // Validamos si el código de seguridad ingresado coincide con el guardado en la tabla del usuario
-        if( $request->code !== $user->decryptSeccurityCode() ) {
+        if ($request->code !== $user->decryptSeccurityCode()) {
             $response = ['status' => 'error', 'message' => 'El código de seguridad ingresado no coincide'];
             return response()->json($response, 200);
         }
 
         // Validamos si id del usuario y el código ingresado coincide con el guardado en la tabla de respaldo
-        if( $this->validateSeccurityCode($user, $code) ) {
+        if ($this->validateSeccurityCode($user, $code)) {
             $response = ['status' => 'error', 'message' => 'El código de seguridad ingresado no coincide'];
             return response()->json($response, 200);
         }
 
-        if( $this->validateUserWallet($user) ) {
+        // Validamos si el PIN de seguridad ingresado coincide con el guardado en el registro de la tabla PIN perteneciente a ese usuario
+        if ($request->pin !== $user->decryptPin()) {
+            $response = ['status' => 'error', 'message' => 'El PIN de seguridad ingresado no coincide'];
+            return response()->json($response, 200);
+        }
+
+        if ($this->validateUserWallet($user)) {
             $response = ['status' => 'error', 'message' => 'Existe una inconsistencia con su wallet, por favor cambiela para poder realizar retiros'];
             return response()->json($response, 200);
         }
 
         $Monto_a_retirar = $request->Monto_a_retirar;
 
-        $saldo = WalletComission::where([['user_id', $user->id],['status','0'],['type',3]])->get();
-        // TODO: El tipo de liquidacion debera modificarse ya que creo que no tendrán tipos
+        $saldo = WalletComission::where([['user_id', $user->id], ['status', '0']])->get();
         $tipo = 0;
 
         $saldo_total = $saldo->sum('amount_available');
@@ -585,69 +612,73 @@ class LiquidactionController extends Controller
         $fee = WithdrawalSetting::value('percentage');
 
         // Se verifica si el monto a retirar es mayor al saldo disponible
-        if( $Monto_a_retirar > $saldo_total ) {
+        if ($Monto_a_retirar > $saldo_total) {
             $response = ['status' => 'error', 'message' => 'El monto a retirar supera su saldo disponible'];
             return response()->json($response, 200);
         }
 
-        $feed = ( $Monto_a_retirar * $fee ) / 100;
-        $data_liquidation =[
+        $feed = ($Monto_a_retirar * $fee) / 100;
+        $data_liquidation = [
             'user_id' => $user->id,
             'amount_gross' => $Monto_a_retirar,
             'amount_net' => $Monto_a_retirar - $feed,
             'amount_fee' => $feed,
             'wallet_used' => $wallet,
-            'type'=> $tipo
+            'type' => $tipo
         ];
 
         $liquidacion = Liquidation::create($data_liquidation);
 
+        LogLiquidation::create([
+            'liquidation_id' => $liquidacion->id,
+            'email' => Crypt::encryptString($user->id . "-" . $user->email)
+        ]);
+
         // Código para los retiros parciales
-        for($i = 0; $i < $saldo->count(); $i++){
-            if($saldo[$i]['amount_available'] <= $Monto_a_retirar  ){
+        for ($i = 0; $i < $saldo->count(); $i++) {
+            if ($saldo[$i]['amount_available'] <= $Monto_a_retirar) {
 
-                    $Monto_a_retirar =  $Monto_a_retirar - $saldo[$i]['amount_available'];
-                    $saldo[$i]['status'] = 1;
-                    $saldo[$i]['amount_retired'] = $saldo[$i]['amount'];
-                    //creando la transaccion
-                    $data_transaction =[
-                        'liquidation_id' =>$liquidacion['id'],
-                        'wallets_user_id'=> $saldo[$i]['user_id'],
-                        'wallets_commissions_id'=> $saldo[$i]['id'],
-                        'amount'=> $saldo[$i]['amount'],
-                        'amount_retired'=> $saldo[$i]['amount_available'],
-                        'amount_available'=> 0,
-                    ];
+                $Monto_a_retirar =  $Monto_a_retirar - $saldo[$i]['amount_available'];
+                $saldo[$i]['status'] = 1;
+                $saldo[$i]['amount_retired'] = $saldo[$i]['amount'];
+                //creando la transaccion
+                $data_transaction = [
+                    'liquidation_id' => $liquidacion['id'],
+                    'wallets_user_id' => $saldo[$i]['user_id'],
+                    'wallets_commissions_id' => $saldo[$i]['id'],
+                    'amount' => $saldo[$i]['amount'],
+                    'amount_retired' => $saldo[$i]['amount_available'],
+                    'amount_available' => 0,
+                ];
 
-                    $saldo[$i]['amount_available'] = 0;
-                    $saldo[$i]->update();
-                    Transactions::create( $data_transaction );
-            }else{
-                if($Monto_a_retirar > 0){
+                $saldo[$i]['amount_available'] = 0;
+                $saldo[$i]->update();
+                Transactions::create($data_transaction);
+            } else {
+                if ($Monto_a_retirar > 0) {
                     $saldo[$i]['amount_available'] =  $saldo[$i]['amount_available'] - $Monto_a_retirar;
                     $saldo[$i]['amount_retired'] = $Monto_a_retirar;
                     $saldo[$i]->update();
 
 
-                        $data_transaction =[
-                        'liquidation_id' =>$liquidacion['id'],
-                        'wallets_user_id'=> $saldo[$i]['user_id'],
-                        'wallets_commissions_id'=> $saldo[$i]['id'],
-                        'amount'=> $saldo[$i]['amount'],
-                        'amount_retired'=> $saldo[$i]['amount_retired'],
-                        'amount_available'=> $saldo[$i]['amount_available'],
+                    $data_transaction = [
+                        'liquidation_id' => $liquidacion['id'],
+                        'wallets_user_id' => $saldo[$i]['user_id'],
+                        'wallets_commissions_id' => $saldo[$i]['id'],
+                        'amount' => $saldo[$i]['amount'],
+                        'amount_retired' => $saldo[$i]['amount_retired'],
+                        'amount_available' => $saldo[$i]['amount_available'],
                     ];
-                    Transactions::create( $data_transaction );
+                    Transactions::create($data_transaction);
                     $i = $saldo->count();
                 }
-
             }
-        } 
+        }
 
-        $user->update([ 'code_security' => null ]);
+        $user->update(['code_security' => null]);
         $admin = User::findOrFail(1);
-        Mail::to($user->email)->send(new withdrawRequest($user, $Monto_a_retirar) );
-        Mail::to($admin->email)->send(new WithdrawAdmin($user, $Monto_a_retirar) );
+        Mail::to($user->email)->send(new withdrawRequest($user, $Monto_a_retirar));
+        Mail::to($admin->email)->send(new WithdrawAdmin($user, $Monto_a_retirar));
 
         $response = ['status' => 'success', 'message' => 'Su retiro se ha procesado exitosamente!'];
         return response()->json($response, 200);
@@ -655,15 +686,15 @@ class LiquidactionController extends Controller
     /**
      * Se compara si el id del usuario en sesión es igual al que se guardo al crear la wallet
      * Y si el código ingresado es igual al registrado en la tabla de seguridad.
-    */
+     */
     private function validateSeccurityCode(User $user, $code)
     {
         try {
-            $code_array = explode('-', Crypt::decryptString( $user->codeSeccurity->encrypted) );
-            if( intval($code_array[0]) != $user->id || $code_array[1] != $code ) {
+            $code_array = explode('-', Crypt::decryptString($user->codeSeccurity->encrypted));
+            if (intval($code_array[0]) != $user->id || $code_array[1] != $code) {
                 return true;
             }
-    
+
             return false;
         } catch (\Throwable $th) {
             Log::alert("Error al desencriptar el codigo de seguridad del usaurio: {$user->email} ");
@@ -671,17 +702,17 @@ class LiquidactionController extends Controller
         }
     }
     /**
-    *   Compara si la wallet del usuario coincide con la de la tabla de seguridad.
-    */
+     *   Compara si la wallet del usuario coincide con la de la tabla de seguridad.
+     */
     private function validateUserWallet(User $user)
     {
         try {
-            $wallet_array = explode('-', Crypt::decryptString( $user->walletSeccurity->encrypted) );
-    
-            if( intval($wallet_array[0]) != $user->id || $wallet_array[1] != $user->decryptWallet() ) {
+            $wallet_array = explode('-', Crypt::decryptString($user->walletSeccurity->encrypted));
+
+            if (intval($wallet_array[0]) != $user->id || $wallet_array[1] != $user->decryptWallet()) {
                 return true;
             }
-    
+
             return false;
         } catch (\Throwable $th) {
             Log::alert("Error al desencriptar la wallet del usuario: {$user->email} ");
@@ -689,47 +720,49 @@ class LiquidactionController extends Controller
         }
     }
 
-    public function configurar_retiro(){
+    public function configurar_retiro()
+    {
         $WithdrawalSetting = WithdrawalSetting::first();
         $weekMap = Carbon::getDays();
         //return $weekMap[7];
         $dayOfTheWeek = Carbon::now()->dayOfWeek;
         $transferencias_entre_users = $WithdrawalSetting['transferencias_entre_users'];
 
-        return view('business.Config.configurar_retiro',compact('WithdrawalSetting','transferencias_entre_users'));
+        return view('business.Config.configurar_retiro', compact('WithdrawalSetting', 'transferencias_entre_users'));
     }
 
-    public function guardar_configuracion(Request $request){
+    public function guardar_configuracion(Request $request)
+    {
         $day_start = $request->desde;
         $day_end = $request->hasta;
         $time_start = ($request->hora_inicial);
         $time_end = ($request->hora_final);
         $percentage = intval($request->fee_valor);
-        $transferencias_entre_users = $request->transferencias_entre_users;
+        // $transferencias_entre_users = $request->transferencias_entre_users;
         $WithdrawalSetting = WithdrawalSetting::first();
 
         //return $request;
 
         $WithdrawalSetting['day_start'] = $day_start;
-        $WithdrawalSetting['day_end'] = $day_end ;
+        $WithdrawalSetting['day_end'] = $day_end;
         $WithdrawalSetting['time_start'] = $time_start;
         $WithdrawalSetting['time_end'] = $time_end;
         $WithdrawalSetting['percentage'] = $percentage;
-        $WithdrawalSetting['transferencias_entre_users'] = $transferencias_entre_users;
-        if($day_start == 'sinvalor' || $day_end == 'sinvalor'  ){
+        // $WithdrawalSetting['transferencias_entre_users'] = $transferencias_entre_users;
+        if ($day_start == 'sinvalor' || $day_end == 'sinvalor') {
             $data_config = 2;
-            return response()->json(['value' =>   $data_config ]);
-        }else{
+            return response()->json(['value' =>   $data_config]);
+        } else {
             $WithdrawalSetting->update();
             $data_config = 1;
-            return response()->json(['value' =>   $data_config ]);
+            return response()->json(['value' =>   $data_config]);
         }
-
     }
 
-    public function transferencia(){
-        $retiros = Liquidation::where('status',10)->get();
-        return view('business.Trasferencia.transferencia',compact('retiros'));
+    public function transferencia()
+    {
+        $retiros = Liquidation::where('status', 10)->get();
+        return view('business.Trasferencia.transferencia', compact('retiros'));
     }
     public function userTransfer()
     {
@@ -743,119 +776,119 @@ class LiquidactionController extends Controller
         $time_end = Carbon::createFromFormat('H:i:s', $config->time_end)->toTimeString();
 
 
-                $user = auth()->user();
-                $wallets = WalletComission::where([
-                ['user_id', $user->id],
-                ['status', 0],
-                ['type',0]
-            ])->get();
-            $availableBalanceWallet = $wallets->sum('amount_available');
-            $avaibleBalanceTotal = $availableBalanceWallet;
-            //$fee = ($config->percentage * $availableBalance)/100;
-            $fee = $config->percentage;
-            return view('business.Trasferencia.Transferir',
-            compact('availableBalanceWallet','avaibleBalanceTotal','fee','transferencia_entre_user'));
-
-
+        $user = auth()->user();
+        $wallets = WalletComission::where([
+            ['user_id', $user->id],
+            ['status', 0],
+            ['type', 0]
+        ])->get();
+        $availableBalanceWallet = $wallets->sum('amount_available');
+        $avaibleBalanceTotal = $availableBalanceWallet;
+        //$fee = ($config->percentage * $availableBalance)/100;
+        $fee = $config->percentage;
+        return view(
+            'business.Trasferencia.Transferir',
+            compact('availableBalanceWallet', 'avaibleBalanceTotal', 'fee', 'transferencia_entre_user')
+        );
     }
 
-    public function email_trasnfer(Request $request){
+    public function email_trasnfer(Request $request)
+    {
         $email = $request->email;
-        $transferi_a = User::where('email',$email)->first('email');
+        $transferi_a = User::where('email', $email)->first('email');
         $data = 'sin_resultados';
-        if(!empty($transferi_a) && isset($transferi_a)){
+        if (!empty($transferi_a) && isset($transferi_a)) {
             $transferi_a = $transferi_a['email'];
             $data = $transferi_a;
             return response()->json(['value' => $data]);
-        }else{
+        } else {
 
-            return response()->json(['value' =>   $data ]);
-
+            return response()->json(['value' =>   $data]);
         }
-
     }
 
-    function Transferencia_verificada(Request $request){
+    function Transferencia_verificada(Request $request)
+    {
         $id = Auth::id();
 
         $data = 0;
         $code = $request->code;
         $Monto_a_retirar = $request->Monto_a_retirar;
-        
+
         $saldo = WalletComission::where([
-        ['user_id', $id],
-        ['status','0'],
-        ['type',0]])->get();
+            ['user_id', $id],
+            ['status', '0'],
+            ['type', 0]
+        ])->get();
 
         $saldo_total = $saldo->sum('amount_available');
         $code_security = $user = Auth::user()->code_security;
 
         $email = $request->email;
-        $usuario_a_transferir = User::where('email',$email)->first('id');
+        $usuario_a_transferir = User::where('email', $email)->first('id');
         $usuario_a_transferir = $usuario_a_transferir['id'];
 
         $fee = WithdrawalSetting::get('percentage');
         $fee = $fee[0]['percentage'];
 
-        if( $code == $code_security ){
-            if($Monto_a_retirar > $saldo_total ){
-            $data = 2;
-            return response()->json(['value' =>  $data]);
-
-            }else{
+        if ($code == $code_security) {
+            if ($Monto_a_retirar > $saldo_total) {
+                $data = 2;
+                return response()->json(['value' =>  $data]);
+            } else {
                 $data = 1;
-                $feed = ($Monto_a_retirar *  $fee)/100;
-                $data_transaction =[
-                    'user_id'=>$usuario_a_transferir,
-                    'amount'=>$Monto_a_retirar - $feed,
-                    'amount_available'=>$Monto_a_retirar - $feed,
-                    'level'=>1,
-                    'description'=>'transferencia del usuario '.$id.' al usuario '.$usuario_a_transferir
+                $feed = ($Monto_a_retirar *  $fee) / 100;
+                $data_transaction = [
+                    'user_id' => $usuario_a_transferir,
+                    'amount' => $Monto_a_retirar - $feed,
+                    'amount_available' => $Monto_a_retirar - $feed,
+                    'level' => 1,
+                    'description' => 'transferencia del usuario ' . $id . ' al usuario ' . $usuario_a_transferir
                 ];
                 $transferencia = WalletComission::create($data_transaction);
-                $data_liquidaction =[
-                    'user_id'=>$id,
-                    'amount_gross'=>$Monto_a_retirar,
-                    'amount_net'=>$Monto_a_retirar - $feed,
-                    'amount_fee'=>$feed,
-                    'wallet_used'=>'tranferencia del usuario '.$id,
-                    'status'=>10 //estatus de transferencias entre usuarios
+                $data_liquidaction = [
+                    'user_id' => $id,
+                    'amount_gross' => $Monto_a_retirar,
+                    'amount_net' => $Monto_a_retirar - $feed,
+                    'amount_fee' => $feed,
+                    'wallet_used' => 'tranferencia del usuario ' . $id,
+                    'status' => 10 //estatus de transferencias entre usuarios
                 ];
                 $liquidacion = Liquidation::create($data_liquidaction);
-                for($i = 0; $i < $saldo->count(); $i++){
-                    if($saldo[$i]['amount_available'] <= $Monto_a_retirar  ){
+                for ($i = 0; $i < $saldo->count(); $i++) {
+                    if ($saldo[$i]['amount_available'] <= $Monto_a_retirar) {
                         $Monto_a_retirar =  $Monto_a_retirar - $saldo[$i]['amount_available'];
                         $saldo[$i]['status'] = 1;
                         $saldo[$i]['amount_retired'] = $saldo[$i]['amount'];
                         //creando la transaccion
-                        $data_transaction =[
-                            'liquidation_id' =>$liquidacion['id'],
-                            'wallets_user_id'=> $saldo[$i]['user_id'],
-                            'wallets_commissions_id'=> $saldo[$i]['id'],
-                            'amount'=> $saldo[$i]['amount'],
-                            'amount_retired'=> $saldo[$i]['amount_available'],
-                            'amount_available'=> 0,
+                        $data_transaction = [
+                            'liquidation_id' => $liquidacion['id'],
+                            'wallets_user_id' => $saldo[$i]['user_id'],
+                            'wallets_commissions_id' => $saldo[$i]['id'],
+                            'amount' => $saldo[$i]['amount'],
+                            'amount_retired' => $saldo[$i]['amount_available'],
+                            'amount_available' => 0,
                         ];
 
                         $saldo[$i]['amount_available'] = 0;
                         $saldo[$i]->update();
-                        Transactions::create( $data_transaction );
-                    }else{
-                        if($Monto_a_retirar > 0){
+                        Transactions::create($data_transaction);
+                    } else {
+                        if ($Monto_a_retirar > 0) {
                             $saldo[$i]['amount_available'] =  $saldo[$i]['amount_available'] - $Monto_a_retirar;
                             $saldo[$i]['amount_retired'] = $Monto_a_retirar;
                             $saldo[$i]->update();
 
 
-                              $data_transaction =[
-                                'liquidation_id' =>$liquidacion['id'],
-                                'wallets_user_id'=> $saldo[$i]['user_id'],
-                                'wallets_commissions_id'=> $saldo[$i]['id'],
-                                'amount'=> $saldo[$i]['amount'],
-                                'amount_retired'=> $saldo[$i]['amount_retired'],
-                                'amount_available'=> $saldo[$i]['amount_available'],
+                            $data_transaction = [
+                                'liquidation_id' => $liquidacion['id'],
+                                'wallets_user_id' => $saldo[$i]['user_id'],
+                                'wallets_commissions_id' => $saldo[$i]['id'],
+                                'amount' => $saldo[$i]['amount'],
+                                'amount_retired' => $saldo[$i]['amount_retired'],
+                                'amount_available' => $saldo[$i]['amount_available'],
                             ];
-                            Transactions::create( $data_transaction );
+                            Transactions::create($data_transaction);
                             $i = $saldo->count();
                         }
                     }
@@ -865,7 +898,8 @@ class LiquidactionController extends Controller
         return response()->json(['value' =>  $data]);
     }
 
-    public function verificarRetiroUtilidad(Request $request){
+    public function verificarRetiroUtilidad(Request $request)
+    {
         $id = Auth::id();
         $Monto_a_retirar = $request->Monto_a_retirar;
         $code = $request->code;
@@ -873,91 +907,91 @@ class LiquidactionController extends Controller
         $code_security = $user = Auth::user()->code_security;
         $fee = WithdrawalSetting::get('percentage');
         $fee = $fee[0]['percentage'];
-        $feed = ($Monto_a_retirar *  $fee)/100;
-        
+        $feed = ($Monto_a_retirar *  $fee) / 100;
+
         //$total = $utilidad->sum('amount_available');
-        
 
-            $utilidades = Utility::where('status','0')->where('user_id', $id)->get();
 
-            $utilidad = [];
-            $total = 0;
-            $year_now = Carbon::now();
-            
-            foreach($utilidades as $key => $utili){
-                if(!empty($utili)){
-                    if($utili->investment->type == '1' || $utili->investment->type == '2' ){
+        $utilidades = Utility::where('status', '0')->where('user_id', $id)->get();
+
+        $utilidad = [];
+        $total = 0;
+        $year_now = Carbon::now();
+
+        foreach ($utilidades as $key => $utili) {
+            if (!empty($utili)) {
+                if ($utili->investment->type == '1' || $utili->investment->type == '2') {
+                    array_push($utilidad, $utili);
+                    $total = $total + $utili->amount_available;
+                }
+                if ($year_now->gt(Carbon::parse($utili->investment->created_at)->addYears(1)->format('d-m-Y'))) {
+                    if ($utili->investment->type == '3') {
                         array_push($utilidad, $utili);
                         $total = $total + $utili->amount_available;
                     }
-                    if( $year_now->gt(Carbon::parse($utili->investment->created_at)->addYears(1)->format('d-m-Y'))  ){
-                        if($utili->investment->type == '3'){    
-                            array_push($utilidad, $utili);
-                            $total = $total + $utili->amount_available;
-                        }
-                     }
-                     
-                     //validacion para paquetes platino se valida si el paquete esta en su 7timo mes
-                    // o 14ceavo mes
-                     $mes7 = intval(Carbon::parse($utili->investment->created_at)->addMonth(7)->format('m'));
-                     $Validar_mes = intval($year_now->format('m'));
+                }
 
-                     $mes14 = intval(Carbon::parse($utili->investment->created_at)->addMonth(14)->format('m'));
-                     if( $Validar_mes == $mes7 || $Validar_mes == $mes14  ){
-                       
-                        if($utili->investment->type == '4'){    
-                            array_push($utilidad, $utili);
-                            $total =  $total + $utili->amount_available;
-                        }
-                     }
+                //validacion para paquetes platino se valida si el paquete esta en su 7timo mes
+                // o 14ceavo mes
+                $mes7 = intval(Carbon::parse($utili->investment->created_at)->addMonth(7)->format('m'));
+                $Validar_mes = intval($year_now->format('m'));
+
+                $mes14 = intval(Carbon::parse($utili->investment->created_at)->addMonth(14)->format('m'));
+                if ($Validar_mes == $mes7 || $Validar_mes == $mes14) {
+
+                    if ($utili->investment->type == '4') {
+                        array_push($utilidad, $utili);
+                        $total =  $total + $utili->amount_available;
+                    }
                 }
             }
+        }
 
         $memberType = $utilidad[0]->investment->type;
-        if($memberType == 1 || $memberType == 2 || $memberType == 3 || $memberType == 4){
-            if($code == $code_security){
-                if( $Monto_a_retirar <=  $total){
-                    if($Monto_a_retirar > 50){
-                        $data_liquidaction =[
-                            'user_id'=>$id,
-                            'amount_gross'=>$Monto_a_retirar,
-                            'amount_net'=>$Monto_a_retirar - $feed,
-                            'amount_fee'=>$feed,
-                            'wallet_used'=>$wallet,
-                            'type'=>1
+        if ($memberType == 1 || $memberType == 2 || $memberType == 3 || $memberType == 4) {
+            if ($code == $code_security) {
+                if ($Monto_a_retirar <=  $total) {
+                    if ($Monto_a_retirar > 50) {
+                        $data_liquidaction = [
+                            'user_id' => $id,
+                            'amount_gross' => $Monto_a_retirar,
+                            'amount_net' => $Monto_a_retirar - $feed,
+                            'amount_fee' => $feed,
+                            'wallet_used' => $wallet,
+                            'type' => 1
                         ];
                         $liquidacion = Liquidation::create($data_liquidaction);
-                        
-                        for($i = 0; $i < count($utilidad); $i++){
-                            $data_transaction =[
-                                'liquidation_id' =>$liquidacion['id'],
-                                'utilies_id'=> $utilidad[$i]['id'],
-                                'amount'=> $utilidad[$i]['amount_available'],
-                                'amount_retired'=> $utilidad[$i]['amount_available'],
-                                'amount_available'=> 0,
+
+                        for ($i = 0; $i < count($utilidad); $i++) {
+                            $data_transaction = [
+                                'liquidation_id' => $liquidacion['id'],
+                                'utilies_id' => $utilidad[$i]['id'],
+                                'amount' => $utilidad[$i]['amount_available'],
+                                'amount_retired' => $utilidad[$i]['amount_available'],
+                                'amount_available' => 0,
                             ];
-                            Transactions::create( $data_transaction );
+                            Transactions::create($data_transaction);
                             $utilidad[$i]['amount_retired'] = $utilidad[$i]['amount_retired'] + $utilidad[$i]['amount_available'];
                             $utilidad[$i]['amount_available'] = 0;
                             $utilidad[$i]->update();
                         }
-                    return response()->json(['value' =>  1]);
+                        return response()->json(['value' =>  1]);
                     }
-                }else{
+                } else {
                     return response()->json(['value' =>  2]);
-                }            
-            }else{
-            return response()->json(['value' =>  0]);
+                }
+            } else {
+                return response()->json(['value' =>  0]);
             }
-        }else{
+        } else {
             return response()->json(['value' =>  'no_es_paquete_oro_o_plata']);
         }
-        
-    return response()->json(['value' =>  $request]);
+
+        return response()->json(['value' =>  $request]);
     }
     /*
     * Exporta a formato CSV la lista de liquidaciones (solicitudes de retiro) pendientes
-    * @return CSV 
+    * @return CSV
     */
     public function ExportCSV()
     {

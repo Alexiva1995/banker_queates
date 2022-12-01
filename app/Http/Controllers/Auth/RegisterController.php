@@ -83,15 +83,30 @@ class RegisterController extends Controller
      */
     protected function create(Request $request)
     {   
-        // dd(intval($request['buyer_id']));
-        $this->Validator($request);
-        $binary_side = '';
-        $binary_id = 0;
+        $request->validate(
+            [
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|confirmed|unique:users',
+                'username' => 'required|string|max:10|alpha_dash|unique:users,username',
+                'password' => 'required|string|min:8|confirmed',
+                'countrie_id' => 'required',
+                'buyer_id' => 'nullable|exists:users,id',
+            ],
+            [
+                'countrie_id.required' => 'El pais es requerido',
+                'buyer_id.exists' => 'El usuario referido no existe.',
+            ]
+        );
+        $binary_side = 'R';
+        if($request->has('binary')) {
+            $binary_side = $request['binary'];
+        }
+        
+        $binary_id = 1;
         if (isset($request->buyer_id)) {
             $userR = User::findOrFail($request['buyer_id']);
-            $binary_id = $this->treController->getPosition(intval($request['buyer_id']),$request['binary'], $request['binary']);
 
-            $binary_side = $request['binary'];
+            $binary_id = $this->treController->getPosition(intval($request['buyer_id']),$binary_side, $binary_side);
         }
 
         //$this->validate($request, ['recaptcha_token' => ['required', new   ReCaptchaRule($request->recaptcha_token)]]);

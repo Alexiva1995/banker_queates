@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Orden_pamm;
+use App\Models\OrdenPamm;
 use App\Models\User;
 use App\Models\WalletComission;
 use Illuminate\Console\Command;
@@ -41,7 +41,7 @@ class bonosPamm extends Command
      */
     public function handle()
     {
-        $ordenes_pamm = Orden_pamm::where('status', '0')->get();
+        $ordenes_pamm = OrdenPamm::where('status', '0')->get();
 
         foreach($ordenes_pamm as $pam){
             
@@ -66,13 +66,13 @@ class bonosPamm extends Command
             for($i = 0; $i < count($NIVELES); $i++){
 
                 if( $ID_padre == -1){
-                    $ID_padre = $this->padre($id , $NIVELES[$i][0],$monto_residual );
+                    $ID_padre = $this->padre($id , $NIVELES[$i][0],$monto_residual, $id );
                     if(isset($ID_padre) && !empty($ID_padre) && $ID_padre != null){
                         Log::info('Pagando bono NIVEL_.'.$NIVELES[$i][0].'.  a usuario '. $ID_padre);
-                        $i++;
+                        
                     }
                 }else{
-                    $ID_padre = $this->padre($ID_padre , $NIVELES[$i][0],$monto_residual );
+                    $ID_padre = $this->padre($ID_padre , $NIVELES[$i][0],$monto_residual, $id );
                     if(isset($ID_padre) && !empty($ID_padre) && $ID_padre != null){
                         Log::info('Pagando bono NIVEL_.'.$NIVELES[$i][0].'.  a usuario '.  $ID_padre);
                     }
@@ -81,14 +81,14 @@ class bonosPamm extends Command
         }
     }
 
-    public function padre($id,$BONO,$monto_residual){
+    public function padre($id,$BONO,$monto_residual, $buyer_id){
         $user = User::where('id',$id)->first('buyer_id');
         if(isset($user) && !empty($user) && $user['buyer_id'] != null) {
             $bono_pamm = [
                 'user_id'=>$user['buyer_id'],
                 'amount'=>$BONO * $monto_residual,
                 'amount_available'=>$BONO * $monto_residual,
-                'buyer_id'=>$id,
+                'buyer_id'=>$buyer_id,
                 'amount_last_liquidation',
                 'type',
                 'description'=>'Bono Pamm',

@@ -13,12 +13,17 @@ class CreatePointsTable extends Migration
      */
     public function up()
     {
-        Schema::create('points', function (Blueprint $table) {
+        Schema::create('point_range', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('referred_id')->constrained('users');
+            $table->foreignId('buyer_id')->constrained('users');
             $table->foreignId('orden_id')->constrained('orders');
-            $table->integer('quantity');
+            $table->integer('right_range_points')->default(0);
+            $table->integer('left_range_points')->default(0);
+            $table->integer('points_range_L')->default(0);
+            $table->integer('points_range_R')->default(0);
+            $table->tinyInteger('status')->default(0)->comment('0 - Por cobrar 1 - Cobrados');
+            $table->date('limit')->nullable();
             $table->timestamps();
         });
     }

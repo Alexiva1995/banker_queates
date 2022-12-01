@@ -61,7 +61,7 @@
             </div>
           </li>
         </ul> -->
-        
+
       </div>
       <ul class="nav navbar-nav align-items-center ms-auto " >
       {{-- <li class="nav-item dropdown dropdown-language " >
@@ -206,7 +206,7 @@
           </ul>
         </li> -->
         <li class="nav-item d-lg-block me-1">
-          <div class="form-check form-switch form-check-light">
+          <!--<div class="form-check form-switch form-check-light">
             <input type="checkbox" class="form-check-input nav-link-style form-check-darkM" checked id="flexSwitchCheckDefault" >
             <label class="form-check-label" for="flexSwitchCheckDefault">
               <span class="switch-icon-right">
@@ -216,8 +216,8 @@
                 <i class="ficonCustom" data-feather='sun'></i>
               </span>
             </label>
-          </div>
-{{-- 
+          </div>-->
+{{--
            <div class="d-flex align-content-around align-item-center">
              <i class="ficonCustom" data-feather='sun' style="margin-right: 0.3rem;"></i>
 
@@ -228,7 +228,7 @@
              <i class="ficonCustom" data-feather='moon' style="margin-left: -1.5rem;"></i>
            </div> --}}
         </li>
-        <li class="nav-item dropdown dropdown-notification me-25 ">
+        <!--<li class="nav-item dropdown dropdown-notification me-25 ">
           <a class="nav-link" href="javascript:void(0);" data-bs-toggle="dropdown">
             <i class="ficon" data-feather="bell"></i>
             @if(count(auth()->user()->unreadNotifications) > 0)
@@ -280,7 +280,7 @@
               </li>
             @endif
           </ul>
-        </li>
+        </li>-->
         <li class="nav-item dropdown dropdown-user">
           <a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="javascript:void(0);" data-bs-toggle="dropdown" aria-haspopup="true">
             <div class="user-nav d-sm-flex d-none">
@@ -288,15 +288,34 @@
               {{-- <span class="user-name fw-bolder text-capitalize" >{{Auth::user()->last_name}}</span> --}}
 
             </div>
-            @if( auth()->user()->investment !== null && auth()->user()->admin == 0 )
-              <img class="round" src="" alt="{{'emblema'.auth()->user()->investment->licensePackage->emblem}}" height="40" width="40">
-            @endif
-            <span class="avatar">
-              @if(Auth::user()->photo == null)
+            <!--<span class="avatar">-->
+            <span>
+              {{-- @if( auth()->user()->investment !== null && auth()->user()->admin == 0 )
+                <img class="round" src="" alt="{{'emblema'.auth()->user()->investment->licensePackage->emblem}}" height="50" width="50" alt="license_emblem">
+                --}}
+                
+                @if(Auth::user()->admin != 1)
+                  @if(auth()->user()->range_id == null)
+
+                    <img class="round" src="{{asset('images/ico/deg.ico')}}" alt="avatar" height="40" width="40" style="object-fit: contain; background-color: white;">
+
+                    <!-- <img class="round" src="{{ asset('images/logo/logo-deg-white.png') }}" alt="avatar" style="box-shadow: none;" height="50" width="50"> -->
+
+                  @else
+                    <img  class="round" src="{{ asset('images/ensignRanges/'.auth()->user()->range_id.'.png') }}" style="box-shadow: none;" height="50" width="50">
+                  @endif
+
+                @elseif(Auth::user()->admin == 1)
+                  @if(Auth::user()->photo == null)
+                    <img class="round" src="{{asset('images/logo/logo-deg-white.png')}}" style="box-shadow: none;" alt="avatar" height="50" width="50">
+                  @endif
+                @endif
+
+              {{--@if(Auth::user()->photo == null)
                 <img class="round" src="{{asset('images/portrait/small/avatar-s-11.jpg')}}" alt="avatar" height="40" width="40">
               @else
                 <img class="round" src="{{ asset('storage/photo-profile/'.Auth::user()->photo) }}" alt="avatar" height="40" width="40">
-              @endif
+              @endif--}}
              {{-- @if(Auth::user()->status == 1)
                  <span class="avatar-status-online"></span>
               @else
@@ -314,7 +333,7 @@
               <i class="me-1 text-primary" data-feather="user"></i> Mi Perfil
             </a>
             @endif
-           
+
             <!-- <a class="dropdown-item" href="{{url('app/email')}}">
               <i class="me-50" data-feather="mail"></i> Inbox
             </a>

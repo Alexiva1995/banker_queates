@@ -92,7 +92,7 @@ class WalletController extends Controller
         if($user->admin == 1){
             $wallets = WalletComission::with('user')->orderBy('id', 'desc')->get();
         } else {
-            $wallets = WalletComission::where([['user_id', '=', $user->id],['type', '=', 0]])->with('user')->orderBy('id', 'desc')->get();
+            $wallets = WalletComission::where([['user_id', '=', $user->id]])->with('user')->orderBy('id', 'desc')->get();
         }
         return view('reports.comision', compact('wallets'));
     }
@@ -211,5 +211,53 @@ class WalletController extends Controller
 
     }
 
+    public function transferMlm(Request $request)
+    {
+        //dd($request);
+        $user = Auth::user();
+
+        if($request->amount > 0){
+           $wallet = new WalletComission();
+           $wallet->user_id = $user->id;
+           $wallet->level = 0;
+           $wallet->description = 'transferencia a general';
+           $wallet->amount = $request->amount;
+           $wallet->amount_available = $request->amount;
+           $wallet->type = 3;
+           $wallet->status = 0;
+           $wallet->save();
+           WalletComission::where([['user_id', $user->id],['type', 5],['status', 0]])->update([
+                'status' => '1',
+                'transfer_id' => $wallet->id
+           ]);
+            return back()->with('success', 'transferencia creada con exito');
+        }
+
+        return back()->with('error' , 'tu saldo tiene que ser mayor a 0');
+    }
+    public function transferLicencias(Request $request)
+    {
+        //dd($request);
+        $user = Auth::user();
+
+        if($request->amount > 0){
+           $wallet = new WalletComission();
+           $wallet->user_id = $user->id;
+           $wallet->level = 0;
+           $wallet->description = 'transferencia a general';
+           $wallet->amount = $request->amount;
+           $wallet->amount_available = $request->amount;
+           $wallet->type = 3;
+           $wallet->status = 0;
+           $wallet->save();
+           WalletComission::where([['user_id', $user->id],['type', 2],['status', 0]])->update([
+                'status' => '1',
+                'transfer_id' => $wallet->id
+           ]);
+            return back()->with('success', 'transferencia creada con exito');
+        }
+
+        return back()->with('error' , 'tu saldo tiene que ser mayor a 0');
+    }
 
 }

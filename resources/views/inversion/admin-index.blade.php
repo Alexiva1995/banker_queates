@@ -48,7 +48,7 @@
                                         <th>{{ $inversion->id }}</th>
                                         <th>{{ $inversion->user->username }}</th>
                                         <th>{{ $inversion->user->id }}</th>
-                                        <th>{{ $inversion->membershipPackage->membershipType->name }}</th>
+                                        <th>{{ $inversion->LicensePackage->name }}</th>
                                         <th style="text-align:right">{{ number_format($inversion->invested ,2, ',', '.') }}</th>
                                         <th style="text-align:right">{{ number_format($inversion->gain ,2, ',', '.') }}</th>
                                         <th>{{ "{$inversion->getGainPercent()} %" }}</th>

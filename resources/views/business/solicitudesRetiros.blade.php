@@ -24,61 +24,65 @@
             <div class="card-content">
                 <div class="card-header">
                     <div class="d-flex justify-content-start"><h4 class="fw-700">Últimos retiros</h4></div>
-                    <div class="d-flex justify-content-end">
+                    {{--<div class="d-flex justify-content-end">
                         <div class="d-flex col-12" style="margin-bottom:14px;">
                             <a href="{{route('solicitudesRetiros')}}" class="btn btn-primary float-end">Solicitar Retiro</a>
 
                             <button type="button" data-bs-toggle="modal" data-bs-target="#modalWallet" class="btn btn-gradient-primary float-end ms-1">Enlazar Wallet</button>
                         </div>
-                    </div>
+                    </div>--}}
                 </div>
-                
+
                 <div class="card-body card-dashboard">
                     <div class="table-responsive">
                         <table class="table w-100 nowrap scroll-horizontal-vertical myTable table-striped w-100">
                             <thead class="">
                                 <tr class=" text-center">
                                     <th class="fw-600">Fecha</th>
-                                    <th class="fw-600 ">Estado</th>
-                                    <th class="fw-600 ">Monto</th>
-                                    <th class="fw-600 ">Fee</th>
-                                    <th class="fw-600 ">Total</th>
-                                    <th class="fw-600 ">Wallet</th>
+                                    <th class="fw-600">Estado</th>
+                                    <th class="fw-600 d-none d-md-table-cell">Monto</th>
+                                    <th class="fw-600 d-none d-md-table-cell">Fee</th>
+                                    <th class="fw-600">Total</th>
+                                    <th class="fw-600 d-none d-md-table-cell">Wallet</th>
+                                    <th class="fw-600 d-none d-md-table-cell">Hash</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($retiros as $retiro)
-                                <tr class=" text-center">
-                                    <td >
-                                        {{$retiro->updated_at}}
+                                <tr class="text-center">
+                                    <td>
+                                       {{date_format($retiro->updated_at, 'Y-m-d')}}
                                     </td>
                                     <td>
 
                                     @if($retiro->status == 0)
-                                            <button class="btn bg-light-warning" style="color: #FE8900;">
+                                            <span class="btn bg-light-warning" style="color: #FE8900;">
                                                 En Espera
-                                            </button>
+                                            </span>
                                     @elseif($retiro->status ==1)
                                             <button class="btn bg-light-success" style="color: #28C76F;">
-                                                Pagado
+                                                <a href="https://tronscan.org/#/transaction/${{$retiro->hash}}" class="text-decoration-none text-success">Pagado</a>
                                             </button>
                                     @else
                                             <button class="btn bg-light-danger" style="color: red;">
-                                                Retirado
+                                                <a href="https://tronscan.org/#/transaction/${{$retiro->hash}}" class="text-decoration-none text-danger">Cancelado</a>
                                             </button>
                                     @endif
                                     </td>
-                                    <td class="text-end">
+                                    <td class="text-end d-none d-md-table-cell">
                                         {{number_format($retiro->amount_gross,2)}}
                                     </td>
-                                    <td class="text-end">
+                                    <td class="text-end d-none d-md-table-cell">
                                         {{number_format($retiro->amount_fee,2)}}
                                     </td>
                                     <td class="text-end">
                                         {{number_format($retiro->amount_net,2)}}
                                     </td>
-                                    <td>
+                                    <td class="d-none d-md-table-cell">
                                         {{ $retiro->decryptWallet() }}
+                                    </td>
+                                    <td class="d-none d-md-table-cell">
+                                        {{$retiro->hash !== null ? $retiro->hash : 'No disponible'}}
                                     </td>
                                 </tr>
                                 @endforeach
@@ -90,8 +94,6 @@
         </div>
     </div>
 </div>
-
-@include('business.componentes.Modal.Retiros.setWalletModal')
 @endsection
 
 @section('vendor-script')

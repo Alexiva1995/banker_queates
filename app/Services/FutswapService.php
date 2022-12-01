@@ -25,12 +25,12 @@ class FutswapService
         $this->futswap = $futswap;
     }
 
-    public function createOrden($user, $amount, $ordenId)
+    public function createUser($user)
     {
-        $url = config('futswap.apiUrl');
-        $token = $this->generateKey();
-        $response = Http::withHeaders([
-            'x-api-key' => config('futswap.apiKey'),
+        $url = config('whitz.apiUrl');
+       // $token = $this->generateKey();
+       $response = Http::withHeaders([
+            'x-api-key' => config('whitz.apiKey'),
         ])->post("{$url}/bill", [
             'companyId' => config('futswap.companyId'),
             'usdValue' => $amount,
@@ -51,10 +51,39 @@ class FutswapService
 
         }else{
 
-            Log::info('Error Futswap- '.$response);
+            Log::info('Error Whitz- '.$response);
             $order = OrdenPurchase::where('id', $ordenId)->first();
             $order->status = '2';
             $order->update();
+            $error = ['error'];
+            $error[] = $response->json()['message'];
+            return $error;
+        }
+    }
+    public function show()
+    {
+        $url = config('whitz.apiUrl');
+        $response = Http::withHeaders([
+            'x-api-key' => config('whitz.apiKey'),
+        ])->get("{$url}/bill/status", [
+            'id'=> 152,
+            'customer_id'=> 1,
+            'filename'=> "example.png",
+            'type'=> "image\/png",
+            'size'=> 3517,
+            'created'=> "2016-08-19",
+            'purpose_id'=> 1,
+            'description'=> "",
+            'uploaded_by_id'=> null,
+            'download_url'=> "https:\/\/example.com\/customer\/profile\/download_file\/152",
+            'billId' => $billId,
+        ]);
+        if($response->successful())
+        {
+            $data = $response->json();
+            return $this->updateStatusCanceled($data['data']);
+
+        }else{
             $error = ['error'];
             $error[] = $response->json()['message'];
             return $error;

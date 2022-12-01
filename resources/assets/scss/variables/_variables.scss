@@ -2,4 +2,14 @@
 //  ? TIP:  It is recommended to use this file for overriding bootstrap variables.
 //  ================================================================================================
 
-// $primary: #00cfe8;
+$primary: #07B0F2;
+.bg1{
+    background-image: url(/images/auth/fondo-auth.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: fixed;
+}
+.card{
+    box-shadow: 0 4px 24px 0 rgb(247 255 254 / 10%);
+}

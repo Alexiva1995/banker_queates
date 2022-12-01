@@ -11,7 +11,7 @@
         width: 50%;
         display: inline;
     }
-   
+
     .dt-button{
         border: none !important;
         border-radius: 5px !important;
@@ -29,28 +29,67 @@
     <div class="card p-2">
         <div class="card-content">
             <div class="card-body p-0">
+                <div class="card-header d-block p-3 pb-0">
+               
+                    <form action="{{ route('search.users') }}" method="POST">
+                        @csrf
+                        <div class="row justify-content-end">
+                            <div class="col-md-2 col-sm-4" style="padding-top: 5px;">
+                                <select class="form-select" aria-label=".form-select-lg example" name="select">
+                                    <option selected value="Filtar">Filtar por </option>
+                                    <option value="id">ID</option>
+                                    <option value="name">NOMBRE</option>
+                                    <option value="email">EMAIL</option>
+                                    <option value="pamm">PAMM</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-3 col-sm-4" style="padding-top: 5px;">
+                                <input type="text" placeholder="..." name="filtro" class="form-control" id="buscar">
+                            </div>
+
+                            <div class="col-md-1 col-sm-3" style="padding-top: 5px;">
+                                <button type="submit" class="btn btn-primary">
+                                    Filtrar
+                                </button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
                 <div class="table-responsive">
                     <table class="table nowrap scroll-horizontal-vertical myTable w-100">
+                        <div class="card-content p-75">
                         <thead>
                             <tr class="text-center ">
                                 <th class="fw-500">ID</th>
-                                <th class="fw-500">Nombre</th>
-                                <th class="fw-500">Usuario</th>
+                                <th class="fw-500">Nombre/Apellido</th>
                                 <th class="fw-500">Email</th>
+                                <th class="fw-500">Licencia</th>
+                                <th class="fw-500">Balance</th>
+                                <th class="fw-500">Ganancias</th>
+                                <th class="fw-500">PAMM</th>
                                 <th class="fw-500">Estado</th>
-                                <th class="fw-500">Patrocinador</th>
                                 <th class="fw-500">ID del <br/>Patrocinador</th>
-                                <th class="fw-500">País</th>
-                                <th class="fw-500">Accion</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($users as $user)
                             <tr class="text-center">
                                 <td>{{$user->id}}</td>
-                                <td>{{$user->name}}</td>
-                                <td>{{$user->username}}</td>
+                                <td>{{$user->name}} {{$user->last_name}}</td>
                                 <td>{{$user->email}}</td>
+
+                                @if($user->investment != null && $user->investment->status == 1 )
+                                    <td>{{ $user->investment->LicensePackage->name }}</td>
+                                @else
+                                    <td>No tiene licencia activa</td>
+                                @endif
+
+                                <td>--</td> <!-- Balance-->
+                                <td>{{ $user->getWalletComissionAvailable() }}</td>
+                                <td>--</td> <!-- PAMM-->
                                 @if ($user->status == '0')
                                     <td> <a class="alert alert-danger text-danger fw-400 p-75">Inactivo</a></td>
                                 @elseif($user->status == '1')
@@ -64,11 +103,10 @@
                                 @elseif($user->status == '5')
                                     <td> <a class="alert alert-danger text-danger fw-400 p-75">Eliminado</a></td>
                                 @endif
-                                <td>{{$user->padre->name}}</td>
                                 <td>{{$user->padre->id}}</td>
-                                <td>{{$user->countrie !== null ? $user->countrie->name : '-'}}</td>
+                                <!--<td>{{$user->countrie !== null ? $user->countrie->name : '-'}}</td>-->
 
-                                <td>
+                                <!--<td>
                                    {{-- <form action="{{route('user.start', $user)}}" method="POST" class="btn">
                                         @csrf--}}
                                         <a href="{{ route('user.user-view',['id' => $user->id])}}" class="btn btn-outline-secondary p-75">
@@ -76,7 +114,7 @@
                                         </a>
 
                                     {{--</form>--}}
-                                </td>
+                                </td>-->
                                 @include('user.components.referred')
                             </tr>
                             @endforeach
@@ -103,10 +141,11 @@
 @endsection
 @section('page-script')
 <script>
-    //datataables ordenes 
-   
+    //datataables ordenes
+
     $('.myTable').DataTable({
         responsive: false,
+        searching:false,
         order: [
             [0, "asc"]
         ],
@@ -117,7 +156,7 @@
             "lengthMenu":     "Mostrar _MENU_ entradas",
             "loadingRecords": "Cargando...",
             "processing":     "",
-            "search":         "Filtrar: nombre, correo, numero de cuenta bróker:",
+            //"search":         "Filtrar: nombre, correo, numero de cuenta bróker:",
             "zeroRecords":    "No se encontraron resultados",
             paginate: {
                 first:    ' ',

@@ -1,11 +1,11 @@
 @extends('layouts/contentLayoutMaster')
 @section('content')
 <div id="logs-list">
-   
+
     <div class="col-12">
         <div class="card p-2">
             <div class="card-content">
-               
+
                 <div class="card-body card-dashboard p-0">
                     <div class="table-responsive">
                         <table class="table    myTable table-striped ">
@@ -13,6 +13,7 @@
                                 <tr class="text-center">
                                     <th>ID</th>
                                     <th>nombre</th>
+                                    <th>Correo</th>
                                     <th>Licencia</th>
                                     <th>accion</th>
                                 </tr>
@@ -26,8 +27,15 @@
                                     <td>
                                         {{$user->name}}
                                     </td>
+                                     <td>
+                                        {{$user->email}}
+                                    </td>
                                     <td>
-                                        #licencia
+                                        @if($user->investment != null)
+                                            {{$user->investment->LicensePackage->name}}
+                                        @else
+                                            No disponible
+                                        @endif
                                     </td>
                                     <td>
                                         <button  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$user->id}}">
@@ -35,7 +43,7 @@
                                         </button>
                                     </td>
                                 </tr>
-                                
+
                                     @include('bonoManual.componentes.modal')
                                 @endforeach
                             </tbody>
@@ -64,9 +72,9 @@
         order: [
             [0, "desc"]
         ],
-        
+
     })
-   
+
 </script>
 
 @endsection

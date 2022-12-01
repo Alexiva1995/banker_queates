@@ -83,6 +83,15 @@
             text-align: left;
         }
 
+        .texCustomDeg {
+            color: #07B0F2 !important;
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 27px;
+            letter-spacing: 0em;
+            text-align: left;
+        }
+
 
         .container-custom {
             padding-right: 0px !important;
@@ -158,7 +167,7 @@
         .square-active {
             height: 120px;
             width: 120px;
-            background-color: #FAF9FF;
+            /*background-color: #FAF9FF;*/
             border-radius: 10px;
         }
 
@@ -166,7 +175,7 @@
             height: 106 !important;
             width: 87 !important;
             border-radius: 10px;
-            background-color: #886de0;
+            /*background-color: #886de0;*/
         }
 
         .square p,
@@ -259,38 +268,39 @@
     <div class="container-fluid container-custom">
         <div class="d-flex my-1">
             <p class="fw-700 mb-0">Dashboard</p><span class="fw-300 mx-1 text-light">|</span>
-            <p class="fw-300 mb-0">Project 7K</p>
+            <p class="fw-300 mb-0">Banker Quotes</p>
         </div>
         <div class="row">
             <div class="col-sm-12">
                 @include('dashboard.components.cryptobar')
-                <div class="row match-height">
+                <!--<div class="row match-height">
                     @include('dashboard.components.totalEarningsChart')
                     @include('dashboard.components.packageProgress')
-                </div>
+                </div>-->
             </div>
         </div>
-        @include('dashboard.components.bonusCharts')
+        <!--@include('dashboard.components.bonusCharts')-->
         <div class="col-12">
             <div class="row match-height">
                 @include('dashboard.components.balanceCard')
-                @include('dashboard.components.earningsPerRankCard')
-                @include('dashboard.components.comissionsCard')
-                @include('dashboard.components.passivesCard')
+                @include('dashboard.components.licenseBonus')
+                @include('dashboard.components.MLMPAMM')
+                @include('dashboard.components.balancePAMM')
             </div>
         </div>
         <div class="col-sm-12 ">
             <div class="row">
-                <div class="col-lg-6 h-25">
-                    <div class="row match-height">
-                        {{-- @include('dashboard.components.referral-link') --}}
-                        @include('dashboard.components.referral_binary_side')
-                        @include('dashboard.components.referralsCard')
-                    </div>
+                <div class="row">
+                    @include('dashboard.components.referral_binary_side')
+                    @include('dashboard.components.rangeCard')
                 </div>
-                @include('dashboard.components.rangeCard')
-                @include('dashboard.components.historyPackagesTable')
-                @include('dashboard.components.historyBonusTable')
+                <div class="row match-height">
+                    @include('dashboard.components.referralsCard')
+                </div>
+                <div class="row match-height">
+                    @include('dashboard.components.historyBonusTable')
+                    @include('dashboard.components.gain-chart')
+                </div>
             </div>
         </div>       
     </div>
@@ -314,6 +324,7 @@
 @endsection
 @section('page-script')
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
     <script>
         $('.myTable').DataTable({
             responsive: false,
@@ -461,17 +472,21 @@
         packageRadialChart.render();
 
         $(document).ready(() => {
+            getDaysChart();
             getRadialPackageChartData();
             getBonusChartsData();
             getProfitsData();
+            getWalltetData();
             // afilliatesChart();
             // getRentChart(user_id);
         });
 
         function getDaysChart() {
+            let url = "{!! route('get.days.chart', 'replace_this') !!}";
+            url = url.replace('replace_this', user_id);
             $.ajax({
-                url: 'api/days-chart',
-                type: 'POST',
+                url: url,
+                type: 'GET',
                 datatype: 'json',
                 success: (response) => {
                     let total_days = response[0];
@@ -479,7 +494,7 @@
                     let percentage = (days_remaining / total_days) * 100;
                     let color_chart;
                     if (percentage > 50) {
-                        color_chart = "#14c061";
+                        color_chart = "#04D99D";
                     } else if (percentage <= 50 && percentage > 25) {
                         color_chart = "rgb(241, 145, 0)";
                     } else if (percentage <= 25) {
@@ -1240,9 +1255,7 @@
                 })
                 .catch( err => console.log(err) );
         }
-        /*
-         *Obtiene los datos para el gráfico de barras de ganancias mensuales de paquete
-         */
+        /*Obtiene los datos para el gráfico de barras de ganancias mensuales de paquete*/
         const getProfitsData = () => {
             let url = "{!! route('get.package.chart.data', 'replace_this') !!}";
             url = url.replace('replace_this', user_id);
@@ -1259,6 +1272,70 @@
                     profitsBarChart(months, amounts);
                     profitsLineChart(months, amounts);
                     $('#totalProfitsText').text(`USD ${(total).toFixed(2)}`);
+                })
+                .catch(err => console.log(err));
+        }
+
+        const salesChart = (amounts, dates) => {
+            const options = {
+                chart: {
+                    id: 'chart1',
+                    type: 'line',
+                    height: '300px',
+                    zoom: {
+                        enabled: false
+                    },
+                    toolbar: {
+                        show: false,
+                    },
+                },
+                series: [{
+                    color: '#07C4D9',
+                    data: amounts,
+                }],
+                grid: {
+                    position: 'back',
+                    yaxis: {
+                        lines: {
+                            show: true,
+                        }
+                    },  
+                },
+                xaxis: {
+                    categories: dates,
+                },
+                noData: {
+                    text: 'Sin Información',
+                    align: 'center',
+                    verticalAlign: 'middle',
+                    offsetX: 0,
+                    offsetY: 0,
+                    style: {
+                    color: undefined,
+                    fontSize: '15px',
+                    fontFamily: undefined
+                    }
+                }
+            }
+
+            var chart = new ApexCharts( document.querySelector("#line-chart-wallet"), options);
+            chart.render();
+        }
+        
+        /* Obtiene la data para el gráfico de ganancias*/
+        const getWalltetData = () => {
+            let url = "{!! route('get.wallets.avaliable.data', 'replace_this') !!}";
+            url = url.replace('replace_this', user_id);
+            /*const url = "{!! route('get.wallets.avaliable.data') !!}";*/
+            const dates = [];
+            const amounts = [];
+            axios.get(url)
+                .then( res => {
+                    res.data.forEach( item =>{
+                        dates.push(item.date + '');
+                        amounts.push(item.amount);
+                    });
+                    salesChart(amounts,dates);
                 })
                 .catch(err => console.log(err));
         }
