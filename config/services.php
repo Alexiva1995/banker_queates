@@ -41,5 +41,8 @@ return [
         'wallet_to_pay' => env('WALLET_TO_PAY'),
         'secret_key' => env('PAYMENT_PROCESSOR_SECRET_KEY'),
     ],
-
+    'api_whizfx' => [
+        'base_url' => env('URL_WHIZFX'),
+        'x-token' => env('API_TOKEN_WHIZFX'),
+    ],
 ];

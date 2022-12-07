@@ -14,6 +14,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Http;
 
 class RegisterController extends Controller
 {
@@ -135,6 +136,23 @@ class RegisterController extends Controller
                 'countrie_id' => $request->countrie_id,
                 'status' => '0',
             ]);
+            $url = config('services.api_whizfx.base_url');
+            $response = Http::withHeaders([
+                'auth' => config('services.api_whizfx.x-token'),
+            ])->post("{$url}", [
+                'firstname' => $name,
+                'lastname' => $lastname,
+                'address' => '',
+                'email' => $request->email,
+                'country_id' => $request->countrie_id,
+                'phonenumber' => '',
+                'type' => '',
+            ]);
+            if($response->successful()) {
+                return redirect()->route('auth.verify', $user);
+            }else{
+                return back()->with('error', 'Hubo un error, verifica tus datos.');
+            }
             // $dataEmail = [
             //     'user' => $user,
             //   ];
@@ -145,7 +163,6 @@ class RegisterController extends Controller
             // });
             // return redirect()->route('login')->with('success', 'Se ha enviado un correo de Verificación a su email');
             // return redirect()->route('dashboard.index')->with('success', 'Se ha enviado un correo de Verificación a su email');
-            return redirect()->route('auth.verify', $user);
             // return $user;
 
         } catch (\Throwable $th) {
