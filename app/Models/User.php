@@ -460,7 +460,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function cartera()
     {
-        $bonoCartera = WalletComission::where([['user_id', '=', Auth::id()], ['type', '=', 2]])->sum('amount');
+        $bonoCartera = WalletComission::where([['user_id', '=', Auth::id()], ['type', '=', 1]])->sum('amount');
 
         return $bonoCartera;
     }
