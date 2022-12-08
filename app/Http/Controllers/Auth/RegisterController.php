@@ -136,23 +136,23 @@ class RegisterController extends Controller
                 'countrie_id' => $request->countrie_id,
                 'status' => '0',
             ]);
-            $url = config('services.api_whizfx.base_url');
-            $response = Http::withHeaders([
-                'auth' => config('services.api_whizfx.x-token'),
-            ])->post("{$url}", [
-                'firstname' => $name,
-                'lastname' => $lastname,
-                'address' => '',
-                'email' => $request->email,
-                'country_id' => $request->countrie_id,
-                'phonenumber' => '',
-                'type' => '',
-            ]);
-            if($response->successful()) {
+            // $url = config('services.api_whizfx.base_url');
+            // $response = Http::withHeaders([
+            //     'auth' => config('services.api_whizfx.x-token'),
+            // ])->post("{$url}", [
+            //     'firstname' => $name,
+            //     'lastname' => $lastname,
+            //     'address' => '',
+            //     'email' => $request->email,
+            //     'country_id' => $request->countrie_id,
+            //     'phonenumber' => '',
+            //     'type' => '',
+            // ]);
+            // if($response->successful()) {
                 return redirect()->route('auth.verify', $user);
-            }else{
-                return back()->with('error', 'Hubo un error, verifica tus datos.');
-            }
+            // }else{
+            //     return back()->with('error', 'Hubo un error, verifica tus datos.');
+            // }
             // $dataEmail = [
             //     'user' => $user,
             //   ];
