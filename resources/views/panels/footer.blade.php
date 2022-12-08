@@ -1,7 +1,7 @@
 <!-- BEGIN: Footer-->
 <style>
   .bg-footer{
-    background-image: url('{{asset('images/dashboard/wp-horizonta.png')}}');
+    /* background-image: url('{{asset('images/dashboard/wp-horizonta.png')}}'); */
     background-position: center;
     background-repeat: no-repeat;
     background-size: 100%;

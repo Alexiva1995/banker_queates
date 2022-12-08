@@ -35,10 +35,12 @@
             <div class="card-content p-50">
                 <div class="card-header p-0">
                     <h4 class="fw-700">Comisiones</h4>
+                    @if(auth()->user()->admin == 1)
                     <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button"
                         aria-expanded="false" aria-controls="collapseExample">
                         Filtros
                     </a>
+                    @endif
                 </div>
                 <div class="card-body card-dashboard p-0">
                     @if(auth()->user()->admin == 1)
@@ -230,7 +232,7 @@
             }
         }
     })
-    
+
     const btn_clear = document.querySelector('#btn_clear');
     // Clear filter inputs
     btn_clear.addEventListener('click', ()=>{

@@ -325,9 +325,9 @@
           </a>
           <div class="dropdown-menu  dropdown-menu-end" aria-labelledby="dropdown-user" >
             @if(Auth::user()->admin == 1 || Auth::user()->status == 1 || Auth::user()->admin == 2)
-              <a class="dropdown-item text-light" href="{{url('profile')}}">
+              {{-- <a class="dropdown-item text-light" href="{{url('profile')}}">
                 <i class="me-1 text-primary" data-feather="user" ></i> Mi Perfil
-              </a>
+              </a> --}}
             @else
             <a class="dropdown-item text-light" href="#">
               <i class="me-1 text-primary" data-feather="user"></i> Mi Perfil

@@ -67,9 +67,6 @@ Route::get('/delete', [ReportController::class, 'cron'])->name('delete');
 Route::get('/massive/mail', [UserController::class, 'massiveMail']);
 
 
-
-
-
 Route::get('/futswap_confirmation', function () {
     Artisan::call('futswap:canceled');
     return 'DONE'; //Return anything
