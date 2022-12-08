@@ -214,6 +214,7 @@ Route::middleware('auth')->group(function () {
         //Ruta para transferir saldo licencias
         Route::post('transfer-licencias', [WalletController::class, 'transferLicencias'])->name('transfer.licencias');
         Route::get('/comisiones', [WalletController::class, 'comisiones'])->name('reports.comision');
+        Route::post('/comisiones', [WalletController::class, 'comisiones'])->name('reports.comision.filter');
 
 
         // ruta para el envio del codigo de seguridad para enlazar una wallet

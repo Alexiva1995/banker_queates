@@ -13,7 +13,7 @@
                     "url": "/comisiones",
                     "name": "Comisiones",
                     "icon": "circle",
-                    "slug": "comisiones"
+                    "slug": "reports.comision"
                 },
                 {
                     "url": "/reports/withdraw",

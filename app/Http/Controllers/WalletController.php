@@ -18,7 +18,6 @@ use Illuminate\Support\Facades\Hash;
 
 class WalletController extends Controller
 {
-    //
     use Tree;
 
     public function bonoCartera(){
@@ -59,7 +58,6 @@ class WalletController extends Controller
             abort(403, "Ocurrio un error, contacte con el administrador");
         }
     }
-
     /**
      * Permite obtener el total disponible en comisiones
      *
@@ -86,18 +84,100 @@ class WalletController extends Controller
      * @param integer $user_id
      * @return float
      */
-    public function comisiones()
+    public function comisiones(Request $request)
     {
         $user = auth()->user();
+
+        $user_id = null;
+        
+        $buyer_id = null;
+
+        $user_name = null;
+
+        $buyer_name = null;
+
+        $comission_type = null;
+
+        $comission_status = null;
+
+        $date_from = null;
+
+        $date_to = null;
+
+        if($request->isMethod('post') && $user->admin == 1)
+        {
+            $query = WalletComission::with(['user', 'buyer'])->orderBy('id', 'desc');
+
+            $user_id = $request->user_id;
+
+            $user_name = $request->user_name;  
+
+            $buyer_name = $request->buyer_name;   
+            
+            $buyer_id = $request->buyer_id;
+
+            $comission_type = $request->comission_type;
+
+            $comission_status = $request->comission_status;
+
+            $date_from = $request->date_from;
+
+            $date_to = $request->date_to;
+
+            if($request->has('user_id') && $request->user_id !== null) 
+            {
+                $query->orWhere('user_id', $user_id);
+            }
+            
+            if($request->has('buyer_id') && $request->buyer_id !== null)
+            {
+                $query->orWhere('buyer_id', $buyer_id);
+            }
+
+            if($request->has('user_name') && $request->user_name !== null) 
+            {
+                $query->whereHas('user', function($q) use($user_name){
+                    $q->where('name', 'LIKE', "%{$user_name}%");
+                });
+            }
+
+            if($request->has('buyer_name') && $request->buyer_name !== null)
+            {
+                $query->whereHas('buyer', function($q) use($buyer_name){
+                    $q->where('name', 'LIKE', "%{$buyer_name}%");
+                });
+            }
+
+            if($request->has('comission_type') && $request->comission_type !== null)
+            {
+                $query->orWhere('type', $comission_type);
+            }
+
+            if($request->has('comission_status') && $request->comission_status !== null)
+            {
+                $query->orWhere('status', $comission_status);
+            }
+
+            if($request->has('date_from') && $request->date_from !== null && $request->has('date_to') && $request->date_to != null)
+            {
+                $query->whereDate('created_at', '>=', $date_from)
+                      ->whereDate('created_at', '<=', $date_to);
+            }
+
+            $wallets = $query->get();
+
+            return view('reports.comision', compact('wallets','user_id','user_name', 'buyer_name', 'buyer_id', 'comission_type', 'comission_status', 'date_from', 'date_to'));
+        }
+
         if($user->admin == 1){
             $wallets = WalletComission::with('user')->orderBy('id', 'desc')->get();
         } else {
             $wallets = WalletComission::where([['user_id', '=', $user->id]])->with('user')->orderBy('id', 'desc')->get();
         }
-        return view('reports.comision', compact('wallets'));
+        return view('reports.comision', compact('wallets','user_id', 'user_name', 'buyer_name', 'buyer_id', 'comission_type', 'comission_status', 'date_from', 'date_to'));
     }
 
-     public function walletOption(Request $request)
+    public function walletOption(Request $request)
     {
 
         $data = $request->validate([
