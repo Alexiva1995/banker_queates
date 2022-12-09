@@ -1,5 +1,5 @@
 <div class="col-md-3">
-    <div class="card p-2">
+    <div class="card-d p-2 mb-2">
         <div class="avatar bg-light-primary avatar-md me-auto mb-1 custom-avatar-content" >
             <div class="avatar-content">
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -11,8 +11,8 @@
         </div>
         <div class="texto">
             <!-- wallets_commissions tipo 5 -->
-            <h3 class="fw-700 mb-25">USDT {{ number_format($user->rendimientoAvailable(), 2, ',', '.') }}</h3>
-            <p class="font-medium-2 mb-0" >Balance PAMM</p>
+            <h3 class="fw-700 mb-25 texto">USDT {{ number_format($user->rendimientoAvailable(), 2, ',', '.') }}</h3>
+            <p class="font-medium-2 mb-0 texto" >Balance PAMM</p>
         </div>
     </div>
 </div>

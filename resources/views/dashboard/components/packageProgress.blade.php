@@ -1,5 +1,5 @@
 <div class="col-md-5">
-    <div class="card p-2 mb-2">
+    <div class="card-d p-2 mb-2">
         <h5 class="fw-700">Avances del paquete</h5>
             <select class="select2 form-control" name="package_select" id="package_select"
                 data-toggle="select" class="form-control">

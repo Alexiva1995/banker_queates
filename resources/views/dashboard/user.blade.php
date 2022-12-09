@@ -263,6 +263,24 @@
                 margin-top: 0rem;
             }
         }
+    .card-d{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid #05B1D966;
+    border-radius: 10px;
+}
+.gradient{
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, #05A4EA, #02D6AC 100%);
+}
+.texto{
+    color:#04D99D;
+}
     </style>
 
     <div class="container-fluid container-custom">
@@ -494,7 +512,7 @@
                     let percentage = (days_remaining / total_days) * 100;
                     let color_chart;
                     if (percentage > 50) {
-                        color_chart = "#04D99D";
+                        color_chart = "#05A5E9";
                     } else if (percentage <= 50 && percentage > 25) {
                         color_chart = "rgb(241, 145, 0)";
                     } else if (percentage <= 25) {
@@ -511,14 +529,14 @@
         function daysChart(percentage, days_remaining, color_chart) {
             goalChartOptions = {
                 chart: {
-                    height: 220,
+                    height: 260,
                     width: '100%',
                     type: 'radialBar',
                     sparkline: {
                         enabled: true
                     },
                     dropShadow: {
-                        enabled: true,
+                        enabled: false,
                         blur: 3,
                         left: 1,
                         top: 1,
@@ -548,7 +566,7 @@
                         dataLabels: {
                             value: {
                                 offsetY: -12,
-                                color: '#808E9E',
+                                color: '#05A5E9',
                                 fontSize: '40px',
                                 fontWeight: '900',
                                 formatter: function(val) {
@@ -601,7 +619,7 @@
                     let percentage = (gained / maxGain) * 100;
                     let color_chart;
                     if (percentage > 70) {
-                        color_chart = "#14c061";
+                        color_chart = "#05A5E9";
                     } else if (percentage <= 70 && percentage > 40) {
                         color_chart = "rgb(241, 145, 0)";
                     } else if (percentage <= 40) {
@@ -636,7 +654,7 @@
                 stroke: {
                     width: 8
                 },
-                colors: ['#14c061', '#FF4969'],
+                colors: ['#05A5E9', '#FF4969'],
 
             };
 

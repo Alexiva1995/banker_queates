@@ -1,5 +1,5 @@
 <div class="col-md-7">
-    <div class="card p-2 mb-2">
+    <div class="card-d p-2 mb-2">
         <div class="col-sm-12 ">
             <h5 class="fw-700">Ganancias</h5>
             <div class="row fd-sm ">
