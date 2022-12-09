@@ -85,29 +85,29 @@
     <div class="card p-2">
         <div class="card-body p-0">
 
-            <div class="row">
-                <h6 class="card-title customTexto">Licencia Actual</h6>
-                
-                <div class="col-sm-5 col-md-6">
-                    @if(Auth::user()->investment == null)
-                         <div class="square-active d-flex justify-content-center align-items-center">
-                            <p class="text-center mb-0 no-rank-txt" style="color:#000">Sin licencia</p>
-                        </div>
-                    @else
-                        <div class="d-flex justify-content-center align-items-center">
-                            <img src="{{ asset('images/licencias/id/'.Auth::user()->investment->package_id.'.png') }}" height="150" width="150">
-                        </div>
-                        <p class="text-center mb-0 no-rank-txt" style="color:#000">Licencia Activa</p>
-                        <p class="text-center mb-0 no-rank-txt" style="color:#000"><strong> {{ Auth::user()->investment->LicensePackage->name }}</strong></p>
-                    @endif
-                </div>
-
-                <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">
-                    {{-- Grafico Dias Faltantes --}}
-                        <div class="sk-circles sk-circles-up me-2">
-                            <div id="chartDays" style=""></div>
+                <div class="row">
+                    <h6 class="card-title customTexto">Licencia Actual</h6>
+                    
+                    <div class="col-sm-5 col-md-6">
+                        @if(Auth::user()->investment == null)
+                            <div class="square-active d-flex justify-content-center align-items-center">
+                                <p class="text-center mb-0 no-rank-txt" style="color:#000">Sin licencia</p>
                             </div>
-                        </div>
+                        @else
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img src="{{ asset('images/licencias/id/'.Auth::user()->investment->package_id.'.png') }}" height="150" width="150">
+                            </div>
+                            <p class="text-center mb-0 no-rank-txt" style="color:#000">Licencia Activa</p>
+                            <p class="text-center mb-0 no-rank-txt" style="color:#000"><strong> {{ Auth::user()->investment->LicensePackage->name }}</strong></p>
+                        @endif
+                    </div>
+
+                    <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">
+                        {{-- Grafico Dias Faltantes --}}
+                            <div class="sk-circles sk-circles-up me-2">
+                                <div id="chartDays" style=""></div>
+                                </div>
+                    </div>
                 </div>
             </div>
         </div>
