@@ -56,12 +56,29 @@ class ReportController extends Controller
     public function withdraw()
     {
         $user = auth()->user();
+
+        $user_id = null;
+
+        $user_name = null;
+
+        $liquidation_status = [];
+
+        $hash = null;
+
+        $request_date_from = null;
+        
+        $request_date_to = null;
+
+        $payment_date_from = null;
+        
+        $payment_date_to = null;
+        
         if($user->admin == 1){
             $liquidactions = Liquidation::with('user')->orderBy('id', 'desc')->get();
         } else {
             $liquidactions = Liquidation::where('user_id', $user->id)->with('user')->orderBy('id', 'desc')->get();
         }
-        return view('reports.withdraw', compact('liquidactions'));
+        return view('reports.withdraw', compact('liquidactions', 'user_id', 'user_name', 'liquidation_status', 'hash', 'request_date_from', 'request_date_to', 'payment_date_from', 'payment_date_to'));
     }
     public function cashflow()
     {

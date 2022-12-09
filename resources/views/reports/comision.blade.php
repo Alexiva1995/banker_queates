@@ -112,7 +112,6 @@
                             </div>
                         </form>
                     </div>
-
                     @endif
                     <div class="table-responsive">
                         <table class="table w-100 nowrap scroll-horizontal-vertical myTable table-striped w-100">
