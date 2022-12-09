@@ -96,9 +96,9 @@ class WalletController extends Controller
 
         $buyer_name = null;
 
-        $comission_type = null;
+        $comission_type = [];
 
-        $comission_status = null;
+        $comission_status = [];
 
         $date_from = null;
 
@@ -115,10 +115,6 @@ class WalletController extends Controller
             $buyer_name = $request->buyer_name;   
             
             $buyer_id = $request->buyer_id;
-
-            $comission_type = $request->comission_type;
-
-            $comission_status = $request->comission_status;
 
             $date_from = $request->date_from;
 
@@ -150,12 +146,23 @@ class WalletController extends Controller
 
             if($request->has('comission_type') && $request->comission_type !== null)
             {
-                $query->orWhere('type', $comission_type);
+                $comission_type = $request->comission_type;
+
+                foreach($comission_type as  $type)
+                {
+                    $query->orWhere('type', $type);
+                }
             }
 
             if($request->has('comission_status') && $request->comission_status !== null)
             {
-                $query->orWhere('status', $comission_status);
+                $comission_status = $request->comission_status;
+
+                foreach($comission_status as  $status)
+                {
+                    $query->orWhere('status', $status);
+                }
+
             }
 
             if($request->has('date_from') && $request->date_from !== null && $request->has('date_to') && $request->date_to != null)
@@ -174,6 +181,7 @@ class WalletController extends Controller
         } else {
             $wallets = WalletComission::where([['user_id', '=', $user->id]])->with('user')->orderBy('id', 'desc')->get();
         }
+
         return view('reports.comision', compact('wallets','user_id', 'user_name', 'buyer_name', 'buyer_id', 'comission_type', 'comission_status', 'date_from', 'date_to'));
     }
 

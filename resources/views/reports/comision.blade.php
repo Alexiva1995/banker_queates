@@ -6,6 +6,8 @@
 <!-- vendor css files -->
 <link rel="stylesheet" href="{{ asset(mix('vendors/css/charts/apexcharts.css')) }}">
 <link rel="stylesheet" href="{{ asset(mix('vendors/css/tables/datatable/dataTables.bootstrap5.min.css')) }}">
+<link rel="stylesheet" href="https://cdn.rawgit.com/wenzhixin/multiple-select/e14b36de/multiple-select.css">
+
 @endsection
 <style>
     .fw-700 {
@@ -60,12 +62,12 @@
                                 </div>
                                 <div class="mb-2 col-md-4 col-sm-12">
                                     <label for="user_name" class="form-label">Tipo de Comision</label>
-                                    <select class="form-select" name="comission_type" id="comission_type"
+                                    <select class="form-select" name="comission_type[]" id="comission_type" multiple
                                         aria-label="Default select example">
-                                        <option selected value="">Seleccione un tipo</option>
-                                        <option value="0" {{ $comission_type == '0' ? 'selected' : ''}}>MLM PAMM</option>
-                                        <option value="1" {{ $comission_type == '1' ? 'selected' : ''}}>Binario</option>
-                                        <option value="2" {{ $comission_type == '2' ? 'selected' : ''}}>Asignado</option>
+                                        <option value="0" {{ in_array('0', $comission_type) ? "selected" : null }}
+                                        >MLM PAMM</option>
+                                        <option value="1" {{ in_array('1', $comission_type) ? "selected" : null }}>Binario</option>
+                                        <option value="2" {{ in_array('2', $comission_type) ? "selected" : null }}>Asignado</option>
                                     </select>
                                 </div>
 
@@ -81,13 +83,12 @@
                                 </div>
                                 <div class="mb-2 col-md-4 col-sm-12">
                                     <label for="comission_status" class="form-label">Estado de Comision</label>
-                                    <select class="form-select" name="comission_status" id="comission_status"
-                                        aria-label="Default select example">
-                                        <option selected value="">Seleccione un estado</option>
-                                        <option value="0" {{ $comission_status == '0' ? 'selected' : ''}}>Disponible</option>
-                                        <option value="1" {{ $comission_status == '1' ? 'selected' : ''}}>Solicitada</option>
-                                        <option value="2" {{ $comission_status == '2' ? 'selected' : ''}}>Pagada</option>
-                                        <option value="3" {{ $comission_status == '3' ? 'selected' : ''}}>Anulada</option>
+                                    <select class="form-select" name="comission_status[]" id="comission_status"
+                                        aria-label="Default select example" multiple>
+                                        <option value="0" {{ in_array('0', $comission_status) ? "selected" : null }}>Disponible</option>
+                                        <option value="1" {{ in_array('1', $comission_status) ? "selected" : null }}>Solicitada</option>
+                                        <option value="2" {{ in_array('2', $comission_status) ? "selected" : null }}>Pagada</option>
+                                        <option value="3" {{ in_array('3', $comission_status) ? "selected" : null }}>Anulada</option>
                                     </select>
                                 </div>
 
@@ -105,7 +106,7 @@
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-primary">Buscar</button>
 
-                                    <a class="btn btn-info" id="btn_clear">Limpiar filtros</a>
+                                    {{-- <a class="btn btn-info" id="btn_clear">Limpiar filtros</a> --}}
                                 </div>
 
                             </div>
@@ -196,11 +197,22 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+<!-- Include plugin -->
+<script src="https://cdn.rawgit.com/wenzhixin/multiple-select/e14b36de/multiple-select.js"></script>
 
 
 @endsection
 @section('page-script')
 <script>
+     // Initialize multiple select on your regular select
+    $("#comission_type").multipleSelect({
+        filter: false
+    });
+
+    $("#comission_status").multipleSelect({
+        filter: false
+    });
+
     //datataables ordenes
     $('.myTable').DataTable({
         responsive: false,
@@ -233,17 +245,17 @@
         }
     })
 
-    const btn_clear = document.querySelector('#btn_clear');
-    // Clear filter inputs
-    btn_clear.addEventListener('click', ()=>{
-        document.querySelector('#user_id').value = '';
-        document.querySelector('#user_name').value = '';
-        document.querySelector('#buyer_id').value = '';
-        document.querySelector('#buyer_name').value = '';
-        document.querySelector('#date_from').value = '';
-        document.querySelector('#date_to').value = '';
-        document.querySelector('#comission_status').value = '';
-        document.querySelector('#comission_type').value = '';
-    });
+    // const btn_clear = document.querySelector('#btn_clear');
+    // // Clear filter inputs
+    // btn_clear.addEventListener('click', ()=>{
+    //     document.querySelector('#user_id').value = '';
+    //     document.querySelector('#user_name').value = '';
+    //     document.querySelector('#buyer_id').value = '';
+    //     document.querySelector('#buyer_name').value = '';
+    //     document.querySelector('#date_from').value = '';
+    //     document.querySelector('#date_to').value = '';
+    //     document.querySelector('#comission_status').value = '';
+    //     document.querySelector('#comission_type').value = '';
+    // });
 </script>
 @endsection
