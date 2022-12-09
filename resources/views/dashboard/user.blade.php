@@ -310,14 +310,14 @@
             <div class="row">
                 <div class="row">
                     @include('dashboard.components.referral_binary_side')
-                    @include('dashboard.components.rangeCard')
+                    @include('dashboard.components.licenciaCard')
                 </div>
                 <div class="row match-height">
-                    @include('dashboard.components.referralsCard')
+                    @include('dashboard.components.rangoCard')
                 </div>
                 <div class="row match-height">
-                    @include('dashboard.components.historyBonusTable')
                     @include('dashboard.components.gain-chart')
+                    @include('dashboard.components.historyBonusTable')
                 </div>
             </div>
         </div>       
@@ -495,7 +495,7 @@
             getBonusChartsData();
             getProfitsData();
             getWalltetData();
-            // afilliatesChart();
+             afilliatesChart();
             // getRentChart(user_id);
         });
 
@@ -631,36 +631,7 @@
             });
         }
 
-        function afilliatesChart() {
-            let activeAfilliates = {!! 0 !!};
-            let inactiveAfilliates = {!! 0 !!};
-            const chartAfiliadosOptions = {
-                chart: {
-                    type: 'donut',
-                    height: 250,
-                    toolbar: {
-                        show: false
-                    }
-                },
-                dataLabels: {
-                    enabled: false
-                },
-                series: [activeAfilliates, inactiveAfilliates],
-                legend: {
-                    show: false
-                },
-                comparedResult: [2, -3, 8],
-                labels: ['Usuarios Activos', 'Usuarios Inactivos'],
-                stroke: {
-                    width: 8
-                },
-                colors: ['#05A5E9', '#FF4969'],
-
-            };
-
-            const chartAfiliados = new ApexCharts(document.querySelector("#chartAfiliados"), chartAfiliadosOptions);
-            chartAfiliados.render();
-        }
+       
 
         function rentChart(percentage, gained, color_chart) {
             chartRentOptions = {
