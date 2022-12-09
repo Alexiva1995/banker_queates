@@ -223,6 +223,7 @@ Route::middleware('auth')->group(function () {
 
         //Route Retiros
         Route::get('/reports/withdraw', [ReportController::class, 'withdraw'])->name('reports.withdraw');
+        Route::post('/reports/withdraw', [ReportController::class, 'withdraw'])->name('reports.withdraw.filter');
         Route::get('/withdraw', [LiquidactionController::class, 'withdraw'])->name('business.withdraw');
         Route::post('/withdraw-capital', [LiquidactionController::class, 'withdrawCapital'])->name('business.withdraw-capital');
         Route::post('/procesar-retiro-capital', [LiquidactionController::class, 'procesarRetiroCapital'])->name('settlement.procesarRetiroCapital');

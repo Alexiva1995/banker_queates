@@ -74,30 +74,30 @@
 
                                     <div class="mb-2 col-md-4 col-sm-12">
                                         <label for="hash" class="form-label">Hash</label>
-                                        <input type="number" class="form-control" id="hash" name="hash"
+                                        <input type="text" class="form-control" id="hash" name="hash"
                                         @if($hash != null) value="{{$hash}}" @endif>
                                     </div>
 
                                     <div class="mb-2 col-md-4 col-sm-12">
-                                        <label for="request_date_from" class="form-label">Desde</label>
+                                        <label for="request_date_from" class="form-label">Solicitudes Desde</label>
                                         <input type="date" class="form-control" id="request_date_from" name="request_date_from"
                                         @if($request_date_from != null) value="{{ $request_date_from }}"  @endif>
                                     </div>
 
                                     <div class="mb-2 col-md-4 col-sm-12">
-                                        <label for="request_date_to" class="form-label">Hasta</label>
+                                        <label for="request_date_to" class="form-label">Solicitudes Hasta</label>
                                         <input type="date" class="form-control" id="request_date_to" name="request_date_to"
                                         @if($request_date_to != null) value="{{ $request_date_to }}"  @endif>
                                     </div>
 
                                     <div class="mb-2 col-md-6 col-sm-12">
-                                        <label for="payment_date_from" class="form-label">Desde</label>
+                                        <label for="payment_date_from" class="form-label">Pagos Desde</label>
                                         <input type="date" class="form-control" id="payment_date_from" name="payment_date_from"
                                         @if($payment_date_from != null) value="{{ $payment_date_from }}"  @endif>
                                     </div>
 
                                     <div class="mb-2 col-md-6 col-sm-12">
-                                        <label for="payment_date_to" class="form-label">Hasta</label>
+                                        <label for="payment_date_to" class="form-label">Pagos Hasta</label>
                                         <input type="date" class="form-control" id="payment_date_to" name="payment_date_to"
                                         @if($payment_date_to != null) value="{{ $payment_date_to }}"  @endif>
                                     </div>
@@ -105,6 +105,7 @@
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-primary">Buscar</button>
                                         {{-- <a class="btn btn-info" id="btn_clear">Limpiar filtros</a> --}}
+                                        <a class="btn btn-info" href="{{route('reports.withdraw')}}">Limpiar filtros</a>
                                     </div>
 
                                 </div>

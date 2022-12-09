@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\Utility;
 use App\Models\WalletComission;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 
 class ReportController extends Controller
@@ -53,7 +54,7 @@ class ReportController extends Controller
 
         return view('reports.anuales', compact('ordenes'));
     }
-    public function withdraw()
+    public function withdraw(Request $request)
     {
         $user = auth()->user();
 
@@ -72,6 +73,77 @@ class ReportController extends Controller
         $payment_date_from = null;
         
         $payment_date_to = null;
+
+        if($request->isMethod('post') && $user->admin == 1)
+        {
+
+            $query = Liquidation::with(['user']);
+
+            $user_id = $request->user_id;
+
+            $user_name = $request->user_name;  
+
+            $hash = $request->hash;
+
+            $request_date_from = $request->request_date_from;
+
+            $request_date_to = $request->request_date_to;
+
+            $payment_date_from = $request->payment_date_from;
+            
+            $payment_date_to = $request->payment_date_to;
+
+            if($request->has('user_id') && $request->user_id !== null) 
+            {
+                $query->orWhere('user_id', $user_id);
+            }
+
+            if($request->has('user_name') && $request->user_name !== null) 
+            {
+                $query->whereHas('user', function($q) use($user_name){
+                    $q->where('name', 'LIKE', "%{$user_name}%");
+                });
+            }
+
+            if($request->has('buyer_name') && $request->buyer_name !== null)
+            {
+                $query->whereHas('buyer', function($q) use($buyer_name){
+                    $q->where('name', 'LIKE', "%{$buyer_name}%");
+                });
+            }
+
+            if($request->has('liquidation_status') && $request->liquidation_status !== null)
+            {
+                $liquidation_status = $request->liquidation_status;
+
+                foreach($liquidation_status as  $status)
+                {
+                    $query->orWhere('status', $status);
+                }
+
+            }
+
+            if($request->has('hash') && $request->hash !== null) 
+            {
+                $query->orWhere('hash', $hash);
+            }
+
+            if($request->has('request_date_from') && $request->request_date_from !== null && $request->has('request_date_to') && $request->request_date_to != null)
+            {
+                $query->whereDate('created_at', '>=', $request_date_from)
+                      ->whereDate('created_at', '<=', $request_date_to);
+            }
+
+            if($request->has('payment_date_from') && $request->payment_date_from !== null && $request->has('payment_date_to') && $request->payment_date_to != null)
+            {
+                $query->whereDate('updated_at', '>=', $payment_date_from)
+                      ->whereDate('updated_at', '<=', $payment_date_to);
+            }
+
+            $liquidactions = $query->orderBy('id', 'desc')->get();
+
+            return view('reports.withdraw', compact('liquidactions', 'user_id', 'user_name', 'liquidation_status', 'hash', 'request_date_from', 'request_date_to', 'payment_date_from', 'payment_date_to'));
+        }
         
         if($user->admin == 1){
             $liquidactions = Liquidation::with('user')->orderBy('id', 'desc')->get();
