@@ -195,6 +195,7 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::get('/ordenes', [ReportController::class, 'ordenes'])->name('ordenes.index');
+        Route::post('/ordenes', [ReportController::class, 'ordenes'])->name('ordenes.index.filter');
         Route::post('/cambiarStatus', [TiendaController::class, 'cambiar_status'])->name('orders.cambiarStatus');
         Route::get('/reports/utility', [ReportController::class, 'utility'])->name('reports.utility');
         Route::get('inversiones', [BusinessController::class, 'inversiones'])->name('business.invest');
