@@ -67,9 +67,6 @@ Route::get('/delete', [ReportController::class, 'cron'])->name('delete');
 Route::get('/massive/mail', [UserController::class, 'massiveMail']);
 
 
-
-
-
 Route::get('/futswap_confirmation', function () {
     Artisan::call('futswap:canceled');
     return 'DONE'; //Return anything
@@ -214,6 +211,7 @@ Route::middleware('auth')->group(function () {
         //Ruta para transferir saldo licencias
         Route::post('transfer-licencias', [WalletController::class, 'transferLicencias'])->name('transfer.licencias');
         Route::get('/comisiones', [WalletController::class, 'comisiones'])->name('reports.comision');
+        Route::post('/comisiones', [WalletController::class, 'comisiones'])->name('reports.comision.filter');
 
 
         // ruta para el envio del codigo de seguridad para enlazar una wallet
