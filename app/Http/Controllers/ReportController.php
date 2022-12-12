@@ -152,36 +152,25 @@ class ReportController extends Controller
 
             $query = Liquidation::with(['user']);
 
-            $user_id = $request->user_id;
-
-            $user_name = $request->user_name;  
-
-            $hash = $request->hash;
-
-            $request_date_from = $request->request_date_from;
-
-            $request_date_to = $request->request_date_to;
-
-            $payment_date_from = $request->payment_date_from;
-            
-            $payment_date_to = $request->payment_date_to;
-
             if($request->has('user_id') && $request->user_id !== null) 
             {
-                $query->orWhere('user_id', $user_id);
+                $user_id = $request->user_id;
+
+                $query->where('user_id', $user_id);
             }
 
             if($request->has('user_name') && $request->user_name !== null) 
             {
+                $user_name = $request->user_name; 
                 $query->whereHas('user', function($q) use($user_name){
-                    $q->where('name', 'LIKE', "%{$user_name}%");
+                    $q->where('name', $user_name);
                 });
             }
 
             if($request->has('buyer_name') && $request->buyer_name !== null)
             {
                 $query->whereHas('buyer', function($q) use($buyer_name){
-                    $q->where('name', 'LIKE', "%{$buyer_name}%");
+                    $q->where('name', $buyer_name);
                 });
             }
 
@@ -189,26 +178,39 @@ class ReportController extends Controller
             {
                 $liquidation_status = $request->liquidation_status;
 
-                foreach($liquidation_status as  $status)
+                foreach($liquidation_status as $key => $status)
                 {
-                    $query->orWhere('status', $status);
+                    if($key == 0) {
+                        $query->where('status', $status);
+                    } else {
+                        $query->orWhere('status', $status);
+                    }
                 }
 
             }
 
             if($request->has('hash') && $request->hash !== null) 
             {
-                $query->orWhere('hash', $hash);
+                $hash = $request->hash;
+                $query->where('hash', $hash);
             }
 
             if($request->has('request_date_from') && $request->request_date_from !== null && $request->has('request_date_to') && $request->request_date_to != null)
             {
+                $request_date_from = $request->request_date_from;
+
+                $request_date_to = $request->request_date_to;
+
                 $query->whereDate('created_at', '>=', $request_date_from)
                       ->whereDate('created_at', '<=', $request_date_to);
             }
 
             if($request->has('payment_date_from') && $request->payment_date_from !== null && $request->has('payment_date_to') && $request->payment_date_to != null)
             {
+                $payment_date_from = $request->payment_date_from;
+            
+                $payment_date_to = $request->payment_date_to;
+
                 $query->whereDate('updated_at', '>=', $payment_date_from)
                       ->whereDate('updated_at', '<=', $payment_date_to);
             }
