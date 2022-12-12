@@ -109,11 +109,60 @@ class LiquidactionController extends Controller
     {
         return view("liquidaciones.validacion");
     }
-    public function realizadas()
+    public function realizadas(Request $request)
     {
+        $user_id = null;
+        $user_name = null;
+        $email = null;
+        $hash = null;
+
+        if( $request->isMethod('post') )
+        {
+            $query =  Liquidation::where('status', 1)->with('user');
+
+            if($request->has('user_id') && $request->user_id !== null) 
+            {
+                $user_id = $request->user_id;
+
+                $query->where('user_id', $user_id);
+            }
+
+            if($request->has('hash') && $request->hash !== null) 
+            {
+                $hash = $request->hash;
+
+                $query->where('hash', $hash);
+            }
+
+            if($request->has('user_name') && $request->user_name !== null) 
+            {
+                $user_name = $request->user_name;
+
+                $query->whereHas('user', function($q) use($user_name){
+                    $q->where('name',$user_name);
+                });
+            }
+
+            if($request->has('email') && $request->email !== null) 
+            {
+                $email = $request->email;
+                
+                $query->whereHas('user', function($q) use($email){
+                    $q->where('email', $email);
+                });
+
+            }
+
+            $liquidaciones = $query->orderBy('id', 'desc')->get();
+
+            return view('liquidaciones.realizadas', compact('liquidaciones', 'user_id', 'user_name', 'email', 'hash'));
+
+        }
+
+
         $liquidaciones = Liquidation::where('status', 1)->with('user')->orderBy('id', 'desc')->get();
 
-        return view('liquidaciones.realizadas', compact('liquidaciones'));
+        return view('liquidaciones.realizadas', compact('liquidaciones', 'user_id', 'user_name', 'email', 'hash'));
     }
 
     public function pendientes(Request $request)

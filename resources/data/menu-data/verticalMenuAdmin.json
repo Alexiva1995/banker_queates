@@ -68,8 +68,8 @@
         {
             "name": "Edición de saldo",
             "icon": "home",
-            "slug": "Edicion-Saldo-Index",
-            "url": "/search"
+            "slug": "search.id",
+            "url": "/search.id"
         },
         {
             "name": "Soporte",
