@@ -125,7 +125,7 @@ Route::middleware('auth')->group(function () {
             //USERS
             Route::prefix('user')->group(function () {
                 Route::get('user-list', [UserController::class, 'listUser'])->name('user.list-user');
-                Route::post('/user-list', [UserController::class, 'searchUsers'])->name('search.users');
+                Route::post('user-list', [UserController::class, 'listUser'])->name('user.list-user.filter');
 
                 Route::get('expired/license/list', [UserController::class, 'ExpiredLicenseUserList'])->name('user.expired.licenses.list');
                 Route::get('user-view/{id}', [UserController::class, 'userView'])->name('user.user-view');

@@ -74,12 +74,92 @@ class UserController extends Controller
         return view('user.user-view', compact('country', 'user', 'wallet', 'invertido', 'prefix'));
     }
 
-    public function listUser()
+    public function listUser(Request $request)
     {
+        $user_name = null;
+
+        $user_email = null;
+
+        $licenses = [];
+
+        $pamm = null;
+        
+        $buyer_id = null;
+
+        $user_status = [];
+
+        if( $request->isMethod('post') )
+        {
+            // return $request;
+            $query = User::where('admin', '0')->with('padre', 'investment.LicensePackage', 'countrie');
+
+            if($request->has('user_name') && $request->user_name !== null) 
+            {
+                $user_name = $request->user_name;
+
+                $query->where('name', 'LIKE', $user_name);
+            }
+            // TODO: integrar con api?
+            if($request->has('pamm') && $request->pamm !== null) 
+            {
+                $user_name = $request->pamm;
+
+                // $query->whereHas('user', function($q) use($user_name){
+                //     $q->where('email', $user_name);
+                // });
+            }
+            
+            if($request->has('buyer_id') && $request->buyer_id !== null) 
+            {
+                $buyer_id = $request->buyer_id;
+
+                $query->where('buyer_id', $buyer_id);
+            }
+
+            if($request->has('user_email') && $request->user_email !== null) 
+            {
+                $user_email = $request->user_email;
+
+                $query->where('email', $user_email);
+            }
+
+            if($request->has('licenses') && $request->licenses !== null)
+            {
+
+                $licenses = $request->licenses;
+
+                foreach($licenses as  $license)
+                {
+                    $query->whereHas('investment.LicensePackage', function($q) use($license){
+                        $q->orWhere('id', $license);
+                    });
+                }
+
+            }
+
+            if($request->has('user_status') && $request->user_status !== null)
+            {
+                $user_status = $request->user_status;
+
+                foreach($user_status as $key => $status)
+                {
+                    if($key == 0) {
+                        $query->where('status', '=', $status);
+                    } else {
+                        $query->orWhere('status', '=', $status);
+                    }
+                }
+            }
+
+            $users = $query->orderBy('id', 'desc')->get();
+
+            return view('user.list-users', compact('users', 'user_name', 'user_email', 'licenses', 'pamm', 'buyer_id', 'user_status'));
+
+        }
 
         $users = User::where('admin', '0')->with('padre', 'investment.LicensePackage', 'countrie')->orderBy('id', 'desc')->get();
 
-        return view('user.list-users', compact('users'));
+        return view('user.list-users', compact('users', 'user_name', 'user_email', 'licenses', 'pamm', 'buyer_id', 'user_status'));
     }
 
     public function searchUsers(Request $request)
