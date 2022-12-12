@@ -107,40 +107,36 @@ class WalletController extends Controller
         if($request->isMethod('post') && $user->admin == 1)
         {
             $query = WalletComission::with(['user', 'buyer'])->orderBy('id', 'desc');
-
-            $user_id = $request->user_id;
-
-            $user_name = $request->user_name;  
-
-            $buyer_name = $request->buyer_name;   
             
-            $buyer_id = $request->buyer_id;
-
-            $date_from = $request->date_from;
-
-            $date_to = $request->date_to;
-
             if($request->has('user_id') && $request->user_id !== null) 
             {
-                $query->orWhere('user_id', $user_id);
+                $user_id = $request->user_id;
+
+                $query->where('user_id', $user_id);
             }
             
             if($request->has('buyer_id') && $request->buyer_id !== null)
             {
-                $query->orWhere('buyer_id', $buyer_id);
+                $buyer_id = $request->buyer_id;
+
+                $query->where('buyer_id', $buyer_id);
             }
 
             if($request->has('user_name') && $request->user_name !== null) 
             {
+                $user_name = $request->user_name;  
+
                 $query->whereHas('user', function($q) use($user_name){
-                    $q->where('name', 'LIKE', "%{$user_name}%");
+                    $q->where('name', $user_name);
                 });
             }
 
             if($request->has('buyer_name') && $request->buyer_name !== null)
             {
+                $buyer_name = $request->buyer_name;   
+
                 $query->whereHas('buyer', function($q) use($buyer_name){
-                    $q->where('name', 'LIKE', "%{$buyer_name}%");
+                    $q->where('name', $buyer_name);
                 });
             }
 
@@ -148,9 +144,13 @@ class WalletController extends Controller
             {
                 $comission_type = $request->comission_type;
 
-                foreach($comission_type as  $type)
+                foreach($comission_type as $key => $type)
                 {
-                    $query->orWhere('type', $type);
+                    if($key == 0) {
+                        $query->where('type', $type);
+                    } else {
+                        $query->orWhere('type', $type);
+                    }
                 }
             }
 
@@ -158,20 +158,29 @@ class WalletController extends Controller
             {
                 $comission_status = $request->comission_status;
 
-                foreach($comission_status as  $status)
+                foreach($comission_status as $key => $status)
                 {
-                    $query->orWhere('status', $status);
+                    if($key == 0)
+                    {
+                        $query->where('status', $status);
+                    } else {
+                        $query->orWhere('status', $status);
+                    }
                 }
 
             }
 
             if($request->has('date_from') && $request->date_from !== null && $request->has('date_to') && $request->date_to != null)
             {
+                $date_from = $request->date_from;
+
+                $date_to = $request->date_to;
+
                 $query->whereDate('created_at', '>=', $date_from)
                       ->whereDate('created_at', '<=', $date_to);
             }
 
-            $wallets = $query->get();
+            $wallets = $query->orderBy('created_at', 'desc')->get();
 
             return view('reports.comision', compact('wallets','user_id','user_name', 'buyer_name', 'buyer_id', 'comission_type', 'comission_status', 'date_from', 'date_to'));
         }
