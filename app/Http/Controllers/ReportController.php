@@ -9,21 +9,95 @@ use App\Models\Order;
 use App\Models\Utility;
 use App\Models\WalletComission;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 
 class ReportController extends Controller
 {
 
-    public function ordenes()
+    public function ordenes(Request $request)
     {
         $user = auth()->user();
+
+        $user_name = null;
+
+        $id_tx = null;
+
+        $order_status = [];
+
+        $created_from = null;
+
+        $created_to = null;
+
+        $updated_from = null;
+
+        $updated_to = null;
+
+        if($request->isMethod('post') && $user->admin == 1)
+        {
+            $user_name = $request->user_name;
+
+            $id_tx = $request->id_tx;
+
+            $created_from = $request->created_from;
+
+            $created_to = $request->created_to;
+
+            $updated_from = $request->updated_from;
+
+            $updated_to = $request->updated_to;
+
+            $query = Order::with(['user']);
+
+            if($request->has('user_name') && $request->user_name !== null) 
+            {
+                $query->whereHas('user', function($q) use($user_name){
+                    $q->where('email', $user_name);
+                });
+            }
+
+            if($request->has('id_tx') && $request->id_tx !== null) 
+            {
+                $query->where('id', $id_tx);
+            }
+
+            if($request->has('order_status') && $request->order_status !== null)
+            {
+
+                $order_status = $request->order_status;
+
+                foreach($order_status as  $status)
+                {
+                    $query->orWhere('status', $status);
+                }
+
+            }
+
+            if($request->has('created_from') && $request->created_from !== null && $request->has('created_to') && $request->created_to != null)
+            {
+                $query->whereDate('created_at', '>=', $created_from)
+                      ->whereDate('created_at', '<=', $created_to);
+            }
+
+            if($request->has('updated_from') && $request->updated_from !== null && $request->has('updated_to') && $request->updated_to != null)
+            {
+                $query->whereDate('created_at', '>=', $updated_from)
+                      ->whereDate('created_at', '<=', $updated_to);
+            }
+
+            $ordenes = $query->orderBy('id', 'desc')->get();
+
+            return view('reports.index', compact('ordenes','user_name', 'id_tx', 'order_status', 'created_from', 'created_to', 'updated_from', 'updated_to'));
+
+        }
+
         if($user->admin == 1){
             $ordenes = Order::orderBy('id', 'desc')->with('user')->get();
         }else{
             $ordenes = Order::where('user_id', $user->id)->with('user')->orderBy('id', 'desc')->get();
         }
 
-        return view('reports.index', compact('ordenes'));
+        return view('reports.index', compact('ordenes','user_name', 'id_tx', 'order_status', 'created_from', 'created_to', 'updated_from', 'updated_to'));
     }
     public function utility()
     {
@@ -53,15 +127,103 @@ class ReportController extends Controller
 
         return view('reports.anuales', compact('ordenes'));
     }
-    public function withdraw()
+    public function withdraw(Request $request)
     {
         $user = auth()->user();
+
+        $user_id = null;
+
+        $user_name = null;
+
+        $liquidation_status = [];
+
+        $hash = null;
+
+        $request_date_from = null;
+        
+        $request_date_to = null;
+
+        $payment_date_from = null;
+        
+        $payment_date_to = null;
+
+        if($request->isMethod('post') && $user->admin == 1)
+        {
+
+            $query = Liquidation::with(['user']);
+
+            $user_id = $request->user_id;
+
+            $user_name = $request->user_name;  
+
+            $hash = $request->hash;
+
+            $request_date_from = $request->request_date_from;
+
+            $request_date_to = $request->request_date_to;
+
+            $payment_date_from = $request->payment_date_from;
+            
+            $payment_date_to = $request->payment_date_to;
+
+            if($request->has('user_id') && $request->user_id !== null) 
+            {
+                $query->orWhere('user_id', $user_id);
+            }
+
+            if($request->has('user_name') && $request->user_name !== null) 
+            {
+                $query->whereHas('user', function($q) use($user_name){
+                    $q->where('name', 'LIKE', "%{$user_name}%");
+                });
+            }
+
+            if($request->has('buyer_name') && $request->buyer_name !== null)
+            {
+                $query->whereHas('buyer', function($q) use($buyer_name){
+                    $q->where('name', 'LIKE', "%{$buyer_name}%");
+                });
+            }
+
+            if($request->has('liquidation_status') && $request->liquidation_status !== null)
+            {
+                $liquidation_status = $request->liquidation_status;
+
+                foreach($liquidation_status as  $status)
+                {
+                    $query->orWhere('status', $status);
+                }
+
+            }
+
+            if($request->has('hash') && $request->hash !== null) 
+            {
+                $query->orWhere('hash', $hash);
+            }
+
+            if($request->has('request_date_from') && $request->request_date_from !== null && $request->has('request_date_to') && $request->request_date_to != null)
+            {
+                $query->whereDate('created_at', '>=', $request_date_from)
+                      ->whereDate('created_at', '<=', $request_date_to);
+            }
+
+            if($request->has('payment_date_from') && $request->payment_date_from !== null && $request->has('payment_date_to') && $request->payment_date_to != null)
+            {
+                $query->whereDate('updated_at', '>=', $payment_date_from)
+                      ->whereDate('updated_at', '<=', $payment_date_to);
+            }
+
+            $liquidactions = $query->orderBy('id', 'desc')->get();
+
+            return view('reports.withdraw', compact('liquidactions', 'user_id', 'user_name', 'liquidation_status', 'hash', 'request_date_from', 'request_date_to', 'payment_date_from', 'payment_date_to'));
+        }
+        
         if($user->admin == 1){
             $liquidactions = Liquidation::with('user')->orderBy('id', 'desc')->get();
         } else {
             $liquidactions = Liquidation::where('user_id', $user->id)->with('user')->orderBy('id', 'desc')->get();
         }
-        return view('reports.withdraw', compact('liquidactions'));
+        return view('reports.withdraw', compact('liquidactions', 'user_id', 'user_name', 'liquidation_status', 'hash', 'request_date_from', 'request_date_to', 'payment_date_from', 'payment_date_to'));
     }
     public function cashflow()
     {

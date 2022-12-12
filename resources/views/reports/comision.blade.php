@@ -105,14 +105,13 @@
 
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-primary">Buscar</button>
-
+                                    <a class="btn btn-info" href="{{route('reports.comision')}}">Limpiar filtros</a>
                                     {{-- <a class="btn btn-info" id="btn_clear">Limpiar filtros</a> --}}
                                 </div>
 
                             </div>
                         </form>
                     </div>
-
                     @endif
                     <div class="table-responsive">
                         <table class="table w-100 nowrap scroll-horizontal-vertical myTable table-striped w-100">

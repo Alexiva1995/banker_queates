@@ -125,7 +125,7 @@ Route::middleware('auth')->group(function () {
             //USERS
             Route::prefix('user')->group(function () {
                 Route::get('user-list', [UserController::class, 'listUser'])->name('user.list-user');
-                Route::post('/user-list', [UserController::class, 'searchUsers'])->name('search.users');
+                Route::post('user-list', [UserController::class, 'listUser'])->name('user.list-user.filter');
 
                 Route::get('expired/license/list', [UserController::class, 'ExpiredLicenseUserList'])->name('user.expired.licenses.list');
                 Route::get('user-view/{id}', [UserController::class, 'userView'])->name('user.user-view');
@@ -195,6 +195,7 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::get('/ordenes', [ReportController::class, 'ordenes'])->name('ordenes.index');
+        Route::post('/ordenes', [ReportController::class, 'ordenes'])->name('ordenes.index.filter');
         Route::post('/cambiarStatus', [TiendaController::class, 'cambiar_status'])->name('orders.cambiarStatus');
         Route::get('/reports/utility', [ReportController::class, 'utility'])->name('reports.utility');
         Route::get('inversiones', [BusinessController::class, 'inversiones'])->name('business.invest');
@@ -223,6 +224,7 @@ Route::middleware('auth')->group(function () {
 
         //Route Retiros
         Route::get('/reports/withdraw', [ReportController::class, 'withdraw'])->name('reports.withdraw');
+        Route::post('/reports/withdraw', [ReportController::class, 'withdraw'])->name('reports.withdraw.filter');
         Route::get('/withdraw', [LiquidactionController::class, 'withdraw'])->name('business.withdraw');
         Route::post('/withdraw-capital', [LiquidactionController::class, 'withdrawCapital'])->name('business.withdraw-capital');
         Route::post('/procesar-retiro-capital', [LiquidactionController::class, 'procesarRetiroCapital'])->name('settlement.procesarRetiroCapital');

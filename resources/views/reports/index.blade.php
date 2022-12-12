@@ -6,6 +6,7 @@
 <!-- vendor css files -->
 <link rel="stylesheet" href="{{ asset(mix('vendors/css/charts/apexcharts.css')) }}">
 <link rel="stylesheet" href="{{ asset(mix('vendors/css/tables/datatable/dataTables.bootstrap5.min.css')) }}">
+<link rel="stylesheet" href="https://cdn.rawgit.com/wenzhixin/multiple-select/e14b36de/multiple-select.css">
 @endsection
 <style>
     div.dataTables_wrapper div.dataTables_paginate ul.pagination{
@@ -30,8 +31,73 @@
             <div class="card-content p-50">
                 <div class="card-header p-0">
                     <h4 class="fw-700">Ordenes</h4>
+                    @if(auth()->user()->admin == 1)
+                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button"
+                        aria-expanded="false" aria-controls="collapseExample">
+                        Filtros
+                    </a>
+                    @endif
                 </div>
                 <div class="card-body  p-0">
+                    @if(auth()->user()->admin == 1)
+                    <div class="collapse" id="collapseExample">
+                        <form action="{{ route('ordenes.index.filter') }}" method="POST" class="mt-2">
+                            @csrf
+                            <div class="row">
+
+                                <div class="mb-2 col-md-4 col-sm-6">
+                                    <label for="user_name" class="form-label">Usuario</label>
+                                    <input type="text" class="form-control" id="user_name" name="user_name"
+                                    @if($user_name != null) value="{{$user_name}}" @endif>
+                                </div>
+
+                                <div class="mb-2 col-md-4 col-sm-6">
+                                    <label for="id_tx" class="form-label">ID TX</label>
+                                    <input type="number" class="form-control" id="id_tx" name="id_tx" 
+                                    @if($id_tx != null) value="{{$id_tx}}" @endif">
+                                </div>
+
+                                <div class="mb-2 col-md-4 col-sm-12">
+                                    <label for="order_status" class="form-label">Estado</label>
+                                    <select class="form-select" name="order_status[]" id="order_status" multiple
+                                        aria-label="Default select example">
+                                        <option value="1" {{ in_array('1', $order_status) ? "selected" : null }}>Aprobado</option>
+                                        <option value="2" {{ in_array('2', $order_status) ? "selected" : null }}>Rechazado</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-2 col-md-6 col-sm-12">
+                                    <label for="created_from" class="form-label">Creado Desde</label>
+                                    <input type="date" class="form-control" id="created_from" name="created_from"
+                                    @if($created_from != null) value="{{ $created_from }}"  @endif>
+                                </div>
+                                <div class="mb-2 col-md-6 col-sm-12">
+                                    <label for="created_to" class="form-label">Creado Hasta</label>
+                                    <input type="date" class="form-control" id="created_to" name="created_to"
+                                    @if($created_to != null) value="{{ $created_to }}"  @endif>
+                                </div>
+
+                                <div class="mb-2 col-md-6 col-sm-12">
+                                    <label for="updated_from" class="form-label">Actualizado Desde</label>
+                                    <input type="date" class="form-control" id="updated_from" name="updated_from"
+                                    @if($updated_from != null) value="{{ $updated_from }}"  @endif>
+                                </div>
+                                <div class="mb-2 col-md-6 col-sm-12">
+                                    <label for="updated_to" class="form-label">Actualizado Hasta</label>
+                                    <input type="date" class="form-control" id="updated_to" name="updated_to"
+                                    @if($updated_to != null) value="{{ $updated_to }}"  @endif>
+                                </div>
+
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary">Buscar</button>
+                                    <a class="btn btn-info" href="{{route('ordenes.index')}}">Limpiar filtros</a>
+                                    {{-- <a class="btn btn-info" id="btn_clear">Limpiar filtros</a> --}}
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                    @endif
                     <div class="table-responsive">
                         <table class="table nowrap scroll-horizontal-vertical myTable w-100">
                             <thead class="">
@@ -55,7 +121,6 @@
                                         <td class="fw-300">{{$orden->id}}</td>
                                         @if(Auth::user()->admin != 0)
                                             <td class="fw-300">{{$orden->user->email}}</td>
-                                        @else
                                         @endif
                                         <td class="fw-300">
                                             @if ($orden->coinpaymentTransaccion != null)
@@ -133,11 +198,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
-
+<!-- Include plugin -->
+<script src="https://cdn.rawgit.com/wenzhixin/multiple-select/e14b36de/multiple-select.js"></script>
 
 @endsection
 @section('page-script')
 <script>
+    $("#order_status").multipleSelect({
+        filter: false
+    });
     //datataables ordenes
     $('.myTable').DataTable({
         order: [
