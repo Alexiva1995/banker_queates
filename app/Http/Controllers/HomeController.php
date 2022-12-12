@@ -25,8 +25,8 @@ class HomeController extends Controller
         $pageConfigs = ['blankPage' => true];
         //criptobar
         //$cryptos = $this->minApiService->get10Cryptos();
-
-        return view('home.welcome', ['pageConfigs' => $pageConfigs]);
+        return redirect('/login');
+        // return view('home.welcome', ['pageConfigs' => $pageConfigs]);
     }
     public function terminos()
     {

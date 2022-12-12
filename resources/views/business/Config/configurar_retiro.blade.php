@@ -6,7 +6,7 @@
 @include('business.Config.JS.Js_config')
 <div class="container">
     <div class="row">
-      <div class="col-sm-8 card mb-5" >
+      <div class="col-sm-12 card mb-5" >
         <div class="row" id="config">
             <div class="col-sm-12 ">
                 <div class="d-flex justify-content-start fw-bold mt-1">
