@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->foreignId('countrie_id')->nullable()->constrained('countries')->comment('el id del pais del usuario');
             $table->foreignId('prefix_id')->nullable()->constrained('prefixes')->comment('el id del prefijo del tlf');
             $table->bigInteger('binary_id')->default(1)->comment('ID del usuario binario')->nullable();
+            $table->integer('whizfx_id')->comment('ID de la api whizfx')->nullable();
             $table->enum('binary_side', ['L', 'R'])->default('L')->comment('Permite saber porque lado va a registrar a un nuevo usuario');
             $table->string('username')->nullable()->unique();
             $table->string('name');
