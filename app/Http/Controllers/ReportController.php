@@ -35,22 +35,13 @@ class ReportController extends Controller
 
         if($request->isMethod('post') && $user->admin == 1)
         {
-            $user_name = $request->user_name;
-
-            $id_tx = $request->id_tx;
-
-            $created_from = $request->created_from;
-
-            $created_to = $request->created_to;
-
-            $updated_from = $request->updated_from;
-
-            $updated_to = $request->updated_to;
 
             $query = Order::with(['user']);
 
             if($request->has('user_name') && $request->user_name !== null) 
             {
+                $user_name = $request->user_name;
+
                 $query->whereHas('user', function($q) use($user_name){
                     $q->where('email', $user_name);
                 });
@@ -58,6 +49,8 @@ class ReportController extends Controller
 
             if($request->has('id_tx') && $request->id_tx !== null) 
             {
+                $id_tx = $request->id_tx;
+
                 $query->where('id', $id_tx);
             }
 
@@ -66,21 +59,33 @@ class ReportController extends Controller
 
                 $order_status = $request->order_status;
 
-                foreach($order_status as  $status)
+                foreach($order_status as $key => $status)
                 {
-                    $query->orWhere('status', $status);
+                    if($key == 0) {
+                        $query->where('status', $status);
+                    } else {
+                        $query->orWhere('status', $status);
+                    }
                 }
 
             }
 
             if($request->has('created_from') && $request->created_from !== null && $request->has('created_to') && $request->created_to != null)
             {
+                $created_from = $request->created_from;
+
+                $created_to = $request->created_to;
+
                 $query->whereDate('created_at', '>=', $created_from)
                       ->whereDate('created_at', '<=', $created_to);
             }
 
             if($request->has('updated_from') && $request->updated_from !== null && $request->has('updated_to') && $request->updated_to != null)
             {
+                $updated_from = $request->updated_from;
+
+                $updated_to = $request->updated_to;
+
                 $query->whereDate('created_at', '>=', $updated_from)
                       ->whereDate('created_at', '<=', $updated_to);
             }
