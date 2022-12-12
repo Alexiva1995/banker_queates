@@ -12,7 +12,7 @@
         <div class="texto">
             <!-- wallets_commissions tipo 5 -->
             <h3 class="fw-700 mb-25 texto">USDT {{ number_format($user->rendimientoAvailable(), 2, ',', '.') }}</h3>
-            <p class="font-medium-2 mb-0 texto" >Balance PAMM</p>
+            <p class="font-medium-2 mb-0  " >Balance PAMM</p>
         </div>
     </div>
 </div>

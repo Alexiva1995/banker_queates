@@ -1,4 +1,4 @@
-<div class="col-sm-12 col-lg-4 mb-2" style="z-index: 2">
+<div class="col-sm-5  mb-2" style="z-index: 2">
     <div class="card-d p-2">
         <div class="">
             <p class=" card-title customTexto mb-1">Lado Binario</p>
@@ -43,3 +43,9 @@
         </div>
     </div>
 </div>
+<style>
+    .form-check-input:checked {
+        background-color: #04D99D;
+    border-color: #04D99D;
+    }
+</style>

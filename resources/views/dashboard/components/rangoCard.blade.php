@@ -1,6 +1,5 @@
 
 
-<div class="col-sm-12 mb-2">
         <div class="card-d p-2">
             {{-- Sin Rango --}}
             <div class="card-body p-0" style="">
@@ -194,4 +193,3 @@
                     </div>
                 @endif
             </div>
-    </div>

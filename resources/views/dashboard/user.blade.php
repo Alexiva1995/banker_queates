@@ -150,7 +150,7 @@
         }
 
         .apexcharts-text {
-            fill: #9892AA !important;
+            fill: #ffffff !important;
         }
 
         .custom-avatar-content {
@@ -298,7 +298,7 @@
             </div>
         </div>
         <!--@include('dashboard.components.bonusCharts')-->
-        <div class="col-12">
+        <div class="col-sm-12">
             <div class="row match-height">
                 @include('dashboard.components.balanceCard')
                 @include('dashboard.components.licenseBonus')
@@ -306,18 +306,17 @@
                 @include('dashboard.components.balancePAMM')
             </div>
         </div>
-        <div class="col-sm-12 ">
-            <div class="row">
+            <div class="col-sm-12">
                 <div class="row">
-                    @include('dashboard.components.referral_binary_side')
-                    @include('dashboard.components.licenciaCard')
-                </div>
-                <div class="row match-height">
-                    @include('dashboard.components.rangoCard')
-                </div>
-                <div class="row match-height">
-                    @include('dashboard.components.gain-chart')
-                    @include('dashboard.components.historyBonusTable')
+                        @include('dashboard.components.referral_binary_side')
+                        @include('dashboard.components.licenciaCard')
+                    <div class="col-sm-12 mb-2">
+                        @include('dashboard.components.rangoCard')
+                    </div>
+                            @include('dashboard.components.gain-chart')
+                   
+                            @include('dashboard.components.historyBonusTable')
+                        
                 </div>
             </div>
         </div>       
@@ -566,7 +565,7 @@
                         dataLabels: {
                             value: {
                                 offsetY: -12,
-                                color: '#05A5E9',
+                                color: '#F2F4F5',
                                 fontSize: '40px',
                                 fontWeight: '900',
                                 formatter: function(val) {

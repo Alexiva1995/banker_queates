@@ -1,4 +1,4 @@
-<div class="col-lg-8">
+<div class="col-sm-7">
     <div class="card-d p-2 gradient">
         {{-- Sin Rango --}}
         <div class="card-body p-0">
