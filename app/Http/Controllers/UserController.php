@@ -91,7 +91,7 @@ class UserController extends Controller
         if( $request->isMethod('post') )
         {
             // return $request;
-            $query = User::where('admin', '0')->with('padre', 'investment.LicensePackage', 'countrie');
+            $query = User::with('padre', 'investment.LicensePackage', 'countrie');
 
             if($request->has('user_name') && $request->user_name !== null) 
             {
@@ -127,13 +127,19 @@ class UserController extends Controller
             {
 
                 $licenses = $request->licenses;
-
-                foreach($licenses as  $license)
-                {
-                    $query->whereHas('investment.LicensePackage', function($q) use($license){
-                        $q->orWhere('id', $license);
-                    });
-                }
+                $query->whereHas('investment.licensePackage', function($q) use($licenses){
+                    $q->whereIn('id', $licenses);
+                });
+                
+                // foreach($licenses as $key => $license)
+                // {
+                //     if($key == 0) {
+                //     }  else {
+                //         $query->whereHas('investment.licensePackage', function($q) use($license){
+                //             $q->orWhere('id', $license);
+                //         });
+                //     }
+                // }
 
             }
 
@@ -151,7 +157,7 @@ class UserController extends Controller
                 }
             }
 
-            $users = $query->orderBy('id', 'desc')->get();
+            $users = $query->where('admin', '0')->orderBy('id', 'desc')->get();
 
             return view('user.list-users', compact('users', 'user_name', 'user_email', 'licenses', 'pamm', 'buyer_id', 'user_status'));
 
