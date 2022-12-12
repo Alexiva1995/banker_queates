@@ -53,25 +53,25 @@
                     @csrf
                     <div class="row">
 
-                      <div class="mb-2 col-md-4 col-sm-6">
+                      <div class="mb-2 col-md-6 col-sm-12">
                         <label for="user_id" class="form-label">ID de Usuario</label>
                         <input type="number" class="form-control" id="user_id" name="user_id" @if($user_id !=null)
                           value="{{$user_id}}" @endif">
                       </div>
 
-                      <div class="mb-2 col-md-4 col-sm-6">
+                      <div class="mb-2 col-md-6 col-sm-12">
                         <label for="user_name" class="form-label">Usuario</label>
                         <input type="text" class="form-control" id="user_name" name="user_name" 
                         @if($user_name !=null) value="{{$user_name}}" @endif>
                       </div>
 
-                      <div class="mb-2 col-md-4 col-sm-12">
+                      <div class="mb-2 col-md-6 col-sm-12">
                         <label for="email" class="form-label">Correo</label>
                         <input type="email" class="form-control" id="email" name="email" 
                         @if($email !=null) value="{{$email}}" @endif>
                       </div>
 
-                      <div class="mb-2 col-md-4 col-sm-12">
+                      <div class="mb-2 col-md-6 col-sm-12">
                         <label for="hash" class="form-label">Hash</label>
                         <input type="text" class="form-control" id="hash" name="hash" 
                         @if($hash !=null) value="{{$hash}}" @endif>

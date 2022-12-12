@@ -130,16 +130,6 @@ class UserController extends Controller
                 $query->whereHas('investment.licensePackage', function($q) use($licenses){
                     $q->whereIn('id', $licenses);
                 });
-                
-                // foreach($licenses as $key => $license)
-                // {
-                //     if($key == 0) {
-                //     }  else {
-                //         $query->whereHas('investment.licensePackage', function($q) use($license){
-                //             $q->orWhere('id', $license);
-                //         });
-                //     }
-                // }
 
             }
 
