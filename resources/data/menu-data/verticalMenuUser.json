@@ -8,7 +8,7 @@
         },
         {
             "name": "Licencias",
-            "icon": "file",
+            "icon": "fa-solid fa-building-columns",
             "slug": "market.licenses",
             "url": "/market/licenses"
         },

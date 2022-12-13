@@ -1,4 +1,4 @@
-<div class="col-md-3">
+<div class="col-sm-3">
     <div class="card-d p-2">
         <div class="avatar bg-light-primary avatar-md me-auto mb-1 custom-avatar-content"e="padding: 0.3rem;">
             <div class="avatar-content">
@@ -12,7 +12,7 @@
         <div class="texto">
             <!-- wallets_commissions tipo 0 -->
             <h3 class="fw-700 mb-25 texto">USDT {{ number_format($user->bonoInicioAvailable(), 2, ',', '.') }}</h3>
-            <p class="font-medium-2 mb-0 texto">MLM PAMM</p>
+            <p class="font-medium-2 mb-0  ">MLM PAMM</p>
         </div>
     </div>
 </div>

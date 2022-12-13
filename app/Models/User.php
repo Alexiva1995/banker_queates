@@ -614,6 +614,7 @@ class User extends Authenticatable implements MustVerifyEmail
             $package->amount = $investment->licensePackage->amount;
             $package->id = $investment->licensePackage->id;
             $package->investment_id = $investment->id;
+            $package->image = $investment->licensePackage->image;
             $user_packages->push($package);
         }
         return $user_packages = $user_packages->sortBy('id');
