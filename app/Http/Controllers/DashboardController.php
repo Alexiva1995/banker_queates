@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Investment;
 use App\Models\Order;
+use App\Models\Range;
 use App\Services\MinApiService;
 use App\Services\RangeService;
 use App\Services\ReferalService;
@@ -72,10 +73,8 @@ class DashboardController extends Controller
       $user_packages = $user->getActivePackages();
       $daysRemaining = 0;
       $user->range;
-       $rangos = [[0],[1],[2],[3],[4],[5]];
-       foreach($rangos as $r){
-        $r[0] = 3;
-       }
+      $rangos = Range::all();
+       
        //return $rangos[1][0];
       if($user->investment)
       {
