@@ -65,6 +65,7 @@
                                     <label for="order_status" class="form-label">Estado</label>
                                     <select class="form-select" name="order_status[]" id="order_status" multiple
                                         aria-label="Default select example">
+                                        <option value="0" {{ in_array('0', $order_status) ? "selected" : null }}>En Espera</option>
                                         <option value="1" {{ in_array('1', $order_status) ? "selected" : null }}>Aprobado</option>
                                         <option value="2" {{ in_array('2', $order_status) ? "selected" : null }}>Rechazado</option>
                                     </select>
