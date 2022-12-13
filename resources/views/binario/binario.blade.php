@@ -26,7 +26,10 @@
             position: absolute;
             right: 0;
         }
-
+        .card{
+            border: 1px solid #05B1D966 !important;
+            border-radius: 10px !important;
+        }
         .content-input {
             position: relative;
             display: block;
@@ -90,7 +93,11 @@
             height: auto;
             max-width: 128%;
         }
-
+        
+        .form-control{
+            border: 1px solid #05B1D966 !important;
+            border-radius: 10px !important;
+        }
         .rounded-circle-add {
             width: auto;
             height: auto;
@@ -102,7 +109,7 @@
         <div class="padre">
 
             <div class="d-flex my-1">
-                <p class="fw-700 mb-0">Red</p><span class="fw-300 mx-1 text-light">|</span>
+                <p class="fw-700 mb-0">Red</p><span class="fw-300 text-primary mx-1 ">|</span>
                 <p class="fw-400 mb-0">Binario</p>
             </div>
             <div class="card">

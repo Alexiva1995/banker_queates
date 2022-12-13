@@ -19,8 +19,6 @@
             right: 0;
         }
         .card{
-            
-
             border: 1px solid #05B1D966 !important;
             border-radius: 10px !important;
         }
