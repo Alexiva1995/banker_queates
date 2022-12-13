@@ -15,24 +15,12 @@
                     <div class="col-md-12 d-flex justify-content-between h-100 align-items-center flex-wrap gap-50">
                         <div>
                             <div class="square-active d-flex justify-content-center align-items-center">
-                                <img src="{{ asset('images/ensignRanges/1.png') }}" height="90" width="90">
+                                <img src="{{ asset('images/ensignRanges/1.png') }}" height="90" width="120">
                             </div>
                             <h5 class="text-center fw-700 mt-1 mb-0">Consultant</h5>
                         </div>
     
-                        <div>
-                            <div class="square-active d-flex justify-content-center align-items-center">
-                                <img src="{{ asset('images/ensignRanges/2.png') }}" height="90" width="90">
-                            </div>
-                            <h5 class="text-center fw-700 mt-1 mb-0">Qualified Consultant</h5>
-                        </div>
-    
-                        <div>
-                            <div class="square-active d-flex justify-content-center align-items-center">
-                                <img src="{{ asset('images/ensignRanges/3.png') }}" height="90" width="90">
-                            </div>
-                            <h5 class="text-center fw-700 mt-1 mb-0">Sapphire</h5>
-                        </div>
+                      
                     </div>
     
                     <div class="row border-top mt-1 pe-0">
@@ -56,57 +44,7 @@
                         </div>
                     </div>
     
-                @elseif( (Auth::user()->range_id !== null) && (Auth::user()->range_id < 5) )
-                    <div class="col-md-12 d-flex justify-content-around h-100 align-items-center flex-wrap gap-50">
-                        <div>
-                            <div class="square-active d-flex justify-content-center align-items-center">
-                                <img src="{{ asset('images/ensignRanges/'.Auth::user()->range_id.'.png') }}" height="110" width="110">
-                            </div>
-                            <h5 class="text-center fw-700 mt-1">Rango actual</h5>
-                        </div>
-    
-                        <div class="d-flex flex-wrap justify-content-center flex-column">
-                            <div class="square d-flex justify-content-center align-items-center p-25">
-                                @php $nextRange = Auth::user()->range_id + 1; @endphp
-                                <img src="{{ asset('images/ensignRanges/'.$nextRange.'.png') }}" height="80" width="80">
-                            </div>
-                            <p class="text-center fw-500 mt-1 mb-0">Próximo rango</p>
-                        </div>
-    
-                        <div class="d-flex flex-wrap justify-content-center flex-column">
-                            <div class="square d-flex justify-content-center align-items-center p-25">
-                                @php $nextRange = Auth::user()->range_id + 2; @endphp
-                                <img src="{{ asset('images/ensignRanges/'.$nextRange.'.png') }}" height="70" width="70">
-                            </div>
-                            <p class="text-center fw-500 mt-1 mb-0">Siguiente rango</p>
-                        </div>
-                    </div>
-                @elseif(Auth::user()->range_id === 5)
-                    <div class="col-md-12 d-flex justify-content-around h-100 align-items-center flex-wrap gap-50">
-                        <div>
-                            <div class="square-active d-flex justify-content-center align-items-center">
-                                <img src="{{ asset('images/ensignRanges/'.Auth::user()->range_id.'.png') }}" height="110" width="110">
-                            </div>
-                            <h5 class="text-center fw-700 mt-1">Rango actual</h5>
-                        </div>
-    
-                        <div class="d-flex flex-wrap justify-content-center flex-column">
-                            <div class="square d-flex justify-content-center align-items-center p-25">
-                                @php $nextRange = Auth::user()->range_id + 1; @endphp
-                                <img src="{{ asset('images/ensignRanges/'.$nextRange.'.png') }}" height="80" width="80">
-                            </div>
-                            <p class="text-center fw-500 mt-1 mb-0">Próximo rango</p>
-                        </div>
-                    </div>
-                @elseif(Auth::user()->range_id === 6)
-                    <div class="col-md-12 d-flex justify-content-around h-100 align-items-center flex-wrap gap-50">
-                        <div>
-                            <div class="square-active d-flex justify-content-center align-items-center">
-                                <img src="{{ asset('images/ensignRanges/'.Auth::user()->range_id.'.png') }}" height="120" width="120">
-                            </div>
-                            <h5 class="text-center fw-700 mt-1 justify-content-center">Rango actual</h5>
-                        </div>
-                    </div>
+                
                 @endif
     
     

@@ -71,6 +71,12 @@ class DashboardController extends Controller
       $total_available = $user->wallets->where('status', 0)->sum('amount');
       $user_packages = $user->getActivePackages();
       $daysRemaining = 0;
+      $user->range;
+       $rangos = [[0],[1],[2],[3],[4],[5]];
+       foreach($rangos as $r){
+        $r[0] = 3;
+       }
+       //return $rangos[1][0];
       if($user->investment)
       {
           $date1 = Carbon::parse($user->investment->expiration_date);
@@ -80,7 +86,7 @@ class DashboardController extends Controller
 
       //criptobar
       $cryptos = $this->minApiService->get10Cryptos();
-      return view('dashboard.user', ['pageConfigs' => $pageConfigs], compact('user', 'cryptos', 'investments', 'indirect_referrals', 'total_referrals', 'total_available', 'user_packages'));
+      return view('dashboard.user', ['pageConfigs' => $pageConfigs], compact('rangos','user', 'cryptos', 'investments', 'indirect_referrals', 'total_referrals', 'total_available', 'user_packages'));
     }
   }
 

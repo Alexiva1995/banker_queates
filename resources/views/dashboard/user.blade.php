@@ -291,39 +291,35 @@
         <div class="row">
             <div class="col-sm-12">
                 @include('dashboard.components.cryptobar')
-                <!--<div class="row match-height">
-                    @include('dashboard.components.totalEarningsChart')
-                    @include('dashboard.components.packageProgress')
-                </div>-->
+               
             </div>
-        <!--@include('dashboard.components.bonusCharts')-->
-        <div class="col-sm-12">
-            <div class="row match-height">
-                @include('dashboard.components.balanceCard')
-                @include('dashboard.components.licenseBonus')
-                @include('dashboard.components.MLMPAMM')
-                @include('dashboard.components.balancePAMM')
-            </div>
-        </div>
             <div class="col-sm-12">
-                    <div class="row">
-                            @include('dashboard.components.referral_binary_side')
-                            @include('dashboard.components.licenciaCard')
-                        <div class="col-sm-12 mb-2">
-                            @include('dashboard.components.rangoCard')
-                        </div>
-                        <div class="col-sm-12 mb-2">
-                    <div class="row">
-                        @include('dashboard.components.gain-chart')
-                    
-                                @include('dashboard.components.historyBonusTable')
+                <div class="row match-height">
+                    @include('dashboard.components.balanceCard')
+                    @include('dashboard.components.licenseBonus')
+                    @include('dashboard.components.MLMPAMM')
+                    @include('dashboard.components.balancePAMM')
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="row">
+                        @include('dashboard.components.referral_binary_side')
+                        @include('dashboard.components.licenciaCard')
+                    <div class="col-sm-12 mb-2">
+                        @include('dashboard.components.rangoCard')
                     </div>
+                    <div class="col-sm-12 mb-2 ">
+                        <div class="row d-flex justify-content-between" style="--bs-gutter-x: 0rem;">
                             
+                             @include('dashboard.components.gain-chart')
+                        
+                            @include('dashboard.components.historyBonusTable')
                         </div>
                     </div>
                 </div>
             </div>
-        </div>       
+        </div>
+    </div>       
     <!-- Dashboard Analytics end -->
 @endsection
 
