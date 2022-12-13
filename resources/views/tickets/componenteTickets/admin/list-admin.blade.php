@@ -5,8 +5,15 @@
 @section('vendor-style')
 <!-- vendor css files -->
 <link rel="stylesheet" href="{{ asset(mix('vendors/css/tables/datatable/dataTables.bootstrap5.min.css')) }}">
+
 @endsection
 
+<style>
+    .ms-choice{
+        margin: -3px;
+        border: none !important;
+    }
+</style>
 @section('content')
 
 <div class="d-flex my-2">
@@ -21,10 +28,52 @@
         <h4 class=" fw-bold">
         Listado de Tickets
         </h4>
+        <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button"
+            aria-expanded="false" aria-controls="collapseExample">
+            Filtros
+        </a>
     </div>
     <!--Card Header End--->
     <div class="card-body">
+        <div class="collapse" id="collapseExample">
+            <form action="{{ route('ticket.list-admin.filter') }}" method="POST" class="mt-2">
+                @csrf
+                <div class="row">
 
+                    <div class="mb-2 col-md-6 col-sm-12">
+                        <label for="date_from" class="form-label">Desde</label>
+                        <input type="date" class="form-control" id="date_from" name="date_from"
+                        @if($date_from != null) value="{{ $date_from }}"  @endif>
+                    </div>
+
+                    <div class="mb-2 col-md-6 col-sm-12">
+                        <label for="date_to" class="form-label">Hasta</label>
+                        <input type="date" class="form-control" id="date_to" name="date_to"
+                        @if($date_to != null) value="{{ $date_to }}"  @endif>
+                    </div>
+
+                    <div class="mb-2 col-md-6 col-sm-12">
+                        <label for="ticket_status" class="form-label">Estado</label>
+                        <select class="form-select multiple" name="ticket_status[]" id="ticket_status" multiple
+                            aria-label="Default select example">
+                            <option value="0" {{ in_array('0', $ticket_status) ? "selected" : null }}>
+                                Abierto
+                            </option>
+                            <option value="1" {{ in_array('1', $ticket_status) ? "selected" : null }}>
+                                Cerrado
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Buscar</button>
+                        <a class="btn btn-info" href="{{route('ticket.list-admin')}}">Limpiar filtros</a>
+                        {{-- <a class="btn btn-info" id="btn_clear">Limpiar filtros</a> --}}
+                    </div>
+
+                </div>
+            </form>
+        </div>
         <table class="table w-100 nowrap scroll-horizontal-vertical myTable table-striped w-100">
             <thead>
                 <tr class="text-center">
@@ -38,7 +87,7 @@
             <tbody>
                 @foreach ($ticket as $item)
                 <tr class="text-center">
-                    <td>{{ $item->id}}</td>
+                    <td>{{ $item->id }}</td>
                     <td class="text-start">[Ticket #{{ $item->user_id}}] {{$item->issue}}</td>
 
 
@@ -70,10 +119,15 @@
 <script src="{{ asset(mix('vendors/js/tables/datatable/jquery.dataTables.min.js')) }}"></script>
 <script src="{{ asset(mix('vendors/js/tables/datatable/dataTables.bootstrap5.min.js')) }}"></script>
 <script src="{{ asset(mix('vendors/js/tables/datatable/dataTables.responsive.min.js')) }}"></script>
+<script src="https://cdn.rawgit.com/wenzhixin/multiple-select/e14b36de/multiple-select.js"></script>
+<link rel="stylesheet" href="https://cdn.rawgit.com/wenzhixin/multiple-select/e14b36de/multiple-select.css">
 
 @endsection
 @section('page-script')
 <script>
+    $(".multiple").multipleSelect({
+        filter: false
+    });
     //datataables ordenes
     $('.myTable').DataTable({
         responsive: false,

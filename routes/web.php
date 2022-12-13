@@ -120,6 +120,7 @@ Route::middleware('auth')->group(function () {
 
             //Licences
             Route::get('/licenses', [InversionController::class, 'licenses'])->name('licenses.index');
+            Route::post('/licenses', [InversionController::class, 'licenses'])->name('licenses.index.filter');
 
             Route::get('/anuales', [ReportController::class, 'anuales'])->name('reports.anuales');
             //USERS
@@ -330,6 +331,7 @@ Route::group(['prefix' => 'tickets'], function () {
         Route::get('ticket-edit-admin/{id}', [TicketsController::class, 'editAdmin'])->name('ticket.edit-admin');
         Route::patch('ticket-update-admin/{id}', [TicketsController::class, 'updateAdmin'])->name('ticket.update-admin');
         Route::get('ticket-list-admin', [TicketsController::class, 'listAdmin'])->name('ticket.list-admin');
+        Route::post('ticket-list-admin', [TicketsController::class, 'listAdmin'])->name('ticket.list-admin.filter');
         Route::get('ticket-show-admin/{id}',  [TicketsController::class, 'showAdmin'])->name('ticket.show-admin');
     });
 });
