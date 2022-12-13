@@ -5,19 +5,24 @@
 @section('vendor-style')
 <!-- vendor css files -->
 <link rel="stylesheet" href="{{ asset(mix('vendors/css/charts/apexcharts.css')) }}">
+<link rel="stylesheet" href="https://cdn.rawgit.com/wenzhixin/multiple-select/e14b36de/multiple-select.css">
 <link rel="stylesheet" href="{{ asset(mix('vendors/css/tables/datatable/dataTables.bootstrap5.min.css')) }}">
 @endsection
 <style>
     div.dataTables_wrapper div.dataTables_paginate ul.pagination{
         justify-content: end!important;
     }
-     .dt-button{
+    .dt-button{
         background: transparent !important;
         border: none !important;
         border-radius: 5px !important;
         font-size: 1em !important;
         margin-bottom: -2rem;
-      }
+    }
+    .ms-choice{
+        margin: -3px;
+        border: none !important;
+    }
 </style>
 @section('content')
 <div id="logs-list">
@@ -30,8 +35,75 @@
             <div class="card-content p-50">
                 <div class="card-header p-0">
                     <h4 class="fw-700">Ordenes</h4>
+                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button"
+                        aria-expanded="false" aria-controls="collapseExample">
+                        Filtros
+                    </a>
                 </div>
                 <div class="card-body  p-0">
+                    <div class="collapse" id="collapseExample">
+                        <form action="{{ route('licenses.index.filter') }}" method="POST" class="mt-2">
+                            @csrf
+                            <div class="row">
+
+                                <div class="mb-2 col-md-4 col-sm-6">
+                                    <label for="user_id" class="form-label">ID de Usuario</label>
+                                    <input type="number" class="form-control" id="user_id" name="user_id"
+                                    @if($user_id) value="{{$user_id}}" @endif>
+                                </div>
+
+                                <div class="mb-2 col-md-4 col-sm-6">
+                                    <label for="email" class="form-label">Correo</label>
+                                    <input type="email" class="form-control" id="email" name="email" 
+                                    @if($email) value="{{$email}}" @endif">
+                                </div>
+
+                                <div class="mb-2 col-md-4 col-sm-12">
+                                    <label for="licenses_list" class="form-label">Licencia</label>
+                                    <select class="form-select multiple" name="licenses_list[]" id="licenses_list" multiple
+                                        aria-label="Default select example">
+                                        <option value="1" {{ in_array('1', $licenses_list) ? "selected" : null }}>
+                                            Consultant Binary Position
+                                        </option>
+                                        <option value="2" {{ in_array('2', $licenses_list) ? "selected" : null }}>
+                                            Standard License
+                                        </option>
+                                        <option value="3" {{ in_array('3', $licenses_list) ? "selected" : null }}>
+                                            Gold License
+                                        </option>
+                                        <option value="4" {{ in_array('4', $licenses_list) ? "selected" : null }}>
+                                            Titanium License
+                                        </option>
+                                        <option value="5" {{ in_array('5', $licenses_list) ? "selected" : null }}>
+                                            Platinum License
+                                        </option>
+                                        <option value="6" {{ in_array('6', $licenses_list) ? "selected" : null }}>
+                                            Banker Platinum License
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-2 col-md-6 col-sm-12">
+                                    <label for="date_from" class="form-label">Desde</label>
+                                    <input type="date" class="form-control" id="date_from" name="date_from"
+                                    @if($date_from) value="{{ $date_from }}"  @endif>
+                                </div>
+
+                                <div class="mb-2 col-md-6 col-sm-12">
+                                    <label for="date_to" class="form-label">Hasta</label>
+                                    <input type="date" class="form-control" id="date_to" name="date_to"
+                                    @if($date_to) value="{{ $date_to }}"  @endif>
+                                </div>
+                               
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary">Buscar</button>
+                                    <a class="btn btn-info" href="{{route('licenses.index')}}">Limpiar filtros</a>
+                                    {{-- <a class="btn btn-info" id="btn_clear">Limpiar filtros</a> --}}
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
                     <div class="table-responsive">
                         <table class="table nowrap scroll-horizontal-vertical myTable w-100">
                             <thead class="">
@@ -79,11 +151,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
-
+<script src="https://cdn.rawgit.com/wenzhixin/multiple-select/e14b36de/multiple-select.js"></script>
 
 @endsection
 @section('page-script')
 <script>
+    $(".multiple").multipleSelect({
+        filter: false
+    });
     //datataables ordenes
     $('.myTable').DataTable({
         order: [
