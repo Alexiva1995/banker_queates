@@ -1,6 +1,9 @@
 @php
 $configData = Helper::applClasses();
 @endphp
+<style>
+   
+</style>
 <div class="main-menu menu-fixed {{ $configData['theme'] === 'dark' || $configData['theme'] === 'semi-dark' ? 'menu-dark' : 'menu-light' }} menu-accordion "
     data-scroll-to-active="true">
     <div class="navbar-header">
@@ -260,6 +263,9 @@ $configData = Helper::applClasses();
         .show {
             display: block;
         }
+        i,a{
+        color:  #03CDB6!important;
+    }
     </style>
     <script>
         function myFunction() {
