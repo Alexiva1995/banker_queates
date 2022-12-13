@@ -283,7 +283,7 @@
 }
     </style>
 
-    <div class="container-fluid container-custom">
+    <div class="container-fluid ">
         <div class="d-flex my-1">
             <p class="fw-700 mb-0">Dashboard</p><span class="fw-300 mx-1 text-light">|</span>
             <p class="fw-300 mb-0">Banker Quotes</p>
@@ -296,7 +296,6 @@
                     @include('dashboard.components.packageProgress')
                 </div>-->
             </div>
-        </div>
         <!--@include('dashboard.components.bonusCharts')-->
         <div class="col-sm-12">
             <div class="row match-height">
@@ -307,20 +306,24 @@
             </div>
         </div>
             <div class="col-sm-12">
-                <div class="row">
-                        @include('dashboard.components.referral_binary_side')
-                        @include('dashboard.components.licenciaCard')
-                    <div class="col-sm-12 mb-2">
-                        @include('dashboard.components.rangoCard')
+                    <div class="row">
+                            @include('dashboard.components.referral_binary_side')
+                            @include('dashboard.components.licenciaCard')
+                        <div class="col-sm-12 mb-2">
+                            @include('dashboard.components.rangoCard')
+                        </div>
+                        <div class="col-sm-12 mb-2">
+                    <div class="row">
+                        @include('dashboard.components.gain-chart')
+                    
+                                @include('dashboard.components.historyBonusTable')
                     </div>
-                            @include('dashboard.components.gain-chart')
-                   
-                            @include('dashboard.components.historyBonusTable')
-                        
+                            
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>       
-    </div>
     <!-- Dashboard Analytics end -->
 @endsection
 

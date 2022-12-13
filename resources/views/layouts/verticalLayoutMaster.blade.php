@@ -2,11 +2,7 @@
   <!-- BEGIN: Header-->
   @include('panels.navbar')
   <!-- END: Header-->
-<style>
-body{
-    font-family: 'Roboto', sans-serif;
-  }
-</style>
+
   <!-- BEGIN: Main Menu-->
   @if((isset($configData['showMenu']) && $configData['showMenu'] === true))
   @include('panels.sidebar')
