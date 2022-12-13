@@ -826,7 +826,7 @@ class InversionController extends Controller
         $date_to = null;
         $licenses_list = [];
         
-        if($request->isMethod('post') && Auth::user()->admin == 1)
+        if($request->isMethod('post'))
         {
             $request->all();
 
