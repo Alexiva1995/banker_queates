@@ -12,7 +12,7 @@
         <div class="texto">
             <!-- wallets_commissions tipo 0 -->
             <h3 class="fw-700 mb-25 texto">USDT {{ number_format($user->bonoInicioAvailable(), 2, ',', '.') }}</h3>
-            <p class="font-medium-2 mb-0 texto">MLM PAMM</p>
+            <p class="font-medium-2 mb-0  ">MLM PAMM</p>
         </div>
     </div>
 </div>

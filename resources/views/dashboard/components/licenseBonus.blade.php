@@ -12,7 +12,7 @@
         <div class="texto">
             <!-- wallets_commissions tipo 2 -->
             <h3 class="fw-700 mb-25 texto">USDT {{number_format($user->cartera(), 2, ',', '.')}}</h3>
-            <p class="font-medium-2 mb-0 texto" >Bono por Licencias</p>
+            <p class="font-medium-2 mb-0  " >Bono por Licencias</p>
         </div>
     </div>
 </div>
