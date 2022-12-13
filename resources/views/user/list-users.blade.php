@@ -9,6 +9,10 @@
 @endsection
 @section('content')
     <style>
+        .ms-choice{
+            margin: -3px;
+            border: none !important;
+        }
         .dt-buttons {
             width: 50%;
             display: inline;
