@@ -3,11 +3,14 @@
         {{-- Sin Rango --}}
         <div class="card-body">
             <div class="row">
+                
+                <!-- Muestra tres rangos con su barra cuando rango es null -->
+                @if (isset($user_packages[0]->image))
                 <div class="col-sm-12">
                     <h3 class="card-title text-white">Tu licencia</h3>
                 </div>
-                <!-- Muestra tres rangos con su barra cuando rango es null -->
-                @if($user_packages[0]->image != null)
+                
+                    @if($user_packages[0]->image != null)
                     <div class="col-sm-6">
                         <div>
                             <div class=" d-flex justify-content-center align-items-star">
@@ -21,6 +24,11 @@
                             <div id="chartDays" style=""></div>
                         </div>
                     </div>
+                    @endif
+                @else
+                <div class="col-sm-12">
+                    <h3 class="card-title text-white text-center">Sin licencia</h3>
+                </div>
                 @endif
             </div>
         </div>
