@@ -120,6 +120,7 @@ Route::middleware('auth')->group(function () {
 
             //Licences
             Route::get('/licenses', [InversionController::class, 'licenses'])->name('licenses.index');
+            Route::post('/licenses', [InversionController::class, 'licenses'])->name('licenses.index.filter');
 
             Route::get('/anuales', [ReportController::class, 'anuales'])->name('reports.anuales');
             //USERS

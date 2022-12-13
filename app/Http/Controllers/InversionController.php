@@ -817,271 +817,61 @@ class InversionController extends Controller
         }
     }
 
-    public function rentabilidadSumCapital()
+
+    public function licenses(Request $request)
     {
-        try {
+        $user_id = null;
+        $email = null;
+        $date_from = null;
+        $date_to = null;
+        $licenses_list = [];
+        
+        if($request->isMethod('post') && Auth::user()->admin == 1)
+        {
+            $request->all();
 
-            DB::beginTransaction();
-            $wallets = Wallet::where('tipo_transaction', 0)->where('status', 0)->where('type', 5)->get();
+            $query = Investment::where('status', 1);
 
-            foreach ($wallets as $wallet) {
-                $inversion = $wallet->inversion;
-                $inversion->capital += $wallet->amount;
-                $inversion->save();
-                $wallet->status = 1;
-                $wallet->save();
+            if($request->has('user_id') && $request->user_id !== null) 
+            {
+                $user_id = $request->user_id;
+
+                $query->whereHas('user', function($q) use($user_id){
+                    $q->where('id', $user_id);
+                });
             }
 
-            DB::commit();
-            //return ['ids' => $ids, 'gain' => $gain];
-        } catch (\Throwable $th) {
-            DB::rollback();
-            Log::error('InversionController - rentabilidadSumCapital -> Error: ' . $th);
-            abort(403, "Ocurrio un error, contacte con el administrador");
+            if($request->has('email') && $request->email !== null) 
+            {
+                $email = $request->email;
+
+                $query->whereHas('user', function($q) use($email){
+                    $q->where('email', $email);
+                });
+            }
+
+            if($request->has('licenses_list') && $request->licenses_list !== null)
+            {
+
+                $licenses_list = $request->licenses_list;
+                $query->whereIn('package_id', $licenses_list);
+
+            }
+
+            if($request->has('date_from') && $request->date_from !== null && $request->has('date_to') && $request->date_to != null)
+            {
+                $date_from = $request->date_from;
+
+                $date_to = $request->date_to;
+
+                $query->whereDate('created_at', '>=', $date_from)
+                      ->whereDate('created_at', '<=', $date_to);
+            }
+
+            $licenses = $query->get();
+            return view('licenses.index',compact('licenses', 'user_id', 'email', 'date_from', 'date_to', 'licenses_list'));
         }
-    }
-
-    public function createBonusRage()
-    {
-        $users = User::where('id', '!=', '1')->get('id');
-
-        $cantidad = count($users);
-        $arrayInversion = [];
-
-        for ($i=0; $i < $cantidad; $i++) {
-            $id = $users[$i]['id'];
-
-            $referred = User::where('buyer_id', $id)->get('id');
-            $acounReferred = count($referred);
-            for ($r=0; $r < $acounReferred; $r++) {
-
-               $buyer_id = $referred[$r]['id'];
-
-              $inversion = Investment::where([['user_id' , $buyer_id],['status', '1'],['invested', '7000']])->get();
-              if(count($inversion) != 0){
-
-                array_push($arrayInversion, $inversion);
-              }
-
-            }
-
-        }
-
-        $countInversion =  count($arrayInversion);
-
-
-        foreach ($arrayInversion as $key => $value) {
-
-            $buyer = $value[0]['user_id'];
-            $order = $value[0]['order_id'];
-            $idInversion = $value[0]['id'];
-            $userPadre = $value[0]['buyer_id'];
-        }
-
-        $bonusPadre = WalletComission::where([['user_id', $userPadre],['type', 1],['description', 'Bono 7k']])->sum('amount');
-
-
-        if($bonusPadre > 0){
-            $resta = $bonusPadre;
-        }else{
-            $resta = 0;
-        }
-
-        if($countInversion >= 3 && $countInversion <= 5 )
-        {
-            $bonusRange = new WalletComission();
-            $bonusRange->user_id = $userPadre;
-            $bonusRange->buyer_id = $userPadre;
-            $bonusRange->order_id = $order;
-            $bonusRange->level = 1;
-            $bonusRange->description = "Bono 7k";
-            $bonusRange->investment_id = $idInversion;
-            $bonusRange->amount = 1000 - $resta ;
-            $bonusRange->amount_retired = 0;
-            $bonusRange->amount_available = 1000 - $resta ;
-            $bonusRange->amount_last_liquidation = null;
-            $bonusRange->type = 1;
-            $bonusRange->liquidation_id = null;
-            $bonusRange->status = 0;
-            $bonusRange->avaliable_withdraw = 0;
-            if($bonusRange->amount > 0 ){
-                $bonusRange->save();
-            }
-
-
-        }elseif($countInversion >= 6 && $countInversion <= 8 )
-        {
-            $bonusRange = new WalletComission();
-            $bonusRange->user_id = $userPadre;
-            $bonusRange->buyer_id = $userPadre;
-            $bonusRange->order_id = $order;
-            $bonusRange->level = 1;
-            $bonusRange->description = "Bono 7k";
-            $bonusRange->investment_id = $idInversion;
-            $bonusRange->amount = 2000 - $resta ;
-            $bonusRange->amount_retired = 0;
-            $bonusRange->amount_available = 2000 - $resta ;
-            $bonusRange->amount_last_liquidation = null;
-            $bonusRange->type = 1;
-            $bonusRange->liquidation_id = null;
-            $bonusRange->status = 0;
-            $bonusRange->avaliable_withdraw = 0;
-            if($bonusRange->amount > 0 ){
-                $bonusRange->save();
-            }
-
-        }elseif($countInversion >= 9 && $countInversion <= 11 )
-        {
-            $bonusRange = new WalletComission();
-            $bonusRange->user_id = $userPadre;
-            $bonusRange->buyer_id = $userPadre;
-            $bonusRange->order_id = $order;
-            $bonusRange->level = 1;
-            $bonusRange->description = "Bono 7k";
-            $bonusRange->investment_id = $idInversion;
-            $bonusRange->amount = 3000 - $resta ;
-            $bonusRange->amount_retired = 0;
-            $bonusRange->amount_available = 3000 - $resta ;
-            $bonusRange->amount_last_liquidation = null;
-            $bonusRange->type = 1;
-            $bonusRange->liquidation_id = null;
-            $bonusRange->status = 0;
-            $bonusRange->avaliable_withdraw = 0;
-            if($bonusRange->amount > 0 ){
-                $bonusRange->save();
-            }
-
-        }elseif($countInversion >= 12 && $countInversion <= 14 )
-        {
-            $bonusRange = new WalletComission();
-            $bonusRange->user_id = $userPadre;
-            $bonusRange->buyer_id = $userPadre;
-            $bonusRange->order_id = $order;
-            $bonusRange->level = 1;
-            $bonusRange->description = "Bono 7k";
-            $bonusRange->investment_id = $idInversion;
-            $bonusRange->amount = 4000 - $resta ;
-            $bonusRange->amount_retired = 0;
-            $bonusRange->amount_available = 4000 - $resta ;
-            $bonusRange->amount_last_liquidation = null;
-            $bonusRange->type = 1;
-            $bonusRange->liquidation_id = null;
-            $bonusRange->status = 0;
-            $bonusRange->avaliable_withdraw = 0;
-            if($bonusRange->amount > 0 ){
-                $bonusRange->save();
-            }
-
-        }elseif($countInversion >= 15 && $countInversion <= 17 )
-        {
-            $bonusRange = new WalletComission();
-            $bonusRange->user_id = $userPadre;
-            $bonusRange->buyer_id = $userPadre;
-            $bonusRange->order_id = $order;
-            $bonusRange->level = 1;
-            $bonusRange->description = "Bono 7k";
-            $bonusRange->investment_id = $idInversion;
-            $bonusRange->amount = 5000 - $resta ;
-            $bonusRange->amount_retired = 0;
-            $bonusRange->amount_available = 5000 - $resta ;
-            $bonusRange->amount_last_liquidation = null;
-            $bonusRange->type = 1;
-            $bonusRange->liquidation_id = null;
-            $bonusRange->status = 0;
-            $bonusRange->avaliable_withdraw = 0;
-            if($bonusRange->amount > 0 ){
-                $bonusRange->save();
-            }
-
-        }elseif($countInversion >= 21 && $countInversion <= 23 )
-        {
-            $bonusRange = new WalletComission();
-            $bonusRange->user_id = $userPadre;
-            $bonusRange->buyer_id = $userPadre;
-            $bonusRange->order_id = $order;
-            $bonusRange->level = 1;
-            $bonusRange->description = "Bono 7k";
-            $bonusRange->investment_id = $idInversion;
-            $bonusRange->amount = 6000 - $resta ;
-            $bonusRange->amount_retired = 0;
-            $bonusRange->amount_available = 6000 - $resta ;
-            $bonusRange->amount_last_liquidation = null;
-            $bonusRange->type = 1;
-            $bonusRange->liquidation_id = null;
-            $bonusRange->status = 0;
-            $bonusRange->avaliable_withdraw = 0;
-            if($bonusRange->amount > 0 ){
-                $bonusRange->save();
-            }
-
-        }elseif($countInversion >= 24 && $countInversion <= 26 )
-        {
-            $bonusRange = new WalletComission();
-            $bonusRange->user_id = $userPadre;
-            $bonusRange->buyer_id = $userPadre;
-            $bonusRange->order_id = $order;
-            $bonusRange->level = 1;
-            $bonusRange->description = "Bono 7k";
-            $bonusRange->investment_id = $idInversion;
-            $bonusRange->amount = 7000 - $resta ;
-            $bonusRange->amount_retired = 0;
-            $bonusRange->amount_available = 7000 - $resta ;
-            $bonusRange->amount_last_liquidation = null;
-            $bonusRange->type = 1;
-            $bonusRange->liquidation_id = null;
-            $bonusRange->status = 0;
-            $bonusRange->avaliable_withdraw = 0;
-            if($bonusRange->amount > 0 ){
-                $bonusRange->save();
-            }
-
-        }elseif($countInversion >= 27 && $countInversion <= 29 )
-        {
-            $bonusRange = new WalletComission();
-            $bonusRange->user_id = $userPadre;
-            $bonusRange->buyer_id = $userPadre;
-            $bonusRange->order_id = $order;
-            $bonusRange->level = 1;
-            $bonusRange->description = "Bono 7k";
-            $bonusRange->investment_id = $idInversion;
-            $bonusRange->amount = 8000 - $resta ;
-            $bonusRange->amount_retired = 0;
-            $bonusRange->amount_available = 8000 - $resta ;
-            $bonusRange->amount_last_liquidation = null;
-            $bonusRange->type = 1;
-            $bonusRange->liquidation_id = null;
-            $bonusRange->status = 0;
-            $bonusRange->avaliable_withdraw = 0;
-            if($bonusRange->amount > 0 ){
-                $bonusRange->save();
-            }
-
-        }elseif($countInversion >= 30 && $countInversion <= 32 )
-        {
-            $bonusRange = new WalletComission();
-            $bonusRange->user_id = $userPadre;
-            $bonusRange->buyer_id = $userPadre;
-            $bonusRange->order_id = $order;
-            $bonusRange->level = 1;
-            $bonusRange->description = "Bono 7k";
-            $bonusRange->investment_id = $idInversion;
-            $bonusRange->amount = 9000 - $resta ;
-            $bonusRange->amount_retired = 0;
-            $bonusRange->amount_available = 9000 - $resta ;
-            $bonusRange->amount_last_liquidation = null;
-            $bonusRange->type = 1;
-            $bonusRange->liquidation_id = null;
-            $bonusRange->status = 0;
-            $bonusRange->avaliable_withdraw = 0;
-            if($bonusRange->amount > 0 ){
-                $bonusRange->save();
-            }
-        }
-    }
-    public function licenses()
-    {
-
-       $licenses = Investment::where('status', 1)->get();
-        return view('licenses.index',compact('licenses'));
+        $licenses = Investment::where('status', 1)->get();
+        return view('licenses.index',compact('licenses', 'user_id', 'email', 'date_from', 'date_to', 'licenses_list'));
     }
 }
