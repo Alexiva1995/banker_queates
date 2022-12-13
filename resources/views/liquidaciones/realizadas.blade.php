@@ -15,6 +15,12 @@
 @section('content')
 <!-- Statistics card section -->
 <section class="row">
+  <style>
+    .ms-choice{
+        margin: -3px;
+        border: none !important;
+    }
+  </style>
   <!-- Miscellaneous Charts -->
   <!--/ Line Chart -->
   @if (Auth::user()->admin == 0)
