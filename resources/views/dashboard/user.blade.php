@@ -285,8 +285,8 @@
 
     <div class="container-fluid ">
         <div class="d-flex my-1">
-            <p class="fw-700 mb-0">Dashboard</p><span class="fw-300 mx-1 text-light">|</span>
-            <p class="fw-300 mb-0">Banker Quotes</p>
+            <p class="fw-700 mb-0" style="color: #000000;">Dashboard</p><span class="fw-300 mx-1 " style="color: #04D99D; font-size: 20px;">|</span>
+            <p class="fw-300 mb-0" style="color: #000000;">Banker Quotes</p>
         </div>
         <div class="row">
             <div class="col-sm-12">

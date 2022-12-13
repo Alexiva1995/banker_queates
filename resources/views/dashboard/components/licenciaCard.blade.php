@@ -14,7 +14,7 @@
                     <div class="col-sm-6">
                         <div>
                             <div class=" d-flex justify-content-center align-items-star">
-                                <img src="{{ asset('images/licencias/'.$user_packages[0]->image) }}" height="220" width="240">
+                                <img src="{{ asset('images/licencias/'.$user_packages[0]->image) }}" height="242" width="250">
                             </div>
                         </div>
                     </div>
