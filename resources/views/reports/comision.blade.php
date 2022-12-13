@@ -13,6 +13,10 @@
     .fw-700 {
         font-weight: 700 !important;
     }
+    .ms-choice{
+        border: none !important;
+        margin: -3px;
+    }
 
     div.dataTables_wrapper div.dataTables_paginate ul.pagination {
         justify-content: end !important;

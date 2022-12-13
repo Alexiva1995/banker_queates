@@ -9,4 +9,9 @@
     color: #544E67 !important;
     font-weight: 500 !important;
  }
+
+ .ms-choice{
+    margin: -3px;
+    border: none !important;
+}
 </style>
