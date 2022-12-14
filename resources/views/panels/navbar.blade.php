@@ -290,8 +290,17 @@
         <li class="nav-item dropdown dropdown-user">
           <a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="javascript:void(0);" data-bs-toggle="dropdown" aria-haspopup="true">
             <div class="user-nav d-sm-flex d-none">
-              <span class="user-name fw-bolder text-capitalize" >{{Auth::user()->name}}</span>
+              <div class="row">
+                <div class="col-sm-6">
+                  <i class="fa-solid fa-arrows-rotate text-dark" style="font-size: 18px"></i>
+                </div>
+                <div class="col-sm-6">
+                  <span class="user-name fw-bolder text-capitalize" >{{Auth::user()->name}}</span>
               {{-- <span class="user-name fw-bolder text-capitalize" >{{Auth::user()->last_name}}</span> --}}
+                </div>
+               
+              </div>
+              
 
             </div>
             <!--<span class="avatar">-->
