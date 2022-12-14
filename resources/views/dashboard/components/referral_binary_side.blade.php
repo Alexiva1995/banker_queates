@@ -1,5 +1,5 @@
-<div class="col-sm-5  mb-2" style="z-index: 2">
-    <div class="card-d p-2">
+<div class="col-sm-5  mb-2" >
+    <div class="card  p-2">
         <div class="row">
             <div class="col-sm-6">
                 <div class="">
@@ -29,7 +29,7 @@
           </div>
     </div>
 
-    <div class="card-d mt-2 p-2">
+    <div class="card  mt-2 p-2">
         <div class="row">
             <div class="col-sm-6">
                 <div class=" align-items-center">

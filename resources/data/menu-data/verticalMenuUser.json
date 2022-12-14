@@ -2,19 +2,19 @@
     "menu": [
         {
             "name": "Inicio",
-            "icon": "home",
+            "icon": "fa-solid fa-house",
             "slug": "dashboard.index",
             "url": "/panels"
         },
         {
             "name": "Licencias",
-            "icon": "file",
+            "icon": "fa-solid fa-building-columns",
             "slug": "market.licenses",
             "url": "/market/licenses"
         },
         {
             "name": "Informes",
-            "icon": "list",
+            "icon": "fa-solid fa-chart-column",
             "slug": "/",
             "submenu": [
                 {
@@ -37,22 +37,17 @@
                 }
             ]
         },
+        
         {
             "url": "/wallet",
             "name": "Wallet",
-            "icon": "credit-card",
+            "icon": "fa-solid fa-wallet",
             "slug": "wallet"
-        },
-        {
-            "url": "/investments",
-            "name": "Mis licencias",
-            "icon": "columns",
-            "slug": "investment.user.index"
         },
         {
             "url": "/red/unilevel",
             "name": "Red",
-            "icon": "users",
+            "icon": "fa-solid fa-users",
             "slug": "financial.unilevel",
             "submenu": [
                 {
@@ -77,13 +72,13 @@
         },
         {
             "name": "Retiros",
-            "icon": "grid",
+            "icon": "fa-solid fa-circle-dollar-to-slot",
             "slug": "retiro",
             "url": "/retirar"
         },
         {
             "name": "Soporte",
-            "icon": "help-circle",
+            "icon": "fa-solid fa-circle-question",
             "slug": "tickets.create",
             "submenu": [
                 {
@@ -100,5 +95,6 @@
                 }
             ]
         }
+        
     ]
 }

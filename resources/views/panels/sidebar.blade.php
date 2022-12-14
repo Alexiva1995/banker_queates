@@ -19,8 +19,8 @@ $configData = Helper::applClasses();
             </li>
             <!-- <li class="nav-item nav-toggle">
         <a class="nav-link modern-nav-toggle pe-0" data-toggle="collapse">
-          <i class="d-block d-xl-none text-primary toggle-icon font-medium-4" data-feather="x"></i>
-          <i class="d-none d-xl-block collapse-toggle-icon font-medium-4 text-primary" data-feather="disc" data-ticon="disc"></i>
+          <i class="d-block d-xl-none text-primary toggle-icon font-medium-4" class="x"></i>
+          <i class="d-none d-xl-block collapse-toggle-icon font-medium-4 text-primary" class="disc" data-ticon="disc"></i>
         </a>
       </li> -->
         </ul>
@@ -39,7 +39,7 @@ $configData = Helper::applClasses();
                         @if (isset($menu->navheader))
                             <li class="navigation-header">
                                 <span>{{ __('locale.' . $menu->navheader) }}</span>
-                                <i data-feather="more-horizontal"></i>
+                                <i class="more-horizontal"></i>
                             </li>
                         @else
                             {{-- Add Custom Class with nav-item --}}
@@ -55,7 +55,7 @@ $configData = Helper::applClasses();
                                     <a href="{{ isset($menu->url) ? url($menu->url) : 'javascript:void(0)' }}"
                                         class="d-flex align-items-center shadow-none"
                                         target="{{ isset($menu->newTab) ? '_blank' : '_self' }}">
-                                        <i data-feather="{{ $menu->icon }}"></i>
+                                        <i class="{{ $menu->icon }}"></i>
                                         <span class="menu-title text-truncate">{{ __('locale.' . $menu->name) }}</span>
                                         @if (isset($menu->badge))
                                             <?php $badgeClasses = 'badge badge-pill badge-light-primary ml-auto mr-1'; ?>
@@ -68,7 +68,7 @@ $configData = Helper::applClasses();
                                     {{-- <a href="{{ Auth::user()->status == '1' ? ($menu->name == 'Unilevel' || $menu->name == 'Inicio' ? (isset($menu->url) ? url($menu->url) : 'javascript:void(0)') : '#') : '#' }}" --}}
                                         class="d-flex align-items-center shadow-none"
                                         target="{{ isset($menu->newTab) ? '_blank' : '_self' }}">
-                                        <i data-feather="{{ $menu->icon }}"></i>
+                                        <i class="{{ $menu->icon }}"></i>
                                         <span class="menu-title text-truncate">{{ __('locale.' . $menu->name) }}</span>
                                         @if (isset($menu->badge))
                                             <?php $badgeClasses = 'badge badge-pill badge-light-primary ml-auto mr-1'; ?>
@@ -95,7 +95,7 @@ $configData = Helper::applClasses();
                             @if (isset($menu->navheader))
                                 <li class="navigation-header">
                                     <span>{{ __('locale.' . $menu->navheader) }}</span>
-                                    <i data-feather="more-horizontal"></i>
+                                    <i class="more-horizontal"></i>
                                 </li>
                             @else
                                 {{-- Add Custom Class with nav-item --}}
@@ -110,7 +110,7 @@ $configData = Helper::applClasses();
                                     <a href="{{ isset($menu->url) ? url($menu->url) : 'javascript:void(0)' }}"
                                         class="d-flex align-items-center shadow-none"
                                         target="{{ isset($menu->newTab) ? '_blank' : '_self' }}">
-                                        <i data-feather="{{ $menu->icon }}"></i>
+                                        <i class="{{ $menu->icon }}"></i>
                                         <span class="menu-title text-truncate">{{ __('locale.' . $menu->name) }}</span>
                                         @if (isset($menu->badge))
                                             <?php $badgeClasses = 'badge badge-pill badge-light-primary ml-auto mr-1'; ?>
@@ -157,7 +157,7 @@ $configData = Helper::applClasses();
                         @if (isset($menu->navheader))
                             <li class="navigation-header">
                                 <span>{{ __('locale.' . $menu->navheader) }}</span>
-                                <i data-feather="more-horizontal"></i>
+                                <i class="more-horizontal"></i>
                             </li>
                         @else
                             {{-- Add Custom Class with nav-item --}}
@@ -172,7 +172,7 @@ $configData = Helper::applClasses();
                                 <a href="{{ isset($menu->url) ? url($menu->url) : 'javascript:void(0)' }}"
                                     class="d-flex align-items-center"
                                     target="{{ isset($menu->newTab) ? '_blank' : '_self' }}">
-                                    <i data-feather="{{ $menu->icon }}"></i>
+                                    <i class="{{ $menu->icon }}"></i>
                                     <span class="menu-title text-truncate">{{ __('locale.' . $menu->name) }}</span>
                                     @if (isset($menu->badge))
                                         <?php $badgeClasses = 'badge badge-pill badge-light-primary ml-auto mr-1'; ?>
@@ -197,7 +197,7 @@ $configData = Helper::applClasses();
                 <li class="nav-item shadow-none" style="margin: 0 15px;">
                     <a class="d-flex align-items-center"
                         onclick="event.preventDefault();this.closest('form').submit();">
-                        <i data-feather='log-out' style="width: 18px;height:18px"></i> <span class="menu-title"
+                        <i class='fa-solid fa-arrow-right-from-bracket' style="font-size: 23px; height: 24px;"></i> <span class="menu-title"
                             style="">Cerrar sesión</span>
                     </a>
                 </li>
@@ -205,6 +205,10 @@ $configData = Helper::applClasses();
         </ul>
     </div>
     <style>
+    .main-menu.menu-light .navigation > li.active > a > i {
+    
+    color: #fff !important;
+}
         .btn-grad:hover,
         .dropbtn:hover,
         .dropbtn:focus {

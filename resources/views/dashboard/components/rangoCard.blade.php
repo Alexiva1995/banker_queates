@@ -1,6 +1,6 @@
 
 
-        <div class="card-d p-2">
+        <div class="card  p-2">
             {{-- Sin Rango --}}
             <div class="card-body p-0" style="">
                 <div class="row">

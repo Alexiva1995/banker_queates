@@ -1,4 +1,4 @@
-<div class="col-sm-6 card mt-2 " style="width: 41rem;">
+<div class="col-sm-6 card mt-2 " style="width: 50%;">
   <div class="row">
           {{-- Grafico  --}}
           <div class="col-sm-6">
