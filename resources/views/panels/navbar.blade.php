@@ -1,4 +1,10 @@
 @if($configData["mainLayoutType"] === 'horizontal' && isset($configData["mainLayoutType"]))
+<style>
+  .navbar-container{
+    border-color: blue;
+    border-radius: 5px;
+  }
+</style>
 <nav class="header-navbar navbar-expand-lg navbar navbar-fixed align-items-center navbar-brand-center {{ $configData['navbarColor'] }}" data-nav="brand-center">
   <div class="navbar-header d-xl-block d-none">
     <ul class="nav navbar-nav">
@@ -34,7 +40,7 @@
     </ul>
   </div>
   @else
-  <nav class="header-navbar navbar navbar-expand-lg align-items-center {{ $configData['navbarClass'] }} navbar-light  {{ $configData['navbarColor'] }} {{ ($configData['layoutWidth'] === 'boxed' && $configData['verticalMenuNavbarType']  === 'navbar-floating') ? 'container-xxl' : '' }}">
+  <nav style="border-color:  #05B1D966" class="header-navbar navbar navbar-expand-lg align-items-center {{ $configData['navbarClass'] }} navbar-light  {{ $configData['navbarColor'] }} {{ ($configData['layoutWidth'] === 'boxed' && $configData['verticalMenuNavbarType']  === 'navbar-floating') ? 'container-xxl' : '' }}">
     @endif
     <div class="navbar-container d-flex content" >
       <div class="bookmark-wrapper d-flex align-items-center" >
@@ -297,12 +303,12 @@
                 @if(Auth::user()->admin != 1)
                   @if(auth()->user()->range_id == null)
 
-                    <img class="round" src="{{asset('images/ico/deg.ico')}}" alt="avatar" height="40" width="40" style="object-fit: contain; background-color: white;">
+                    <img class="round" src="{{asset('images/ico/deg.ico')}}" alt="avatar" height="50" width="63" style="object-fit: contain; background-color: white;">
 
                     <!-- <img class="round" src="{{ asset('images/logo/logo-deg-white.png') }}" alt="avatar" style="box-shadow: none;" height="50" width="50"> -->
 
                   @else
-                    <img  class="round" src="{{ asset('images/ensignRanges/'.auth()->user()->range_id.'.png') }}" style="box-shadow: none;" height="50" width="50">
+                    <img  class="round" src="{{ asset('images/ensignRanges/'.auth()->user()->range_id.'.png') }}" style="box-shadow: none;" height="50" width="63">
                   @endif
 
                 @elseif(Auth::user()->admin == 1)

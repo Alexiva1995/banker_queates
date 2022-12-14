@@ -1,5 +1,5 @@
 <div class="col-sm-3 mb-2">
-    <div class="card-d p-2 mb-2">
+    <div class="card  p-2 mb-2">
         <div class="avatar bg-light-primary avatar-md me-auto mb-1 custom-avatar-content" >
             <div class="avatar-content">
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">

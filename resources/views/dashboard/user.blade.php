@@ -263,17 +263,7 @@
                 margin-top: 0rem;
             }
         }
-    .card-d{
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 1px solid #05B1D966;
-    border-radius: 10px;
-}
+    
 .gradient{
     background: rgb(2,0,36);
     background: linear-gradient(90deg, #05A4EA, #02D6AC 100%);
@@ -303,8 +293,13 @@
             </div>
             <div class="col-sm-12">
                 <div class="row">
-                        @include('dashboard.components.referral_binary_side')
-                        @include('dashboard.components.licenciaCard')
+                    <div class="col-sm-12">
+                        <div class="row">
+                            @include('dashboard.components.referral_binary_side')
+                            @include('dashboard.components.licenciaCard')
+                        </div>
+                    </div>
+                        
                     <div class="col-sm-12 mb-2">
                         @include('dashboard.components.rangoCard')
                     </div>
@@ -507,7 +502,8 @@
                 success: (response) => {
                     let total_days = response[0];
                     let days_remaining = response[1];
-                    let percentage = (days_remaining / total_days) * 100;
+                    let percentage = (total_days/365)*100 ;
+                    console.log(percentage); 
                     let color_chart;
                     if (percentage > 50) {
                         color_chart = "#05A5E9";
@@ -527,7 +523,7 @@
         function daysChart(percentage, days_remaining, color_chart) {
             goalChartOptions = {
                 chart: {
-                    height: 260,
+                    height: 280,
                     width: '100%',
                     type: 'radialBar',
                     sparkline: {

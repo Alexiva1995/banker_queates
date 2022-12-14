@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Carbon\Carbon;
 use App\Models\User;
-use App\Models\Investment;
 use App\Models\Order;
 use App\Models\Range;
-use App\Services\MinApiService;
+use App\Models\Investment;
+use Illuminate\Http\Request;
 use App\Services\RangeService;
+use App\Services\MinApiService;
 use App\Services\ReferalService;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -99,9 +100,9 @@ class DashboardController extends Controller
     $date2 = Carbon::parse($user->investment->created_at);
     $date1 = Carbon::parse($user->investment->expiration_date);
 
-    $total_days = $date2->diffInDays($date1->format('Y-m-d'));
+    $total_days = $date2->diffInDays(today()->format('Y-m-d'));
     $daysRemaining = $date1->diffInDays(today()->format('Y-m-d') ); 
-
+    Log::info($total_days);
     $data = [$total_days, $daysRemaining];
 
     return $data;

@@ -1,5 +1,5 @@
-<div class="col-sm-7">
-    <div class="card-d gradient">
+<div class="col-sm-7 mb-2" >
+    <div class="card  gradient">
         {{-- Sin Rango --}}
         <div class="card-body">
             <div class="row">
@@ -20,7 +20,7 @@
                     </div>
                     <div class="col-sm-6">
                         {{-- Grafico  --}}
-                        <div class="sk-circles sk-circles-up ">
+                        <div class="">
                             <div id="chartDays" style=""></div>
                         </div>
                     </div>
