@@ -150,11 +150,11 @@
                                     <div style="width:1000px; margin: 0 auto">
                                         @if ($base['range_id'] != null)
                                             <img src="{{ asset('images/ensignRanges/' . $base['range_id'] . '.png') }}"
-                                                height="110" width="110" class="align-self-center mr-1 di"
+                                                height="100" width="120" class="align-self-center mr-1 di"
                                                 alt="{{ $base['range_id'] }}">
                                         @elseif($base['range_id'] == null && !empty($base->licence))
                                             <img src="{{ asset('images/ensignRanges/' . $base->investment->package_id . '.png') }}"
-                                                height="110" width="110" class="align-self-center mr-1 di"
+                                                height="100" width="120" class="align-self-center mr-1 di"
                                                 alt="{{ $base['range_id'] }}">
                                         @elseif ($base['range_id'] == null && empty($base->licence))
                                             <img src="{{ asset('images/ensignRanges/0.png') }}" height="110"

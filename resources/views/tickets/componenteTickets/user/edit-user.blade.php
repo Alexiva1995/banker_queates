@@ -2,12 +2,12 @@
 @section('title', 'Editando ticket')
 
 @section('content')
-<style >
-    .card{
+    <style>
+        .card {
             border: 1px solid #05B1D966 !important;
             border-radius: 10px !important;
-    }
-</style>
+        }
+    </style>
     <div class="d-flex my-2">
         <p style="color:#808E9E;" class="fw-700">Soporte</p><span class="fw-normal mx-1">|</span>
         <p>Ticket</p>
@@ -26,7 +26,7 @@
                             <div class="col-6 mb-2">
                                 <!--SELECT-->
                                 <span class=" text-bold-600 text-primary">ID User: </span>
-                                <span>{{Auth::user()->id}}</span>
+                                <span>{{ Auth::user()->id }}</span>
                             </div>
                             <div class="col-6 mb-2">
                                 <span class=" text-bold-600 text-primary">Correo:</span>
@@ -48,10 +48,10 @@
                                     <span>Inversión total</span>
                                 @endif
                                 <!--SELECT END-->
-                                
+
                             </div>
                             <div class="col-6 mb-2">
-                            <span class=" text-bold-600 text-primary">Asunto:</span>
+                                <span class=" text-bold-600 text-primary">Asunto:</span>
                                 <span>{{ $ticket->issue }}</span>
                             </div>
 
@@ -72,20 +72,18 @@
 
                             <div class="col-sm-12 mb-2">
                                 <!--Asunto -->
-                                
+
                                 <!--Asunto end-->
 
                                 <!--Chat-->
-                                <span class="text-bold-600">Chat:</span>
-
-                                <div class="card-body mb-1">
+                                <div class="mb-1">
                                     @foreach ($message as $item)
                                         @if ($item->type == 0)
-                                            <div class="title1 ml-2 d-flex justify-content-start">
+                                            <div class="title1 ml-2 d-flex justify-content-end">
                                                 <span>{{ $item->getUser->email }}</span>
                                             </div>
-                                            <div class="d-flex justify-content-start mb-4">
-                                                <div class="msg_cotainer">
+                                            <div class="d-flex justify-content-end mb-4">
+                                                <div class="msg_cotainer" style="border-radius: 10px; background-color: #E3E7EB; color: rgb(0, 0, 0); box-shadow: 0px 10px 9px -4px rgba(0,0,0,0.76);">
                                                     <div class="img">
                                                         @if ($item->image !== null)
                                                             <a href="{{ asset('storage/' . $item->image) }}"
@@ -105,10 +103,10 @@
                                                 </div>
                                             </div>
                                         @elseif ($item->type == 1)
-                                            <div class="title2 d-flex justify-content-end">
+                                            <div class="title2 d-flex justify-content-start">
                                                 <span>{{ $item->getAdmin->email }}</span>
                                             </div>
-                                            <div class="d-flex justify-content-end mb-4">
+                                            <div class="d-flex justify-content-start mb-4">
                                                 <div class="msg_cotainer_send">
                                                     <div class="img">
                                                         @if ($item->image !== null)
@@ -136,42 +134,48 @@
                             </div>
 
 
-                            <div class="col-sm-12"> 
-                                
-                                <div class="d-flex justify-content-between">
-                                <div class="col-sm-10">
-                                <!--MENSAJE-->
-                                
-                                <input class="ms-2 form-control " placeholder="Escriba un mensaje" type="text" id="message" name="message"></input>
-                                <!--MENSAJE END-->
-                                </div>
-                                <div class="col-sm-1">
-                                    <div class="d-flex justify-content-center">
-                                    <form class="p-0" id="frm-example" name="frm-example">
-                                        <span for="hiddenBtn" class="ms-1 choose-btn capa-interior" id="chooseBtn"><i data-feather='image'></i></span>
-                                        <input type="file" id="hiddenBtn" name="image">
-                                    </form>
-                                    
-                               
-                                @error('image')
-                                    <small class="text-danger">
-                                        {{ $message }}
-                                    </small>
-                                @enderror
-                                <!--CONTENEDOR DE ARCHIVO ADJUNTO END-->
-                                <br>
+                            <div class="col-sm-12">
 
-                                <!--CONTENEDOR DE ENVIAR Y PAPELERA-->
-                                  
-                                    <button
-                                        class="btn btn-primary waves-effect waves-float waves-light">Enviar</button>
+                                <div class="d-flex justify-content-between">
+                                    <div class="col-sm-10">
+                                        <!--MENSAJE-->
+
+                                        <input class="form-control " placeholder="Escriba un mensaje" type="text"
+                                            id="message" name="message" style="background-color: #CBC6D9"></input>
+                                        <!--MENSAJE END-->
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="d-flex justify-content-around">
+                                            <form class="p-0" id="frm-example" name="frm-example">
+                                                <label for="hiddenBtn" class="choose-btn capa-interior"
+                                                    id="chooseBtn" style="margin-top: 0.5em;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M20.75 23.25H3.25C1.86929 23.25 0.75 22.1307 0.75 20.75V3.25C0.75 1.86929 1.86929 0.75 3.25 0.75H20.75C22.1307 0.75 23.25 1.86929 23.25 3.25V20.75C23.25 22.1307 22.1307 23.25 20.75 23.25ZM3.25 3.25V20.75H20.75V3.25H3.25ZM19.5 18.25H4.5L8.25 13.25L9.5 14.5L13.25 9.5L19.5 18.25ZM7.625 10.75C6.58947 10.75 5.75 9.91053 5.75 8.875C5.75 7.83947 6.58947 7 7.625 7C8.66053 7 9.5 7.83947 9.5 8.875C9.5 9.91053 8.66053 10.75 7.625 10.75Z" fill="#2E3A59"/>
+                                                        </svg>
+                                                    </label>
+                                                <input type="file" id="hiddenBtn" name="image">
+                                            </form>
+
+
+                                            @error('image')
+                                                <small class="text-danger">
+                                                    {{ $message }}
+                                                </small>
+                                            @enderror
+                                            <!--CONTENEDOR DE ARCHIVO ADJUNTO END-->
+
+                                            <!--CONTENEDOR DE ENVIAR Y PAPELERA-->
+
+                                            <button class="btn btn-primary waves-effect waves-float waves-light">Enviar
+                                            </button>
                                         </div>
-                                 </div>
-                            </div>
+                                    </div>
+                                </div>
                                 <!--CONTENEDOR DE ARCHIVO ADJUNTO-->
-                                
+
                                 <!--CONTENEDOR DE ENVIAR Y PAPELERA END-->
                                 <!--CONTENEDOR DE ARCHIVO ADJUNTO END-->
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
