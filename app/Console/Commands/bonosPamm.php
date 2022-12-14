@@ -66,13 +66,13 @@ class bonosPamm extends Command
             for($i = 0; $i < count($NIVELES); $i++){
 
                 if( $ID_padre == -1){
-                    $ID_padre = $this->padre($id , $NIVELES[$i][0],$monto_residual, $id );
+                    $ID_padre = $this->padre($id , $NIVELES[$i][0],$monto_residual, $id, $i );
                     if(isset($ID_padre) && !empty($ID_padre) && $ID_padre != null){
                         Log::info('Pagando bono NIVEL_.'.$NIVELES[$i][0].'.  a usuario '. $ID_padre);
                         
                     }
                 }else{
-                    $ID_padre = $this->padre($ID_padre , $NIVELES[$i][0],$monto_residual, $id );
+                    $ID_padre = $this->padre($ID_padre , $NIVELES[$i][0],$monto_residual, $id, $i );
                     if(isset($ID_padre) && !empty($ID_padre) && $ID_padre != null){
                         Log::info('Pagando bono NIVEL_.'.$NIVELES[$i][0].'.  a usuario '.  $ID_padre);
                     }
@@ -81,7 +81,7 @@ class bonosPamm extends Command
         }
     }
 
-    public function padre($id,$BONO,$monto_residual, $buyer_id){
+    public function padre($id,$BONO,$monto_residual, $buyer_id, $level){
         $user = User::where('id',$id)->first('buyer_id');
         if(isset($user) && !empty($user) && $user['buyer_id'] != null) {
             $bono_pamm = [
@@ -92,7 +92,7 @@ class bonosPamm extends Command
                 'amount_last_liquidation',
                 'type',
                 'description'=>'Bono Pamm',
-                'level'=>0,
+                'level'=> $level + 1,
                 'status'=> 0,
             ];
 

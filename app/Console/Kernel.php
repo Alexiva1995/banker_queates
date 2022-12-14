@@ -23,6 +23,7 @@ class Kernel extends ConsoleKernel
         Commands\AlertLicenseexpiration::class,
         Commands\DeleteBinaryPoints::class,
         Commands\BinaryProfit::class,
+        Commands\bonosPamm::class,
     ];
 
     /**
