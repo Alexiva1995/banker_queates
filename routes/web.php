@@ -438,41 +438,4 @@ Route::middleware('admin')->group(function () {
         Artisan::call('corte:ganancias:binarias');
         return redirect()->back()->with('success', 'El cron add:utility corrio con exito');
     })->name('corte.ganancias.binarias');
-
-    Route::get('/start-cronRentabilidad', function () {
-        Artisan::call('pagar:rentabilidad');
-        return redirect()->back()->with('success', 'el cron pagar:rentabilidad corrio con exito');
-    })->name('bono.cronRentabilidad');
-
-
-    Route::get('/start-cronSumRentabilidad', function () {
-        Artisan::call('capital:sumRentabilidad');
-        return redirect()->back()->with('success', 'el cron capital:sumRentabilidad corrio con exito');
-    })->name('start.cronSumRentabilidad');
-
-
-    Route::get('/start-start:payrentabilidad', function () {
-        Artisan::call('start:payrentabilidad');
-        return redirect()->back()->with('success', 'el cron start:payrentabilidad corrio con exito');
-    })->name('start.payrentabilidad');
-
-    Route::get('/check-order', function () {
-        Artisan::call('checkstatus:order');
-        return redirect()->back()->with('success', 'el cron checkstatus:order corrio con exito');
-    })->name('check.order');
-
-    Route::get('/avaliable-bonus', function () {
-        Artisan::call('avaliable:bonus');
-        return redirect()->back()->with('success', 'el cron avaliable:bonus corrio con exito');
-    })->name('avaliable.bonus');
-
-    Route::get('/bonus-7k', function () {
-        Artisan::call('bonus:range');
-        return redirect()->back()->with('success', 'el cron bonus:7k corrio con exito');
-    })->name('bonus.7k');
-
-    Route::get('/corte-binario', function () {
-        Artisan::call('corte:ganancias:binarias');
-        return redirect()->back()->with('success', 'el cron corte:ganancias:binarias corrio con exito');
-    });
 });
