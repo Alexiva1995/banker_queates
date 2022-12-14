@@ -26,6 +26,12 @@
                     "name": "Ordenes",
                     "icon": "circle",
                     "slug": "ordenes.index"
+                },
+                {
+                    "url": "/manual-bonus-history",
+                    "name": "Historial de Bono Manual",
+                    "icon": "circle",
+                    "slug": "manual.bonus.history"
                 }
             ]
         },

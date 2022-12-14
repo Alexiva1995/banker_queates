@@ -86,6 +86,9 @@ Route::middleware('auth')->group(function () {
 
         //RUTAS ADMIN
         Route::middleware('admin')->group(function () {
+
+            Route::get('/manual-bonus-history', [ReportController::class, 'manualBonusHistory'])->name('manual.bonus.history');
+
             Route::get('/configurar-retiros', [LiquidactionController::class, 'configurar_retiro'])->name('config.retiros');
             //GENEALOGY
             Route::prefix('red')->group(function () {

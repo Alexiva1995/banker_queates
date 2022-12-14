@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Investment;
 use App\Models\Liquidation;
+use App\Models\ManualBonusLog;
 use App\Models\OrdenPurchase;
 use App\Models\Order;
 use App\Models\Utility;
@@ -104,17 +105,11 @@ class ReportController extends Controller
 
         return view('reports.index', compact('ordenes','user_name', 'id_tx', 'order_status', 'created_from', 'created_to', 'updated_from', 'updated_to'));
     }
-    public function utility()
+    public function manualBonusHistory()
     {
-        $user = auth()->user();
-        if($user->admin == 1){
-            $utilities = Utility::orderBy('id', 'desc')->get();
+        $history = ManualBonusLog::with(['user','author'])->get();
 
-        }else{
-            $utilities = Utility::where('user_id', $user->id)->orderBy('id', 'desc')->get();
-        }
-
-        return view('reports.utilities', compact('utilities'));
+        return view('reports.manualBonusHistory', compact('history'));
     }
 
     public function cron()
