@@ -7,15 +7,22 @@
 @endsection
 
 @section('content')
-<div class="d-flex my-2">
-    <p style="color:#808E9E;" class="fw-700">Soporte</p><span class="fw-normal mx-1">|</span>
+<style >
+    .card{
+            border: 1px solid #05B1D966 !important;
+            border-radius: 10px !important;
+    }
+</style>
+<div class="d-flex my-1">
+    <p style="color:#808E9E;" class="fw-700">Soporte</p><span class="fw-normal mx-1 text-primary">|</span>
     <p>Ticket</p>
 </div>
     <div class="card">
+        <div class="mx-1 mt-1">
         <!--Card Header--->
-        <div class="card-header">
-            <h4 class="text-white fw-bold">
-                Listado de Tickets
+        <div class=" card-header">
+            <h4>
+                Lista de Tickets
             </h4>
         </div>
         <!--Card Header End--->
@@ -34,7 +41,7 @@
                 @foreach ($ticket as $item)
                     <tr class="text-center">
                         <td>{{ $item->id }}</td>
-                        <td class="text-start">[Ticket #{{ $item->user_id }}] {{ $item->issue }}</td>
+                        <td class="text-center">[Ticket #{{ $item->user_id }}] {{ $item->issue }}</td>
 
                         @if ($item->status == '0')
                             <td> <a class="btn btn-info text-white text-bold-600">Abierto</a></td>
@@ -43,9 +50,9 @@
                         @endif
 
                         @if ($item->send == '')
-                            <td class="text-start">No hay mensaje Disponibles</td>
+                            <td class="text-center">No hay mensaje Disponibles</td>
                         @else
-                            <td class="text-start">{{ $item->send }}</td>
+                            <td class="text-center">{{ $item->send }}</td>
                         @endif
 
 
@@ -65,6 +72,7 @@
             </table>
 
         </div>
+        </div>
     </div>
 @endsection
 @section('vendor-script')
@@ -83,9 +91,9 @@
                 [0, "desc"]
             ],
             language: {
-                lengthMenu: 'Mostrar _MENU_ registros',
+                lengthMenu: 'Mostrar _MENU_ Entradas',
                 zeroRecords: 'No hay registros para mostrar',
-                info: 'Mostrando _PAGE_ de _PAGES_',
+                info: 'Mostrando _PAGE_ de _PAGES_ entradas',
                 infoEmpty: 'No hay registros para mostrar',
                 "search": "Buscar:",
                 "paginate": {

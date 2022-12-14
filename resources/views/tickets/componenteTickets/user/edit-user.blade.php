@@ -2,7 +2,12 @@
 @section('title', 'Editando ticket')
 
 @section('content')
-
+<style >
+    .card{
+            border: 1px solid #05B1D966 !important;
+            border-radius: 10px !important;
+    }
+</style>
     <div class="d-flex my-2">
         <p style="color:#808E9E;" class="fw-700">Soporte</p><span class="fw-normal mx-1">|</span>
         <p>Ticket</p>
@@ -11,14 +16,6 @@
     <div class="row match-height">
         <div class="col-md-12 col-12">
             <div class="card">
-                <!--Card Header--->
-                <div class="card-header">
-                    <h4 class=" fw-bold">
-                        Revisando Ticket
-                    </h4>
-                </div>
-                <!--Card Header End--->
-
                 <div class="card-body">
                     <form action="{{ route('ticket.update-user', $ticket->id) }}" method="POST"
                         enctype="multipart/form-data">
@@ -26,56 +23,62 @@
                         @method('PATCH')
 
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-6 mb-2">
                                 <!--SELECT-->
-                                <span class=" text-bold-600">Categoria:</span>
+                                <span class=" text-bold-600 text-primary">ID User: </span>
+                                <span>{{Auth::user()->id}}</span>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <span class=" text-bold-600 text-primary">Correo:</span>
+                                <span>{{ $emailUser }}</span>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <!--SELECT-->
+                                <span class=" text-bold-600 text-primary">Categoria: </span>
 
                                 @if ($ticket->categories == '0')
-                                    <h5>Ayuda</h5>
+                                    <span>Ayuda</span>
                                 @elseif($ticket->categories == '1')
-                                    <h5>Soporte técnico</h5>
+                                    <span>Soporte técnico</span>
                                 @elseif($ticket->categories == '2')
-                                    <h5>Corrección de datos</h5>
+                                    <span>Corrección de datos</span>
                                 @elseif($ticket->categories == '3')
-                                    <h5>Bonos</h5>
+                                    <span>Bonos</span>
                                 @elseif($ticket->categories == '4')
-                                    <h5>Inversión total</h5>
+                                    <span>Inversión total</span>
                                 @endif
                                 <!--SELECT END-->
+                                
+                            </div>
+                            <div class="col-6 mb-2">
+                            <span class=" text-bold-600 text-primary">Asunto:</span>
+                                <span>{{ $ticket->issue }}</span>
                             </div>
 
-                            <div class="col-6">
-                                <span class=" text-bold-600">Correo:</span>
-                                <h5>{{ $emailUser }}</h5>
+                            <div class="col-6 mb-2">
+                                <span class=" text-bold-600 text-primary"># Ticket:</span>
+                                <span>{{ $ticket->id }}</span>
                             </div>
 
-                            <div class="col-6">
-                                <span class=" text-bold-600"># Ticket:</span>
-                                <h5>{{ $ticket->id }}</h5>
-                            </div>
-
-                            <div class="col-6">
-                                <label for="">Estado:</label>
+                            <div class="col-6 mb-2">
+                                <label class="text-primary" for="">Estado:</label>
                                 @if ($ticket->status == '0')
-                                    <h5>Abierto</h5>
+                                    <span>Abierto</span>
                                 @endif
                                 @if ($ticket->status == '1')
-                                    <h5>Cerrado</h5>
+                                    <span>Cerrado</span>
                                 @endif
                             </div>
 
                             <div class="col-sm-12 mb-2">
                                 <!--Asunto -->
-                                <span class=" text-bold-600">Asunto:</span>
-                                <div class="input-group input-group-lg mb-1">
-                                    <h5>{{ $ticket->issue }}</h5>
-                                </div>
+                                
                                 <!--Asunto end-->
 
                                 <!--Chat-->
                                 <span class="text-bold-600">Chat:</span>
 
-                                <div class="card-body msg_card_body mb-1">
+                                <div class="card-body mb-1">
                                     @foreach ($message as $item)
                                         @if ($item->type == 0)
                                             <div class="title1 ml-2 d-flex justify-content-start">
@@ -133,25 +136,23 @@
                             </div>
 
 
-                            <div class="col-sm-8">
+                            <div class="col-sm-12"> 
+                                
+                                <div class="d-flex justify-content-between">
+                                <div class="col-sm-10">
                                 <!--MENSAJE-->
-                                <span class=" text-bold-600">Mensaje:</span>
-                                <textarea class="form-control " type="text" id="message" name="message" rows="3" style="height: 25vh;"></textarea>
+                                
+                                <input class="ms-2 form-control " placeholder="Escriba un mensaje" type="text" id="message" name="message"></input>
                                 <!--MENSAJE END-->
-                            </div>
-
-                            <div class="col-sm-4 mt-2">
-
-                                <!--CONTENEDOR DE ARCHIVO ADJUNTO-->
-                                <div class="container-fluid capa-exterior">
-
-                                    <form id="frm-example" name="frm-example">
-                                        <label for="hiddenBtn" class="choose-btn capa-interior" id="chooseBtn"><i
-                                                class="fas fa-upload rosado"></i> Ajuntar archivo</label>
+                                </div>
+                                <div class="col-sm-1">
+                                    <div class="d-flex justify-content-center">
+                                    <form class="p-0" id="frm-example" name="frm-example">
+                                        <span for="hiddenBtn" class="ms-1 choose-btn capa-interior" id="chooseBtn"><i data-feather='image'></i></span>
                                         <input type="file" id="hiddenBtn" name="image">
                                     </form>
-                                    <br>
-                                </div>
+                                    
+                               
                                 @error('image')
                                     <small class="text-danger">
                                         {{ $message }}
@@ -159,24 +160,16 @@
                                 @enderror
                                 <!--CONTENEDOR DE ARCHIVO ADJUNTO END-->
                                 <br>
-                                <!--CONTENEDOR DE ENVIAR Y PAPELERA-->
-                                <div class="col-sm-12">
-                                    <div class="row justify-content-between">
-                                        <div class="col-lg-2 col-sm-12">
-                                            <!--BOTON ELIMINAR-->
 
-                                            <span class="rosado" style="font-size: 20px;">
-                                                | <i id="remove" class=" far fa-trash-alt"></i>
-                                            </span>
-                                            <!--BOTON ELIMINAR END-->
+                                <!--CONTENEDOR DE ENVIAR Y PAPELERA-->
+                                  
+                                    <button
+                                        class="btn btn-primary waves-effect waves-float waves-light">Enviar</button>
                                         </div>
-                                        <div class="col-lg-10 col-sm-12">
-                                            <!--BOTON ENVIAR-->
-                                            <button
-                                                class="btn btn-primary w-100 waves-effect waves-float waves-light">Enviar</button>
-                                        </div>
-                                    </div>
-                                </div>
+                                 </div>
+                            </div>
+                                <!--CONTENEDOR DE ARCHIVO ADJUNTO-->
+                                
                                 <!--CONTENEDOR DE ENVIAR Y PAPELERA END-->
                                 <!--CONTENEDOR DE ARCHIVO ADJUNTO END-->
                     </form>

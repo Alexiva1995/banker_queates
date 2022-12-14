@@ -10,7 +10,7 @@
     <li>
         <a>
             <div class="media d-flex justify-content-center ">
-                <img src="{{ asset('images/ensignRanges/sin-referido.png') }}" height="80" width="70"
+                <img src="{{ asset('images/ensignRanges/sin-referido.jpg') }}" height="80" width="70"
                 class="rounded-circle"  style="margin-top: -2px">
             </div>
         </a>
