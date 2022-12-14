@@ -157,6 +157,10 @@
                                     @elseif($wallet->status == 3)
                                     <td class="fw-300 text-center"> <a
                                             class=" btn bg-light-danger fw-300 p-75">Anulada</a></td>
+                                    @elseif($wallet->status == 4)
+                                        <td class="fw-300 text-center"> 
+                                            <a class=" btn bg-light-danger fw-300 p-75">Sustraido</a>
+                                        </td>
                                     @endif
                                     <td class="fw-300 text-center">
                                         @switch($wallet->type)
