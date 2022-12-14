@@ -584,10 +584,7 @@ class LiquidactionController extends Controller
             $general =  WalletComission::where('user_id', $user->id)->get();
             $generalTotal = $general->sum('amount');
             $generalAvailable =  $general->where('status', 0)->sum('amount_available');
-
             $balancEdition = Liquidation::where('user_id', $user->id)->get();
-
-
 
             //vista mlm
 
