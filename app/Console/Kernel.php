@@ -18,13 +18,8 @@ class Kernel extends ConsoleKernel
         //Commands\startPayRentabilidad::class,
         //Commands\DeleteOrden::class,
         //Commands\FutswapCanceled::class,
-        //Commands\SetRanges::class,
+        Commands\SetRanges::class,
         //Commands\AlertMembershipexpiration::class,
-        Commands\CreateUtility::class,
-        Commands\AddRentability::class,
-        Commands\AvaliableBonus::class,
-        Commands\BonusRange::class,
-        Commands\RentabilityPackages::class,
         Commands\AlertLicenseexpiration::class,
         Commands\DeleteBinaryPoints::class,
         Commands\BinaryProfit::class,
@@ -38,20 +33,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('pay:rentability')->monthlyOn(1, '00:00');
-        //$schedule->command('bono:cartera')->monthly();
-        //$schedule->command('start:payrentabilidad')->cron('0 23 * * 0');
-        //$schedule->command('pagar:rentabilidad')->days([1,2,3,4,5])->at('00:00');
-        //$schedule->command('capital:sumRentabilidad')->monthly();
-        //$schedule->command('checkstatus:order')->hourly();
-        // $schedule->command('checkstatus:withdraw')->everyTenMinutes();
-        $schedule->command('set:ranges')->daily();
         //$schedule->command('alert:email')->daily();
         //$schedule->command('delete:orden')->everyMinute();
-        $schedule->command('create:utility')->lastDayOfMonth('00:00');
-        $schedule->command('add:rentability')->lastDayOfMonth('00:00');
-        $schedule->command('avaliable:bonus')->daily(); 
-        $schedule->command('bonus:range')->monthlyOn(30, '00:00');
+        $schedule->command('set:ranges')->daily();
         $schedule->command('bonos:pamm')->everyMinute();
         $schedule->command('delete:binary:points')->daily();
         $schedule->command('corte:ganancias:binarias')->daily();
