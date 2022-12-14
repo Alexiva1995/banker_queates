@@ -1,4 +1,4 @@
-<div class="col-sm-3">
+<div class="col-sm-3 mb-2">
     <div class="card-d p-2">
         <div class="avatar bg-light-primary avatar-md me-auto mb-1 custom-avatar-content"e="padding: 0.3rem;">
             <div class="avatar-content">
