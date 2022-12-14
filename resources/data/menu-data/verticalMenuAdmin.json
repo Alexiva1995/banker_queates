@@ -76,6 +76,37 @@
             "icon": "help-circle",
             "slug": "ticket.list-admin",
             "url": "/tickets/ticket-list-admin"
+        },
+        {
+            "name": "Crones",
+            "icon": "circle",
+            "slug": "/",
+            "submenu": [
+                {
+                    "url": "/bono-pamm",
+                    "name": "Bono PAMM",
+                    "icon": "circle",
+                    "slug": ""
+                },
+                {
+                    "url": "/set-ranges",
+                    "name": "Set Ranges",
+                    "icon": "circle",
+                    "slug": ""
+                },
+                {
+                    "url": "/corte-ganancias-binarias",
+                    "name": "Corte Binario",
+                    "icon": "circle",
+                    "slug": ""
+                },
+                {
+                    "url": "/delete-binary-points",
+                    "name": "Delete Binary Points",
+                    "icon": "circle",
+                    "slug": ""
+                }
+            ]
         }
 
     ]

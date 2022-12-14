@@ -424,60 +424,18 @@ Route::middleware('admin')->group(function () {
         return redirect()->back()->with('success', 'El cron bono:pamm corrio con exito');
     })->name('bono.pamm');
 
-    Route::get('/bono-cartera', function () {
-        Artisan::call('bono:cartera');
-        return redirect()->back()->with('success', 'El cron bono:cartera corrio con exito');
-    })->name('bono.cartera');
-
     Route::get('/set-ranges', function () {
         Artisan::call('set:ranges');
-        return redirect()->back()->with('success', 'El cron set:ranges corrio con exito');
-    })->name('cron.set.ranges');
+        return redirect()->back()->with('success', 'El cron bono:cartera corrio con exito');
+    })->name('set.ranges');
 
-    Route::get('/create-utility', function () {
-        Artisan::call('create:utility');
+    Route::get('/delete-binary-points', function () {
+        Artisan::call('delete:binary:points');
         return redirect()->back()->with('success', 'El cron create:utility corrio con exito');
-    })->name('create.utility');
+    })->name('delete.binary.points');
 
-    Route::get('/update-utility', function () {
-        Artisan::call('add:rentability');
-        return redirect()->back()->with('success', 'El cron add:utility corrio con exito');
-    })->name('add.utility');
-
-    Route::get('/start-cronRentabilidad', function () {
-        Artisan::call('pagar:rentabilidad');
-        return redirect()->back()->with('success', 'el cron pagar:rentabilidad corrio con exito');
-    })->name('bono.cronRentabilidad');
-
-
-    Route::get('/start-cronSumRentabilidad', function () {
-        Artisan::call('capital:sumRentabilidad');
-        return redirect()->back()->with('success', 'el cron capital:sumRentabilidad corrio con exito');
-    })->name('start.cronSumRentabilidad');
-
-
-    Route::get('/start-start:payrentabilidad', function () {
-        Artisan::call('start:payrentabilidad');
-        return redirect()->back()->with('success', 'el cron start:payrentabilidad corrio con exito');
-    })->name('start.payrentabilidad');
-
-    Route::get('/check-order', function () {
-        Artisan::call('checkstatus:order');
-        return redirect()->back()->with('success', 'el cron checkstatus:order corrio con exito');
-    })->name('check.order');
-
-    Route::get('/avaliable-bonus', function () {
-        Artisan::call('avaliable:bonus');
-        return redirect()->back()->with('success', 'el cron avaliable:bonus corrio con exito');
-    })->name('avaliable.bonus');
-
-    Route::get('/bonus-7k', function () {
-        Artisan::call('bonus:range');
-        return redirect()->back()->with('success', 'el cron bonus:7k corrio con exito');
-    })->name('bonus.7k');
-
-    Route::get('/corte-binario', function () {
+    Route::get('/corte-ganancias-binarias', function () {
         Artisan::call('corte:ganancias:binarias');
-        return redirect()->back()->with('success', 'el cron corte:ganancias:binarias corrio con exito');
-    });
+        return redirect()->back()->with('success', 'El cron add:utility corrio con exito');
+    })->name('corte.ganancias.binarias');
 });
