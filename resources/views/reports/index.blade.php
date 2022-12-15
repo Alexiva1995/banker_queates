@@ -22,13 +22,35 @@
         border-radius: 5px !important;
         font-size: 1em !important;
         margin-bottom: -2rem;
-      }
+    }
+
+    .success-badge{
+        background-color: rgba(66, 172, 70, 0.16);
+    }
+    .success-text{
+        color: #42AC46;
+    }
+    .waiting-text{
+        color: #36D9ED;
+    }
+    .waiting-badge{
+        background-color: #D6F7FB;
+    }
+    .warning-text{
+        color: #FF4969;
+    }
+    .cebra{
+        background-color: #D8EDED;
+    }
+    .warning-badge{
+        background-color: #FBE3E4;
+    }
 </style>
 @section('content')
 <div id="logs-list">
     <div class="d-flex my-1">
-        <p class="fw-700 mb-0">Informes</p><span class="fw-300 mx-1 text-light">|</span>
-        <p class="fw-300 mb-0">Ordenes</p>
+        <p class="fw-700 mb-0" style="font-weight: 700; color:#000">Informes</p><span class="fw-300 mx-1 text-light">|</span>
+        <p class="fw-700 mb-0" style="font-weight: 700; color:rgba(0, 0, 0, 0.514)">Ordenes</p>
     </div>
     <div class="col-12 mt-2">
         <div class="card p-2">
@@ -110,7 +132,6 @@
                                     <th>ID</th>
                                     @if(Auth::user()->admin != 0)
                                         <th>Usuario</th>
-                                    @else
                                     @endif
                                     <th>ID TX</th>
                                     <th>Monto</th>
@@ -120,10 +141,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($ordenes as $orden)
+                                @foreach ($ordenes as $key => $orden)
                                 {{-- {{ dd($orden->coinpaymentTransaccion->txn_id) }} --}}
-                                    <tr class="text-center">
-                                        <td class="fw-300">{{$orden->id}}</td>
+                                    <tr class="text-center {{ $key % 2 == 0 ? 'cebra' : null }}">
+                                        <td class="fw-600">{{$orden->id}}</td>
                                         @if(Auth::user()->admin != 0)
                                             <td class="fw-300">{{$orden->user->email}}</td>
                                         @endif
@@ -135,49 +156,62 @@
                                             @endif
                                         </td>
                                         <td class="fw-300 text-end">{{number_format($orden->amount, 2)}}</td>
-                                        <td class="fw-300">
-                                        <button type="button" @if(Auth::user()->admin == '1' && $orden->status == '0')
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#ModalStatus{{$orden->id}}"
-                                            @endif
+                                        @if(Auth::user()->admin == 1)
+                                            <td class="fw-300">
+                                                <button type="button" @if(Auth::user()->admin == '1' && $orden->status == '0')
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#ModalStatus{{$orden->id}}"
+                                                    @endif
 
-                                            class="@if ($orden->status == '0') btn btn-warning text-white text-bold-600 @elseif($orden->status == '1') btn btn-info text-white text-bold-600 @elseif($orden->status == '2') btn btn-danger text-white text-bold-600 @elseif($orden->status == '3') btn btn-danger text-white text-bold-600 @endif">{{$orden->status()}}
-                                        </button>
+                                                    class="@if ($orden->status == '0') btn btn-warning text-white text-bold-600 @elseif($orden->status == '1') btn btn-info text-white text-bold-600 @elseif($orden->status == '2') btn btn-danger text-white text-bold-600 @elseif($orden->status == '3') btn btn-danger text-white text-bold-600 @endif">{{$orden->status()}}
+                                                </button>
+                                            </td>
+                                            <div class="modal fade" id="ModalStatus{{$orden->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Cambiar estatus</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <form action="{{ route('orders.cambiarStatus') }}" method="POST">
+                                                            @csrf
+                                                            <div class="modal-body">
 
-                                        </td>
-                                        <div class="modal fade" id="ModalStatus{{$orden->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Cambiar estatus</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                <input type="hidden" name="id" value="{{$orden->id}}">
+                                                                ¿Desea cambiar es estatus de la orden?
+                                                                <br>
+                                                                <label>Seleccione el estado</label>
+                                                                <select name="status" required class="form-control">
+                                                                    <option value="">Seleccione un estado</option>
+                                                                    <option value="1">Aprobado</option>
+                                                                    <option value="2">Rechazado</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
                                                 </div>
-                                                <form action="{{ route('orders.cambiarStatus') }}" method="POST">
-                                                    @csrf
-                                                    <div class="modal-body">
-
-                                                        <input type="hidden" name="id" value="{{$orden->id}}">
-                                                        ¿Desea cambiar es estatus de la orden?
-                                                        <br>
-                                                        <label>Seleccione el estado</label>
-                                                        <select name="status" required class="form-control">
-                                                            <option value="">Seleccione un estado</option>
-                                                            <option value="1">Aprobado</option>
-                                                            <option value="2">Rechazado</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                                        <button type="submit" class="btn btn-primary">Guardar</button>
-                                                    </div>
-                                                </form>
                                             </div>
-                                        </div>
-                                    </div>
-
-                                        {{--<td>
-                                            {{$orden->investment->payment_plataform == 0 ? 'CoinPayment' : 'Manual'}}
-                                        </td>--}}
+                                        @else
+                                        <td>
+                                            @if ($orden->status == 0)
+                                                <span class="badge success-badge">
+                                                    <span class="text-info">Pendiente</span>
+                                                </span>
+                                            @elseif($orden->status == 1)
+                                                <span class="badge success-badge">
+                                                    <span class="success-text">Pagada</span>
+                                                </span>
+                                            @elseif($orden->status == 2)
+                                                <span class="badge warning-badge">
+                                                    <span class="warning-text">Cancelada</span>
+                                                </span>
+                                            @endif
+                                        </td>
+                                        @endif
                                         <td class="fw-300">{{$orden->created_at->format('Y-m-d')}}</td>
                                         <td class="fw-300">{{$orden->updated_at->format('Y-m-d')}}</td>
                                     </tr>
