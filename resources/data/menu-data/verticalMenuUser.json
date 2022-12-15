@@ -21,7 +21,7 @@
                     "url": "/comisiones",
                     "name": "Comisiones",
                     "icon": "circle",
-                    "slug": "comisiones"
+                    "slug": "reports.comision"
                 },
                 {
                     "url": "/reports/withdraw",
@@ -42,7 +42,7 @@
             "url": "/wallet",
             "name": "Wallet",
             "icon": "fa-solid fa-wallet",
-            "slug": "wallet"
+            "slug": "wallet.index"
         },
         {
             "url": "/red/unilevel",

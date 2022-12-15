@@ -109,8 +109,8 @@
                                         <td> {{ number_format($gen->amount, 2) }}</td>
                                         <td>
                                             @if ($gen->status == '0')
-                                                <span class="badge badge-info">
-                                                    <span class="text-info">Disponible</span>
+                                                <span class="badge success-badge">
+                                                    <span class="text-success">Disponible</span>
                                                 </span>
                                             @elseif($gen->status == '1')
                                                 <span class="badge waiting-badge">

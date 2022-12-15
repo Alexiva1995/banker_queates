@@ -92,6 +92,9 @@
     .waiting-badge{
         background-color: #D6F7FB;
     }
+    .warning-badge{
+        background-color: #FBE3E4;
+    }
     .warning-text{
         color: #FF4969;
     }
