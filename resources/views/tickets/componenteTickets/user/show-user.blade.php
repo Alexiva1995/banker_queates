@@ -2,9 +2,14 @@
 @section('title', 'Editando ticket')
 
 @section('content')
-
+<style type="text/css">
+    .card {
+            border: 1px solid #05B1D966 !important;
+            border-radius: 10px !important;
+    }
+</style>
     <div class="d-flex my-2">
-        <p style="color:#808E9E;" class="fw-700">Soporte</p><span class="fw-normal mx-1">|</span>
+        <p style="color:#808E9E;" class="fw-700">Soporte</p><span class="fw-normal mx-1 text-primary">|</span>
         <p>Ticket</p>
     </div>
 
@@ -78,15 +83,11 @@
                                 <!--Asunto end-->
 
                                 <!--Chat-->
-                                <div class="mb-1">
+                                <div class="card pt-5" style="background-color: #D8EDED;">
                                     @foreach ($message as $item)
                                         @if ($item->type == 0)
-                                            <div class="title1 ml-2 d-flex justify-content-end">
-                                                <span>{{ $item->getUser->email }}</span>
-                                            </div>
                                             <div class="d-flex justify-content-end mb-4">
-                                                <div class="msg_cotainer"
-                                                    style="border-radius: 10px; background-color: #E3E7EB; color: rgb(0, 0, 0); box-shadow: 0px 10px 9px -4px rgba(0,0,0,0.76);">
+                                                <div class="me-2 msg_cotainer" style="border-radius: 10px; background-color: #05A5E9; color: rgb(0, 0, 0); box-shadow: 0px 10px 9px -4px rgba(0,0,0,0.76);">
                                                     <div class="img">
                                                         @if ($item->image !== null)
                                                             <a href="{{ asset('storage/' . $item->image) }}"
@@ -101,16 +102,17 @@
                                                                 height="150" style="display: none;">
                                                         @endif
                                                     </div>
-                                                    <span> {{ $item->message }}</span>
+                                                    <span style="color: #fff;"> {{ $item->message }}</span>
 
                                                 </div>
                                             </div>
                                         @elseif ($item->type == 1)
                                             <div class="title2 d-flex justify-content-start">
-                                                <span>{{ $item->getAdmin->email }}</span>
+                                                
                                             </div>
                                             <div class="d-flex justify-content-start mb-4">
-                                                <div class="msg_cotainer_send">
+                                                <div class="ms-2 msg_cotainer_send" style="background-color: #E3E7EB; border-radius: 10px;
+                                                box-shadow: 0px 10px 9px -4px rgba(0,0,0,0.76);">
                                                     <div class="img">
                                                         @if ($item->image !== null)
                                                             <a href="{{ asset('storage/' . $item->image) }}"
@@ -125,7 +127,7 @@
                                                                 height="150" style="display: none;">
                                                         @endif
                                                     </div>
-                                                    <span class="mb-1"> {{ $item->message }}</span>
+                                                    <span class="mb-1" style="color: #000;"> {{ $item->message }}</span>
 
                                                 </div>
                                             </div>

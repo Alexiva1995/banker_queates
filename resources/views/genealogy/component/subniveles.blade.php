@@ -16,7 +16,7 @@
             class=""  style="margin-top: -2px" alt="{{ $data->name }}"
             title="{{ $data->name }}">
         @endif
-    </div>|
+    </div>
     <div class="media-body">
             <h5 style="font-size: 0.8rem"> <b>{{ $data->name }}</b></h5>
     </div>

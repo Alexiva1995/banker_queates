@@ -22,6 +22,9 @@
             border: 1px solid #05B1D966 !important;
             border-radius: 10px !important;
         }
+        .cebra {
+            background-color: #D8EDED;
+        }
         .form-control{
             border: 1px solid #05B1D966 !important;
             border-radius: 10px !important;

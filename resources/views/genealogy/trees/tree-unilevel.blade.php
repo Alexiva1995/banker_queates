@@ -174,7 +174,7 @@
 
                 <div id="tree-body-1" class="tab-body">
                     <ul>
-                        <li class="baseli p-0" style="overflow:scroll">
+                        <li class=" p-0" style="overflow:scroll">
                             {{-- usuario principal --}}
                             <div style="width:1000px; margin: 0 auto">
                                 @if ($base['range_id'] != null)
