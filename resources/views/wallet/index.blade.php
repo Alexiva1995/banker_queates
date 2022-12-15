@@ -58,8 +58,8 @@
         color: white;
         padding: 10px 20px;
         text-decoration: none;
-        font-weight: bold;
-        text-transform: uppercase;
+        font-weight: 500;
+        font-size: 14px;
     }
 
     .ajust-icon {
@@ -70,6 +70,37 @@
     .fw-700 {
         font-weight: 700 !important;
     }
+    .nav-text{
+        color: #68676e !important;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .usdt-color{
+        color: #04D99D;
+    }
+
+    .success-badge{
+        background-color: rgba(66, 172, 70, 0.16);
+    }
+    .success-text{
+        color: #42AC46;
+    }
+    .waiting-text{
+        color: #36D9ED;
+    }
+    .waiting-badge{
+        background-color: #D6F7FB;
+    }
+    .warning-badge{
+        background-color: #FBE3E4;
+    }
+    .warning-text{
+        color: #FF4969;
+    }
+    .cebra{
+        background-color: #D8EDED;
+    }
 </style>
 <div class="d-flex my-2">
     <p style="color:#808E9E;" class="fw-700">Billetera</p><span class="fw-normal mx-1">|</span>
@@ -79,16 +110,16 @@
 <nav class="col-sm-12 lista">
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <button class="nav-link active" id="nav-rentability-tab" data-bs-toggle="tab" data-bs-target="#general"
-        type="button" role="tab" aria-controls="nav-rentability" aria-selected="false">General</button>
+        type="button" role="tab" aria-controls="nav-rentability" aria-selected="false"><span class="nav-text">General</span> </button>
 
         <button class="nav-link" id="nav-rentability-tab" data-bs-toggle="tab" data-bs-target="#license"
-        type="button" role="tab" aria-controls="nav-rentability" aria-selected="false">Licencias</button>
+        type="button" role="tab" aria-controls="nav-rentability" aria-selected="false"><span class="nav-text">Licencias</span></button>
 
         <button class="nav-link" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button"
-        role="tab" aria-controls="nav-home" aria-selected="true">MLM PAMM</button>
+        role="tab" aria-controls="nav-home" aria-selected="true"><span class="nav-text">MLM PAMM</span></button>
 
-        <button class="nav-link" id="nav-range-tab" data-bs-toggle="tab" data-bs-target="#nav-range" type="button"
-        role="tab" aria-controls="nav-range" aria-selected="false">Balance en cuenta PAMM </button>
+        {{-- <button class="nav-link" id="nav-range-tab" data-bs-toggle="tab" data-bs-target="#nav-range" type="button"
+        role="tab" aria-controls="nav-range" aria-selected="false">Balance en cuenta PAMM </button> --}}
 
     </div>
 </nav>
@@ -107,11 +138,7 @@
                 </div>
 
                 <div class="texto" style="padding-left: 3%">
-                    @if (isset($mlmTotal))
-                    <span style="font-weight:900; font-size: 21px">USDT {{ $mlmTotal }} </span>
-                    @else
-                    <span style="font-weight:900; font-size: 21px">USDT 0 </span>
-                    @endif
+                    <span class="usdt-color" style="font-weight:900; font-size: 21px">USDT {{ $mlmTotal }} </span>
                     <br>
                     <span class="text-light">Total Ganado</span>
                 </div>
@@ -129,11 +156,7 @@
                 </div>
 
                 <div class="texto" style="padding-left: 3%">
-                    @if (isset($mlmAvailable))
-                    <span style="font-weight:900; font-size: 21px">USDT {{ $mlmAvailable }} </span>
-                    @else
-                    <span style="font-weight:900; font-size: 21px">USDT 0 </span>
-                    @endif
+                    <span class="usdt-color" style="font-weight:900; font-size: 21px">USDT {{ $mlmAvailable }} </span>
                     <br>
                     <span class="text-light">Saldo Disponibles</span>
                 </div>

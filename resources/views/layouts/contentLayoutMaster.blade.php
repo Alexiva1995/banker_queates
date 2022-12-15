@@ -43,7 +43,10 @@ data-textdirection="{{ env('MIX_CONTENT_DIRECTION') === 'rtl' ? 'rtl' : 'ltr' }}
     background-repeat: repeat;
    
     font-family: 'Roboto', sans-serif;
-}
+  }
+  table{
+    border: 1px solid #E2DBDB;
+  }
 body{
 }
 
