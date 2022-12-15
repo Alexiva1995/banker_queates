@@ -157,6 +157,7 @@
                                         <thead class="">
                                             <tr class="text-center">
                                                 <th>Monto</th>
+                                                <th>Nivel</th>
                                                 <th>Estado</th>
                                                 <th class="d-none d-sm-table-cell">Fecha</th>
                                             </tr>
@@ -164,8 +165,10 @@
                                         <tbody>
                                             @foreach ($mlm as $wallet)
                                             <tr class="text-center">
-                                                <td>{{ number_format($wallet->amount, 2, ',',
-                                                    '.') }}</td>
+                                                <td>
+                                                    {{ number_format($wallet->amount, 2, ',','.') }}
+                                                </td>
+                                                <td>{{ $wallet->level }}</td>
                                                 <td>
                                                     @if ($wallet->status == '0')
                                                     <span class="badge bg-info">Disponible</span>

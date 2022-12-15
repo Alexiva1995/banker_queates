@@ -13,6 +13,10 @@
     .fw-700 {
         font-weight: 700 !important;
     }
+    .ms-choice{
+        border: none !important;
+        margin: -3px;
+    }
 
     div.dataTables_wrapper div.dataTables_paginate ul.pagination {
         justify-content: end !important;
@@ -153,6 +157,10 @@
                                     @elseif($wallet->status == 3)
                                     <td class="fw-300 text-center"> <a
                                             class=" btn bg-light-danger fw-300 p-75">Anulada</a></td>
+                                    @elseif($wallet->status == 4)
+                                        <td class="fw-300 text-center"> 
+                                            <a class=" btn bg-light-danger fw-300 p-75">Sustraido</a>
+                                        </td>
                                     @endif
                                     <td class="fw-300 text-center">
                                         @switch($wallet->type)

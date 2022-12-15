@@ -99,13 +99,13 @@ class TiendaController extends Controller
         $package = LicensePackage::where('id', $request->package)->first();
         $investment = Investment::where('user_id', $user->id)->where('status', 1)->first();
         $orden = new Order();
+        // Se cancelan las ordenes previas
+        foreach ($allOrder as $order) {
+            $order->status = '2';
+            $order->save();
+        }
         if ($investment == null) {
-            foreach ($allOrder as $order) {
-                if ($order->licensePackage->id == $package->id) {
-                    $order->status = '2';
-                    $order->save();
-                }
-            }
+            
             $orden->user_id = $user->id;
             $orden->package_id = $package->id;
             $orden->amount = $package->amount;
@@ -119,13 +119,8 @@ class TiendaController extends Controller
 
 
         } else {
+            
             $newAmount = $package->amount - $investment->invested;
-            foreach ($allOrder as $order) {
-                if ($order->licensePackage->id == $package->id) {
-                    $order->status = '2';
-                    $order->save();
-                }
-            }
 
             $orden->user_id = $user->id;
             $orden->package_id = $package->id;

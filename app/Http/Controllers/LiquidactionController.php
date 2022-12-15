@@ -109,18 +109,113 @@ class LiquidactionController extends Controller
     {
         return view("liquidaciones.validacion");
     }
-    public function realizadas()
+    public function realizadas(Request $request)
     {
+        $user_id = null;
+        $user_name = null;
+        $email = null;
+        $hash = null;
+
+        if( $request->isMethod('post') )
+        {
+            $query =  Liquidation::where('status', 1)->with('user');
+
+            if($request->has('user_id') && $request->user_id !== null) 
+            {
+                $user_id = $request->user_id;
+
+                $query->where('user_id', $user_id);
+            }
+
+            if($request->has('hash') && $request->hash !== null) 
+            {
+                $hash = $request->hash;
+
+                $query->where('hash', $hash);
+            }
+
+            if($request->has('user_name') && $request->user_name !== null) 
+            {
+                $user_name = $request->user_name;
+
+                $query->whereHas('user', function($q) use($user_name){
+                    $q->where('name',$user_name);
+                });
+            }
+
+            if($request->has('email') && $request->email !== null) 
+            {
+                $email = $request->email;
+                
+                $query->whereHas('user', function($q) use($email){
+                    $q->where('email', $email);
+                });
+
+            }
+
+            $liquidaciones = $query->orderBy('id', 'desc')->get();
+
+            return view('liquidaciones.realizadas', compact('liquidaciones', 'user_id', 'user_name', 'email', 'hash'));
+
+        }
+
+
         $liquidaciones = Liquidation::where('status', 1)->with('user')->orderBy('id', 'desc')->get();
 
-        return view('liquidaciones.realizadas', compact('liquidaciones'));
+        return view('liquidaciones.realizadas', compact('liquidaciones', 'user_id', 'user_name', 'email', 'hash'));
     }
 
-    public function pendientes()
+    public function pendientes(Request $request)
     {
+        $user_id = null;
+        $email = null;
+        $liquidation_status = [];
+        
+        if( $request->isMethod('post') )
+        {
+            $query = Liquidation::with('user')->where('status', '!=', 1);
+
+            if($request->has('user_id') && $request->user_id !== null) 
+            {
+                $user_id = $request->user_id;
+
+                $query->where('user_id', $user_id);
+            }
+
+            if($request->has('email') && $request->email !== null) 
+            {
+                $email = $request->email;
+                
+                $query->whereHas('user', function($q) use($email){
+                    $q->where('email', $email);
+                });
+
+            }
+
+            if($request->has('liquidation_status') && $request->liquidation_status !== null) 
+            {
+                $liquidation_status = $request->liquidation_status;
+
+                foreach($liquidation_status as $key => $status)
+                {
+                    if($key == 0) {
+                        $query->where('status', $status);
+                    } else {
+                        $query->orWhere('status', $status);
+                    }
+                }
+                
+            }
+
+            $liquidaciones = $query->orderBy('id', 'desc')->get();
+
+            return view('liquidaciones.pendientes', compact('liquidaciones', 'user_id', 'email', 'liquidation_status'));
+        }
+
+
         $liquidaciones = Liquidation::where('status', 0)->orWhere('status', 2)->with('user')->orderBy('id', 'desc')->get();
 
-        return view('liquidaciones.pendientes', compact('liquidaciones'));
+        return view('liquidaciones.pendientes', compact('liquidaciones', 'user_id', 'email', 'liquidation_status'));
     }
     public function codeEmail()
     {
@@ -489,10 +584,7 @@ class LiquidactionController extends Controller
             $general =  WalletComission::where('user_id', $user->id)->get();
             $generalTotal = $general->sum('amount');
             $generalAvailable =  $general->where('status', 0)->sum('amount_available');
-
             $balancEdition = Liquidation::where('user_id', $user->id)->get();
-
-
 
             //vista mlm
 

@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\Investment;
-use App\Models\Order;
-use App\Services\MinApiService;
-use App\Services\RangeService;
-use App\Services\ReferalService;
 use Carbon\Carbon;
+use App\Models\User;
+use App\Models\Order;
+use App\Models\Range;
+use App\Models\Investment;
+use Illuminate\Http\Request;
+use App\Services\RangeService;
+use App\Services\MinApiService;
+use App\Services\ReferalService;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -70,18 +72,21 @@ class DashboardController extends Controller
       $investments = Investment::where('user_id', $user->id)->with('licensePackage')->get();
       $total_available = $user->wallets->where('status', 0)->sum('amount');
       $user_packages = $user->getActivePackages();
-
       $daysRemaining = 0;
+      $user->range;
+      $rangos = Range::all();
+       
+       //return $rangos[1][0];
       if($user->investment)
       {
           $date1 = Carbon::parse($user->investment->expiration_date);
           $daysRemaining = $date1->diffInDays(today()->format('Y-m-d') );
+
       }
 
       //criptobar
       $cryptos = $this->minApiService->get10Cryptos();
-
-      return view('dashboard.user', ['pageConfigs' => $pageConfigs], compact('user', 'cryptos', 'investments', 'indirect_referrals', 'total_referrals', 'total_available', 'user_packages'));
+      return view('dashboard.user', ['pageConfigs' => $pageConfigs], compact('rangos','user', 'cryptos', 'investments', 'indirect_referrals', 'total_referrals', 'total_available', 'user_packages'));
     }
   }
 
@@ -95,9 +100,9 @@ class DashboardController extends Controller
     $date2 = Carbon::parse($user->investment->created_at);
     $date1 = Carbon::parse($user->investment->expiration_date);
 
-    $total_days = $date2->diffInDays($date1->format('Y-m-d'));
+    $total_days = $date2->diffInDays(today()->format('Y-m-d'));
     $daysRemaining = $date1->diffInDays(today()->format('Y-m-d') ); 
-
+    Log::info($total_days);
     $data = [$total_days, $daysRemaining];
 
     return $data;

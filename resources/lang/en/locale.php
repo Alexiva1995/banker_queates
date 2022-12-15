@@ -2,7 +2,11 @@
 
 return [
     "Niveles" => "Niveles",
+    "Historial" => "Historial",
     "Corte Binario" => "Corte Binario",
+    "Bono PAMM" => "Bono PAMM",
+    "Set Ranges" => "Setear Rangos",
+    "Delete Binary Points" => "Limpieza de puntos binarios",
     "Usuarios Expirados" => 'Usuarios Expirados',
     "Asignar Rangos" => "Asignar los Rangos",
     "habilitar bonos Rango" => "habilitar bonos Rango",

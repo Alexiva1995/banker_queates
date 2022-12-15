@@ -60,6 +60,7 @@
                                     <thead class="">
                                         <tr class="text-center">
                                             <th>Monto</th>
+                                            <th>Puntos</th>
                                             <th>Estado</th>
                                             <th class="d-none d-sm-table-cell">Fecha</th>
                                         </tr>
@@ -68,6 +69,7 @@
                                         @foreach ($licencias  as $licen)
                                             <tr class="text-center">
                                                 <td> {{ number_format($licen->amount, 2) }}</td>
+                                                <td> {{ $licen->amount * 5 }}</td>
                                                 <td>
                                                     @if ($licen->status == '0')
                                                         <span class="badge bg-info">Disponible</span>

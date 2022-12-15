@@ -35,7 +35,20 @@ data-textdirection="{{ env('MIX_CONTENT_DIRECTION') === 'rtl' ? 'rtl' : 'ltr' }}
   <script src="{{asset('assets/js/librerias/axios.min.js')}}"></script>
 </head>
 <!-- END: Head-->
+<style>
 
+
+  html body {
+    background-color:  #D8EDED;
+    background-repeat: repeat;
+   
+    font-family: 'Roboto', sans-serif;
+}
+body{
+}
+
+
+</style>
 <!-- BEGIN: Body-->
 @isset($configData["mainLayoutType"])
 @extends((( $configData["mainLayoutType"] === 'horizontal') ? 'layouts.horizontalLayoutMaster' :

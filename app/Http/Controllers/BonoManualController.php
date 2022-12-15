@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Liquidation;
+use App\Models\ManualBonusLog;
 use App\Models\User;
 use App\Models\WalletComission;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class BonoManualController extends Controller
@@ -37,7 +39,8 @@ class BonoManualController extends Controller
         return view('bonoManual.index' , compact('usuarios'));
     }
 
-    public function agregar_saldo(Request $request){
+    public function agregar_saldo(Request $request) 
+    {
         $user_id = $request->user_id;
         $monto_a_agregar = $request->monto_a_agregar;
         $descripcion = $request->descripcion;
@@ -48,9 +51,20 @@ class BonoManualController extends Controller
                 'amount_available'=> $monto_a_agregar,
                 'level'=>0,
                 'description'=> $descripcion,
-                'type' => 3
+                'type' => 2
             ];
+            
             WalletComission::create($data);
+
+            $fields = [
+                'author_id' => Auth::user()->id,
+                'user_id' => $user_id,
+                'amount' => $monto_a_agregar,
+                'action' => 'suma de saldo',
+            ];
+
+            ManualBonusLog::create($fields);
+
             return response()->json(['msj' =>  'Saldo agregado correctamente',
                                      'ico'=> 'success' ]);
         }else{
@@ -92,6 +106,16 @@ class BonoManualController extends Controller
                 $liqui->status = 0;
                 $liqui->save();
             }
+
+            $fields = [
+                'author_id' => Auth::user()->id,
+                'user_id' => $id,
+                'amount' => $request->monto_a_sustraer,
+                'action' => 'resta de saldo',
+            ];
+
+            ManualBonusLog::create($fields);
+
             return response()->json(['msj' =>  'Saldo sutraido correctamente',
             'ico'=> 'success' ]);
         }else{

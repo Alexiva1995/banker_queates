@@ -14,6 +14,11 @@
         font-weight: 700 !important;
     }
 
+    .ms-choice{
+        margin: -3px;
+        border: none !important;
+    }
+
     div.dataTables_wrapper div.dataTables_paginate ul.pagination {
         justify-content: end !important;
     }

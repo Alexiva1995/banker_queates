@@ -1,4 +1,10 @@
 @if($configData["mainLayoutType"] === 'horizontal' && isset($configData["mainLayoutType"]))
+<style>
+  .navbar-container{
+    border-color: blue;
+    border-radius: 5px;
+  }
+</style>
 <nav class="header-navbar navbar-expand-lg navbar navbar-fixed align-items-center navbar-brand-center {{ $configData['navbarColor'] }}" data-nav="brand-center">
   <div class="navbar-header d-xl-block d-none">
     <ul class="nav navbar-nav">
@@ -34,10 +40,10 @@
     </ul>
   </div>
   @else
-  <nav class="header-navbar navbar navbar-expand-lg align-items-center {{ $configData['navbarClass'] }} navbar-light  {{ $configData['navbarColor'] }} {{ ($configData['layoutWidth'] === 'boxed' && $configData['verticalMenuNavbarType']  === 'navbar-floating') ? 'container-xxl' : '' }}">
+  <nav style="border-color:  #05B1D966" class="header-navbar navbar navbar-expand-lg align-items-center {{ $configData['navbarClass'] }} navbar-light  {{ $configData['navbarColor'] }} {{ ($configData['layoutWidth'] === 'boxed' && $configData['verticalMenuNavbarType']  === 'navbar-floating') ? 'container-xxl' : '' }}">
     @endif
-    <div class="navbar-container d-flex content">
-      <div class="bookmark-wrapper d-flex align-items-center">
+    <div class="navbar-container d-flex content" >
+      <div class="bookmark-wrapper d-flex align-items-center" >
         <ul class="nav navbar-nav d-xl-none">
           <li class="nav-item"><a class="nav-link menu-toggle" href="javascript:void(0);"><i class="ficon" data-feather="menu"></i></a></li>
         </ul>
@@ -284,8 +290,17 @@
         <li class="nav-item dropdown dropdown-user">
           <a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="javascript:void(0);" data-bs-toggle="dropdown" aria-haspopup="true">
             <div class="user-nav d-sm-flex d-none">
-              <span class="user-name fw-bolder text-capitalize" >{{Auth::user()->name}}</span>
+              <div class="row">
+                <div class="col-sm-6">
+                  <i class="fa-solid fa-arrows-rotate text-dark" style="font-size: 18px"></i>
+                </div>
+                <div class="col-sm-6">
+                  <span class="user-name fw-bolder text-capitalize" >{{Auth::user()->name}}</span>
               {{-- <span class="user-name fw-bolder text-capitalize" >{{Auth::user()->last_name}}</span> --}}
+                </div>
+               
+              </div>
+              
 
             </div>
             <!--<span class="avatar">-->
@@ -297,12 +312,12 @@
                 @if(Auth::user()->admin != 1)
                   @if(auth()->user()->range_id == null)
 
-                    <img class="round" src="{{asset('images/ico/deg.ico')}}" alt="avatar" height="40" width="40" style="object-fit: contain; background-color: white;">
+                    <img class="round" src="{{asset('images/ico/deg.ico')}}" alt="avatar" height="50" width="63" style="object-fit: contain; background-color: white;">
 
                     <!-- <img class="round" src="{{ asset('images/logo/logo-deg-white.png') }}" alt="avatar" style="box-shadow: none;" height="50" width="50"> -->
 
                   @else
-                    <img  class="round" src="{{ asset('images/ensignRanges/'.auth()->user()->range_id.'.png') }}" style="box-shadow: none;" height="50" width="50">
+                    <img  class="round" src="{{ asset('images/ensignRanges/'.auth()->user()->range_id.'.png') }}" style="box-shadow: none;" height="50" width="63">
                   @endif
 
                 @elseif(Auth::user()->admin == 1)

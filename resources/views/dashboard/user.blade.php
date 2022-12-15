@@ -150,7 +150,7 @@
         }
 
         .apexcharts-text {
-            fill: #9892AA !important;
+            fill: #ffffff !important;
         }
 
         .custom-avatar-content {
@@ -263,17 +263,7 @@
                 margin-top: 0rem;
             }
         }
-    .card-d{
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 1px solid #05B1D966;
-    border-radius: 10px;
-}
+    
 .gradient{
     background: rgb(2,0,36);
     background: linear-gradient(90deg, #05A4EA, #02D6AC 100%);
@@ -283,45 +273,48 @@
 }
     </style>
 
-    <div class="container-fluid container-custom">
+    <div class="container-fluid ">
         <div class="d-flex my-1">
-            <p class="fw-700 mb-0">Dashboard</p><span class="fw-300 mx-1 text-light">|</span>
-            <p class="fw-300 mb-0">Banker Quotes</p>
+            <p class="fw-700 mb-0" style="color: #000000;">Dashboard</p><span class="fw-300 mx-1 " style="color: #04D99D; font-size: 20px;">|</span>
+            <p class="fw-300 mb-0" style="color: #000000;">Banker Quotes</p>
         </div>
         <div class="row">
             <div class="col-sm-12">
                 @include('dashboard.components.cryptobar')
-                <!--<div class="row match-height">
-                    @include('dashboard.components.totalEarningsChart')
-                    @include('dashboard.components.packageProgress')
-                </div>-->
+               
             </div>
-        </div>
-        <!--@include('dashboard.components.bonusCharts')-->
-        <div class="col-12">
-            <div class="row match-height">
-                @include('dashboard.components.balanceCard')
-                @include('dashboard.components.licenseBonus')
-                @include('dashboard.components.MLMPAMM')
-                @include('dashboard.components.balancePAMM')
+            <div class="col-sm-12">
+                <div class="row match-height">
+                    @include('dashboard.components.balanceCard')
+                    @include('dashboard.components.licenseBonus')
+                    @include('dashboard.components.MLMPAMM')
+                    @include('dashboard.components.balancePAMM')
+                </div>
             </div>
-        </div>
-        <div class="col-sm-12 ">
-            <div class="row">
+            <div class="col-sm-12">
                 <div class="row">
-                    @include('dashboard.components.referral_binary_side')
-                    @include('dashboard.components.rangeCard')
-                </div>
-                <div class="row match-height">
-                    @include('dashboard.components.referralsCard')
-                </div>
-                <div class="row match-height">
-                    @include('dashboard.components.historyBonusTable')
-                    @include('dashboard.components.gain-chart')
+                    <div class="col-sm-12">
+                        <div class="row">
+                            @include('dashboard.components.referral_binary_side')
+                            @include('dashboard.components.licenciaCard')
+                        </div>
+                    </div>
+                        
+                    <div class="col-sm-12 mb-2">
+                        @include('dashboard.components.rangoCard')
+                    </div>
+                    <div class="col-sm-12 mb-2 ">
+                        <div class="row d-flex justify-content-between" style="--bs-gutter-x: 0rem;">
+                            
+                             @include('dashboard.components.gain-chart')
+                        
+                            @include('dashboard.components.historyBonusTable')
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>       
-    </div>
+        </div>
+    </div>       
     <!-- Dashboard Analytics end -->
 @endsection
 
@@ -495,7 +488,7 @@
             getBonusChartsData();
             getProfitsData();
             getWalltetData();
-            // afilliatesChart();
+             afilliatesChart();
             // getRentChart(user_id);
         });
 
@@ -509,7 +502,8 @@
                 success: (response) => {
                     let total_days = response[0];
                     let days_remaining = response[1];
-                    let percentage = (days_remaining / total_days) * 100;
+                    let percentage = (total_days/365)*100 ;
+                    console.log(percentage); 
                     let color_chart;
                     if (percentage > 50) {
                         color_chart = "#05A5E9";
@@ -529,7 +523,7 @@
         function daysChart(percentage, days_remaining, color_chart) {
             goalChartOptions = {
                 chart: {
-                    height: 260,
+                    height: 280,
                     width: '100%',
                     type: 'radialBar',
                     sparkline: {
@@ -566,7 +560,7 @@
                         dataLabels: {
                             value: {
                                 offsetY: -12,
-                                color: '#05A5E9',
+                                color: '#F2F4F5',
                                 fontSize: '40px',
                                 fontWeight: '900',
                                 formatter: function(val) {
@@ -631,36 +625,7 @@
             });
         }
 
-        function afilliatesChart() {
-            let activeAfilliates = {!! 0 !!};
-            let inactiveAfilliates = {!! 0 !!};
-            const chartAfiliadosOptions = {
-                chart: {
-                    type: 'donut',
-                    height: 250,
-                    toolbar: {
-                        show: false
-                    }
-                },
-                dataLabels: {
-                    enabled: false
-                },
-                series: [activeAfilliates, inactiveAfilliates],
-                legend: {
-                    show: false
-                },
-                comparedResult: [2, -3, 8],
-                labels: ['Usuarios Activos', 'Usuarios Inactivos'],
-                stroke: {
-                    width: 8
-                },
-                colors: ['#05A5E9', '#FF4969'],
-
-            };
-
-            const chartAfiliados = new ApexCharts(document.querySelector("#chartAfiliados"), chartAfiliadosOptions);
-            chartAfiliados.render();
-        }
+       
 
         function rentChart(percentage, gained, color_chart) {
             chartRentOptions = {

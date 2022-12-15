@@ -24,9 +24,41 @@ class TicketsController extends Controller
 
     // permite ver la lista de tickets
 
-    public function listAdmin()
+    public function listAdmin(Request $request)
     {
+        $date_from = null;
+        $date_to = null;
+        $ticket_status = [];
+
+        if($request->isMethod('post'))
+        {
+            $query = Tickets::where('id', '!=', '1');
+
+            if($request->has('ticket_status') && $request->ticket_status !== null) 
+            {
+                $ticket_status = $request->ticket_status;
+
+                $query->whereIn('status', $ticket_status);
+            }
+
+            if($request->has('date_from') && $request->date_from !== null && $request->has('date_to') && $request->date_to != null)
+            {
+                $date_from = $request->date_from;
+
+                $date_to = $request->date_to;
+
+                $query->whereDate('created_at', '>=', $date_from)
+                      ->whereDate('created_at', '<=', $date_to);
+            }
+
+            $ticket = $query->orderBy('updated_at', 'desc')->get();
+
+            return view('tickets.componenteTickets.admin.list-admin', compact('ticket', 'date_from', 'date_to', 'ticket_status'));
+
+        }
+
         $ticket = Tickets::all();
+
         foreach ($ticket as $ticke) {
 
             $message = MessageTicket::where('id_ticket', '=', $ticke->id)
@@ -40,8 +72,8 @@ class TicketsController extends Controller
                 $ticke->send = $message->updated_at->format('d-m-Y');
             }
         }
-        return view('tickets.componenteTickets.admin.list-admin')
-            ->with('ticket', $ticket);
+
+        return view('tickets.componenteTickets.admin.list-admin', compact('ticket', 'date_from', 'date_to', 'ticket_status'));
     }
 
 
