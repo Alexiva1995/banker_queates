@@ -12,11 +12,7 @@
             </div>
 
             <div class="texto" style="padding-left: 3%">
-                @if (isset($RangeTotal))
-                <span style="font-weight:900; font-size: 21px">USDT {{--{{ $RangeTotal }}--}} 0 </span>
-                @else
-                <span style="font-weight:900; font-size: 21px">USDT 0 </span>
-                @endif
+                <span class="usdt-color" style="font-weight:900; font-size: 21px">USDT {{--{{ $RangeTotal }}--}} 0 </span>
                 <br>
                 <span class="text-light">Balance</span>
             </div>

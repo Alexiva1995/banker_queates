@@ -12,11 +12,7 @@
             </div>
 
             <div class="texto" style="padding-left: 3%">
-                @if (isset($licenciasTotal ))
-                    <span style="font-weight:900; font-size: 21px">USDT {{$licenciasTotal }} </span>
-                @else
-                    <span style="font-weight:900; font-size: 21px">USDT 0 </span>
-                @endif
+                <span class="usdt-color" style="font-weight:900; font-size: 21px">USDT {{$licenciasTotal }} </span>
                 <br>
                 <span class="text-light">Total Ganado</span>
             </div>
@@ -33,11 +29,7 @@
             </div>
 
             <div class="texto" style="padding-left: 3%">
-                @if (isset($licenciasAvailable ))
-                    <span style="font-weight:900; font-size: 21px">USDT {{$licenciasAvailable }} </span>
-                @else
-                    <span style="font-weight:900; font-size: 21px">USDT 0 </span>
-                @endif
+                <span class="usdt-color" style="font-weight:900; font-size: 21px">USDT {{$licenciasAvailable }} </span>
                 <br>
                 <span class="text-light">Saldo Disponibles</span>
             </div>
