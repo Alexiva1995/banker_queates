@@ -60,7 +60,7 @@ class BonoManualController extends Controller
                 'author_id' => Auth::user()->id,
                 'user_id' => $user_id,
                 'amount' => $monto_a_agregar,
-                'action' => 'Suma de saldo',
+                'action' => 'suma de saldo',
             ];
 
             ManualBonusLog::create($fields);
@@ -111,7 +111,7 @@ class BonoManualController extends Controller
                 'author_id' => Auth::user()->id,
                 'user_id' => $id,
                 'amount' => $request->monto_a_sustraer,
-                'action' => 'Resta de saldo',
+                'action' => 'resta de saldo',
             ];
 
             ManualBonusLog::create($fields);

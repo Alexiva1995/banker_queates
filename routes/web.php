@@ -88,6 +88,7 @@ Route::middleware('auth')->group(function () {
         Route::middleware('admin')->group(function () {
 
             Route::get('/manual-bonus-history', [ReportController::class, 'manualBonusHistory'])->name('manual.bonus.history');
+            Route::post('/manual-bonus-history', [ReportController::class, 'manualBonusHistory'])->name('manual.bonus.history.filter');
 
             Route::get('/configurar-retiros', [LiquidactionController::class, 'configurar_retiro'])->name('config.retiros');
             //GENEALOGY

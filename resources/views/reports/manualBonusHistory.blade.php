@@ -41,13 +41,57 @@
             <div class="card-content p-50">
                 <div class="card-header p-0">
                     <h4 class="fw-700">Historial de Bonos Manuales</h4>
-                    {{-- <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button"
+                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button"
                         aria-expanded="false" aria-controls="collapseExample">
                         Filtros
-                    </a> --}}
+                    </a>
                 </div>
                 <div class="card-body card-dashboard p-0">
-                    {{-- Filtro aca --}}
+                    <div class="collapse" id="collapseExample">
+                        <form action="" method="POST" class="mt-2">
+                            @csrf
+                            <div class="row">
+                                <div class="mb-2 col-md-4 col-sm-6">
+                                    <label for="user_name" class="form-label">Usuario</label>
+                                    <input type="text" class="form-control" id="user_name" name="user_name" 
+                                    @if($user_name != null) value="{{$user_name}}" @endif">
+                                </div>
+
+                                <div class="mb-2 col-md-4 col-sm-6">
+                                    <label for="author_name" class="form-label">Autor</label>
+                                    <input type="text" class="form-control" id="author_name" name="author_name"
+                                    @if($author_name != null) value="{{$author_name}}" @endif>
+                                </div>
+
+                                <div class="mb-2 col-md-4 col-sm-12">
+                                    <label for="actions" class="form-label">Acción</label>
+                                    <select class="form-select multiple" name="actions[]" id="actions" multiple
+                                        aria-label="Default select example">
+                                        <option value="suma" {{ in_array('suma', $actions) ? "selected" : null }} >Suma</option>
+                                        <option value="resta" {{ in_array('resta', $actions) ? "selected" : null }} >Resta</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-2 col-md-4 col-sm-12">
+                                    <label for="date_from" class="form-label">Desde</label>
+                                    <input type="date" class="form-control" id="date_from" name="date_from"
+                                    @if($date_from != null) value="{{ $date_from }}"  @endif>
+                                </div>
+
+                                <div class="mb-2 col-md-4 col-sm-12">
+                                    <label for="date_to" class="form-label">Hasta</label>
+                                    <input type="date" class="form-control" id="date_to" name="date_to"
+                                    @if($date_to != null) value="{{ $date_to }}"  @endif>
+                                </div>
+
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary">Buscar</button>
+                                    <a class="btn btn-info" href="{{route('manual.bonus.history')}}">Limpiar filtros</a>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
                     <div class="table-responsive">
                         <table class="table w-100 nowrap scroll-horizontal-vertical myTable table-striped w-100">
                             <thead class="">
@@ -96,11 +140,12 @@
 <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
 <!-- Include plugin -->
 <script src="https://cdn.rawgit.com/wenzhixin/multiple-select/e14b36de/multiple-select.js"></script>
-
-
 @endsection
 @section('page-script')
 <script>
+    $(".multiple").multipleSelect({
+        filter: false
+    });
 
     //datataables ordenes
     $('.myTable').DataTable({

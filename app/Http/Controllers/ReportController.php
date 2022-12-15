@@ -105,11 +105,72 @@ class ReportController extends Controller
 
         return view('reports.index', compact('ordenes','user_name', 'id_tx', 'order_status', 'created_from', 'created_to', 'updated_from', 'updated_to'));
     }
-    public function manualBonusHistory()
+    public function manualBonusHistory(Request $request)
     {
+        $user_name = null;
+        $author_name = null;
+        $date_from = null;
+        $date_to = null;
+        $actions = [];
+
+        if($request->isMethod('post'))
+        {
+            $query = ManualBonusLog::with(['user','author']);
+
+            if($request->has('user_name') && $request->user_name !== null)
+            {
+                $user_name = $request->user_name;
+
+                $query->whereHas('user', function($q) use($user_name){
+                    $q->where('name', $user_name);
+                });
+            }
+
+            if($request->has('author_name') && $request->author_name !== null)
+            {
+                $author_name = $request->author_name;
+
+                $query->whereHas('author', function($q) use($author_name){
+                    $q->where('name', $author_name);
+                });
+            }
+            
+            if($request->has('actions') && $request->actions !== null)
+            {
+                $actions = $request->actions;
+
+                foreach($actions as $key => $action)
+                {
+                    if($key == 0) {
+                        $query->where('action', 'LIKE', "%$action%");
+                    } else {
+                        $query->orWhere('action', 'LIKE', "%$action%");
+                    }
+                }
+
+            }
+
+            if($request->has('date_from') && $request->date_from !== null && $request->has('date_to') && $request->date_to != null)
+            {
+                $date_from = $request->date_from;
+
+                $date_to = $request->date_to;
+
+                $query->whereDate('created_at', '>=', $date_from)
+                      ->whereDate('created_at', '<=', $date_to);
+            }
+
+            $history = $query->get();
+
+            return view('reports.manualBonusHistory', compact('history', 'user_name', 'author_name', 'date_from','date_to', 'actions'));
+
+        }
+
+
+
         $history = ManualBonusLog::with(['user','author'])->get();
 
-        return view('reports.manualBonusHistory', compact('history'));
+        return view('reports.manualBonusHistory', compact('history', 'user_name', 'author_name', 'date_from','date_to', 'actions'));
     }
 
     public function cron()
@@ -121,12 +182,6 @@ class ReportController extends Controller
         return "listo";
     }
 
-    public function anuales()
-    {
-        $ordenes = OrdenPurchase::where([['status', '!=', '2'],['type', 'anual']])->get();
-
-        return view('reports.anuales', compact('ordenes'));
-    }
     public function withdraw(Request $request)
     {
         $user = auth()->user();
@@ -226,44 +281,5 @@ class ReportController extends Controller
             $liquidactions = Liquidation::where('user_id', $user->id)->with('user')->orderBy('id', 'desc')->get();
         }
         return view('reports.withdraw', compact('liquidactions', 'user_id', 'user_name', 'liquidation_status', 'hash', 'request_date_from', 'request_date_to', 'payment_date_from', 'payment_date_to'));
-    }
-    public function cashflow()
-    {
-        //Todos los depositos
-        $allDeposits = Investment::get();
-        $totalDeposits = $allDeposits->count();
-        $amountDeposits = $allDeposits->sum('invested');
-        //Todos los depositos de tipo Bronce
-        $broncePackages = Investment::where('type', 1)->get();
-        $totalBroncePackages = $broncePackages->count();
-        $amountBroncePackages = $broncePackages->sum('invested');
-        //Todos los depositos de tipo Plata
-        $plataPackages = Investment::where('type', 2)->get();
-        $totalPlataPackages = $plataPackages->count();
-        $amountPlataPackages = $plataPackages->sum('invested');
-        //Todos los depositos de tipo Oro
-        $oroPackages = Investment::where('type', 3)->get();
-        $totalOroPackages = $oroPackages->count();
-        $amountOroPackages = $oroPackages->sum('invested');
-        //Todos los depositos de tipo Platino
-        $PlatinoPackages = Investment::where('type', 4)->get();
-        $totalPlatinoPackages = $PlatinoPackages->count();
-        $amountPlatinoPackages = $PlatinoPackages->sum('invested');
-        //Comisiones Generadas
-        $comisions = WalletComission::get();
-        $totalComisions = $comisions->sum('amount');
-        //Liquidaciones realizadas
-        $liquidactions = Liquidation::where('status', '1')->get();
-        $totalLiquidactions = $liquidactions->count();
-        $amountLiquidactions = $liquidactions->sum('amount_net');
-        $feedLiquidactions = $liquidactions->sum('amount_fee');
-        //Rentabilidad Generada
-        $rentability = Utility::all();
-        $amountRentability = $rentability->sum('amount');
-        return view('reports.cashflow', compact('totalDeposits','amountDeposits',
-        'totalBroncePackages', 'amountBroncePackages', 'totalPlataPackages',
-        'amountPlataPackages', 'amountPlataPackages', 'totalOroPackages', 'amountOroPackages', 'totalPlatinoPackages',
-        'amountPlatinoPackages', 'totalComisions', 'totalLiquidactions', 'amountLiquidactions', 'feedLiquidactions',
-        'amountRentability'));
     }
 }

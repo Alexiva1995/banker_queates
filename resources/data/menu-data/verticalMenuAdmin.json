@@ -29,7 +29,7 @@
                 },
                 {
                     "url": "/manual-bonus-history",
-                    "name": "Historial Edición Saldos",
+                    "name": "Historial",
                     "icon": "circle",
                     "slug": "manual.bonus.history"
                 }
