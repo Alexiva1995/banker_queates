@@ -2,7 +2,7 @@
 
 return [
     "Niveles" => "Niveles",
-    "Historial Edición Saldos" => "Historial Edición Saldos",
+    "Historial" => "Historial",
     "Corte Binario" => "Corte Binario",
     "Bono PAMM" => "Bono PAMM",
     "Set Ranges" => "Setear Rangos",
