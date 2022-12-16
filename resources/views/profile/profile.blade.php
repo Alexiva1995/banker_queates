@@ -37,7 +37,13 @@
             color: #fff;
             background-color: #07B0F2;
         }
-
+        .card{
+            border: 1px solid #05B1D966 !important;
+            border-radius: 10px !important;
+        }
+        .nav {
+            flex-wrap: nowrap;
+        }   
         .nav-tabs .nav-link.active {
             position: relative;
             color: #ffffff;
@@ -55,40 +61,62 @@
         <p class="fw-400 mb-0">Editar Perfil</p>
     </div>
     <div class="row row col-lg-11 col-md-12 col-sm-12 mt-1">
-        <nav class="links col-sm-4">
-            <div class="nav nav-tabs flex-column" id="nav-tab" role="tablist">
-                <button class="nav-link active justify-content-start text-start fw-400 rounded" id="nav-home-tab"
-                    data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
-                    aria-selected="true"><i data-feather='user' class="mx-lg-2 mx-md-2 me-sm-2"></i>Datos Generales</button>
-                <button class="nav-link justify-content-start text-start fw-400 rounded" id="nav-password-tab"
-                    data-bs-toggle="tab" data-bs-target="#nav-password" type="button" role="tab"
-                    aria-controls="nav-password" aria-selected="false"><i data-feather='lock'
-                        class="mx-lg-2 mx-md-2 me-sm-2"></i>Cambiar
-                    contraseña
-                </button>
-                <button class="nav-link justify-content-start text-start fw-400 rounded" id="nav-pin-tab"
-                    data-bs-toggle="tab" data-bs-target="#nav-pin" type="button" role="tab"
-                    aria-controls="nav-pin" aria-selected="false"><i data-feather='lock'
-                        class="mx-lg-2 mx-md-2 me-sm-2"></i>Configurar PIN de seguridad
-                </button>
-                @if (Auth::user()->admin != 1)
-                    {{-- <button class="nav-link" id="nav-auth-tab" data-bs-toggle="tab" data-bs-target="#nav-auth" type="button" role="tab" aria-controls="nav-auth" aria-selected="false" style="padding-inline-end:10%;"><i data-feather='git-commit'></i>Configurar Authenticator</button> --}}
-                @endif
-            </div>
-        </nav>
-        <div class="col-sm-8 ">
+        
+        <div class="col-sm-12 ">
             {{-- apartado perfil --}}
             <div class="row">
                 <div class="col-lg-12 col-12 order-2 order-lg-1">
+                    <nav class="" > 
+                        <div class="nav d-flex nav-tabs" id="nav-tab" role="tablist" style="width: 30%">
+                            <button class="nav-link active justify-content-start text-start fw-400 rounded" id="nav-home-tab"
+                                data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
+                                aria-selected="true" style="width: 30%;"><i data-feather='user' class="ms-1"></i>Account</button>
+                            <button class="nav-link justify-content-start text-start fw-400 rounded" style="width: 30%;" id="nav-password-tab"
+                                data-bs-toggle="tab" data-bs-target="#nav-password" type="button" role="tab"
+                                aria-controls="nav-password" aria-selected="false"><i data-feather='lock'
+                                    class="ms-1"></i>Security
+                            </button>
+                            {{-- <button class="nav-link justify-content-start text-start fw-400 rounded" id="nav-password-tab"
+                                data-bs-toggle="tab" data-bs-target="#nav-pin" type="button" role="tab"
+                                aria-controls="nav-pin" aria-selected="false"><i data-feather='lock'
+                                    class="mx-lg-2 mx-md-2 me-sm-2"></i>Configurar PIN de seguridad
+                            </button> --}}
+                            @if (Auth::user()->admin != 1)
+                                {{-- <button class="nav-link" id="nav-auth-tab" data-bs-toggle="tab" data-bs-target="#nav-auth" type="button" role="tab" aria-controls="nav-auth" aria-selected="false" style="padding-inline-end:10%;"><i data-feather='git-commit'></i>Configurar Authenticator</button> --}}
+                            @endif
+                        </div>
+                    </nav>
                     <div class="card base p-2">
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
                                 aria-labelledby="nav-home-tab">
                                 <div class="card-body p-0">
+                                    <h3 class="mt-1 fw-600">Profile details</h3>
+                                    <div class="d-flex align-items-center">
+                                    @if (Auth::user()->range_id != null)
+                                        <img class="ms-1 rounded rounded-circle"
+                                            src="{{ asset('images/ensignRanges/' . Auth::user()->range_id . '.png') }}"
+                                            alt="Avatar" width="140px" height="110px" data-toggle="modal"
+                                            data-target="#fotos">
+                                        <div>
+                                        <h3 class="mb-2 fw-600">{{Auth::user()->name}} {{Auth::user()->last_name}}</h3>
+                                    
+                                        <h4 style="color: #9892AA;">Rango {{Auth::user()->range->name}}</h4>
+                                        </div>
+                                    @else
+                                        <img class="ms-2 rounded rounded-circle"
+                                        src="{{ asset('images/ensignRanges/0.png') }}"
+                                        alt="Avatar" width="110px" height="110px" data-toggle="modal"
+                                        data-target="#fotos">
+                                        <div>
+                                        <h3 class="mb-1 fw-600">{{Auth::user()->name}} {{Auth::user()->last_name}}</h3> 
+                                        <h4 style="color: #9892AA;">Sin rango</h4>
+                                    </div>
+                                        @endif
+                                    </div>
                                     <!--<div class="row col-lg-12 col-md-12 col-sm-12">
                                         <div class="col-lg-3 col-md-4 col-sm-4">
                                             <div class="p-1 pe-0 pb-0">
-                                                @if (Auth::user()->photo == null)
                                                     <div class="card image rounded-circle alert alert-primary">
                                                         <div class="card-body">
                                                             <div class="d-flex justify-content-center"
@@ -106,12 +134,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                @else
-                                                    <a><img class="d-block rounded rounded-circle"
-                                                            src="{{ asset('storage/photo-profile/' . $user->photo) }}"
-                                                            alt="Avatar" width="110px" height="110px" data-toggle="modal"
-                                                            data-target="#fotos"></a>
-                                                @endif
+                                                
                                             </div>
                                         </div>
                                         <div
@@ -140,7 +163,7 @@
                                                 máximo 800kB.</p>
                                         </div>
                                     </div>-->
-                                    <div class="card-body" style="margin-top: -4%;">
+                                    <div class="mt-2 card-body" style="margin-top: -4%;">
                                         <form method="POST" action="{{ route('profile.update') }}"
                                             enctype="multipart/form-data" novalidate>
                                             @csrf
@@ -318,12 +341,11 @@
                                                     @endif
                                                 </div>
                                             </div>
-                                            <div class="modal-footer mt-2" style="border: none">
+                                            <div class="float-start modal-footer mt-2" style="border: none">
+                                                <button type="submit" class="btn btn-primary" id="guardar">Guardar Cambios</button>
                                                 <button type="button" id="boton01" class="btn btn-outline-danger ">
-                                                    Reiniciar
+                                                    Cancelar
                                                 </button>
-                                                <button type="submit" class="btn btn-primary" id="guardar">Actualizar
-                                                    Datos</button>
                                             </div>
                                         </form>
                                     </div>
@@ -331,10 +353,10 @@
                             </div>
                             @include('profile.ui.password')
                             @include('profile.ui.pin')
-                            {{-- @include('profile.ui.authenticator') --}}
-                            {{-- @include('profile.ui.kyc') --}}
                         </div>
                     </div>
+                            {{-- @include('profile.ui.authenticator') --}}
+                            {{-- @include('profile.ui.kyc') --}}
                 </div>
             </div>
         </div>

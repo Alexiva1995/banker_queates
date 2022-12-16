@@ -16,13 +16,13 @@
     <div class="row match-height">
         <div class="col-md-12 col-12">
             <div class="card">
-                <div class="card-body">
+                <div class="mx-5 card-body">
                     <form action="{{ route('ticket.update-user', $ticket->id) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PATCH')
 
-                        <div class="row">
+                        <div class="mt-2 row">
                             <div class="col-6 mb-2">
                                 <!--SELECT-->
                                 <span class=" text-bold-600 text-primary">ID User: </span>
@@ -80,7 +80,7 @@
                                     @foreach ($message as $item)
                                         @if ($item->type == 0)
                                             <div class="d-flex justify-content-end mb-4">
-                                                <div class="me-2 msg_cotainer" style="border-radius: 10px; background-color: #05A5E9; color: rgb(0, 0, 0); box-shadow: 0px 10px 9px -4px rgba(0,0,0,0.76);">
+                                                <div class="me-3 msg_cotainer" style="border-radius: 10px; background-color: #05A5E9; color: rgb(0, 0, 0); box-shadow: 0px 10px 9px -4px rgba(0,0,0,0.76);">
                                                     <div class="img">
                                                         @if ($item->image !== null)
                                                             <a href="{{ asset('storage/' . $item->image) }}"
@@ -104,7 +104,7 @@
                                                 
                                             </div>
                                             <div class="d-flex justify-content-start mb-4">
-                                                <div class="ms-2 msg_cotainer_send" style="background-color: #E3E7EB; border-radius: 10px;
+                                                <div class="ms-3 msg_cotainer_send" style="background-color: #E3E7EB; border-radius: 10px;
                                                 box-shadow: 0px 10px 9px -4px rgba(0,0,0,0.76);">
                                                     <div class="img">
                                                         @if ($item->image !== null)
@@ -134,7 +134,7 @@
 
                             <div class="col-sm-12">
 
-                                <div class="d-flex justify-content-between">
+                                <div class="mb-2 d-flex justify-content-between">
                                     <div class="col-sm-10">
                                         <!--MENSAJE-->
 

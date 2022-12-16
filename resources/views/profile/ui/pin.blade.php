@@ -1,5 +1,5 @@
 {{-- password --}}
-<div class="tab-pane fade" id="nav-pin" role="tabpanel" aria-labelledby="nav-pin-tab">
+<div class="tab-pane fade" id="nav-password" role="tabpanel" aria-labelledby="nav-pin-tab">
     <div class="card-body ">
         <div class="row">
             <div class="col-lg-12 col-12 order-2 order-lg-1">
