@@ -67,20 +67,20 @@
             <div class="row">
                 <div class="col-lg-12 col-12 order-2 order-lg-1">
                     <nav class="" > 
-                        <div class="nav d-flex nav-tabs" id="nav-tab" role="tablist" style="width: 30%">
-                            <button class="nav-link active justify-content-start text-start fw-400 rounded" id="nav-home-tab"
+                        <div class="nav d-flex nav-tabs" id="nav-tab" role="tablist" style="width: 100%">
+                            <button class="nav-link active justify-content-center text-start fw-400 rounded" id="nav-home-tab"
                                 data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
-                                aria-selected="true" style="width: 30%;"><i data-feather='user' class="ms-1"></i>Account</button>
-                            <button class="nav-link justify-content-start text-start fw-400 rounded" style="width: 30%;" id="nav-password-tab"
+                                aria-selected="true" style="width: 15%;"><i data-feather='user' class=""></i>Account</button>
+                            <button class="nav-link justify-content-center text-start fw-400 rounded" style="width: 15%;" id="nav-password-tab"
                                 data-bs-toggle="tab" data-bs-target="#nav-password" type="button" role="tab"
                                 aria-controls="nav-password" aria-selected="false"><i data-feather='lock'
-                                    class="ms-1"></i>Security
+                                    class=""></i>Password
                             </button>
-                            {{-- <button class="nav-link justify-content-start text-start fw-400 rounded" id="nav-password-tab"
+                            <button class="nav-link justify-content-center text-start fw-400 rounded" style="width: 15%;" id="nav-pin-tab"
                                 data-bs-toggle="tab" data-bs-target="#nav-pin" type="button" role="tab"
                                 aria-controls="nav-pin" aria-selected="false"><i data-feather='lock'
-                                    class="mx-lg-2 mx-md-2 me-sm-2"></i>Configurar PIN de seguridad
-                            </button> --}}
+                                    class=""></i>Security Ping 
+                            </button> 
                             @if (Auth::user()->admin != 1)
                                 {{-- <button class="nav-link" id="nav-auth-tab" data-bs-toggle="tab" data-bs-target="#nav-auth" type="button" role="tab" aria-controls="nav-auth" aria-selected="false" style="padding-inline-end:10%;"><i data-feather='git-commit'></i>Configurar Authenticator</button> --}}
                             @endif
@@ -239,12 +239,9 @@
 
                                                         <input type="text" name="emailOrigin" value="{{ $user->email }}" hidden>
 
-                                                        <button type="button" 
-                                                        id="inputPassword"
+                                                        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModalVerification" id="continue-button"
                                                         class="btn btn-primary" 
-                                                        data-bs-toggle="tooltip" 
-                                                        data-bs-placement="top" 
-                                                        data-bs-title="Para cambiar su correo, debe colocar su contraseña de Take. De clic aquí">
+                                                        >
                                                        <!-- <i class="fal fa-edit" class="mx-lg-2 mx-md-2 me-sm-2"></i>-->
                                                        <img width="15px" height="15px" src="{{ asset('images/svg/edit.svg') }}">
                                                         </button>
@@ -363,10 +360,57 @@
     </div>
     @include('profile.components.style')
     @include('profile.components.modal-photo')
+    @include('profile.components.modal-verification')
     <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset(mix('vendors/js/forms/select/select2.full.min.js')) }}"></script>
 
     <script>
+        async function getCode(){
+
+        const codeBtn = document.getElementById('codeButton');
+        const url = '{{route("getCode.user.retiro")}}'
+        codeBtn.disabled = true;
+        let seconds = 50;
+
+        try {
+
+            if( !codeBtn.disabled ) return ;
+
+            function segundos(){
+                codeBtn.textContent =`Reenviar en ${seconds}s`;
+                seconds--;
+                if( seconds > 0 ){
+                    // console.log(seconds)
+                    setTimeout(segundos,1000);
+                }else{
+                    codeBtn.disabled = false;
+                    codeBtn.textContent = 'Obtener codigo';
+                }
+            }
+            
+            segundos();
+
+            const response = await axios.post(url);
+            const { status } = response.data;
+
+            if( status === 'success')
+            {
+                toastr['success']('Por favor revise su correo', '¡Exitoso!', {
+                    closeButton: true,
+                    tapToDismiss: false
+                });
+            }
+
+
+        } catch (error) {
+            console.log(error);
+            toastr['error']('Hubo un error por favor contacte con el administrador', '¡error!', {
+                closeButton: true,
+                tapToDismiss: false
+            });
+        }
+        
+    }
         let btnModalphoto = document.querySelector('#btnModalphoto');
         btnModalphoto.addEventListener("click", function(event) {
             let myModal = new bootstrap.Modal(document.getElementById('Modalphoto'), {

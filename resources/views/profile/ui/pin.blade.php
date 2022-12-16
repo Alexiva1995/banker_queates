@@ -1,5 +1,5 @@
 {{-- password --}}
-<div class="tab-pane fade" id="nav-password" role="tabpanel" aria-labelledby="nav-pin-tab">
+<div class="tab-pane fade" id="nav-pin" role="tabpanel" aria-labelledby="nav-pin-tab">
     <div class="card-body ">
         <div class="row">
             <div class="col-lg-12 col-12 order-2 order-lg-1">
@@ -57,11 +57,8 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="modal-footer" style="border: none">
-                            {{-- <button type="button" id="boton03" class="btn btn-outline-danger">
-                                Reiniciar
-                            </button> --}}
-                            <button type="submit" class="btn btn-primary" id="guardar">
+                        <div class="d-flex justify-content-start modal-footer" style="border: none">
+                            <button type="submit" class=" btn btn-primary" id="guardar">
                                 Guardar
                             </button>
                         </div>

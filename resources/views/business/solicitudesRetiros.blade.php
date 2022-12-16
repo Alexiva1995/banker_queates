@@ -12,18 +12,25 @@
         background: none !important;
         color: #000000 !important
     }
+    .card{
+        border: 1px solid #05B1D966 !important;
+        border-radius: 10px !important;
+    }
+    .cebra {
+        background-color: #D8EDED;
+    }
 </style>
 @section('content')
 <div id="logs-list">
     <div class="col-12">
         <div class="d-flex my-1">
-            <p class="fw-700 mb-0">Billetera</p><span class="fw-300 mx-1 text-light">|</span>
+            <p class="fw-700 mb-0">Billetera</p><span class="fw-300 mx-1 text-primary">|</span>
             <p class="fw-300 mb-0">Retiros</p>
         </div>
         <div class="card p-75">
             <div class="card-content">
                 <div class="card-header">
-                    <div class="d-flex justify-content-start"><h4 class="fw-700">Últimos retiros</h4></div>
+                    <div class="mt-2 d-flex justify-content-start"><h4 class="fw-700">Últimos retiros</h4></div>
                     {{--<div class="d-flex justify-content-end">
                         <div class="d-flex col-12" style="margin-bottom:14px;">
                             <a href="{{route('solicitudesRetiros')}}" class="btn btn-primary float-end">Solicitar Retiro</a>
@@ -48,7 +55,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($retiros as $retiro)
+                                @foreach ($retiros as $key => $retiro)
                                 <tr class="text-center">
                                     <td>
                                        {{date_format($retiro->updated_at, 'Y-m-d')}}
@@ -113,7 +120,7 @@
         ],
         pagingType: 'simple_numbers',
         language: {
-            "info":           "Mostrando _START_ de _END_ entradas",
+            "info":           "Mostrando _START_ de _END_ Entradas",
             "infoFiltered":   "(filtrado de _MAX_ entradas)",
             "lengthMenu":     "Mostrar _MENU_ entradas",
             "loadingRecords": "Cargando...",

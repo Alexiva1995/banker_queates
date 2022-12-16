@@ -38,7 +38,7 @@
 
         /* Estas reglas se aplicarán a todos los span despues de un input de tipo radio*/
         .content-input input[type=radio]+span {
-            width: 15rem;
+            width: 13rem;
             border: 1px solid #02D6AC;
             border-radius: 10px;
         }
@@ -53,7 +53,7 @@
             color: #fff;
             border-radius: 10px;
             opacity: 1;
-            width: 15rem;
+            width: 13rem;
         }
     </style>
     <div class="d-flex my-2">
@@ -64,7 +64,7 @@
     <section id="basic-vertical-layouts">
         <div class="match-height d-flex justify-content-center">
             <div class="col-md-12 col-12">
-                <div class="card">
+                <div class="card p-2">
                     <!--Card Header--->
                     <div class="card-header">
                         <h4 class="mt-2 fw-bold fw-600">
@@ -76,35 +76,35 @@
                         <form action="{{ route('ticket.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
-                                <div class="col-sm-12 mb-2">
+                                <div class="col-sm-12 mb-2" style="width:100%">
                                     <!--SELECT-->
                                     <div class="d-flex justify-content-between categorie-content flex-wrap mt-1">
-                                        <label class="ms-5 d-flex  content-input">
+                                        <label style="width:18%" class=" d-flex  content-input">
                                             <input type="radio" name="categories" id="nivel_1" value="0" checked>
-                                            <span class="text-center categorie">Ayuda</span>
+                                            <span style="font-size: 0.9rem" class="text-center categorie" >Ayuda</span>
                                             </input>
                                         </label>
-                                        <label class="d-flex  content-input">
+                                        <label style="width:18%" class="d-flex  content-input">
                                             <input type="radio" name="categories" id="nivel_1" value="1">
-                                            <span class="text-center categorie">
+                                            <span style="font-size: 0.9rem" class="text-center categorie">
                                                 Soporte Tecnico</span>
                                             </input>
                                         </label>
-                                        <label class="d-flex  content-input">
+                                        <label style="width:18%" class="d-flex  content-input">
                                             <input type="radio" name="categories" id="nivel_1" value="2">
-                                            <span class="text-center categorie">
+                                            <span style="font-size: 0.9rem" class="text-center categorie">
                                                 Correcion de Datos</span>
                                             </input>
                                         </label>
-                                        <label class="d-flex content-input">
+                                        <label style="width:18%" class="d-flex content-input">
                                             <input type="radio" name="categories" id="nivel_1" value="3">
-                                            <span class="text-center categorie">
+                                            <span style="font-size: 0.9rem" class="text-center categorie">
                                                 Bonos</span>
                                             </input>
                                         </label>
-                                        <label class="d-flex  content-input">
+                                        <label style="width:18%" class="d-flex  content-input">
                                             <input type="radio" name="categories" id="nivel_1" value="4">
-                                            <span class="me-5 text-center categorie">
+                                            <span style="font-size: 0.9rem" class="text-center categorie">
                                                 Inversion Total</span>
                                             </input>
                                         </label>
@@ -124,20 +124,20 @@
                                 </div> --}}
                                 <div class="col-sm-6 mb-2 mt-2">
                                     <!--Asunto -->
-                                    <h4 class="ms-5 me-5 text-bold-600 fw-600">Asunto:</h4>
+                                    <h4 class="text-bold-600 fw-600">Asunto:</h4>
                                     <div class="input-group input-group-lg">
-                                        <input type="text" name="issue" class="ms-5 me-5 form-control">
+                                        <input type="text" name="issue" class="form-control">
                                     </div>
                                     <!--Asunto end-->
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-12 ">
-                                        <div class="ms-5 me-3 card" style="background-color: #D8EDED; padding: 20em;">
+                                        <div class=" card" style="background-color: #D8EDED; padding: 10em;">
                                         </div>
                                         <div class="d-flex justify-content-between">
                                             <div class="col-sm-9">
                                                 <!--MENSAJE-->
-                                                <input class="ms-5 form-control " placeholder="Escriba un mensaje"
+                                                <input class="form-control " placeholder="Escriba un mensaje"
                                                     type="text" id="message" name="message"
                                                     style="background-color: #D8EDED;"></input>
                                                 <!--MENSAJE END-->
@@ -166,7 +166,7 @@
 
                                                     <!--CONTENEDOR DE ENVIAR Y PAPELERA-->
                                                     <button
-                                                        class="me-3 mb-2 btn btn-primary waves-effect waves-float waves-light"
+                                                        class="mb-2 btn btn-primary waves-effect waves-float waves-light"
                                                         style="width: 8em">Enviar
                                                     </button>
                                                 </div>

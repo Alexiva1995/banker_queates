@@ -22,7 +22,7 @@
                                         @foreach ($user->children as $user)
                                             @foreach ($user->children as $user)
                                                 @foreach ($user->children as $key => $user)
-                                               <tr {{$key%2 ==0 ? "class=cebra" : null}}>
+                                               <tr >
                         <td class="text-center ">{{ $user->id }}</td>
                         <td class="text-center ">{{ $user->username }}</td>
                         <td class="text-center ">{{$user->email}}</td>
