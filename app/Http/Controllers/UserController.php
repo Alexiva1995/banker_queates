@@ -427,11 +427,16 @@ class UserController extends Controller
             'current_password' => ['required', new MatchOldPassword],
             'new_password' => ['required'],
             'confirm_password' => ['same:new_password'],
+            'code_password' => 'required'
         ]);
+        $code = Crypt::decryptString(Auth::user()->code_security);
+        if ($request->code_password == $code) {
+            User::find(auth()->user()->id)->update(['password' => Hash::make($request->new_password)]);
 
-        User::find(auth()->user()->id)->update(['password' => Hash::make($request->new_password)]);
-
-        return back()->with('success', 'Contraseña actualizada');
+            return back()->with('success', 'Contraseña actualizada');
+        } else {
+            return back()->with('error', 'Verificacion de email fallida');
+        }
     }
 
     public function pinUpdate(Request $request)
@@ -440,20 +445,25 @@ class UserController extends Controller
             'current_password' => ['required', new MatchOldPassword],
             'new_pin' => ['required'],
             'confirm_pin' => ['same:new_pin'],
+            'code_pin' => 'required'
         ]);
+        $code = Crypt::decryptString(Auth::user()->code_security);
+        if ($request->code_pin == $code) {
+            Pin::updateOrCreate(
+                ['user_id' => Auth::id()],
+                ['pin' => Crypt::encryptString($request->new_pin)]
+            );
 
-        Pin::updateOrCreate(
-            ['user_id' =>  Auth::id()],
-            ['pin' => Crypt::encryptString($request->new_pin)]
-        );
-
-        PinSecurity::updateOrCreate(
-            ['user_id' =>  Auth::id()],
-            ['pin' => Crypt::encryptString($request->new_pin)]
-        );
+            PinSecurity::updateOrCreate(
+                ['user_id' => Auth::id()],
+                ['pin' => Crypt::encryptString($request->new_pin)]
+            );
 
 
-        return back()->with('success', 'PIN actualizado');
+            return back()->with('success', 'PIN actualizado');
+        } else {
+            return back()->with('error', 'Verificacion de email fallida');
+        }
     }
 
     public function paquete()
@@ -633,5 +643,15 @@ class UserController extends Controller
         $user->update(['code_security' => null]);
 
         return back()->with('success', 'Su wallet se ha guardado exitosamente!');
+    }
+    public function checkCode(Request $request) {      
+        $user = Auth::user();
+        $code = Crypt::decryptString($user->code_security);
+        if ($code == $request->pin) {
+            $response = ['status' => 'success'];
+            return response()->json($response, 200);
+        }
+        $response = ['status' => 'error'];
+        return response()->json($response, 200);
     }
 }

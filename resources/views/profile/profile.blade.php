@@ -51,16 +51,14 @@
 
         .box {
             background-color: rgb(0 191 191 / 5%);
-            padding: 1rem 0rem;
-            margin-right: 0.25rem;
-            margin-left: 0.25rem;
+            
         }
     </style>
     <div class="d-flex my-1">
         <p class="fw-700 mb-0">Perfil</p><span class="fw-300 mx-1 text-light">|</span>
         <p class="fw-400 mb-0">Editar Perfil</p>
     </div>
-    <div class="row row col-lg-11 col-md-12 col-sm-12 mt-1">
+    <div class="row" >
         
         <div class="col-sm-12 ">
             {{-- apartado perfil --}}
@@ -79,14 +77,14 @@
                             <button class="nav-link justify-content-center text-start fw-400 rounded" style="width: 15%;" id="nav-pin-tab"
                                 data-bs-toggle="tab" data-bs-target="#nav-pin" type="button" role="tab"
                                 aria-controls="nav-pin" aria-selected="false"><i data-feather='lock'
-                                    class=""></i>Security Ping 
+                                    class=""></i>Security Pin
                             </button> 
                             @if (Auth::user()->admin != 1)
                                 {{-- <button class="nav-link" id="nav-auth-tab" data-bs-toggle="tab" data-bs-target="#nav-auth" type="button" role="tab" aria-controls="nav-auth" aria-selected="false" style="padding-inline-end:10%;"><i data-feather='git-commit'></i>Configurar Authenticator</button> --}}
                             @endif
                         </div>
                     </nav>
-                    <div class="card base p-2">
+                    <div class="card p-2">
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
                                 aria-labelledby="nav-home-tab">
@@ -363,10 +361,32 @@
     @include('profile.components.modal-verification')
     <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset(mix('vendors/js/forms/select/select2.full.min.js')) }}"></script>
-
     <script>
+         async function checkCode() {
+            const pin = document.getElementById('code')
+            const code = {
+                pin: pin.value
+            }
+            console.log(pin.value);
+            const url = '{{route("check-code")}}'
+            console.log(url);
+            const response = await axios.post(url, code);
+            console.log(response);
+            const { status } = response.data;
+            if (status === 'success') {
+                toastr['success']('Condigo Verificado', '¡Exitoso!', {
+                    closeButton: true,
+                    tapToDismiss: false
+                });
+                const email = document.getElementById('email')
+                email.disabled = false
+            } else
+            toastr['error']('Los codigos no coinciden', '¡error!', {
+                closeButton: true,
+                tapToDismiss: false
+            });
+        }
         async function getCode(){
-
         const codeBtn = document.getElementById('codeButton');
         const url = '{{route("getCode.user.retiro")}}'
         codeBtn.disabled = true;
@@ -375,7 +395,6 @@
         try {
 
             if( !codeBtn.disabled ) return ;
-
             function segundos(){
                 codeBtn.textContent =`Reenviar en ${seconds}s`;
                 seconds--;
