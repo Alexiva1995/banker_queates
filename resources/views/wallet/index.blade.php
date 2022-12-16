@@ -201,13 +201,25 @@
                                                 <td>{{ $wallet->level }}</td>
                                                 <td>
                                                     @if ($wallet->status == '0')
-                                                    <span class="badge bg-info">Disponible</span>
+                                                        <span class="badge success-badge">
+                                                            <span class="text-success">Disponible</span>
+                                                        </span>
                                                     @elseif($wallet->status == '1')
-                                                    <span class="badge bg-warning">Solicitada</span>
+                                                        <span class="badge waiting-badge">
+                                                            <span class="waiting-text">Solicitada</span>
+                                                        </span>
                                                     @elseif($wallet->status == '2')
-                                                    <span class="badge bg-success">Pagada</span>
+                                                        <span class="badge success-badge">
+                                                            <span class="success-text">Pagado</span>
+                                                        </span>
                                                     @elseif($wallet->status == '3')
-                                                    <span class="badge bg-danger">Anulada</span>
+                                                        <span class="badge warning-badge">
+                                                            <span class="warning-text">Anulada</span>
+                                                        </span>
+                                                    @elseif($wallet->status == '4')
+                                                        <span class="badge warning-badge">
+                                                            <span class="text-warning">Sustraida</span>
+                                                        </span>
                                                     @endif
                                                 </td>
                                                 <td class="d-none d-sm-table-cell">
