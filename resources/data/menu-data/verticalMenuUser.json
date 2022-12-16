@@ -20,19 +20,19 @@
                 {
                     "url": "/comisiones",
                     "name": "Comisiones",
-                    "icon": "circle",
+                    "icon": "",
                     "slug": "reports.comision"
                 },
                 {
                     "url": "/reports/withdraw",
                     "name": "Retiros",
-                    "icon": "circle",
+                    "icon": "",
                     "slug": "reports.withdraw"
                 },
                 {
                     "url": "/ordenes",
                     "name": "Ordenes",
-                    "icon": "circle",
+                    "icon": "",
                     "slug": "ordenes.index"
                 }
             ]
@@ -53,19 +53,19 @@
                 {
                     "url": "/red/unilevel",
                     "name": "Unilevel",
-                    "icon": "circle",
+                    "icon": "",
                     "slug": "red.unilevel"
                 },
                 {
                     "url": "/red/binario",
                     "name": "Binario",
-                    "icon": "circle",
+                    "icon": "",
                     "slug": "red.binario"
                 },
                 {
                     "url": "/red/referred/tree/1",
                     "name": "Arbol de Referidos",
-                    "icon": "circle",
+                    "icon": "",
                     "slug": "referred.tree"
                 }
             ]
@@ -84,13 +84,13 @@
                 {
                     "url": "/tickets/ticket-create",
                     "name": "Crear ticket",
-                    "icon": "circle",
+                    "icon": "",
                     "slug": "ticket.create"
                 },
                 {
                     "url": "/tickets/ticket-list-user",
                     "name": "Ver tickets",
-                    "icon": "circle",
+                    "icon": "",
                     "slug": "ticket.list-user"
                 }
             ]

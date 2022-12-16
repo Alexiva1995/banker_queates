@@ -44,9 +44,6 @@
     .warning-text{
         color: #FF4969;
     }
-    .cebra{
-        background-color: #D8EDED;
-    }
     .warning-badge{
         background-color: #FBE3E4;
     }
@@ -127,7 +124,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($history as $key => $item)
-                                <tr class="text-center {{ $key % 2 == 0 ? 'cebra' : null }}">
+                                <tr class="text-center">
                                     <td class="fw-300 text-center">{{ $item->id }}</td>
                                     <td>
                                         @if ($item->action == 'suma de saldo')
