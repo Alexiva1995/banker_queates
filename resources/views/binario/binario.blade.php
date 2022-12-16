@@ -14,6 +14,9 @@
 
 @section('content')
     <style>
+        .center-binary{
+            margin: auto !important;
+        }
         .content-input input,
         .content-select select {
             appearance: none;

@@ -23,7 +23,7 @@
   }
 </style>
 
-<footer class="footer bg-footer footer-light ($configData['footerType'] === 'foote }}r-hidden') ? 'd-none':''}} {{$configData['footerType']}}">
+<footer class="footer center-binary bg-footer footer-light ($configData['footerType'] === 'foote }}r-hidden') ? 'd-none':''}} {{$configData['footerType']}}">
 
   <div class="d-flex justify-content-center align-items-center mt-2 flex-wrap">
       <img src="{{asset('images/logo/icon-deg.png')}}" style="max-width: 50px" class="me-1 mt-3"/><span class="mt-3">Banker Quotes - Todos los Derechos Reservados</span>

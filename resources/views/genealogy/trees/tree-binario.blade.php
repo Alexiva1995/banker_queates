@@ -78,7 +78,9 @@
             margin-left: 15px;
         }
 
-
+        .center-binary{
+            margin: auto !important;
+        }
         .paginate_button.page-item:nth-child(2) {
             border-top-left-radius: 50%;
             border-bottom-left-radius: 50%;

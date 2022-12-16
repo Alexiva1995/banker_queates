@@ -100,7 +100,7 @@
                             </thead>
                             <tbody>
                                 @foreach ( $general as $key => $gen)
-                                     <tr class="text-center {{ $key % 2 == 0 ? 'cebra' : null }}">
+                                     <tr class="text-center">
                                         @if ($gen->type == 1)
                                             <td>Bono de licencia</td>
                                         @else
@@ -168,7 +168,7 @@
                             </thead>
                             <tbody>
                                 @foreach ( $balancEdition  as $key => $gen)
-                                     <tr class="text-center {{ $key % 2 == 0 ? 'cebra' : null }}">
+                                     <tr class="text-center">
                                         @if ($gen->type != 3)
                                             <td> Retiro </td>
                                         @else
