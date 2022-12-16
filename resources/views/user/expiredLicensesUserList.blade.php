@@ -19,7 +19,7 @@
         margin-bottom: -2rem;
       }
       .dataTables_wrapper .dt-buttons .buttons-excel{
-        background-color: #673DED !important;
+        background-color: #05A5E9 !important;
       }
 </style>
 <div class="d-flex my-1">
