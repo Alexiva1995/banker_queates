@@ -20,7 +20,7 @@
             </div>
 
             <div class="d-flex justify-content-center" id="contenedorspiner_bonus" hidden>
-                <i class="fa-solid fa-circle-notch rotate" style="color: #673DED; font-size: 7rem;" id="spiner_bonus"hidden></i>
+                <i class="fa-solid fa-circle-notch rotate" style="color: #05A5E9; font-size: 7rem;" id="spiner_bonus"hidden></i>
             </div>
 
             <div id="passed_bonus" hidden>

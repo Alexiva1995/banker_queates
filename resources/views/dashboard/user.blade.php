@@ -402,7 +402,7 @@
                 breakpoint: 200,
                 options: {},
             }],
-            colors: ['#673DEDB2'],
+            colors: ['#05A5E9'],
             plotOptions: {
                 radialBar: {
                     dataLabels: {
@@ -702,7 +702,7 @@
                     datasets: [{
                         barPercentage: 0.5,
                         borderRadius: 50,
-                        backgroundColor: "#673DEDB2",
+                        backgroundColor: "#05A5E9",
                         data: amounts
                     }],
                 },
@@ -809,7 +809,7 @@
                     width: 3,
                     lineCap: 'round',
                     curve: 'smooth',
-                    colors: ['#673DED'],
+                    colors: ['#05A5E9'],
                     dashArray: 12
                 },
                 title: {

@@ -401,7 +401,7 @@
                 breakpoint: 200,
                 options: {},
             }],
-            colors: ['#673DEDB2'],
+            colors: ['#05A5E9'],
             plotOptions: {
                 radialBar: {
                     dataLabels: {
@@ -506,7 +506,7 @@
                 breakpoint: 200,
                 options: {},
             }],
-            colors: ['#673DEDB2'],
+            colors: ['#05A5E9'],
             plotOptions: {
                 radialBar: {
                     dataLabels: {
@@ -611,7 +611,7 @@
                 breakpoint: 200,
                 options: {},
             }],
-            colors: ['#673DEDB2'],
+            colors: ['#05A5E9'],
             plotOptions: {
                 radialBar: {
                     dataLabels: {
@@ -716,7 +716,7 @@
                 breakpoint: 200,
                 options: {},
             }],
-            colors: ['#673DEDB2'],
+            colors: ['#05A5E9'],
             plotOptions: {
                 radialBar: {
                     dataLabels: {

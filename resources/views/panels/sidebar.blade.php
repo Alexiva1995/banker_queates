@@ -212,7 +212,7 @@ $configData = Helper::applClasses();
         .btn-grad:hover,
         .dropbtn:hover,
         .dropbtn:focus {
-            background-color: #673DED;
+            background-color: #05A5E9;
         }
 
         .btn-grad {
