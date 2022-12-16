@@ -98,9 +98,6 @@
     .warning-text{
         color: #FF4969;
     }
-    .cebra{
-        background-color: #D8EDED;
-    }
 </style>
 <div class="d-flex my-2">
     <p style="color:#808E9E;" class="fw-700">Billetera</p><span class="fw-normal mx-1">|</span>

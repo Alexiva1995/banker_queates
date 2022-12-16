@@ -45,9 +45,6 @@
     .warning-text{
         color: #FF4969;
     }
-    .cebra{
-        background-color: #D8EDED;
-    }
     .warning-badge{
         background-color: #FBE3E4;
     }
@@ -158,7 +155,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($liquidactions as $key => $liquidaction)
-                                <tr class="text-center  {{ $key % 2 == 0 ? 'cebra' : null }}">
+                                <tr class="text-center">
                                     <td class="fw-600">{{$liquidaction->id}}</td>
                                     @if(Auth::user()->id == 1)
                                     <td class="fw-300">{{$liquidaction->user->name}}</td>

@@ -95,6 +95,9 @@
             height: auto;
             max-width: 128%;
         }
+        .center-binary{
+            margin: auto !important;
+        }
     </style>
 
     <div class="col-12">
