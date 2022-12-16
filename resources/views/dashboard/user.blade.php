@@ -153,6 +153,10 @@
             fill: #ffffff !important;
         }
 
+        .apexcharts-text , #userCharts  {
+            fill:  #5E7382 !important;
+        }
+       
         .custom-avatar-content {
             border-radius: 10px !important;
         }
@@ -504,14 +508,8 @@
                     let days_remaining = response[1];
                     let percentage = (total_days/365)*100 ;
                     console.log(percentage); 
-                    let color_chart;
-                    if (percentage > 50) {
-                        color_chart = "#05A5E9";
-                    } else if (percentage <= 50 && percentage > 25) {
-                        color_chart = "rgb(241, 145, 0)";
-                    } else if (percentage <= 25) {
-                        color_chart = "#FF4969";
-                    }
+                    let color_chart = "#05A5E9";
+                    
                     daysChart(percentage, days_remaining, color_chart);
                 },
                 error: function(error) {

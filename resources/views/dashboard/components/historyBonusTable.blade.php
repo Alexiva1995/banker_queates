@@ -1,87 +1,120 @@
-<div class="col-sm-6 card mt-2 " style="width: 50%;">
+<div class="col-sm-12 col-md-6 card mt-2 " >
   <div class="row">
           {{-- Grafico  --}}
           <div class="col-sm-6">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-12 mt-2 mb-3">
+                  <h4 style="font-weight: 700;
+                   color: #5E7382;">
+                   Miembros
+                  </h4>
+                </div>
 
+                <div class="col-sm-12">
+                  <div class="row">
+                    <div class="col-sm-12 mb-2">
+                      <h1  style="font-weight: 600;  color: #04D99D;">
+                        {{$allUsers}}
+                      </h1>
+                    </div>
+
+                    <div class="col-sm-12  mb-2">
+                      <h5 style="color: #5E7382;">
+                        Usuarios
+                      </h5>
+                    </div>
+
+                    <div class="col-sm-12">
+                      <div class="row">
+                        <div class="col-sm-12 mb-2">
+                          <h5 style="font-weight: 600; color:#5E7382;"><i class="fa-regular fa-circle" style=" color: #05A5E9 !important;"></i> Miembros Activos {{$activeUsers}}</h5>
+                        </div>
+
+                        <div class="col-sm-12 mb-2">
+                          <h5 style="font-weight: 600; color:#5E7382;"><i class="fa-regular fa-circle" style=" color: #DD0A56 !important;"></i> Miembros Inactivos {{$inactiveUsers}}</h5>
+                        </div>
+                        
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            
           </div>
-          <div class="col-sm-6">
-              <div id="chartAfiliados" style=""></div>
+          <div class="col-sm-6 ">
+              <div id="chartAfiliados">
+
+              </div>
           </div>
   </div>
 </div>
 <script>
-     function afilliatesChart() {
-        const options = {
-          height: 260,
-                width: '100%',
-          series: [44, 55,  ],
-          labels: ['', ''],
-          chart: {
-          type: 'donut',
-          },
-          plotOptions: {
-            pie:{
-              size: 200,
-              donut: {
-                labels: {
-                  show: true,
-                  total:{
-                    show:true,
-                    showAlways:true,
-                    fontSize:"5px",
-                    color:"#2787AB",
-                    size:'2%'
-                  }
-                }
-              }
+  function afilliatesChart()  { 
+        $.ajax({
+            url : "{!! route('usersChart') !!}",
+            type : 'POST',
+            datatype: 'json',
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            success: response => {
+                const { activeUsers, inactiveUsers} = response;
+                usersChart(activeUsers, inactiveUsers);
+            },
+            error: error => {
+                console.log('Hubo un error');
+                console.log(error);
             }
-          },
-          responsive: [{
-            breakpoint: 80,
-            options: {
-              chart: {
-                height: 260,
+        });
+    }
+     function usersChart(activeUsers, inactiveUsers) {
+        const options = {
+            chart: {
+                type: 'donut',
                 width: '100%',
-              },
-              legend: {
-                position: 'center'
-              }
-          }
-        }]
-        };
+                height: 290
+            },
+            dataLabels: {
+              enabled: false,
+            },
+            plotOptions: {
+                pie: {
+                    customScale: 1.1,
+                    donut: {
+                      size: '80%',
+                      labels: {
+                      show: true,
+                      total:{
+                        show:true,
+                        showAlways:true,
+                        fontSize:"3px",
+                        color:"#2787AB",
+                        }
+                      }
+                    },
+                    offsetY: 70,
+                    offsetX: -10,
+                },
+                stroke: {
+                    colors: undefined
+                }
+            },
+            colors: ['#05A5E9','#DD0A56'],
+            series: [activeUsers, inactiveUsers],
+            labels: ['',''],
+            legend: {
+                position: 'bottom',
+                offsetY: 100
+            }
+        }
+        
         var chart = new ApexCharts(document.querySelector("#chartAfiliados"), options);
         chart.render();
         }
 
-        function afilliatesChart1(){
-          goalChartOptions = {
-            chart:{
-              type: 'donut',
-              series: [44, 55, 13, 33],
-              labels: ['Apple', 'Mango', 'Orange', 'Watermelon'],
-            },
-            plotOptions: {
-            pie:{
-              donut: {
-                labels: {
-                  show: true,
-                  total:{
-                    show:true,
-                    showAlways:true,
-                    fontSize:"24px",
-                    color:"#2787AB",
-                    size:'2%'
 
-                  }
-                }
-              }
-            }
-          },
-          legend: {
-              position: 'bottom'
-            }
-          }
-          var chart = new ApexCharts(document.querySelector("#chartAfiliados"), goalChartOptions);
-        chart.render();
-        }
+        
 </script>

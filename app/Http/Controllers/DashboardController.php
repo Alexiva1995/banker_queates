@@ -83,10 +83,12 @@ class DashboardController extends Controller
           $daysRemaining = $date1->diffInDays(today()->format('Y-m-d') );
 
       }
-
+      $activeUsers = User::where('status', '1')->count();
+      $inactiveUsers = User::where('status', '0')->count();
+      $allUsers = User::all()->count();
       //criptobar
       $cryptos = $this->minApiService->get10Cryptos();
-      return view('dashboard.user', ['pageConfigs' => $pageConfigs], compact('rangos','user', 'cryptos', 'investments', 'indirect_referrals', 'total_referrals', 'total_available', 'user_packages'));
+      return view('dashboard.user', ['pageConfigs' => $pageConfigs], compact('allUsers','activeUsers','inactiveUsers','rangos','user', 'cryptos', 'investments', 'indirect_referrals', 'total_referrals', 'total_available', 'user_packages'));
     }
   }
 
