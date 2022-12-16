@@ -70,56 +70,62 @@
     .fw-700 {
         font-weight: 700 !important;
     }
-    .nav-text{
+
+    .nav-text {
         color: #68676e !important;
         font-size: 14px;
         font-weight: bold;
     }
 
-    .usdt-color{
+    .usdt-color {
         color: #04D99D;
     }
 
-    .success-badge{
+    .success-badge {
         background-color: rgba(66, 172, 70, 0.16);
     }
-    .success-text{
+
+    .success-text {
         color: #42AC46;
     }
-    .waiting-text{
+
+    .waiting-text {
         color: #36D9ED;
     }
-    .waiting-badge{
+
+    .waiting-badge {
         background-color: #D6F7FB;
     }
-    .warning-badge{
+
+    .warning-badge {
         background-color: #FBE3E4;
     }
-    .warning-text{
+
+    .warning-text {
         color: #FF4969;
-    }
-    .cebra{
-        background-color: #D8EDED;
     }
 </style>
 <div class="d-flex my-2">
-    <p style="color:#808E9E;" class="fw-700">Billetera</p><span class="fw-normal mx-1">|</span>
-    <p>Billetera</p>
+    <p class="fw-700 mb-0" style="font-weight: 700; color:#000">Billetera</p><span
+        class="fw-300 mx-1 text-light">|</span>
+    <p class="fw-700 mb-0" style="font-weight: 700; color:rgba(0, 0, 0, 0.514)">Billetera</p>
 </div>
 
 <nav class="col-sm-12 lista">
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <button class="nav-link active" id="nav-rentability-tab" data-bs-toggle="tab" data-bs-target="#general"
-        type="button" role="tab" aria-controls="nav-rentability" aria-selected="false"><span class="nav-text">General</span> </button>
+            type="button" role="tab" aria-controls="nav-rentability" aria-selected="false"><span
+                class="nav-text">General</span> </button>
 
-        <button class="nav-link" id="nav-rentability-tab" data-bs-toggle="tab" data-bs-target="#license"
-        type="button" role="tab" aria-controls="nav-rentability" aria-selected="false"><span class="nav-text">Licencias</span></button>
+        <button class="nav-link" id="nav-rentability-tab" data-bs-toggle="tab" data-bs-target="#license" type="button"
+            role="tab" aria-controls="nav-rentability" aria-selected="false"><span
+                class="nav-text">Licencias</span></button>
 
         <button class="nav-link" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button"
-        role="tab" aria-controls="nav-home" aria-selected="true"><span class="nav-text">MLM PAMM</span></button>
+            role="tab" aria-controls="nav-home" aria-selected="true"><span class="nav-text">MLM PAMM</span></button>
 
         {{-- <button class="nav-link" id="nav-range-tab" data-bs-toggle="tab" data-bs-target="#nav-range" type="button"
-        role="tab" aria-controls="nav-range" aria-selected="false">Balance en cuenta PAMM </button> --}}
+            role="tab" aria-controls="nav-range" aria-selected="false">Balance en cuenta PAMM </button> --}}
 
     </div>
 </nav>
@@ -170,7 +176,8 @@
                         <div class="card-content">
                             <div class="card-header my-1 p-0">
                                 <h4 class="fw-700">Comisiones</h4>
-                                {{--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#transferMlm">
+                                {{--<button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#transferMlm">
                                     Transferir
                                 </button>--}}
                             </div>
@@ -194,13 +201,25 @@
                                                 <td>{{ $wallet->level }}</td>
                                                 <td>
                                                     @if ($wallet->status == '0')
-                                                    <span class="badge bg-info">Disponible</span>
+                                                        <span class="badge success-badge">
+                                                            <span class="text-success">Disponible</span>
+                                                        </span>
                                                     @elseif($wallet->status == '1')
-                                                    <span class="badge bg-warning">Solicitada</span>
+                                                        <span class="badge waiting-badge">
+                                                            <span class="waiting-text">Solicitada</span>
+                                                        </span>
                                                     @elseif($wallet->status == '2')
-                                                    <span class="badge bg-success">Pagada</span>
+                                                        <span class="badge success-badge">
+                                                            <span class="success-text">Pagado</span>
+                                                        </span>
                                                     @elseif($wallet->status == '3')
-                                                    <span class="badge bg-danger">Anulada</span>
+                                                        <span class="badge warning-badge">
+                                                            <span class="warning-text">Anulada</span>
+                                                        </span>
+                                                    @elseif($wallet->status == '4')
+                                                        <span class="badge warning-badge">
+                                                            <span class="text-warning">Sustraida</span>
+                                                        </span>
                                                     @endif
                                                 </td>
                                                 <td class="d-none d-sm-table-cell">
@@ -219,24 +238,24 @@
             </div>
         </div>
     </div>
-        @include('wallet.Licencias')
-        @include('wallet.range')
-        @include('wallet.general')
-    </div>
+    @include('wallet.Licencias')
+    @include('wallet.range')
+    @include('wallet.general')
+</div>
 
-    @endsection
+@endsection
 
-    @section('vendor-script')
-    <script src="{{ asset(mix('vendors/js/charts/apexcharts.min.js')) }}"></script>
-    <script src="{{ asset(mix('vendors/js/tables/datatable/jquery.dataTables.min.js')) }}"></script>
-    <script src="{{ asset(mix('vendors/js/tables/datatable/dataTables.bootstrap5.min.js')) }}"></script>
-    <script src="{{ asset(mix('vendors/js/tables/datatable/dataTables.responsive.min.js')) }}"></script>
-    @endsection
-    @section('page-script')
-    <script></script>
-    {{-- <script src="{{ asset(mix('js/scripts/cards/card-statistics.js')) }}"></script> --}}
-    <script>
-        //datataables ordenes
+@section('vendor-script')
+<script src="{{ asset(mix('vendors/js/charts/apexcharts.min.js')) }}"></script>
+<script src="{{ asset(mix('vendors/js/tables/datatable/jquery.dataTables.min.js')) }}"></script>
+<script src="{{ asset(mix('vendors/js/tables/datatable/dataTables.bootstrap5.min.js')) }}"></script>
+<script src="{{ asset(mix('vendors/js/tables/datatable/dataTables.responsive.min.js')) }}"></script>
+@endsection
+@section('page-script')
+<script></script>
+{{-- <script src="{{ asset(mix('js/scripts/cards/card-statistics.js')) }}"></script> --}}
+<script>
+    //datataables ordenes
         $('.myTable').DataTable({
             responsive: false,
             order: [
@@ -255,10 +274,10 @@
             },
             pagingType: 'simple_numbers',
         })
-    </script>
+</script>
 
-    <script>
-        let span = document.getElementById('span');
+<script>
+    let span = document.getElementById('span');
         let enviar = 'Enviar';
         let enviado = 'Enviado';
         span.innerHTML = enviar;
@@ -300,6 +319,6 @@
                 window.location = '{{ route('wallet.index') }}';
             });
         });
-    </script>
+</script>
 
-    @endsection
+@endsection

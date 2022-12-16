@@ -34,75 +34,75 @@
                                     Paquetes totales Comprados
                                     <div class="d-flex flex-column justify-content-center align-items-end">
                                         <p class="mb-0">Total: <span id="total_package" class="badge badge-primary badge-pill"
-                                            style="background-color: #673DED">{{$totalDeposits}}</span></p>
+                                            style="background-color: #05A5E9">{{$totalDeposits}}</span></p>
                                         <p class="mb-0">Monto: <span id="total_package" class="badge badge-primary badge-pill"
-                                            style="background-color: #673DED">${{number_format($amountDeposits, 2)}}</span></p>
+                                            style="background-color: #05A5E9">${{number_format($amountDeposits, 2)}}</span></p>
                                     </div>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     Paquetes Bronce Comprados
                                     <div class="d-flex flex-column justify-content-center align-items-end">
                                         <p class="mb-0">Total: <span id="total_package" class="badge badge-primary badge-pill"
-                                            style="background-color: #673DED">{{$totalBroncePackages}}</span></p>
+                                            style="background-color: #05A5E9">{{$totalBroncePackages}}</span></p>
                                         <p class="mb-0">Monto: <span id="total_package" class="badge badge-primary badge-pill"
-                                            style="background-color: #673DED">${{number_format($amountBroncePackages, 2)}}</span></p>
+                                            style="background-color: #05A5E9">${{number_format($amountBroncePackages, 2)}}</span></p>
                                     </div>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     Paquetes Plata Comprados
                                     <div class="d-flex flex-column justify-content-center align-items-end">
                                         <p class="mb-0">Total: <span id="total_package" class="badge badge-primary badge-pill"
-                                            style="background-color: #673DED">{{$totalPlataPackages}}</span></p>
+                                            style="background-color: #05A5E9">{{$totalPlataPackages}}</span></p>
                                         <p class="mb-0">Monto: <span id="total_package" class="badge badge-primary badge-pill"
-                                            style="background-color: #673DED">${{number_format($amountPlataPackages, 2)}}</span></p>
+                                            style="background-color: #05A5E9">${{number_format($amountPlataPackages, 2)}}</span></p>
                                     </div>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     Paquetes Oro Comprados
                                     <div class="d-flex flex-column justify-content-center align-items-end">
                                         <p class="mb-0">Total: <span id="total_package" class="badge badge-primary badge-pill"
-                                            style="background-color: #673DED">{{$totalOroPackages}}</span></p>
+                                            style="background-color: #05A5E9">{{$totalOroPackages}}</span></p>
                                         <p class="mb-0">Monto: <span id="total_package" class="badge badge-primary badge-pill"
-                                            style="background-color: #673DED">${{number_format($amountOroPackages, 2)}}</span></p>
+                                            style="background-color: #05A5E9">${{number_format($amountOroPackages, 2)}}</span></p>
                                     </div>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     Paquetes Platino Comprados
                                     <div class="d-flex flex-column justify-content-center align-items-end"> 
                                         <p class="mb-0">Total: <span id="total_package" class="badge badge-primary badge-pill"
-                                            style="background-color: #673DED">{{$totalPlatinoPackages}}</span></p>    
+                                            style="background-color: #05A5E9">{{$totalPlatinoPackages}}</span></p>    
                                         <p class="mb-0">Monto: <span id="total_package" class="badge badge-primary badge-pill"
-                                            style="background-color: #673DED">${{number_format($amountPlatinoPackages, 2)}}</span></p>  
+                                            style="background-color: #05A5E9">${{number_format($amountPlatinoPackages, 2)}}</span></p>  
                                     </div>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     Retiros Totales Realizados
                                     <div class="d-flex flex-column justify-content-center align-items-end">
                                         <p class="mb-0">Total: <span id="total_package" class="badge badge-primary badge-pill"
-                                            style="background-color: #673DED">{{$totalLiquidactions}}</span></p>
+                                            style="background-color: #05A5E9">{{$totalLiquidactions}}</span></p>
                                         <p class="mb-0">Monto: <span id="total_package" class="badge badge-primary badge-pill"
-                                            style="background-color: #673DED">${{number_format($amountLiquidactions, 2)}}</span></p>
+                                            style="background-color: #05A5E9">${{number_format($amountLiquidactions, 2)}}</span></p>
                                     </div>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     Feed Totales
                                     <span id="feed" class="mx-1 badge badge-primary badge-pill"
-                                        style="background-color: #673DED">${{number_format($feedLiquidactions, 2)}}</span>
+                                        style="background-color: #05A5E9">${{number_format($feedLiquidactions, 2)}}</span>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     Comisiones Generadas
                                     <span id="comisiones" class="mx-1 badge badge-primary badge-pill"
-                                        style="background-color: #673DED">${{number_format($totalComisions, 2)}}</span>
+                                        style="background-color: #05A5E9">${{number_format($totalComisions, 2)}}</span>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     Retabilidad Generada
                                     <span id="comisiones" class="mx-1 badge badge-primary badge-pill"
-                                        style="background-color: #673DED">${{number_format($amountRentability, 2)}}</span>
+                                        style="background-color: #05A5E9">${{number_format($amountRentability, 2)}}</span>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     Total Ganado
                                     <span id="comisiones" class="mx-1 badge badge-primary badge-pill"
-                                        style="background-color: #673DED">${{number_format($amountDeposits - $totalComisions - $amountLiquidactions - $amountRentability + $feedLiquidactions, 2)}}</span>
+                                        style="background-color: #05A5E9">${{number_format($amountDeposits - $totalComisions - $amountLiquidactions - $amountRentability + $feedLiquidactions, 2)}}</span>
                                 </li>
                             </ul>
                         </div>

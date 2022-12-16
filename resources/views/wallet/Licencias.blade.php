@@ -64,15 +64,25 @@
                                                 <td> {{ $licen->amount * 5 }}</td>
                                                 <td>
                                                     @if ($licen->status == '0')
-                                                        <span class="badge bg-info">Disponible</span>
+                                                        <span class="badge success-badge">
+                                                            <span class="text-success">Disponible</span>
+                                                        </span>
                                                     @elseif($licen->status == '1')
-                                                        <span class="badge bg-warning">Solicitada</span>
+                                                        <span class="badge waiting-badge">
+                                                            <span class="waiting-text">Solicitada</span>
+                                                        </span>
                                                     @elseif($licen->status == '2')
-                                                        <span class="badge bg-success">Pagado</span>
+                                                        <span class="badge success-badge">
+                                                            <span class="success-text">Pagado</span>
+                                                        </span>
                                                     @elseif($licen->status == '3')
-                                                        <span class="badge bg-danger">Anulada</span>
+                                                        <span class="badge warning-badge">
+                                                            <span class="warning-text">Anulada</span>
+                                                        </span>
                                                     @elseif($licen->status == '4')
-                                                        <span class="badge bg-danger">Sustraida</span>
+                                                        <span class="badge warning-badge">
+                                                            <span class="text-warning">Sustraida</span>
+                                                        </span>
                                                     @endif
                                                 </td>
                                                 <td class="d-none d-sm-table-cell">

@@ -25,7 +25,7 @@
             </div>
 
             <div class="d-flex justify-content-center" id="contenedorspiner" hidden>
-                <i class="fa-solid fa-circle-notch rotate" style="color: #673DED; font-size: 7rem;" id="spiner"hidden></i>
+                <i class="fa-solid fa-circle-notch rotate" style="color: #05A5E9; font-size: 7rem;" id="spiner"hidden></i>
             </div>
 
             <div id="passed" hidden>

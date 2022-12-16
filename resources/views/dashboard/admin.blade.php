@@ -244,7 +244,7 @@
                 datasets: [{
                     barPercentage: 0.2,
                     borderRadius: 50,
-                    backgroundColor: "#673DED",
+                    backgroundColor: "#05A5E9",
                     data: amounts
                 }]
             },

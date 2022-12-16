@@ -47,6 +47,15 @@ data-textdirection="{{ env('MIX_CONTENT_DIRECTION') === 'rtl' ? 'rtl' : 'ltr' }}
   table{
     border: 1px solid #E2DBDB;
   }
+  li.active a {
+    color: #fff !important;
+  }
+  tr:nth-child(even) {
+    background-color: #D8EDED;
+  }
+  .page-link:hover{
+    background: #05A5E9;
+  }
 body{
 }
 
