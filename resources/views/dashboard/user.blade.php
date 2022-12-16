@@ -149,13 +149,9 @@
 
         }
 
-        .apexcharts-text {
-            fill: #ffffff !important;
-        }
+        
 
-        .apexcharts-text , #userCharts  {
-            fill:  #5E7382 !important;
-        }
+        
        
         .custom-avatar-content {
             border-radius: 10px !important;
@@ -268,12 +264,28 @@
             }
         }
     
-.gradient{
+        .gradient{
     background: rgb(2,0,36);
     background: linear-gradient(90deg, #05A4EA, #02D6AC 100%);
 }
+.gradient2{
+    background: rgb(2,0,36);
+    background: linear-gradient(  90deg, #02D6AC , #05A4EA 100%);
+}
+
 .texto{
     color:#04D99D;
+}
+
+.zoom {
+    transition: transform .2s; 
+}
+ 
+.zoom:hover {
+    transform: scale(1.2); 
+}
+.zoom:active{
+    transform: scale(1); 
 }
     </style>
 
@@ -493,99 +505,11 @@
             getProfitsData();
             getWalltetData();
              afilliatesChart();
+             sesionChart();
             // getRentChart(user_id);
         });
 
-        function getDaysChart() {
-            let url = "{!! route('get.days.chart', 'replace_this') !!}";
-            url = url.replace('replace_this', user_id);
-            $.ajax({
-                url: url,
-                type: 'GET',
-                datatype: 'json',
-                success: (response) => {
-                    let total_days = response[0];
-                    let days_remaining = response[1];
-                    let percentage = (total_days/365)*100 ;
-                    console.log(percentage); 
-                    let color_chart = "#05A5E9";
-                    
-                    daysChart(percentage, days_remaining, color_chart);
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-        }
-
-        function daysChart(percentage, days_remaining, color_chart) {
-            goalChartOptions = {
-                chart: {
-                    height: 280,
-                    width: '100%',
-                    type: 'radialBar',
-                    sparkline: {
-                        enabled: true
-                    },
-                    dropShadow: {
-                        enabled: false,
-                        blur: 3,
-                        left: 1,
-                        top: 1,
-                        opacity: 0.1
-                    }
-                },
-                series: [percentage],
-                labels: ['Días Faltantes'],
-                colors: [color_chart],
-                grid: {
-                    padding: {
-                        bottom: 30
-                    }
-                },
-                plotOptions: {
-                    radialBar: {
-                        // offsetY: 20,
-                        startAngle: -150,
-                        endAngle: 150,
-                        hollow: {
-                            size: '65%'
-                        },
-                        track: {
-                            background: '#F2F4F5',
-                            strokeWidth: '50%'
-                        },
-                        dataLabels: {
-                            value: {
-                                offsetY: -12,
-                                color: '#F2F4F5',
-                                fontSize: '40px',
-                                fontWeight: '900',
-                                formatter: function(val) {
-                                    return parseInt(days_remaining);
-                                }
-                            },
-                            name: {
-                                show: true,
-                                offsetY: 30,
-                                fontSize: '14px',
-                                fontWeight: 600,
-                            },
-                        }
-                    }
-                },
-                fill: {
-                    type: 'solid',
-                },
-                stroke: {
-                    lineCap: 'round',
-                },
-            };
-
-            var chart = new ApexCharts(document.querySelector("#chartDays"), goalChartOptions);
-            chart.render();
-        }
-
+        
         var userText = $("#copy-to-clipboard");
         var btnCopy = $("#btn-copy");
 

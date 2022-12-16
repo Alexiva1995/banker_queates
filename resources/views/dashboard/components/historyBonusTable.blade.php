@@ -91,7 +91,7 @@
                         show:true,
                         showAlways:true,
                         fontSize:"3px",
-                        color:"#2787AB",
+                        color:"#DD0A56",
                         }
                       }
                     },
