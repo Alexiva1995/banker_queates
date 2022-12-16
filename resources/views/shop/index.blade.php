@@ -85,7 +85,7 @@
 
                                         </div>
                                     @else
-                                        <div class="card rounded-0 mb-0 border-0" style="width: 100%;">
+                                        <div class="card mb-0 border-0" style="width: 100%;">
 
                                             <img src="{{ asset('images/licencias/' . $package->image) }}"
                                                 alt="{{ $package->image }}"
