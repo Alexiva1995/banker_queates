@@ -30,12 +30,33 @@
         font-size: 1em !important;
         margin-bottom: -2rem;
     }
+    .success-badge{
+        background-color: rgba(66, 172, 70, 0.16);
+    }
+    .success-text{
+        color: #42AC46;
+    }
+    .waiting-text{
+        color: #36D9ED;
+    }
+    .waiting-badge{
+        background-color: #D6F7FB;
+    }
+    .warning-text{
+        color: #FF4969;
+    }
+    .cebra{
+        background-color: #D8EDED;
+    }
+    .warning-badge{
+        background-color: #FBE3E4;
+    }
 </style>
 @section('content')
 <div id="logs-list">
     <div class="d-flex my-1">
-        <p class="fw-700 mb-0">Informes</p><span class="fw-300 mx-1 text-light">|</span>
-        <p class="fw-300 mb-0">Retiros</p>
+        <p class="fw-700 mb-0" style="font-weight: 700; color:#000">Informes</p><span class="fw-300 mx-1 text-light">|</span>
+        <p class="fw-700 mb-0" style="font-weight: 700; color:rgba(0, 0, 0, 0.514)">Retiros</p>
     </div>
     <div class="col-12">
         <div class="card p-2">
@@ -136,9 +157,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($liquidactions as $liquidaction)
-                                <tr class="text-center">
-                                    <td class="fw-300">{{$liquidaction->id}}</td>
+                                @foreach ($liquidactions as $key => $liquidaction)
+                                <tr class="text-center  {{ $key % 2 == 0 ? 'cebra' : null }}">
+                                    <td class="fw-600">{{$liquidaction->id}}</td>
                                     @if(Auth::user()->id == 1)
                                     <td class="fw-300">{{$liquidaction->user->name}}</td>
                                     <td class="fw-300">{{$liquidaction->user->id}}</td>
@@ -147,13 +168,21 @@
                                     <td class="fw-300">{{number_format($liquidaction->amount_net, 2)}}</td>
                                     <td class="fw-300">{{number_format($liquidaction->amount_fee, 2)}}</td>
                                     <td class="fw-300">{{$liquidaction->hash}}</td>
-                                    @if ($liquidaction->status == '0')
-                                    <td class="fw-300"> <a class=" btn bg-light-warning fw-300 p-75">Pendiente</a></td>
-                                    @elseif($liquidaction->status == '1')
-                                    <td> <a class=" btn bg-light-success fw-300 p-75">Pagada</a></td>
-                                    @elseif($liquidaction->status == '2')
-                                    <td> <a class=" btn bg-light-danger fw-300 p-75">Cancelada</a></td>
-                                    @endif
+                                    <td>
+                                        @if ($liquidaction->status == 2)
+                                            <span class="badge warning-badge">
+                                                <span class="warning-text">Cancelada</span>
+                                            </span>
+                                        @elseif($liquidaction->status == 0)
+                                            <span class="badge success-badge">
+                                                <span class="text-info">Pendiente</span>
+                                            </span>
+                                        @elseif($liquidaction->status == 1)
+                                            <span class="badge success-badge">
+                                                <span class="success-text">Pagada</span>
+                                            </span>
+                                        @endif
+                                    </td>
                                     <td class=" fw-300">{{date('Y-m-d', strtotime($liquidaction->created_at))}}</td>
                                     <td class=" fw-300">{{date('Y-m-d', strtotime($liquidaction->updated_at))}}</td>
                                 </tr>

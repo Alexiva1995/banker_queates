@@ -29,12 +29,33 @@
         font-size: 1em !important;
         margin-bottom: -2rem;
     }
+    .success-badge{
+        background-color: rgba(66, 172, 70, 0.16);
+    }
+    .success-text{
+        color: #42AC46;
+    }
+    .waiting-text{
+        color: #36D9ED;
+    }
+    .waiting-badge{
+        background-color: #D6F7FB;
+    }
+    .warning-text{
+        color: #FF4969;
+    }
+    .cebra{
+        background-color: #D8EDED;
+    }
+    .warning-badge{
+        background-color: #FBE3E4;
+    }
 </style>
 @section('content')
 <div id="logs-list">
     <div class="d-flex my-1">
-        <p class="fw-700 mb-0">Informes</p><span class="fw-300 mx-1 text-light">|</span>
-        <p class="fw-300 mb-0">Comisiones</p>
+        <p class="fw-700 mb-0" style="font-weight: 700; color:#000">Informes</p><span class="fw-300 mx-1 text-light">|</span>
+        <p class="fw-700 mb-0" style="font-weight: 700; color:rgba(0, 0, 0, 0.514)">Comisiones</p>
     </div>
     <div class="col-12">
         <div class="card p-2">
@@ -135,9 +156,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($wallets as $wallet)
-                                <tr>
-                                    <td class="fw-300 text-center">{{$wallet->id}}</td>
+                                @foreach ($wallets as $key => $wallet)
+                                <tr class="{{ $key % 2 == 0 ? 'cebra' : null }}">
+                                    <td class="fw-600 text-center">{{$wallet->id}}</td>
                                     @if(Auth::user()->admin == 1)
                                     <td class="text-center">{{$wallet->user->name}}</td>
                                     <td class="text-center">{{$wallet->user->id}}</td>
@@ -145,23 +166,29 @@
                                     <td class="fw-300 text-center">{{$wallet->buyer->name ?? '--'}}</td>
                                     <td class="fw-300 text-center">{{$wallet->buyer->id ?? '--'}}</td>
                                     <td class="fw-300 text-end">{{number_format($wallet->amount,2)}}</td>
+                                    <td class="fw-300 text-center">
                                     @if ($wallet->status == 0)
-                                    <td class="fw-300 text-center"> <a
-                                            class=" btn bg-light-info  fw-300 p-75">Disponible</a></td>
+                                        <span class="badge success-badge">
+                                            <span class="success-text">Disponible</span>
+                                        </span>
                                     @elseif($wallet->status == 1)
-                                    <td class="fw-300 text-center"> <a
-                                            class=" btn bg-light-warning fw-300 p-75">Solicitada</a></td>
+                                        <span class="badge waiting-badge">
+                                            <span class="waiting-text">Solicitada</span>
+                                        </span>
                                     @elseif($wallet->status == 2)
-                                    <td class="fw-300 text-center"> <a
-                                            class=" btn bg-light-success fw-300 p-75">Pagada</a></td>
+                                        <span class="badge success-badge">
+                                            <span class="success-text">Pagada</span>
+                                        </span>
                                     @elseif($wallet->status == 3)
-                                    <td class="fw-300 text-center"> <a
-                                            class=" btn bg-light-danger fw-300 p-75">Anulada</a></td>
+                                        <span class="badge warning-badge">
+                                            <span class="warning-text">Anulada</span>
+                                        </span>
                                     @elseif($wallet->status == 4)
-                                        <td class="fw-300 text-center"> 
-                                            <a class=" btn bg-light-danger fw-300 p-75">Sustraido</a>
-                                        </td>
+                                        <span class="badge warning-badge">
+                                            <span class="text-warning">Sustraida</span>
+                                        </span>
                                     @endif
+                                    </td>
                                     <td class="fw-300 text-center">
                                         @switch($wallet->type)
                                         @case( 0 )

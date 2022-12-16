@@ -29,12 +29,33 @@
         font-size: 1em !important;
         margin-bottom: -2rem;
     }
+    .success-badge{
+        background-color: rgba(66, 172, 70, 0.16);
+    }
+    .success-text{
+        color: #42AC46;
+    }
+    .waiting-text{
+        color: #36D9ED;
+    }
+    .waiting-badge{
+        background-color: #D6F7FB;
+    }
+    .warning-text{
+        color: #FF4969;
+    }
+    .cebra{
+        background-color: #D8EDED;
+    }
+    .warning-badge{
+        background-color: #FBE3E4;
+    }
 </style>
 @section('content')
 <div id="logs-list">
     <div class="d-flex my-1">
-        <p class="fw-700 mb-0">Informes</p><span class="fw-300 mx-1 text-light">|</span>
-        <p class="fw-300 mb-0">Historial de Bonos Manuales</p>
+        <p class="fw-700 mb-0" style="font-weight: 700; color:#000">Informes</p><span class="fw-300 mx-1 text-light">|</span>
+        <p class="fw-700 mb-0" style="font-weight: 700; color:rgba(0, 0, 0, 0.514)">Historial de Bonos Manuales</p>
     </div>
     <div class="col-12">
         <div class="card p-2">
@@ -105,10 +126,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($history as $item)
-                                <tr>
+                                @foreach ($history as $key => $item)
+                                <tr class="text-center {{ $key % 2 == 0 ? 'cebra' : null }}">
                                     <td class="fw-300 text-center">{{ $item->id }}</td>
-                                    <td class="text-center">{{ $item->action }}</td>
+                                    <td>
+                                        @if ($item->action == 'suma de saldo')
+                                            <span class="badge success-badge">
+                                                <span class="success-text">Suma de Saldo</span>
+                                            </span>
+                                        @else
+                                            <span class="badge warning-badge">
+                                                <span class="warning-text">Resta de Saldo</span>
+                                            </span>
+                                        @endif
+                                    </td>
                                     <td class="text-center">{{ $item->user->name }}</td>
                                     <td class="fw-300 text-center">{{ $item->author->name }}</td>
                                     <td class="fw-300 text-end">{{ number_format($item->amount,2) }}</td>
