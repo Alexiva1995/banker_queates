@@ -291,52 +291,35 @@
           <a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="javascript:void(0);" data-bs-toggle="dropdown" aria-haspopup="true">
             <div class="user-nav d-sm-flex d-none">
               <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-4 d-flex justify-content-center align-items-center">
                   <i class="fa-solid fa-arrows-rotate text-dark" style="font-size: 18px"></i>
                 </div>
-                <div class="col-sm-6">
+
+                <div class="col-sm-4 d-flex justify-content-center align-items-center">
                   <span class="user-name fw-bolder text-capitalize" >{{Auth::user()->name}}</span>
-              {{-- <span class="user-name fw-bolder text-capitalize" >{{Auth::user()->last_name}}</span> --}}
                 </div>
-               
+
+                <div class="col-sm-4">
+                <span>
+                  @if(Auth::user()->admin != 1)
+                    @if(auth()->user()->range_id == null)
+
+                      <img class="round" src="{{asset('images/ico/deg.ico')}}" alt="avatar" height="50" width="50" style="object-fit: contain; background-color: white;">
+
+                    @else
+                      <img  class="round" src="{{ asset('images/ensignRanges/'.auth()->user()->range_id.'.png') }}" style="box-shadow: none;" height="50" width="63">
+                    @endif
+
+                  @elseif(Auth::user()->admin == 1)
+                    @if(Auth::user()->photo == null)
+                      <img class="round" src="{{asset('images/logo/logo-deg-white.png')}}" style="box-shadow: none;" alt="avatar" height="50" width="50">
+                    @endif
+                  @endif
+              </span>
+                </div>
               </div>
-              
-
             </div>
-            <!--<span class="avatar">-->
-            <span>
-              {{-- @if( auth()->user()->investment !== null && auth()->user()->admin == 0 )
-                <img class="round" src="" alt="{{'emblema'.auth()->user()->investment->licensePackage->emblem}}" height="50" width="50" alt="license_emblem">
-                --}}
-                
-                @if(Auth::user()->admin != 1)
-                  @if(auth()->user()->range_id == null)
-
-                    <img class="round" src="{{asset('images/ico/deg.ico')}}" alt="avatar" height="50" width="63" style="object-fit: contain; background-color: white;">
-
-                    <!-- <img class="round" src="{{ asset('images/logo/logo-deg-white.png') }}" alt="avatar" style="box-shadow: none;" height="50" width="50"> -->
-
-                  @else
-                    <img  class="round" src="{{ asset('images/ensignRanges/'.auth()->user()->range_id.'.png') }}" style="box-shadow: none;" height="50" width="63">
-                  @endif
-
-                @elseif(Auth::user()->admin == 1)
-                  @if(Auth::user()->photo == null)
-                    <img class="round" src="{{asset('images/logo/logo-deg-white.png')}}" style="box-shadow: none;" alt="avatar" height="50" width="50">
-                  @endif
-                @endif
-
-              {{--@if(Auth::user()->photo == null)
-                <img class="round" src="{{asset('images/portrait/small/avatar-s-11.jpg')}}" alt="avatar" height="40" width="40">
-              @else
-                <img class="round" src="{{ asset('storage/photo-profile/'.Auth::user()->photo) }}" alt="avatar" height="40" width="40">
-              @endif--}}
-             {{-- @if(Auth::user()->status == 1)
-                 <span class="avatar-status-online"></span>
-              @else
-                <span class="avatar-status-offline"></span>
-              @endif --}}
-            </span>
+            
           </a>
           <div class="dropdown-menu  dropdown-menu-end" aria-labelledby="dropdown-user" >
             @if(Auth::user()->admin == 1 || Auth::user()->status == '0')

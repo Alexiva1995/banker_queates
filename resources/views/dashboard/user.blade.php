@@ -53,7 +53,7 @@
         .counter span {
             font-size: 2.15rem;
         }
-
+        
         .membresia {
             position: absolute;
             top: 60%;
@@ -286,6 +286,15 @@
 }
 .zoom:active{
     transform: scale(1); 
+}
+
+g#SvgjsG1165 .apexcharts-text {
+    fill: #FFFFFF;
+    filter: none;
+}
+path#SvgjsPath2394 {
+    border-radius: 10px !important;
+    stroke-linecap: round !important;
 }
     </style>
 
