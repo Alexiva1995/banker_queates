@@ -26,7 +26,14 @@
             position: absolute;
             right: 0;
         }
-
+        .form-control{
+            border: 1px solid #05B1D966 !important;
+            border-radius: 10px !important;
+        }
+        .card{
+            border: 1px solid #05B1D966 !important;
+            border-radius: 10px !important;
+        }
         .content-input {
             position: relative;
             display: block;
@@ -103,7 +110,7 @@
     <div class="col-12">
         <div class="padre">
             <div class="d-flex my-1">
-                <p class="fw-700 mb-0">Red</p><span class="fw-300 mx-1 text-light">|</span>
+                <p class="fw-700 mb-0">Red</p><span class="fw-300 mx-1 text-primary">|</span>
                 <p class="fw-400 mb-0">Arbol de referidos</p>
             </div>
             <div class="card">
@@ -169,16 +176,16 @@
 
                 <div id="tree-body-1" class="tab-body">
                     <ul>
-                        <li class="baseli p-0" style="overflow:scroll">
+                        <li class=" p-0" style="overflow:scroll">
                             {{-- usuario principal --}}
                             <div style="width:1000px; margin: 0 auto">
                                 @if ($base['range_id'] != null)
                                     <img src="{{ asset('images/ensignRanges/' . $base['range_id'] . '.png') }}"
-                                        height="110" width="110" class="align-self-center mr-1 di"
+                                    height="100" width="120" class="align-self-center mr-1 di"
                                         alt="{{ $base['range_id'] }}">
                                 @elseif($base['range_id'] == null && !empty($base->licence))
                                     <img src="{{ asset('images/ensignRanges/' . $base->investment->package_id . '.png') }}"
-                                        height="110" width="110" class="align-self-center mr-1 di"
+                                    height="100" width="120" class="align-self-center mr-1 di"
                                         alt="{{ $base['range_id'] }}">
                                 @elseif ($base['range_id'] == null && empty($base->licence))
                                     <img src="{{ asset('images/ensignRanges/0.png') }}" height="110" width="110"

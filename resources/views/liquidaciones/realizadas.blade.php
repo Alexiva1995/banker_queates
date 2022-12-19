@@ -126,7 +126,7 @@
                           <span class="badge bg-success">Realizada</span>
                           @endif
                         </td>
-                        <td>{{date('d-m-Y', strtotime($liquidacion->created_at));}}</td>
+                        <td>{{date('d-m-Y', strtotime($liquidacion->created_at))}}</td>
                       </tr>
                       @endforeach
                       @endif

@@ -18,7 +18,18 @@
             position: absolute;
             right: 0;
         }
-
+        .card{
+            border: 1px solid #05B1D966 !important;
+            border-radius: 10px !important;
+        }
+        .form-control{
+            border: 1px solid #05B1D966 !important;
+            border-radius: 10px !important;
+        }
+        .form-select{
+            border: 1px solid #05B1D966 !important;
+            border-radius: 10px !important;
+        }
         .content-input {
             position: relative;
             display: block;
@@ -35,7 +46,8 @@
         }
 
         .content-input input[type=radio]:checked+span {
-            background-color: #07B0F2 !important;
+            background: rgb(2,0,36);
+            background: linear-gradient(90deg, #05A4EA, #02D6AC 100%);
             color: #fff;
             border-radius: 5px;
             opacity: 1;
@@ -79,7 +91,7 @@
     </style>
     <div id="logs-list">
         <div class="d-flex my-1">
-            <p class="fw-700 mb-0">Red</p><span class="fw-300 mx-1 text-light">|</span>
+            <p class="fw-700 mb-0">Red</p><span class="fw-300 mx-1 text-primary">|</span>
             <p class="fw-400 mb-0">Unilevel</p>
         </div>
         <div class="card">
@@ -373,7 +385,7 @@
             language: {
                 lengthMenu: 'Mostrar _MENU_ registros',
                 zeroRecords: 'No hay registros para mostrar',
-                info: 'Mostrando _PAGE_ de _PAGES_',
+                info: 'Mostrando _PAGE_ de _PAGES_ entradas',
                 infoEmpty: 'No hay registros para mostrar',
                 "search": "Buscar:",
                 "paginate": {

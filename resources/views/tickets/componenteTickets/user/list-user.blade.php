@@ -7,15 +7,25 @@
 @endsection
 
 @section('content')
-<div class="d-flex my-2">
-    <p style="color:#808E9E;" class="fw-700">Soporte</p><span class="fw-normal mx-1">|</span>
+<style >
+    .card{
+            border: 1px solid #05B1D966 !important;
+            border-radius: 10px !important;
+    }
+    a {
+        color: black !important;
+    }
+</style>
+<div class="d-flex my-1">
+    <p style="color:#808E9E;" class="fw-700">Soporte</p><span class="fw-normal mx-1 text-primary">|</span>
     <p>Ticket</p>
 </div>
     <div class="card">
+        <div class="mx-1 mt-1">
         <!--Card Header--->
-        <div class="card-header">
-            <h4 class="text-white fw-bold">
-                Listado de Tickets
+        <div class=" card-header">
+            <h4>
+                Lista de Tickets
             </h4>
         </div>
         <!--Card Header End--->
@@ -28,42 +38,29 @@
                         <th>Asunto</th>
                         <th>Estado</th>
                         <th>Última Respuesta</th>
-                        <th>Acción</th>
                     </tr>
                 </thead>
                 @foreach ($ticket as $item)
                     <tr class="text-center">
-                        <td>{{ $item->id }}</td>
-                        <td class="text-start">[Ticket #{{ $item->user_id }}] {{ $item->issue }}</td>
-
+                        <td><a @if ($item->status == '0') href='{{ route('ticket.edit-user', $item->id) }}' @else href='{{ route('ticket.show-user', $item->id) }}' @endif>  {{ $item->id }}</a></td>
+                        <td class="text-center"> <a @if ($item->status == '0') href='{{ route('ticket.edit-user', $item->id) }}' @else href='{{ route('ticket.show-user', $item->id) }}' @endif>[Ticket #{{ $item->user_id }}] {{ $item->issue }}</a></td>
                         @if ($item->status == '0')
-                            <td> <a class="btn btn-info text-white text-bold-600">Abierto</a></td>
+                            <td> <a @if ($item->status == '0') href='{{ route('ticket.edit-user', $item->id) }}' @else href='{{ route('ticket.show-user', $item->id) }}' @endif class="btn btn-info text-bold-600">Abierto</a></td>
                         @elseif($item->status == '1')
-                            <td> <a class="btn btn-danger text-white text-bold-600">Cerrado</a></td>
+                            <td> <a  @if ($item->status == '0') href='{{ route('ticket.edit-user', $item->id) }}' @else href='{{ route('ticket.show-user', $item->id) }}' @endif class="btn btn-danger text-white text-bold-600">Cerrado</a></td>
                         @endif
 
                         @if ($item->send == '')
-                            <td class="text-start">No hay mensaje Disponibles</td>
+                            <td class="text-center"><a @if ($item->status == '0') href='{{ route('ticket.edit-user', $item->id) }}' @else href='{{ route('ticket.show-user', $item->id) }}' @endif> No hay mensaje Disponibles</a></td>
                         @else
-                            <td class="text-start">{{ $item->send }}</td>
+                            <td class="text-center"><a @if ($item->status == '0') href='{{ route('ticket.edit-user', $item->id) }}' @else href='{{ route('ticket.show-user', $item->id) }}' @endif> {{ $item->send }}</a></td>
                         @endif
-
-
-                        @if ($item->status == '0')
-                            <td><a href="{{ route('ticket.edit-user', $item->id) }}">
-                                    <button class="btn btn-success text-white text-bold-600">Ver</button>
-                                </a></td>
-                        @else
-                            <td><a href="{{ route('ticket.show-user', $item->id) }}">
-                                    <button class="btn btn-success text-white text-bold-600">Ver</button>
-                                </a></td>
-                        @endif
-
                     </tr>
                 @endforeach
                 </tbody>
             </table>
 
+        </div>
         </div>
     </div>
 @endsection
@@ -83,9 +80,9 @@
                 [0, "desc"]
             ],
             language: {
-                lengthMenu: 'Mostrar _MENU_ registros',
+                lengthMenu: 'Mostrar _MENU_ Entradas',
                 zeroRecords: 'No hay registros para mostrar',
-                info: 'Mostrando _PAGE_ de _PAGES_',
+                info: 'Mostrando _PAGE_ de _PAGES_ entradas',
                 infoEmpty: 'No hay registros para mostrar',
                 "search": "Buscar:",
                 "paginate": {
