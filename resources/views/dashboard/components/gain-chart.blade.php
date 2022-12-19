@@ -24,7 +24,18 @@
     
   </div>
 </div>
-
+<style>
+  path[Attributes Style] {
+  d: path("M 224.792 190.407 L 224.792 71.8114 L 245.812 71.8114 L 245.812 190.407 Z");
+    fill:'#51e5a8' !important;
+    fill-opacity: 1;
+    stroke-opacity: 1;
+    stroke-linecap: round;
+    stroke-width: 0;
+    stroke-dasharray: 0;
+    clip-path: url(#gridRectMaskl06x809f);
+}
+</style>
 <script>
   var $barColor = '#51e5a8';
   var $trackBgColor = '#51e5a8';
@@ -49,7 +60,7 @@
       },
       distributed: true
     },
-    colors: [window.colors.solid.primary, window.colors.solid.warning],
+    colors: ['#05A5E9', window.colors.solid.warning],
     series: [
       {
         name: 'Earning',

@@ -1,4 +1,4 @@
-<div class="col-sm-7 mb-2" >
+<div class="col-sm-7 mb-2 d-flex align-items-stretch" >
     @if (isset($user_packages[0]->image))
     @if($user_packages[0]->image != null)
     <div class="card  gradient">
@@ -49,7 +49,7 @@
                             <div>
                                 <div class=" d-flex justify-content-center align-items-center">
                                     <a href="{{route('market.licenses')}}">
-                                    <img class="zoom" src="{{ asset('images/licencias/Standar.png') }}" height="200" width="220">
+                                    <img class="zoom" src="{{ asset('images/licencias/Golden.png') }}" height="200" width="220">
                                     </a>
                                 </div>
                             </div>
@@ -58,7 +58,7 @@
                             <div>
                                 <div class=" d-flex justify-content-end align-items-end">
                                     <a href="{{route('market.licenses')}}">
-                                        <img  class="zoom" src="{{ asset('images/licencias/Golden.png') }}" height="200" width="220">
+                                        <img  class="zoom" src="{{ asset('images/licencias/Banker.png') }}" height="200" width="220">
                                     </a>
                                 </div>
                             </div>
