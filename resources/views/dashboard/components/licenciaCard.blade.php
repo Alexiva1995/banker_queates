@@ -14,14 +14,16 @@
                 <!-- Muestra tres rangos con su barra cuando rango es null -->
                 @if (isset($user_packages[0]->image))
                 <div class="col-sm-12">
-                    <h3 class="card-title text-white">Tu licencia</h3>
+                    <h2 class="card-title text-white" style="font-weight: 700;
+                    font-size: 24px;
+                    line-height: 28px;">Tu licencia</h2>
                 </div>
                 
                     @if($user_packages[0]->image != null)
                     <div class="col-sm-6">
                         <div>
                             <div class=" d-flex justify-content-center align-items-center">
-                                <img  src="{{ asset('images/licencias/'.$user_packages[0]->image) }}" height="200" width="220">
+                                <img  src="{{ asset('images/licencias/'.$user_packages[0]->image) }}" height="260" width="280">
                             </div>
                         </div>
                     </div>
