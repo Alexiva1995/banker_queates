@@ -574,6 +574,7 @@ class LiquidactionController extends Controller
     {
         try {
             $user = auth()->user();
+            $userGraP = User::findOrFail(Auth::user()->id);
 
             //vista licencias
             $licencias  = WalletComission::where([['user_id', $user->id], ['type', 1]])->get();
@@ -597,8 +598,9 @@ class LiquidactionController extends Controller
                 $date1 = Carbon::parse($user->investment->expiration_date);
                 $daysRemaining = $date1->diffInDays(today()->format('Y-m-d'));
             }
-
+            $user_packages = $userGraP->getActivePackages();
             return view('wallet.index', compact(
+                'user_packages',
                 'balancEdition',
                 'licencias',
                 'licenciasTotal',

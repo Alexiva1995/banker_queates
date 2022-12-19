@@ -289,7 +289,7 @@
 }
 
 g#SvgjsG1165 .apexcharts-text {
-    fill: #FFFFFF;
+    fill: #FFFFFF !important;
     filter: none;
 }
 path#SvgjsPath2394 {

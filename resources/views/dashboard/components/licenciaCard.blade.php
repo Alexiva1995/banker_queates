@@ -1,4 +1,4 @@
-<div class="col-sm-7 mb-2 d-flex align-items-stretch" >
+<div class="col-sm-7 mb-2 " >
     @if (isset($user_packages[0]->image))
     @if($user_packages[0]->image != null)
     <div class="card  gradient">
@@ -11,7 +11,6 @@
         {{-- Sin Rango --}}
         <div class="card-body">
             <div class="row">
-                
                 <!-- Muestra tres rangos con su barra cuando rango es null -->
                 @if (isset($user_packages[0]->image))
                 <div class="col-sm-12">
@@ -21,8 +20,8 @@
                     @if($user_packages[0]->image != null)
                     <div class="col-sm-6">
                         <div>
-                            <div class=" d-flex justify-content-center align-items-star">
-                                <img  src="{{ asset('images/licencias/Consultant.png') }}" height="200" width="220">
+                            <div class=" d-flex justify-content-center align-items-center">
+                                <img  src="{{ asset('images/licencias/'.$user_packages[0]->image) }}" height="200" width="220">
                             </div>
                         </div>
                     </div>
@@ -38,7 +37,7 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div>
-                                <div class=" d-flex justify-content-star align-items-star">
+                                <div class=" d-flex justify-content-star align-items-center">
                                     <a href="{{route('market.licenses')}}">
                                     <img class="zoom" src="{{ asset('images/licencias/Consultant.png') }}" height="200" width="220">
                                     </a>
@@ -193,72 +192,6 @@
 
   
 
-        function daysChart1(percentage, days_remaining, color_chart) {
-            goalChartOptions = {
-                chart: {
-                    height: 280,
-                    width: '100%',
-                    type: 'radialBar',
-                    sparkline: {
-                        enabled: true
-                    },
-                    dropShadow: {
-                        enabled: false,
-                        blur: 3,
-                        left: 1,
-                        top: 1,
-                        opacity: 0.1
-                    }
-                },
-                series: [percentage],
-                labels: ['Días Faltantes'],
-                colors: [color_chart],
-                grid: {
-                    padding: {
-                        bottom: 30
-                    }
-                },
-                plotOptions: {
-                    radialBar: {
-                        // offsetY: 20,
-                        startAngle: -150,
-                        endAngle: 150,
-                        hollow: {
-                            size: '65%'
-                        },
-                        track: {
-                            background: '#F2F4F5',
-                            strokeWidth: '50%'
-                        },
-                        dataLabels: {
-                            value: {
-                                offsetY: -12,
-                                color: '#F2F4F5',
-                                fontSize: '40px',
-                                fontWeight: '900',
-                                formatter: function(val) {
-                                    return parseInt(days_remaining);
-                                }
-                            },
-                            name: {
-                                show: true,
-                                offsetY: 30,
-                                fontSize: '14px',
-                                fontWeight: 600,
-                            },
-                        }
-                    }
-                },
-                fill: {
-                    type: 'solid',
-                },
-                stroke: {
-                    lineCap: 'round',
-                },
-            };
-
-            var chart = new ApexCharts(document.querySelector("#chartDays"), goalChartOptions);
-            chart.render();
-        }
+        
 
 </script>
