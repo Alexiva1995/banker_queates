@@ -1,13 +1,13 @@
 {
     "menu": [{
             "name": "Inicio",
-            "icon": "home",
+            "icon": "fa-solid fa-house",
             "slug": "dashboard.index",
             "url": "/panels"
         },
         {
             "name": "Informes",
-            "icon": "list",
+            "icon": "fa-solid fa-chart-column",
             "slug": "/",
             "submenu": [{
                     "url": "/comisiones",
@@ -37,13 +37,13 @@
         },
         {
             "name": "Usuarios",
-            "icon": "users",
+            "icon": "fa-solid fa-users",
             "slug": "user.list-user",
             "url": "user/user-list"
         },
         {
             "name": "Liquidaciones",
-            "icon": "trending-down",
+            "icon": "fa-solid fa-wallet",
             "slug": "/",
             "submenu": [{
                     "url": "/liquidaciones/pendientes",
@@ -62,30 +62,30 @@
         {
             "url": "configurar-retiros",
             "name": "Configuración de retiro",
-            "icon": "credit-card",
+            "icon": "fa-solid fa-gears",
             "slug": "config.retiros"
         },
         {
             "url": "licenses",
             "name": "Licencias",
-            "icon": "bar-chart-2",
+            "icon": "fa-solid fa-building-columns",
             "slug": "licenses.index"
         },
         {
             "name": "Edición de saldo",
-            "icon": "home",
+            "icon": "fa-solid fa-gears",
             "slug": "search.id",
             "url": "/search"
         },
         {
             "name": "Soporte",
-            "icon": "help-circle",
+            "icon": "fa-solid fa-circle-question",
             "slug": "ticket.list-admin",
             "url": "/tickets/ticket-list-admin"
         },
         {
             "name": "Crones",
-            "icon": "circle",
+            "icon": "fa-solid fa-gears",
             "slug": "/",
             "submenu": [
                 {

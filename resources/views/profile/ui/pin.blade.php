@@ -5,9 +5,9 @@
             <div class="col-lg-12 col-12 order-2 order-lg-1">
                 <form method="POST" action="{{ route('pin.update') }}" novalidate>
                     @csrf
-                    <div class="row" style="padding: 1%;">
+                    <div class="row">
                         <!--ROW 1 START-->
-                        
+                        <h3 class="fw-600 mb-4">Pin de seguridad</h3>
                         <div class="col-sm-6">
                             <label for="" class="fw-500">Contraseña<label
                                     style="color: red;">*</label></label>
@@ -24,7 +24,21 @@
                                 </div>
                             </div>
                         </div>
-
+                        <div class="col-sm-6">
+                            <label for="" class="fw-500">Verificacion de correo <label
+                                    style="color: red;">*</label></label>
+                            <div class="input-group mb-2 shadow-none">
+                                <div class="input-group input-group-merge form-password-toggle shadow-none">
+                                    <input type="text" class="form-control form-control-merge" id="code_pin" name="code_pin" placeholder="Ingresa el código"/>
+                        <a class="btn input-group-btn btn-primary cursor-pointer border-end input-group-text border-top border-bottom" id="codeButton" onclick="getCode();">Obtener codigo</a>
+                                    @error('current_password')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-12"></div>
 
                         <div class="col-sm-6" >

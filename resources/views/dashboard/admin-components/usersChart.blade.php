@@ -8,4 +8,4 @@
             <div id="userCharts" class="mx-auto"></div>
         </div>
     </div>
-</div>
+</div> 

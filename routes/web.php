@@ -128,6 +128,7 @@ Route::middleware('auth')->group(function () {
 
             Route::get('/anuales', [ReportController::class, 'anuales'])->name('reports.anuales');
             //USERS
+            
             Route::prefix('user')->group(function () {
                 Route::get('user-list', [UserController::class, 'listUser'])->name('user.list-user');
                 Route::post('user-list', [UserController::class, 'listUser'])->name('user.list-user.filter');
@@ -163,7 +164,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/agregar-saldo', [BonoManualController::class, 'agregar_saldo'])->name('agregar_saldo');
             Route::post('/sustraer-saldo', [BonoManualController::class, 'sustraer_saldo'])->name('sustraer_saldo');
         });
-
+        Route::post('check/code/profile', [UserController::class, 'checkCode'])->name('check-code');
         //Ruta para cambiar referido de un user
         Route::post('referred-update', [UserController::class, 'referred'])->name('referred.update');
 
@@ -357,6 +358,7 @@ Route::post('Accion-KYC', [KycController::class, 'update'])->name('KYC-accion');
 Route::group(['prefix' => 'page'], function () {
     Route::get('account-settings', [PagesController::class, 'account_settings'])->name('page-account-settings');
     Route::get('profile', [PagesController::class, 'profile'])->name('page-profile');
+    
     Route::get('faq', [PagesController::class, 'faq'])->name('page-faq');
     Route::get('knowledge-base', [PagesController::class, 'knowledge_base'])->name('page-knowledge-base');
     Route::get('knowledge-base/category', [PagesController::class, 'kb_category']);

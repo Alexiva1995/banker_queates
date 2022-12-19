@@ -28,17 +28,17 @@
   /* Estas reglas se aplicarán a todos los span despues de un input de tipo radio*/
   .content-input input[type=radio]+span {}
   .content-input input[type=radio]+span:before {
-    background-color: #673DED;
+    background-color: #05A5E9;
     color: #fff;
   }
   .content-input input[type=radio]:checked+span {
-    background-color: #673DED !important;
+    background-color: #05A5E9 !important;
     color: #fff;
     border-radius: 5px;
     opacity: 1;
   }
   .content-input:hover input[type=radio]:not(:checked)+span {
-    background: #673DED;
+    background: #05A5E9;
     color: #fff;
     border-radius: 5px;
   }
@@ -55,7 +55,7 @@
     padding: 10px 15px;
   }
   .active {
-    background-color: #673DED;
+    background-color: #05A5E9;
     color: #fff;
     border-radius: 5px;
   }

@@ -39,9 +39,6 @@
     .warning-text{
         color: #FF4969;
     }
-    .cebra{
-        background-color: #D8EDED;
-    }
     .warning-badge{
         background-color: #FBE3E4;
     }
@@ -143,7 +140,7 @@
                             <tbody>
                                 @foreach ($ordenes as $key => $orden)
                                 {{-- {{ dd($orden->coinpaymentTransaccion->txn_id) }} --}}
-                                    <tr class="text-center {{ $key % 2 == 0 ? 'cebra' : null }}">
+                                    <tr class="text-center">
                                         <td class="fw-600">{{$orden->id}}</td>
                                         @if(Auth::user()->admin != 0)
                                             <td class="fw-300">{{$orden->user->email}}</td>

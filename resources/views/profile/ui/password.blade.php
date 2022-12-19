@@ -7,8 +7,8 @@
                     @csrf
                     <div class="row">
                         <!--ROW 1 START-->
+                        <h3 class="mb-4 fw-600">Cambio de Contraseña</h3>
                         <div class="col-sm-6">
-                            <h3 class="mb-4 fw-600">Cambio de Contraseña</h3>
                             <label for="" class="fw-500">Contraseña Anterior <label
                                     style="color: red;">*</label></label>
                             <div class="input-group mb-2 shadow-none">
@@ -16,6 +16,21 @@
                                     <input id="password" type="password" name="current_password"
                                         class="form-control form-control-merge @error('current_password') is-invalid @enderror"
                                         autocomplete="current-password" placeholder="Ingresa tu contraseña anterior">
+                                    @error('current_password')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="" class="fw-500">Verificacion de correo <label
+                                    style="color: red;">*</label></label>
+                            <div class="input-group mb-2 shadow-none">
+                                <div class="input-group input-group-merge form-password-toggle shadow-none">
+                                    <input type="text" class="form-control form-control-merge" id="code_password" name="code_password" placeholder="Ingresa el código"/>
+                        <a class="btn input-group-btn btn-primary cursor-pointer border-end input-group-text border-top border-bottom" id="codeButton" onclick="getCode();">Obtener codigo</a>
                                     @error('current_password')
                                         <span class="invalid-feedback d-block" role="alert">
                                             <strong>{{ $message }}</strong>

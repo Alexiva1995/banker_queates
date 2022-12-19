@@ -54,7 +54,7 @@
         }
 
         /* .content-input:hover input[type=radio]:not(:checked)+span {
-            background: #673DED;
+            background: #05A5E9;
             color: #fff;
             border-radius: 5px;
         } */
