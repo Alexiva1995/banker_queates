@@ -49,7 +49,7 @@ class UserController extends Controller
         $id = Auth::user()->id;
         $invertido = $this->paquete();
         $user = User::find($id);
-        $country = Countrie::all();
+        $country = Prefix::all();
         $wallet = WalletComission::where('user_id', $user->id)->get();
         $prefix = Prefix::orderBy('id', 'asc')->get();
 
@@ -260,7 +260,6 @@ class UserController extends Controller
     }
     public function update(Request $request)
     {
-
         $user = User::find(Auth::user()->id);
 
         $data = $request->validate([
@@ -270,9 +269,8 @@ class UserController extends Controller
             'last_name' => 'required',
             'countrie_id' => 'required'
         ]);
-
-        dd($request->pin);
-
+        
+/*
         if ((strcmp($request->input('email'), $request->input('emailOrigin')) !== 0) &&
             ($request->input('email') != null && $request->input('password') == null)
         ) {
@@ -289,11 +287,14 @@ class UserController extends Controller
                 return redirect()->back()->with('error', 'NO coincide la contraseña ingresada, con su contraseña de Take.');
             }
         }
-
+*/
         $user->name = $data['name'];
         $user->last_name = $data['last_name'];
         $user->phone = $data['phone'];
-        $user->countrie_id = $data['countrie_id'];
+        $user->prefix_id = $data['countrie_id'];
+        if (in_array('email', $data,)) {
+            $user->email = $data ['email'];
+        }
         if ($request->has('gender')) $user->gender = $request->input('gender');
 
         $user->save();
@@ -427,11 +428,16 @@ class UserController extends Controller
             'current_password' => ['required', new MatchOldPassword],
             'new_password' => ['required'],
             'confirm_password' => ['same:new_password'],
+            'code_password' => 'required'
         ]);
+        $code = Crypt::decryptString(Auth::user()->code_security);
+        if ($request->code_password == $code) {
+            User::find(auth()->user()->id)->update(['password' => Hash::make($request->new_password)]);
 
-        User::find(auth()->user()->id)->update(['password' => Hash::make($request->new_password)]);
-
-        return back()->with('success', 'Contraseña actualizada');
+            return back()->with('success', 'Contraseña actualizada');
+        } else {
+            return back()->with('error', 'Verificacion de email fallida');
+        }
     }
 
     public function pinUpdate(Request $request)
@@ -440,20 +446,25 @@ class UserController extends Controller
             'current_password' => ['required', new MatchOldPassword],
             'new_pin' => ['required'],
             'confirm_pin' => ['same:new_pin'],
+            'code_pin' => 'required'
         ]);
+        $code = Crypt::decryptString(Auth::user()->code_security);
+        if ($request->code_pin == $code) {
+            Pin::updateOrCreate(
+                ['user_id' => Auth::id()],
+                ['pin' => Crypt::encryptString($request->new_pin)]
+            );
 
-        Pin::updateOrCreate(
-            ['user_id' =>  Auth::id()],
-            ['pin' => Crypt::encryptString($request->new_pin)]
-        );
-
-        PinSecurity::updateOrCreate(
-            ['user_id' =>  Auth::id()],
-            ['pin' => Crypt::encryptString($request->new_pin)]
-        );
+            PinSecurity::updateOrCreate(
+                ['user_id' => Auth::id()],
+                ['pin' => Crypt::encryptString($request->new_pin)]
+            );
 
 
-        return back()->with('success', 'PIN actualizado');
+            return back()->with('success', 'PIN actualizado');
+        } else {
+            return back()->with('error', 'Verificacion de email fallida');
+        }
     }
 
     public function paquete()
@@ -633,5 +644,15 @@ class UserController extends Controller
         $user->update(['code_security' => null]);
 
         return back()->with('success', 'Su wallet se ha guardado exitosamente!');
+    }
+    public function checkCode(Request $request) {      
+        $user = Auth::user();
+        $code = Crypt::decryptString($user->code_security);
+        if ($code == $request->pin) {
+            $response = ['status' => 'success'];
+            return response()->json($response, 200);
+        }
+        $response = ['status' => 'error'];
+        return response()->json($response, 200);
     }
 }

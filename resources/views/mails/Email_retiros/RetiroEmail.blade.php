@@ -53,7 +53,7 @@
                             <tr>
 
                                 <td style="font-size: 16px; line-height: 24px; padding: 0px 0 0px 0; display:block; margin-top: 10px;">
-                                    <p style="margin: 0;">Su código de retiro es: </p>
+                                    <p style="margin: 0;">Su código de verificacion es: </p>
                                     <p style="margin: 0;">{{ $codeRetiro }}</p>
                                 </td>
                             </tr>

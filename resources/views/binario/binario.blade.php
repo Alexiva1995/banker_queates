@@ -10,6 +10,8 @@
     <!-- Page css files -->
     <link rel="stylesheet" href="{{ asset(mix('css/base/plugins/extensions/ext-component-toastr.css')) }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/tree-matriz.css') }}" />
+    <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css"/>
+
 @endsection
 
 @section('content')
@@ -29,7 +31,10 @@
             position: absolute;
             right: 0;
         }
-
+        .card{
+            border: 1px solid #05B1D966 !important;
+            border-radius: 10px !important;
+        }
         .content-input {
             position: relative;
             display: block;
@@ -92,7 +97,11 @@
             height: auto;
             max-width: 128%;
         }
-
+        
+        .form-control{
+            border: 1px solid #05B1D966 !important;
+            border-radius: 10px !important;
+        }
         .rounded-circle-add {
             width: auto;
             height: auto;
@@ -104,7 +113,7 @@
         <div class="padre">
 
             <div class="d-flex my-1">
-                <p class="fw-700 mb-0">Red</p><span class="fw-300 mx-1 text-light">|</span>
+                <p class="fw-700 mb-0">Red</p><span class="fw-300 text-primary mx-1 ">|</span>
                 <p class="fw-400 mb-0">Binario</p>
             </div>
             <div class="card">
@@ -145,11 +154,11 @@
                                     <div style="width:1000px; margin: 0 auto">
                                         @if ($base['range_id'] != null)
                                             <img src="{{ asset('images/ensignRanges/' . $base['range_id'] . '.png') }}"
-                                                height="110" width="110" class="align-self-center mr-1 di"
+                                                height="100" width="120" class="align-self-center mr-1 di"
                                                 alt="{{ $base['range_id'] }}">
                                         @elseif($base['range_id'] == null && !empty($base->licence))
                                             <img src="{{ asset('images/ensignRanges/' . $base->investment->package_id . '.png') }}"
-                                                height="110" width="110" class="align-self-center mr-1 di"
+                                                height="100" width="120" class="align-self-center mr-1 di"
                                                 alt="{{ $base['range_id'] }}">
                                         @elseif ($base['range_id'] == null && empty($base->licence))
                                             <img src="{{ asset('images/ensignRanges/0.png') }}" height="110"
@@ -301,6 +310,8 @@
         <script src="{{ asset(mix('vendors/js/tables/datatable/jquery.dataTables.min.js')) }}"></script>
         <script src="{{ asset(mix('vendors/js/tables/datatable/dataTables.bootstrap5.min.js')) }}"></script>
         <script src="{{ asset(mix('vendors/js/tables/datatable/dataTables.responsive.min.js')) }}"></script>
+        <script src="assets/js/scripts.bundle.js"></script>
+
     @endsection
 
     @section('page-script')

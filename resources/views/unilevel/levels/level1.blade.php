@@ -1,27 +1,28 @@
+
 <div id="tab-body-1" class="tab-body">
     <div class="table-responsive">
         <table class=" table  nowrap scroll-horizontal-vertical myTable table-striped w-100">
             <thead>
                 <tr>
-                    <th class="fw-600">#</th>
-                    <th class="fw-600">Usuario</th>
-                    <th class="fw-600">Email</th>
-                    <th class="fw-600">Licencia</th>
-                    <th class="fw-600">Estado</th>
-                    <th class="fw-600">Afiliado por</th>
-                    <th class="fw-600">Fecha</th>
+                    <th class="text-center fw-600">#</th>
+                    <th class="text-center fw-600">Usuario</th>
+                    <th class="text-center fw-600">Email</th>
+                    <th class="text-center fw-600">Licencia</th>
+                    <th class="text-center fw-600">Estado</th>
+                    <th class="text-center fw-600">Afiliado por</th>
+                    <th class="text-center fw-600">Fecha</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($referals_childrens as $user)
-                    <tr>
-                        <td>{{ $user->id }}</td>
-                        <td>{{ $user->username }}</td>
-                        <td>{{$user->email}}</td>
+                @foreach ($referals_childrens as $key => $user)
+                    <tr {{$key%2 ==0 ? "class=cebra" : null}}>
+                        <td class="text-center ">{{ $user->id }}</td>
+                        <td class="text-center ">{{ $user->username }}</td>
+                        <td class="text-center ">{{$user->email}}</td>
                         @if($user->investment != null)
-                            <td>{{$user->investment->LicensePackage->name}}</td>
+                            <td class="text-center ">{{$user->investment->LicensePackage->name}}</td>
                         @else
-                            <td>No tiene licencias activas</td>
+                            <td class="text-center ">No tiene licencias activas</td>
                         @endif
 
                         @if ($user->investments->count() > 0)
@@ -39,10 +40,10 @@
                                 </td>
                             @endif
                         @else
-                            <td>-</td>
+                            <td class="text-center ">-</td>
                         @endif
-                        <td>{{ $user->padre->fullName() }}</td>
-                        <td>{{ date('Y-m-d', strtotime($user->created_at)) }}</td>
+                        <td class="text-center ">{{ $user->padre->fullName() }}</td>
+                        <td class="text-center ">{{ date('Y-m-d', strtotime($user->created_at)) }}</td>
                     </tr>
                 @endforeach
             </tbody>

@@ -37,7 +37,13 @@
             color: #fff;
             background-color: #07B0F2;
         }
-
+        .card{
+            border: 1px solid #05B1D966 !important;
+            border-radius: 10px !important;
+        }
+        .nav {
+            flex-wrap: nowrap;
+        }   
         .nav-tabs .nav-link.active {
             position: relative;
             color: #ffffff;
@@ -45,50 +51,70 @@
 
         .box {
             background-color: rgb(0 191 191 / 5%);
-            padding: 1rem 0rem;
-            margin-right: 0.25rem;
-            margin-left: 0.25rem;
+            
         }
     </style>
     <div class="d-flex my-1">
         <p class="fw-700 mb-0">Perfil</p><span class="fw-300 mx-1 text-light">|</span>
         <p class="fw-400 mb-0">Editar Perfil</p>
     </div>
-    <div class="row row col-lg-11 col-md-12 col-sm-12 mt-1">
-        <nav class="links col-sm-4">
-            <div class="nav nav-tabs flex-column" id="nav-tab" role="tablist">
-                <button class="nav-link active justify-content-start text-start fw-400 rounded" id="nav-home-tab"
-                    data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
-                    aria-selected="true"><i data-feather='user' class="mx-lg-2 mx-md-2 me-sm-2"></i>Datos Generales</button>
-                <button class="nav-link justify-content-start text-start fw-400 rounded" id="nav-password-tab"
-                    data-bs-toggle="tab" data-bs-target="#nav-password" type="button" role="tab"
-                    aria-controls="nav-password" aria-selected="false"><i data-feather='lock'
-                        class="mx-lg-2 mx-md-2 me-sm-2"></i>Cambiar
-                    contraseña
-                </button>
-                <button class="nav-link justify-content-start text-start fw-400 rounded" id="nav-pin-tab"
-                    data-bs-toggle="tab" data-bs-target="#nav-pin" type="button" role="tab"
-                    aria-controls="nav-pin" aria-selected="false"><i data-feather='lock'
-                        class="mx-lg-2 mx-md-2 me-sm-2"></i>Configurar PIN de seguridad
-                </button>
-                @if (Auth::user()->admin != 1)
-                    {{-- <button class="nav-link" id="nav-auth-tab" data-bs-toggle="tab" data-bs-target="#nav-auth" type="button" role="tab" aria-controls="nav-auth" aria-selected="false" style="padding-inline-end:10%;"><i data-feather='git-commit'></i>Configurar Authenticator</button> --}}
-                @endif
-            </div>
-        </nav>
-        <div class="col-sm-8 ">
+    <div class="row" >
+        
+        <div class="col-sm-12 ">
             {{-- apartado perfil --}}
             <div class="row">
                 <div class="col-lg-12 col-12 order-2 order-lg-1">
-                    <div class="card base p-2">
+                    <nav class="" > 
+                        <div class="nav d-flex nav-tabs" id="nav-tab" role="tablist" style="width: 100%">
+                            <button class="nav-link active justify-content-center text-start fw-400 rounded" id="nav-home-tab"
+                                data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
+                                aria-selected="true" style="width: 15%;"><i data-feather='user' class=""></i>Account</button>
+                            <button class="nav-link justify-content-center text-start fw-400 rounded" style="width: 15%;" id="nav-password-tab"
+                                data-bs-toggle="tab" data-bs-target="#nav-password" type="button" role="tab"
+                                aria-controls="nav-password" aria-selected="false"><i data-feather='lock'
+                                    class=""></i>Password
+                            </button>
+                            <button class="nav-link justify-content-center text-start fw-400 rounded" style="width: 15%;" id="nav-pin-tab"
+                                data-bs-toggle="tab" data-bs-target="#nav-pin" type="button" role="tab"
+                                aria-controls="nav-pin" aria-selected="false"><i data-feather='lock'
+                                    class=""></i>Security Pin
+                            </button> 
+                            @if (Auth::user()->admin != 1)
+                                {{-- <button class="nav-link" id="nav-auth-tab" data-bs-toggle="tab" data-bs-target="#nav-auth" type="button" role="tab" aria-controls="nav-auth" aria-selected="false" style="padding-inline-end:10%;"><i data-feather='git-commit'></i>Configurar Authenticator</button> --}}
+                            @endif
+                        </div>
+                    </nav>
+                    <div class="card p-2">
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
                                 aria-labelledby="nav-home-tab">
                                 <div class="card-body p-0">
+                                    <h3 class="mt-1 fw-600">Profile details</h3>
+                                    <div class="d-flex align-items-center">
+                                    @if (Auth::user()->range_id != null)
+                                        <img class="ms-1 rounded rounded-circle"
+                                            src="{{ asset('images/ensignRanges/' . Auth::user()->range_id . '.png') }}"
+                                            alt="Avatar" width="140px" height="110px" data-toggle="modal"
+                                            data-target="#fotos">
+                                        <div>
+                                        <h3 class="mb-2 fw-600">{{Auth::user()->name}} {{Auth::user()->last_name}}</h3>
+                                    
+                                        <h4 style="color: #9892AA;">Rango {{Auth::user()->range->name}}</h4>
+                                        </div>
+                                    @else
+                                        <img class="ms-2 rounded rounded-circle"
+                                        src="{{ asset('images/ensignRanges/0.png') }}"
+                                        alt="Avatar" width="110px" height="110px" data-toggle="modal"
+                                        data-target="#fotos">
+                                        <div>
+                                        <h3 class="mb-1 fw-600">{{Auth::user()->name}} {{Auth::user()->last_name}}</h3> 
+                                        <h4 style="color: #9892AA;">Sin rango</h4>
+                                    </div>
+                                        @endif
+                                    </div>
                                     <!--<div class="row col-lg-12 col-md-12 col-sm-12">
                                         <div class="col-lg-3 col-md-4 col-sm-4">
                                             <div class="p-1 pe-0 pb-0">
-                                                @if (Auth::user()->photo == null)
                                                     <div class="card image rounded-circle alert alert-primary">
                                                         <div class="card-body">
                                                             <div class="d-flex justify-content-center"
@@ -106,12 +132,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                @else
-                                                    <a><img class="d-block rounded rounded-circle"
-                                                            src="{{ asset('storage/photo-profile/' . $user->photo) }}"
-                                                            alt="Avatar" width="110px" height="110px" data-toggle="modal"
-                                                            data-target="#fotos"></a>
-                                                @endif
+                                                
                                             </div>
                                         </div>
                                         <div
@@ -140,7 +161,7 @@
                                                 máximo 800kB.</p>
                                         </div>
                                     </div>-->
-                                    <div class="card-body" style="margin-top: -4%;">
+                                    <div class="mt-2 card-body" style="margin-top: -4%;">
                                         <form method="POST" action="{{ route('profile.update') }}"
                                             enctype="multipart/form-data" novalidate>
                                             @csrf
@@ -187,16 +208,16 @@
                                                         <select id="countrie_id" class="rounded form-control text-dark shadow-none" name="countrie_id" required>
 
                                                             
-                                                            @if($user->countrie_id  != null)
+                                                            @if($user->prefix_id  != null)
                                                                 @foreach($country as $countries)
-                                                                    <option value="{{$countries->id}}" {{$user->countrie_id == $countries->id ? 'selected' : ''}}>{{$countries->name}}</option>
+                                                                    <option value="{{$countries->id}}" {{$user->prefix_id == $countries->id ? 'selected' : ''}}>{{$countries->pais}}</option>
                                                                 @endforeach
                                                             @else
                                                                 <option>Ingresa o selecciona un país</option>
                                                             @endif
 
                                                             @foreach($country as $countries)
-                                                                <option value="{{$countries->id}}" {{old('countries') == $countries->id ? 'selected' : ''}}>{{$countries->name}}</option>
+                                                                <option value="{{$countries->id}}" {{old('countries') == $countries->id ? 'selected' : ''}}>{{$countries->pais}}</option>
                                                             @endforeach
 
                                                         </select>
@@ -216,12 +237,9 @@
 
                                                         <input type="text" name="emailOrigin" value="{{ $user->email }}" hidden>
 
-                                                        <button type="button" 
-                                                        id="inputPassword"
+                                                        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModalVerification" id="continue-button"
                                                         class="btn btn-primary" 
-                                                        data-bs-toggle="tooltip" 
-                                                        data-bs-placement="top" 
-                                                        data-bs-title="Para cambiar su correo, debe colocar su contraseña de Take. De clic aquí">
+                                                        >
                                                        <!-- <i class="fal fa-edit" class="mx-lg-2 mx-md-2 me-sm-2"></i>-->
                                                        <img width="15px" height="15px" src="{{ asset('images/svg/edit.svg') }}">
                                                         </button>
@@ -318,12 +336,11 @@
                                                     @endif
                                                 </div>
                                             </div>
-                                            <div class="modal-footer mt-2" style="border: none">
+                                            <div class="float-start modal-footer mt-2" style="border: none">
+                                                <button type="submit" class="btn btn-primary" id="guardar">Guardar Cambios</button>
                                                 <button type="button" id="boton01" class="btn btn-outline-danger ">
-                                                    Reiniciar
+                                                    Cancelar
                                                 </button>
-                                                <button type="submit" class="btn btn-primary" id="guardar">Actualizar
-                                                    Datos</button>
                                             </div>
                                         </form>
                                     </div>
@@ -331,20 +348,88 @@
                             </div>
                             @include('profile.ui.password')
                             @include('profile.ui.pin')
-                            {{-- @include('profile.ui.authenticator') --}}
-                            {{-- @include('profile.ui.kyc') --}}
                         </div>
                     </div>
+                            {{-- @include('profile.ui.authenticator') --}}
+                            {{-- @include('profile.ui.kyc') --}}
                 </div>
             </div>
         </div>
     </div>
     @include('profile.components.style')
     @include('profile.components.modal-photo')
+    @include('profile.components.modal-verification')
     <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset(mix('vendors/js/forms/select/select2.full.min.js')) }}"></script>
-
     <script>
+         async function checkCode() {
+            const pin = document.getElementById('code')
+            const code = {
+                pin: pin.value
+            }
+            console.log(pin.value);
+            const url = '{{route("check-code")}}'
+            console.log(url);
+            const response = await axios.post(url, code);
+            console.log(response);
+            const { status } = response.data;
+            if (status === 'success') {
+                toastr['success']('Condigo Verificado', '¡Exitoso!', {
+                    closeButton: true,
+                    tapToDismiss: false
+                });
+                const email = document.getElementById('email')
+                email.disabled = false
+            } else
+            toastr['error']('Los codigos no coinciden', '¡error!', {
+                closeButton: true,
+                tapToDismiss: false
+            });
+        }
+        async function getCode(){
+        const codeBtn = document.getElementById('codeButton');
+        const url = '{{route("getCode.user.retiro")}}'
+        codeBtn.disabled = true;
+        let seconds = 50;
+
+        try {
+
+            if( !codeBtn.disabled ) return ;
+            function segundos(){
+                codeBtn.textContent =`Reenviar en ${seconds}s`;
+                seconds--;
+                if( seconds > 0 ){
+                    // console.log(seconds)
+                    setTimeout(segundos,1000);
+                }else{
+                    codeBtn.disabled = false;
+                    codeBtn.textContent = 'Obtener codigo';
+                }
+            }
+            
+            segundos();
+
+            const response = await axios.post(url);
+            const { status } = response.data;
+
+            if( status === 'success')
+            {
+                toastr['success']('Por favor revise su correo', '¡Exitoso!', {
+                    closeButton: true,
+                    tapToDismiss: false
+                });
+            }
+
+
+        } catch (error) {
+            console.log(error);
+            toastr['error']('Hubo un error por favor contacte con el administrador', '¡error!', {
+                closeButton: true,
+                tapToDismiss: false
+            });
+        }
+        
+    }
         let btnModalphoto = document.querySelector('#btnModalphoto');
         btnModalphoto.addEventListener("click", function(event) {
             let myModal = new bootstrap.Modal(document.getElementById('Modalphoto'), {

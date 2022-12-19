@@ -74,11 +74,11 @@ class LiquidactionController extends Controller
         // Valida si el dia actual esta dentro de los dias condigurados para poder realizar retiros, pero cubriendo el caso especial en que es domingo
 
         if ($date->dayOfWeek == 0) {
-            if (!($config->day_start == 7 || $config->day_end == 7)) {
+            if (($config->day_start == 7 || $config->day_end == 7)) {
                 return redirect()->back()->with('warning', 'La solicitud de retiro solo puede realizarse los días ' . $config->getFirtsDayOfWeek() . ' y ' . $config->getLastDayOfWeek() . '.');
             }
         } else {
-            if (!($date->dayOfWeek  == $config->day_start || $date->dayOfWeek  == $config->day_end)) {
+            if (($date->dayOfWeek  == $config->day_start || $date->dayOfWeek  == $config->day_end)) {
                 return redirect()->back()->with('warning', 'La solicitud de retiro solo puede realizarse los días ' . $config->getFirtsDayOfWeek() . ' y ' . $config->getLastDayOfWeek() . '.');
             }
         }

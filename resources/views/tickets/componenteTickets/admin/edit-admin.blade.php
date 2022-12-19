@@ -13,75 +13,79 @@
                 <div class="card">
                     <!--Card Header--->
                     <div class="card-header">
-                        <h4 class=" fw-bold">
+                        <h4 class="mt-1 ms-1 fw-bold">
                             Revisando Ticket de: <span><b>{{ $ticket->getUser->name }}</b></span>
                         </h4>
                     </div>
                     <!--Card Header End--->
 
-                    <div class="card-body">
+                    <div class="card-body mx-5">
                         <form action="{{ route('ticket.update-admin', $ticket->id) }}" method="POST"
                             enctype="multipart/form-data">
                             @csrf
                             @method('PATCH')
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-6 mb-2">
                                     <!--SELECT-->
-                                    <span class=" text-bold-600">Categoria:</span>
+                                    <span class=" text-bold-600 text-primary">ID User: </span>
+                                    <span>{{ Auth::user()->id }}</span>
+                                </div>
+                                <div class="col-6 mb-2">
+                                    <span class=" text-bold-600 text-primary">Correo:</span>
+                                    <span>{{ $emailUser }}</span>
+                                </div>
+                                <div class="col-6 mb-2">
+                                    <!--SELECT-->
+                                    <span class=" text-bold-600 text-primary">Categoria: </span>
 
                                     @if ($ticket->categories == '0')
-                                        <h5>Ayuda</h5>
+                                        <span>Ayuda</span>
                                     @elseif($ticket->categories == '1')
-                                        <h5>Soporte técnico</h5>
+                                        <span>Soporte técnico</span>
                                     @elseif($ticket->categories == '2')
-                                        <h5>Corrección de datos</h5>
+                                        <span>Corrección de datos</span>
                                     @elseif($ticket->categories == '3')
-                                        <h5>Bonos</h5>
+                                        <span>Bonos</span>
                                     @elseif($ticket->categories == '4')
-                                        <h5>Inversión total</h5>
+                                        <span>Inversión total</span>
                                     @endif
                                     <!--SELECT END-->
+
+                                </div>
+                                <div class="col-6 mb-2">
+                                    <span class=" text-bold-600 text-primary">Asunto:</span>
+                                    <span>{{ $ticket->issue }}</span>
                                 </div>
 
+                                <div class="col-6 mb-2">
+                                    <span class=" text-bold-600 text-primary"># Ticket:</span>
+                                    <span>{{ $ticket->id }}</span>
+                                </div>
                                 <div class="col-6">
-                                    <span class=" text-bold-600">Correo:</span>
-                                    <h5>{{ $emailUser }}</h5>
-                                </div>
-
-                                <div class="col-6">
-                                    <span class=" text-bold-600"># Ticket:</span>
-                                    <h5>{{ $ticket->id }}</h5>
-                                </div>
-
-                                <div class="col-6">
-                                    <label for="">Estado:</label>
-                                    <select name="status"
-                                        class="form-select custom-select @error('status') is-invalid @enderror">
-                                        <option value="0" @if ($ticket->status == '0') selected @endif>Abierto
-                                        </option>
-                                        <option value="1" @if ($ticket->status == '1') selected @endif>Cerrado
-                                        </option>
-                                    </select>
-                                </div>
-
-                                <div class="col-12">
-                                    <!--Asunto -->
-                                    <span class=" text-bold-600">Asunto:</span>
-                                    <div class="input-group input-group-lg mb-2">
-                                        <h5>{{ $ticket->issue }}</h5>
+                                    <div class="d-flex align-items-center">
+                                        <span class="text-bold-600 text-primary">Estado:</span>
+                                        <select name="status"
+                                            class=" form-select custom-select @error('status') is-invalid @enderror">
+                                            <option value="0" @if ($ticket->status == '0') selected @endif>Abierto
+                                            </option>
+                                            <option value="1" @if ($ticket->status == '1') selected @endif>Cerrado
+                                            </option>
+                                        </select>
                                     </div>
-                                    <!--Asunto end-->
-                                    <!--Chat-->
-                                    <span class="text-bold-600">Chat:</span>
+                                </div>
 
-                                    <div class="card-body msg_card_body">
+                                <div class="col-sm-12 mb-2">
+                                    <!--Asunto -->
+
+                                    <!--Asunto end-->
+
+                                    <!--Chat-->
+                                    <div class="card mt-2 pt-5" style="background-color: #D8EDED;">
                                         @foreach ($message as $item)
                                             @if ($item->type == 0)
-                                                <div class="title1 ml-2 d-flex justify-content-start">
-                                                    <span>{{ $item->getUser->email }}</span>
-                                                </div>
                                                 <div class="d-flex justify-content-start mb-4">
-                                                    <div class="msg_cotainer">
+                                                    <div class="ms-3 msg_cotainer"
+                                                        style="border-radius: 10px; background-color: #E3E7EB; color: rgb(0, 0, 0); box-shadow: 0px 10px 9px -4px rgba(0,0,0,0.76);">
                                                         <div class="img">
                                                             @if ($item->image !== null)
                                                                 <a href="{{ asset('storage/' . $item->image) }}"
@@ -96,16 +100,15 @@
                                                                     width="150" height="150" style="display: none;">
                                                             @endif
                                                         </div>
-                                                        <span> {{ $item->message }}</span>
+                                                        <span style="color: #000;"> {{ $item->message }}</span>
 
                                                     </div>
                                                 </div>
                                             @elseif ($item->type == 1)
-                                                <div class="title2 d-flex justify-content-end">
-                                                    <span>{{ $item->getAdmin->email }}</span>
-                                                </div>
                                                 <div class="d-flex justify-content-end mb-4">
-                                                    <div class="msg_cotainer_send">
+                                                    <div class="me-3 msg_cotainer_send"
+                                                        style="background-color: #05A5E9; border-radius: 10px;
+                                                    box-shadow: 0px 10px 9px -4px rgba(0,0,0,0.76);">
                                                         <div class="img">
                                                             @if ($item->image !== null)
                                                                 <a href="{{ asset('storage/' . $item->image) }}"
@@ -120,7 +123,9 @@
                                                                     width="150" height="150" style="display: none;">
                                                             @endif
                                                         </div>
-                                                        <span class="mb-1"> {{ $item->message }}</span>
+                                                        <span class="mb-1" style="color: #fff;">
+                                                            {{ $item->message }}</span>
+
                                                     </div>
                                                 </div>
 
@@ -130,63 +135,62 @@
                                     </div>
                                 </div>
 
-                                <div class="col-sm-8">
-                                    <!--MENSAJE-->
-                                    <span class=" text-bold-600">Mensaje:</span>
-                                    <textarea class="form-control " type="text" id="message" name="message" rows="3" style="height: 25vh;"></textarea>
-                                    <!--MENSAJE END-->
-                                </div>
 
-                                <div class="col-sm-4 mt-2">
-                                    <!--CONTENEDOR DE ARCHIVO ADJUNTO-->
-                                    <div class="container-fluid capa-exterior">
+                                <div class="col-sm-12">
 
-                                        <form id="frm-example" name="frm-example">
-                                            <label for="hiddenBtn" class="choose-btn capa-interior" id="chooseBtn"><i
-                                                    class="fas fa-upload rosado"></i> Ajuntar archivo</label>
-                                            <input type="file" id="hiddenBtn" name="image" accept="image/*">
-                                        </form>
-                                        <br>
-                                    </div>
-                                    @error('image')
-                                        <small class="text-danger">
-                                            {{ $message }}
-                                        </small>
-                                    @enderror
+                                    <div class="d-flex justify-content-between">
+                                        <div class="col-sm-10">
+                                            <!--MENSAJE-->
 
-                                    <!--CONTENEDOR DE ARCHIVO ADJUNTO END-->
-                                    <br>
-                                    <!--CONTENEDOR DE ENVIAR Y PAPELERA-->
-                                    <div class="col-sm-12">
-                                        <div class="row justify-content-between">
-                                            <div class="col-lg-2 col-sm-12">
-                                                <!--BOTON ELIMINAR-->
+                                            <input class="form-control " placeholder="Escriba un mensaje" type="text"
+                                                id="message" name="message" style="background-color: #D8EDED;"></input>
+                                            <!--MENSAJE END-->
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="d-flex justify-content-around">
+                                                <form class="p-0" id="frm-example" name="frm-example">
+                                                    <label for="hiddenBtn" class="choose-btn capa-interior" id="chooseBtn"
+                                                        style="margin-top: 0.5em;"><svg width="24" height="24"
+                                                            viewBox="0 0 24 24" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M20.75 23.25H3.25C1.86929 23.25 0.75 22.1307 0.75 20.75V3.25C0.75 1.86929 1.86929 0.75 3.25 0.75H20.75C22.1307 0.75 23.25 1.86929 23.25 3.25V20.75C23.25 22.1307 22.1307 23.25 20.75 23.25ZM3.25 3.25V20.75H20.75V3.25H3.25ZM19.5 18.25H4.5L8.25 13.25L9.5 14.5L13.25 9.5L19.5 18.25ZM7.625 10.75C6.58947 10.75 5.75 9.91053 5.75 8.875C5.75 7.83947 6.58947 7 7.625 7C8.66053 7 9.5 7.83947 9.5 8.875C9.5 9.91053 8.66053 10.75 7.625 10.75Z"
+                                                                fill="#2E3A59" />
+                                                        </svg>
+                                                    </label>
+                                                    <input type="file" id="hiddenBtn" name="image">
+                                                </form>
 
-                                                <span class="rosado" style="font-size: 20px;">
-                                                    | <i id="remove" class=" far fa-trash-alt"></i>
-                                                </span>
-                                                <!--BOTON ELIMINAR END-->
-                                            </div>
-                                            <div class="col-lg-10 col-sm-12">
-                                                <!--BOTON ENVIAR-->
-                                                <button
-                                                    class="btn btn-primary w-100 waves-effect waves-float waves-light">Enviar</button>
+
+                                                @error('image')
+                                                    <small class="text-danger">
+                                                        {{ $message }}
+                                                    </small>
+                                                @enderror
+                                                <!--CONTENEDOR DE ARCHIVO ADJUNTO END-->
+
+                                                <!--CONTENEDOR DE ENVIAR Y PAPELERA-->
+
+                                                <button class="btn btn-primary waves-effect waves-float waves-light">Enviar
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
+                                    <!--CONTENEDOR DE ARCHIVO ADJUNTO-->
+
                                     <!--CONTENEDOR DE ENVIAR Y PAPELERA END-->
                                     <!--CONTENEDOR DE ARCHIVO ADJUNTO END-->
+                                </div>
+                                <!--CONTENEDOR DE ARCHIVO ADJUNTO-->
+
+
+                                <!--CONTENEDOR DE ENVIAR Y PAPELERA END-->
+                                <!--CONTENEDOR DE ARCHIVO ADJUNTO END-->
+                            </div>
                         </form>
                     </div>
                 </div>
-
             </div>
-
-        </div>
-        </div>
-        </div>
-        </div>
         </div>
     </section>
-
 @endsection

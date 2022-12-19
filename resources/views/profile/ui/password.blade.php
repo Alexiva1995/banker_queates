@@ -1,15 +1,15 @@
 {{-- password --}}
 <div class="tab-pane fade" id="nav-password" role="tabpanel" aria-labelledby="nav-password-tab">
-    <div class="card-body ">
+    <div class="card-body p-0 mt-1">
         <div class="row">
             <div class="col-lg-12 col-12 order-2 order-lg-1">
                 <form method="POST" action="{{ route('contraseña.update') }}" novalidate>
                     @csrf
-                    <div class="row" style="padding: 1%;">
+                    <div class="row">
                         <!--ROW 1 START-->
-                        
+                        <h3 class="mb-4 fw-600">Cambio de Contraseña</h3>
                         <div class="col-sm-6">
-                            <label for="" class="fw-500">Contraseña anterior <label
+                            <label for="" class="fw-500">Contraseña Anterior <label
                                     style="color: red;">*</label></label>
                             <div class="input-group mb-2 shadow-none">
                                 <div class="input-group input-group-merge form-password-toggle shadow-none">
@@ -24,11 +24,26 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-sm-6">
+                            <label for="" class="fw-500">Verificacion de correo <label
+                                    style="color: red;">*</label></label>
+                            <div class="input-group mb-2 shadow-none">
+                                <div class="input-group input-group-merge form-password-toggle shadow-none">
+                                    <input type="text" class="form-control form-control-merge" id="code_password" name="code_password" placeholder="Ingresa el código"/>
+                        <a class="btn input-group-btn btn-primary cursor-pointer border-end input-group-text border-top border-bottom" id="codeButton" onclick="getCode();">Obtener codigo</a>
+                                    @error('current_password')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="col-12"></div>
 
                         <div class="col-sm-6" >
-                            <label for="" style="margin-bottom: 1%;" class="fw-500">Nueva contraseña <label
+                            <label for="" style="margin-bottom: 1%;" class="fw-500">Nueva Contraseña <label
                                     style="color: red;">*</label></label>
                             <div class="input-group mb-3">
                                 {{-- <input id="new_password" type="password" class="form-control" name="new_password" autocomplete="current-password"> --}}
@@ -44,7 +59,7 @@
                         </div>
 
                         <div class="col-sm-6">
-                            <label for="" style="margin-bottom: 1%;" class="fw-500">Repetir nueva contraseña <label
+                            <label for="" style="margin-bottom: 1%;" class="fw-500">Confirmar Nueva Contraseña <label
                                     style="color: red;">*</label></label>
                             <div class="input-group mb-3">
                                 <input id="confirm_password" type="password" name="confirm_password"
@@ -57,12 +72,26 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="modal-footer" style="border: none">
-                            <button type="button" id="boton03" class="btn btn-outline-danger">
-                                Reiniciar
+                        <div class="mb-2 col-sm-6">
+                            <h4 class="mb-2 fw-600">Password Requirements :</h4>
+                            <ul>
+                                <li>
+                                    <p>Minimum 8 characters long - the more, the better</p>
+                                </li>
+                                <li>
+                                    <p>At least one lowercase character</p>
+                                </li>
+                                <li>
+                                    <p>At least one number, symbol, or whitespace character</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="d-flex justify-content-start" style="border: none">
+                            <button type="submit" class="ms-1 btn btn-primary" id="guardar">
+                                Guardar Cambios
                             </button>
-                            <button type="submit" class="btn btn-primary" id="guardar">
-                                Cambiar Contraseña
+                            <button type="button" id="boton03" class="ms-1 btn btn-outline-danger">
+                                Cancelar
                             </button>
                         </div>
                     </div>
@@ -71,4 +100,6 @@
         </div>
     </div>
 </div>
+
+
 <!--Cambiar Contraseña end-->
