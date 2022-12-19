@@ -133,7 +133,7 @@ class RegisterController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'buyer_id' => $request->buyer_id ?? 1,
-                'countrie_id' => $request->countrie_id,
+                'prefix_id' => $request->countrie_id,
                 'status' => '0',
             ]);
             // $url = config('services.api_whizfx.base_url');

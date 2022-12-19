@@ -49,7 +49,7 @@ class UserController extends Controller
         $id = Auth::user()->id;
         $invertido = $this->paquete();
         $user = User::find($id);
-        $country = Countrie::all();
+        $country = Prefix::all();
         $wallet = WalletComission::where('user_id', $user->id)->get();
         $prefix = Prefix::orderBy('id', 'asc')->get();
 
@@ -260,7 +260,6 @@ class UserController extends Controller
     }
     public function update(Request $request)
     {
-
         $user = User::find(Auth::user()->id);
 
         $data = $request->validate([
@@ -270,9 +269,8 @@ class UserController extends Controller
             'last_name' => 'required',
             'countrie_id' => 'required'
         ]);
-
-        dd($request->pin);
-
+        
+/*
         if ((strcmp($request->input('email'), $request->input('emailOrigin')) !== 0) &&
             ($request->input('email') != null && $request->input('password') == null)
         ) {
@@ -289,11 +287,14 @@ class UserController extends Controller
                 return redirect()->back()->with('error', 'NO coincide la contraseña ingresada, con su contraseña de Take.');
             }
         }
-
+*/
         $user->name = $data['name'];
         $user->last_name = $data['last_name'];
         $user->phone = $data['phone'];
-        $user->countrie_id = $data['countrie_id'];
+        $user->prefix_id = $data['countrie_id'];
+        if (in_array('email', $data,)) {
+            $user->email = $data ['email'];
+        }
         if ($request->has('gender')) $user->gender = $request->input('gender');
 
         $user->save();

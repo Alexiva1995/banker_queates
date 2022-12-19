@@ -208,16 +208,16 @@
                                                         <select id="countrie_id" class="rounded form-control text-dark shadow-none" name="countrie_id" required>
 
                                                             
-                                                            @if($user->countrie_id  != null)
+                                                            @if($user->prefix_id  != null)
                                                                 @foreach($country as $countries)
-                                                                    <option value="{{$countries->id}}" {{$user->countrie_id == $countries->id ? 'selected' : ''}}>{{$countries->name}}</option>
+                                                                    <option value="{{$countries->id}}" {{$user->prefix_id == $countries->id ? 'selected' : ''}}>{{$countries->pais}}</option>
                                                                 @endforeach
                                                             @else
                                                                 <option>Ingresa o selecciona un país</option>
                                                             @endif
 
                                                             @foreach($country as $countries)
-                                                                <option value="{{$countries->id}}" {{old('countries') == $countries->id ? 'selected' : ''}}>{{$countries->name}}</option>
+                                                                <option value="{{$countries->id}}" {{old('countries') == $countries->id ? 'selected' : ''}}>{{$countries->pais}}</option>
                                                             @endforeach
 
                                                         </select>
