@@ -298,6 +298,7 @@ Route::group(['prefix' => 'ui'], function () {
     Route::get('typography', [UserInterfaceController::class, 'typography'])->name('ui-typography');
 });
 /* Route UI */
+Route::post('/days-chartAxios', [DashboardController::class, 'getDaysChartAxios'])->name('get.days.chartAxios');
 
 Route::get('profile', [UserController::class, 'profile'])->name('profile.profile');
 Route::post('update', [UserController::class, 'update'])->name('profile.update');

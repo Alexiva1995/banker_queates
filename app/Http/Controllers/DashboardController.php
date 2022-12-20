@@ -94,7 +94,7 @@ class DashboardController extends Controller
 
   // Dashboard user - para grafico de dias faltantes
   public function getDaysChart($user_id){
-
+    Log::info('ususario '.$user_id);
     $user = User::findOrFail($user_id);
     
     $investments = Investment::where('user_id', $user_id)->with('licensePackage')->get();
@@ -108,6 +108,23 @@ class DashboardController extends Controller
     $data = [$total_days, $daysRemaining];
 
     return $data;
+}
+
+public function getDaysChartAxios(){
+  $user_id = Auth::user()->id;
+  Log::info('ususario '.$user_id);
+  $user = User::findOrFail($user_id);
+  
+  $investments = Investment::where('user_id', $user_id)->with('licensePackage')->get();
+
+  $date2 = Carbon::parse($user->investment->created_at);
+  $date1 = Carbon::parse($user->investment->expiration_date);
+
+  $total_days = $date2->diffInDays(today()->format('Y-m-d'));
+  $daysRemaining = $date1->diffInDays(today()->format('Y-m-d') ); 
+  $data = ['total_days'=>$total_days, 'daysRemaining'=>$daysRemaining];
+
+   return response()->json(['value' =>   $data ]);
 }
 
   // Dashboard - Analyticspwalle
