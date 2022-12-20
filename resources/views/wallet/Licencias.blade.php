@@ -42,7 +42,6 @@
 
             <div class="col-sm-6">
                 @include('wallet.components.activeLicen')
-
             </div>
           </div>
         
