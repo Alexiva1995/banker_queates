@@ -22,8 +22,8 @@
                     @if($user_packages[0]->image != null)
                     <div class="col-sm-6">
                         <div>
-                            <div class=" d-flex justify-content-center align-items-center">
-                                <img  src="{{ asset('images/licencias/'.$user_packages[0]->image) }}" height="260" width="280">
+                            <div class="  ">
+                                <img  src="{{ asset('images/licencias/'.$user_packages[0]->image) }}" height="270" width="290">
                             </div>
                         </div>
                     </div>
@@ -129,7 +129,7 @@
     labels: ['Días Faltantes'],
     plotOptions: {
       radialBar: {
-        offsetY: -10,
+        offsetY: 10,
         startAngle: -150,
         endAngle: 150,
         hollow: {
