@@ -23,8 +23,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 d-flex justify-content-center">
-                <i data-feather='users' class="texto" style="height: 95px; width: 95px; opacity:0.15;"></i>
+            <div class="col-sm-6 d-flex justify-content-end align-items-center">
+                <i class="fa-solid fa-users texto" style="font-size: 7rem; opacity:0.15;"></i>
             </div>
           </div>
     </div>
@@ -36,16 +36,15 @@
                     <p class="card-title customTexto mb-1">Tu link de referidos</p>
                     <h4 class="mt-2  mb-1 texto">Comparte tu link</h4>
                    
-                    <a><i data-feather='copy'>
-                       </i>
+                    <a><i class="fa-regular fa-copy"></i>
                         <span onclick="getlink()" class="text-decoration-underline" style="font-weight: 700;font-size:14px;">
                                 COPIAR LINK
                         </span>
                     </a>
                 </div>
             </div>
-            <div class="col-sm-6 d-flex justify-content-center">
-                <i data-feather='link' class="texto" style="height: 95px; width: 95px; opacity:0.15;"></i>
+            <div class="col-sm-6 d-flex justify-content-end ">
+                <i class="fa-solid fa-link texto" style="font-size: 7rem; opacity:0.15;"></i>
             </div>
           </div>
     </div>
