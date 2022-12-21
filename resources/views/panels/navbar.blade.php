@@ -1,17 +1,20 @@
 @if($configData["mainLayoutType"] === 'horizontal' && isset($configData["mainLayoutType"]))
 <style>
-  .navbar-container{
+  .navbar-container {
     border-color: blue;
     border-radius: 5px;
   }
 </style>
-<nav class="header-navbar navbar-expand-lg navbar navbar-fixed align-items-center navbar-brand-center {{ $configData['navbarColor'] }}" data-nav="brand-center">
+<nav
+  class="header-navbar navbar-expand-lg navbar navbar-fixed align-items-center navbar-brand-center {{ $configData['navbarColor'] }}"
+  data-nav="brand-center">
   <div class="navbar-header d-xl-block d-none">
     <ul class="nav navbar-nav">
       <li class="nav-item">
         <a class="navbar-brand" href="{{url('/')}}">
           <span class="brand-logo">
-            <svg viewbox="0 0 139 95" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="24">
+            <svg viewbox="0 0 139 95" version="1.1" xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink" height="24">
               <defs>
                 <lineargradient id="linearGradient-1" x1="100%" y1="10.5120544%" x2="50%" y2="89.4879456%">
                   <stop stop-color="#000000" offset="0%"></stop>
@@ -25,11 +28,18 @@
               <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                 <g id="Artboard" transform="translate(-400.000000, -178.000000)">
                   <g id="Group" transform="translate(400.000000, 178.000000)">
-                    <path class="text-primary" id="Path" d="M-5.68434189e-14,2.84217094e-14 L39.1816085,2.84217094e-14 L69.3453773,32.2519224 L101.428699,2.84217094e-14 L138.784583,2.84217094e-14 L138.784199,29.8015838 C137.958931,37.3510206 135.784352,42.5567762 132.260463,45.4188507 C128.736573,48.2809251 112.33867,64.5239941 83.0667527,94.1480575 L56.2750821,94.1480575 L6.71554594,44.4188507 C2.46876683,39.9813776 0.345377275,35.1089553 0.345377275,29.8015838 C0.345377275,24.4942122 0.230251516,14.560351 -5.68434189e-14,2.84217094e-14 Z" style="fill:currentColor"></path>
-                    <path id="Path1" d="M69.3453773,32.2519224 L101.428699,1.42108547e-14 L138.784583,1.42108547e-14 L138.784199,29.8015838 C137.958931,37.3510206 135.784352,42.5567762 132.260463,45.4188507 C128.736573,48.2809251 112.33867,64.5239941 83.0667527,94.1480575 L56.2750821,94.1480575 L32.8435758,70.5039241 L69.3453773,32.2519224 Z" fill="url(#linearGradient-1)" opacity="0.2"></path>
-                    <polygon id="Path-2" fill="#000000" opacity="0.049999997" points="69.3922914 32.4202615 32.8435758 70.5039241 54.0490008 16.1851325"></polygon>
-                    <polygon id="Path-21" fill="#000000" opacity="0.099999994" points="69.3922914 32.4202615 32.8435758 70.5039241 58.3683556 20.7402338"></polygon>
-                    <polygon id="Path-3" fill="url(#linearGradient-2)" opacity="0.099999994" points="101.428699 0 83.0667527 94.1480575 130.378721 47.0740288"></polygon>
+                    <path class="text-primary" id="Path"
+                      d="M-5.68434189e-14,2.84217094e-14 L39.1816085,2.84217094e-14 L69.3453773,32.2519224 L101.428699,2.84217094e-14 L138.784583,2.84217094e-14 L138.784199,29.8015838 C137.958931,37.3510206 135.784352,42.5567762 132.260463,45.4188507 C128.736573,48.2809251 112.33867,64.5239941 83.0667527,94.1480575 L56.2750821,94.1480575 L6.71554594,44.4188507 C2.46876683,39.9813776 0.345377275,35.1089553 0.345377275,29.8015838 C0.345377275,24.4942122 0.230251516,14.560351 -5.68434189e-14,2.84217094e-14 Z"
+                      style="fill:currentColor"></path>
+                    <path id="Path1"
+                      d="M69.3453773,32.2519224 L101.428699,1.42108547e-14 L138.784583,1.42108547e-14 L138.784199,29.8015838 C137.958931,37.3510206 135.784352,42.5567762 132.260463,45.4188507 C128.736573,48.2809251 112.33867,64.5239941 83.0667527,94.1480575 L56.2750821,94.1480575 L32.8435758,70.5039241 L69.3453773,32.2519224 Z"
+                      fill="url(#linearGradient-1)" opacity="0.2"></path>
+                    <polygon id="Path-2" fill="#000000" opacity="0.049999997"
+                      points="69.3922914 32.4202615 32.8435758 70.5039241 54.0490008 16.1851325"></polygon>
+                    <polygon id="Path-21" fill="#000000" opacity="0.099999994"
+                      points="69.3922914 32.4202615 32.8435758 70.5039241 58.3683556 20.7402338"></polygon>
+                    <polygon id="Path-3" fill="url(#linearGradient-2)" opacity="0.099999994"
+                      points="101.428699 0 83.0667527 94.1480575 130.378721 47.0740288"></polygon>
                   </g>
                 </g>
               </g>
@@ -40,12 +50,14 @@
     </ul>
   </div>
   @else
-  <nav style="border-color:  #05B1D966" class="header-navbar navbar navbar-expand-lg align-items-center {{ $configData['navbarClass'] }} navbar-light  {{ $configData['navbarColor'] }} {{ ($configData['layoutWidth'] === 'boxed' && $configData['verticalMenuNavbarType']  === 'navbar-floating') ? 'container-xxl' : '' }}">
+  <nav style="border-color:  #05B1D966"
+    class="header-navbar navbar navbar-expand-lg align-items-center {{ $configData['navbarClass'] }} navbar-light  {{ $configData['navbarColor'] }} {{ ($configData['layoutWidth'] === 'boxed' && $configData['verticalMenuNavbarType']  === 'navbar-floating') ? 'container-xxl' : '' }}">
     @endif
-    <div class="navbar-container d-flex content" >
-      <div class="bookmark-wrapper d-flex align-items-center" >
+    <div class="navbar-container d-flex content">
+      <div class="bookmark-wrapper d-flex align-items-center">
         <ul class="nav navbar-nav d-xl-none">
-          <li class="nav-item"><a class="nav-link menu-toggle" href="javascript:void(0);"><i class="ficon" data-feather="menu"></i></a></li>
+          <li class="nav-item"><a class="nav-link menu-toggle" href="javascript:void(0);"><i class="ficon"
+                data-feather="menu"></i></a></li>
         </ul>
         <!-- <ul class="nav navbar-nav bookmark-icons">
           <li class="nav-item d-none d-lg-block"><a class="nav-link" href="{{url('app/email')}}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Email"><i class="ficon" data-feather="mail"></i></a></li>
@@ -69,13 +81,15 @@
         </ul> -->
 
       </div>
-      <ul class="nav navbar-nav align-items-center ms-auto " >
-      {{-- <li class="nav-item dropdown dropdown-language " >
-          <a class="nav-link dropdown-toggle" id="dropdown-flag" href="#" data-bs-toggle="dropdown" aria-haspopup="true">
+      <ul class="nav navbar-nav align-items-center ms-auto ">
+        {{-- <li class="nav-item dropdown dropdown-language ">
+          <a class="nav-link dropdown-toggle" id="dropdown-flag" href="#" data-bs-toggle="dropdown"
+            aria-haspopup="true">
             <i class="flag-icon flag-icon-mx"></i>
             <span class="selected-language ">ESPAÑOL</span>
           </a>
-          <div class="dropdown-menu dropdown-menu-end  cartas" aria-labelledby="dropdown-flag" style="background: white">
+          <div class="dropdown-menu dropdown-menu-end  cartas" aria-labelledby="dropdown-flag"
+            style="background: white">
             <a href="#googtrans(es|es)" class="dropdown-item lang-select" data-language="es" alt="ESPAÑOL">
               <i class="flag-icon flag-icon-mx "></i> ESPAÑOL
             </a>
@@ -93,17 +107,18 @@
             </a>
           </div>
         </li>
-         {{--  @if(Auth::user()->id !== 1)
-       <li>
-          @if(Auth::user()->date_activo <= date('Y-m-d')) <button class="btn Referral-btn rosado col-sm" data-bs-toggle="modal" data-bs-target="#Modal_reactivacion" >Hacer activación</button>
+        {{-- @if(Auth::user()->id !== 1)
+        <li>
+          @if(Auth::user()->date_activo <= date('Y-m-d')) <button class="btn Referral-btn rosado col-sm"
+            data-bs-toggle="modal" data-bs-target="#Modal_reactivacion">Hacer activación</button>
         </li>
         <li>
           @else
-          <button class="btn Referral-btn rosado" >Activo</button>
+          <button class="btn Referral-btn rosado">Activo</button>
           @endif
         </li>
         @endif
-      --}}
+        --}}
 
         <!-- <li class="nav-item nav-search"><a class="nav-link nav-link-search"><i class="ficon" data-feather="search"></i></a>
           <div class="search-input">
@@ -223,16 +238,16 @@
               </span>
             </label>
           </div>-->
-{{--
-           <div class="d-flex align-content-around align-item-center">
-             <i class="ficonCustom" data-feather='sun' style="margin-right: 0.3rem;"></i>
+          {{--
+          <div class="d-flex align-content-around align-item-center">
+            <i class="ficonCustom" data-feather='sun' style="margin-right: 0.3rem;"></i>
 
-             <div class="form-check form-switch form-switch-sm mb-0">
+            <div class="form-check form-switch form-switch-sm mb-0">
               <input class="form-check-input nav-link-style" type="checkbox" id="flexSwitchCheckDefault">
             </div>
 
-             <i class="ficonCustom" data-feather='moon' style="margin-left: -1.5rem;"></i>
-           </div> --}}
+            <i class="ficonCustom" data-feather='moon' style="margin-left: -1.5rem;"></i>
+          </div> --}}
         </li>
         <!--<li class="nav-item dropdown dropdown-notification me-25 ">
           <a class="nav-link" href="javascript:void(0);" data-bs-toggle="dropdown">
@@ -289,29 +304,34 @@
         </li>-->
         <li class="nav-item me-1">
           <div class="row d-flex align-content-end align-items-center">
-              <div class="col-md-12">
-                  <div class="dropdown">
-                      <button class="d-flex align-items-center btn btn-primary btn-sm dropdown-toggle" type="button"
-                          id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                          Idioma
-                      </button>
-                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                          <li><a href="#googtrans(en|en)" class="lang-en dropdown-item lang-select"
-                                  data-lang="en"><img src="https://flagcdn.com/16x12/us.png" class="me-1"
-                                      alt="Inglés">Inglés</a></li>
-                          <li><a href="#googtrans(en|es)" class="lang-es dropdown-item lang-select"
-                                  data-lang="es"><img src="https://flagcdn.com/16x12/es.png" class="me-1"
-                                      alt="Español">Español</a></li>
-                          <li><a href="#googtrans(en|pt)" class="lang-es dropdown-item lang-select"
-                                  data-lang="pt"><img src="https://flagcdn.com/16x12/pt.png" class="me-1"
-                                      alt="Portugues">Portugués</a></li>
-                      </ul>
-                  </div>
+            <div class="col-md-12">
+              <div class="dropdown">
+                <button class="d-flex align-items-center btn btn-primary btn-sm dropdown-toggle" type="button"
+                  id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                  Idioma
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li>
+                    <a href="#googtrans(en|en)" class="lang-en dropdown-item lang-select" data-lang="en">
+                      <img src="https://flagcdn.com/16x12/us.png" class="me-1" alt="Inglés">Inglés
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#googtrans(en|es)" class="lang-es dropdown-item lang-select" data-lang="es">
+                      <img src="https://flagcdn.com/16x12/es.png" class="me-1" alt="Español">
+                      Español
+                    </a>
+                  </li>
+                  <li><a href="#googtrans(en|pt)" class="lang-es dropdown-item lang-select" data-lang="pt"><img
+                        src="https://flagcdn.com/16x12/pt.png" class="me-1" alt="Portugues">Portugués</a></li>
+                </ul>
               </div>
+            </div>
           </div>
-      </li>
+        </li>
         <li class="nav-item dropdown dropdown-user">
-          <a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="javascript:void(0);" data-bs-toggle="dropdown" aria-haspopup="true">
+          <a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="javascript:void(0);"
+            data-bs-toggle="dropdown" aria-haspopup="true">
             <div class="user-nav d-sm-flex d-none">
               <div class="row">
                 <div class="col-sm-4 d-flex justify-content-center align-items-center">
@@ -319,39 +339,42 @@
                 </div>
 
                 <div class="col-sm-4 d-flex justify-content-center align-items-center">
-                  <span class="user-name fw-bolder text-capitalize" >{{Auth::user()->name}}</span>
+                  <span class="user-name fw-bolder text-capitalize">{{Auth::user()->name}}</span>
                 </div>
 
                 <div class="col-sm-4">
-                <span>
-                  @if(Auth::user()->admin != 1)
+                  <span>
+                    @if(Auth::user()->admin != 1)
                     @if(auth()->user()->range_id == null)
 
-                      <img class="round" src="{{asset('images/ico/deg.ico')}}" alt="avatar" height="50" width="50" style="object-fit: contain; background-color: white;">
+                    <img class="round" src="{{asset('images/ico/deg.ico')}}" alt="avatar" height="50" width="50"
+                      style="object-fit: contain; background-color: white;">
 
                     @else
-                      <img  class="round" src="{{ asset('images/ensignRanges/'.auth()->user()->range_id.'.png') }}" style="box-shadow: none;" height="50" width="63">
+                    <img class="round" src="{{ asset('images/ensignRanges/'.auth()->user()->range_id.'.png') }}"
+                      style="box-shadow: none;" height="50" width="63">
                     @endif
 
-                  @elseif(Auth::user()->admin == 1)
+                    @elseif(Auth::user()->admin == 1)
                     @if(Auth::user()->photo == null)
-                      <img class="round" src="{{asset('images/logo/logo-deg-white.png')}}" style="box-shadow: none;" alt="avatar" height="50" width="50">
+                    <img class="round" src="{{asset('images/logo/logo-deg-white.png')}}" style="box-shadow: none;"
+                      alt="avatar" height="50" width="50">
                     @endif
-                  @endif
-              </span>
+                    @endif
+                  </span>
                 </div>
               </div>
             </div>
-            
+
           </a>
-          <div class="dropdown-menu  dropdown-menu-end" aria-labelledby="dropdown-user" >
+          <div class="dropdown-menu  dropdown-menu-end" aria-labelledby="dropdown-user">
             @if(Auth::user()->admin == 1 || Auth::user()->status == '0')
-              {{-- <a class="dropdown-item text-light" href="{{url('profile')}}">
-                <i class="me-1 text-primary" data-feather="user" ></i> Mi Perfil
-              </a> --}}
+            {{-- <a class="dropdown-item text-light" href="{{url('profile')}}">
+              <i class="me-1 text-primary" data-feather="user"></i> Mi Perfil
+            </a> --}}
             @else
             <a class="dropdown-item text-light" href="{{url('profile')}}">
-              <i class="me-1 text-primary" data-feather="user" ></i> Mi Perfil
+              <i class="me-1 text-primary" data-feather="user"></i> Mi Perfil
             </a>
             @endif
 
@@ -384,7 +407,7 @@
               @csrf
               <button class="dropdown-item w-100 text-light" href="{{ route('logout') }}" onclick="event.preventDefault();
                         this.closest('form').submit();">
-                <i class="me-1 text-primary" data-feather="log-out" ></i> Cerrar sesion
+                <i class="me-1 text-primary" data-feather="log-out"></i> Cerrar sesion
               </button>
             </form>
           </div>
