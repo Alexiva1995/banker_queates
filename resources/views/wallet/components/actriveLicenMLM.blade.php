@@ -3,14 +3,13 @@
     background: rgb(2,0,36);
     background: linear-gradient(180deg, #03B5D5 0%, #02D6AC 100%);
 }
-g#SvgjsG1040 .apexcharts-text {
+
+g .apexcharts-text {
     fill: #FFFFFF !important;
     filter: none;
     left: 100px !important;
 }
-g#SvgjsG1165{
-    
-}
+
 </style>
 <div class="col-sm-12 " >
     @if (isset($user_packages[0]->image))
