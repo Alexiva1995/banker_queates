@@ -8,9 +8,9 @@
             <img src="{{ asset('images/ensignRanges/'.$data['range_id'].'.png') }}" height="70" width="90"
             class=""  style="margin-top: -2px" alt="{{$data['range_id']}}">
         @elseif($data['range_id'] == null && $data->hasActiveLicense())
-            <img src="{{ asset('images/ensignRanges/' . $data->investment->package_id . '.png') }}"
-            height="70" width="90"
-            class=""  style="margin-top: -2px" alt="{{$data['range_id']}}">
+        <img src="{{ asset('images/ensignRanges/0.png') }}" height="70" width="70"
+        class=""  style="margin-top: -2px" alt="{{ $data->name }}"
+        title="{{ $data->name }}">
         @elseif ( ($data["range_id"] == null) && !$data->hasActiveLicense() )
             <img src="{{ asset('images/ensignRanges/0.png') }}" height="70" width="70"
             class=""  style="margin-top: -2px" alt="{{ $data->name }}"
