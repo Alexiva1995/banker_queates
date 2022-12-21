@@ -184,9 +184,6 @@
                                             </div>
                                             
                                         </div>
-                                        <!--CONTENEDOR DE ARCHIVO ADJUNTO-->
-                                        <!--CONTENEDOR DE ENVIAR Y PAPELERA END-->
-                                        <!--CONTENEDOR DE ARCHIVO ADJUNTO END-->
                                     </div>
                                 </div>
                             </div>

@@ -218,12 +218,7 @@ class TicketsController extends Controller
     // permite la creacion del ticket
     public function store(Request $request)
     {
-        Tickets::create([
-            'user_id' => Auth::id(),
-            'issue' => request('issue'),
-            'categories' => request('categories')
-            // 'priority' => request('priority')
-        ]);
+       
 
         $ticket_create = Tickets::where('user_id', Auth::id())->orderby('created_at', 'DESC')->take(1)->get();
         $id_ticket = $ticket_create[0]->id;
