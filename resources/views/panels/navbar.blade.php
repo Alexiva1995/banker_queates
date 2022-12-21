@@ -287,6 +287,29 @@
             @endif
           </ul>
         </li>-->
+        <li class="nav-item me-1">
+          <div class="row d-flex align-content-end align-items-center">
+              <div class="col-md-12">
+                  <div class="dropdown">
+                      <button class="d-flex align-items-center btn btn-primary btn-sm dropdown-toggle" type="button"
+                          id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                          Idioma
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                          <li><a href="#googtrans(en|en)" class="lang-en dropdown-item lang-select"
+                                  data-lang="en"><img src="https://flagcdn.com/16x12/us.png" class="me-1"
+                                      alt="Inglés">Inglés</a></li>
+                          <li><a href="#googtrans(en|es)" class="lang-es dropdown-item lang-select"
+                                  data-lang="es"><img src="https://flagcdn.com/16x12/es.png" class="me-1"
+                                      alt="Español">Español</a></li>
+                          <li><a href="#googtrans(en|pt)" class="lang-es dropdown-item lang-select"
+                                  data-lang="pt"><img src="https://flagcdn.com/16x12/pt.png" class="me-1"
+                                      alt="Portugues">Portugués</a></li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </li>
         <li class="nav-item dropdown dropdown-user">
           <a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="javascript:void(0);" data-bs-toggle="dropdown" aria-haspopup="true">
             <div class="user-nav d-sm-flex d-none">
@@ -506,3 +529,13 @@
   @include('panels/Reactivacion')
   {{-- Search Ends --}}
   <!-- END: Header-->
+  <script>
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+  </script>
