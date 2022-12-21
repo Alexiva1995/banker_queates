@@ -218,6 +218,15 @@ class TicketsController extends Controller
     // permite la creacion del ticket
     public function store(Request $request)
     {
+        
+
+
+        $validate = $request->validate([
+            'image' => 'image|max:2048',
+            'message' => 'min:2'
+
+        ]);
+        
         Tickets::create([
             'user_id' => Auth::id(),
             'issue' => request('issue'),
@@ -227,13 +236,6 @@ class TicketsController extends Controller
 
         $ticket_create = Tickets::where('user_id', Auth::id())->orderby('created_at', 'DESC')->take(1)->get();
         $id_ticket = $ticket_create[0]->id;
-
-
-        $validate = $request->validate([
-            'image' => 'image|max:2048',
-            'message' => 'min:2'
-
-        ]);
 
         if ($validate && $request->hasFile('image')) {
             $imagen = $request->file('image');
