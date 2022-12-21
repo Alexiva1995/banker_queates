@@ -38,7 +38,7 @@ g#SvgjsG1165{
                     </div>
                     <div class="col-sm-3">
                         {{-- Grafico  --}}
-                            <div  id="goal-overview-radial-bar-chart"></div>
+                            <div  id="goal-overview-radial-bar-chartMLM"></div>
                     </div>
                     <div class="col-sm-3">
                         <div class=" d-flex justify-content-end align-items-center">
@@ -60,10 +60,7 @@ g#SvgjsG1165{
     </div>
 </div>
 <script>
-     window.onload = function () {
-        getDaysChart();
-        getDaysChart2();
-     }
+     
     
   var $barColor = '#ffff';
   var $trackBgColor = '#fff';
@@ -76,10 +73,10 @@ g#SvgjsG1165{
   var $earningsStrokeColor3 = '#28c76f33';
     //------------ Goal Overview Chart ------------
   //---------------------------------------------
-  var $goalOverviewChart = document.querySelector('#goal-overview-radial-bar-chart');
-  function getDaysChart() {
+  var $chartMLM = document.querySelector('#goal-overview-radial-bar-chartMLM');
+  function getDaysChart2() {
     axios.post('{{route("get.days.chartAxios")}}', {
-    
+   
   })
   .then(function (response) {
     console.log(response.data.value);
@@ -88,16 +85,16 @@ g#SvgjsG1165{
     let percentage = (total_days/365)*100 ;
     let color_chart = "#05A5E9";
                     
-    daysChart(percentage, days_remaining, color_chart);
+    daysChart2(percentage, days_remaining, color_chart);
   })
   .catch(function (error) {
     console.log(error);
   });
 }
        
-  function daysChart(percentage, days_remaining, color_chart) {
+  function daysChart2(percentage, days_remaining, color_chart) {
 
-    goalOverviewChartOptions = {
+    chartMLMOptions = {
     chart: {
         height: 138,
         type: 'radialBar',
@@ -169,8 +166,8 @@ g#SvgjsG1165{
       }
     }
   };
-  goalOverviewChart = new ApexCharts($goalOverviewChart, goalOverviewChartOptions);
-  goalOverviewChart.render();
+  chartMLM = new ApexCharts($chartMLM, chartMLMOptions);
+  chartMLM.render();
 
   }
   
