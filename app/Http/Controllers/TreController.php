@@ -69,17 +69,12 @@ class TreController extends Controller
 
     public function binario($base = NULL)
     {
-        /*$user = Auth::user();
-        $direct_childres = User::where('binary_id', $user->id)->get();
-        $referals_childrens =  $this->getChildren($direct_childres, 1);
-        $lastLevelActive = Level::where('status', 1)->orderBy('id', 'desc')->first();
-        return view('binario.index', compact('referals_childrens', 'lastLevelActive'));*/
-
         try {
+
             if($base == NULL)
             {
-                $base = User::findOrFail( Auth::id() )->with('investment')->first();
-            }
+                $base = Auth::user();
+            } 
             $trees = $this->getDataEstructuraBinary($base->id, $tree = 2);
             foreach($trees as $tree){
                 $childLicenses =  Investment::where('user_id', $tree->id)->where('status', 1)->with('LicensePackage')->first();
