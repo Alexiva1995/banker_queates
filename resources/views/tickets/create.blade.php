@@ -145,10 +145,10 @@
                                                     </div>
                                                     <div class="col-sm-12 text-center mt-1">
                                                         @error('image')
-                                                                <small class="text-danger ">
-                                                                    {{ $message }}
-                                                                </small>
-                                                            @enderror
+                                                            <small class="text-danger ">
+                                                                {{ $message }}
+                                                            </small>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <!--MENSAJE-->
@@ -169,7 +169,7 @@
                                                                             fill="#2E3A59" />
                                                                     </svg>
                                                                 </label>
-                                                                <input type="file" id="hiddenBtn" name="image">
+                                                                <input type="file" id="hiddenBtn" name="image"  accept="image/png, image/gif, image/jpeg">
                                                             </form>
                                                         </div>
 
