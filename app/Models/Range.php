@@ -18,4 +18,8 @@ class Range extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    public function getQualifiedNameAttribute(){
+        return 'Qualified';
+    }
 }
