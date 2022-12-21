@@ -263,7 +263,7 @@ $configData = Helper::applClasses();
             display: block;
         }
         i,a{
-        color:  #03CDB6!important;
+        color:  #03CDB6;
     }
     </style>
     <script>
