@@ -3,366 +3,387 @@
 @section('title', 'Dashboard Analytics')
 
 @section('vendor-style')
-    <!-- vendor css files -->
-    <link rel="stylesheet" href="{{ asset(mix('vendors/css/charts/apexcharts.css')) }}">
-    <link rel="stylesheet" href="{{ asset(mix('css/base/pages/dashboard-ecommerce.css')) }}">
-    <link rel="stylesheet" href="{{ asset(mix('vendors/css/extensions/toastr.min.css')) }}">
-    <link rel="stylesheet" href="{{ asset(mix('vendors/css/tables/datatable/dataTables.bootstrap5.min.css')) }}">
-    <link rel="stylesheet" href="{{ asset(mix('vendors/css/tables/datatable/responsive.bootstrap4.min.css')) }}">
-    <link rel="stylesheet" href="{{ asset(mix('vendors/css/forms/select/select2.min.css')) }}">
+<!-- vendor css files -->
+<link rel="stylesheet" href="{{ asset(mix('vendors/css/charts/apexcharts.css')) }}">
+<link rel="stylesheet" href="{{ asset(mix('css/base/pages/dashboard-ecommerce.css')) }}">
+<link rel="stylesheet" href="{{ asset(mix('vendors/css/extensions/toastr.min.css')) }}">
+<link rel="stylesheet" href="{{ asset(mix('vendors/css/tables/datatable/dataTables.bootstrap5.min.css')) }}">
+<link rel="stylesheet" href="{{ asset(mix('vendors/css/tables/datatable/responsive.bootstrap4.min.css')) }}">
+<link rel="stylesheet" href="{{ asset(mix('vendors/css/forms/select/select2.min.css')) }}">
 @endsection
 @section('page-style')
-    <!-- Page css files -->
-    <link rel="stylesheet" href="{{ asset(mix('css/base/plugins/charts/chart-apex.css')) }}">
-    <link rel="stylesheet" href="{{ asset(mix('css/base/plugins/extensions/ext-component-toastr.css')) }}">
-    <link rel="stylesheet" href="{{ asset(mix('css/base/pages/app-invoice-list.css')) }}">
-    <link rel="stylesheet" href="{{ asset(mix('css/style.css')) }}">
+<!-- Page css files -->
+<link rel="stylesheet" href="{{ asset(mix('css/base/plugins/charts/chart-apex.css')) }}">
+<link rel="stylesheet" href="{{ asset(mix('css/base/plugins/extensions/ext-component-toastr.css')) }}">
+<link rel="stylesheet" href="{{ asset(mix('css/base/pages/app-invoice-list.css')) }}">
+<link rel="stylesheet" href="{{ asset(mix('css/style.css')) }}">
 
 @endsection
 
 @section('content')
 
-    <style>
-        :root {
-            --hue-1: 257;
-            --hue-2: 47;
-            --bg-color: hsl(var(--hue-1), 100%, 97%);
-            --main-color-1: hsl(var(--hue-1), 100%, 60%);
-            --main-color-dark-1: hsl(var(--hue-1), 69%, 50%);
-            --main-color-2: hsl(var(--hue-2), 100%, 61%);
-            --main-color-dark-2: hsl(var(--hue-2), 82%, 55%);
-            --bg-color-1: hsl(var(--hue-1), 100%, 97%);
-            --bg-color-2: #fff;
-            --bg-color-3: hsl(var(--hue-1), 100%, 98%);
-            --bg-color-transparent: rgba(255, 255, 255, 0.6);
-            --headiing-color: hsl(var(--hue-1), 61%, 24%);
-            --text-color: hsl(var(--hue-1), 17%, 63%);
-            --section--padding: 7rem;
+<style>
+    :root {
+        --hue-1: 257;
+        --hue-2: 47;
+        --bg-color: hsl(var(--hue-1), 100%, 97%);
+        --main-color-1: hsl(var(--hue-1), 100%, 60%);
+        --main-color-dark-1: hsl(var(--hue-1), 69%, 50%);
+        --main-color-2: hsl(var(--hue-2), 100%, 61%);
+        --main-color-dark-2: hsl(var(--hue-2), 82%, 55%);
+        --bg-color-1: hsl(var(--hue-1), 100%, 97%);
+        --bg-color-2: #fff;
+        --bg-color-3: hsl(var(--hue-1), 100%, 98%);
+        --bg-color-transparent: rgba(255, 255, 255, 0.6);
+        --headiing-color: hsl(var(--hue-1), 61%, 24%);
+        --text-color: hsl(var(--hue-1), 17%, 63%);
+        --section--padding: 7rem;
+    }
+
+    .counter {
+        position: absolute;
+        top: 40%;
+        left: 53%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        font-weight: 400;
+        font-size: 0.9rem;
+    }
+
+    .counter span {
+        font-size: 2.15rem;
+    }
+
+    .membresia {
+        position: absolute;
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        font-weight: 400;
+        font-size: 0.9rem;
+    }
+
+    .membresia span {
+        font-size: 14px;
+        font-weight: 700, bold;
+        color: #0255B8;
+    }
+
+    .texCustom {
+        color: #47586C !important;
+    }
+
+    .texCustomBlu {
+        color: #0255B8 !important;
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 27px;
+        letter-spacing: 0em;
+        text-align: left;
+    }
+
+    .texCustomDeg {
+        color: #07B0F2 !important;
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 27px;
+        letter-spacing: 0em;
+        text-align: left;
+    }
+
+
+    .container-custom {
+        padding-right: 0px !important;
+        padding-left: 0px !important;
+    }
+
+    .inconDashboar {
+        width: 5.1rem;
+        height: 5.1rem;
+        color: rgba(100, 59, 237, 0.05);
+        position: absolute;
+        /* left: 68%; */
+        font-size: 4.5rem;
+        right: 15px;
+    }
+
+    .iconCard {
+        width: 1.2rem;
+        height: 1.2rem;
+    }
+
+    .icono {
+        position: relative;
+    }
+
+    .customTexto {
+        font-size: 0.95rem !important;
+        color: #808E9E;
+    }
+
+    .customTextoP {
+        font-size: 40px;
+        color: #808e9e;
+    }
+
+    .aDecoration {
+        text-decoration: underline !important;
+    }
+
+    .customTextoCard {
+        font-size: 0.8919rem !important;
+        font-weight: 500;
+    }
+
+    .customTextoCardNumber {
+        font-size: 1.05rem !important;
+        color: #47586C;
+        font-weight: 1000;
+    }
+
+    .custoTextRangosEstadisticas {
+        /* font-size: 1.2rem !important; */
+        font-weight: 900;
+        color: #47586C;
+
+    }
+
+
+
+
+
+    .custom-avatar-content {
+        border-radius: 10px !important;
+    }
+
+    .square {
+        height: 87px;
+        width: 109px;
+        border-radius: 10px;
+        /* background-color: rgba(103, 61, 237, 0.5); */
+    }
+
+    .square-active {
+        height: 120px;
+        width: 120px;
+        /*background-color: #FAF9FF;*/
+        border-radius: 10px;
+    }
+
+    .square-selected {
+        height: 106 !important;
+        width: 87 !important;
+        border-radius: 10px;
+        /*background-color: #886de0;*/
+    }
+
+    .square p,
+    .square-active p {
+        color: #fff;
+    }
+
+    @media (max-width:486px) {
+        .flex-c-md {
+            flex-direction: column !important;
         }
 
-        .counter {
-            position: absolute;
-            top: 40%;
-            left: 53%;
-            transform: translate(-50%, -50%);
-            z-index: 1;
-            font-weight: 400;
-            font-size: 0.9rem;
+        .flex-c-md .col-3 {
+            flex: 0 0 auto;
+            width: 121.8px !important;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .counter span {
-            font-size: 2.15rem;
-        }
-        
-        .membresia {
-            position: absolute;
-            top: 60%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1;
-            font-weight: 400;
-            font-size: 0.9rem;
+        .flex-c-md .col-6 {
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .membresia span {
-            font-size: 14px;
-            font-weight: 700, bold;
-            color: #0255B8;
+        .flex-c-md .mt-5 {
+            margin-top: 2rem !important;
+            margin-bottom: 3rem;
         }
 
-        .texCustom {
-            color: #47586C !important;
+    }
+
+    @media screen and (min-width:768px) and (max-width:991px) {
+        .col-lg-6.col-sm-12.d-flex.align-items-center.border-start {
+            border-left: 1px solid #ededed00 !important;
+        }
+    }
+
+    @media screen and (min-width:450px) and (max-width:767px) {
+
+        .fd-sm {
+            flex-direction: row !important;
         }
 
-        .texCustomBlu {
-            color: #0255B8 !important;
-            font-size: 18px;
-            font-weight: 700;
-            line-height: 27px;
-            letter-spacing: 0em;
-            text-align: left;
+        .md-50 {
+            width: 50% !important;
         }
 
-        .texCustomDeg {
-            color: #07B0F2 !important;
-            font-size: 18px;
-            font-weight: 700;
-            line-height: 27px;
-            letter-spacing: 0em;
-            text-align: left;
+        .md-60 {
+            width: 60% !important;
         }
 
+        .md-40 {
+            width: 40% !important;
+        }
+    }
 
-        .container-custom {
-            padding-right: 0px !important;
-            padding-left: 0px !important;
+    @media(max-width:449px) {
+        .md-40 {
+            margin-top: 1rem !important;
         }
 
-        .inconDashboar {
-            width: 5.1rem;
-            height: 5.1rem;
-            color: rgba(100, 59, 237, 0.05);
-            position: absolute;
-            /* left: 68%; */
-            font-size: 4.5rem;
-            right: 15px;
+        .col-md-7.border-end.md-60 {
+            border-right: 1px solid #ededed00 !important;
         }
+    }
 
-        .iconCard {
-            width: 1.2rem;
-            height: 1.2rem;
-        }
+    .row-top {
+        margin-top: -7.1rem;
+    }
 
-        .icono {
-            position: relative;
-        }
-
-        .customTexto {
-            font-size: 0.95rem !important;
-            color: #808E9E;
-        }
-
-        .customTextoP {
-            font-size: 40px;
-            color: #808e9e;
-        }
-
-        .aDecoration {
-            text-decoration: underline !important;
-        }
-
-        .customTextoCard {
-            font-size: 0.8919rem !important;
-            font-weight: 500;
-        }
-
-        .customTextoCardNumber {
-            font-size: 1.05rem !important;
-            color: #47586C;
-            font-weight: 1000;
-        }
-
-        .custoTextRangosEstadisticas {
-            /* font-size: 1.2rem !important; */
-            font-weight: 900;
-            color: #47586C;
+    @media(max-width:1360px) {
+        .row-top {
+            margin-top: -14.1rem;
 
         }
+    }
 
-        
-
-        
-       
-        .custom-avatar-content {
-            border-radius: 10px !important;
+    @media(max-width:1210px) {
+        .row-top {
+            margin-top: -9.9rem;
         }
+    }
 
-        .square {
-            height: 87px;
-            width: 109px;
-            border-radius: 10px;
-            /* background-color: rgba(103, 61, 237, 0.5); */
+    @media(max-width:1199px) {
+        .row-top {
+            margin-top: -6.9rem;
         }
+    }
 
-        .square-active {
-            height: 120px;
-            width: 120px;
-            /*background-color: #FAF9FF;*/
-            border-radius: 10px;
+    @media(max-width:1100px) {
+        .row-top {
+            margin-top: -18.9%;
         }
+    }
 
-        .square-selected {
-            height: 106 !important;
-            width: 87 !important;
-            border-radius: 10px;
-            /*background-color: #886de0;*/
+    @media (max-width: 991px) {
+        .row-top {
+            margin-top: 0rem;
         }
+    }
 
-        .square p,
-        .square-active p {
-            color: #fff;
-        }
+    .gradient {
+        background: rgb(2, 0, 36);
+        background: linear-gradient(90deg, #05A4EA, #02D6AC 100%);
+    }
 
-        @media (max-width:486px) {
-            .flex-c-md {
-                flex-direction: column !important;
-            }
+    .gradient2 {
+        background: rgb(2, 0, 36);
+        background: linear-gradient(90deg, #02D6AC, #05A4EA 100%);
+    }
 
-            .flex-c-md .col-3 {
-                flex: 0 0 auto;
-                width: 121.8px !important;
-                margin-left: auto;
-                margin-right: auto;
-            }
+    .texto {
+        color: #04D99D;
+    }
 
-            .flex-c-md .col-6 {
-                margin-left: auto;
-                margin-right: auto;
-            }
+    .zoom {
+        transition: transform .2s;
+    }
 
-            .flex-c-md .mt-5 {
-                margin-top: 2rem !important;
-                margin-bottom: 3rem;
-            }
+    .zoom:hover {
+        transform: scale(1.2);
+    }
 
-        }
-        @media screen and (min-width:768px) and (max-width:991px){
-            .col-lg-6.col-sm-12.d-flex.align-items-center.border-start{
-                border-left: 1px solid #ededed00 !important;
-            }
-        }
-        @media screen and (min-width:450px) and (max-width:767px){
-            
-            .fd-sm {
-                flex-direction: row!important;
-            }
-            .md-50{
-                width: 50%!important;
-            }
-            .md-60{
-                width: 60%!important;
-            }
-            .md-40{
-                width: 40%!important;
-            }
-        }
-        @media(max-width:449px){
-            .md-40{
-                margin-top: 1rem!important;
-            }
-            .col-md-7.border-end.md-60{
-                border-right: 1px solid #ededed00 !important;
-            }
-        } 
-        .row-top{
-            margin-top: -7.1rem;
-        }
-        @media(max-width:1360px){
-            .row-top{
-                 margin-top: -14.1rem; 
+    .zoom:active {
+        transform: scale(1);
+    }
 
-            }
-        } 
-        @media(max-width:1210px){
-            .row-top{
-             margin-top: -9.9rem;
-            }
-        } 
-        @media(max-width:1199px){
-            .row-top{
-                margin-top: -6.9rem;
-            }
-        } 
-        @media(max-width:1100px){
-            .row-top{
-                margin-top: -18.9%;
-            }
-        } 
-        @media (max-width: 991px){
-            .row-top {
-                margin-top: 0rem;
-            }
-        }
-    
-        .gradient{
-    background: rgb(2,0,36);
-    background: linear-gradient(90deg, #05A4EA, #02D6AC 100%);
-}
-.gradient2{
-    background: rgb(2,0,36);
-    background: linear-gradient(  90deg, #02D6AC , #05A4EA 100%);
-}
+    g#SvgjsG1165 .apexcharts-text {
+        fill: #FFFFFF !important;
+        filter: none;
+    }
 
-.texto{
-    color:#04D99D;
-}
+    path#SvgjsPath2394 {
+        border-radius: 10px !important;
+        stroke-linecap: round !important;
+    }
 
-.zoom {
-    transition: transform .2s; 
-}
- 
-.zoom:hover {
-    transform: scale(1.2); 
-}
-.zoom:active{
-    transform: scale(1); 
-}
+    footer{
+        margin: auto !important;
+    }
+</style>
 
-g#SvgjsG1165 .apexcharts-text {
-    fill: #FFFFFF !important;
-    filter: none;
-}
-path#SvgjsPath2394 {
-    border-radius: 10px !important;
-    stroke-linecap: round !important;
-}
-    </style>
+<div class="container-fluid ">
+    <div class="d-flex my-1">
+        <p class="fw-700 mb-0" style="color: #000000;">Dashboard</p><span class="fw-300 mx-1 "
+            style="color: #04D99D; font-size: 20px;">|</span>
+        <p class="fw-300 mb-0" style="color: #000000;">Banker Quotes</p>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            @include('dashboard.components.cryptobar')
 
-    <div class="container-fluid ">
-        <div class="d-flex my-1">
-            <p class="fw-700 mb-0" style="color: #000000;">Dashboard</p><span class="fw-300 mx-1 " style="color: #04D99D; font-size: 20px;">|</span>
-            <p class="fw-300 mb-0" style="color: #000000;">Banker Quotes</p>
         </div>
-        <div class="row">
-            <div class="col-sm-12">
-                @include('dashboard.components.cryptobar')
-               
-            </div>
-            <div class="col-sm-12">
-                <div class="row match-height">
-                    @include('dashboard.components.balanceCard')
-                    @include('dashboard.components.licenseBonus')
-                    @include('dashboard.components.MLMPAMM')
-                    @include('dashboard.components.balancePAMM')
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="row">
-                            @include('dashboard.components.referral_binary_side')
-                            @include('dashboard.components.licenciaCard')
-                        </div>
-                    </div>
-                        
-                    <div class="col-sm-12 mb-2">
-                        @include('dashboard.components.rangoCard')
-                    </div>
-                    <div class="col-sm-12 mb-2 ">
-                        <div class="row d-flex justify-content-between" style="--bs-gutter-x: 0rem;">
-                            
-                             @include('dashboard.components.gain-chart')
-                        
-                            @include('dashboard.components.historyBonusTable')
-                        </div>
-                    </div>
-                </div>
+        <div class="col-sm-12">
+            <div class="row match-height">
+                @include('dashboard.components.balanceCard')
+                @include('dashboard.components.licenseBonus')
+                @include('dashboard.components.MLMPAMM')
+                @include('dashboard.components.balancePAMM')
             </div>
         </div>
-    </div>       
-    <!-- Dashboard Analytics end -->
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="row">
+                        @include('dashboard.components.referral_binary_side')
+                        @include('dashboard.components.licenciaCard')
+                    </div>
+                </div>
+
+                <div class="col-sm-12 mb-2">
+                    @include('dashboard.components.rangoCard')
+                </div>
+                <div class="col-sm-12 mb-2 ">
+                    <div class="row d-flex justify-content-between" style="--bs-gutter-x: 0rem;">
+
+                        @include('dashboard.components.gain-chart')
+
+                        @include('dashboard.components.historyBonusTable')
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Dashboard Analytics end -->
 @endsection
 
 @section('vendor-script')
-    <!-- vendor files -->
+<!-- vendor files -->
 
-    <script src="{{ asset(mix('vendors/js/charts/chart.min.js')) }}"></script>
-    <script src="{{ asset(mix('js/scripts/charts/chart-chartjs.js')) }}"></script>
-    <script src="{{ asset(mix('vendors/js/charts/apexcharts.min.js')) }}"></script>
-    <script src="{{ asset(mix('vendors/js/extensions/toastr.min.js')) }}"></script>
-    <script src="{{ asset(mix('vendors/js/extensions/moment.min.js')) }}"></script>
-    <script src="{{ asset(mix('vendors/js/tables/datatable/jquery.dataTables.min.js')) }}"></script>
-    <script src="{{ asset(mix('vendors/js/tables/datatable/datatables.buttons.min.js')) }}"></script>
-    <script src="{{ asset(mix('vendors/js/tables/datatable/dataTables.bootstrap5.min.js')) }}"></script>
-    <script src="{{ asset(mix('vendors/js/tables/datatable/dataTables.responsive.min.js')) }}"></script>
-    <script src="{{ asset(mix('vendors/js/tables/datatable/responsive.bootstrap4.js')) }}"></script>
-    <script src="{{ asset(mix('vendors/js/forms/select/select2.full.min.js')) }}"></script>
+<script src="{{ asset(mix('vendors/js/charts/chart.min.js')) }}"></script>
+<script src="{{ asset(mix('js/scripts/charts/chart-chartjs.js')) }}"></script>
+<script src="{{ asset(mix('vendors/js/charts/apexcharts.min.js')) }}"></script>
+<script src="{{ asset(mix('vendors/js/extensions/toastr.min.js')) }}"></script>
+<script src="{{ asset(mix('vendors/js/extensions/moment.min.js')) }}"></script>
+<script src="{{ asset(mix('vendors/js/tables/datatable/jquery.dataTables.min.js')) }}"></script>
+<script src="{{ asset(mix('vendors/js/tables/datatable/datatables.buttons.min.js')) }}"></script>
+<script src="{{ asset(mix('vendors/js/tables/datatable/dataTables.bootstrap5.min.js')) }}"></script>
+<script src="{{ asset(mix('vendors/js/tables/datatable/dataTables.responsive.min.js')) }}"></script>
+<script src="{{ asset(mix('vendors/js/tables/datatable/responsive.bootstrap4.js')) }}"></script>
+<script src="{{ asset(mix('vendors/js/forms/select/select2.full.min.js')) }}"></script>
 @endsection
 @section('page-script')
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
-    <script>
-        $('.myTable').DataTable({
+<script>
+    $('.myTable').DataTable({
             responsive: false,
             order: [
                 [0, 'desc']
@@ -396,9 +417,9 @@ path#SvgjsPath2394 {
         // minimumResultsForSearch: Infinity
 
         // });
-    </script>
-    <script>
-        //Url global para actualizar gráfico de avance de paquete
+</script>
+<script>
+    //Url global para actualizar gráfico de avance de paquete
         const package_chart_url = "{!! route('package.rentability.chart', 'replace_this') !!}";
         const user_id = {!! $user->id !!};
 
@@ -1253,9 +1274,9 @@ path#SvgjsPath2394 {
                 })
                 .catch(err => console.log(err));
         }
-    </script>
-    <script>
-        function derecho(){
+</script>
+<script>
+    function derecho(){
             const lado = document.getElementById('binary')
             lado.setAttribute("value", "R");
         }
@@ -1264,5 +1285,5 @@ path#SvgjsPath2394 {
             const lado = document.getElementById('binary')
             lado.setAttribute("value", "L");
         }
-    </script>
+</script>
 @endsection
