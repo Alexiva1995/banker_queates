@@ -99,9 +99,7 @@
                 <div class="card-header d-block p-2 pb-0">
                     <div class="d-flex justify-content-between align-item-center flex-wrap  gap-50">
                         <h4 class="fw-700">Unilevel</h4>
-                        <a id="btn-copy"><i class="iconCard text-primary " data-feather='copy'></i><strong
-                                class="ms-1 aDecoration fw-700" onclick="getlink()" id="copy-to-clipboard">COPIAR LINK
-                                DE REFERIDOS!</strong></a>
+                       
                     </div>
                 </div>
             </div>

@@ -149,7 +149,7 @@
 
             if( status === 'success' ) {
 
-                toastr.success(message, '¡Error!', {
+                toastr.success(message, '¡Éxito!', {
                     "progressBar": true
                 });
                 

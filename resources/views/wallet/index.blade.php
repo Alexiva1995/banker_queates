@@ -53,7 +53,7 @@
         }
     }
 
-    .entrada-bloc a {
+    . a {
         display: inline-block;
         color: white;
         padding: 10px 20px;
@@ -131,44 +131,52 @@
 </nav>
 <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade show" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-        <div class="contenedor tres-columnas ">
-            <div class="card p-2 entrada-bloc">
-                <div class="avatar bg-light-primary avatar-md me-auto mb-1" style="padding: 0.3rem !important">
-                    <div class="avatar-content">
-                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M16 18H2C0.89543 18 0 17.1046 0 16V2C0 0.89543 0.89543 0 2 0H16C17.1046 0 18 0.89543 18 2V16C18 17.1046 17.1046 18 16 18ZM2 2V16H16V2H2ZM14 14H12V7H14V14ZM10 14H8V4H10V14ZM6 14H4V9H6V14Z"
-                                fill="#04D99D" />
-                        </svg>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="card p-2 ">
+                        <div class="avatar bg-light-primary avatar-md me-auto mb-1" >
+                            <div class="avatar-content">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M16 18H2C0.89543 18 0 17.1046 0 16V2C0 0.89543 0.89543 0 2 0H16C17.1046 0 18 0.89543 18 2V16C18 17.1046 17.1046 18 16 18ZM2 2V16H16V2H2ZM14 14H12V7H14V14ZM10 14H8V4H10V14ZM6 14H4V9H6V14Z"
+                                        fill="#04D99D" />
+                                </svg>
+                            </div>
+                        </div>
+        
+                        <div class="texto" >
+                            <span class="usdt-color" style="font-weight:900; font-size: 21px">USDT {{ $mlmTotal }} </span>
+                            <br>
+                            <span class="text-light">Total Ganado</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="texto" style="padding-left: 3%">
-                    <span class="usdt-color" style="font-weight:900; font-size: 21px">USDT {{ $mlmTotal }} </span>
-                    <br>
-                    <span class="text-light">Total Ganado</span>
-                </div>
-            </div>
-
-            <div class="card p-2 entrada-bloc">
-                <div class="avatar bg-light-primary avatar-md me-auto mb-1" style="padding: 0.3rem !important">
-                    <div class="avatar-content">
-                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M16 18H2C0.89543 18 0 17.1046 0 16V2C0 0.89543 0.89543 0 2 0H16C17.1046 0 18 0.89543 18 2V16C18 17.1046 17.1046 18 16 18ZM2 2V16H16V2H2ZM14 14H12V7H14V14ZM10 14H8V4H10V14ZM6 14H4V9H6V14Z"
-                                fill="#04D99D" />
-                        </svg>
+                <div class="col-sm-3">
+                    <div class="card p-2 ">
+                        <div class="avatar bg-light-primary avatar-md me-auto mb-1" >
+                            <div class="avatar-content">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M16 18H2C0.89543 18 0 17.1046 0 16V2C0 0.89543 0.89543 0 2 0H16C17.1046 0 18 0.89543 18 2V16C18 17.1046 17.1046 18 16 18ZM2 2V16H16V2H2ZM14 14H12V7H14V14ZM10 14H8V4H10V14ZM6 14H4V9H6V14Z"
+                                        fill="#04D99D" />
+                                </svg>
+                            </div>
+                        </div>
+        
+                        <div class="texto" >
+                            <span class="usdt-color" style="font-weight:900; font-size: 21px">USDT {{ $mlmAvailable }} </span>
+                            <br>
+                            <span class="text-light">Saldo Disponible</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="texto" style="padding-left: 3%">
-                    <span class="usdt-color" style="font-weight:900; font-size: 21px">USDT {{ $mlmAvailable }} </span>
-                    <br>
-                    <span class="text-light">Saldo Disponibles</span>
+                <div class="col-sm-6">
+                    @include('wallet.components.activeLicen')
                 </div>
-            </div>
+              </div>
 
-        </div>
         <div class="col-lg-12 col-12">
             <div id="logs-list">
                 <div class="col-12">
@@ -238,9 +246,10 @@
             </div>
         </div>
     </div>
+    @include('wallet.general')
     @include('wallet.Licencias')
     @include('wallet.range')
-    @include('wallet.general')
+
 </div>
 
 @endsection
