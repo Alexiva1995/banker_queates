@@ -173,7 +173,7 @@
                 </div>
 
                 <div class="col-sm-6">
-                    @include('wallet.components.activeLicen')
+                    @include('wallet.components.actriveLicenMLM')
                 </div>
               </div>
 
