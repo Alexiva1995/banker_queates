@@ -124,35 +124,37 @@ class RegisterController extends Controller
             $lastname=$userName[1];
         }
         try {
-            $user = User::create([
-                'username' => $request->username,
-                'name' => $name,
-                'binary_id' => $binary_id,
-                'binary_side' => $binary_side,
-                'last_name' => $lastname,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'buyer_id' => $request->buyer_id ?? 1,
-                'prefix_id' => $request->countrie_id,
-                'status' => '0',
-            ]);
-            // $url = config('services.api_whizfx.base_url');
-            // $response = Http::withHeaders([
-            //     'auth' => config('services.api_whizfx.x-token'),
-            // ])->post("{$url}", [
-            //     'firstname' => $name,
-            //     'lastname' => $lastname,
-            //     'address' => '',
+            // $user = User::create([
+            //     'username' => $request->username,
+            //     'name' => $name,
+            //     'binary_id' => $binary_id,
+            //     'binary_side' => $binary_side,
+            //     'last_name' => $lastname,
             //     'email' => $request->email,
-            //     'country_id' => $request->countrie_id,
-            //     'phonenumber' => '',
-            //     'type' => '',
+            //     'password' => Hash::make($request->password),
+            //     'buyer_id' => $request->buyer_id ?? 1,
+            //     'prefix_id' => $request->countrie_id,
+            //     'status' => '0',
             // ]);
-            // if($response->successful()) {
+            $url = config('services.api_whizfx.base_url');
+            $url = $url . 'customer';
+            $response = Http::withHeaders([
+                'auth' => config('services.api_whizfx.x-token'),
+            ])->post("{$url}", [
+                'firstname' => $name,
+                'lastname' => $lastname,
+                'address' => '',
+                'email' => $request->email,
+                'country_id' => $request->countrie_id,
+                'phonenumber' => '',
+                'type' => '',
+            ]);
+            if($response->successful()) {
+                dd($response->json());
                 return redirect()->route('auth.verify', $user);
-            // }else{
-            //     return back()->with('error', 'Hubo un error, verifica tus datos.');
-            // }
+            }else{
+                return back()->with('error', 'Hubo un error, verifica tus datos.');
+            }
             // $dataEmail = [
             //     'user' => $user,
             //   ];
