@@ -201,6 +201,26 @@
                 </div>
                 @include('business.componentes.Modal.Retiros.setWalletModal')
             </div>
+    <script>
+    function notification(){
+        Swal.fire({
+        position: 'top-end',
+        html: '<div  class="cont1"><img id="rangoimg" class="capas" src="{{ asset('images/ensignRanges/1.png') }}" height="90" width="120"></div>',
+        title: 'Your work has been saved',
+        showConfirmButton: false,
+        timer: 1900
+})
+
+setTimeout(rotacionImg , 100);
+
+    }
+    function rotacionImg(){
+        let img = document.getElementById("rangoimg");
+        console.log(img);
+        img.style.transform = "rotateY(360deg)"
+    }
+    </script>
+
         </div>
     </div>
 </div>
@@ -212,9 +232,9 @@
     <script src="{{ asset(mix('vendors/js/tables/datatable/dataTables.responsive.min.js')) }}"></script>
     @endsection
     @section('page-script')
-    <script></script>
     {{-- <script src="{{ asset(mix('js/scripts/cards/card-statistics.js')) }}"></script> --}}
     <script>
+        
         //datataables ordenes
         $('.myTable').DataTable({
             responsive: false,
