@@ -15,7 +15,7 @@
                     <div class="texto" style="padding-left: 3%">
                         <span class="usdt-color" style="font-weight:900; font-size: 21px">USDT {{$licenciasTotal }} </span>
                         <br>
-                        <span class="text-light">Total Ganado</span>
+                        <span class="text-light">Total Ganado Binario</span>
                     </div>
                 </div>
             </div>
