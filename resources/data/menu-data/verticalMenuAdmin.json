@@ -11,7 +11,7 @@
             "slug": "/",
             "submenu": [{
                     "url": "/comisiones",
-                    "name": "Comisiones",
+                    "name": "Comisiones Globales",
                     "icon": "circle",
                     "slug": "reports.comision"
                 },
@@ -23,7 +23,7 @@
                 },
                 {
                     "url": "/ordenes",
-                    "name": "Ordenes",
+                    "name": "Histórico de Licencias",
                     "icon": "circle",
                     "slug": "ordenes.index"
                 },
@@ -42,7 +42,7 @@
             "url": "user/user-list"
         },
         {
-            "name": "Liquidaciones",
+            "name": "Retiros",
             "icon": "fa-solid fa-wallet",
             "slug": "/",
             "submenu": [{

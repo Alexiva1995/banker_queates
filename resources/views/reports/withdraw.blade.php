@@ -59,7 +59,21 @@
         <div class="card p-2">
             <div class="card-content p-50">
                 <div class="card-header p-0">
-                    <h4 class="fw-700">Retiros</h4>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="col-sm-6 d-flex justify-content-start">
+                                        <h4 class="fw-700">Retiros</h4>
+                                    </div>
+                                    <div class="col-sm-6 d-flex justify-content-end">
+                                            <a href="{{route('solicitudesRetiros')}}" class="btn btn-primary ">Solicitar Retiro</a>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                    </div>
+                   
                     @if(auth()->user()->admin == 1)
                         <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button"
                             aria-expanded="false" aria-controls="collapseExample">
