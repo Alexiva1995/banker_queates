@@ -15,10 +15,10 @@ class CreateWhizfxTable extends Migration
     {
         Schema::create('whizfx', function (Blueprint $table) {
             $table->id();
-            $table->integer('account_id');
-            $table->integer('customer_id');
-            $table->double('balance');
-            $table->integer('kyc_percentage');
+            $table->integer('account_id')->nullable();
+            $table->integer('customer_id')->nullable();
+            $table->double('balance')->nullable();
+            $table->integer('kyc_percentage')->nullable();
             $table->timestamps();
         });
     }

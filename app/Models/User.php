@@ -95,6 +95,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsTo('App\Models\Countrie', 'countrie_id');
     }
+    public function whizfx()
+    {
+        return $this->belongsTo('App\Models\Whizfx');
+    }
 
     public function memberships()
     {

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\TreController;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\Whizfx;
 use App\Models\WalletComission;
 use App\Models\Prefix;
 use App\Services\FutswapService;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class RegisterController extends Controller
 {
@@ -124,18 +126,18 @@ class RegisterController extends Controller
             $lastname=$userName[1];
         }
         try {
-            // $user = User::create([
-            //     'username' => $request->username,
-            //     'name' => $name,
-            //     'binary_id' => $binary_id,
-            //     'binary_side' => $binary_side,
-            //     'last_name' => $lastname,
-            //     'email' => $request->email,
-            //     'password' => Hash::make($request->password),
-            //     'buyer_id' => $request->buyer_id ?? 1,
-            //     'prefix_id' => $request->countrie_id,
-            //     'status' => '0',
-            // ]);
+            $user = User::create([
+                'username' => $request->username,
+                'name' => $name,
+                'binary_id' => $binary_id,
+                'binary_side' => $binary_side,
+                'last_name' => $lastname,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'buyer_id' => $request->buyer_id ?? 1,
+                'prefix_id' => $request->countrie_id,
+                'status' => '0',
+            ]);
             $url = config('services.api_whizfx.base_url');
             $url = $url . 'customer';
             $response = Http::withHeaders([
@@ -149,8 +151,24 @@ class RegisterController extends Controller
                 'phonenumber' => '',
                 'type' => '',
             ]);
+            
             if($response->successful()) {
-                dd($response->json());
+                $customerData = $response->object();
+                // log::debug($customerData);
+                $whizfx = Whizfx::create([
+                    'customer_id' => $customerData->id,
+                ]);
+                $user->whizfx_id = $whizfx->id;
+                $user->save();
+
+                $url = config('services.api_whizfx.base_url');
+                $url = $url . 'customer/'.$customerData->id;
+                $response = Http::withHeaders([
+                'auth' => config('services.api_whizfx.x-token'),
+            ])->get("{$url}");
+                $customerData = $response->object();
+                $whizfx->kyc_percentage = $customerData->kyc_percentage;
+                $whizfx->save();
                 return redirect()->route('auth.verify', $user);
             }else{
                 return back()->with('error', 'Hubo un error, verifica tus datos.');

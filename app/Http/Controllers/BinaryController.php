@@ -25,7 +25,7 @@ class BinaryController extends Controller
             $referred_left = User::where('binary_id', $usuario->id)->where('binary_side', 'L')->exists();
             $referred_right = User::where('binary_id', $usuario->id)->where('binary_side', 'R')->exists();
 
-            if ($referred_left && $referred_right) {
+            if ($referred_left && $referred_right && $usuario->whizfx->kyc_percetage == 100 ) {
 
                 $binary_points = BinaryPoint::where('user_id', $id)->where('status', 0)->get();
 
