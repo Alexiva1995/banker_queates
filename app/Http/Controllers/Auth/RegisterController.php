@@ -186,6 +186,8 @@ class RegisterController extends Controller
             // return $user;
 
         } catch (\Throwable $th) {
+            Log::error('Error al registrar usuario');
+            Log::error($th);
             return back()->with('error', 'Hubo un error, verifica tus datos.');
         }
 
