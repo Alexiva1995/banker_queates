@@ -20,7 +20,13 @@
                                     <div class="square-active d-flex justify-content-center align-items-center">
                                         <img src="{{ asset('images/ensignRanges/'.$r['id'].'.png') }}" height="130" width="170">
                                     </div>
-                                    <h5 class="text-center fw-700 mt-1 mb-0" style="color: #5E7382">{{$r['name']}}</h5>
+                                    <h5 class="text-center fw-700 mt-1 mb-0" style="color: #5E7382">
+                                        @if($r->id == 2)
+                                            {{$r->qualified_name}}
+                                        @else
+                                            {{$r['name']}}
+                                        @endif
+                                    </h5>
                                 </div>
                             </div>
 
@@ -30,7 +36,13 @@
                                     <div class="square-active d-flex justify-content-center align-items-center">
                                         <img src="{{ asset('images/ensignRanges/'.$r['id'].'.png') }}" height="90" width="120">
                                     </div>
-                                    <h5 class="text-center fw-700 mt-1 mb-0" style="color: #5E7382">{{$r['name']}}</h5>
+                                    <h5 class="text-center fw-700 mt-1 mb-0" style="color: #5E7382">
+                                        @if($r->id == 2)
+                                            {{$r->qualified_name}}
+                                        @else
+                                            {{$r['name']}}
+                                        @endif
+                                    </h5>
                                 </div>
                             </div>
                             @endif
@@ -40,7 +52,13 @@
                                 <div class="square-active d-flex justify-content-center align-items-center">
                                      <img src="{{ asset('images/ensignRanges/'.$r['id'].'.png') }}" height="90" width="120">
                                 </div>
-                                 <h5 class="text-center fw-700 mt-1 mb-0" style="color: #5E7382">{{$r['name']}}</h5>
+                                 <h5 class="text-center fw-700 mt-1 mb-0" style="color: #5E7382">
+                                    @if($r->id == 2)
+                                        {{$r->qualified_name}}
+                                    @else
+                                        {{$r['name']}}
+                                    @endif
+                                </h5>
                             </div>
                         </div>
                         @endif

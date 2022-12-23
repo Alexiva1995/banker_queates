@@ -218,13 +218,9 @@ class TicketsController extends Controller
     // permite la creacion del ticket
     public function store(Request $request)
     {
-        
-
-
         $validate = $request->validate([
             'image' => 'image|max:2048',
             'message' => 'min:2'
-
         ]);
         
         Tickets::create([
