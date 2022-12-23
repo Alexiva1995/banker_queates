@@ -96,11 +96,11 @@ class bonosPamm extends Command
                 'status'=> 0,
             ];
             $padre = User::findOrFail($user['buyer_id']);
-            if ($padre->whizfx_id) {
-                if ($padre->whizfx->kyc_percetage == 100) {
+            // if ($padre->whizfx_id) {
+            //     if ($padre->whizfx->kyc_percentage == 100) {
                      WalletComission::create($bono_pamm);                             
-                }    
-            } 
+            //     }    
+            // } 
             return $user['buyer_id'];   
         }else{
             return null;
