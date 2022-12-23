@@ -82,6 +82,16 @@ class BonoManualController extends Controller
         $total = $saldo->sum('amount_available');
         //return  $total - $monto_a_sustraer ;
         if($monto_a_sustraer <= $total  && !empty($descripcion)){
+            $liqui = new Liquidation();
+                $liqui->user_id = $id;
+                $liqui->amount_gross = $monto_a_sustraer;
+                $liqui->amount_net = $monto_a_sustraer;
+                $liqui->amount_fee = 0;
+                $liqui->description = $descripcion;
+                $liqui->type = 3;
+                $liqui->status = 0;
+                $liqui->save();
+
             for($i = 0; $i < count($saldo); $i++){
                 $total = $saldo->sum('amount_available');
                 if(  $saldo[$i]['amount_available'] - $monto_a_sustraer   <= 0){
@@ -96,15 +106,6 @@ class BonoManualController extends Controller
                     $saldo[$i]->update();
                     $i = count($saldo);
                 }
-                $liqui = new Liquidation();
-                $liqui->user_id = $id;
-                $liqui->amount_gross = $monto_a_sustraer;
-                $liqui->amount_net = $monto_a_sustraer;
-                $liqui->amount_fee = 0;
-                $liqui->description = $descripcion;
-                $liqui->type = 3;
-                $liqui->status = 0;
-                $liqui->save();
             }
 
             $fields = [

@@ -126,7 +126,7 @@
                                     <!--Asunto -->
                                     <h4 class="text-bold-600 fw-600">Asunto:</h4>
                                     <div class="input-group input-group-lg">
-                                        <input type="text" name="issue" class="form-control">
+                                        <input type="text" name="issue" class="form-control" required>
                                     </div>
                                     <!--Asunto end-->
                                 </div>
@@ -136,45 +136,54 @@
                                         </div>
                                         <div class="d-flex justify-content-between">
                                             <div class="col-sm-9">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <input class="form-control " placeholder="Escriba un mensaje"
+                                                        type="text" id="message" name="message"
+                                                        style="background-color: #D8EDED;" required></input>
+                                                    <!--MENSAJE END-->
+                                                    </div>
+                                                    <div class="col-sm-12 text-center mt-1">
+                                                        @error('image')
+                                                            <small class="text-danger ">
+                                                                {{ $message }}
+                                                            </small>
+                                                        @enderror
+                                                    </div>
+                                                </div>
                                                 <!--MENSAJE-->
-                                                <input class="form-control " placeholder="Escriba un mensaje"
-                                                    type="text" id="message" name="message"
-                                                    style="background-color: #D8EDED;"></input>
-                                                <!--MENSAJE END-->
+                                                
                                             </div>
-                                            <div class="col-sm-2">
-                                                <div class="d-flex justify-content-around">
-                                                    <form class="p-0" id="frm-example" name="frm-example">
-                                                        <label for="hiddenBtn" class="choose-btn capa-interior"
-                                                            id="chooseBtn"
-                                                            style="margin-top: 0.5em; margin-right: 3em;"><svg
-                                                                width="24" height="24" viewBox="0 0 24 24"
-                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path
-                                                                    d="M20.75 23.25H3.25C1.86929 23.25 0.75 22.1307 0.75 20.75V3.25C0.75 1.86929 1.86929 0.75 3.25 0.75H20.75C22.1307 0.75 23.25 1.86929 23.25 3.25V20.75C23.25 22.1307 22.1307 23.25 20.75 23.25ZM3.25 3.25V20.75H20.75V3.25H3.25ZM19.5 18.25H4.5L8.25 13.25L9.5 14.5L13.25 9.5L19.5 18.25ZM7.625 10.75C6.58947 10.75 5.75 9.91053 5.75 8.875C5.75 7.83947 6.58947 7 7.625 7C8.66053 7 9.5 7.83947 9.5 8.875C9.5 9.91053 8.66053 10.75 7.625 10.75Z"
-                                                                    fill="#2E3A59" />
-                                                            </svg>
-                                                        </label>
-                                                        <input type="file" id="hiddenBtn" name="image">
-                                                    </form>
-                                                    @error('image')
-                                                        <small class="text-danger">
-                                                            {{ $message }}
-                                                        </small>
-                                                    @enderror
-                                                    <!--CONTENEDOR DE ARCHIVO ADJUNTO END-->
+                                            <div class="col-sm-3">
+                                                <div class="">
+                                                    <div class="row">
+                                                        <div class="col-sm-7 d-flex justify-content-end">
+                                                            <form class="p-0" id="frm-example" name="frm-example">
+                                                                <label for="hiddenBtn" class="choose-btn capa-interior"
+                                                                    id="chooseBtn"
+                                                                    style="margin-top: 0.5em; margin-right: 3em;"><svg
+                                                                        width="24" height="24" viewBox="0 0 24 24"
+                                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path
+                                                                            d="M20.75 23.25H3.25C1.86929 23.25 0.75 22.1307 0.75 20.75V3.25C0.75 1.86929 1.86929 0.75 3.25 0.75H20.75C22.1307 0.75 23.25 1.86929 23.25 3.25V20.75C23.25 22.1307 22.1307 23.25 20.75 23.25ZM3.25 3.25V20.75H20.75V3.25H3.25ZM19.5 18.25H4.5L8.25 13.25L9.5 14.5L13.25 9.5L19.5 18.25ZM7.625 10.75C6.58947 10.75 5.75 9.91053 5.75 8.875C5.75 7.83947 6.58947 7 7.625 7C8.66053 7 9.5 7.83947 9.5 8.875C9.5 9.91053 8.66053 10.75 7.625 10.75Z"
+                                                                            fill="#2E3A59" />
+                                                                    </svg>
+                                                                </label>
+                                                                <input type="file" id="hiddenBtn" name="image"  accept="image/png, image/gif, image/jpeg">
+                                                            </form>
+                                                        </div>
 
-                                                    <!--CONTENEDOR DE ENVIAR Y PAPELERA-->
-                                                    <button
-                                                        class="mb-2 btn btn-primary waves-effect waves-float waves-light"
-                                                        style="width: 8em">Enviar
-                                                    </button>
+                                                        <div class="col-sm-5 d-flex justify-content-end">
+                                                            <button
+                                                                class="mb-2 btn btn-primary waves-effect waves-float waves-light"
+                                                                style="width: 8em">Enviar
+                                                            </button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
+                                            
                                         </div>
-                                        <!--CONTENEDOR DE ARCHIVO ADJUNTO-->
-                                        <!--CONTENEDOR DE ENVIAR Y PAPELERA END-->
-                                        <!--CONTENEDOR DE ARCHIVO ADJUNTO END-->
                                     </div>
                                 </div>
                             </div>
