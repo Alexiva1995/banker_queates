@@ -24,88 +24,90 @@ class BinaryController extends Controller
             // Valida si el referido tiene un hijo directo por cada lado 
             $referred_left = User::where('binary_id', $usuario->id)->where('binary_side', 'L')->exists();
             $referred_right = User::where('binary_id', $usuario->id)->where('binary_side', 'R')->exists();
+            if ($usuario->whizfx_id){
+                if ($referred_left && $referred_right && $usuario->whizfx->kyc_percentage == 100) {
 
-            if ($referred_left && $referred_right) {
+                    $binary_points = BinaryPoint::where('user_id', $id)->where('status', 0)->get();
 
-                $binary_points = BinaryPoint::where('user_id', $id)->where('status', 0)->get();
+                    $point_right = BinaryPoint::where('user_id', $id)->where('status', 0)->sum('right_points');
 
-                $point_right = BinaryPoint::where('user_id', $id)->where('status', 0)->sum('right_points');
+                    $point_left = BinaryPoint::where('user_id', $id)->where('status', 0)->sum('left_points');
 
-                $point_left = BinaryPoint::where('user_id', $id)->where('status', 0)->sum('left_points');
+                    $menber = Investment::where('user_id', $id)->where('status', '1')->first();
 
-                $menber = Investment::where('user_id', $id)->where('status', '1')->first();
+                    $user_referred = User::where('id', $id)->first();
 
-                $user_referred = User::where('id', $id)->first();
+                    // Armamos una coleccion o lista para contener los elementos a trabajar en su respectivo lado
+                    $lista_pierna_derecha = new Collection();
+                    $lista_pierna_izquierda = new Collection();
 
-                // Armamos una coleccion o lista para contener los elementos a trabajar en su respectivo lado
-                $lista_pierna_derecha = new Collection();
-                $lista_pierna_izquierda = new Collection();
+                    $resta = $point_right - $point_left;
 
-                $resta = $point_right - $point_left;
+                    $resta = -$resta;
+                    // Invierte los valores en caso de generar resultados negativos
+                    if ($resta < 0)
+                        $resta = -$resta;
 
-                $resta = -$resta;
-                // Invierte los valores en caso de generar resultados negativos
-                if ($resta < 0) $resta = -$resta;
-
-                if ($point_right < $point_left) {
-                    if ($point_right >= 150) {
-                        if ($id != 1) {
-                            if ($menber != null) {
-                                // Se aplica el 20%
-                                $bonus_t = $point_right * 0.20;
-                                $this->createBonusBinary($id,$bonus_t, $point_right, $user_referred);
-                            }
-                            // Asignamos cada elemento a la lista en la cual correspondan.
-                            foreach ($binary_points as $binary_point) {
-
-                                if ($binary_point->right_points > 0) {
-                                    $lista_pierna_derecha->push($binary_point);
-                                } else {
-                                    $lista_pierna_izquierda->push($binary_point);
+                    if ($point_right < $point_left) {
+                        if ($point_right >= 150) {
+                            if ($id != 1) {
+                                if ($menber != null) {
+                                    // Se aplica el 20%
+                                    $bonus_t = $point_right * 0.20;
+                                    $this->createBonusBinary($id, $bonus_t, $point_right, $user_referred);
                                 }
+                                // Asignamos cada elemento a la lista en la cual correspondan.
+                                foreach ($binary_points as $binary_point) {
+
+                                    if ($binary_point->right_points > 0) {
+                                        $lista_pierna_derecha->push($binary_point);
+                                    } else {
+                                        $lista_pierna_izquierda->push($binary_point);
+                                    }
+                                }
+                                $this->subtractPointsWhenLeftItsMayor($lista_pierna_derecha, $lista_pierna_izquierda);
                             }
-                            $this->subtractPointsWhenLeftItsMayor($lista_pierna_derecha, $lista_pierna_izquierda);
                         }
-                    }
-                } elseif ($point_right > $point_left) {
-                    if ($point_left >= 150) {
-                        if ($id != 1) {
-                            if ($menber != null) {
-                                // Se aplica el 20%
-                                $bonus_t = $point_left * 0.20;
-                                $this->createBonusBinary($id,$bonus_t, $point_left, $user_referred);
-                            }
-                            // Asignamos cada elemento a la lista en la cual correspondan.
-                            foreach ($binary_points as $binary_point) {
-
-                                if ($binary_point->left_points > 0) {
-                                    $lista_pierna_izquierda->push($binary_point);
-                                } else {
-                                    $lista_pierna_derecha->push($binary_point);
+                    } elseif ($point_right > $point_left) {
+                        if ($point_left >= 150) {
+                            if ($id != 1) {
+                                if ($menber != null) {
+                                    // Se aplica el 20%
+                                    $bonus_t = $point_left * 0.20;
+                                    $this->createBonusBinary($id, $bonus_t, $point_left, $user_referred);
                                 }
+                                // Asignamos cada elemento a la lista en la cual correspondan.
+                                foreach ($binary_points as $binary_point) {
+
+                                    if ($binary_point->left_points > 0) {
+                                        $lista_pierna_izquierda->push($binary_point);
+                                    } else {
+                                        $lista_pierna_derecha->push($binary_point);
+                                    }
+                                }
+                                $this->subtractPointsWhenRightItsMayor($lista_pierna_izquierda, $lista_pierna_derecha);
                             }
-                            $this->subtractPointsWhenRightItsMayor($lista_pierna_izquierda, $lista_pierna_derecha);
                         }
-                    }
 
-                } elseif($point_right == $point_left) {
-                    if($point_right >= 150) {
-                        if ($id != 1) {
-                            if ($menber != null) {
-                                // Se aplica el 20%
-                                $bonus_t = $point_right * 0.20;
-                                $this->createBonusBinary($id,$bonus_t, $point_right, $user_referred);
-                            }
-                            // Asignamos cada elemento a la lista en la cual correspondan.
-                            foreach ($binary_points as $binary_point) {
-
-                                if ($binary_point->left_points > 0) {
-                                    $lista_pierna_izquierda->push($binary_point);
-                                } else {
-                                    $lista_pierna_derecha->push($binary_point);
+                    } elseif ($point_right == $point_left) {
+                        if ($point_right >= 150) {
+                            if ($id != 1) {
+                                if ($menber != null) {
+                                    // Se aplica el 20%
+                                    $bonus_t = $point_right * 0.20;
+                                    $this->createBonusBinary($id, $bonus_t, $point_right, $user_referred);
                                 }
+                                // Asignamos cada elemento a la lista en la cual correspondan.
+                                foreach ($binary_points as $binary_point) {
+
+                                    if ($binary_point->left_points > 0) {
+                                        $lista_pierna_izquierda->push($binary_point);
+                                    } else {
+                                        $lista_pierna_derecha->push($binary_point);
+                                    }
+                                }
+                                $this->bothSideAreEquals($lista_pierna_izquierda, $lista_pierna_derecha);
                             }
-                            $this->bothSideAreEquals($lista_pierna_izquierda, $lista_pierna_derecha);
                         }
                     }
                 }
