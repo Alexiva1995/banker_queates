@@ -125,6 +125,9 @@ class RegisterController extends Controller
             $name=$userName[0];
             $lastname=$userName[1];
         }
+        if ($lastname == null) {
+            return back()->with('error', 'Es requerido su apellido.');
+        }
         try {
             $user = User::create([
                 'username' => $request->username,
