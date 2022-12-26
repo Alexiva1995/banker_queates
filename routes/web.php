@@ -158,7 +158,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/search', [BonoManualController::class, 'search'])->name('bonoManual.search');
             Route::post('/search-id', [BonoManualController::class, 'searchPost'])->name('search.id');
             //Bono manual
-            Route::get('/Edicion-saldo', [BonoManualController::class, 'index'])->name('Edicion-SaldoI-ndex');
+            Route::get('/Edicion-saldo/{id}', [BonoManualController::class, 'index'])->name('Edicion-SaldoI-ndex');
 
             //Agragr saldo a usuario
             Route::post('/agregar-saldo', [BonoManualController::class, 'agregar_saldo'])->name('agregar_saldo');
