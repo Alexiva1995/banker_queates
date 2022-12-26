@@ -420,14 +420,22 @@
 </script>
 <script>
     function alertKyc() {
-        const user =  {!!$user->whizfx->kyc_percentage!!}
-        if (user !== 100) {
+        @if ($user->whizfx) 
+            const user =  {!!$user->whizfx->kyc_percentage!!}
+            if (user !== 100) {
+                Swal.fire({
+                  icon: 'warning',
+                  title: 'KYC no aprobado',
+                  text: 'Actualmente tiene un limite de deposito y retiro de 10k, si desea extenderlo debe verificar el KYC',
+                })
+            
+        @else 
             Swal.fire({
-              icon: 'warning',
-              title: 'KYC no aprobado',
-              text: 'Actualmente tiene un limite de deposito y retiro de 10k, si desea extenderlo debe verificar el KYC',
+                icon: 'warning',
+                title: 'KYC no aprobado',
+                text: 'Actualmente tiene un limite de deposito y retiro de 10k, si desea extenderlo debe verificar el KYC',
             })
-        }
+        @endif
     }
     //Url global para actualizar gráfico de avance de paquete
         const package_chart_url = "{!! route('package.rentability.chart', 'replace_this') !!}";
