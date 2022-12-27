@@ -18,19 +18,20 @@ class BonoManualController extends Controller
     }
     public function searchPost(Request $request)
     {
-        $usuario = User::where('id', $request->id)->get();
+        $usuario =  $request->id;
 
         if ($usuario == null) {
             return back()->with('error', 'Usuario no existe por favor verifique');
         }else{
 
-            return $this->index($usuario);
+            //return $this->index($usuario);
+            return redirect()->route('Edicion-SaldoI-ndex',$usuario );
         }
     }
 
     public function index($user){
 
-        $usuarios = User::where('id', $user[0]->id)->get();
+        $usuarios = User::where('id', $user)->get();
 
         foreach($usuarios as $user){
            $user->saldo_disponible = $user->getWallet->sum('amount_available');
