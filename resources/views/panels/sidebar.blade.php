@@ -198,7 +198,7 @@ $configData = Helper::applClasses();
                     <a class="d-flex align-items-center"
                         onclick="event.preventDefault();this.closest('form').submit();">
                         <i class='fa-solid fa-arrow-right-from-bracket' style="font-size: 23px; height: 24px;"></i> <span class="menu-title"
-                            style="">Cerrar sesión</span>
+                            style="">Log Out</span>
                     </a>
                 </li>
             </form>

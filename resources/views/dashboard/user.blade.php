@@ -428,7 +428,6 @@
                   title: 'KYC no aprobado',
                   text: 'Actualmente tiene un limite de deposito y retiro de 10k, si desea extenderlo debe verificar el KYC',
                 })
-            
         @else 
             Swal.fire({
                 icon: 'warning',
