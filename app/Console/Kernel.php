@@ -24,6 +24,7 @@ class Kernel extends ConsoleKernel
         Commands\DeleteBinaryPoints::class,
         Commands\BinaryProfit::class,
         Commands\bonosPamm::class,
+        Commands\updateWhizfx::class,
     ];
 
     /**
@@ -40,6 +41,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('bonos:pamm')->everyMinute();
         $schedule->command('delete:binary:points')->daily();
         $schedule->command('corte:ganancias:binarias')->daily();
+        $schedule->command('update:whizfx')->daily();
 
     }
 

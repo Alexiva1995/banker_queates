@@ -73,6 +73,7 @@ Route::get('/futswap_confirmation', function () {
 });
 
 Route::get('/welcome', [HomeController::class, 'index'])->name('welcome');
+Route::get('/update/whizfx', [UserController::class, 'updateWhizfx'])->name('update.whizfx');
 Route::get('/terminos', [HomeController::class, 'terminos'])->name('terminos');
 Route::get('/politicas', [HomeController::class, 'politicas'])->name('politicas');
 Route::get('/', [DashboardController::class, 'landing'])->name('landing');
