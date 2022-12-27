@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Models\Whizfx;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class updateWhizfx extends Command
 {
@@ -39,6 +40,7 @@ class updateWhizfx extends Command
      */
     public function handle()
     {
+        Log::info('Inicio actualizacion de dato whixfx - '.now());
         $whizfxs = Whizfx::all();
         foreach ($whizfxs as $whizfx) {
                 $url = config('services.api_whizfx.base_url');
@@ -48,8 +50,8 @@ class updateWhizfx extends Command
                 ])->get("{$url}");
                 $customerData = $response->object();
                 $whizfx->kyc_percentage = $customerData->kyc_percentage;
-                
                 $whizfx->save();
         }
+        Log::info('Fin actualizacion de dato whixfx - '.now());
     }
 }
