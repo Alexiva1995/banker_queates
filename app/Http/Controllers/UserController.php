@@ -29,6 +29,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Http;
 
 class UserController extends Controller
 {
@@ -654,5 +655,20 @@ class UserController extends Controller
         }
         $response = ['status' => 'error'];
         return response()->json($response, 200);
+    }
+    public function updateWhizfx() {      
+        $user = Auth::user();
+        if ($user->whizfx_id != null) {
+            $url = config('services.api_whizfx.base_url');
+            $url = $url . 'customer/'.$user->whizfx->customer_id;
+            $response = Http::withHeaders([
+                'auth' => config('services.api_whizfx.x-token'),
+            ])->get("{$url}");
+            $customerData = $response->object();
+            $user->whizfx->kyc_percentage = $customerData->kyc_percentage;
+            $user->whizfx->save();
+            return back()->with('success', 'Datos Actualizados!');
+        }
+        return back()->with('error', 'Sucedio un error');
     }
 }

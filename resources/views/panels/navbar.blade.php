@@ -329,9 +329,8 @@
             </div>
           </div>
         </li>
-        <li class="nav-item dropdown dropdown-user">
-          <a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="javascript:void(0);"
-            data-bs-toggle="dropdown" aria-haspopup="true">
+        <li class="nav-item">
+          <a class="" href="{{route('update.whizfx')}}">
             <div class="user-nav d-sm-flex d-none">
               <div class="row">
                 <div class="col-sm-4 d-flex justify-content-center align-items-center">
