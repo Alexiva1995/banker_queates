@@ -329,15 +329,16 @@
             </div>
           </div>
         </li>
-        <li class="nav-item dropdown dropdown-user">
-          <a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="javascript:void(0);"
+        <li class="nav-item me-1">
+          <a href="{{route('update.whizfx')}}">
+            <i class="fa-solid fa-arrows-rotate text-dark" style="font-size: 18px"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a  class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="javascript:void(0);"
             data-bs-toggle="dropdown" aria-haspopup="true">
             <div class="user-nav d-sm-flex d-none">
               <div class="row">
-                <div class="col-sm-4 d-flex justify-content-center align-items-center">
-                  <i class="fa-solid fa-arrows-rotate text-dark" style="font-size: 18px"></i>
-                </div>
-
                 <div class="col-sm-4 d-flex justify-content-center align-items-center">
                   <span class="user-name fw-bolder text-capitalize">{{Auth::user()->name}}</span>
                 </div>
@@ -365,7 +366,6 @@
                 </div>
               </div>
             </div>
-
           </a>
           <div class="dropdown-menu  dropdown-menu-end" aria-labelledby="dropdown-user">
             @if(Auth::user()->admin == 1 || Auth::user()->status == '0')
@@ -407,7 +407,7 @@
               @csrf
               <button class="dropdown-item w-100 text-light" href="{{ route('logout') }}" onclick="event.preventDefault();
                         this.closest('form').submit();">
-                <i class="me-1 text-primary" data-feather="log-out"></i> Cerrar sesion
+                <i class="me-1 text-primary" data-feather="log-out"></i> Log Out
               </button>
             </form>
           </div>
