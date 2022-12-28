@@ -8,7 +8,8 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use Illuminate\Support\Facades\Event;
 use App\Events\UserEvent;
 use App\Listeners\UserListener;
-
+use App\Models\User;
+use App\Observers\UserObserver;
 class EventServiceProvider extends ServiceProvider
 {
     /**
@@ -32,6 +33,6 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        User::observe(UserObserver::class);
     }
 }
