@@ -24,8 +24,7 @@ class BinaryController extends Controller
             // Valida si el referido tiene un hijo directo por cada lado 
             $referred_left = User::where('binary_id', $usuario->id)->where('binary_side', 'L')->exists();
             $referred_right = User::where('binary_id', $usuario->id)->where('binary_side', 'R')->exists();
-            if ($usuario->whizfx_id){
-                if ($referred_left && $referred_right && $usuario->whizfx->kyc_percentage == 100) {
+                if ($referred_left && $referred_right) {
 
                     $binary_points = BinaryPoint::where('user_id', $id)->where('status', 0)->get();
 
@@ -111,7 +110,7 @@ class BinaryController extends Controller
                         }
                     }
                 }
-            }
+            
         }
     }
     /**

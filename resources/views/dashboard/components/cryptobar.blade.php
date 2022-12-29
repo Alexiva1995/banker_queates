@@ -1,6 +1,6 @@
 {{-- criptobar --}}
 <div class="card pt-2 pb-50 shadow-none cryptoBar px-1 mb-2 mt-1 carousel slide cycle rounded-3 overflow-hidden box-shadow-1" data-bs-ride="carousel" data-bs-wrap="true">
-    <h5 class="fw-700">Mercados</h5>
+    <h5 class="fw-700">Markets</h5>
     <div id="cryptoBarWrapper" >
         @foreach ($cryptos as $crypto)
             <div class="col-md-4 py-25 px-25 d-flex crypto border-right align-items-center carousel-item">

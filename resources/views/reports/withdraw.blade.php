@@ -52,8 +52,8 @@
 @section('content')
 <div id="logs-list">
     <div class="d-flex my-1">
-        <p class="fw-700 mb-0" style="font-weight: 700; color:#000">Informes</p><span class="fw-300 mx-1 text-light">|</span>
-        <p class="fw-700 mb-0" style="font-weight: 700; color:rgba(0, 0, 0, 0.514)">Retiros</p>
+        <p class="fw-700 mb-0" style="font-weight: 700; color:#000">Reports</p><span class="fw-300 mx-1 text-light">|</span>
+        <p class="fw-700 mb-0" style="font-weight: 700; color:rgba(0, 0, 0, 0.514)">Withdrawal</p>
     </div>
     <div class="col-12">
         <div class="card p-2">
@@ -64,10 +64,10 @@
                             <div class="col-sm-12">
                                 <div class="row">
                                     <div class="col-sm-6 d-flex justify-content-start">
-                                        <h4 class="fw-700">Retiros</h4>
+                                        <h4 class="fw-700">Withdrawal</h4>
                                     </div>
                                     <div class="col-sm-6 d-flex justify-content-end">
-                                            <a href="{{route('solicitudesRetiros')}}" class="btn btn-primary ">Solicitar Retiro</a>
+                                            <a href="{{route('solicitudesRetiros')}}" class="btn btn-primary ">Request Withdrawal</a>
                                     </div>
                                 </div>
                             </div>
@@ -155,16 +155,16 @@
                                 <tr class="text-center">
                                     <th class="fw-600">ID</th>
                                     @if(Auth::user()->id == 1)
-                                    <th class="fw-600">Usuario</th>
-                                    <th class="fw-600">ID de <br />Usuario</th>
+                                    <th class="fw-600">User</th>
+                                    <th class="fw-600">ID <br />User</th>
                                     @endif
-                                    <th class="fw-600">Monto <br />Bruto</th>
-                                    <th class="fw-600">Monto <br />Neto</th>
+                                    <th class="fw-600">Gross <br />Amount</th>
+                                    <th class="fw-600">Net <br />Amount</th>
                                     <th class="fw-600">Fee</th>
                                     <th class="fw-600">Hash</th>
-                                    <th class="fw-600">Estado</th>
-                                    <th class="fw-600">Fecha de <br />Solicitud</th>
-                                    <th class="fw-600">Fecha de <br />Pago</th>
+                                    <th class="fw-600">Status</th>
+                                    <th class="fw-600">Application date</th>
+                                    <th class="fw-600">Payment Date</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -182,15 +182,15 @@
                                     <td>
                                         @if ($liquidaction->status == 2)
                                             <span class="badge warning-badge">
-                                                <span class="warning-text">Cancelada</span>
+                                                <span class="warning-text">Canceled</span>
                                             </span>
                                         @elseif($liquidaction->status == 0)
                                             <span class="badge success-badge">
-                                                <span class="text-info">Pendiente</span>
+                                                <span class="text-info">Pending</span>
                                             </span>
                                         @elseif($liquidaction->status == 1)
                                             <span class="badge success-badge">
-                                                <span class="success-text">Pagada</span>
+                                                <span class="success-text">Paid</span>
                                             </span>
                                         @endif
                                     </td>
@@ -237,29 +237,7 @@
             [0, "asc"]
         ],
         pagingType: 'simple_numbers',
-        language: {
-            "info":           "Mostrando _START_ de _END_ de _TOTAL_ entradas",
-            "infoFiltered":   "(filtrado de _MAX_ entradas)",
-            "lengthMenu":     "Mostrar _MENU_ entradas",
-            "loadingRecords": "Cargando...",
-            "processing":     "",
-            "search":         "Buscar:",
-            "zeroRecords":    "No se encontraron resultados",
-            paginate: {
-                first:    ' ',
-                previous: ' ',
-                next:     ' ',
-                last:     ' '
-            },
-            aria: {
-                paginate: {
-                    first:    '',
-                    previous: '',
-                    next:     '',
-                    last:     ''
-                }
-            }
-        }
+       
     });
 </script>
 @endsection

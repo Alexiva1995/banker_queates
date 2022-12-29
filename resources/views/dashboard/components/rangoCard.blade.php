@@ -6,9 +6,9 @@
                 <div class="row">
                     <div class="col-sm-12">
                         @if(Auth::user()->range != null)
-                        <h6 class="card-title customTexto">Rango actual: <strong>{{ Auth::user()->range->name }}</strong></h6>
+                        <h6 class="card-title customTexto">Your Range: <strong>{{ Auth::user()->range->name }}</strong></h6>
                         @else
-                        <h6 class="card-title customTexto">Rango</h6>
+                        <h6 class="card-title customTexto">Range</h6>
                         @endif
                     </div>
                    
@@ -83,7 +83,7 @@
                                 </div>
                             <div class="mt-1 d-flex justify-content-end">
                                 @if ($user->range_id != 6)
-                                    <span class="me-1">Rango Sapphire:
+                                    <span class="me-1">Range Sapphire:
                                         {{ number_format(75000, 0, '.', '.') }}</span>
                                 @endif
                             </div>
