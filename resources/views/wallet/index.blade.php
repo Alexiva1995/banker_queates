@@ -250,6 +250,11 @@
     @include('wallet.Licencias')
     @include('wallet.range')
 
+    <div class="row">
+        <div class="col-sm-12">
+            @include('banner.banner')
+        </div>
+    </div>
 </div>
 
 @endsection

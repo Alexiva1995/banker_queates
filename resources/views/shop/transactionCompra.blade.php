@@ -33,7 +33,7 @@
             @csrf
             <div class="card-body">
                 <div class="container">
-                    <nav class="links col-sm-5">
+                    <nav class="links col-sm-12">
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <button class="nav-link active justify-content-start text-start fw-400 rounded"
                                 id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button"
@@ -66,7 +66,7 @@
                     </nav>
                     <div class="row">
 
-                        <div class="col-sm">
+                        <div class="col-sm-6">
                             <div class="tab-content" id="nav-tabContent">
                                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
                                     aria-labelledby="nav-home-tab">
@@ -83,27 +83,45 @@
                                 @include('shop.ui.billeteraBnB')
                             </div>
                         </div>
-                        <div class="col-sm">
-                            <div class="col-12 mt-1">
-                                <label for="hash" class="form-label w-100">Paquete:</>
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="col-12 mt-1">
+                                    </div>
+                                    <div class="col-12 mt-1">
+                                        <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon3">Paquete:</span>
+                                        <input name="amount" type="number"  class="form-control" value="{{ $amount }}" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mt-1">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon3">Hash:</span>
+                                            <input name="hash" id="hash" type="text"  class="form-control" required>
+                                            </div>
+                                    </div>
+                                    <input type="hidden" name="package" value="{{ $packageId }}">
+                                    <div class="modal-footer mt-2" style="padding-left:1px;">
+                                        {{-- <button type="button" class="btn btn-secondary"
+                                        href="{{route('')}}">volver</button> --}}
+                                        <button type="submit" class="btn btn-primary">Confirmar</button>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    
+                                    <div class="col-sm-12 mt-1">
+                                        <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon3">Saldo Disponible:</span>
+                                        <input name="total_available" type="number"  class="form-control" value="{{ $total_available  }}" disabled>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                </div>
                             </div>
-                            <div class="col-12 mt-1">
-                                <label for="amount" class="form-label w-100">{{ __('Monto:') }}</>
-                                    <input name="amount" type="number" class="w-100 form-control"
-                                        style="display: block !important;" value="{{ $amount }}" disabled>
-                            </div>
-                            <div class="col-12 mt-1">
-                                <label for="hash" class="form-label w-100">{{ __('Hash:') }}</>
-                                    <input name="hash" id="hash" type="text" class="w-100 form-control"
-                                        required>
-                            </div>
-                            <input type="hidden" name="package" value="{{ $packageId }}">
-                            <div class="modal-footer mt-2" style="padding-left:1px;">
-                                {{-- <button type="button" class="btn btn-secondary"
-                                href="{{route('')}}">volver</button> --}}
-                                <button type="submit" class="btn btn-primary">Confirmar</button>
-                            </div>
+                            
                         </div>
+                        
                     </div>
                 </div>
             </div>

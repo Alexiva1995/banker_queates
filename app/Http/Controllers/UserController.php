@@ -26,6 +26,7 @@ use App\Models\WalletSeccurity;
 use PragmaRX\Google2FA\Google2FA;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -656,6 +657,56 @@ class UserController extends Controller
         $response = ['status' => 'error'];
         return response()->json($response, 200);
     }
+
+    public function ranNotification(Request $request){
+        $user = Auth::user();
+        $estatus = 'error_1';
+        $data = [
+            'rank_id'=> $user->range_id,
+            'status'=> $estatus
+        ];
+
+        $rangoAnterior = $this->verificarRango();
+        
+        session(['rango' => $user->range_id]);
+
+        if($rangoAnterior != null ){
+            Log::info('no es null 1');
+
+            if($user->range_id > $rangoAnterior){
+
+                $estatus = 'success';
+                $data = [
+                    'rank_id'=> $user->range_id,
+                    'status'=> $estatus
+                ];
+
+                Log::info('tiene rango nuevo 2');
+                return response()->json(['value'=> $data]);       
+            }else{
+                $estatus = 'error_2';
+                $data = [
+                    'rank_id'=> $user->range_id,
+                    'status'=> $estatus
+                ];
+                return response()->json(['value'=> $data]);       
+            }
+        }else{
+            return response()->json(['value'=> $data]);       
+        }
+    }
+
+    public function verificarRango(){
+        if(session()->has('rango')){
+            $rango = session('rango');
+            Log::info('rango guadardo en variable de sesion '. $rango);
+            return $rango;
+        }else{
+            return null;
+        }
+    } 
+    
+    
     public function updateWhizfx() {      
         $user = Auth::user();
         if ($user->whizfx_id != null) {

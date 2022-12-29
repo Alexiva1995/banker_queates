@@ -170,6 +170,7 @@ Route::middleware('auth')->group(function () {
         Route::post('referred-update', [UserController::class, 'referred'])->name('referred.update');
 
         Route::get('/panels', [DashboardController::class, 'index'])->name('dashboard.index');
+        Route::post('/rankNotification', [UserController::class, 'ranNotification'])->name('notification.Rank');
 
         // Red de usuario
         Route::prefix('red')->group(function () {

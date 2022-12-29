@@ -36,6 +36,8 @@ data-textdirection="{{ env('MIX_CONTENT_DIRECTION') === 'rtl' ? 'rtl' : 'ltr' }}
 </head>
 <!-- END: Head-->
 <style>
+ 
+ 
 
 
   html body {
@@ -56,11 +58,52 @@ data-textdirection="{{ env('MIX_CONTENT_DIRECTION') === 'rtl' ? 'rtl' : 'ltr' }}
   .page-link:hover{
     background: #05A5E9;
   }
-body{
-}
-
-
+  
+  .capas {
+ transition: all ease 1250ms;
+  }
 </style>
+<script>
+  window.onload=verificarRango;
+
+  function verificarRango(){
+   
+    axios.post('{{route("notification.Rank")}}', {
+    
+  })
+  .then(function (response) {
+    //console.log(response.data.value);
+    let newRank_id = response.data.value.rank_id;
+
+    if(response.data.value.status == 'success'){
+      setTimeout(notification , 1000, newRank_id);
+    }else{
+      setTimeout(verificarRango , 5000);
+    }
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+  }
+
+  function notification(rank_id){
+        Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Nuevo rango alcanzado',
+        showConfirmButton: false,
+        timer: 1900
+    })
+    //console.log('rango id pasado desde la funcion anterior '+rank_id)
+    setTimeout(rotacionImg , 100);
+    setTimeout(verificarRango , 5000,rank_id);
+
+    }
+    function rotacionImg(){
+        let img = document.getElementById("rangoimg");
+        img.style.transform = "rotateY(360deg)"
+    }
+</script>
 <!-- BEGIN: Body-->
 @isset($configData["mainLayoutType"])
 @extends((( $configData["mainLayoutType"] === 'horizontal') ? 'layouts.horizontalLayoutMaster' :

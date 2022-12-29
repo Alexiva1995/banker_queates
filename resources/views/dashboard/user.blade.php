@@ -357,6 +357,9 @@
                         @include('dashboard.components.historyBonusTable')
                     </div>
                 </div>
+                <div class="col-sm-12">
+                        @include('banner.banner')
+                </div>
             </div>
         </div>
     </div>
