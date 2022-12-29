@@ -20,15 +20,14 @@
         </div>
         <div class="texto">
           <h3 class="fw-700 mb-3" style="color:#02D6AC;">USDT {{ number_format($balance, 2) }}</h3>
-          <h5 class="" style="margin-bottom: 2.5rem">Saldo Disponible para
-          Retirar</h5>
+          <h5 class="" style="margin-bottom: 2.5rem">Balance available to withdraw</h5>
           <br>
           <span class="d-flex align-items-center text-info fw-500">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="me-1 bi bi-info-circle" viewBox="0 0 16 16">
               <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
               <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
             </svg>
-          El retiro Mínimo debe ser de 100 USDT
+            The Minimum withdrawal must be 100 USDT
           </span>
         </div>
       </div>
@@ -46,19 +45,19 @@
                     class="form-control mb-2" value="{{auth()->user()->decryptWallet()}}" disabled>
                 <input type="hidden" name="wallet" value="{{auth()->user()->decryptWallet()}} ">
               </div>
-              <label for="" class="fw-500 " style="font-size: 14px;margin-bottom:4px">Monto a retirar<label
+              <label for="" class="fw-500 " style="font-size: 14px;margin-bottom:4px">Amount to withdraw<label
                   style="color: red;">*</label></label>
               <div class="input-group mb-3" style="margin-bottom: 6px;">
                 <input type="hidden" value="{{$balance}}" id="avaibleBalanceTotal">
                 <input type="number" id="Monto_a_retirar" onkeyup="activarInput(this.value)" name="Monto_a_retirar"
-                  class="form-control rounded-start" placeholder="Introduzca el monto" required>
+                  class="form-control rounded-start" placeholder="Enter the amount" required>
                 <span class="input-group-text fw-bold rounded-end bg-transparent ">USDT <label onclick="max();"
                     style="cursor: pointer;" class="text-primary ms-1" style="padding-inline-start: 6px;">
                     MAX</label></span>
               </div>
               <div class="modal-footer mt-1 " style="border-top: none;">
                 <button type="button" data-bs-toggle="modal" data-bs-target="#{{$pin != null ? 'exampleModalComision' : 'configurePin' }}" id="continue-button"
-                  class="btn btn-primary" style="width: 100%;" disabled>Retirar</button>
+                  class="btn btn-primary" style="width: 100%;" disabled>Withdraw</button>
               </div>
             </div> 
           </div>

@@ -17,7 +17,7 @@
     }
 </style>
 <div class="d-flex my-1">
-    <p style="color:#808E9E;" class="fw-700">Soporte</p><span class="fw-normal mx-1 text-primary">|</span>
+    <p style="color:#808E9E;" class="fw-700">Support</p><span class="fw-normal mx-1 text-primary">|</span>
     <p>Ticket</p>
 </div>
     <div class="card">
@@ -25,7 +25,7 @@
         <!--Card Header--->
         <div class=" card-header">
             <h4>
-                Lista de Tickets
+                Tickets List
             </h4>
         </div>
         <!--Card Header End--->
@@ -35,9 +35,9 @@
                 <thead>
                     <tr class="text-center">
                         <th>#</th>
-                        <th>Asunto</th>
-                        <th>Estado</th>
-                        <th>Última Respuesta</th>
+                        <th>Issue</th>
+                        <th>Status</th>
+                        <th>Last reply</th>
                     </tr>
                 </thead>
                 @foreach ($ticket as $item)
@@ -45,13 +45,13 @@
                         <td><a @if ($item->status == '0') href='{{ route('ticket.edit-user', $item->id) }}' @else href='{{ route('ticket.show-user', $item->id) }}' @endif>  {{ $item->id }}</a></td>
                         <td class="text-center"> <a @if ($item->status == '0') href='{{ route('ticket.edit-user', $item->id) }}' @else href='{{ route('ticket.show-user', $item->id) }}' @endif>[Ticket #{{ $item->user_id }}] {{ $item->issue }}</a></td>
                         @if ($item->status == '0')
-                            <td> <a @if ($item->status == '0') href='{{ route('ticket.edit-user', $item->id) }}' @else href='{{ route('ticket.show-user', $item->id) }}' @endif class="btn btn-info text-bold-600">Abierto</a></td>
+                            <td> <a @if ($item->status == '0') href='{{ route('ticket.edit-user', $item->id) }}' @else href='{{ route('ticket.show-user', $item->id) }}' @endif class="btn btn-info text-bold-600">Open</a></td>
                         @elseif($item->status == '1')
-                            <td> <a  @if ($item->status == '0') href='{{ route('ticket.edit-user', $item->id) }}' @else href='{{ route('ticket.show-user', $item->id) }}' @endif class="btn btn-danger text-white text-bold-600">Cerrado</a></td>
+                            <td> <a  @if ($item->status == '0') href='{{ route('ticket.edit-user', $item->id) }}' @else href='{{ route('ticket.show-user', $item->id) }}' @endif class="btn btn-danger text-white text-bold-600">Close</a></td>
                         @endif
 
                         @if ($item->send == '')
-                            <td class="text-center"><a @if ($item->status == '0') href='{{ route('ticket.edit-user', $item->id) }}' @else href='{{ route('ticket.show-user', $item->id) }}' @endif> No hay mensaje Disponibles</a></td>
+                            <td class="text-center"><a @if ($item->status == '0') href='{{ route('ticket.edit-user', $item->id) }}' @else href='{{ route('ticket.show-user', $item->id) }}' @endif> No message Available</a></td>
                         @else
                             <td class="text-center"><a @if ($item->status == '0') href='{{ route('ticket.edit-user', $item->id) }}' @else href='{{ route('ticket.show-user', $item->id) }}' @endif> {{ $item->send }}</a></td>
                         @endif
@@ -79,17 +79,7 @@
             order: [
                 [0, "desc"]
             ],
-            language: {
-                lengthMenu: 'Mostrar _MENU_ Entradas',
-                zeroRecords: 'No hay registros para mostrar',
-                info: 'Mostrando _PAGE_ de _PAGES_ entradas',
-                infoEmpty: 'No hay registros para mostrar',
-                "search": "Buscar:",
-                "paginate": {
-                    "next": " ",
-                    "previous": " "
-                },
-            },
+            
             pagingType: 'simple_numbers',
         })
     </script>

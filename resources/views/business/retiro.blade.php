@@ -61,14 +61,15 @@
     <div class="d-flex my-1 justify-content-between flex-wrap">
         <div class="d-flex align-items-center flex-wrap">
 
-            <p class="fw-700 mb-0">Billetera</p><span class="fw-300 mx-1 text-light">|</span>
-            <p class="fw-500 mb-0 text-primary">Retiro</p>
+            <p class="fw-700 mb-0">Wallet</p><span class="fw-300 mx-1 text-light">|</span>
+            <p class="fw-500 mb-0 text-primary">Withdrawal</p>
             <i data-feather='chevron-right' class="text-light mx-75"></i>
-            <p class="fw-400 mb-0">Solicitar Retiro</p>
+            <p class="fw-400 mb-0">
+                Request Withdrawal</p>
 
         </div>
         <a type="button" class="btn border-primary ms-auto text-primary mt-1" href="{{ route('retiro') }}"><i
-                class="fas fa-arrow-left"></i> Volver</a>
+                class="fas fa-arrow-left"></i> Back</a>
     </div>
 
     <!-- Statistics card section -->

@@ -22,21 +22,21 @@
                         @if($user->investment != null)
                             <td class="text-center ">{{$user->investment->LicensePackage->name}}</td>
                         @else
-                            <td class="text-center ">No tiene licencias activas</td>
+                            <td class="text-center ">Don't have an active license</td>
                         @endif
 
                         @if ($user->investments->count() > 0)
                             @if ($user->investments->last()->status == 0)
                                 <td class="text-center">
-                                    <span class="badge bg-warning">En espera</span>
+                                    <span class="badge bg-warning">Pending</span>
                                 </td>
                             @elseif ($user->investments->last()->status == 1)
                                 <td class="text-center">
-                                    <span class="badge bg-success">Activo</span>
+                                    <span class="badge bg-success">Active</span>
                                 </td>
                             @else
                                 <td class="text-center">
-                                    <span class="badge bg-danger">Inactivo</span>
+                                    <span class="badge bg-danger">Inactive</span>
                                 </td>
                             @endif
                         @else

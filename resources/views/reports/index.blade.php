@@ -196,15 +196,15 @@
                                         <td>
                                             @if ($orden->status == 0)
                                                 <span class="badge success-badge">
-                                                    <span class="text-info">Pendiente</span>
+                                                    <span class="text-info">Pending</span>
                                                 </span>
                                             @elseif($orden->status == 1)
                                                 <span class="badge success-badge">
-                                                    <span class="success-text">Pagada</span>
+                                                    <span class="success-text">Paid</span>
                                                 </span>
                                             @elseif($orden->status == 2)
                                                 <span class="badge warning-badge">
-                                                    <span class="warning-text">Cancelada</span>
+                                                    <span class="warning-text">Cancelled</span>
                                                 </span>
                                             @endif
                                         </td>

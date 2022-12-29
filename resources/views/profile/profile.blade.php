@@ -55,8 +55,8 @@
         }
     </style>
     <div class="d-flex my-1">
-        <p class="fw-700 mb-0">Perfil</p><span class="fw-300 mx-1 text-light">|</span>
-        <p class="fw-400 mb-0">Editar Perfil</p>
+        <p class="fw-700 mb-0">Profiel</p><span class="fw-300 mx-1 text-light">|</span>
+        <p class="fw-400 mb-0">Edit Profiel</p>
     </div>
     <div class="row" >
         
@@ -99,7 +99,7 @@
                                         <div>
                                         <h3 class="mb-2 fw-600">{{Auth::user()->name}} {{Auth::user()->last_name}}</h3>
                                     
-                                        <h4 style="color: #9892AA;">Rango {{Auth::user()->range->name}}</h4>
+                                        <h4 style="color: #9892AA;">Range {{Auth::user()->range->name}}</h4>
                                         </div>
                                     @else
                                         <img class="ms-2 rounded rounded-circle"
@@ -108,7 +108,7 @@
                                         data-target="#fotos">
                                         <div>
                                         <h3 class="mb-1 fw-600">{{Auth::user()->name}} {{Auth::user()->last_name}}</h3> 
-                                        <h4 style="color: #9892AA;">Sin rango</h4>
+                                        <h4 style="color: #9892AA;">Not range</h4>
                                     </div>
                                         @endif
                                     </div>
@@ -168,7 +168,7 @@
                                             <div class="row" style="margin-top: 4%;">
                                                 <!--ROW 1 START-->
                                                 <div class="col-sm-6">
-                                                    <label for="name" class=" fw-500">Nombre<label
+                                                    <label for="name" class=" fw-500">Name<label
                                                             style="color: red;">*</label></label>
                                                     <div class="input-group mb-1">
                                                         <input type="text" name="name"
@@ -183,7 +183,7 @@
                                                 </div>
 
                                                 <div class="col-sm-6">
-                                                    <label for="last_name" class=" fw-500">Apellido<label
+                                                    <label for="last_name" class=" fw-500">Last Name<label
                                                             style="color: red;">*</label></label>
                                                     <div class="input-group mb-1">
                                                         <input type="text" name="last_name"
@@ -201,7 +201,7 @@
                                             <div class="row" style="margin-top: 3%;">
 
                                                 <div class="col-sm-6">
-                                                    <label for="" class=" fw-500">País <label
+                                                    <label for="" class=" fw-500">Country <label
                                                             style="color: red;">*</label></label>
 
                                                     <div class="input-group mb-2 shadow-none">
@@ -213,7 +213,7 @@
                                                                     <option value="{{$countries->id}}" {{$user->prefix_id == $countries->id ? 'selected' : ''}}>{{$countries->pais}}</option>
                                                                 @endforeach
                                                             @else
-                                                                <option>Ingresa o selecciona un país</option>
+                                                                <option>Enter or select a country</option>
                                                             @endif
 
                                                             @foreach($country as $countries)
@@ -227,7 +227,7 @@
 
                                                 <div class="col-sm-6">
                                                     <label for="" class="correo  fw-500">
-                                                        Correo <label style="color: red;">*</label>
+                                                        Email <label style="color: red;">*</label>
                                                     </label>
 
                                                     <div class="input-group mb-1">
@@ -272,20 +272,20 @@
 
                                                 <div class="col-sm-6">
                                                     <label for="gender" class=" fw-500">
-                                                        Genero 
+                                                        Sex 
                                                         <span class="text-danger">*</span>
                                                     </label>
                                                     <div class="input-group mb-1">
                                                         <select class=" form-select" name="gender">
-                                                            <option disabled {{$user->gender == null ? 'selected' : ' ' }}>Seleccion su genero"</option>
-                                                            <option value="0" {{$user->gender == '0' ? 'selected' : ' ' }}>Masculino</option>
-                                                            <option value="1" {{$user->gender == '1' ? 'selected' : ' ' }}>Femenino</option>
+                                                            <option disabled {{$user->gender == null ? 'selected' : ' ' }}>Select your gender</option>
+                                                            <option value="0" {{$user->gender == '0' ? 'selected' : ' ' }}>Male</option>
+                                                            <option value="1" {{$user->gender == '1' ? 'selected' : ' ' }}>Female</option>
                                                         </select>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-sm-6">
-                                                    <label for="" class=" fw-500">Teléfono <label
+                                                    <label for="" class=" fw-500">Phone <label
                                                             style="color: red;">*</label></label>
                                                     <div class="input-group mb-1">
                                                         <input type="enum" name="phone"
@@ -304,7 +304,7 @@
                                             <div class="row" style="margin-top: 3%;">
                                                     
                                                 <div class="col-sm-6">
-                                                    <label for="name" class=" fw-500">Nombres del Patrocinador <label
+                                                    <label for="name" class=" fw-500">Sponsor Names<label
                                                             style="color: red;">*</label></label>
                                                     @if ($user->admin != 1)
                                                         <div class="input-group mb-1">
@@ -321,7 +321,7 @@
 
                                                 <div class="col-sm-6">
                                                     <label for="" class="correo fw-500">
-                                                        Correo del Patrocinador<label style="color: red;">*</label>
+                                                        Sponso Email<label style="color: red;">*</label>
                                                     </label>
                                                     @if ($user->admin != 1)
                                                         <div class="input-group mb-1">
@@ -337,9 +337,9 @@
                                                 </div>
                                             </div>
                                             <div class="float-start modal-footer mt-2" style="border: none">
-                                                <button type="submit" class="btn btn-primary" id="guardar">Guardar Cambios</button>
+                                                <button type="submit" class="btn btn-primary" id="guardar">Save Changes</button>
                                                 <button type="button" id="boton01" class="btn btn-outline-danger ">
-                                                    Cancelar
+                                                    Cancel
                                                 </button>
                                             </div>
                                         </form>
@@ -374,14 +374,14 @@
             console.log(response);
             const { status } = response.data;
             if (status === 'success') {
-                toastr['success']('Condigo Verificado', '¡Exitoso!', {
+                toastr['success']('Verified Code', '¡Successful!', {
                     closeButton: true,
                     tapToDismiss: false
                 });
                 const email = document.getElementById('email')
                 email.disabled = false
             } else
-            toastr['error']('Los codigos no coinciden', '¡error!', {
+            toastr['error']('The codes do not match', '¡error!', {
                 closeButton: true,
                 tapToDismiss: false
             });
@@ -396,14 +396,14 @@
 
             if( !codeBtn.disabled ) return ;
             function segundos(){
-                codeBtn.textContent =`Reenviar en ${seconds}s`;
+                codeBtn.textContent =`Forward in ${seconds}s`;
                 seconds--;
                 if( seconds > 0 ){
                     // console.log(seconds)
                     setTimeout(segundos,1000);
                 }else{
                     codeBtn.disabled = false;
-                    codeBtn.textContent = 'Obtener codigo';
+                    codeBtn.textContent = 'Get code';
                 }
             }
             
@@ -414,7 +414,8 @@
 
             if( status === 'success')
             {
-                toastr['success']('Por favor revise su correo', '¡Exitoso!', {
+                $("#exampleModalVerification").modal('hide')
+                toastr['success']('Please check your mail', '¡Successful!', {
                     closeButton: true,
                     tapToDismiss: false
                 });
@@ -423,7 +424,7 @@
 
         } catch (error) {
             console.log(error);
-            toastr['error']('Hubo un error por favor contacte con el administrador', '¡error!', {
+            toastr['error']('There was an error please contact the administrator', '¡error!', {
                 closeButton: true,
                 tapToDismiss: false
             });

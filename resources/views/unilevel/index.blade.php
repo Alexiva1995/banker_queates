@@ -114,7 +114,7 @@
                                 <path
                                     d="M7.5 14.7318L0.375 9.19015L1.6575 8.19265L7.49208 12.7289L13.3346 8.18473L14.625 9.19015L7.5 14.7318ZM7.5 11.3514L1.66542 6.81515L0.375 5.80973L7.5 0.268066L14.625 5.80973L13.3267 6.81515L7.5 11.3514Z"
                                     fill="white" />
-                            </svg>Nivel 1</span>
+                            </svg>Level 1</span>
                         </input>
                     </label>
                     @if (2 <= $lastLevelActive->id)
@@ -126,7 +126,7 @@
                                     <path
                                         d="M7.5 14.7318L0.375 9.19015L1.6575 8.19265L7.49208 12.7289L13.3346 8.18473L14.625 9.19015L7.5 14.7318ZM7.5 11.3514L1.66542 6.81515L0.375 5.80973L7.5 0.268066L14.625 5.80973L13.3267 6.81515L7.5 11.3514Z"
                                         fill="white" />
-                                </svg>Nivel 2</span>
+                                </svg>Level 2</span>
                         </label>
                     @endif
                     @if (3 <= $lastLevelActive->id)
@@ -138,7 +138,7 @@
                                     <path
                                         d="M7.5 14.7318L0.375 9.19015L1.6575 8.19265L7.49208 12.7289L13.3346 8.18473L14.625 9.19015L7.5 14.7318ZM7.5 11.3514L1.66542 6.81515L0.375 5.80973L7.5 0.268066L14.625 5.80973L13.3267 6.81515L7.5 11.3514Z"
                                         fill="white" />
-                                </svg>Nivel 3</span>
+                                </svg>Level 3</span>
                         </label>
                     @endif
                     @if (4 <= $lastLevelActive->id)
@@ -150,7 +150,7 @@
                                     <path
                                         d="M7.5 14.7318L0.375 9.19015L1.6575 8.19265L7.49208 12.7289L13.3346 8.18473L14.625 9.19015L7.5 14.7318ZM7.5 11.3514L1.66542 6.81515L0.375 5.80973L7.5 0.268066L14.625 5.80973L13.3267 6.81515L7.5 11.3514Z"
                                         fill="white" />
-                                </svg>Nivel 4</span>
+                                </svg>Level 4</span>
                         </label>
                     @endif
                     @if (5 <= $lastLevelActive->id)
@@ -162,7 +162,7 @@
                                     <path
                                         d="M7.5 14.7318L0.375 9.19015L1.6575 8.19265L7.49208 12.7289L13.3346 8.18473L14.625 9.19015L7.5 14.7318ZM7.5 11.3514L1.66542 6.81515L0.375 5.80973L7.5 0.268066L14.625 5.80973L13.3267 6.81515L7.5 11.3514Z"
                                         fill="white" />
-                                </svg>Nivel 5</span>
+                                </svg>Level 5</span>
                         </label>
                     @endif
                     @if (6 <= $lastLevelActive->id)
@@ -175,7 +175,7 @@
                                     <path
                                         d="M7.5 14.7318L0.375 9.19015L1.6575 8.19265L7.49208 12.7289L13.3346 8.18473L14.625 9.19015L7.5 14.7318ZM7.5 11.3514L1.66542 6.81515L0.375 5.80973L7.5 0.268066L14.625 5.80973L13.3267 6.81515L7.5 11.3514Z"
                                         fill="white" />
-                                </svg>Nivel 6</span>
+                                </svg>Level 6</span>
                         </label>
                     @endif
                     @if (7 <= $lastLevelActive->id)
@@ -188,7 +188,7 @@
                                     <path
                                         d="M7.5 14.7318L0.375 9.19015L1.6575 8.19265L7.49208 12.7289L13.3346 8.18473L14.625 9.19015L7.5 14.7318ZM7.5 11.3514L1.66542 6.81515L0.375 5.80973L7.5 0.268066L14.625 5.80973L13.3267 6.81515L7.5 11.3514Z"
                                         fill="white" />
-                                </svg>Nivel 7</span>
+                                </svg>Level 7</span>
                         </label>
                     @endif
                     @if (8 <= $lastLevelActive->id)
@@ -201,7 +201,7 @@
                                     <path
                                         d="M7.5 14.7318L0.375 9.19015L1.6575 8.19265L7.49208 12.7289L13.3346 8.18473L14.625 9.19015L7.5 14.7318ZM7.5 11.3514L1.66542 6.81515L0.375 5.80973L7.5 0.268066L14.625 5.80973L13.3267 6.81515L7.5 11.3514Z"
                                         fill="white" />
-                                </svg>Nivel 8</span>
+                                </svg>Level 8</span>
                         </label>
                     @endif
                     @if (9 <= $lastLevelActive->id)
@@ -214,7 +214,7 @@
                                     <path
                                         d="M7.5 14.7318L0.375 9.19015L1.6575 8.19265L7.49208 12.7289L13.3346 8.18473L14.625 9.19015L7.5 14.7318ZM7.5 11.3514L1.66542 6.81515L0.375 5.80973L7.5 0.268066L14.625 5.80973L13.3267 6.81515L7.5 11.3514Z"
                                         fill="white" />
-                                </svg>Nivel 9</span>
+                                </svg>Level 9</span>
                         </label>
                     @endif
                     @if (10 <= $lastLevelActive->id)
@@ -227,7 +227,7 @@
                                     <path
                                         d="M7.5 14.7318L0.375 9.19015L1.6575 8.19265L7.49208 12.7289L13.3346 8.18473L14.625 9.19015L7.5 14.7318ZM7.5 11.3514L1.66542 6.81515L0.375 5.80973L7.5 0.268066L14.625 5.80973L13.3267 6.81515L7.5 11.3514Z"
                                         fill="white" />
-                                </svg>Nivel 10</span>
+                                </svg>Level 10</span>
                         </label>
                     @endif
                 </div>
@@ -380,17 +380,6 @@
             order: [
                 [0, 'desc']
             ],
-            language: {
-                lengthMenu: 'Mostrar _MENU_ registros',
-                zeroRecords: 'No hay registros para mostrar',
-                info: 'Mostrando _PAGE_ de _PAGES_ entradas',
-                infoEmpty: 'No hay registros para mostrar',
-                "search": "Buscar:",
-                "paginate": {
-                    "next": " ",
-                    "previous": " "
-                },
-            },
             pagingType: 'simple_numbers',
         })
     </script>

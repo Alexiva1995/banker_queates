@@ -30,7 +30,7 @@ g .apexcharts-text {
                     @if($user_packages[0]->image != null)
                     <div class="col-sm-6 d-flex justify-content-center align-items-star mt-2">
                         <div>
-                            <h4 class="text-white">Balance de cuenta PAMM</h4>
+                            <h4 class="text-white">PAMM account balance</h4>
                             <h4 class="text-white">14,000 USDT</h4>
                         </div>
                         
@@ -110,7 +110,7 @@ g .apexcharts-text {
     },
     series: [percentage],
     colors: [color_chart],
-    labels: ['Días Faltantes'],
+    labels: ['Left days'],
     plotOptions: {
       radialBar: {
         offsetY: -10,

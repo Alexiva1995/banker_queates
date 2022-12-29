@@ -92,7 +92,7 @@
                         <table class="table  nowrap scroll-horizontal-vertical myTable table-striped w-100">
                             <thead class="">
                                 <tr class="text-center">
-                                    <th>Descripcion</th>
+                                    <th>Description</th>
                                     <th>Amount</th>
                                     <th>Status</th>
                                     <th class="d-none d-sm-table-cell">Date</th>
@@ -160,7 +160,7 @@
                         <table class="table  nowrap scroll-horizontal-vertical myTable table-striped w-100">
                             <thead class="">
                                 <tr class="text-center">
-                                    <th>Descripcion</th>
+                                    <th>Description</th>
                                     <th>Amount</th>
                                     <th>Status</th>
                                     <th class="d-none d-sm-table-cell">Date</th>

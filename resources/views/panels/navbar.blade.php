@@ -374,7 +374,7 @@
             </a> --}}
             @else
             <a class="dropdown-item text-light" href="{{url('profile')}}">
-              <i class="me-1 text-primary" data-feather="user"></i> Mi Perfil
+              <i class="me-1 text-primary" data-feather="user"></i>My profile
             </a>
             @endif
 
