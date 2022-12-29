@@ -10,8 +10,8 @@
                 <form action="{{ route('search.id') }}" method="POST">
                     @csrf
                     <div class="card-body">
-                        <label for="id">Buscar id de usuario</label>
-                        <input class="form-control" type="number" name="id" >
+                        <label for="id">Buscar por id o email de usuario</label>
+                        <input class="form-control" type="text" name="id" >
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-primary" type="submit">Buscar</button>

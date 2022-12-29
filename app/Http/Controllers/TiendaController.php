@@ -85,7 +85,9 @@ class TiendaController extends Controller
         }
 
         $packageId = $request->package;
-        return view('shop.transactionCompra', compact('amount', 'packageId', 'walletbtc','walletbnb','wallettrc20'));
+      $total_available = $user->wallets->where('user_id', $user->id)->sum('amount');
+
+        return view('shop.transactionCompra', compact('amount', 'packageId', 'walletbtc','walletbnb','wallettrc20','total_available'));
     }
 
     /**

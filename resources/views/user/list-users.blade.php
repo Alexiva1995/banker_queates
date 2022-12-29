@@ -139,6 +139,7 @@
                                         <th class="fw-500">PAMM</th>
                                         <th class="fw-500">Estado</th>
                                         <th class="fw-500">ID del <br />Patrocinador</th>
+                                        <th class="fw-500">Accion</th>
                                     </tr>
                                 </thead>
                                 <tbody>
