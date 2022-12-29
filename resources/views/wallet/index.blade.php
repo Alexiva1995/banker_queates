@@ -106,9 +106,9 @@
     }
 </style>
 <div class="d-flex my-2">
-    <p class="fw-700 mb-0" style="font-weight: 700; color:#000">Billetera</p><span
+    <p class="fw-700 mb-0" style="font-weight: 700; color:#000">Wallet</p><span
         class="fw-300 mx-1 text-light">|</span>
-    <p class="fw-700 mb-0" style="font-weight: 700; color:rgba(0, 0, 0, 0.514)">Billetera</p>
+    <p class="fw-700 mb-0" style="font-weight: 700; color:rgba(0, 0, 0, 0.514)">Wallet</p>
 </div>
 
 <nav class="col-sm-12 lista">
@@ -119,13 +119,13 @@
 
         <button class="nav-link" id="nav-rentability-tab" data-bs-toggle="tab" data-bs-target="#license" type="button"
             role="tab" aria-controls="nav-rentability" aria-selected="false"><span
-                class="nav-text">Licencias</span></button>
+                class="nav-text">Licences</span></button>
 
         <button class="nav-link" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button"
             role="tab" aria-controls="nav-home" aria-selected="true"><span class="nav-text">MLM PAMM</span></button>
 
         {{-- <button class="nav-link" id="nav-range-tab" data-bs-toggle="tab" data-bs-target="#nav-range" type="button"
-            role="tab" aria-controls="nav-range" aria-selected="false">Balance en cuenta PAMM </button> --}}
+            role="tab" aria-controls="nav-range" aria-selected="false">PAMM Account Balance </button> --}}
 
     </div>
 </nav>
@@ -147,7 +147,7 @@
                         <div class="texto" >
                             <span class="usdt-color" style="font-weight:900; font-size: 21px">USDT {{ $mlmTotal }} </span>
                             <br>
-                            <span class="text-light">Total Ganado</span>
+                            <span class="text-light">Total Amount</span>
                         </div>
                     </div>
                 </div>
@@ -167,7 +167,7 @@
                         <div class="texto" >
                             <span class="usdt-color" style="font-weight:900; font-size: 21px">USDT {{ $mlmAvailable }} </span>
                             <br>
-                            <span class="text-light">Saldo Disponible</span>
+                            <span class="text-light">Balanca Available</span>
                         </div>
                     </div>
                 </div>
@@ -183,10 +183,10 @@
                     <div class="card p-2">
                         <div class="card-content">
                             <div class="card-header my-1 p-0">
-                                <h4 class="fw-700">Comisiones</h4>
+                                <h4 class="fw-700">Commissions</h4>
                                 {{--<button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#transferMlm">
-                                    Transferir
+                                    Transfer
                                 </button>--}}
                             </div>
                             <div class="card-body card-dashboard p-0">
@@ -194,10 +194,10 @@
                                     <table class="table  nowrap scroll-horizontal-vertical myTable table-striped w-100">
                                         <thead class="">
                                             <tr class="text-center">
-                                                <th>Monto</th>
-                                                <th>Nivel</th>
-                                                <th>Estado</th>
-                                                <th class="d-none d-sm-table-cell">Fecha</th>
+                                                <th>Amount</th>
+                                                <th>Level</th>
+                                                <th>Status</th>
+                                                <th class="d-none d-sm-table-cell">Date</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -210,23 +210,23 @@
                                                 <td>
                                                     @if ($wallet->status == '0')
                                                         <span class="badge success-badge">
-                                                            <span class="text-success">Disponible</span>
+                                                            <span class="text-success">Available</span>
                                                         </span>
                                                     @elseif($wallet->status == '1')
                                                         <span class="badge waiting-badge">
-                                                            <span class="waiting-text">Solicitada</span>
+                                                            <span class="waiting-text">Requested</span>
                                                         </span>
                                                     @elseif($wallet->status == '2')
                                                         <span class="badge success-badge">
-                                                            <span class="success-text">Pagado</span>
+                                                            <span class="success-text">Paid</span>
                                                         </span>
                                                     @elseif($wallet->status == '3')
                                                         <span class="badge warning-badge">
-                                                            <span class="warning-text">Anulada</span>
+                                                            <span class="warning-text">Canceled</span>
                                                         </span>
                                                     @elseif($wallet->status == '4')
                                                         <span class="badge warning-badge">
-                                                            <span class="text-warning">Sustraida</span>
+                                                            <span class="text-warning">Stolen</span>
                                                         </span>
                                                     @endif
                                                 </td>
@@ -275,17 +275,6 @@
             order: [
                 [0, 'desc']
             ],
-            language: {
-                lengthMenu: 'Mostrar _MENU_ registros',
-                zeroRecords: 'No hay registros para mostrar',
-                info: 'Mostrando _PAGE_ de _PAGES_',
-                infoEmpty: 'No hay registros para mostrar',
-                "search": "Buscar:",
-                "paginate": {
-                    "next": " ",
-                    "previous": " "
-                },
-            },
             pagingType: 'simple_numbers',
         })
 </script>

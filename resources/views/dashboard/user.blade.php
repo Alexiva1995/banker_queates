@@ -428,14 +428,14 @@
             if (user !== 100) {
                 Swal.fire({
                   icon: 'warning',
-                  title: 'KYC no aprobado',
-                  text: 'Actualmente tiene un limite de deposito y retiro de 10k, si desea extenderlo debe verificar el KYC',
+                  title: 'KYC not approved',
+                  text: 'You currently have a deposit and withdrawal limit of 10k, if you want to extend it you must verify the KYC',
                 })
         @else 
             Swal.fire({
                 icon: 'warning',
-                title: 'KYC no aprobado',
-                text: 'Actualmente tiene un limite de deposito y retiro de 10k, si desea extenderlo debe verificar el KYC',
+                title: 'KYC not approved',
+                text: 'You currently have a deposit and withdrawal limit of 10k, if you want to extend it you must verify the KYC',
             })
         @endif
     }

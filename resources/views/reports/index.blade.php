@@ -46,14 +46,14 @@
 @section('content')
 <div id="logs-list">
     <div class="d-flex my-1">
-        <p class="fw-700 mb-0" style="font-weight: 700; color:#000">Informes</p><span class="fw-300 mx-1 text-light">|</span>
-        <p class="fw-700 mb-0" style="font-weight: 700; color:rgba(0, 0, 0, 0.514)">Ordenes</p>
+        <p class="fw-700 mb-0" style="font-weight: 700; color:#000">Reports</p><span class="fw-300 mx-1 text-light">|</span>
+        <p class="fw-700 mb-0" style="font-weight: 700; color:rgba(0, 0, 0, 0.514)">Orders</p>
     </div>
     <div class="col-12 mt-2">
         <div class="card p-2">
             <div class="card-content p-50">
                 <div class="card-header p-0">
-                    <h4 class="fw-700">Ordenes</h4>
+                    <h4 class="fw-700">Orders</h4>
                     @if(auth()->user()->admin == 1)
                     <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button"
                         aria-expanded="false" aria-controls="collapseExample">
@@ -128,13 +128,13 @@
                                 <tr class="text-center">
                                     <th>ID</th>
                                     @if(Auth::user()->admin != 0)
-                                        <th>Usuario</th>
+                                        <th>User</th>
                                     @endif
                                     <th>ID TX</th>
-                                    <th>Monto</th>
-                                    <th>Estado</th>
-                                    <th>Fecha Creacion</th>
-                                    <th>Fecha Actualizacion</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Creation Date</th>
+                                    <th>Update Date</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -249,29 +249,7 @@
             [0, "desc"]
         ],
         pagingType: 'simple_numbers',
-        language: {
-            "info":           "Mostrando _START_ de _END_ de _TOTAL_ entradas",
-            "infoFiltered":   "(filtrado de _MAX_ entradas)",
-            "lengthMenu":     "Mostrar _MENU_ entradas",
-            "loadingRecords": "Cargando...",
-            "processing":     "",
-            "search":         "Buscar:",
-            "zeroRecords":    "No se encontraron resultados",
-            paginate: {
-                first:    ' ',
-                previous: ' ',
-                next:     ' ',
-                last:     ' '
-            },
-            aria: {
-                paginate: {
-                    first:    '',
-                    previous: '',
-                    next:     '',
-                    last:     ''
-                }
-            }
-        },
+       
     });
 </script>
 @endsection

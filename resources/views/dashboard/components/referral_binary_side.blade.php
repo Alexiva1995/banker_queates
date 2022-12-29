@@ -3,8 +3,8 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="">
-                    <p class=" card-title customTexto mb-1">Lado Binario</p>
-                    <h4 class=" fw-700 texto">Elige tu lado Binario</h4>
+                    <p class=" card-title customTexto mb-1">Binary Side</p>
+                    <h4 class=" fw-700 texto">Choose your binary side</h4>
                     <div class="mt-2 align-items-center">
                         <input class="form-check-input" type="hidden" name="binary" id="binary"
                         value="L">
@@ -12,12 +12,12 @@
                             <div class="me-auto bd-highlight">
                                 <input class="form-check-input texto" type="radio" name="flexRadioDefault"
                                 checked="checked" id="I" value="I" onclick="izquierdo()">
-                                <label class="form-check-label" for="flexRadioDefault1"> Izquierda </label>
+                                <label class="form-check-label" for="flexRadioDefault1"> Left </label>
                             </div>
                             <div class="mt- bd-highlight" style="padding-right: 25%">
                                 <input class="form-check-input" type="radio" name="flexRadioDefault"
                                     id="D" value="R" onclick="derecho()">
-                                <label class="form-check-label" for="flexRadioDefault1">Derecha</label>
+                                <label class="form-check-label" for="flexRadioDefault1">Right</label>
                             </div>
                         </div>
                     </div>
@@ -33,12 +33,12 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class=" align-items-center">
-                    <p class="card-title customTexto mb-1">Tu link de referidos</p>
-                    <h4 class="mt-2  mb-1 texto">Comparte tu link</h4>
+                    <p class="card-title customTexto mb-1">Your referral link</p>
+                    <h4 class="mt-2  mb-1 texto">Share your link</h4>
                    
                     <a><i class="fa-regular fa-copy"></i>
                         <span onclick="getlink()" class="text-decoration-underline" style="font-weight: 700;font-size:14px;">
-                                COPIAR LINK
+                                COPY LINK
                         </span>
                     </a>
                 </div>

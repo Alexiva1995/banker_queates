@@ -7,7 +7,7 @@
                 <div class="col-sm-12 mt-2 mb-3">
                   <h4 style="font-weight: 700;
                    color: #5E7382;">
-                   Miembros
+                   Members
                   </h4>
                 </div>
 
@@ -21,18 +21,18 @@
 
                     <div class="col-sm-12  mb-2">
                       <h5 style="color: #5E7382;">
-                        Usuarios
+                        Users
                       </h5>
                     </div>
 
                     <div class="col-sm-12">
                       <div class="row">
                         <div class="col-sm-12 mb-2">
-                          <h5 style="font-weight: 600; color:#5E7382;"><i class="fa-regular fa-circle" style=" color: #05A5E9 !important;"></i> Miembros Activos {{$activeUsers}}</h5>
+                          <h5 style="font-weight: 600; color:#5E7382;"><i class="fa-regular fa-circle" style=" color: #05A5E9 !important;"></i>Active Members {{$activeUsers}}</h5>
                         </div>
 
                         <div class="col-sm-12 mb-2">
-                          <h5 style="font-weight: 600; color:#5E7382;"><i class="fa-regular fa-circle" style=" color: #DD0A56 !important;"></i> Miembros Inactivos {{$inactiveUsers}}</h5>
+                          <h5 style="font-weight: 600; color:#5E7382;"><i class="fa-regular fa-circle" style=" color: #DD0A56 !important;"></i> Inactive Members {{$inactiveUsers}}</h5>
                         </div>
                         
                       </div>

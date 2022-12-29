@@ -49,7 +49,7 @@ g .apexcharts-text {
                 <div class="col-sm-12">
                     <div class="row">
                         <div class="col-sm-12 d-flex justify-content-center mt-2">
-                            <a href="{{route('market.licenses')}}" class="btn btn-primary btn-lg gradient2 zoom">Comprar Licencia</a>
+                            <a href="{{route('market.licenses')}}" class="btn btn-primary btn-lg gradient2 zoom">Buy License</a>
                         </div>
                     </div>
                 </div>
