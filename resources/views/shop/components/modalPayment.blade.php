@@ -21,7 +21,7 @@
                               font-style: normal;
                               font-weight: 700;
                               font-size: 18px;
-                              line-height: 27px;">Criptomnoneda</button>
+                              line-height: 27px;" onclick="type('cripto', {{ $package->id }})">Criptomnoneda</button>
                             </li>
     
                             <li class="nav-item" role="presentation">
@@ -29,7 +29,7 @@
                               font-style: normal;
                               font-weight: 700;
                               font-size: 18px;
-                              line-height: 27px;">Saldo del sistema</button>
+                              line-height: 27px;" onclick="type('system', {{ $package->id }})">Saldo del sistema</button>
                             </li>
                             
                           </ul>

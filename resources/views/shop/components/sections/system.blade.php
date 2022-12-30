@@ -8,14 +8,20 @@
             <label for="basic-url" class="form-label" style="font-weight: 500; font-size: 14px; line-height: 18px; color: #544E67;">
                 Saldo disponible:</label>
             <div class="input-group mb-3">
-              <p name="saldo_disponible_system" type="text" class="form-control"  aria-describedby="basic-addon3" style="border-color: #05A5E9; border: 1px solid #05A5E9;">USD {{ $generalAvailable }}</p>
+              <p name="saldo_disponible_system" type="text" class="form-control"   style="border-color: #05A5E9; border: 1px solid #05A5E9;">USD {{ $generalAvailable }}</p>
             </div>
         </div>
         <div class="col-sm-6">
             <label for="basic-url" class="form-label" style="font-weight: 500; font-size: 14px; line-height: 18px; color: #544E67;">
                 Monto a pagar:</label>
             <div class="input-group mb-3">
-              <p  id="montoSystem{{ $package->id }}" type="number" class="form-control"  aria-describedby="basic-addon3" style="border-color: #05A5E9; border: 1px solid #05A5E9;" 
+                <input  id="montoSystem{{ $package->id }}" type="hidden" class="form-control"   style="border-color: #05A5E9; border: 1px solid #05A5E9;" 
+                value="{{ $package->amount }}">
+
+                <input  id="saldoSystem{{ $package->id }}" type="hidden" class="form-control"   style="border-color: #05A5E9; border: 1px solid #05A5E9;" 
+                value="system" disabled>
+
+              <p type="number" class="form-control"   style="border-color: #05A5E9; border: 1px solid #05A5E9;" 
                 value="{{ $package->amount }}">USD {{ $package->amount }}</p>
             </div>
         </div>

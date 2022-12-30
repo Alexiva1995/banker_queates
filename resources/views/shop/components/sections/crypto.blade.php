@@ -25,6 +25,8 @@
             <label for="basic-url" class="form-label" style="font-weight: 500; font-size: 14px; line-height: 18px; color: #544E67;">
                 Monto a pagar:</label>
             <div class="input-group mb-3">
+              <input  id="montoCrypto{{ $package->id }}" type="hidden" class="form-control"   style="border-color: #05A5E9; border: 1px solid #05A5E9;" 
+                value="{{ $package->amount  }}">
               <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" style="border-color: #05A5E9; border: 1px solid #05A5E9;" disabled value="USD {{ $package->amount }}">
             </div>
         </div>

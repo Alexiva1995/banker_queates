@@ -77,7 +77,12 @@ class TiendaController extends Controller
     public function transactionCompra(Request $request)
     {
         $monto_a_pagar_system = $request->montoSystem;
-        return response()->json(['value' =>  $monto_a_pagar_system ]);
+        $monto_a_pagar_crypto = $request->montoCrypto;
+        $data = [
+            'monto_a_pagar_system'=>$monto_a_pagar_system,
+            'monto_a_pagar_crypto'=>$monto_a_pagar_crypto
+        ];
+        return response()->json(['value' =>  $data]);
 
     }
 
