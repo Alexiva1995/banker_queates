@@ -12,10 +12,10 @@
                             <thead class="">
                                 <tr class="text-center">
                                     <th>ID</th>
-                                    <th>nombre</th>
-                                    <th>Correo</th>
-                                    <th>Licencia</th>
-                                    <th>accion</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Licence</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -34,12 +34,12 @@
                                         @if($user->investment != null)
                                             {{$user->investment->LicensePackage->name}}
                                         @else
-                                            No disponible
+                                            Not Available
                                         @endif
                                     </td>
                                     <td>
                                         <button  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$user->id}}">
-                                            Accion
+                                            Action
                                         </button>
                                     </td>
                                 </tr>
