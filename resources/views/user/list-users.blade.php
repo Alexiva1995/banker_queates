@@ -30,17 +30,17 @@
         }
     </style>
     <div class="d-flex my-1">
-        <p class="fw-700 mb-0">Usuarios</p>
+        <p class="fw-700 mb-0">Users</p>
     </div>
     <div class="col-12">
         <div class="card p-2">
             <div class="card-content">
                 <div class="card-header p-0">
-                    <h4 class="fw-700">Usuarios</h4>
+                    <h4 class="fw-700">Users</h4>
                     @if (auth()->user()->admin == 1)
                         <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button"
                             aria-expanded="false" aria-controls="collapseExample">
-                            Filtros
+                            Filters
                         </a>
                     @endif
                 </div>
@@ -51,7 +51,7 @@
                                 @csrf
                                 <div class="row">
                                     <div class="mb-2 col-md-4 col-sm-6">
-                                        <label for="user_name" class="form-label">Usuario</label>
+                                        <label for="user_name" class="form-label">User</label>
                                         <input type="text" class="form-control" id="user_name" name="user_name"
                                             @if ($user_name != null) value="{{ $user_name }}" @endif">
                                     </div>
@@ -61,7 +61,7 @@
                                             @if ($user_email != null) value="{{ $user_email }}" @endif>
                                     </div>
                                     <div class="mb-2 col-md-4 col-sm-12">
-                                        <label for="licenses" class="form-label">Licencia</label>
+                                        <label for="licenses" class="form-label">Licence</label>
                                         <select class="form-select select-multiple" name="licenses[]" id="licenses" multiple
                                             aria-label="Default select example">
                                             <option value="1" {{ in_array('1', $licenses) ? 'selected' : null }}>
@@ -92,31 +92,31 @@
                                     </div>
 
                                     <div class="mb-2 col-md-4 col-sm-12">
-                                        <label for="buyer_id" class="form-label">ID Patrocinador</label>
+                                        <label for="buyer_id" class="form-label">ID Sponsor</label>
                                         <input type="number" class="form-control" id="buyer_id" name="buyer_id"
                                             @if ($buyer_id != null) value="{{ $buyer_id }}" @endif>
                                     </div>
 
                                     <div class="mb-2 col-md-4 col-sm-12">
-                                        <label for="user_status" class="form-label">Estado</label>
+                                        <label for="user_status" class="form-label">Status</label>
                                         <select class="form-select select-multiple" name="user_status[]" id="user_status"
                                             aria-label="Default select example" multiple>
                                             <option value="0" {{ in_array('0', $user_status) ? 'selected' : null }}>
-                                                Inactivo
+                                                Inactive
                                             </option>
                                             <option value="1" {{ in_array('1', $user_status) ? 'selected' : null }}>
-                                                Activo
+                                                Active
                                             </option>
                                             <option value="2" {{ in_array('2', $user_status) ? 'selected' : null }}>
-                                                Eliminado
+                                                Removed
                                             </option>
                                         </select>
                                     </div>
 
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-primary">Buscar</button>
+                                        <button type="submit" class="btn btn-primary">Search</button>
                                         <a class="btn btn-info" href="{{route('user.list-user')}}">
-                                            Limpiar filtros
+                                            Clear filters
                                         </a>
                                         {{-- <a class="btn btn-info" id="btn_clear">Limpiar filtros</a> --}}
                                     </div>
@@ -131,15 +131,15 @@
                                 <thead>
                                     <tr class="text-center ">
                                         <th class="fw-500">ID</th>
-                                        <th class="fw-500">Nombre/Apellido</th>
+                                        <th class="fw-500">Name/Last name</th>
                                         <th class="fw-500">Email</th>
-                                        <th class="fw-500">Licencia</th>
+                                        <th class="fw-500">Licence</th>
                                         <th class="fw-500">Balance</th>
-                                        <th class="fw-500">Ganancias</th>
+                                        <th class="fw-500">Profits</th>
                                         <th class="fw-500">PAMM</th>
-                                        <th class="fw-500">Estado</th>
-                                        <th class="fw-500">ID del <br />Patrocinador</th>
-                                        <th class="fw-500">Accion</th>
+                                        <th class="fw-500">Status</th>
+                                        <th class="fw-500">ID Sponsor</th>
+                                        <th class="fw-500">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -152,7 +152,7 @@
                                             @if ($user->investment != null && $user->investment->status == 1)
                                                 <td>{{ $user->investment->LicensePackage->name }}</td>
                                             @else
-                                                <td>No tiene licencia activa</td>
+                                                <td>Don't have a license active</td>
                                             @endif
 
                                             <td>--</td> <!-- Balance-->
@@ -161,19 +161,19 @@
                                             @if ($user->status == '0')
                                                 <td>
                                                      <a class="alert alert-danger text-danger fw-400 p-75">
-                                                        Inactivo
+                                                        Inactive
                                                     </a>
                                                 </td>
                                             @elseif($user->status == '1')
                                                 <td> 
                                                     <a class="alert alert-success text-success fw-400 p-75">
-                                                        Activo
+                                                        Active
                                                     </a>
                                                 </td>
                                             @elseif($user->status == '2')
                                                 <td> 
                                                     <a class="alert alert-warning text-warning fw-400 p-75">
-                                                        Suspendido
+                                                        Discontinued
                                                     </a>
                                                 </td>
                                             @endif

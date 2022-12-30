@@ -307,7 +307,7 @@
                 categories: dates,
             },
             noData: {
-                text: 'Sin Información',
+                text: 'No information',
                 align: 'center',
                 verticalAlign: 'middle',
                 offsetX: 0,
@@ -348,7 +348,7 @@
             },
             colors: ['#07C4D9','#04D99D'],
             series: [uActive, uInactive],
-            labels: ['Activos', 'Inactivos'],
+            labels: ['Actives', 'Inactive'],
             legend: {
                 position: 'bottom',
                 offsetY: 0
@@ -375,7 +375,7 @@
                 usersChart(activeUsers, inactiveUsers);
             },
             error: error => {
-                console.log('Hubo un error');
+                console.log('There was a mistake');
                 console.log(error);
             }
         });

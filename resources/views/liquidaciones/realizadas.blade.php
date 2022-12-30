@@ -27,7 +27,7 @@
   <div class="col-12">
     <div class="card card-statistics">
       <div class="card-header">
-        <h4 class="card-title">Liquidaciones</h4>
+        <h4 class="card-title">Liquidactions</h4>
         <div class="d-flex align-items-center">
           <p class="card-text me-25 mb-0">{{date('m-Y')}}</p>
         </div>
@@ -46,10 +46,10 @@
           <div class="card">
             <div class="card-content">
               <div class="card-header">
-                <h4 class="fw-700">Liquidaciones Realizadas</h4>
+                <h4 class="fw-700">Done Liquidactions</h4>
                 <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button"
                   aria-expanded="false" aria-controls="collapseExample">
-                  Filtros
+                  Filters
                 </a>
               </div>
 
@@ -60,19 +60,19 @@
                     <div class="row">
 
                       <div class="mb-2 col-md-6 col-sm-12">
-                        <label for="user_id" class="form-label">ID de Usuario</label>
+                        <label for="user_id" class="form-label">ID User</label>
                         <input type="number" class="form-control" id="user_id" name="user_id" @if($user_id !=null)
                           value="{{$user_id}}" @endif">
                       </div>
 
                       <div class="mb-2 col-md-6 col-sm-12">
-                        <label for="user_name" class="form-label">Usuario</label>
+                        <label for="user_name" class="form-label">User</label>
                         <input type="text" class="form-control" id="user_name" name="user_name" 
                         @if($user_name !=null) value="{{$user_name}}" @endif>
                       </div>
 
                       <div class="mb-2 col-md-6 col-sm-12">
-                        <label for="email" class="form-label">Correo</label>
+                        <label for="email" class="form-label">Email</label>
                         <input type="email" class="form-control" id="email" name="email" 
                         @if($email !=null) value="{{$email}}" @endif>
                       </div>
@@ -84,8 +84,8 @@
                       </div>
 
                       <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Buscar</button>
-                        <a class="btn btn-info" href="{{route('liquidaciones.realizadas')}}">Limpiar filtros</a>
+                        <button type="submit" class="btn btn-primary">Search</button>
+                        <a class="btn btn-info" href="{{route('liquidaciones.realizadas')}}">Clear Filters</a>
                         {{-- <a class="btn btn-info" id="btn_clear">Limpiar filtros</a> --}}
                       </div>
 
@@ -98,15 +98,15 @@
 
                       <tr class="text-center">
                         <th>ID</th>
-                        <th>Usuario</th>
-                        <th>correo</th>
-                        <th>Monto Bruto</th>
+                        <th>User</th>
+                        <th>Email</th>
+                        <th>Gross Amount</th>
                         <th>Fee</th>
-                        <th>Monto a recibir</th>
+                        <th>Amount to receive</th>
                         <th>Wallet</th>
                         <th>HASH</th>
-                        <th>Estado</th>
-                        <th>Fecha</th>
+                        <th>Status</th>
+                        <th>Date</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -123,7 +123,7 @@
                         <td>{{($liquidacion->hash)}}</td>
                         <td>
                           @if ($liquidacion->status == '1')
-                          <span class="badge bg-success">Realizada</span>
+                          <span class="badge bg-success">Done</span>
                           @endif
                         </td>
                         <td>{{date('d-m-Y', strtotime($liquidacion->created_at))}}</td>
@@ -165,17 +165,6 @@
         responsive: false,
         order: [[ 0, "desc" ]],
         pagingType: 'simple_numbers',
-        language: {
-            lengthMenu: 'Mostrar _MENU_ registros',
-            zeroRecords: 'No hay registros para mostrar',
-            info: 'Mostrando _PAGE_ de _PAGES_',
-            infoEmpty: 'No hay registros para mostrar',
-            "search":"Buscar:",
-            "paginate": {
-              "next":       " ",
-              "previous":   " "
-            },
-        },
     })
 </script>
 
