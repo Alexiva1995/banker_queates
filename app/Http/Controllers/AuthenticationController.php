@@ -85,7 +85,7 @@ class AuthenticationController extends Controller
             $msj->subject('Verificación de correo electrónico.');
             $msj->to($user->email);
         });  
-    return redirect()->back()->with('success', 'Correo de verificación enviado exitosamente');
+    return redirect()->back()->with('success', 'Verification email sent successfully');
   }
 
   public function verify(Request $request, User $user)

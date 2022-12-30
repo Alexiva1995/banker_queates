@@ -24,7 +24,7 @@ class BonoManualController extends Controller
             return redirect()->route('Edicion-SaldoI-ndex',$user );
 
         }else{
-            return back()->with('error', 'Usuario no existe por favor verifique');
+            return back()->with('error', 'User does not exist please check');
 
         }
     }

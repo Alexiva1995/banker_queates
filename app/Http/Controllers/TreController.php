@@ -125,14 +125,14 @@ class TreController extends Controller
                 $level->update();
             }
         }
-        return back()->with('success', 'Los niveles han sido actualizados');
+        return back()->with('success', 'The levels have been updated');
     }
 
     public function search(Request $request)
     {
 
         $user = User::find($request->id);
-        if($user == null) { return back()->with('error', 'Usuario no Encontrado'); }
+        if($user == null) { return back()->with('error', 'User not found'); }
 
         $direct_childres = User::where('buyer_id', $user->id)->get();
         $referals_childrens = $this->getChildren($direct_childres, 1);
@@ -151,7 +151,7 @@ class TreController extends Controller
             return view('genealogy.tree', compact('trees', 'base'));
         } catch (\Throwable $th) {
 
-            return back()->with('danger', 'El ID que ingreso no existe');
+            return back()->with('danger', 'The ID I entered does not exist');
         }
 
     }
@@ -172,7 +172,7 @@ class TreController extends Controller
             if($child == 1){
                return $this->binario($userCompare);
             }else{
-                return redirect('/red/binario')->with('error', 'Este usuario no pertenece a su red binaria');
+                return redirect('/red/binario')->with('error', 'This user does not belong to your binary network');
             }
 
         }catch(\Throwable $th){
@@ -226,7 +226,7 @@ class TreController extends Controller
                 $tree = 1;
                 return view('genealogy.tree', compact('trees', 'base', 'tree'));
             }else{
-                return redirect('/referred/tree/1')->with('error', 'Este usuario no pertenece a su red unilevel');
+                return redirect('/referred/tree/1')->with('error', 'This user does not belong to your unilevel network');
             }
 
         } catch (\Throwable $th) {
@@ -305,7 +305,7 @@ class TreController extends Controller
         $userCompare = User::find($userToCompare);
 
         if($userCompare == null){
-            return redirect()->back()->with('error', 'El usuario no existe');
+            return redirect()->back()->with('error', 'The User does not exist');
             //echo "El usuario no existe";
         }
 

@@ -85,7 +85,8 @@ class RegisterController extends Controller
      * @return \App\Models\User
      */
     protected function create(Request $request)
-    {   
+    {
+       
         $request->validate(
             [
                 'name' => 'required|string|max:255',
@@ -126,9 +127,10 @@ class RegisterController extends Controller
             $lastname=$userName[1];
         }
         if ($lastname == null) {
-            return back()->with('error', 'Es requerido su apellido.');
+            return back()->with('error', 'Your last name is required.');
         }
         try {
+            
             $user = User::create([
                 'username' => $request->username,
                 'name' => $name,
@@ -163,18 +165,18 @@ class RegisterController extends Controller
                 ]);
                 $user->whizfx_id = $whizfx->id;
                 $user->save();
-
                 $url = config('services.api_whizfx.base_url');
                 $url = $url . 'customer/'.$customerData->id;
                 $response = Http::withHeaders([
                 'auth' => config('services.api_whizfx.x-token'),
             ])->get("{$url}");
+            
                 $customerData = $response->object();
                 $whizfx->kyc_percentage = $customerData->kyc_percentage;
                 $whizfx->save();
                 return redirect()->route('auth.verify', $user);
             }else{
-                return back()->with('error', 'Hubo un error, verifica tus datos.');
+                return back()->with('error', 'There was an error, check your data.');
             }
             // $dataEmail = [
             //     'user' => $user,
@@ -191,7 +193,7 @@ class RegisterController extends Controller
         } catch (\Throwable $th) {
             Log::error('Error al registrar usuario');
             Log::error($th);
-            return back()->with('error', 'Hubo un error, verifica tus datos.');
+            return back()->with('error', 'There was an error, check your data.');
         }
 
         // $orden = new OrdenPurchase();

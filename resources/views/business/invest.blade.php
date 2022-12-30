@@ -465,7 +465,7 @@
                 stroke: {
                     lineCap: 'round'
                 },
-                labels: ['Dias Faltantes'],
+                labels: ['Missing Days'],
             };
             var chart = new ApexCharts(document.querySelector("#chart"), options);
             chart.render();
@@ -540,7 +540,7 @@
                 stroke: {
                     lineCap: 'round'
                 },
-                labels: ['Dias Faltantes'],
+                labels: ['Missing Days'],
             };
             var chart = new ApexCharts(document.querySelector("#chart2"), options);
             chart.render();
@@ -615,7 +615,7 @@
                 stroke: {
                     lineCap: 'round'
                 },
-                labels: ['Dias Faltantes'],
+                labels: ['Missing Days'],
             };
             var chart = new ApexCharts(document.querySelector("#chart3"), options);
             chart.render();

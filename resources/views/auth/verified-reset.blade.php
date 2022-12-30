@@ -49,9 +49,9 @@
                     <img width="200" src="{{asset('images/logo/logo-deg.png')}}"  alt="">
                 </a>
                 <div class="card-body mx-1 text-center">
-                    <h4 class="text-center mb-1 fw-700">Revisa tu correo y sigue las instrucciones</h4>
-                    <p class="card-text mb-3 text-center">Te hemos enviado un correo con las instrucciones para cambiar tu contraseña. Si no logras encontrarlo, revisa tu bandeja de spam.</p>
-                    <a href="{{ route('password.request') }}" class="btn btn-primary w-75 fw-500 align-baseline mb-0">{{ __('¿Desea solicitar otro?') }}
+                    <h4 class="text-center mb-1 fw-700">Check your email and follow the instructions</h4>
+                    <p class="card-text mb-3 text-center">We have sent you an email with instructions to change your password. If you can't find it, check your spam folder.</p>
+                    <a href="{{ route('password.request') }}" class="btn btn-primary w-75 fw-500 align-baseline mb-0">{{ __('Do you want to request another?') }}
                     </a>
                 </div>
             </div>

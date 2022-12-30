@@ -56,13 +56,13 @@ class LiquidactionController extends Controller
         $user = auth()->user();
         // Valida si el usuario tiene una wallet enlazada para poder retirar
         if (!$user->wallet) {
-            return redirect()->back()->with('warning', 'Debe primero enlazar una wallet');
+            return redirect()->back()->with('warning', 'You must first link a wallet');
         }
         // Si el usuario hizo un cambio en su wallet no puede retirar durante 15 dias
         $remaining_days = $user->wallet->updated_at->diffInDays(now());
         if ($remaining_days <= 15 && !$user->wallet->created_at->eq($user->wallet->updated_at)) {
             $remaining_days = 15 - $remaining_days;
-            return redirect()->back()->with('warning', "Debido a que modifico su wallet debe esperar {$remaining_days} dias para poder solicitar retiros");
+            return redirect()->back()->with('warning', "Because I modified your wallet you must wait {$remaining_days} days to request withdrawals");
         }
 
         $config = WithdrawalSetting::first();
@@ -75,11 +75,11 @@ class LiquidactionController extends Controller
 
         if ($date->dayOfWeek == 0) {
             if (!($config->day_start == 7 || $config->day_end == 7)) {
-                return redirect()->back()->with('warning', 'La solicitud de retiro solo puede realizarse los días ' . $config->getFirtsDayOfWeek() . ' y ' . $config->getLastDayOfWeek() . '.');
+                return redirect()->back()->with('warning', 'The withdrawal request can only be made on days ' . $config->getFirtsDayOfWeek() . ' y ' . $config->getLastDayOfWeek() . '.');
             }
         } else {
             if (!($date->dayOfWeek  == $config->day_start || $date->dayOfWeek  == $config->day_end)) {
-                return redirect()->back()->with('warning', 'La solicitud de retiro solo puede realizarse los días ' . $config->getFirtsDayOfWeek() . ' y ' . $config->getLastDayOfWeek() . '.');
+                return redirect()->back()->with('warning', 'The withdrawal request can only be made on days ' . $config->getFirtsDayOfWeek() . ' y ' . $config->getLastDayOfWeek() . '.');
             }
         }
 
@@ -89,7 +89,7 @@ class LiquidactionController extends Controller
             $time_start = Carbon::createFromFormat('H:i:s', $config->time_start)->format('h:i A');
             $time_end = Carbon::createFromFormat('H:i:s', $config->time_end)->format('h:i A');
 
-            return redirect()->back()->with('warning', 'La solicitud de retiro solo puede realizarse de ' . $time_start . ' a ' . $time_end . ' Hora Texas');
+            return redirect()->back()->with('warning', 'The withdrawal request can only be made ' . $time_start . ' a ' . $time_end . ' Texas Time');
         }
 
         $balance = WalletComission::where([
@@ -249,7 +249,7 @@ class LiquidactionController extends Controller
         if ($data["code"] == $desincryptarDB && (new Google2FA())->verifyKey($user->token_auth, $request->codeAuth)) {
             return redirect()->route("liquidaciones.pendientes");
         } else {
-            return back()->with("warning", "El codigo no coincide");
+            return back()->with("warning", "The code does not match");
         }
     }
     public function withdraw()
@@ -387,7 +387,7 @@ class LiquidactionController extends Controller
                 $user = $liquidation->getUserLiquidation;
                 $user->notify(new RetiroAprobado($user));
 
-                return back()->with('success', 'La liquidación fue aprobada con éxito');
+                return back()->with('success', 'The settlement was successfully approved');
             } catch (\Throwable $th) {
                 Log::error('Liquidaction - saveLiquidation -> Error: ' . $th);
                 abort(403, "Ocurrio un error, contacte con el administrador");
@@ -402,7 +402,7 @@ class LiquidactionController extends Controller
 
                 DB::commit();
 
-                return back()->with('success', 'Status cambiado exitosamente');
+                return back()->with('success', 'Status changed successfully');
             } catch (\Throwable $th) {
 
                 DB::rollback();

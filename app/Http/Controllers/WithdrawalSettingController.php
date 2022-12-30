@@ -97,7 +97,7 @@ class WithdrawalSettingController extends Controller
                 'time_start' => $request->time_start,
                 'time_end' => $request->time_end
             ]);
-            return redirect()->back()->with('success', 'La configuración de días y horas de retiro han sido actualizada.');
+            return redirect()->back()->with('success', 'The configuration of days and hours of withdrawal have been updated.');
         } else if ($request->type == 'percentaje'){
             $request->validate([
                 'percentage' => 'required',
@@ -107,7 +107,7 @@ class WithdrawalSettingController extends Controller
             WithdrawalSetting::where('id', $id)->update([
                 'percentage' => $request->percentage,
             ]);
-            return redirect()->back()->with('success', 'La configuración del porcentaje de retiro han sido actualizada.');
+            return redirect()->back()->with('success', 'Withdrawal percentage settings have been updated.');
         }
         
         

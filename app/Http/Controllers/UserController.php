@@ -184,7 +184,7 @@ class UserController extends Controller
 
             $users = User::where('email', $request->input('filtro'))->orderBy('id', 'desc')->get();
         } elseif (!empty($request->input('filtro')) && ($request->input('select') == "pamm")) {
-            return redirect()->back()->with('error', 'En proceso');
+            return redirect()->back()->with('error', 'In process');
         } else {
             $users = User::where('admin', '0')->with('padre', 'investment.LicensePackage', 'countrie')->orderBy('id', 'desc')->get();
         }
@@ -219,7 +219,7 @@ class UserController extends Controller
 
         Auth::login($user);
 
-        return redirect('/')->with('success', 'Has iniciado seccion en otra cuenta');
+        return redirect('/')->with('success', 'You have started a section in another account');
     }
 
     public function stop()
@@ -228,7 +228,7 @@ class UserController extends Controller
         Auth::loginUsingId(session()->pull('impersonated_by'));
 
         return redirect('/')
-            ->with('success', 'Has iniciado seccion con tu cuenta admin');
+            ->with('success', 'You have started section with your admin account');
     }
 
     public function verifiedEmail()
@@ -245,7 +245,7 @@ class UserController extends Controller
         $user->email_verified_at = Carbon::now();
         $user->save();
 
-        return redirect()->route('verified-email')->with('success', 'Tu usuario ha sido verificado con éxito.');
+        return redirect()->route('verified-email')->with('success', 'Your username has been successfully verified.');
         /* }else{
                 return redirect()->back()->with('alert-danger', 'El código está caducado, se ha enviado un nuevo código.');
             } */
@@ -301,7 +301,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return back()->with('success', 'Perfil actualizado');
+        return back()->with('success', 'Updated profile');
     }
     public function updateContacto(Request $request)
     {
@@ -327,7 +327,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return back()->with('success', 'Perfil actualizado');
+        return back()->with('success', 'Updated profile');
     }
     public function photoUpdate(Request $request)
     {
@@ -346,13 +346,13 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect()->back()->with('success', 'La foto fue actualizada con exito');
+        return redirect()->back()->with('success', 'The photo was successfully updated');
     }
     public function deletePhoto()
     {
         $user = Auth::user();
         $user->update(['photo' => null]);
-        return redirect()->back()->with('success', 'Su foto fue removida con exito');
+        return redirect()->back()->with('success', 'Your photo was successfully removed');
     }
 
     public function sendCodeAutentication(Request $request)
@@ -421,7 +421,7 @@ class UserController extends Controller
         } else {
             $user->code_security = $request['code_security'];
             $user->save();
-            return redirect()->back()->with('success', 'PIN configurado');
+            return redirect()->back()->with('success', 'PIN set');
         }
     }
     public function PasswordUpdate(Request $request)
@@ -436,9 +436,9 @@ class UserController extends Controller
         if ($request->code_password == $code) {
             User::find(auth()->user()->id)->update(['password' => Hash::make($request->new_password)]);
 
-            return back()->with('success', 'Contraseña actualizada');
+            return back()->with('success', 'Updated password');
         } else {
-            return back()->with('error', 'Verificacion de email fallida');
+            return back()->with('error', 'Email verification failed');
         }
     }
 
@@ -463,9 +463,9 @@ class UserController extends Controller
             );
 
 
-            return back()->with('success', 'PIN actualizado');
+            return back()->with('success', 'Updated PIN');
         } else {
-            return back()->with('error', 'Verificacion de email fallida');
+            return back()->with('error', 'Email verification failed');
         }
     }
 
@@ -556,12 +556,12 @@ class UserController extends Controller
                 }
                 $user->wallet = Crypt::encryptString($data['wallet']);
                 $user->save();
-                return redirect()->back()->with('success', 'Wallet actualizada correctamente ');
+                return redirect()->back()->with('success', 'Wallet updated successfully ');
             } else {
-                return redirect()->back()->with('error', 'Codigo auth incorrecto');
+                return redirect()->back()->with('error', 'Wrong auth code');
             }
         } else {
-            return redirect()->back()->with('error', 'Pin incorrecto');
+            return redirect()->back()->with('error', 'Wrong pin');
         }
     }
 
@@ -573,7 +573,7 @@ class UserController extends Controller
             'referred_id' => $request->referido
         ]);
 
-        return redirect()->back()->with('success', 'Usuario Actualizado con exito');
+        return redirect()->back()->with('success', 'User Updated Successfully');
     }
 
     public function massiveMail()
@@ -622,15 +622,15 @@ class UserController extends Controller
         $user = Auth::user();
 
         if (!$user->code_security) {
-            return back()->with('error', 'Debe requerir un código de seguridad');
+            return back()->with('error', 'Must require a security code');
         }
 
         if ($request->code !== $user->decryptSeccurityCode()) {
-            return back()->with('error', 'El código de seguridad no coincide');
+            return back()->with('error', 'Security code does not match');
         }
 
         if (!Hash::check($request->password, $user->password)) {
-            return back()->with('error', 'La contraseña es incorrecta');
+            return back()->with('error', 'Password is incorrect');
         }
         // Se guarda su wallet encriptada
         Wallet::updateOrCreate(
@@ -645,7 +645,7 @@ class UserController extends Controller
 
         $user->update(['code_security' => null]);
 
-        return back()->with('success', 'Su wallet se ha guardado exitosamente!');
+        return back()->with('success', 'Your wallet has been successfully saved!');
     }
     public function checkCode(Request $request) {      
         $user = Auth::user();
@@ -718,8 +718,8 @@ class UserController extends Controller
             $customerData = $response->object();
             $user->whizfx->kyc_percentage = $customerData->kyc_percentage;
             $user->whizfx->save();
-            return back()->with('success', 'Datos Actualizados!');
+            return back()->with('success', 'Updated data!');
         }
-        return back()->with('error', 'Sucedio un error');
+        return back()->with('error', 'An error happened');
     }
 }
