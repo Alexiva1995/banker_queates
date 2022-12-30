@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalWalletLabel">Enlazar Wallet</h5>
+                <h5 class="modal-title" id="modalWalletLabel">Link Wallet</h5>
                 <button type="button" class="btn btn-danger btn-close" data-bs-dismiss="modal"
                     aria-label="Close"></button>
             </div>
@@ -13,9 +13,9 @@
                         <div class="row">
                             <div class="col-12 mt-1">
                                 <div class="alert alert-info p-1" role="alert">
-                                    Al realizar un cambio de wallet, no podrá realizar retiros durante 15 días
+                                    When making a change of wallet, you will not be able to make withdrawals for 15 days
                                   </div>
-                                <h6 class="fw-500 mt-2">El código será enviado a {{substr(Auth::user()->email, 0,
+                                <h6 class="fw-500 mt-2">The code will be sent to {{substr(Auth::user()->email, 0,
                                     4)}}*****@*****.com</h6>
 
                                 <div class="input-group mb-2 shadow-none">
@@ -23,7 +23,7 @@
                                         <input type="text" class="form-control form-control-merge" id="code" name="code"
                                             placeholder="Ingresa el código" required />
                                         <button
-                                            class="btn input-group-btn btn-primary cursor-pointer border-end input-group-text border-top border-bottom" id="codeButton" onclick="getCode()">Obtener codigo
+                                            class="btn input-group-btn btn-primary cursor-pointer border-end input-group-text border-top border-bottom" id="codeButton" onclick="getCode()">Get Code
                                         </button>
                                     </div>
                                 </div>
@@ -39,7 +39,7 @@
                             </div>
 
                             <div class="col-12 mt-1">
-                                <label for="name">Contraseña <span class="requerid">*</span></label>
+                                <label for="name">Password <span class="requerid">*</span></label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="password" id="password" 
                                     placeholder="Ingrese su contraseña" 
@@ -50,7 +50,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
                 </div>
             </form>
         </div>

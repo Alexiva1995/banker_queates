@@ -7,15 +7,15 @@
                     @csrf
                     <div class="row">
                         <!--ROW 1 START-->
-                        <h3 class="mb-4 fw-600">Cambio de Contraseña</h3>
+                        <h3 class="mb-4 fw-600">Change Password</h3>
                         <div class="col-sm-6">
-                            <label for="" class="fw-500">Contraseña Anterior <label
+                            <label for="" class="fw-500">Old Password <label
                                     style="color: red;">*</label></label>
                             <div class="input-group mb-2 shadow-none">
                                 <div class="input-group input-group-merge form-password-toggle shadow-none">
                                     <input id="password" type="password" name="current_password"
                                         class="form-control form-control-merge @error('current_password') is-invalid @enderror"
-                                        autocomplete="current-password" placeholder="Ingresa tu contraseña anterior">
+                                        autocomplete="current-password" placeholder="Enter your old password">
                                     @error('current_password')
                                         <span class="invalid-feedback d-block" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -25,12 +25,12 @@
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <label for="" class="fw-500">Verificacion de correo <label
+                            <label for="" class="fw-500">Mail verification <label
                                     style="color: red;">*</label></label>
                             <div class="input-group mb-2 shadow-none">
                                 <div class="input-group input-group-merge form-password-toggle shadow-none">
-                                    <input type="text" class="form-control form-control-merge" id="code_password" name="code_password" placeholder="Ingresa el código"/>
-                        <a class="btn input-group-btn btn-primary cursor-pointer border-end input-group-text border-top border-bottom" id="codeButton" onclick="getCode();">Obtener codigo</a>
+                                    <input type="text" class="form-control form-control-merge" id="code_password" name="code_password" placeholder="Enter the code"/>
+                        <a class="btn input-group-btn btn-primary cursor-pointer border-end input-group-text border-top border-bottom" id="codeButton" onclick="getCode();">Get Code</a>
                                     @error('current_password')
                                         <span class="invalid-feedback d-block" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -43,13 +43,13 @@
                         <div class="col-12"></div>
 
                         <div class="col-sm-6" >
-                            <label for="" style="margin-bottom: 1%;" class="fw-500">Nueva Contraseña <label
+                            <label for="" style="margin-bottom: 1%;" class="fw-500">New Password <label
                                     style="color: red;">*</label></label>
                             <div class="input-group mb-3">
                                 {{-- <input id="new_password" type="password" class="form-control" name="new_password" autocomplete="current-password"> --}}
                                 <input id="new_password" type="password" name="new_password"
                                     class="form-control @error('new_password') is-invalid @enderror"
-                                    autocomplete="current-password" placeholder="Ingresa tu nueva contraseña">
+                                    autocomplete="current-password" placeholder="Enter your new password">
                                 @error('new_password')
                                     <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -59,12 +59,12 @@
                         </div>
 
                         <div class="col-sm-6">
-                            <label for="" style="margin-bottom: 1%;" class="fw-500">Confirmar Nueva Contraseña <label
+                            <label for="" style="margin-bottom: 1%;" class="fw-500">Confirm New Password <label
                                     style="color: red;">*</label></label>
                             <div class="input-group mb-3">
                                 <input id="confirm_password" type="password" name="confirm_password"
                                     class="form-control @error('new_confirm_password') is-invalid @enderror"
-                                    autocomplete="current-password" placeholder="Repite tu nueva contraseña">
+                                    autocomplete="current-password" placeholder="Repeat your new password">
                                 @error('confirm_password')
                                     <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -88,10 +88,10 @@
                         </div>
                         <div class="d-flex justify-content-start" style="border: none">
                             <button type="submit" class="ms-1 btn btn-primary" id="guardar">
-                                Guardar Cambios
+                                Save Changes
                             </button>
                             <button type="button" id="boton03" class="ms-1 btn btn-outline-danger">
-                                Cancelar
+                                Cancel
                             </button>
                         </div>
                     </div>

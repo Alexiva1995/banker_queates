@@ -51,14 +51,14 @@
 @section('content')
 <div id="logs-list">
     <div class="d-flex my-1">
-        <p class="fw-700 mb-0" style="font-weight: 700; color:#000">Informes</p><span class="fw-300 mx-1 text-light">|</span>
-        <p class="fw-700 mb-0" style="font-weight: 700; color:rgba(0, 0, 0, 0.514)">Comisiones</p>
+        <p class="fw-700 mb-0" style="font-weight: 700; color:#000">Reports</p><span class="fw-300 mx-1 text-light">|</span>
+        <p class="fw-700 mb-0" style="font-weight: 700; color:rgba(0, 0, 0, 0.514)">Commissions</p>
     </div>
     <div class="col-12">
         <div class="card p-2">
             <div class="card-content p-50">
                 <div class="card-header p-0">
-                    <h4 class="fw-700">Comisiones</h4>
+                    <h4 class="fw-700">Commissions</h4>
                     @if(auth()->user()->admin == 1)
                     <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button"
                         aria-expanded="false" aria-controls="collapseExample">
@@ -140,16 +140,16 @@
                             <thead class="">
                                 <tr class="text-center">
                                     <th class="fw-600">ID</th>
-                                    <th class="fw-600">Usuario</th>
-                                    <th class="fw-600">ID de Usuario</th>
+                                    <th class="fw-600">User</th>
+                                    <th class="fw-600">ID User</th>
                                     @if(Auth::user()->admin == 1)
-                                    <th class="fw-600">Referido</th>
-                                    <th class="fw-600">ID del <br />Referido</th>
+                                    <th class="fw-600">Referred</th>
+                                    <th class="fw-600">ID <br />Referred</th>
                                     @endif
-                                    <th class="fw-600">Monto</th>
-                                    <th class="fw-600">Estado</th>
-                                    <th class="fw-600">Tipo</th>
-                                    <th class="fw-600">Fecha</th>
+                                    <th class="fw-600">Amount</th>
+                                    <th class="fw-600">Status</th>
+                                    <th class="fw-600">Type</th>
+                                    <th class="fw-600">Date</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -166,23 +166,23 @@
                                     <td class="fw-300 text-center">
                                     @if ($wallet->status == 0)
                                         <span class="badge success-badge">
-                                            <span class="success-text">Disponible</span>
+                                            <span class="success-text">Available</span>
                                         </span>
                                     @elseif($wallet->status == 1)
                                         <span class="badge waiting-badge">
-                                            <span class="waiting-text">Solicitada</span>
+                                            <span class="waiting-text">Requested</span>
                                         </span>
                                     @elseif($wallet->status == 2)
                                         <span class="badge success-badge">
-                                            <span class="success-text">Pagada</span>
+                                            <span class="success-text">Paid</span>
                                         </span>
                                     @elseif($wallet->status == 3)
                                         <span class="badge warning-badge">
-                                            <span class="warning-text">Anulada</span>
+                                            <span class="warning-text">Canceled</span>
                                         </span>
                                     @elseif($wallet->status == 4)
                                         <span class="badge warning-badge">
-                                            <span class="text-warning">Sustraida</span>
+                                            <span class="text-warning">Stolen</span>
                                         </span>
                                     @endif
                                     </td>
@@ -251,29 +251,7 @@
             [0, "desc"]
         ],
         pagingType: 'simple_numbers',
-        language: {
-            "info":           "Mostrando _START_ de _END_ de _TOTAL_ entradas",
-            "infoFiltered":   "(filtrado de _MAX_ entradas)",
-            "lengthMenu":     "Mostrar _MENU_ entradas",
-            "loadingRecords": "Cargando...",
-            "processing":     "",
-            "search":         "Buscar:",
-            "zeroRecords":    "No se encontraron resultados",
-            paginate: {
-                first:    ' ',
-                previous: ' ',
-                next:     ' ',
-                last:     ' '
-            },
-            aria: {
-                paginate: {
-                    first:    '',
-                    previous: '',
-                    next:     '',
-                    last:     ''
-                }
-            }
-        }
+        
     })
 
     // const btn_clear = document.querySelector('#btn_clear');

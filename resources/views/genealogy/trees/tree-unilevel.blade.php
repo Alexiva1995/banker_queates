@@ -111,13 +111,13 @@
         <div class="padre">
             <div class="d-flex my-1">
                 <p class="fw-700 mb-0">Red</p><span class="fw-300 mx-1 text-primary">|</span>
-                <p class="fw-400 mb-0">Arbol de referidos</p>
+                <p class="fw-400 mb-0">Referral tree</p>
             </div>
             <div class="card">
                 <div class="card-content p-75">
                     <div class="card-header d-block p-2 pb-0">
                         <div class="d-flex justify-content-between align-item-center flex-wrap  gap-50">
-                            <h4 class="fw-700">Arbol de referidos</h4>
+                            <h4 class="fw-700">Referral tree</h4>
                         </div>
                     </div>
                 </div>
@@ -160,7 +160,7 @@
                             <div class="row justify-content-end">
                                 <div class="col-md-2 col-sm-4">
                                     <div class=" white mt-1">
-                                        <input type="number" placeholder="id del usuario" name="id"
+                                        <input type="number" placeholder="Id User" name="id"
                                             class="form-control" id="id">
                                     </div>
                                 </div>

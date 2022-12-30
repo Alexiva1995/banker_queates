@@ -4,9 +4,9 @@
             <div class="d-flex align-items-center justify-content-between">
                 <div class="info w-50 me-1">
                     <label class="form-check-label mb-0 fs-15 fw-500 text-dark text-uppercase"
-                        for="customSwitch44">LIQUIDACIONES</label>
+                        for="customSwitch44">LIQUIDATIONS</label>
                     <br>
-                    <small class="text-info fs-10">VER LIQUIDACIONES</small>
+                    <small class="text-info fs-10">SEE LIQUIDATIONS</small>
                 </div>
                 <div class="form-check form-switch ps-0 text-right d-flex">
                     <span class="rounded-circle p-25" style="border:1px solid #818181;">

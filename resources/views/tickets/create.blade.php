@@ -57,7 +57,7 @@
         }
     </style>
     <div class="d-flex my-2">
-        <p style="color:#808E9E;" class="fw-700">Soporte</p><span class="fw-normal mx-1">|</span>
+        <p style="color:#808E9E;" class="fw-700">Support</p><span class="fw-normal mx-1">|</span>
         <p>Ticket</p>
     </div>
 
@@ -68,7 +68,7 @@
                     <!--Card Header--->
                     <div class="card-header">
                         <h4 class="mt-2 fw-bold fw-600">
-                            Categorias
+                            Categories
                         </h4>
                     </div>
                     <!--Card Header End--->
@@ -81,31 +81,31 @@
                                     <div class="d-flex justify-content-between categorie-content flex-wrap mt-1">
                                         <label style="width:18%" class=" d-flex  content-input">
                                             <input type="radio" name="categories" id="nivel_1" value="0" checked>
-                                            <span style="font-size: 0.9rem" class="text-center categorie" >Ayuda</span>
+                                            <span style="font-size: 0.9rem" class="text-center categorie" >Help</span>
                                             </input>
                                         </label>
                                         <label style="width:18%" class="d-flex  content-input">
                                             <input type="radio" name="categories" id="nivel_1" value="1">
                                             <span style="font-size: 0.9rem" class="text-center categorie">
-                                                Soporte Tecnico</span>
+                                               Technical support</span>
                                             </input>
                                         </label>
                                         <label style="width:18%" class="d-flex  content-input">
                                             <input type="radio" name="categories" id="nivel_1" value="2">
                                             <span style="font-size: 0.9rem" class="text-center categorie">
-                                                Correcion de Datos</span>
+                                                Data Correction</span>
                                             </input>
                                         </label>
                                         <label style="width:18%" class="d-flex content-input">
                                             <input type="radio" name="categories" id="nivel_1" value="3">
                                             <span style="font-size: 0.9rem" class="text-center categorie">
-                                                Bonos</span>
+                                                Bonus</span>
                                             </input>
                                         </label>
                                         <label style="width:18%" class="d-flex  content-input">
                                             <input type="radio" name="categories" id="nivel_1" value="4">
                                             <span style="font-size: 0.9rem" class="text-center categorie">
-                                                Inversion Total</span>
+                                                Total inversion</span>
                                             </input>
                                         </label>
                                     </div>
@@ -124,7 +124,7 @@
                                 </div> --}}
                                 <div class="col-sm-6 mb-2 mt-2">
                                     <!--Asunto -->
-                                    <h4 class="text-bold-600 fw-600">Asunto:</h4>
+                                    <h4 class="text-bold-600 fw-600">Issue:</h4>
                                     <div class="input-group input-group-lg">
                                         <input type="text" name="issue" class="form-control" required>
                                     </div>
@@ -138,7 +138,7 @@
                                             <div class="col-sm-9">
                                                 <div class="row">
                                                     <div class="col-sm-12">
-                                                        <input class="form-control " placeholder="Escriba un mensaje"
+                                                        <input class="form-control " placeholder="Write a message"
                                                         type="text" id="message" name="message"
                                                         style="background-color: #D8EDED;" required></input>
                                                     <!--MENSAJE END-->
@@ -176,7 +176,7 @@
                                                         <div class="col-sm-5 d-flex justify-content-end">
                                                             <button
                                                                 class="mb-2 btn btn-primary waves-effect waves-float waves-light"
-                                                                style="width: 8em">Enviar
+                                                                style="width: 8em">Send
                                                             </button>
                                                         </div>
                                                     </div>

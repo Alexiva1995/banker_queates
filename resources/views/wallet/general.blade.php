@@ -18,7 +18,7 @@
                             {{$generalTotal > 0 ? number_format($generalTotal, 2, ',', ' ') : 0}} 
                         </span></span>
                         <br>
-                        <span class="text-light" style="font-size: 13px;">Total Ganado</span>
+                        <span class="text-light" style="font-size: 13px;">Total Gain</span>
                     </div>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                             {{ $generalAvailable > 0 ? number_format($generalAvailable, 2, ',', ' ') : 0 }}
                         </span>
                         <br>
-                        <span class="text-light">Saldo Disponible</span>
+                        <span class="text-light">Balance Available</span>
                     </div>
                 </div>
             </div>
@@ -60,16 +60,16 @@
                         <span id="pamm_balance" class="usdt-color" style="font-weight:900; font-size: 21px">USDT 0
                         </span>
                         <br>
-                        <span class="text-light">Balance de cuenta PAMM</span>
+                        <span class="text-light">PAMM Account Balance</span>
                     </div>
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="p-2 entrada-bloc ">
-                    <a href="{{route('solicitudesRetiros')}}" class="btn btn-primary float-end w-100" style="margin-bottom:6%;">Solicitar Retiro</a>
+                    <a href="{{route('solicitudesRetiros')}}" class="btn btn-primary float-end w-100" style="margin-bottom:6%;">Request Withdrawal</a>
                     <a type="button" data-bs-toggle="modal" data-bs-target="#modalWallet" class="btn btn-primary float-end w-100" style="margin-bottom:5%">
                         <span style="font-size: 14px; font-weight: 500;">
-                            {{ auth()->user()->wallet != null ? 'Cambiar Wallet' : 'Enlazar Wallet'}}
+                            {{ auth()->user()->wallet != null ? 'Change Wallet' : 'Link Wallet'}}
                         </span>
                     </a>
 
@@ -83,7 +83,7 @@
                 <div class="card-content">
                     <div class="row">
                         <div class="col-sm-6 p-2">
-                            <h4 class="fw-700" style="margin-left: 2%">Ganancias</h4>
+                            <h4 class="fw-700" style="margin-left: 2%">Gains</h4>
                         </div>
                     </div>
                 </div>
@@ -92,10 +92,10 @@
                         <table class="table   nowrap scroll-horizontal-vertical myTable table-striped w-100">
                             <thead class="">
                                 <tr class="text-center">
-                                    <th>Descripcion</th>
-                                    <th>Monto</th>
-                                    <th>Estado</th>
-                                    <th class="d-none d-sm-table-cell">Fecha</th>
+                                    <th>Description</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th class="d-none d-sm-table-cell">Date</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -110,23 +110,23 @@
                                         <td>
                                             @if ($gen->status == '0')
                                                 <span class="badge success-badge">
-                                                    <span class="text-success">Disponible</span>
+                                                    <span class="text-success">Available</span>
                                                 </span>
                                             @elseif($gen->status == '1')
                                                 <span class="badge waiting-badge">
-                                                    <span class="waiting-text">Solicitada</span>
+                                                    <span class="waiting-text">Requested</span>
                                                 </span>
                                             @elseif($gen->status == '2')
                                                 <span class="badge success-badge">
-                                                    <span class="success-text">Pagado</span>
+                                                    <span class="success-text">Paid</span>
                                                 </span>
                                             @elseif($gen->status == '3')
                                                 <span class="badge warning-badge">
-                                                    <span class="warning-text">Anulada</span>
+                                                    <span class="warning-text">Canceled</span>
                                                 </span>
                                             @elseif($gen->status == '4')
                                                 <span class="badge warning-badge">
-                                                    <span class="text-warning">Sustraida</span>
+                                                    <span class="text-warning">Stolen</span>
                                                 </span>
                                             @endif
                                         </td>
@@ -147,11 +147,11 @@
                 <div class="card-content">
                     <div class="row">
                         <div class="col-sm-6 p-2">
-                            <h4 class="fw-700" style="margin-left: 2%">Retiros</h4>
+                            <h4 class="fw-700" style="margin-left: 2%">Withdrawal</h4>
                         </div>
                         {{--<div class="col-sm-6">
                             <a href="{{route('solicitudesRetiros')}}" class="btn btn-primary float-end">Solicitar Retiro</a>
-                            <button type="button" data-bs-toggle="modal" data-bs-target="#modalWallet" class="btn btn-gradient-primary float-end ms-1">Enlazar Wallet</button>
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#modalWallet" class="btn btn-gradient-primary float-end ms-1">Link Wallet</button>
                         </div>--}}
                     </div>
                 </div>
@@ -160,10 +160,10 @@
                         <table class="table  nowrap scroll-horizontal-vertical myTable table-striped w-100">
                             <thead class="">
                                 <tr class="text-center">
-                                    <th>Descripcion</th>
-                                    <th>Monto</th>
-                                    <th>Estado</th>
-                                    <th class="d-none d-sm-table-cell">Fecha</th>
+                                    <th>Description</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th class="d-none d-sm-table-cell">Date</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -178,15 +178,15 @@
                                         <td>
                                             @if ($gen->status == '0')
                                                 <span class="badge waiting-badge">
-                                                    <span class="waiting-text">En Espera</span> 
+                                                    <span class="waiting-text">Pending</span> 
                                                 </span>
                                             @elseif($gen->status == '1')
                                                 <span class="badge success-badge">
-                                                    <span class="success-text">Pagado</span> 
+                                                    <span class="success-text">Paid</span> 
                                                 </span>
                                             @elseif($gen->status == '2')
                                                 <span class="badge warning-badge">
-                                                    <span class="warning-text">Cancelado</span> 
+                                                    <span class="warning-text">Canceled</span> 
                                                 </span>
                                             @endif
                                         </td>

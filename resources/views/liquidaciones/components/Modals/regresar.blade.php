@@ -5,14 +5,14 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Regresar</h5>
+          <h5 class="modal-title" id="exampleModalLabel">To return</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="input-group mb-1">
-                        <span class="input-group-text" id="basic-addon1">Usuario</span>
+                        <span class="input-group-text" id="basic-addon1">User</span>
                         <input type="text" class="form-control" placeholder="{{$liquidacion->user->name}}" aria-label="" aria-describedby="basic-addon1" disabled>
                       </div>
                 </div>
@@ -32,7 +32,7 @@
 
                 <div class="col-sm-8">
                     <div class="input-group mb-1">
-                        <span class="input-group-text" id="basic-addon1">Monto bruto</span>
+                        <span class="input-group-text" id="basic-addon1">Gross amount</span>
                         <input type="text" class="form-control" placeholder="${{$liquidacion->amount_gross}}" aria-label=" " aria-describedby="basic-addon1" disabled>
                       </div>
                 </div>
@@ -46,7 +46,7 @@
                 <div class="col-sm-12">
                     <div class="row">
                         <div class="col-sm-12 d-flex justify-content-end">
-                            <span style="color:#544E67;"><strong style="font-size: 1.1rem;">Monto a enviar</strong></span>
+                            <span style="color:#544E67;"><strong style="font-size: 1.1rem;">Amount to send</strong></span>
                         </div>
                         <div class="col-sm-12 d-flex justify-content-end mt-1">
                             <span style="color:#544E67;"><strong style="font-size: 1.1rem;">$ {{number_format($liquidacion->amount_net,2)}}</strong></span>
@@ -57,7 +57,7 @@
               </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="regresar({{ $liquidacion->id }} , 'regresar')">Regresar</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="regresar({{ $liquidacion->id }} , 'regresar')">Return</button>
         </div>
       </div>
     </div>

@@ -5,7 +5,7 @@
         <div class="row mx-0">
           <div class="col-md-7 col-12 revenue-report-wrapper">
             <div class="d-sm-flex justify-content-between align-items-center mb-3">
-              <h4 class="card-title mb-50 mb-sm-0" style="color: #5E7382: font-weight: 700;">Ganancias</h4>
+              <h4 class="card-title mb-50 mb-sm-0" style="color: #5E7382: font-weight: 700;">Profits</h4>
               <div class="d-flex align-items-center">
               </div>
             </div>
@@ -14,7 +14,7 @@
           <div class="mt-5 col-md-5 col-12 budget-wrapper">
             <h1 class="" style="color:#02D6AC; font-weight: 700;">USD 874</h1>
             <div class="d-flex justify-content-center">
-              <h5 style="color:#9892AA;">Ganancias Totales</h5>
+              <h5 style="color:#9892AA;">Total Profits</h5>
             </div>
             <div id="budget-chart"></div>
           </div>

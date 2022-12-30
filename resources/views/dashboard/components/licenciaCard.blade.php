@@ -16,7 +16,7 @@
                 <div class="col-sm-12">
                     <h2 class="card-title text-white" style="font-weight: 700;
                     font-size: 24px;
-                    line-height: 28px;">Tu licencia</h2>
+                    line-height: 28px;">Your License</h2>
                 </div>
                 
                     @if($user_packages[0]->image != null)
@@ -65,7 +65,7 @@
                             </div>
                         </div>
                         <div class="col-sm-12 d-flex justify-content-center mt-2">
-                            <a href="{{route('market.licenses')}}" class="btn btn-primary btn-lg gradient2 zoom">Comprar Licencia</a>
+                            <a href="{{route('market.licenses')}}" class="btn btn-primary btn-lg gradient2 zoom">Buy License</a>
                         </div>
                     </div>
                 </div>

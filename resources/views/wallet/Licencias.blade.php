@@ -15,7 +15,7 @@
                     <div class="texto" style="padding-left: 3%">
                         <span class="usdt-color" style="font-weight:900; font-size: 21px">USDT {{$licenciasTotal }} </span>
                         <br>
-                        <span class="text-light">Total Ganado Binario</span>
+                        <span class="text-light">Total Binary Gain</span>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                     <div class="texto" style="padding-left: 3%">
                         <span class="usdt-color" style="font-weight:900; font-size: 21px">USDT {{$licenciasAvailable }} </span>
                         <br>
-                        <span class="text-light">Saldo Disponibles</span>
+                        <span class="text-light">Balance Available</span>
                     </div>
                 </div>
             </div>
@@ -52,9 +52,9 @@
                 <div class="card p-2">
                     <div class="card-content">
                         <div class="card-header my-1 p-0">
-                            <h4 class="fw-700">Licencias</h4>
+                            <h4 class="fw-700">Licences</h4>
                             {{--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#transferLicencias">
-                                Transferir
+                                Transfer
                             </button>--}}
                         </div>
                         <div class="card-body card-dashboard p-0">
@@ -62,10 +62,10 @@
                                 <table class="table  nowrap scroll-horizontal-vertical myTable table-striped w-100">
                                     <thead class="">
                                         <tr class="text-center">
-                                            <th>Monto</th>
-                                            <th>Puntos</th>
-                                            <th>Estado</th>
-                                            <th class="d-none d-sm-table-cell">Fecha</th>
+                                            <th>Amount</th>
+                                            <th>Points</th>
+                                            <th>Status</th>
+                                            <th class="d-none d-sm-table-cell">Date</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -76,23 +76,23 @@
                                                 <td>
                                                     @if ($licen->status == '0')
                                                         <span class="badge success-badge">
-                                                            <span class="text-success">Disponible</span>
+                                                            <span class="text-success">Available</span>
                                                         </span>
                                                     @elseif($licen->status == '1')
                                                         <span class="badge waiting-badge">
-                                                            <span class="waiting-text">Solicitada</span>
+                                                            <span class="waiting-text">Requested</span>
                                                         </span>
                                                     @elseif($licen->status == '2')
                                                         <span class="badge success-badge">
-                                                            <span class="success-text">Pagado</span>
+                                                            <span class="success-text">Paid</span>
                                                         </span>
                                                     @elseif($licen->status == '3')
                                                         <span class="badge warning-badge">
-                                                            <span class="warning-text">Anulada</span>
+                                                            <span class="warning-text">Canceled</span>
                                                         </span>
                                                     @elseif($licen->status == '4')
                                                         <span class="badge warning-badge">
-                                                            <span class="text-warning">Sustraida</span>
+                                                            <span class="text-warning">Stolen</span>
                                                         </span>
                                                     @endif
                                                 </td>

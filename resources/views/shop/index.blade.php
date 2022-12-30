@@ -50,8 +50,8 @@
 @section('content')
 <div class="container-fluid container-custom"> 
     <div class="d-flex my-1">
-        <p class="fw-700 mb-0" style="font-weight: 700; color:#000">Mercado</p><span class="fw-300 mx-1 text-light">|</span>
-        <p class="fw-700 mb-0" style="font-weight: 700; color:rgba(0, 0, 0, 0.514)">Licencias</p>
+        <p class="fw-700 mb-0" style="font-weight: 700; color:#000">Market</p><span class="fw-300 mx-1 text-light">|</span>
+        <p class="fw-700 mb-0" style="font-weight: 700; color:rgba(0, 0, 0, 0.514)">Licences</p>
     </div>
 
     <div id="adminServices" class="mt-1">
@@ -96,7 +96,7 @@
                                     @endif
                                 </div>
                                 <div class="card-body text-center">
-                                    <small class="text-light" style="font-size: 12px; color:#9892AA">Depositos Hasta {{$package->description}} USDT</small>
+                                    <small class="text-light" style="font-size: 12px; color:#9892AA">Deposit Until {{$package->description}} USDT</small>
                                     <br>
                                     <h2 class="fw-600 mb-75 text-center" style="color: #04D99D;margin-bottom: 0!important;font-size:40px">{{ "USDT ".$package->amount }}</h2>
                                 </div>
