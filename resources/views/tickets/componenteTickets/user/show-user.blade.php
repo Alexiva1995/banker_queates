@@ -9,7 +9,7 @@
     }
 </style>
     <div class="d-flex my-2">
-        <p style="color:#808E9E;" class="fw-700">Soporte</p><span class="fw-normal mx-1 text-primary">|</span>
+        <p style="color:#808E9E;" class="fw-700">Support</p><span class="fw-normal mx-1 text-primary">|</span>
         <p>Ticket</p>
     </div>
 
@@ -19,7 +19,7 @@
                 <!--Card Header--->
                 <div class="card-header">
                     <h4 class="fw-bold">
-                        Revisando Ticket
+                        Reviewing Ticket
                     </h4>
                 </div>
                 <!--Card Header End--->
@@ -37,29 +37,29 @@
                                 <span>{{ Auth::user()->id }}</span>
                             </div>
                             <div class="col-6 mb-2">
-                                <span class=" text-bold-600 text-primary">Correo:</span>
+                                <span class=" text-bold-600 text-primary">Email:</span>
                                 <span>{{ $emailUser }}</span>
                             </div>
                             <div class="col-6 mb-2">
                                 <!--SELECT-->
-                                <span class=" text-bold-600 text-primary">Categoria: </span>
+                                <span class=" text-bold-600 text-primary">Categorie: </span>
 
                                 @if ($ticket->categories == '0')
-                                    <span>Ayuda</span>
+                                    <span>Help</span>
                                 @elseif($ticket->categories == '1')
-                                    <span>Soporte técnico</span>
+                                    <span>Technical support</span>
                                 @elseif($ticket->categories == '2')
-                                    <span>Corrección de datos</span>
+                                    <span>Data correction</span>
                                 @elseif($ticket->categories == '3')
-                                    <span>Bonos</span>
+                                    <span>Bonus</span>
                                 @elseif($ticket->categories == '4')
-                                    <span>Inversión total</span>
+                                    <span>Total inversion</span>
                                 @endif
                                 <!--SELECT END-->
 
                             </div>
                             <div class="col-6 mb-2">
-                                <span class=" text-bold-600 text-primary">Asunto:</span>
+                                <span class=" text-bold-600 text-primary">Issue:</span>
                                 <span>{{ $ticket->issue }}</span>
                             </div>
 
@@ -69,12 +69,12 @@
                             </div>
 
                             <div class="col-6 mb-2">
-                                <label class="text-primary" for="">Estado:</label>
+                                <label class="text-primary" for="">Status:</label>
                                 @if ($ticket->status == '0')
-                                    <span>Abierto</span>
+                                    <span>Open</span>
                                 @endif
                                 @if ($ticket->status == '1')
-                                    <span>Cerrado</span>
+                                    <span>Close</span>
                                 @endif
                             </div>
                             <div class="col-sm-12 mb-2">

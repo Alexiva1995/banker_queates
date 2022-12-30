@@ -37,17 +37,17 @@
                         <div class="card-content">
                             <div class="card-header">
                                 <div class="d-flex justify-content-start">
-                                    <h4 class="fw-700">Liquidaciones Pendientes</h4>
+                                    <h4 class="fw-700">Pending Settlements</h4>
                                 </div>
                                 <div class="float-right">
                                     <div class="d-flex">
                                         <a href="{{ route('liquidaciones.export.csv') }}" class="btn btn-primary ">
-                                            Exportar CSV
+                                            To export CSV
                                             <i style="font-size: 16px;" class="fas fa-download"></i>
                                         </a>
                                         <a class="btn btn-primary mx-1" data-bs-toggle="collapse" href="#collapseExample"
                                             role="button" aria-expanded="false" aria-controls="collapseExample">
-                                            Filtros
+                                            Filters
                                         </a>
                                     </div>
                                 </div>
@@ -59,33 +59,33 @@
                                         <div class="row">
 
                                             <div class="mb-2 col-md-4 col-sm-6">
-                                                <label for="user_id" class="form-label">ID de Usuario</label>
+                                                <label for="user_id" class="form-label">ID User</label>
                                                 <input type="number" class="form-control" id="user_id" name="user_id"
                                                     @if ($user_id != null) value="{{ $user_id }}" @endif">
                                             </div>
 
                                             <div class="mb-2 col-md-4 col-sm-6">
-                                                <label for="email" class="form-label">Correo</label>
+                                                <label for="email" class="form-label">Email</label>
                                                 <input type="email" class="form-control" id="email" name="email"
                                                     @if ($email != null) value="{{ $email }}" @endif>
                                             </div>
 
                                             <div class="mb-2 col-md-4 col-sm-12">
-                                                <label for="liquidation_status" class="form-label">Tipo de Comision</label>
+                                                <label for="liquidation_status" class="form-label">Commission rate</label>
                                                 <select class="form-select multiple" name="liquidation_status[]" id="liquidation_status" multiple
                                                     aria-label="Default select example">
                                                     <option value="0" {{ in_array('0', $liquidation_status) ? 'selected' : null }}>
-                                                        En espera
+                                                        Pending
                                                     </option>
                                                     <option value="2" {{ in_array('2', $liquidation_status) ? 'selected' : null }}>
-                                                        Cancelada
+                                                        Cancelled
                                                     </option>
                                                 </select>
                                             </div>
 
                                             <div class="text-center">
-                                                <button type="submit" class="btn btn-primary">Buscar</button>
-                                                <a class="btn btn-info" href="{{ route('liquidaciones.pendientes') }}">Limpiar filtros
+                                                <button type="submit" class="btn btn-primary">Search</button>
+                                                <a class="btn btn-info" href="{{ route('liquidaciones.pendientes') }}">Clear filters
                                                 </a>
                                                 {{-- <a class="btn btn-info" id="btn_clear">Limpiar filtros</a> --}}
                                             </div>
@@ -99,13 +99,13 @@
 
                                             <tr class="text-center">
                                                 <th>ID</th>
-                                                <th>correo</th>
-                                                <th>Monto Bruto</th>
+                                                <th>Email</th>
+                                                <th>Gross amount</th>
                                                 <th>Fee</th>
-                                                <th>Monto a recibir</th>
-                                                <th>wallet</th>
-                                                <th>Estado</th>
-                                                <th>Accion</th>
+                                                <th>Amount to receive</th>
+                                                <th>Wallet</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -125,18 +125,18 @@
                                                         <td>{{ $liquidacion->decryptWallet() }}</td>
                                                         <td>
                                                             @if ($liquidacion->status == '0')
-                                                                <span class="badge bg-warning">Pendiente</span>
+                                                                <span class="badge bg-warning">Pending</span>
                                                             @else
-                                                                <span class="badge bg-danger">Cancelado</span>
+                                                                <span class="badge bg-danger">Cancelled</span>
                                                             @endif
                                                         </td>
                                                         <td>
                                                             <button class="btn btn-primary mr-2" data-bs-toggle="modal"
                                                                 data-bs-target="#aprobarModal{{ $liquidacion->id }}"
-                                                                {{ $liquidacion->status == '2' ? 'disabled' : null }}>Aprobar</button>
+                                                                {{ $liquidacion->status == '2' ? 'disabled' : null }}>Approve</button>
                                                             <button class="btn btn-secondary" data-bs-toggle="modal"
                                                                 data-bs-target="#regresarModal{{ $liquidacion->id }}"
-                                                                {{ $liquidacion->status == '2' ? 'disabled' : null }}>Rechazar</button>
+                                                                {{ $liquidacion->status == '2' ? 'disabled' : null }}>To refuse</button>
                                                         </td>
                                                     </tr>
                                                     @include('liquidaciones.components.Modals.regresar')
@@ -185,17 +185,6 @@
               [0, "desc"]
           ],
           pagingType: 'simple_numbers',
-          language: {
-              lengthMenu: 'Mostrar _MENU_ registros',
-              zeroRecords: 'No hay registros para mostrar',
-              info: 'Mostrando _PAGE_ de _PAGES_',
-              infoEmpty: 'No hay registros para mostrar',
-              "search": "Buscar:",
-              "paginate": {
-                  "next": " ",
-                  "previous": " "
-              },
-          },
       })
     </script>
 @endsection

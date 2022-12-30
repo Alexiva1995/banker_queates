@@ -77,7 +77,7 @@
                     @if(auth()->user()->admin == 1)
                         <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button"
                             aria-expanded="false" aria-controls="collapseExample">
-                            Filtros
+                            Filters
                         </a>
                     @endif
                 </div>
@@ -88,24 +88,24 @@
                                 @csrf
                                 <div class="row">
                                     <div class="mb-2 col-md-4 col-sm-6">
-                                        <label for="user_id" class="form-label">ID de Usuario</label>
+                                        <label for="user_id" class="form-label">ID User</label>
                                         <input type="number" class="form-control" id="user_id" name="user_id" 
                                         @if($user_id != null) value="{{$user_id}}" @endif">
                                     </div>
 
                                     <div class="mb-2 col-md-4 col-sm-6">
-                                        <label for="user_name" class="form-label">Usuario</label>
+                                        <label for="user_name" class="form-label">User</label>
                                         <input type="text" class="form-control" id="user_name" name="user_name"
                                         @if($user_name != null) value="{{$user_name}}" @endif>
                                     </div>
 
                                     <div class="mb-2 col-md-4 col-sm-12">
-                                        <label for="liquidation_status" class="form-label">Estado</label>
+                                        <label for="liquidation_status" class="form-label">Status</label>
                                         <select class="form-select" name="liquidation_status[]" id="liquidation_status" multiple
                                             aria-label="Default select example">
-                                            <option value="0" {{ in_array('0', $liquidation_status) ? "selected" : null }} >Pendiente</option>
-                                            <option value="1" {{ in_array('1', $liquidation_status) ? "selected" : null }} >Pagada</option>
-                                            <option value="2" {{ in_array('2', $liquidation_status) ? "selected" : null }} >Cancelada</option>
+                                            <option value="0" {{ in_array('0', $liquidation_status) ? "selected" : null }} >Pending</option>
+                                            <option value="1" {{ in_array('1', $liquidation_status) ? "selected" : null }} >Paid</option>
+                                            <option value="2" {{ in_array('2', $liquidation_status) ? "selected" : null }} >Cancelled</option>
                                         </select>
                                     </div>
 
@@ -116,7 +116,7 @@
                                     </div>
 
                                     <div class="mb-2 col-md-4 col-sm-12">
-                                        <label for="request_date_from" class="form-label">Solicitudes Desde</label>
+                                        <label for="request_date_from" class="form-label">Requests From</label>
                                         <input type="date" class="form-control" id="request_date_from" name="request_date_from"
                                         @if($request_date_from != null) value="{{ $request_date_from }}"  @endif>
                                     </div>
@@ -128,21 +128,21 @@
                                     </div>
 
                                     <div class="mb-2 col-md-6 col-sm-12">
-                                        <label for="payment_date_from" class="form-label">Pagos Desde</label>
+                                        <label for="payment_date_from" class="form-label">Requests Until</label>
                                         <input type="date" class="form-control" id="payment_date_from" name="payment_date_from"
                                         @if($payment_date_from != null) value="{{ $payment_date_from }}"  @endif>
                                     </div>
 
                                     <div class="mb-2 col-md-6 col-sm-12">
-                                        <label for="payment_date_to" class="form-label">Pagos Hasta</label>
+                                        <label for="payment_date_to" class="form-label">Payments up to</label>
                                         <input type="date" class="form-control" id="payment_date_to" name="payment_date_to"
                                         @if($payment_date_to != null) value="{{ $payment_date_to }}"  @endif>
                                     </div>
 
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-primary">Buscar</button>
+                                        <button type="submit" class="btn btn-primary">Search</button>
                                         {{-- <a class="btn btn-info" id="btn_clear">Limpiar filtros</a> --}}
-                                        <a class="btn btn-info" href="{{route('reports.withdraw')}}">Limpiar filtros</a>
+                                        <a class="btn btn-info" href="{{route('reports.withdraw')}}">Clear filters</a>
                                     </div>
 
                                 </div>

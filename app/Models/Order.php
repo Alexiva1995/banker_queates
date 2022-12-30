@@ -36,11 +36,11 @@ class Order extends Model
     public function status()
     {
         if ($this->status == '0'){
-            return "Esperando";
+            return "Pending";
         }elseif($this->status == '1'){
-            return "Aprobado";
+            return "Approved";
         }elseif($this->status >= '2'){
-            return "Rechazada";
+            return "Rejected";
         }
     }
 }

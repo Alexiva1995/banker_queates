@@ -57,7 +57,7 @@
                     @if(auth()->user()->admin == 1)
                     <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button"
                         aria-expanded="false" aria-controls="collapseExample">
-                        Filtros
+                        Filters
                     </a>
                     @endif
                 </div>
@@ -69,7 +69,7 @@
                             <div class="row">
 
                                 <div class="mb-2 col-md-4 col-sm-6">
-                                    <label for="user_name" class="form-label">Usuario</label>
+                                    <label for="user_name" class="form-label">User</label>
                                     <input type="text" class="form-control" id="user_name" name="user_name"
                                     @if($user_name != null) value="{{$user_name}}" @endif>
                                 </div>
@@ -81,40 +81,40 @@
                                 </div>
 
                                 <div class="mb-2 col-md-4 col-sm-12">
-                                    <label for="order_status" class="form-label">Estado</label>
+                                    <label for="order_status" class="form-label">Status</label>
                                     <select class="form-select" name="order_status[]" id="order_status" multiple
                                         aria-label="Default select example">
-                                        <option value="0" {{ in_array('0', $order_status) ? "selected" : null }}>En Espera</option>
-                                        <option value="1" {{ in_array('1', $order_status) ? "selected" : null }}>Aprobado</option>
-                                        <option value="2" {{ in_array('2', $order_status) ? "selected" : null }}>Rechazado</option>
+                                        <option value="0" {{ in_array('0', $order_status) ? "selected" : null }}>Pending</option>
+                                        <option value="1" {{ in_array('1', $order_status) ? "selected" : null }}>Approved</option>
+                                        <option value="2" {{ in_array('2', $order_status) ? "selected" : null }}>Rejected</option>
                                     </select>
                                 </div>
 
                                 <div class="mb-2 col-md-6 col-sm-12">
-                                    <label for="created_from" class="form-label">Creado Desde</label>
+                                    <label for="created_from" class="form-label">Created from</label>
                                     <input type="date" class="form-control" id="created_from" name="created_from"
                                     @if($created_from != null) value="{{ $created_from }}"  @endif>
                                 </div>
                                 <div class="mb-2 col-md-6 col-sm-12">
-                                    <label for="created_to" class="form-label">Creado Hasta</label>
+                                    <label for="created_to" class="form-label">Created Until</label>
                                     <input type="date" class="form-control" id="created_to" name="created_to"
                                     @if($created_to != null) value="{{ $created_to }}"  @endif>
                                 </div>
 
                                 <div class="mb-2 col-md-6 col-sm-12">
-                                    <label for="updated_from" class="form-label">Actualizado Desde</label>
+                                    <label for="updated_from" class="form-label">Updated Since</label>
                                     <input type="date" class="form-control" id="updated_from" name="updated_from"
                                     @if($updated_from != null) value="{{ $updated_from }}"  @endif>
                                 </div>
                                 <div class="mb-2 col-md-6 col-sm-12">
-                                    <label for="updated_to" class="form-label">Actualizado Hasta</label>
+                                    <label for="updated_to" class="form-label">Updated Until</label>
                                     <input type="date" class="form-control" id="updated_to" name="updated_to"
                                     @if($updated_to != null) value="{{ $updated_to }}"  @endif>
                                 </div>
 
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">Buscar</button>
-                                    <a class="btn btn-info" href="{{route('ordenes.index')}}">Limpiar filtros</a>
+                                    <button type="submit" class="btn btn-primary">Search</button>
+                                    <a class="btn btn-info" href="{{route('ordenes.index')}}">Clear filters</a>
                                     {{-- <a class="btn btn-info" id="btn_clear">Limpiar filtros</a> --}}
                                 </div>
 
@@ -196,15 +196,15 @@
                                         <td>
                                             @if ($orden->status == 0)
                                                 <span class="badge success-badge">
-                                                    <span class="text-info">Pendiente</span>
+                                                    <span class="text-info">Pending</span>
                                                 </span>
                                             @elseif($orden->status == 1)
                                                 <span class="badge success-badge">
-                                                    <span class="success-text">Pagada</span>
+                                                    <span class="success-text">Paid</span>
                                                 </span>
                                             @elseif($orden->status == 2)
                                                 <span class="badge warning-badge">
-                                                    <span class="warning-text">Cancelada</span>
+                                                    <span class="warning-text">Cancelled</span>
                                                 </span>
                                             @endif
                                         </td>

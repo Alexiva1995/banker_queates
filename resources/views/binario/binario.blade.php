@@ -131,13 +131,13 @@
                                 <div class="row justify-content-end">
                                     <div class="col-md-2 col-sm-4">
                                         <div class=" white mt-1">
-                                            <input type="number" placeholder="id del usuario" name="id"
+                                            <input type="number" placeholder="Id User" name="id"
                                                 class="form-control" id="id">
                                         </div>
                                     </div>
                                     <div class="col-md-1 col-sm-3">
                                         <div class=" white mt-1">
-                                            <button type="submit" class="btn btn-primary ">Buscar</button>
+                                            <button type="submit" class="btn btn-primary ">Search</button>
                                         </div>
                                     </div>
                                 </div>

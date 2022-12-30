@@ -1,7 +1,7 @@
 <div class="card p-2">
     <div
         class=" card-header pb-0 d-flex flex-sm-row flex-column justify-content-md-between align-items-start justify-content-start ">
-        <h4 class="card-title mb-50 pt-0">Últimas Ordenes</h4>
+        <h4 class="card-title mb-50 pt-0">Last Orders</h4>
     </div>
     <div class="card-body p-0 px-1">
         <div class="table-responsive">
@@ -9,9 +9,9 @@
                 <thead class="">
                     <tr class="text-center">
                         <th>ID</th>
-                        <th>Correo</th>
-                        <th>Monto</th>
-                        <th>Estado</th>
+                        <th>Email</th>
+                        <th>Amount</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>

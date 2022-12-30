@@ -368,7 +368,7 @@ class UserController extends Controller
         $user->update(['token_sistem' => $code_correo]);
         $email = ['email' => $user->email];
         Mail::to($user->email)->send(new CodeEmail($email));
-        return response()->json(['message' => 'El código de autenticación ha sido enviado a su correo electrónico.'], 201);
+        return response()->json(['message' => 'The authentication code has been sent to your email.'], 201);
         // }else{
         //     return response()->json(['error' => 'El código de google auth es incorrecto.'], 422);
         // }

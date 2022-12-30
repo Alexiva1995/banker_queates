@@ -9,7 +9,7 @@
         }
     </style>
     <div class="d-flex my-2">
-        <p style="color:#808E9E;" class="fw-700">Soporte</p><span class="fw-normal mx-1">|</span>
+        <p style="color:#808E9E;" class="fw-700">Support</p><span class="fw-normal mx-1">|</span>
         <p>Ticket</p>
     </div>
 
@@ -29,29 +29,29 @@
                                 <span>{{ Auth::user()->id }}</span>
                             </div>
                             <div class="col-6 mb-2">
-                                <span class=" text-bold-600 text-primary">Correo:</span>
+                                <span class=" text-bold-600 text-primary">Email:</span>
                                 <span>{{ $emailUser }}</span>
                             </div>
                             <div class="col-6 mb-2">
                                 <!--SELECT-->
-                                <span class=" text-bold-600 text-primary">Categoria: </span>
+                                <span class=" text-bold-600 text-primary">Categories: </span>
 
                                 @if ($ticket->categories == '0')
-                                    <span>Ayuda</span>
+                                    <span>Help</span>
                                 @elseif($ticket->categories == '1')
-                                    <span>Soporte técnico</span>
+                                    <span>Technical support</span>
                                 @elseif($ticket->categories == '2')
-                                    <span>Corrección de datos</span>
+                                    <span>Data correction</span>
                                 @elseif($ticket->categories == '3')
-                                    <span>Bonos</span>
+                                    <span>Bonus</span>
                                 @elseif($ticket->categories == '4')
-                                    <span>Inversión total</span>
+                                    <span>Total inversion</span>
                                 @endif
                                 <!--SELECT END-->
 
                             </div>
                             <div class="col-6 mb-2">
-                                <span class=" text-bold-600 text-primary">Asunto:</span>
+                                <span class=" text-bold-600 text-primary">Issue:</span>
                                 <span>{{ $ticket->issue }}</span>
                             </div>
 
@@ -61,12 +61,12 @@
                             </div>
 
                             <div class="col-6 mb-2">
-                                <label class="text-primary" for="">Estado:</label>
+                                <label class="text-primary" for="">Status:</label>
                                 @if ($ticket->status == '0')
-                                    <span>Abierto</span>
+                                    <span>Open</span>
                                 @endif
                                 @if ($ticket->status == '1')
-                                    <span>Cerrado</span>
+                                    <span>Close</span>
                                 @endif
                             </div>
 
@@ -138,7 +138,7 @@
                                     <div class="col-sm-10">
                                         <!--MENSAJE-->
 
-                                        <input class="form-control " placeholder="Escriba un mensaje" type="text"
+                                        <input class="form-control " placeholder="Write a message" type="text"
                                             id="message" name="message" style="background-color: #D8EDED;"></input>
                                         <!--MENSAJE END-->
                                     </div>
@@ -163,7 +163,7 @@
 
                                             <!--CONTENEDOR DE ENVIAR Y PAPELERA-->
 
-                                            <button class="btn btn-primary waves-effect waves-float waves-light">Enviar
+                                            <button class="btn btn-primary waves-effect waves-float waves-light">Send
                                             </button>
                                         </div>
                                     </div>

@@ -51,17 +51,17 @@
 @section('content')
 <div id="logs-list">
     <div class="d-flex my-1">
-        <p class="fw-700 mb-0" style="font-weight: 700; color:#000">Informes</p><span class="fw-300 mx-1 text-light">|</span>
-        <p class="fw-700 mb-0" style="font-weight: 700; color:rgba(0, 0, 0, 0.514)">Historial de Bonos Manuales</p>
+        <p class="fw-700 mb-0" style="font-weight: 700; color:#000">Reports</p><span class="fw-300 mx-1 text-light">|</span>
+        <p class="fw-700 mb-0" style="font-weight: 700; color:rgba(0, 0, 0, 0.514)">Manual Bonus History</p>
     </div>
     <div class="col-12">
         <div class="card p-2">
             <div class="card-content p-50">
                 <div class="card-header p-0">
-                    <h4 class="fw-700">Historial de Bonos Manuales</h4>
+                    <h4 class="fw-700">Manual Bonus History</h4>
                     <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button"
                         aria-expanded="false" aria-controls="collapseExample">
-                        Filtros
+                        Filters
                     </a>
                 </div>
                 <div class="card-body card-dashboard p-0">
@@ -70,19 +70,19 @@
                             @csrf
                             <div class="row">
                                 <div class="mb-2 col-md-4 col-sm-6">
-                                    <label for="user_name" class="form-label">Usuario</label>
+                                    <label for="user_name" class="form-label">User</label>
                                     <input type="text" class="form-control" id="user_name" name="user_name" 
                                     @if($user_name != null) value="{{$user_name}}" @endif">
                                 </div>
 
                                 <div class="mb-2 col-md-4 col-sm-6">
-                                    <label for="author_name" class="form-label">Autor</label>
+                                    <label for="author_name" class="form-label">Author</label>
                                     <input type="text" class="form-control" id="author_name" name="author_name"
                                     @if($author_name != null) value="{{$author_name}}" @endif>
                                 </div>
 
                                 <div class="mb-2 col-md-4 col-sm-12">
-                                    <label for="actions" class="form-label">Acción</label>
+                                    <label for="actions" class="form-label">Action</label>
                                     <select class="form-select multiple" name="actions[]" id="actions" multiple
                                         aria-label="Default select example">
                                         <option value="suma" {{ in_array('suma', $actions) ? "selected" : null }} >Suma</option>
@@ -91,20 +91,20 @@
                                 </div>
 
                                 <div class="mb-2 col-md-4 col-sm-12">
-                                    <label for="date_from" class="form-label">Desde</label>
+                                    <label for="date_from" class="form-label">From</label>
                                     <input type="date" class="form-control" id="date_from" name="date_from"
                                     @if($date_from != null) value="{{ $date_from }}"  @endif>
                                 </div>
 
                                 <div class="mb-2 col-md-4 col-sm-12">
-                                    <label for="date_to" class="form-label">Hasta</label>
+                                    <label for="date_to" class="form-label">Until</label>
                                     <input type="date" class="form-control" id="date_to" name="date_to"
                                     @if($date_to != null) value="{{ $date_to }}"  @endif>
                                 </div>
 
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">Buscar</button>
-                                    <a class="btn btn-info" href="{{route('manual.bonus.history')}}">Limpiar filtros</a>
+                                    <button type="submit" class="btn btn-primary">Search</button>
+                                    <a class="btn btn-info" href="{{route('manual.bonus.history')}}">Clear filters</a>
                                 </div>
 
                             </div>
@@ -115,11 +115,11 @@
                             <thead class="">
                                 <tr class="text-center">
                                     <th class="fw-600">ID</th>
-                                    <th class="fw-600">Acción</th>
-                                    <th class="fw-600">Usuario</th>
-                                    <th class="fw-600">Autor</th>
-                                    <th class="fw-600">Monto</th>
-                                    <th class="fw-600">Fecha</th>
+                                    <th class="fw-600">Action</th>
+                                    <th class="fw-600">User</th>
+                                    <th class="fw-600">Author</th>
+                                    <th class="fw-600">Amount</th>
+                                    <th class="fw-600">Date</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -129,11 +129,11 @@
                                     <td>
                                         @if ($item->action == 'suma de saldo')
                                             <span class="badge success-badge">
-                                                <span class="success-text">Suma de Saldo</span>
+                                                <span class="success-text">Sum of Balance</span>
                                             </span>
                                         @else
                                             <span class="badge warning-badge">
-                                                <span class="warning-text">Resta de Saldo</span>
+                                                <span class="warning-text">Subtraction of Balance</span>
                                             </span>
                                         @endif
                                     </td>
@@ -182,29 +182,6 @@
             [0, "desc"]
         ],
         pagingType: 'simple_numbers',
-        language: {
-            "info":           "Mostrando _START_ de _END_ de _TOTAL_ entradas",
-            "infoFiltered":   "(filtrado de _MAX_ entradas)",
-            "lengthMenu":     "Mostrar _MENU_ entradas",
-            "loadingRecords": "Cargando...",
-            "processing":     "",
-            "search":         "Buscar:",
-            "zeroRecords":    "No se encontraron resultados",
-            paginate: {
-                first:    ' ',
-                previous: ' ',
-                next:     ' ',
-                last:     ' '
-            },
-            aria: {
-                paginate: {
-                    first:    '',
-                    previous: '',
-                    next:     '',
-                    last:     ''
-                }
-            }
-        }
     })
 
 </script>
