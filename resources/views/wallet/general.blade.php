@@ -87,9 +87,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body card-dashboard p-0">
+                <div class="card-body card-dashboard p-1">
                     <div class="table-responsive">
-                        <table class="table  nowrap scroll-horizontal-vertical myTable table-striped w-100">
+                        <table class="table   nowrap scroll-horizontal-vertical myTable table-striped w-100">
                             <thead class="">
                                 <tr class="text-center">
                                     <th>Descripcion</th>
@@ -155,8 +155,8 @@
                         </div>--}}
                     </div>
                 </div>
-                <div class="card-body card-dashboard p-0">
-                    <div class="table-responsive">
+                <div class="card-body card-dashboard p-1">
+                    <div class="table-responsive ">
                         <table class="table  nowrap scroll-horizontal-vertical myTable table-striped w-100">
                             <thead class="">
                                 <tr class="text-center">
