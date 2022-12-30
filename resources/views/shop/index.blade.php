@@ -101,18 +101,15 @@
                                     <h2 class="fw-600 mb-75 text-center" style="color: #04D99D;margin-bottom: 0!important;font-size:40px">{{ "USDT ".$package->amount }}</h2>
                                 </div>
                             </div>
-                            <form class="d-grid gap-2 mb-4" action="{{ route('shop.transactionCompra') }}"
-                                method="POST">
-                                @csrf
+                           
                                 <input type="hidden" name="package" value="{{ $package->id }}">
                                 <input type="hidden" name="amount" value="{{ $package->amount }}">
-                                <button class="btn btn-primary w-100"
+                                <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#ModalPayment{{ $package->id }}"
                                     {{ $package->disabled == true ? 'disabled' : '' }}>{{ $package->text }}
                                 </button>
-                            </form>
                         </div>
                     </div>
-
+                    @include('shop.components.modalPayment')
                 @endforeach
             </div>
         </div>
