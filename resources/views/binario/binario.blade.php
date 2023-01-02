@@ -113,7 +113,7 @@
         <div class="padre">
 
             <div class="d-flex my-1">
-                <p class="fw-700 mb-0">Red</p><span class="fw-300 text-primary mx-1 ">|</span>
+                <p class="fw-700 mb-0">Netword</p><span class="fw-300 text-primary mx-1 ">|</span>
                 <p class="fw-400 mb-0">Binario</p>
             </div>
             <div class="card">

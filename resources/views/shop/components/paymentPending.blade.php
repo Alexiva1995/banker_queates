@@ -5,8 +5,8 @@
             <div class="modal-body rounded mb-0">
                 <div class="text-center my-2">
                     <i data-feather='alert-circle' style="height: 7rem; width: 7rem; color: #ffc107;"></i>
-                    <h3 class="mt-1">Atención</h3>
-                    <p>Usted tiene un pago pendiente por ${{ $order->amount }}</p>
+                    <h3 class="mt-1">Warning</h3>
+                    <p>You have an outstanding payment for ${{ $order->amount }}</p>
                 </div>
             </div>
             <div class="modal-footer d-flex justify-content-center mb-1">

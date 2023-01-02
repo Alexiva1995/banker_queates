@@ -4,12 +4,12 @@
             <thead>
                 <tr>
                     <th class="text-center fw-600">#</th>
-                    <th class="text-center fw-600">Usuario</th>
+                    <th class="text-center fw-600">User</th>
                     <th class="text-center fw-600">Email</th>
-                    <th class="text-center fw-600">Licencia</th>
-                    <th class="text-center fw-600">Estado</th>
-                    <th class="text-center fw-600">Afiliado por</th>
-                    <th class="text-center fw-600">Fecha</th>
+                    <th class="text-center fw-600">License</th>
+                    <th class="text-center fw-600">Status</th>
+                    <th class="text-center fw-600">Affiliated by</th>
+                    <th class="text-center fw-600">Date</th>
                 </tr>
             </thead>
             <tbody>

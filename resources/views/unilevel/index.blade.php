@@ -91,7 +91,7 @@
     </style>
     <div id="logs-list">
         <div class="d-flex my-1">
-            <p class="fw-700 mb-0">Red</p><span class="fw-300 mx-1 text-primary">|</span>
+            <p class="fw-700 mb-0">Netword</p><span class="fw-300 mx-1 text-primary">|</span>
             <p class="fw-400 mb-0">Unilevel</p>
         </div>
         <div class="card">
