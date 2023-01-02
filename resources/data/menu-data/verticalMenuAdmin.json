@@ -38,8 +38,21 @@
         {
             "name": "Usuarios",
             "icon": "fa-solid fa-users",
-            "slug": "user.list-user",
-            "url": "user/user-list"
+            "slug": "/",
+            "submenu": [{
+                "url": "user/user-list",
+                "name": "Usuarios",
+                "icon": "circle",
+                "slug": "user.list-user"
+            },
+            {
+                "url": "/red/referred/tree/1",
+                "name": "Red multinivel",
+                "icon": "circle",
+                "slug": "referred.tree"
+            }
+           
+        ]
         },
         {
             "name": "Retiros",
