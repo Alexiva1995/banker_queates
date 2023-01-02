@@ -96,7 +96,7 @@
                                     @endif
                                 </div>
                                 <div class="card-body text-center">
-                                    <small class="text-light" style="font-size: 12px; color:#9892AA">Deposit Until {{$package->description}} USDT</small>
+                                    <small class="text-light" style="font-size: 12px; color:#9892AA">Deposits up to {{$package->description}} USDT</small>
                                     <br>
                                     <h2 class="fw-600 mb-75 text-center" style="color: #04D99D;margin-bottom: 0!important;font-size:40px">{{ "USDT ".$package->amount }}</h2>
                                 </div>

@@ -47,12 +47,12 @@
             <a href="#" class="brand-logo">
               <img width="200" src="{{asset('images/logo/logo-deg.png')}}"  alt="">
             </a>
-            <h4 class="card-body text-center mb-1 fw-700">Revisa tu correo y sigue las instrucciones</h4>
-            <p class="mb-2 text-center">Te enviaremos un enlace a tu correo<br> para que puedas cambiar la contraseña</p>
+            <h4 class="card-body text-center mb-1 fw-700">Check your email and follow the instructions</h4>
+            <p class="mb-2 text-center">We will send you a link to your email<br> so you can change the password</p>
 
             <form class="auth-forgot-password-form px-1 mt-1" require method="POST" action="{{ route('password.email') }}">
               @csrf
-              <label for="forgot-password-email" class="form-label mt-75 fw-500">Correo</label>
+              <label for="forgot-password-email" class="form-label mt-75 fw-500">Email</label>
               <div class=" input-group mb-1">
                 <input type="text" class="form-control @error('email') is-invalid @enderror" id="forgot-password-email" name="email" value="{{ old('email') }}" placeholder="john@example.com" aria-describedby="forgot-password-email" tabindex="1" autofocus />
                 @error('email')
@@ -63,14 +63,14 @@
               </div>
               <div class="text-center">
                 <button id="boton01" class="btn btn-primary mt-1 fw-400" tabindex="2" style="letter-spacing: 0.9px">
-                  Cambiar Contraseña
+                  Change Password
                 </button>
               </div>
             </form>
             <p class="text-center mt-1">
-              Regresar al
+              Return to
               @if (Route::has('login'))
-                <a href="{{ route('login') }}" class="fw-700">Inicio de sesión</a>
+                <a href="{{ route('login') }}" class="fw-700">Login</a>
               @endif
             </p>
           </div>

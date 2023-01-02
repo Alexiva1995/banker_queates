@@ -110,7 +110,7 @@
     <div class="col-12">
         <div class="padre">
             <div class="d-flex my-1">
-                <p class="fw-700 mb-0">Red</p><span class="fw-300 mx-1 text-primary">|</span>
+                <p class="fw-700 mb-0">Netword</p><span class="fw-300 mx-1 text-primary">|</span>
                 <p class="fw-400 mb-0">Referral tree</p>
             </div>
             <div class="card">
@@ -166,7 +166,7 @@
                                 </div>
                                 <div class="col-md-1 col-sm-3">
                                     <div class=" white mt-1">
-                                        <button type="submit" class="btn btn-primary ">Buscar</button>
+                                        <button type="submit" class="btn btn-primary ">Search</button>
                                     </div>
                                 </div>
                             </div>
