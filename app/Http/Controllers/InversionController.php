@@ -718,7 +718,7 @@ class InversionController extends Controller
             'porcentaje' => $porcentaje,
         ]);
 
-        return back()->with('success', 'porcentaje actualizado exitosamente');
+        return back()->with('success', 'Percentage updated successfully');
     }
 
     public function pagarRentabilidad()
@@ -729,7 +729,7 @@ class InversionController extends Controller
             $porcentaje = PorcentajeRentabilidad::orderBy('id', 'desc')->first();
 
             if (!isset($porcentaje)) {
-                return redirect()->route('rentabilidad')->with('status', 'No se ha especificado un porcentaje de rentabilidad');
+                return redirect()->route('rentabilidad')->with('status', 'A percentage of return has not been specified');
             } else {
                 $porcentaje = ($porcentaje->porcentaje / 20);
 

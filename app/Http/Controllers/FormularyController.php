@@ -283,7 +283,7 @@ class FormularyController extends Controller
         
 
         
-        return redirect()->route('dashboard.index')->with('success', 'Felicitaciones, tu formulario se recibio con exito.  recuerda que el proceso de instalacion durara aproximadamente 2 dias hábiles para ser efectuado.');
+        return redirect()->route('dashboard.index')->with('success', 'Congratulations, your form was successfully received. Remember that the installation process will last approximately 2 business days to be carried out.');
     }
 
     /**
@@ -339,7 +339,7 @@ class FormularyController extends Controller
             $member->start_date = now();
             $member->end_date = now()->addMonth();
             $member->update();
-            return redirect()->back()->with('success', 'Formulario Actualizado con Exito');
+            return redirect()->back()->with('success', 'Successfully Updated Form');
         }elseif($request->status == 2){
             
             Mail::send('mails.formulary.desinstalar',[
@@ -349,7 +349,7 @@ class FormularyController extends Controller
                 $msj->subject('Formulario desinstalado');
                 $msj->to($user->email);
             });
-            return redirect()->back()->with('success', 'Formulario Actualizado con Exito');
+            return redirect()->back()->with('success', 'Successfully Updated Form');
         }elseif($request->status == 3){
             
             Mail::send('mails.formulary.upgrade',[
@@ -359,7 +359,7 @@ class FormularyController extends Controller
                 $msj->subject('Formulario su upgrade fue exitoso');
                 $msj->to($user->email);
             });
-            return redirect()->back()->with('success', 'Formulario Actualizado con Exito');
+            return redirect()->back()->with('success', 'Successfully Updated Form');
         }elseif($request->status == 4){
             
            Mail::send('mails.formulary.rechazado',[
@@ -372,7 +372,7 @@ class FormularyController extends Controller
             $member->ordenes->alertNotification->status = 1;
             $member->ordenes->alertNotification->update();
             
-            return redirect()->back()->with('success', 'Formulario Actualizado con Exito');
+            return redirect()->back()->with('success', 'Successfully Updated Form');
         }
     }
 
@@ -437,6 +437,6 @@ class FormularyController extends Controller
             $msj->to($user->email);
         });
        
-        return redirect()->route('dashboard.index')->with('success', 'Felicitaciones, tu formulario se a actualizado con exito.  recuerda que el proceso de instalacion durara aproximadamente 48 horas para ser efectuado.');
+        return redirect()->route('dashboard.index')->with('success', 'Congratulations, your form has been successfully updated. Remember that the installation process will last approximately 48 hours to be carried out.');
     }
 }

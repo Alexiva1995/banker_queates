@@ -28,6 +28,6 @@ class ForgotPasswordController extends Controller
 
       return view('/auth/passwords/email', [
         'pageConfigs' => $pageConfigs
-      ])->with('success', 'Correo enviado exitosamente, por favor verifique su bandeja de entrada');
+      ])->with('success', 'Mail sent successfully, please check your inbox');
     }
 }

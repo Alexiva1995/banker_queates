@@ -87,7 +87,7 @@ class UtilityController extends Controller
                 ]);
         }*/
 
-        return redirect()->back()->with('success', 'El porcentaje ha sido actualizado');
+        return redirect()->back()->with('success', 'The percentage has been updated');
     }
 
     /**

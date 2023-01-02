@@ -25,15 +25,15 @@
       <div class="card p-2 mb-0 bg-white">
           <div class="card-body mx-1 text-center">
               <img width="120" class="mb-2" src="{{asset('images/logo/logo-deg.png')}}" alt="">
-              <h4 class="text-center mb-1 fw-700">¡Para completar tu registro por favor presiona el boton!</h4>
+              <h4 class="text-center mb-1 fw-700">¡To complete your registration please press the button!</h4>
               @if (session('resent'))
                 <div class="alert alert-success" role="alert">
                   <div class="alert-body">
-                    {{ __('Se ha enviado un link de verificación a tu correo electrónico.') }}
+                    {{ __('A verification link has been sent to your email.') }}
                   </div>
                 </div>
               @endif
-                <p class="card-text mb-3 text-centert">{{ __('Aca se creara tu cuenta en el broker y te llegara el correo de confirmación, si no has recibido el correo, has click abajo para solicitar otro') }}</p>
+                <p class="card-text mb-3 text-centert">{{ __('Here your account will be created in the broker and you will receive the confirmation email, if you have not received the email, click below to request another') }}</p>
                 @if (isset($user))
                  <form class="d-inline" id="send_email_form" method="GET" action="{{ route('auth.verify',$user) }}">
                 @else
@@ -46,7 +46,7 @@
                       <span id="spin-span" class="spin spinner-border-sm">
                       </span>
                       <span id="text">
-                        {{ __('Reintentar creación de cuenta Broker') }}
+                        {{ __('Retry broker account creation') }}
                       </span>
                   </button>.
                 @else
@@ -56,7 +56,7 @@
                       <span id="spin-span" class="spin spinner-border-sm">
                       </span>
                       <span id="text">
-                        {{ __('Crear cuenta en el Broker') }}
+                        {{ __('Create account in the Broker') }}
                       </span>
                   </button>.
                 @endif
@@ -77,7 +77,7 @@
     form.submit();
     btnSubmit.setAttribute('disabled', true);
     spin.classList.add('spinner-border');
-    text.textContent = 'Creando cuenta en el Broker';
+    text.textContent = 'Creating account in the Broker';
   })
   
 </script>

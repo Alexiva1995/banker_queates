@@ -50,8 +50,8 @@
                 <a href="#" class="brand-logo">
                     <img width="200" src="{{asset('images/logo/logo-deg.png')}}" alt="">
                 </a>
-                <h4 class="fw-700" style="">Bienvenido a Banker Quotes</h4>
-                <p class="mb-0 fw-300">Por favor ingresa los datos a continuación e ingresa</p>
+                <h4 class="fw-700" style="">Welcome to Banker Quotes</h4>
+                <p class="mb-0 fw-300">Please enter the information below and enter</p>
 
                 <form class="auth-login-form mt-2" id="login-form" method="POST" action="{{ route('login') }}">
                     <style>
@@ -83,11 +83,11 @@
                          }
                     </style>
                     @csrf
-                    <label for="login-email" class="form-label fw-500">Usuario o Email</label>
+                    <label for="login-email" class="form-label fw-500">User or Email</label>
                     <div class="input-group mb-2 bg-white">
                         <input id="login" type="text"
                             class="form-control bg-white {{ $errors->has('username') || $errors->has('email') ? ' is-invalid' : '' }}"
-                            name="login" value="{{ old('username') ?: old('email') }}" required autofocus placeholder="Ingresa tu usuario o email">
+                            name="login" value="{{ old('username') ?: old('email') }}" required autofocus placeholder="Enter your username or email">
                         @if ($errors->has('username') || $errors->has('email'))
                             <span class="invalid-feedback">
                             <strong>{{ $errors->first('username') ?: $errors->first('email') }}</strong>
@@ -96,10 +96,10 @@
                     </div>
                     <div class="my-2">
                         <div class="d-flex justify-content-between">
-                            <label class="form-label fw-500" for="login-password">Contraseña</label>
+                            <label class="form-label fw-500" for="login-password">Password</label>
                             @if (Route::has('password.request'))
                             <a href="{{ route('password.request') }}">
-                                <small class="fw-500 font-small-3 text-decoration-underline">Olvidé mi contraseña</small>
+                                <small class="fw-500 font-small-3 text-decoration-underline">I forgot my password</small>
                             </a>
                             @endif
                         </div>
@@ -112,7 +112,7 @@
                     <div class="mb-1">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="remember" name="remember" tabindex="3" {{ old('remember') ? 'checked' : '' }} />
-                            <label class="form-check-label fw-400" for="remember"> Recuérdame </label>
+                            <label class="form-check-label fw-400" for="remember"> Remember me </label>
                         </div>
                     </div>
                     <input type='hidden' name='recaptcha_token' id='recaptcha_token'>
@@ -122,15 +122,15 @@
                             {{$errors->first('recaptcha_token')}}
                         </p>
                     @endif
-                        <button type="submit" id="submit" class="btn btn-primary w-100 text-white g-recaptcha fw-400 my-75" style="letter-spacing: 0.9;">Ingresar
+                        <button type="submit" id="submit" class="btn btn-primary w-100 text-white g-recaptcha fw-400 my-75" style="letter-spacing: 0.9;">Log In
                         </button>
                 </form>
             </div>
             <div class="row">
                 <div class="">
-                    <p class="text-center mb-0">¿Aún no tienes una cuenta? @if (Route::has('register'))
+                    <p class="text-center mb-0">Do not you have an account yet? @if (Route::has('register'))
                         <a href="{{ route('register') }}" class="fw-700 text-decoration-underline">
-                            Regístrate
+                            Sign In
                         </a>
                     </p>
                 @endif
