@@ -70,7 +70,7 @@ class RegisterController extends Controller
             'password' => 'required|string|min:8|confirmed',
             'countrie_id' => 'required',
             'buyer_id' => 'nullable|exists:users,id',
-        ], $messages=['buyer_id.exists' => 'El usuario referido no existe.',]);
+        ], $messages=['buyer_id.exists' => 'The referred user does not exist.',]);
         if ($data->fails())
         {
             return redirect()->back()->withInput()->withErrors($data->errors());
@@ -97,8 +97,8 @@ class RegisterController extends Controller
                 'buyer_id' => 'nullable|exists:users,id',
             ],
             [
-                'countrie_id.required' => 'El pais es requerido',
-                'buyer_id.exists' => 'El usuario referido no existe.',
+                'countrie_id.required' => 'The country is required',
+                'buyer_id.exists' => 'The referred user does not exist.',
             ]
         );
         $binary_side = 'R';

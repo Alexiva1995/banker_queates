@@ -294,9 +294,8 @@ class UserController extends Controller
         $user->last_name = $data['last_name'];
         $user->phone = $data['phone'];
         $user->prefix_id = $data['countrie_id'];
-        if (in_array('email', $data,)) {
-            $user->email = $data ['email'];
-        }
+        
+        if ($request->has('email')) $user->email = $data['email'];
         if ($request->has('gender')) $user->gender = $request->input('gender');
 
         $user->save();
@@ -383,24 +382,24 @@ class UserController extends Controller
             'code_email' => 'required',
             'password_autenticator' => 'required'
         ], [
-            'code_verification.required' => 'Debe ingresa un codigo de google auth correcto',
-            'code_email.required' => 'Debe de ingresar el codigo enviado a su correo',
-            'password_autenticator.required' => 'Debe ingresar su contraseña'
+            'code_verification.required' => 'You must enter a correct google auth code',
+            'code_email.required' => 'You must enter the code sent to your email',
+            'password_autenticator.required' => 'You must enter your password'
         ]);
         $auth = Auth::user();
         $desincryptarDB =  Crypt::decrypt($auth->token_sistem);
         if ((new Google2FA())->verifyKey($auth->token_auth, $request->code_verification)) {
             if ($desincryptarDB == $request->code_email) {
                 if (Hash::check($request->password_autenticator, $auth->password)) {
-                    return response()->json(['message' => 'Has sido verificado, ya puedes actualizar tu pin de seguridad'], 201);
+                    return response()->json(['message' => 'You have been verified, you can now update your security pin'], 201);
                 } else {
-                    return response()->json(['error' => 'La contraseña es incorrecta'], 422);
+                    return response()->json(['error' => 'Password is incorrect'], 422);
                 }
             } else {
-                return response()->json(['error' => 'El código es incorrecto'], 422);
+                return response()->json(['error' => 'The code is wrong'], 422);
             }
         } else {
-            return response()->json(['error' => 'El código de autenticacion es incorrecto'], 422);
+            return response()->json(['error' => 'The authentication code is incorrect'], 422);
         }
     }
 
@@ -412,9 +411,9 @@ class UserController extends Controller
         $validate = Validator::make($request->all(), [
             'code_security' => 'required|min:6|confirmed',
         ], [
-            'required' => 'El código de seguridad es obligatorio.',
-            'min' => 'El código de seguridad debe contener al menos 6 caracteres.',
-            'confirmed' => 'El campo confirmación de código de seguridad no coincide.',
+            'required' => 'Security code is required.',
+            'min' => 'The security code must contain at least 6 characters.',
+            'confirmed' => 'The security code confirmation field does not match.',
         ]);
         if ($validate->fails()) {
             return redirect()->back()->withErrors($validate);
@@ -540,9 +539,9 @@ class UserController extends Controller
             'code' => 'required',
             'pin' => 'required',
         ], [
-            'wallet.requered' => 'El campo wallet es requerido',
-            'code.required' => 'El campo auth es requerido',
-            'pin.required' => 'El pin personal es requerido'
+            'wallet.requered' => 'The wallet field is required',
+            'code.required' => 'The auth field is required',
+            'pin.required' => 'The personal pin is required'
         ]);
 
         if ($user->code_security == $request->pin) {
@@ -613,9 +612,9 @@ class UserController extends Controller
                 'password' => 'required'
             ],
             [
-                'code' => 'El codigo es requerido',
-                'wallet' => 'La wallet es requerida',
-                'wallet' => 'Su contraseña es requerida'
+                'code' => 'The code is required',
+                'wallet' => 'The wallet is required',
+                'wallet' => 'Your password is required'
             ]
         );
 

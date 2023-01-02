@@ -374,6 +374,7 @@
             console.log(response);
             const { status } = response.data;
             if (status === 'success') {
+                $("#exampleModalVerification").modal('hide')
                 toastr['success']('Verified Code', '¡Successful!', {
                     closeButton: true,
                     tapToDismiss: false
@@ -414,7 +415,6 @@
 
             if( status === 'success')
             {
-                $("#exampleModalVerification").modal('hide')
                 toastr['success']('Please check your mail', '¡Successful!', {
                     closeButton: true,
                     tapToDismiss: false
