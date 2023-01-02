@@ -47,19 +47,19 @@
                             <tr>
                                 <td>
                                     <h1 style="font-size: 22px; margin: 0;margin-top: 15px; margin-bottom: 15px; color: #333; letter-spacing: 2px; text-transform:uppercase">¡Hola!</h1>
-                                    <p style="margin-top: 25px; font-size: 14px; margin-bottom: 30px; color: #333;">Usted ha solicitado la recuperación de su contraseña, para restablecer tu contraseña sigue el siguiente link:</p>
+                                    <p style="margin-top: 25px; font-size: 14px; margin-bottom: 30px; color: #333;">You have requested the recovery of your password, to reset your password follow the following link:</p>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <div style="text-align: center;">
-                                        <a href="{{ $actionUrl }}" target="_blank" style="font-family: Poppins, sans-serif; box-sizing: border-box; border-radius: 3px; color: #fff; display: inline-block; text-decoration: none; background-color: #07B0F2; border-top: 10px solid #07B0F2; border-right: 18px solid #07B0F2; border-bottom: 10px solid #07B0F2; border-left: 18px solid #07B0F2; margin-bottom: 15px;">Restablecer ahora</a>
+                                        <a href="{{ $actionUrl }}" target="_blank" style="font-family: Poppins, sans-serif; box-sizing: border-box; border-radius: 3px; color: #fff; display: inline-block; text-decoration: none; background-color: #07B0F2; border-top: 10px solid #07B0F2; border-right: 18px solid #07B0F2; border-bottom: 10px solid #07B0F2; border-left: 18px solid #07B0F2; margin-bottom: 15px;">Reset now</a>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <p style="font-size:13px;color: #333;">Si no has creado ninguna cuenta, puedes ignorar o eliminar este e-mail.</p>
+                                    <p style="font-size:13px;color: #333;">If you have not created an account, you can ignore or delete this email.</p>
                                 </td>
                             </tr>
                         </table>
@@ -70,7 +70,7 @@
                         <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
                             <tr>
                                 <td style="text-align: center; color: #ffffff; font-family: Arial, sans-serif; font-size: 16px;">
-                                    <p style="margin: 0;">&reg; {{ date('Y') }} {{ config('app.name') }}. Todos los derechos reservados.<br/>
+                                    <p style="margin: 0;">&reg; {{ date('Y') }} {{ config('app.name') }}. All rights reserved.<br/>
                                 </td>
                             </tr>
                         </table>

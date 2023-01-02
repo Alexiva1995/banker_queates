@@ -42,13 +42,13 @@
                         <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
                             <tr>
                                 <td style="color: #626262; font-family: Arial, sans-serif;">
-                                    <h1 style="font-size: 24px; margin: 0;">Hola de Nuevo!</h1>
+                                    <h1 style="font-size: 24px; margin: 0;">Hello again!</h1>
                                 </td>
                             </tr>
                             <tr>
                                 <td style="color: #626262; font-family: Poppins, sans-serif; font-size: 16px; line-height: 24px; text-align: justify; padding: 20px 0 30px 0;">
-                                    <p style="margin: 0;">Alerta Membresia</p>
-                                    <p style="margin: 0;">Le quedan un total de {{$numberDays}}{{$day}} de membresia {{$type}} activos</p>
+                                    <p style="margin: 0;">Membership Alert</p>
+                                    <p style="margin: 0;">He has a total of {{$numberDays}}{{$day}} of membership {{$type}} active</p>
                                 </td>
                             </tr>
                             <tr>
@@ -72,7 +72,7 @@
                         <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
                             <tr>
                                 <td style="text-align: center; color: #ffffff; font-family: Arial, sans-serif; font-size: 16px;">
-                                    <p style="margin: 0;">&reg; {{ date('Y') }} {{ config('app.name') }}. Todos los derechos reservados.<br/>
+                                    <p style="margin: 0;">&reg; {{ date('Y') }} {{ config('app.name') }}. All rights reserved.<br/>
                                 </td>
                             </tr>
                         </table>

@@ -9,7 +9,7 @@ $configData['theme'] = Auth::user()->app_mode;
 @endphp
 
 <html class="loading {{ $configData['theme'] === 'light' ? 'light-layout' : 'dark-layout' }}"
-    lang="@if(session()->has('locale')){{session()->get('locale')}}@else{{$configData['defaultLanguage']}}@endif"
+    lang="en"
     data-textdirection="{{ env('MIX_CONTENT_DIRECTION') === 'rtl' ? 'rtl' : 'ltr' }}" @if($configData['theme']==='dark'
     ) data-layout="dark-layout" @endif>
 
