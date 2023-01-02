@@ -10,7 +10,7 @@ return [
     "Asignar Rangos" => "Asignar los Rangos",
     "habilitar bonos Rango" => "habilitar bonos Rango",
     "Asignar bonos 7k" => "Asignar bonos 7k",
-    "Red" => "Netword",
+    "Red" => "Network",
     "Árbol de referidos" => "Árbol de referidos",
     "Utilidades" => "Utilidades",
     "Referidos" => "Referidos",
