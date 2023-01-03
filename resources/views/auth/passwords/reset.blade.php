@@ -48,9 +48,9 @@
         <a href="#" class="brand-logo">
           <img width="200" src="{{asset('images/logo/logo-deg.png')}}"  alt="">
         </a>
-        <h4 class="card-body mb-1 fw-700">Estás a punto de cambiar tu contraseña</h4>
+        <h4 class="card-body mb-1 fw-700">You are about to change your password</h4>
         
-        <p class="card-text mb-2">Al terminar, te enviaremos a iniciar sesión de nuevo con tu nueva contraseña</p>
+        <p class="card-text mb-2">When finished, we will send you to log in again with your new password</p>
         <form class="auth-reset-password-form mb-2 " method="POST" action="{{ route('password.update') }}">
           @csrf
           <input type="hidden" name="token" value="{{ $token }}">
@@ -60,7 +60,7 @@
 
           <div class="mb-1">
             <div class="d-flex justify-content-between">
-              <label class="form-label fw-500" for="reset-password-new">Contraseña</label>
+              <label class="form-label fw-500" for="reset-password-new">Password</label>
             </div>
             <div class="input-group input-group-merge form-password-toggle @error('password') is-invalid @enderror">
               <input type="password" class="form-control form-control-merge @error('password') is-invalid @enderror" id="reset-password-new" name="password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="reset-password-new" tabindex="2" autofocus />
@@ -74,21 +74,21 @@
           </div>
           <div class="mb-1">
             <div class="d-flex justify-content-between">
-              <label for="reset-password-confirm" class="form-label fw-500">Confirmar contraseña</label>
+              <label for="reset-password-confirm" class="form-label fw-500">Confirm Password</label>
             </div>
             <div class="input-group input-group-merge form-password-toggle">
               <input type="password" class="form-control form-control-merge" id="reset-password-confirm" name="password_confirmation" autocomplete="new-password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="reset-password-confirm" tabindex="3" />
               <span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary w-100  mt-1" tabindex="4" >Aceptar</button>
+          <button type="submit" class="btn btn-primary w-100  mt-1" tabindex="4" >Accept</button>
         </form>
 
          
           @if (Route::has('login'))
           <a href="{{ route('login') }}" class="fw-500 text-center my-2">
             <i data-feather="chevron-left"></i>
-            Volver al Inicio de Sesión
+            Back to Login
           </a>
           @endif
       </div>

@@ -37,9 +37,9 @@
     document.body.removeChild(aux);
 
     Swal.fire({
-      title: "Link Copiado",
+      title: "Copied Link",
       icon: 'success',
-      text: "Ya puedes pegarlo en su navegador",
+      text: "Now you can paste it in your browser",
       type: "success",
       //confirmButtonClass: 'btn btn-outline-primary'
       confirmButtonColor: '#07B0F2',

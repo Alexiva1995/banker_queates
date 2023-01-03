@@ -113,14 +113,14 @@
         <div class="padre">
 
             <div class="d-flex my-1">
-                <p class="fw-700 mb-0">Red</p><span class="fw-300 text-primary mx-1 ">|</span>
+                <p class="fw-700 mb-0">Network</p><span class="fw-300 text-primary mx-1 ">|</span>
                 <p class="fw-400 mb-0">Binario</p>
             </div>
             <div class="card">
                 <div class="card-content p-75">
                     <div class="card-header d-block p-2 pb-0">
                         <div class="d-flex justify-content-between align-item-center flex-wrap  gap-50">
-                            <h4 class="fw-700">Binario</h4>
+                            <h4 class="fw-700">Binary</h4>
                             
                         </div>
                     </div>

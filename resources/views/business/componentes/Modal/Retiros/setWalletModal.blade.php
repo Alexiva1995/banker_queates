@@ -21,7 +21,7 @@
                                 <div class="input-group mb-2 shadow-none">
                                     <div class="input-group input-group-merge shadow-none">
                                         <input type="text" class="form-control form-control-merge" id="code" name="code"
-                                            placeholder="Ingresa el código" required />
+                                            placeholder="Enter the code" required />
                                         <button
                                             class="btn input-group-btn btn-primary cursor-pointer border-end input-group-text border-top border-bottom" id="codeButton" onclick="getCode()">Get Code
                                         </button>
@@ -33,7 +33,7 @@
                                 <label for="name">Wallet <span class="requerid">*</span></label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="wallet" id="wallet" 
-                                    placeholder="{{ auth()->user()->wallet != null ? auth()->user()->decryptWallet() : 'Ingrese su wallet'}}" 
+                                    placeholder="{{ auth()->user()->wallet != null ? auth()->user()->decryptWallet() : 'Enter your wallet'}}" 
                                     required>
                                 </div>
                             </div>
@@ -42,7 +42,7 @@
                                 <label for="name">Password <span class="requerid">*</span></label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="password" id="password" 
-                                    placeholder="Ingrese su contraseña" 
+                                    placeholder="Enter your password" 
                                     required>
                                 </div>
                             </div>

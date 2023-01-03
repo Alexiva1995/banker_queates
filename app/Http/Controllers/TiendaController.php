@@ -49,11 +49,11 @@ class TiendaController extends Controller
 
         foreach ($licenses as $license) {
             $license->disabled = false;
-            $license->text = 'Comprar Paquete';
+            $license->text = 'Buy Package';
             foreach ($investments as $investment) {
                 if ($license->amount <= $investment->invested) {
                     $license->disabled = true;
-                    $license->text = 'Adquirido';
+                    $license->text = 'Acquired';
                 }
                 if ($license->amount > $investment->invested) {
                     $license->disabled = false;
