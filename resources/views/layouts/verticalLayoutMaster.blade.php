@@ -78,7 +78,7 @@
 
     @if(session('success'))
 
-    toastr['success']('{{ session("success") }}', 'Succefull!', {
+    toastr['success']('{{ session("success") }}', 'Successful!', {
         closeButton: true,
         tapToDismiss: false
       });
