@@ -41,7 +41,7 @@
                             <div class="col-12 mt-1">
                                 <label for="name">Password <span class="requerid">*</span></label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="password" id="password" 
+                                    <input type="password" class="form-control" name="password" id="password" 
                                     placeholder="Enter your password" 
                                     required>
                                 </div>
