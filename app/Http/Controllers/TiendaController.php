@@ -51,11 +51,11 @@ class TiendaController extends Controller
 
         foreach ($licenses as $license) {
             $license->disabled = false;
-            $license->text = 'Comprar Paquete';
+            $license->text = 'Buy Package';
             foreach ($investments as $investment) {
                 if ($license->amount <= $investment->invested) {
                     $license->disabled = true;
-                    $license->text = 'Adquirido';
+                    $license->text = 'Acquired';
                 }
                 if ($license->amount > $investment->invested) {
                     $license->disabled = false;
@@ -200,10 +200,10 @@ class TiendaController extends Controller
 
         if ($orden->save())
         {
-            return redirect()->route('dashboard.index')->with('success', 'Orden Creada, procesando su solicitud...');
+            return redirect()->route('dashboard.index')->with('success', 'Order Created, processing your request...');
         }
 
-        return redirect()->back()->with('error', 'Hubo un error, intente nuevamente');
+        return redirect()->back()->with('error', 'There was an error, try again');
     }
 
     public function saveOrden($data): int
@@ -306,7 +306,7 @@ class TiendaController extends Controller
 
         }
 
-        return back()->with('success', 'Orden actualizada exitosamente');
+        return back()->with('success', 'Order updated successfully');
 
     }
 
@@ -355,7 +355,7 @@ class TiendaController extends Controller
                     $orden->comprobante = $name;
                 }
                 $orden->save();
-                return redirect('/')->with('success', 'orden actualizada exitosamente');
+                return redirect('/')->with('success', 'Order updated successfully');
             }
         } catch (\Throwable $th) {
             Log::error('TiendaController - store -> Error: '.$th);
@@ -407,7 +407,7 @@ class TiendaController extends Controller
 
                 DB::commit();
 
-                return back()->with('succes', 'Reactivacion exitosa');
+                return back()->with('succes', 'Successful reactivation');
             } else {
                 $this->reactivacion($request);
                 //return redirect()->back()->with('info', 'Problemas al generar la orden, no posee saldo suficiente');
@@ -479,7 +479,7 @@ class TiendaController extends Controller
                 return redirect($url);
             } else {
                 OrdenPurchase::where('id', $data['idorden'])->delete();
-                return redirect()->back()->with('info', 'Problemas al general la orden, intente mas tarde');
+                return redirect()->back()->with('info', 'Problems with the general order, try again later');
             }
             // }
 

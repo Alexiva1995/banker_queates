@@ -47,13 +47,13 @@
                         <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
                             <tr>
                                 <td>
-                                    <h1 style="font-size: 24px; margin: 0;">¡ HOLA !</h1>
+                                    <h1 style="font-size: 24px; margin: 0;">¡ HELLO !</h1>
                                 </td>
                             </tr>
                             <tr>
                                 
                                 <td style="font-size: 16px; line-height: 24px; padding: 0px 0 0px 0; display:block; margin-top: 10px;">
-                                    <p style="margin: 0;">Su código de Seguridad es: </p>
+                                    <p style="margin: 0;">Your security code is: </p>
                                     <p style="margin: 0;">123456789</p>
                                 </td>
                             </tr>
@@ -65,7 +65,7 @@
                         <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
                             <tr>
                                 <td style="text-align: center; color: #ffffff; font-family: Arial, sans-serif; font-size: 16px;">
-                                    <p style="margin: 0;">&reg; {{ date('Y') }} {{ config('app.name') }}. Todos los derechos reservados.<br/>
+                                    <p style="margin: 0;">&reg; {{ date('Y') }} {{ config('app.name') }}. All rights reserved.<br/>
                                 </td>
                             </tr>
                         </table>

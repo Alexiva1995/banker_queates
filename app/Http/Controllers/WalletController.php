@@ -208,7 +208,7 @@ class WalletController extends Controller
 
         $wallet->save();
 
-     return back()->with('success', 'la wallet a sido actualizada con Exito');
+     return back()->with('success', 'The wallet has been successfully updated');
     }
 
     public function edit(Request $request)
@@ -225,15 +225,15 @@ class WalletController extends Controller
 
             if ($request->code_security != $request->code_security_confirm){
 
-                return redirect()->back()->with('danger', 'El código pin ingresado no coincide');
+                return redirect()->back()->with('danger', 'The entered pin code does not match');
             }else{
                 $user->code_security = $request->code_security;
                 $user->save();
-                return back()->with('success', 'Perfil actualizado exitosamente');
+                return back()->with('success', 'Profile updated successfully');
             }
 
         }else{
-            return redirect()->back()->with('danger', 'la contraseña no coincide.');
+            return redirect()->back()->with('danger', 'Password does not match.');
         }
 
     }
@@ -282,9 +282,9 @@ class WalletController extends Controller
                 'percentage'=>$percentage
             ]);
                 // dd($bonus) ;
-            return redirect()->back()->with('success', 'Se han modificado los valores.');
+            return redirect()->back()->with('success', 'Values ​​have been changed.');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('error', 'Verifique los datos');
+            return redirect()->back()->with('error', 'Check the data');
         }
 
     }
@@ -327,10 +327,10 @@ class WalletController extends Controller
                 'status' => '1',
                 'transfer_id' => $wallet->id
            ]);
-            return back()->with('success', 'transferencia creada con exito');
+            return back()->with('success', 'Transfer created successfully');
         }
 
-        return back()->with('error' , 'tu saldo tiene que ser mayor a 0');
+        return back()->with('error' , 'Your balance has to be greater than 0');
     }
     public function transferLicencias(Request $request)
     {
@@ -351,10 +351,10 @@ class WalletController extends Controller
                 'status' => '1',
                 'transfer_id' => $wallet->id
            ]);
-            return back()->with('success', 'transferencia creada con exito');
+            return back()->with('success', 'Transfer created successfully');
         }
 
-        return back()->with('error' , 'tu saldo tiene que ser mayor a 0');
+        return back()->with('error' , 'Your balance has to be greater than 0');
     }
 
 }

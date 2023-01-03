@@ -123,7 +123,7 @@
                                     </div>
                                 <div class="mt-1 d-flex justify-content-end">
                                     @if ($user->range_id != 6)
-                                        <span class="me-1">Próximo rango:
+                                        <span class="me-1">Next rank:
                                             {{ number_format(75000, 0, '.', '.') }}</span>
                                     @endif
                                 </div>

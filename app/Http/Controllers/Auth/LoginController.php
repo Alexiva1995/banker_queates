@@ -178,7 +178,7 @@ class LoginController extends Controller
             $user->update();
             return redirect()->route('check.mail', $user->id)->with('user', $user->idr)->with('success','Codigo enviado al correo con exito');
         }else{
-            return redirect()->back()->with('error', 'Código de verificación incorrecto');
+            return redirect()->back()->with('error', 'Incorrect verification code');
         }
     }
 

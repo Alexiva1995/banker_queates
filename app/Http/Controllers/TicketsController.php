@@ -145,7 +145,7 @@ class TicketsController extends Controller
         }
 
 
-        return redirect()->route('ticket.edit-admin', $ticket->id)->with('success', 'El Ticket se actualizo Exitosamente');
+        return redirect()->route('ticket.edit-admin', $ticket->id)->with('success', 'The Ticket was updated Successfully');
     }
 
 
@@ -259,7 +259,7 @@ class TicketsController extends Controller
             ]);
         }
 
-        return redirect()->route('ticket.edit-user', $id_ticket)->with('success', 'El Ticket se creo Exitosamente');
+        return redirect()->route('ticket.edit-user', $id_ticket)->with('success', 'The Ticket was created Successfully');
     }
 
     // permite editar el ticket
@@ -322,7 +322,7 @@ class TicketsController extends Controller
 
         $ticket->save();
 
-        return redirect()->route('ticket.edit-user', $ticket->id)->with('success', 'el ticket se Actualizo Correctamente');
+        return redirect()->route('ticket.edit-user', $ticket->id)->with('success', 'The ticket was updated correctly');
     }
 
     // permite ver la lista de tickets

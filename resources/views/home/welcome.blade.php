@@ -2,7 +2,7 @@
 @php $configData = Helper::applClasses(); @endphp
 
 <html
-    lang="@if (session()->has('locale')) {{ session()->get('locale') }}@else{{ $configData['defaultLanguage'] }} @endif"
+    lang="en"
     class="loading {{ $configData['theme'] === 'light' ? 'light-layout' : 'dark-layout' }}">
     
 <head>

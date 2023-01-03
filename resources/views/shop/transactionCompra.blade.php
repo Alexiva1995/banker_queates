@@ -27,7 +27,7 @@
 @section('content')
     <div class="card text-center">
         <div class="card-header">
-            <h5 class="modal-title" id="ModalPagarLabel">Realizar Pago</h5>
+            <h5 class="modal-title" id="ModalPagarLabel">Make payment</h5>
         </div>
         <form action="{{ route('shop.proccess') }}" method="POST" enctype="multipart/form-data" class="d-inline">
             @csrf
@@ -90,7 +90,7 @@
                                     </div>
                                     <div class="col-12 mt-1">
                                         <div class="input-group mb-3">
-                                        <span class="input-group-text" id="basic-addon3">Paquete:</span>
+                                        <span class="input-group-text" id="basic-addon3">Package:</span>
                                         <input name="amount" type="number"  class="form-control" value="{{ $amount }}" disabled>
                                         </div>
                                     </div>
@@ -104,14 +104,14 @@
                                     <div class="modal-footer mt-2" style="padding-left:1px;">
                                         {{-- <button type="button" class="btn btn-secondary"
                                         href="{{route('')}}">volver</button> --}}
-                                        <button type="submit" class="btn btn-primary">Confirmar</button>
+                                        <button type="submit" class="btn btn-primary">Confirm</button>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     
                                     <div class="col-sm-12 mt-1">
                                         <div class="input-group mb-3">
-                                        <span class="input-group-text" id="basic-addon3">Saldo Disponible:</span>
+                                        <span class="input-group-text" id="basic-addon3">Available Balance:</span>
                                         <input name="total_available" type="number"  class="form-control" value="{{ $total_available  }}" disabled>
                                         </div>
                                     </div>

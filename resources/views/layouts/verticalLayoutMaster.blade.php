@@ -78,7 +78,7 @@
 
     @if(session('success'))
 
-    toastr['success']('{{ session("success") }}', '¡Exitoso!', {
+    toastr['success']('{{ session("success") }}', 'Succefull!', {
         closeButton: true,
         tapToDismiss: false
       });
@@ -92,14 +92,14 @@
     @endif
 
     @if(session('warning'))
-    toastr['warning']('{{ session("warning") }}', 'Advertenecia', {
+    toastr['warning']('{{ session("warning") }}', 'Warning', {
         closeButton: true,
         tapToDismiss: false
       });
     @endif
 
     @if(session('info'))
-    toastr['info']('{{ session("info") }}', 'Informacion', {
+    toastr['info']('{{ session("info") }}', 'Info', {
         closeButton: true,
         tapToDismiss: false
       });
@@ -107,7 +107,7 @@
 
     @if(isset($errors))
     @foreach($errors -> all() as $message)
-    toastr['error']('{{ $message }}', 'Validación fallida', {
+    toastr['error']('{{ $message }}', 'Failed validation', {
       closeButton: true,
       tapToDismiss: false
     });

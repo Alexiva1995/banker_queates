@@ -42,7 +42,7 @@ class ConfigurationController extends Controller
         $wallet->image = '' . $name;
 
         $wallet->save();
-        return redirect()->back()->with('success', 'La wallet fue guardada con éxito');
+        return redirect()->back()->with('success', 'The wallet was saved successfully');
     }
 
 

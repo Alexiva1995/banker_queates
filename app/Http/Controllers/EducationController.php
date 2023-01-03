@@ -77,7 +77,7 @@ class EducationController extends Controller
 
         $education->save();
 
-        return redirect()->back()->with('msj-success', 'La Educacion Fue Creada Con Exito');
+        return redirect()->back()->with('msj-success', 'Education Was Successfully Created');
     }
 
     public function CreateCategorie(Request $request)
@@ -91,7 +91,7 @@ class EducationController extends Controller
         $categorie->name = $request->name;
         $categorie->save();
 
-        return redirect()->back()->with('msj-success', 'La categoria fue creada con exito');
+        return redirect()->back()->with('msj-success', 'The category was created successfully');
     }
 
     /**

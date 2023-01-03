@@ -126,7 +126,7 @@
     },
     series: [percentage],
     colors: [color_chart],
-    labels: ['Días Faltantes'],
+    labels: ['Remaining days'],
     plotOptions: {
       radialBar: {
         offsetY: 10,

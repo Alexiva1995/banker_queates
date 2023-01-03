@@ -73,13 +73,13 @@ class KycController extends Controller
                     $solicitudKycRechazada->delete();
                 }
                 KYC::create($data);
-                return redirect()->back()->with('msj-info', 'Solicitud de Verificacion KYC exitosa');
+                return redirect()->back()->with('msj-info', 'Successful KYC Verification Request');
             }
             else{
-                return redirect()->back()->with('msj-danger', 'Parte frontal y trasera del cocumentos son requeridos');
+                return redirect()->back()->with('msj-danger', 'Front and back of documents are required');
             }
         }else{
-            return redirect()->back()->with('msj-danger', 'Por favor Seleccione el tipo de documento');
+            return redirect()->back()->with('msj-danger', 'Please select the type of document');
         }
     }
 

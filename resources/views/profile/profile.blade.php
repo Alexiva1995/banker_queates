@@ -55,8 +55,8 @@
         }
     </style>
     <div class="d-flex my-1">
-        <p class="fw-700 mb-0">Profiel</p><span class="fw-300 mx-1 text-light">|</span>
-        <p class="fw-400 mb-0">Edit Profiel</p>
+        <p class="fw-700 mb-0">Profile</p><span class="fw-300 mx-1 text-light">|</span>
+        <p class="fw-400 mb-0">Edit Profile</p>
     </div>
     <div class="row" >
         
@@ -321,7 +321,7 @@
 
                                                 <div class="col-sm-6">
                                                     <label for="" class="correo fw-500">
-                                                        Sponso Email<label style="color: red;">*</label>
+                                                        Sponsor Email<label style="color: red;">*</label>
                                                     </label>
                                                     @if ($user->admin != 1)
                                                         <div class="input-group mb-1">
@@ -374,6 +374,7 @@
             console.log(response);
             const { status } = response.data;
             if (status === 'success') {
+                $("#exampleModalVerification").modal('hide')
                 toastr['success']('Verified Code', '¡Successful!', {
                     closeButton: true,
                     tapToDismiss: false
@@ -414,7 +415,6 @@
 
             if( status === 'success')
             {
-                $("#exampleModalVerification").modal('hide')
                 toastr['success']('Please check your mail', '¡Successful!', {
                     closeButton: true,
                     tapToDismiss: false
