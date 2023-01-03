@@ -62,7 +62,7 @@
                     @if(auth()->user()->admin == 1)
                     <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button"
                         aria-expanded="false" aria-controls="collapseExample">
-                        Filtros
+                        Filters
                     </a>
                     @endif
                 </div>
@@ -73,61 +73,61 @@
                             @csrf
                             <div class="row">
                                 <div class="mb-2 col-md-4 col-sm-6">
-                                    <label for="user_id" class="form-label">ID de Usuario</label>
+                                    <label for="user_id" class="form-label">ID User</label>
                                     <input type="number" class="form-control" id="user_id" name="user_id" 
                                     @if($user_id != null) value="{{$user_id}}" @endif">
                                 </div>
                                 <div class="mb-2 col-md-4 col-sm-6">
-                                    <label for="user_name" class="form-label">Usuario</label>
+                                    <label for="user_name" class="form-label">User</label>
                                     <input type="text" class="form-control" id="user_name" name="user_name"
                                     @if($user_name != null) value="{{$user_name}}" @endif>
                                 </div>
                                 <div class="mb-2 col-md-4 col-sm-12">
-                                    <label for="user_name" class="form-label">Tipo de Comision</label>
+                                    <label for="user_name" class="form-label">Commission rate</label>
                                     <select class="form-select" name="comission_type[]" id="comission_type" multiple
                                         aria-label="Default select example">
                                         <option value="0" {{ in_array('0', $comission_type) ? "selected" : null }}
                                         >MLM PAMM</option>
-                                        <option value="1" {{ in_array('1', $comission_type) ? "selected" : null }}>Binario</option>
-                                        <option value="2" {{ in_array('2', $comission_type) ? "selected" : null }}>Asignado</option>
+                                        <option value="1" {{ in_array('1', $comission_type) ? "selected" : null }}>Binary</option>
+                                        <option value="2" {{ in_array('2', $comission_type) ? "selected" : null }}>Assigned</option>
                                     </select>
                                 </div>
 
                                 <div class="mb-2 col-md-4 col-sm-12">
-                                    <label for="buyer_id" class="form-label">ID de Referido</label>
+                                    <label for="buyer_id" class="form-label">ID Referred</label>
                                     <input type="number" class="form-control" id="buyer_id" name="buyer_id"
                                     @if($buyer_id != null) value="{{$buyer_id}}" @endif>
                                 </div>
                                 <div class="mb-2 col-md-4 col-sm-12">
-                                    <label for="buyer_name" class="form-label">Referido</label>
+                                    <label for="buyer_name" class="form-label">Referred</label>
                                     <input type="text" class="form-control" id="buyer_name" name="buyer_name"
                                     @if($buyer_name != null) value="{{$buyer_name}}" @endif>
                                 </div>
                                 <div class="mb-2 col-md-4 col-sm-12">
-                                    <label for="comission_status" class="form-label">Estado de Comision</label>
+                                    <label for="comission_status" class="form-label">Commission Status</label>
                                     <select class="form-select" name="comission_status[]" id="comission_status"
                                         aria-label="Default select example" multiple>
-                                        <option value="0" {{ in_array('0', $comission_status) ? "selected" : null }}>Disponible</option>
-                                        <option value="1" {{ in_array('1', $comission_status) ? "selected" : null }}>Solicitada</option>
-                                        <option value="2" {{ in_array('2', $comission_status) ? "selected" : null }}>Pagada</option>
-                                        <option value="3" {{ in_array('3', $comission_status) ? "selected" : null }}>Anulada</option>
+                                        <option value="0" {{ in_array('0', $comission_status) ? "selected" : null }}>Available</option>
+                                        <option value="1" {{ in_array('1', $comission_status) ? "selected" : null }}>Requested</option>
+                                        <option value="2" {{ in_array('2', $comission_status) ? "selected" : null }}>Paid</option>
+                                        <option value="3" {{ in_array('3', $comission_status) ? "selected" : null }}>Canceled</option>
                                     </select>
                                 </div>
 
                                 <div class="mb-2 col-md-6 col-sm-12">
-                                    <label for="date_from" class="form-label">Desde</label>
+                                    <label for="date_from" class="form-label">From</label>
                                     <input type="date" class="form-control" id="date_from" name="date_from"
                                     @if($date_from != null) value="{{ $date_from }}"  @endif>
                                 </div>
                                 <div class="mb-2 col-md-6 col-sm-12">
-                                    <label for="date_to" class="form-label">Hasta</label>
+                                    <label for="date_to" class="form-label">Until</label>
                                     <input type="date" class="form-control" id="date_to" name="date_to"
                                     @if($date_to != null) value="{{ $date_to }}"  @endif>
                                 </div>
 
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">Buscar</button>
-                                    <a class="btn btn-info" href="{{route('reports.comision')}}">Limpiar filtros</a>
+                                    <button type="submit" class="btn btn-primary">Search</button>
+                                    <a class="btn btn-info" href="{{route('reports.comision')}}">Clear Filters</a>
                                     {{-- <a class="btn btn-info" id="btn_clear">Limpiar filtros</a> --}}
                                 </div>
 
@@ -192,11 +192,11 @@
                                         MLM PAMM
                                         @break
                                         @case( 1 )
-                                        Binario
+                                        Binary
                                         @break
                                         @default
                                         @case( 2 )
-                                        Asignado
+                                        Assigned
                                         @break
                                         @endswitch
                                     </td>

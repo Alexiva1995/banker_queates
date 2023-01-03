@@ -46,7 +46,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'gender',
         'type_dni',
         'phone',
-        'Prefix_id',
+        'prefix_id',
         'code_security',
         'buyer_id',
         'token_auth',
