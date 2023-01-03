@@ -52,7 +52,7 @@
 
                       </div>
 
-                        <a onclick="argegar_saldo({{$user->id}})" class="btn btn-primary">Continue</a>
+                        <button onclick="argegar_saldo({{$user->id}})" id="agregarBtn{{$user->id}}" class="btn btn-primary">Next</button>
                     </form>
                 </div>
 
@@ -88,7 +88,7 @@
 
                             </div>
                         </div>
-                        <a onclick="sustraer_saldo({{$user->id}})" class="btn btn-primary">Continue</a>
+                        <button onclick="sustraer_saldo({{$user->id}})" id="sustraerBtn{{$user->id}}" class="btn btn-primary">Next</button>
                     </form>
                 </div>
             </div>
