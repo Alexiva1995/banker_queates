@@ -16,7 +16,7 @@
                 Monto a pagar:</label>
             <div class="input-group mb-3">
                 <input  id="montoSystem{{ $package->id }}" type="hidden" class="form-control"   style="border-color: #05A5E9; border: 1px solid #05A5E9;" 
-                value="{{ $package->amount }}">
+                value="{{ $package->amount }}" disabled>
 
                 <input  id="saldoSystem{{ $package->id }}" type="hidden" class="form-control"   style="border-color: #05A5E9; border: 1px solid #05A5E9;" 
                 value="system" disabled>

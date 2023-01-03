@@ -9,6 +9,8 @@ use App\Models\Upgrade;
 use App\Events\UserEvent;
 use App\Http\Traits\Tree;
 use App\Models\Investment;
+use App\Models\Liquidation;
+use App\Models\Transactions;
 use Illuminate\Http\Request;
 use App\Models\LicensePackage;
 use App\Models\MembershipType;
@@ -76,13 +78,82 @@ class TiendaController extends Controller
 
     public function transactionCompra(Request $request)
     {
+        $user = Auth::user();
         $monto_a_pagar_system = $request->montoSystem;
         $monto_a_pagar_crypto = $request->montoCrypto;
         $data = [
             'monto_a_pagar_system'=>$monto_a_pagar_system,
             'monto_a_pagar_crypto'=>$monto_a_pagar_crypto
         ];
-        return response()->json(['value' =>  $data]);
+        $saldo = WalletComission::where([['user_id', $user->id], ['status', '0']])->get();
+        
+        $tipo = 0;
+
+        $saldo_total = $saldo->sum('amount_available');
+         
+        if(isset($monto_a_pagar_system)&& !empty($monto_a_pagar_system)){
+
+            if ($saldo_total >= $monto_a_pagar_system  ){
+                $Monto_a_retirar = $monto_a_pagar_system;
+                $data_liquidation = [
+                    'user_id' => $user->id,
+                    'amount_gross' => $Monto_a_retirar,
+                    'amount_net' => $Monto_a_retirar ,
+                    'amount_fee' => 0,
+                    'type' => $tipo
+                ];
+                $liquidacion = Liquidation::create($data_liquidation);
+
+                for ($i = 0; $i < $saldo->count(); $i++) {
+                    if ($saldo[$i]['amount_available'] <= $Monto_a_retirar) {
+        
+                        $Monto_a_retirar =  $Monto_a_retirar - $saldo[$i]['amount_available'];
+                        $saldo[$i]['status'] = 1;
+                        $saldo[$i]['amount_retired'] = $saldo[$i]['amount'];
+                        //creando la transaccion
+                        $data_transaction = [
+                            'liquidation_id' => $liquidacion['id'],
+                            'wallets_user_id' => $saldo[$i]['user_id'],
+                            'wallets_commissions_id' => $saldo[$i]['id'],
+                            'amount' => $saldo[$i]['amount'],
+                            'amount_retired' => $saldo[$i]['amount_available'],
+                            'amount_available' => 0,
+                        ];
+        
+                        $saldo[$i]['amount_available'] = 0;
+                        $saldo[$i]->update();
+                        Transactions::create($data_transaction);
+                    }else {
+                        if ($Monto_a_retirar > 0) {
+                            $saldo[$i]['amount_available'] =  $saldo[$i]['amount_available'] - $Monto_a_retirar;
+                            $saldo[$i]['amount_retired'] = $Monto_a_retirar;
+                            $saldo[$i]->update();
+        
+        
+                            $data_transaction = [
+                                'liquidation_id' => $liquidacion['id'],
+                                'wallets_user_id' => $saldo[$i]['user_id'],
+                                'wallets_commissions_id' => $saldo[$i]['id'],
+                                'amount' => $saldo[$i]['amount'],
+                                'amount_retired' => $saldo[$i]['amount_retired'],
+                                'amount_available' => $saldo[$i]['amount_available'],
+                            ];
+                            Transactions::create($data_transaction);
+                            $i = $saldo->count();
+                        }
+                    }
+                }
+                
+            $this->procesarOrden($request);
+            return response()->json(['value' =>  'system']);
+            }else{
+                return response()->json(['value' =>  'monto insuficiente']);
+            }
+            
+        }
+        if(isset($monto_a_pagar_crypto)&& !empty($monto_a_pagar_crypto)){
+            return response()->json(['value' =>  'crypto']);
+        }
 
     }
 
@@ -90,11 +161,11 @@ class TiendaController extends Controller
      * Procesa el pago o la transacción del usuario al momento de
      * elegir el paquete y enviar su comprobante de pago.
      */
-    public function procesarOrden(PurchaseLicenseStoreRequest $request)
+    public function procesarOrden($request)
     {
         $user = Auth::user();
         $allOrder = Order::where('user_id', $user->id)->where('status', '0')->get();
-        $package = LicensePackage::where('id', $request->package)->first();
+        $package = LicensePackage::where('id', $request->id)->first();
         $investment = Investment::where('user_id', $user->id)->where('status', 1)->first();
         $orden = new Order();
         // Se cancelan las ordenes previas
@@ -118,13 +189,10 @@ class TiendaController extends Controller
 
         } else {
             
-            $newAmount = $package->amount - $investment->invested;
-
             $orden->user_id = $user->id;
             $orden->package_id = $package->id;
-            $orden->amount = $newAmount;
+            $orden->amount =$package->amount;
             $orden->hash = $request->hash;
-
             $orden->fee = 15;
             $orden->status = '0';
             $orden->type = '0';

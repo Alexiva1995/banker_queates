@@ -21,7 +21,7 @@
                               font-style: normal;
                               font-weight: 700;
                               font-size: 18px;
-                              line-height: 27px;" onclick="type('cripto', {{ $package->id }})">Criptomnoneda</button>
+                              line-height: 27px;" onclick="tipo('cripto', {{ $package->id }})">Criptomnoneda</button>
                             </li>
     
                             <li class="nav-item" role="presentation">
@@ -29,11 +29,14 @@
                               font-style: normal;
                               font-weight: 700;
                               font-size: 18px;
-                              line-height: 27px;" onclick="type('system', {{ $package->id }})">Saldo del sistema</button>
+                              line-height: 27px;" onclick="tipo('system', {{ $package->id }})">Saldo del sistema</button>
                             </li>
                             
                           </ul>
-    
+                          
+                          <input  id="id{{ $package->id }}" type="hidden" class="form-control"   style="border-color: #05A5E9; border: 1px solid #05A5E9;" 
+                          value="{{ $package->id }}">
+
                           <div class="tab-content" id="myTabContent{{ $package->id }}">
                             {{-- Seccion para pagar con crypto monedas ------}}
                             @include('shop.components.sections.crypto')
