@@ -167,7 +167,7 @@
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Cambiar estatus</h5>
+                                                            <h5 class="modal-title" id="exampleModalLabel">Change status</h5>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <form action="{{ route('orders.cambiarStatus') }}" method="POST">
@@ -175,18 +175,18 @@
                                                             <div class="modal-body">
 
                                                                 <input type="hidden" name="id" value="{{$orden->id}}">
-                                                                ¿Desea cambiar es estatus de la orden?
+                                                                Do you want to change the status of the order?
                                                                 <br>
                                                                 <label>Seleccione el estado</label>
                                                                 <select name="status" required class="form-control">
-                                                                    <option value="">Seleccione un estado</option>
-                                                                    <option value="1">Aprobado</option>
-                                                                    <option value="2">Rechazado</option>
+                                                                    <option value="">Select a state</option>
+                                                                    <option value="1">Approved</option>
+                                                                    <option value="2">Rejected</option>
                                                                 </select>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                                <button type="submit" class="btn btn-primary">Save</button>
                                                             </div>
                                                         </form>
                                                     </div>

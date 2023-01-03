@@ -114,7 +114,7 @@
 
             <div class="d-flex my-1">
                 <p class="fw-700 mb-0">Network</p><span class="fw-300 text-primary mx-1 ">|</span>
-                <p class="fw-400 mb-0">Binario</p>
+                <p class="fw-400 mb-0">Binary</p>
             </div>
             <div class="card">
                 <div class="card-content p-75">
