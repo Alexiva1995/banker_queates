@@ -2,27 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Order;
-use App\Models\MembershipPackage;
-use App\Models\MembershipType;
-use App\Http\Traits\Tree;
-use Hexters\CoinPayment\CoinPayment;
-use App\Http\Controllers\InversionController;
 use App\Models\User;
-use App\Events\UserEvent;
-use App\Http\Requests\PurchaseLicenseStoreRequest;
-use App\Models\Investment;
-use App\Models\Upgrade;
-use App\Services\BonusService;
-use App\Services\FutswapService;
-use Illuminate\Support\Facades\DB;
 use App\Models\Level;
+use App\Models\Order;
+use App\Models\Upgrade;
+use App\Events\UserEvent;
+use App\Http\Traits\Tree;
+use App\Models\Investment;
+use Illuminate\Http\Request;
 use App\Models\LicensePackage;
-use App\Models\walletPayment as WalletPayment;
+use App\Models\MembershipType;
+use App\Services\BonusService;
+use App\Models\WalletComission;
 use App\Services\PointsService;
+use App\Services\FutswapService;
+use App\Models\MembershipPackage;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Hexters\CoinPayment\CoinPayment;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\InversionController;
+use App\Models\walletPayment as WalletPayment;
+use App\Http\Requests\PurchaseLicenseStoreRequest;
 
 class TiendaController extends Controller
 {
@@ -42,6 +43,9 @@ class TiendaController extends Controller
 
         $investments = Investment::where([['user_id', Auth::id()], ['status', '1']])->with('order')->get();
         $licenses = LicensePackage::orderBy('amount', 'ASC')->get();
+        
+        $general =  WalletComission::where('user_id', Auth::user()->id)->get();
+        $generalAvailable =  $general->where('status', 0)->sum('amount_available');
 
         foreach ($licenses as $license) {
             $license->disabled = false;
@@ -57,7 +61,7 @@ class TiendaController extends Controller
                 }
             }
         }
-        return view('shop.index', compact('order', 'investments', 'licenses'));
+        return view('shop.index', compact('order', 'investments', 'licenses','generalAvailable'));
     }
 
     public function transaction(Request $request)
@@ -72,22 +76,14 @@ class TiendaController extends Controller
 
     public function transactionCompra(Request $request)
     {
-        $user = Auth::user();
-        $wallettrc20 = WalletPayment::where('type', 'trc20')->get();
-        $walletbnb = WalletPayment::where('type', 'bnb')->get();
-        $walletbtc = WalletPayment::where('type', 'btc')->get();
-        $inversion = Investment::where([['user_id', $user->id], ['status', 1]])->first();
-        if ($inversion != null) {
-            $price = $inversion->invested;
-            $amount = $request->amount - $inversion->invested;
-        } else {
-            $amount = $request->amount;
-        }
+        $monto_a_pagar_system = $request->montoSystem;
+        $monto_a_pagar_crypto = $request->montoCrypto;
+        $data = [
+            'monto_a_pagar_system'=>$monto_a_pagar_system,
+            'monto_a_pagar_crypto'=>$monto_a_pagar_crypto
+        ];
+        return response()->json(['value' =>  $data]);
 
-        $packageId = $request->package;
-      $total_available = $user->wallets->where('user_id', $user->id)->sum('amount');
-
-        return view('shop.transactionCompra', compact('amount', 'packageId', 'walletbtc','walletbnb','wallettrc20','total_available'));
     }
 
     /**

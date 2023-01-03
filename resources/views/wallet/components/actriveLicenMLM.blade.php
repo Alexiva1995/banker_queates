@@ -110,7 +110,7 @@ g .apexcharts-text {
     },
     series: [percentage],
     colors: [color_chart],
-    labels: ['Left days'],
+    labels: ['Remaining days'],
     plotOptions: {
       radialBar: {
         offsetY: -10,

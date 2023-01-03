@@ -28,25 +28,25 @@ class WithdrawalSetting extends Model
     public function getDay($day) {
         switch ($day) {
             case 1:
-                return 'Lunes';
+                return 'Monday';
                 break;
             case 2:
-                return 'Martes';
+                return 'Tuesday';
                 break;
             case 3:
-                return 'Miércoles';
+                return 'Wednesday';
                 break;
             case 4:
-                return 'Jueves';
+                return 'Thursday';
                 break;
             case 5:
-                return 'Viernes';
+                return 'Friday';
                 break;
             case 6:
-                return 'Sábado';
+                return 'Saturday';
                 break;
             case 7:
-                return 'Domingo';
+                return 'Sunday';
                 break;
             default:
                 # code...

@@ -198,5 +198,6 @@ return [
     "Edición de saldo"=>"Balance Edition",
     "Binario" => "Binary",
     "Buscar referido" => "Buscar referido",
-    "Arbol de Referidos" => "Referral Tree"
+    "Arbol de Referidos" => "Referral Tree",
+    "Red multinivel"=>"Red multinivel"
 ];
