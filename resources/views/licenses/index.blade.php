@@ -113,7 +113,7 @@
                                     <th>Email</th>
                                     <th>Licence</th>
                                     <th>Creation date</th>
-                                    <th>Remaining days</th>
+                                    <th>Left days</th>
                                 </tr>
                             </thead>
                             <tbody>

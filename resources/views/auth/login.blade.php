@@ -104,7 +104,7 @@
                             @endif
                         </div>
                         <div class="input-group input-group-merge form-password-toggle bg-white">
-                            <input type="password" required class="form-control bg-white form-control-merge" id="login-password" name="password" tabindex="2" placeholder="Ingresa tu contraseña" aria-describedby="login-password" />
+                            <input type="password" required class="form-control bg-white form-control-merge" id="login-password" name="password" tabindex="2" placeholder="Enter your password" aria-describedby="login-password" />
                             <span class="input-group-text cursor-pointer"><i data-feather='eye'></i></span>
                             {{-- <button type="button" o><i data-feather='eye'></i></button> --}}
                         </div>
