@@ -12,7 +12,7 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-sm-12 d-flex justify-content-center">
                         <h5 class="modal-title text-center" id="exampleModalLabel" style="font-family: 'Poppins'; font-style: normal; font-weight: 700; font-size: 18px; line-height: 27px;color: #544E67;"
-                        >Comprar licencia</h5>
+                        >Buy license</h5>
                     </div>
                     <div class="col-sm-12">
                         <ul class="nav nav-tabs d-flex justify-content-center" id="myTab{{ $package->id }}" role="tablist">
@@ -21,7 +21,7 @@
                               font-style: normal;
                               font-weight: 700;
                               font-size: 18px;
-                              line-height: 27px;" onclick="type('cripto', {{ $package->id }})">Criptomnoneda</button>
+                              line-height: 27px;" onclick="type('cripto', {{ $package->id }})">Cryptocurrency</button>
                             </li>
     
                             <li class="nav-item" role="presentation">
@@ -29,7 +29,7 @@
                               font-style: normal;
                               font-weight: 700;
                               font-size: 18px;
-                              line-height: 27px;" onclick="type('system', {{ $package->id }})">Saldo del sistema</button>
+                              line-height: 27px;" onclick="type('system', {{ $package->id }})">System balance</button>
                             </li>
                             
                           </ul>
@@ -46,7 +46,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <p style="font-family: 'Poppins'; font-style: normal;  font-weight: 700; font-size: 16px; line-height: 24px;  color: #544E67;">
-                                    Descripción  de compra:
+                                  Purchase Description:
                                 </p>
                             </div>
                             <div class="col-sm-12">
@@ -61,7 +61,7 @@
     
               <div class="d-grid gap-2 mt-2">
                 <button class="btn btn-primary" onclick="pay({{$package->id}})" type="button" style="font-family: 'Poppins'; font-style: normal; font-weight: 600; font-size: 20px; line-height: 30px;"
-                >Adquirir Paquete</button>
+                >Acquire Package</button>
               </div>
             </div>
             </form>
