@@ -149,17 +149,17 @@
                     if (IsNumeric(response) == true) {
                         $('#idLiquidation').val(response)
                         span.innerHTML = enviado;
-                        toastr.success("Codigo Enviado, Revise su correo", '¡Genial!', {
+                        toastr.success("Code Sent, Check your email", 'Great!', {
                             "progressBar": true
                         });
                     } else {
-                        toastr.error("El monto minimo de retiro es 60 usdt", '¡Error!', {
+                        toastr.error("The minimum withdrawal amount is 60 usdt", '¡Error!', {
                             "progressBar": true
                         });
                     }
                 }).catch(function(error) {
                     console.log(error);
-                    toastr.error("Ocurrio un problema con la solicitud", '¡Error!', {
+                    toastr.error("There was a problem with the request", '¡Error!', {
                         "progressBar": true
                     });
                 })
