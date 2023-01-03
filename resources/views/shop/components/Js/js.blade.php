@@ -1,8 +1,8 @@
 <script>
     function pay(packageID){
-        montoSys = document.getElementById('montoSystem'+packageID);
+        let montoSys = document.getElementById('montoSystem'+packageID);
         
-        montoCrypt = document.getElementById('montoCrypto'+packageID);
+        let montoCrypt = document.getElementById('montoCrypto'+packageID);
         
         if(montoSys.disabled == true){
             montoSys = [];
@@ -22,7 +22,9 @@
         id : document.getElementById('id'+packageID).value
     })
     .then(function (response) {
-        notification(response.data.value)
+        notification(response.data.value);
+
+        setTimeout( reload,2000);
     })
     .catch(function (error) {
         console.log(error);
@@ -54,4 +56,9 @@ function notification(e){
     timer: 1500
     })
 }
+
+function reload(){
+    window.location.reload();
+}
+
 </script>
