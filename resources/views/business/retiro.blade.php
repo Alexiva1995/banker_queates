@@ -117,17 +117,6 @@
                 [0, 'desc']
             ],
             pagingType: 'simple_numbers',
-            language: {
-                lengthMenu: 'Mostrar _MENU_ registros',
-                zeroRecords: 'No hay registros para mostrar',
-                info: 'Mostrando _PAGE_ de _PAGES_',
-                infoEmpty: 'No hay registros para mostrar',
-                "search": "Buscar:",
-                "paginate": {
-                    "next": " ",
-                    "previous": " "
-                },
-            },
         })
     </script>
 
