@@ -145,9 +145,11 @@ class TiendaController extends Controller
                 }
                 
             $this->procesarOrden($request);
-            return response()->json(['value' =>  'system']);
+            return response()->json(['value' =>  ['status'=>'success',
+                                                  'msj'=>'Upgrade processed correctly']]);
             }else{
-                return response()->json(['value' =>  'monto insuficiente']);
+                return response()->json(['value' =>  ['status'=>'error',
+                                                      'msj'=>'insufficient balance to Upgradeo']]);
             }
             
         }

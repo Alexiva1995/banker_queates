@@ -22,7 +22,7 @@
         id : document.getElementById('id'+packageID).value
     })
     .then(function (response) {
-        console.log( );
+        notification(response.data.value)
     })
     .catch(function (error) {
         console.log(error);
@@ -43,6 +43,15 @@ function tipo(tipo,packageID){
         montoCrypto.disabled = true;
     }
 
-    console.log(montoSystem,montoCrypto)
+}
+
+function notification(e){
+    Swal.fire({
+    position: 'top-end',
+    icon: e.status,
+    title: e.msj,
+    showConfirmButton: false,
+    timer: 1500
+    })
 }
 </script>
