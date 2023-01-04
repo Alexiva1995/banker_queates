@@ -108,7 +108,7 @@ class FutswapController extends Controller
                     'logo' => public_path('/images') . '/login/connect.png'
                 ];
                 Mail::send('mails.withdrawConfirmation', $dataEmail,  function ($msj) use ($liquidaction) {
-                $msj->subject('Retiro Confirmado');
+                $msj->subject('Withdrawal Confirmed');
                 $msj->to($liquidaction->getUserLiquidation->email);
                 $msj->cc('retirosconnect@gmail.com');
                 });

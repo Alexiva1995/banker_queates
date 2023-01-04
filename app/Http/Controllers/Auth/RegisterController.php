@@ -86,12 +86,13 @@ class RegisterController extends Controller
      */
     protected function create(Request $request)
     {
+        
        
         $request->validate(
             [
                 'name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|confirmed|unique:users',
-                'username' => 'required|string|max:10|alpha_dash|unique:users,username',
+                'username' => 'required|string|max:20|alpha_dash|unique:users,username',
                 'password' => 'required|string|min:8|confirmed',
                 'countrie_id' => 'required',
                 'buyer_id' => 'nullable|exists:users,id',
@@ -130,7 +131,6 @@ class RegisterController extends Controller
             return back()->with('error', 'Your last name is required.');
         }
         try {
-            
             $user = User::create([
                 'username' => $request->username,
                 'name' => $name,

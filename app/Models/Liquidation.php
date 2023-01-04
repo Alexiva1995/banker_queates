@@ -45,9 +45,9 @@ class Liquidation extends Model
     public function status()
     {
         if ($this->status == '0'){
-            return "Pendiente";
+            return "Pending";
         }elseif($this->status == '1'){
-            return "Realizada";
+            return "Done";
         }
     }
 
