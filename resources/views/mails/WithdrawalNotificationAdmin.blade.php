@@ -62,14 +62,14 @@
                         <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
                             <tr>
                                 <td>
-                                    <h1 style="font-size: 24px; margin: 0;">¡ HOLA ADMINISTRADOR !</h1>
+                                    <h1 style="font-size: 24px; margin: 0;">¡ HELLO ADMINISTRATOR !</h1>
                                 </td>
                             </tr>
                             <tr>
                                 <td style="font-size: 16px; line-height: 24px; padding: 0px 0 0px 0; display:block; margin-top: 10px;">
-                                    <p style="margin: 0;">El usuario {{ $user->email }} ha solicitado un retiro por:</p>
+                                    <p style="margin: 0;">The user {{ $user->email }} has requested a withdrawal for:</p>
                                     <p style="margin: 0;">{{ $amount }} USD</p>
-                                    <p style="margin: 0;">a la Wallet {{ $user->decryptWallet() }}</p>
+                                    <p style="margin: 0;">to the Wallet {{ $user->decryptWallet() }}</p>
                                 </td>
                             </tr>
                             <tr>

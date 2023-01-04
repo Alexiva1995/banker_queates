@@ -342,7 +342,8 @@ Route::group(['prefix' => 'tickets'], function () {
         Route::get('ticket-show-admin/{id}',  [TicketsController::class, 'showAdmin'])->name('ticket.show-admin');
     });
 });
-
+//Pamm
+Route::get('pamm',  [BusinessController::class, 'pamm'])->name('pamm');
 //ruta para redireccionar a la vista del QR
 Route::get('member',  [FutswapController::class, 'redirect'])->name('member');
 //ruta para redirecionar al QR cuando la orden fue cancelada

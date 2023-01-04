@@ -13,6 +13,12 @@
             "url": "/market/licenses"
         },
         {
+            "name": "PAMM",
+            "icon": "fa fa-line-chart",
+            "slug": "pamm",
+            "url": "/pamm"
+        },
+        {
             "name": "Informes",
             "icon": "fa-solid fa-chart-column",
             "slug": "/",

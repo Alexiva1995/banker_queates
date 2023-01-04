@@ -39,7 +39,7 @@ return [
     'digits_between'       => 'Field :attribute debe contener entre :min y :max dígitos.',
     'dimensions'           => 'Field :attribute tiene dimensiones de imagen inválidas.',
     'distinct'             => 'Field :attribute tiene un valor duplicado.',
-    'email'                => 'Field :attribute debe ser una dirección de correo válida.',
+    'email'                => 'Field email debe ser una must be a valid email address.',
     'ends_with'            => 'Field :attribute debe finalizar con alguno de los siguientes valores: :values',
     'exists'               => 'Field :attribute seleccionado no existe.',
     'file'                 => 'Field :attribute debe ser un archivo.',
@@ -103,7 +103,7 @@ return [
     'required_with_all'    => 'Field :attribute is required when :values están presentes.',
     'required_without'     => 'Field :attribute is required when :values no está presente.',
     'required_without_all' => 'Field :attribute is required when ninguno de los campos :values están presentes.',
-    'same'                 => 'Los campos :attribute y :other deben coincidir.',
+    'same'                 => 'Fields :attribute and :other must match.',
     'size'                 => [
         'numeric' => 'Field :attribute debe ser :size.',
         'file'    => 'El archivo :attribute debe pesar :size kilobytes.',
@@ -132,8 +132,8 @@ return [
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
-            'new_password' => 'nueva contraseña',
-            'confirm_password' => 'Confirmar nueva contraseña',
+            'new_password' => 'New password',
+            'confirm_password' => 'Confirm new password',
         ],
     ],
 
@@ -152,8 +152,8 @@ return [
         'email' => 'Correo',
         'title' => 'Titulo',
         'categorie' => 'categoria',
-        'new_password' => 'nueva contraseña',
-        'confirm_password' => 'Confirmar nueva contraseña',
+        'new_password' => 'New password',
+        'confirm_password' => 'Confirm new password',
     ],
 
 ];
