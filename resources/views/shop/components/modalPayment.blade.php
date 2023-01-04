@@ -12,7 +12,7 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-sm-12 d-flex justify-content-center">
                         <h5 class="modal-title text-center" id="exampleModalLabel" style="font-family: 'Poppins'; font-style: normal; font-weight: 700; font-size: 18px; line-height: 27px;color: #544E67;"
-                        >Buy license</h5>
+                        >Buy License</h5>
                     </div>
                     <div class="col-sm-12">
                         <ul class="nav nav-tabs d-flex justify-content-center" id="myTab{{ $package->id }}" role="tablist">
@@ -21,7 +21,7 @@
                               font-style: normal;
                               font-weight: 700;
                               font-size: 18px;
-                              line-height: 27px;" onclick="type('cripto', {{ $package->id }})">Cryptocurrency</button>
+                              line-height: 27px;" onclick="tipo('cripto', {{ $package->id }})">Cryptocurrency</button>
                             </li>
     
                             <li class="nav-item" role="presentation">
@@ -29,11 +29,14 @@
                               font-style: normal;
                               font-weight: 700;
                               font-size: 18px;
-                              line-height: 27px;" onclick="type('system', {{ $package->id }})">System balance</button>
+                              line-height: 27px;" onclick="tipo('system', {{ $package->id }})">System Salance</button>
                             </li>
                             
                           </ul>
-    
+                          
+                          <input  id="id{{ $package->id }}" type="hidden" class="form-control"   style="border-color: #05A5E9; border: 1px solid #05A5E9;" 
+                          value="{{ $package->id }}">
+
                           <div class="tab-content" id="myTabContent{{ $package->id }}">
                             {{-- Seccion para pagar con crypto monedas ------}}
                             @include('shop.components.sections.crypto')
@@ -61,7 +64,8 @@
     
               <div class="d-grid gap-2 mt-2">
                 <button class="btn btn-primary" onclick="pay({{$package->id}})" type="button" style="font-family: 'Poppins'; font-style: normal; font-weight: 600; font-size: 20px; line-height: 30px;"
-                >Acquire Package</button>
+                >
+                Acquire Package</button>
               </div>
             </div>
             </form>

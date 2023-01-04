@@ -9,6 +9,7 @@ use App\Models\Range;
 use App\Models\Investment;
 use Illuminate\Http\Request;
 use App\Services\RangeService;
+use App\Models\WalletComission;
 use App\Services\MinApiService;
 use App\Services\ReferalService;
 use Illuminate\Support\Facades\Log;
@@ -70,7 +71,10 @@ class DashboardController extends Controller
       $total_referrals = $this->tree->getChildrenCount($user->referidos, 2, 0);
       $indirect_referrals = $total_referrals - $user->referidos->count();
       $investments = Investment::where('user_id', $user->id)->with('licensePackage')->get();
-      $total_available = $user->wallets->where('user_id', $user->id)->sum('amount');
+
+      $general =  WalletComission::where('user_id', $user->id)->get();
+
+      $total_available = $general->where('status', 0)->sum('amount_available');
       $user_packages = $user->getActivePackages();
       $daysRemaining = 0;
       $user->range;
