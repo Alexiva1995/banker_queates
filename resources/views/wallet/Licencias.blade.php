@@ -92,7 +92,7 @@
                                                         </span>
                                                     @elseif($licen->status == '4')
                                                         <span class="badge warning-badge">
-                                                            <span class="text-warning">Stolen</span>
+                                                            <span class="text-warning">Substracted</span>
                                                         </span>
                                                     @endif
                                                 </td>

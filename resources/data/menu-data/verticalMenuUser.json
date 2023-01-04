@@ -14,7 +14,7 @@
         },
         {
             "name": "PAMM",
-            "icon": "fa fa-area-chart",
+            "icon": "fa fa-line-chart",
             "slug": "pamm",
             "url": "/pamm"
         },
