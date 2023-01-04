@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Inversion;
+use App\Models\WalletComission;
 use App\Models\Rentabilidad;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
@@ -85,4 +86,8 @@ class BusinessController extends Controller{
 
         return view('business.rentabilidad', compact('rentabilidades'));
     }
-}
+    public function pamm() {
+        $wallets = WalletComission::all();
+        return view('pamm.index', compact('wallets'));
+    }
+} 
