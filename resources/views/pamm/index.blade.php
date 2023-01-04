@@ -3,17 +3,18 @@
 @section('title', 'Comision')
 
 @section('vendor-style')
-<!-- vendor css files -->
-<link rel="stylesheet" href="{{ asset(mix('vendors/css/charts/apexcharts.css')) }}">
-<link rel="stylesheet" href="{{ asset(mix('vendors/css/tables/datatable/dataTables.bootstrap5.min.css')) }}">
-<link rel="stylesheet" href="https://cdn.rawgit.com/wenzhixin/multiple-select/e14b36de/multiple-select.css">
+    <!-- vendor css files -->
+    <link rel="stylesheet" href="{{ asset(mix('vendors/css/charts/apexcharts.css')) }}">
+    <link rel="stylesheet" href="{{ asset(mix('vendors/css/tables/datatable/dataTables.bootstrap5.min.css')) }}">
+    <link rel="stylesheet" href="https://cdn.rawgit.com/wenzhixin/multiple-select/e14b36de/multiple-select.css">
 
 @endsection
 <style>
     .fw-700 {
         font-weight: 700 !important;
     }
-    .ms-choice{
+
+    .ms-choice {
         border: none !important;
         margin: -3px;
     }
@@ -29,171 +30,220 @@
         font-size: 1em !important;
         margin-bottom: -2rem;
     }
-    .success-badge{
+
+    .success-badge {
         background-color: rgba(66, 172, 70, 0.16);
     }
-    .success-text{
+
+    .success-text {
         color: #42AC46;
     }
-    .waiting-text{
+
+    .waiting-text {
         color: #36D9ED;
     }
-    .waiting-badge{
+
+    .waiting-badge {
         background-color: #D6F7FB;
     }
-    .warning-text{
+
+    .warning-text {
         color: #FF4969;
     }
-    .warning-badge{
+
+    .warning-badge {
         background-color: #FBE3E4;
     }
 </style>
 @section('content')
-<div id="logs-list">
-    <div class="d-flex my-1">
-        <p class="fw-700 mb-0" style="font-weight: 700; color:#000">Reports</p><span class="fw-300 mx-1 text-light">|</span>
-        <p class="fw-700 mb-0" style="font-weight: 700; color:rgba(0, 0, 0, 0.514)">Commissions</p>
-    </div>
-    <div class="col-12">
-        <div class="card p-2">
-            <div class="card-content p-50">
-                <div class="card-header p-0">
-                    <h4 class="fw-700">Commissions</h4>
-                </div>
-                <div class="card-body card-dashboard p-0">
-                    <div class="table-responsive">
-                        <table class="table w-100 nowrap scroll-horizontal-vertical myTable table-striped w-100">
-                            <thead class="">
-                                <tr class="text-center">
-                                    <th class="fw-600">ID</th>
-                                    <th class="fw-600">User</th>
-                                    <th class="fw-600">ID User</th>
-                                    <th class="fw-600">Amount</th>
-                                    <th class="fw-600">Status</th>
-                                    <th class="fw-600">Type</th>
-                                    <th class="fw-600">Date</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($wallets as $key => $wallet)
-                                <tr>
-                                    <td class="fw-600 text-center">{{$wallet->id}}</td>
-                                    <td class="fw-300 text-center">{{$wallet->buyer->name ?? '--'}}</td>
-                                    <td class="fw-300 text-center">{{$wallet->buyer->id ?? '--'}}</td>
-                                    <td class="fw-300 text-end">{{number_format($wallet->amount,2)}}</td>
-                                    <td class="fw-300 text-center">
-                                    @if ($wallet->status == 0)
-                                        <span class="badge success-badge">
-                                            <span class="success-text">Available</span>
-                                        </span>
-                                    @elseif($wallet->status == 1)
-                                        <span class="badge waiting-badge">
-                                            <span class="waiting-text">Requested</span>
-                                        </span>
-                                    @elseif($wallet->status == 2)
-                                        <span class="badge success-badge">
-                                            <span class="success-text">Paid</span>
-                                        </span>
-                                    @elseif($wallet->status == 3)
-                                        <span class="badge warning-badge">
-                                            <span class="warning-text">Canceled</span>
-                                        </span>
-                                    @elseif($wallet->status == 4)
-                                        <span class="badge warning-badge">
-                                            <span class="text-warning">Substracted</span>
-                                        </span>
-                                    @endif
-                                    </td>
-                                    <td class="fw-300 text-center">
-                                        @switch($wallet->type)
-                                        @case( 0 )
-                                        MLM PAMM
-                                        @break
-                                        @case( 1 )
-                                        Binary
-                                        @break
-                                        @default
-                                        @case( 2 )
-                                        Assigned
-                                        @break
-                                        @endswitch
-                                    </td>
+    <div id="logs-list">
+        <div class="d-flex my-1">
+            <p class="fw-700 mb-0" style="font-weight: 700; color:#000">Reports</p><span
+                class="fw-300 mx-1 text-light">|</span>
+            <p class="fw-700 mb-0" style="font-weight: 700; color:rgba(0, 0, 0, 0.514)">Commissions</p>
+        </div>
+        <div class="col-12">
+            <div class="card p-2">
+                <div class="card-content p-50">
+                    <div class="card-header p-0">
+                        <h4 class="fw-700">Commissions</h4>
+                    </div>
+                    <div class="card-body card-dashboard p-0">
+                        <div class="table-responsive">
+                            <table class="table w-100 nowrap scroll-horizontal-vertical myTable table-striped w-100">
+                                <thead class="">
+                                    <tr class="text-center">
+                                        <th class="fw-600">ID</th>
+                                        <th class="fw-600">User</th>
+                                        <th class="fw-600">ID User</th>
+                                        <th class="fw-600">Amount</th>
+                                        <th class="fw-600">Status</th>
+                                        <th class="fw-600">Type</th>
+                                        <th class="fw-600">Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($wallets as $key => $wallet)
+                                        <tr>
+                                            <td class="fw-600 text-center">{{ $wallet->id }}</td>
+                                            <td class="fw-300 text-center">{{ $wallet->buyer->name ?? '--' }}</td>
+                                            <td class="fw-300 text-center">{{ $wallet->buyer->id ?? '--' }}</td>
+                                            <td class="fw-300 text-end">{{ number_format($wallet->amount, 2) }}</td>
+                                            <td class="fw-300 text-center">
+                                                @if ($wallet->status == 0)
+                                                    <span class="badge success-badge">
+                                                        <span class="success-text">Available</span>
+                                                    </span>
+                                                @elseif($wallet->status == 1)
+                                                    <span class="badge waiting-badge">
+                                                        <span class="waiting-text">Requested</span>
+                                                    </span>
+                                                @elseif($wallet->status == 2)
+                                                    <span class="badge success-badge">
+                                                        <span class="success-text">Paid</span>
+                                                    </span>
+                                                @elseif($wallet->status == 3)
+                                                    <span class="badge warning-badge">
+                                                        <span class="warning-text">Canceled</span>
+                                                    </span>
+                                                @elseif($wallet->status == 4)
+                                                    <span class="badge warning-badge">
+                                                        <span class="text-warning">Substracted</span>
+                                                    </span>
+                                                @endif
+                                            </td>
+                                            <td class="fw-300 text-center">
+                                                @switch($wallet->type)
+                                                    @case(0)
+                                                        MLM PAMM
+                                                    @break
 
-                                    <td class="fw-300 text-center">{{date('Y-m-d', strtotime($wallet->created_at))}}
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                                    @case(1)
+                                                        Binary
+                                                    @break
+
+                                                    @default
+                                                        @case(2)
+                                                            Assigned
+                                                        @break
+                                                    @endswitch
+                                                </td>
+
+                                                <td class="fw-300 text-center">
+                                                    {{ date('Y-m-d', strtotime($wallet->created_at)) }}
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="mt-1 me-2 btn-close" data-bs-dismiss="modal"
+                            aria-label="Close">
+                        </button>
+                    </div>
+                    <div class="modal-header">
+                        <div class="" style="margin: 0 auto">
+                            <img src="{{ asset('images/logo/icon-deg.png') }}" width="70" height="100"
+                                class="align-self-center mr-1 di" alt="">
+                        </div>
+                    </div>
+                    <h4 class="modal-title mt-2" id="exampleModalLongTitle" style="margin: 0 auto"><strong>PAMM
+                            Application</strong></h4>
+                    <div class="modal-body">
+                        <p class="text-center mt-1">This process will need to be approved by the administrator, so it could take
+                            a moment.</p>
+                        <form action="">
+                            <div class="form-group mt-1">
+                                <label for="" style="margin-bottom: 1%;" class="fw-500">Trading Account Number</label>
+                                <input type="number" name="account_number" class="form-control" placeholder="Enter trading account number">
+                            </div>
+                            <div class="form-group mt-1">
+                                <div class="">
+                                    <input type="file" class="custom-file-input" id="inputGroupFile01">
+                                    <div class="d-flex align-items-center justify-content-center" style="width: 100%; height:10em; background-color:rgba(165, 163, 174, 0.3);">
+                                        <label class="custom-file-label" for="inputGroupFile01"><a href=""><svg width="137" height="36" viewBox="0 0 137 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <rect width="137" height="36" rx="5" fill="#808E9E" fill-opacity="0.5"/>
+                                            <path d="M14.8877 14.373L11.9141 23H10.1162L13.8623 13.0469H15.0107L14.8877 14.373ZM17.376 23L14.3955 14.373L14.2656 13.0469H15.4209L19.1807 23H17.376ZM17.2324 19.3086V20.6689H11.8184V19.3086H17.2324ZM24.6426 21.4688V12.5H26.2969V23H24.7998L24.6426 21.4688ZM19.8301 19.3838V19.2402C19.8301 18.6797 19.8962 18.1693 20.0283 17.709C20.1605 17.2441 20.3519 16.8454 20.6025 16.5127C20.8532 16.1755 21.1585 15.918 21.5186 15.7402C21.8786 15.5579 22.2842 15.4668 22.7354 15.4668C23.182 15.4668 23.5739 15.5534 23.9111 15.7266C24.2484 15.8997 24.5355 16.1481 24.7725 16.4717C25.0094 16.7907 25.1986 17.1735 25.3398 17.6201C25.4811 18.0622 25.5814 18.5544 25.6406 19.0967V19.5547C25.5814 20.0833 25.4811 20.5664 25.3398 21.0039C25.1986 21.4414 25.0094 21.8197 24.7725 22.1387C24.5355 22.4577 24.2461 22.7038 23.9043 22.877C23.5671 23.0501 23.1729 23.1367 22.7217 23.1367C22.2751 23.1367 21.8717 23.0433 21.5117 22.8564C21.1562 22.6696 20.8532 22.4076 20.6025 22.0703C20.3519 21.7331 20.1605 21.3366 20.0283 20.8809C19.8962 20.4206 19.8301 19.9215 19.8301 19.3838ZM21.4775 19.2402V19.3838C21.4775 19.721 21.5072 20.0355 21.5664 20.3271C21.6302 20.6188 21.7282 20.8763 21.8604 21.0996C21.9925 21.3184 22.1634 21.4915 22.373 21.6191C22.5872 21.7422 22.8424 21.8037 23.1387 21.8037C23.5124 21.8037 23.82 21.7217 24.0615 21.5576C24.3031 21.3936 24.4922 21.1725 24.6289 20.8945C24.7702 20.612 24.8659 20.2975 24.916 19.9512V18.7139C24.8887 18.445 24.8317 18.1943 24.7451 17.9619C24.6631 17.7295 24.5514 17.5267 24.4102 17.3535C24.2689 17.1758 24.0934 17.0391 23.8838 16.9434C23.6787 16.8431 23.4349 16.793 23.1523 16.793C22.8516 16.793 22.5964 16.8568 22.3867 16.9844C22.1771 17.112 22.0039 17.2874 21.8672 17.5107C21.735 17.734 21.637 17.9938 21.5732 18.29C21.5094 18.5863 21.4775 18.903 21.4775 19.2402ZM28.1016 15.6035H29.7559V23.6426C29.7559 24.1484 29.6693 24.5745 29.4961 24.9209C29.3229 25.2718 29.0677 25.5361 28.7305 25.7139C28.3932 25.8962 27.9808 25.9873 27.4932 25.9873C27.3473 25.9873 27.1969 25.9759 27.042 25.9531C26.8825 25.9349 26.7321 25.9076 26.5908 25.8711L26.5977 24.5859C26.6934 24.6042 26.7959 24.6178 26.9053 24.627C27.0101 24.6406 27.1104 24.6475 27.2061 24.6475C27.402 24.6475 27.5661 24.6133 27.6982 24.5449C27.8304 24.4766 27.9307 24.3695 27.999 24.2236C28.0674 24.0778 28.1016 23.8841 28.1016 23.6426V15.6035ZM27.958 13.6621C27.958 13.4115 28.0423 13.2041 28.2109 13.04C28.3796 12.8714 28.6097 12.7871 28.9014 12.7871C29.1976 12.7871 29.4277 12.8714 29.5918 13.04C29.7604 13.2041 29.8447 13.4115 29.8447 13.6621C29.8447 13.9082 29.7604 14.1133 29.5918 14.2773C29.4277 14.4414 29.1976 14.5234 28.9014 14.5234C28.6097 14.5234 28.3796 14.4414 28.2109 14.2773C28.0423 14.1133 27.958 13.9082 27.958 13.6621ZM35.9834 21.2568V15.6035H37.6377V23H36.0791L35.9834 21.2568ZM36.2158 19.7188L36.7695 19.7051C36.7695 20.2018 36.7148 20.6598 36.6055 21.0791C36.4961 21.4938 36.3275 21.8561 36.0996 22.166C35.8717 22.4714 35.5801 22.7106 35.2246 22.8838C34.8691 23.0524 34.443 23.1367 33.9463 23.1367C33.5863 23.1367 33.2559 23.0843 32.9551 22.9795C32.6543 22.8747 32.3945 22.7129 32.1758 22.4941C31.9616 22.2754 31.7952 21.9906 31.6768 21.6396C31.5583 21.2887 31.499 20.8695 31.499 20.3818V15.6035H33.1465V20.3955C33.1465 20.6644 33.1784 20.89 33.2422 21.0723C33.306 21.25 33.3926 21.3936 33.502 21.5029C33.6113 21.6123 33.7389 21.6898 33.8848 21.7354C34.0306 21.7809 34.1855 21.8037 34.3496 21.8037C34.819 21.8037 35.1882 21.7126 35.457 21.5303C35.7305 21.3434 35.9242 21.0928 36.0381 20.7783C36.1566 20.4639 36.2158 20.1107 36.2158 19.7188ZM40.96 17.1826V23H39.3125V15.6035H40.8643L40.96 17.1826ZM40.666 19.0283L40.1328 19.0215C40.1374 18.4974 40.2103 18.0166 40.3516 17.5791C40.4974 17.1416 40.6979 16.7656 40.9531 16.4512C41.2129 16.1367 41.5228 15.8952 41.8828 15.7266C42.2428 15.5534 42.6439 15.4668 43.0859 15.4668C43.4414 15.4668 43.7627 15.5169 44.0498 15.6172C44.3415 15.7129 44.5898 15.8701 44.7949 16.0889C45.0046 16.3076 45.1641 16.5924 45.2734 16.9434C45.3828 17.2897 45.4375 17.7158 45.4375 18.2217V23H43.7832V18.2148C43.7832 17.8594 43.7308 17.5791 43.626 17.374C43.5257 17.1644 43.3776 17.0163 43.1816 16.9297C42.9902 16.8385 42.751 16.793 42.4639 16.793C42.1813 16.793 41.9284 16.8522 41.7051 16.9707C41.4818 17.0892 41.2926 17.251 41.1377 17.4561C40.9873 17.6611 40.8711 17.8981 40.7891 18.167C40.707 18.4359 40.666 18.723 40.666 19.0283ZM50.5098 15.6035V16.8066H46.3398V15.6035H50.5098ZM47.543 13.792H49.1904V20.9561C49.1904 21.1839 49.2223 21.3594 49.2861 21.4824C49.3545 21.6009 49.4479 21.6807 49.5664 21.7217C49.6849 21.7627 49.8239 21.7832 49.9834 21.7832C50.0973 21.7832 50.2067 21.7764 50.3115 21.7627C50.4163 21.749 50.5007 21.7354 50.5645 21.7217L50.5713 22.9795C50.4346 23.0205 50.2751 23.057 50.0928 23.0889C49.915 23.1208 49.71 23.1367 49.4775 23.1367C49.0993 23.1367 48.7643 23.0706 48.4727 22.9385C48.181 22.8018 47.9531 22.5807 47.7891 22.2754C47.625 21.9701 47.543 21.5645 47.543 21.0586V13.792ZM55.9512 21.5166V17.9893C55.9512 17.7249 55.9033 17.4971 55.8076 17.3057C55.7119 17.1143 55.5661 16.9661 55.3701 16.8613C55.1787 16.7565 54.9372 16.7041 54.6455 16.7041C54.3766 16.7041 54.1442 16.7497 53.9482 16.8408C53.7523 16.932 53.5996 17.055 53.4902 17.21C53.3809 17.3649 53.3262 17.5404 53.3262 17.7363H51.6855C51.6855 17.4447 51.7562 17.1621 51.8975 16.8887C52.0387 16.6152 52.2438 16.3714 52.5127 16.1572C52.7816 15.943 53.1029 15.7744 53.4766 15.6514C53.8503 15.5283 54.2695 15.4668 54.7344 15.4668C55.2904 15.4668 55.7826 15.5602 56.2109 15.7471C56.6439 15.9339 56.9834 16.2165 57.2295 16.5947C57.4801 16.9684 57.6055 17.4378 57.6055 18.0029V21.291C57.6055 21.6283 57.6283 21.9313 57.6738 22.2002C57.724 22.4645 57.7946 22.6947 57.8857 22.8906V23H56.1973C56.1198 22.8223 56.0583 22.5967 56.0127 22.3232C55.9717 22.0452 55.9512 21.7764 55.9512 21.5166ZM56.1904 18.502L56.2041 19.5205H55.0215C54.7161 19.5205 54.4473 19.5501 54.2148 19.6094C53.9824 19.6641 53.7887 19.7461 53.6338 19.8555C53.4788 19.9648 53.3626 20.097 53.2852 20.252C53.2077 20.4069 53.1689 20.5824 53.1689 20.7783C53.1689 20.9743 53.2145 21.1543 53.3057 21.3184C53.3968 21.4779 53.529 21.6032 53.7021 21.6943C53.8799 21.7855 54.0941 21.8311 54.3447 21.8311C54.682 21.8311 54.9759 21.7627 55.2266 21.626C55.4818 21.4847 55.6823 21.3138 55.8281 21.1133C55.974 20.9082 56.0514 20.7145 56.0605 20.5322L56.5938 21.2637C56.5391 21.4505 56.4456 21.651 56.3135 21.8652C56.1813 22.0794 56.0081 22.2845 55.7939 22.4805C55.5843 22.6719 55.3314 22.8291 55.0352 22.9521C54.7435 23.0752 54.4062 23.1367 54.0234 23.1367C53.5404 23.1367 53.1097 23.041 52.7314 22.8496C52.3532 22.6536 52.057 22.3916 51.8428 22.0635C51.6286 21.7308 51.5215 21.3548 51.5215 20.9355C51.5215 20.5436 51.5944 20.1973 51.7402 19.8965C51.8906 19.5911 52.1094 19.3359 52.3965 19.1309C52.6882 18.9258 53.0436 18.7708 53.4629 18.666C53.8822 18.5566 54.3607 18.502 54.8984 18.502H56.1904ZM60.9824 17.0117V23H59.335V15.6035H60.9072L60.9824 17.0117ZM63.2451 15.5557L63.2314 17.0869C63.1312 17.0687 63.0218 17.055 62.9033 17.0459C62.7894 17.0368 62.6755 17.0322 62.5615 17.0322C62.279 17.0322 62.0306 17.0732 61.8164 17.1553C61.6022 17.2327 61.4222 17.3467 61.2764 17.4971C61.1351 17.6429 61.0257 17.8206 60.9482 18.0303C60.8708 18.2399 60.8252 18.4746 60.8115 18.7344L60.4355 18.7617C60.4355 18.2969 60.4811 17.8662 60.5723 17.4697C60.6634 17.0732 60.8001 16.7246 60.9824 16.4238C61.1693 16.123 61.4017 15.8883 61.6797 15.7197C61.9622 15.5511 62.2881 15.4668 62.6572 15.4668C62.7575 15.4668 62.8646 15.4759 62.9785 15.4941C63.097 15.5124 63.1859 15.5329 63.2451 15.5557ZM74.1621 21.6396V23H69.165V21.6396H74.1621ZM69.6436 13.0469V23H67.9277V13.0469H69.6436ZM79.2686 19.2881H76.6777V17.9277H79.2686C79.7197 17.9277 80.0843 17.8548 80.3623 17.709C80.6403 17.5632 80.8431 17.3626 80.9707 17.1074C81.1029 16.8477 81.1689 16.5514 81.1689 16.2188C81.1689 15.9043 81.1029 15.6104 80.9707 15.3369C80.8431 15.0589 80.6403 14.8356 80.3623 14.667C80.0843 14.4984 79.7197 14.4141 79.2686 14.4141H77.2041V23H75.4883V13.0469H79.2686C80.0387 13.0469 80.6927 13.1836 81.2305 13.457C81.7728 13.7259 82.1852 14.0996 82.4678 14.5781C82.7503 15.0521 82.8916 15.5944 82.8916 16.2051C82.8916 16.8477 82.7503 17.3991 82.4678 17.8594C82.1852 18.3197 81.7728 18.6729 81.2305 18.9189C80.6927 19.165 80.0387 19.2881 79.2686 19.2881ZM92.3662 17.75V18.2969C92.3662 19.0488 92.2682 19.7233 92.0723 20.3203C91.8763 20.9173 91.596 21.4255 91.2314 21.8447C90.8714 22.264 90.4385 22.5853 89.9326 22.8086C89.4268 23.0273 88.8662 23.1367 88.251 23.1367C87.6403 23.1367 87.082 23.0273 86.5762 22.8086C86.0749 22.5853 85.6396 22.264 85.2705 21.8447C84.9014 21.4255 84.6143 20.9173 84.4092 20.3203C84.2087 19.7233 84.1084 19.0488 84.1084 18.2969V17.75C84.1084 16.998 84.2087 16.3258 84.4092 15.7334C84.6097 15.1364 84.8923 14.6283 85.2568 14.209C85.626 13.7852 86.0612 13.4639 86.5625 13.2451C87.0684 13.0218 87.6266 12.9102 88.2373 12.9102C88.8525 12.9102 89.4131 13.0218 89.9189 13.2451C90.4248 13.4639 90.86 13.7852 91.2246 14.209C91.5892 14.6283 91.8695 15.1364 92.0654 15.7334C92.266 16.3258 92.3662 16.998 92.3662 17.75ZM90.6504 18.2969V17.7363C90.6504 17.1803 90.5957 16.6904 90.4863 16.2666C90.3815 15.8382 90.2243 15.4805 90.0146 15.1934C89.8096 14.9017 89.5566 14.6829 89.2559 14.5371C88.9551 14.3867 88.6156 14.3115 88.2373 14.3115C87.859 14.3115 87.5218 14.3867 87.2256 14.5371C86.9294 14.6829 86.6764 14.9017 86.4668 15.1934C86.2617 15.4805 86.1045 15.8382 85.9951 16.2666C85.8857 16.6904 85.8311 17.1803 85.8311 17.7363V18.2969C85.8311 18.8529 85.8857 19.3451 85.9951 19.7734C86.1045 20.2018 86.264 20.5641 86.4736 20.8604C86.6878 21.152 86.943 21.373 87.2393 21.5234C87.5355 21.6693 87.8727 21.7422 88.251 21.7422C88.6338 21.7422 88.9733 21.6693 89.2695 21.5234C89.5658 21.373 89.8164 21.152 90.0215 20.8604C90.2266 20.5641 90.3815 20.2018 90.4863 19.7734C90.5957 19.3451 90.6504 18.8529 90.6504 18.2969ZM97.8076 14.373L94.834 23H93.0361L96.7822 13.0469H97.9307L97.8076 14.373ZM100.296 23L97.3154 14.373L97.1855 13.0469H98.3408L102.101 23H100.296ZM100.152 19.3086V20.6689H94.7383V19.3086H100.152Z" fill="#544E67"/>
+                                            <path d="M114.351 24.5669C112.525 22.6829 112.56 19.6447 114.395 17.7675L120.95 11.0625C122.335 9.64589 124.586 9.64577 125.971 11.0625C127.342 12.4655 127.344 14.729 125.971 16.1336L120.257 21.9728C119.324 22.927 117.799 22.9137 116.882 21.9416C115.999 21.005 116.027 19.5205 116.928 18.5993L121.42 14.0107C121.613 13.8134 121.929 13.81 122.127 14.0032L122.841 14.7025C123.038 14.8957 123.042 15.2123 122.849 15.4096L118.357 19.9977C118.203 20.1554 118.193 20.4174 118.337 20.5694C118.473 20.7142 118.688 20.7166 118.827 20.5745L124.541 14.7354C125.154 14.1085 125.154 13.0878 124.541 12.4605C123.941 11.8471 122.98 11.8468 122.38 12.4605L115.825 19.1655C114.738 20.2767 114.722 22.0755 115.787 23.1753C116.85 24.2719 118.568 24.2733 119.633 23.1842L125.01 17.6842C125.203 17.4868 125.519 17.4832 125.717 17.6762L126.432 18.3751C126.629 18.5681 126.633 18.8847 126.44 19.0822L121.063 24.5821C119.201 26.4864 116.19 26.4639 114.351 24.5669Z" fill="#544E67"/>
+                                            </svg>
+                                            </a></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center mt-2">
+                                <a href="" class="btn btn-primary">Download LPOA:<svg width="14" style="margin-left: 0.5em" height="19" viewBox="0 0 14 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M13.4859 3.57292L10.4271 0.514063C10.099 0.185938 9.65417 0 9.19115 0H1.75C0.783854 0.00364583 0 0.7875 0 1.75365V16.9203C0 17.8865 0.783854 18.6703 1.75 18.6703H12.25C13.2161 18.6703 14 17.8865 14 16.9203V4.8125C14 4.34948 13.8141 3.90104 13.4859 3.57292ZM12.1078 4.67031H9.33333V1.89583L12.1078 4.67031ZM1.75 16.9203V1.75365H7.58333V5.54531C7.58333 6.03021 7.97344 6.42031 8.45833 6.42031H12.25V16.9203H1.75ZM9.77448 9.33698C9.56667 9.33698 9.38802 9.48281 9.34792 9.68333C8.59687 13.2453 8.60417 13.1615 8.58229 13.4568C8.575 13.413 8.56771 13.362 8.55677 13.3C8.5276 13.1141 8.56771 13.3073 7.69635 9.6724C7.64896 9.47552 7.47396 9.33698 7.26979 9.33698H6.7849C6.58437 9.33698 6.40937 9.47552 6.35833 9.66875C5.46875 13.2781 5.48333 13.176 5.45417 13.4495C5.45052 13.4094 5.44688 13.3583 5.43594 13.2964C5.41042 13.1068 4.92188 10.624 4.73958 9.68698C4.69948 9.48281 4.52083 9.33333 4.30937 9.33333H3.69687C3.4125 9.33333 3.20469 9.59948 3.27031 9.87292C3.56198 11.0615 4.24375 13.8651 4.48073 14.8313C4.52812 15.0281 4.70312 15.163 4.90729 15.163H5.82604C6.02656 15.163 6.20156 15.0281 6.24896 14.8313L6.90156 12.2281C6.95625 12.0021 6.99271 11.7906 7.01094 11.5974L7.11667 12.2281C7.12031 12.2427 7.57604 14.0693 7.76927 14.8313C7.81667 15.0245 7.99167 15.163 8.19219 15.163H9.09271C9.29323 15.163 9.46823 15.0281 9.51562 14.8313C10.274 11.8453 10.6167 10.4927 10.7734 9.87292C10.8427 9.59583 10.6349 9.32969 10.3505 9.32969H9.77448V9.33698Z" fill="#F8FBFA"/>
+                                    </svg>
+                                    <svg style="margin-left: 0.5em" width="14" height="19" viewBox="0 0 14 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M13.4859 3.57292L10.4271 0.514063C10.099 0.185938 9.65417 0 9.19115 0H1.75C0.783854 0.00364583 0 0.7875 0 1.75365V16.9203C0 17.8865 0.783854 18.6703 1.75 18.6703H12.25C13.2161 18.6703 14 17.8865 14 16.9203V4.8125C14 4.34948 13.8141 3.90104 13.4859 3.57292ZM12.1078 4.67031H9.33333V1.89583L12.1078 4.67031ZM1.75 16.9203V1.75365H7.58333V5.54531C7.58333 6.03021 7.97344 6.42031 8.45833 6.42031H12.25V16.9203H1.75ZM10.8719 11.6812C10.4271 11.2437 9.15833 11.3641 8.52396 11.4443C7.89687 11.0615 7.4776 10.5328 7.18229 9.75625C7.32448 9.16927 7.55052 8.27604 7.37917 7.71458C7.22604 6.75938 6.00104 6.85417 5.82604 7.49948C5.66563 8.08646 5.81146 8.90313 6.08125 9.94583C5.71667 10.8172 5.17344 11.9875 4.79062 12.6583C4.06146 13.0339 3.07708 13.6135 2.93125 14.3427C2.81094 14.9187 3.87917 16.3552 5.70573 13.2052C6.5224 12.9354 7.41198 12.6036 8.19948 12.4724C8.88854 12.8443 9.69427 13.0922 10.2339 13.0922C11.1635 13.0922 11.2547 12.0641 10.8719 11.6812ZM3.64948 14.5177C3.83542 14.0182 4.54271 13.4422 4.75781 13.2417C4.0651 14.3464 3.64948 14.5432 3.64948 14.5177ZM6.62448 7.56875C6.89427 7.56875 6.86875 8.73906 6.6901 9.05625C6.52969 8.54948 6.53333 7.56875 6.62448 7.56875ZM5.7349 12.549C6.08854 11.9328 6.39115 11.2 6.63542 10.5547C6.93802 11.1052 7.32448 11.5464 7.73281 11.849C6.97448 12.0057 6.31458 12.3266 5.7349 12.549ZM10.5328 12.3667C10.5328 12.3667 10.3505 12.5854 9.17292 12.0823C10.4526 11.9875 10.6641 12.2792 10.5328 12.3667Z" fill="#F8FBFA"/>
+                                    </svg>
+                                </a>
+                            </div>
+                            <div class="modal-footer pb-0">
+                                <button type="button" class="btn btn-primary" style="width: 100%">SEND</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
-@endsection
+    @endsection
 
 
-{{-- CONFIGURACIÓN DE DATATABLE --}}
-@section('vendor-script')
-<!-- vendor files -->
-<script src="{{ asset(mix('vendors/js/charts/apexcharts.min.js')) }}"></script>
-<script src="{{ asset(mix('vendors/js/tables/datatable/jquery.dataTables.min.js')) }}"></script>
-<script src="{{ asset(mix('vendors/js/tables/datatable/dataTables.bootstrap5.min.js')) }}"></script>
-<script src="{{ asset(mix('vendors/js/tables/datatable/dataTables.responsive.min.js')) }}"></script>
-<script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
-<!-- Include plugin -->
-<script src="https://cdn.rawgit.com/wenzhixin/multiple-select/e14b36de/multiple-select.js"></script>
+    {{-- CONFIGURACIÓN DE DATATABLE --}}
+    @section('vendor-script')
+        <!-- vendor files -->
+        <script src="{{ asset(mix('vendors/js/charts/apexcharts.min.js')) }}"></script>
+        <script src="{{ asset(mix('vendors/js/tables/datatable/jquery.dataTables.min.js')) }}"></script>
+        <script src="{{ asset(mix('vendors/js/tables/datatable/dataTables.bootstrap5.min.js')) }}"></script>
+        <script src="{{ asset(mix('vendors/js/tables/datatable/dataTables.responsive.min.js')) }}"></script>
+        <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+        <!-- Include plugin -->
+        <script src="https://cdn.rawgit.com/wenzhixin/multiple-select/e14b36de/multiple-select.js"></script>
 
 
-@endsection
-@section('page-script')
-<script>
-     // Initialize multiple select on your regular select
-    //datataables ordenes
-    $( document ).ready(function() {
-        $('#exampleModalCenter').modal('show')
-    });
-    $('.myTable').DataTable({
-        responsive: false,
-        order: [
-            [0, "desc"]
-        ],
-        pagingType: 'simple_numbers',
-        
-    })
+    @endsection
+    @section('page-script')
+        <script>
+            // Initialize multiple select on your regular select
+            //datataables ordenes
+            $(document).ready(function() {
+                $('#exampleModalCenter').modal('show')
+            });
+            $('.myTable').DataTable({
+                responsive: false,
+                order: [
+                    [0, "desc"]
+                ],
+                pagingType: 'simple_numbers',
 
-    // const btn_clear = document.querySelector('#btn_clear');
-    // // Clear filter inputs
-    // btn_clear.addEventListener('click', ()=>{
-    //     document.querySelector('#user_id').value = '';
-    //     document.querySelector('#user_name').value = '';
-    //     document.querySelector('#buyer_id').value = '';
-    //     document.querySelector('#buyer_name').value = '';
-    //     document.querySelector('#date_from').value = '';
-    //     document.querySelector('#date_to').value = '';
-    //     document.querySelector('#comission_status').value = '';
-    //     document.querySelector('#comission_type').value = '';
-    // });
-</script>
-@endsection
+            })
+
+            // const btn_clear = document.querySelector('#btn_clear');
+            // // Clear filter inputs
+            // btn_clear.addEventListener('click', ()=>{
+            //     document.querySelector('#user_id').value = '';
+            //     document.querySelector('#user_name').value = '';
+            //     document.querySelector('#buyer_id').value = '';
+            //     document.querySelector('#buyer_name').value = '';
+            //     document.querySelector('#date_from').value = '';
+            //     document.querySelector('#date_to').value = '';
+            //     document.querySelector('#comission_status').value = '';
+            //     document.querySelector('#comission_type').value = '';
+            // });
+        </script>
+    @endsection

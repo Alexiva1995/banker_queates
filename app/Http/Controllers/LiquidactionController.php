@@ -506,7 +506,7 @@ class LiquidactionController extends Controller
             ];
 
             Mail::send('mail.SendCodeRetiro', $dataEmail,  function ($msj) use ($user) {
-                $msj->subject('Codigo Retiro');
+                $msj->subject('Withdrawal Code');
                 $msj->to($user->email);
             });
 
@@ -534,7 +534,7 @@ class LiquidactionController extends Controller
         }
 
         Mail::send('mail.retiroExitoso', $datos,  function ($msj) use ($user) {
-            $msj->subject('Codigo Retiro');
+            $msj->subject('Withdrawal Code');
             $msj->to($user->email);
         });
     }
