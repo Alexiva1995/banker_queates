@@ -102,7 +102,7 @@
                                 @foreach ( $general as $key => $gen)
                                      <tr class="text-center">
                                         @if ($gen->type == 1)
-                                            <td>Bono de licencia</td>
+                                            <td>License bonus</td>
                                         @else
                                             <td> {{ $gen->description }}</td>
                                         @endif
@@ -126,7 +126,7 @@
                                                 </span>
                                             @elseif($gen->status == '4')
                                                 <span class="badge warning-badge">
-                                                    <span class="text-warning">Stolen</span>
+                                                    <span class="text-warning">Substracted</span>
                                                 </span>
                                             @endif
                                         </td>
@@ -170,7 +170,7 @@
                                 @foreach ( $balancEdition  as $key => $gen)
                                      <tr class="text-center">
                                         @if ($gen->type != 3)
-                                            <td> Retiro </td>
+                                            <td> Withdrawal </td>
                                         @else
                                             <td> {{ $gen->description }}</td>
                                         @endif
@@ -223,17 +223,6 @@
             order: [
                 [0, 'desc']
             ],
-            language: {
-                lengthMenu: 'Mostrar _MENU_ registros',
-                zeroRecords: 'No hay registros para mostrar',
-                info: 'Mostrando _PAGE_ de _PAGES_',
-                infoEmpty: 'No hay registros para mostrar',
-                "search": "Buscar:",
-                "paginate": {
-                    "next": " ",
-                    "previous": " "
-                },
-            },
             pagingType: 'simple_numbers',
         })
     </script>

@@ -123,7 +123,7 @@ function email_trasnfer(e){
             Swal.fire({
             position: 'top-end',
             icon: 'error',
-            title: 'Codigo incorrecto',
+            title: 'Incorrect code',
             showConfirmButton: false,
             timer: 1500
             })
@@ -132,7 +132,7 @@ function email_trasnfer(e){
             Swal.fire({
             position: 'top-end',
             icon: 'error',
-            title: 'El monto intruducido supera tu saldo disponible ',
+            title: 'The amount entered exceeds your available balance ',
             showConfirmButton: false,
             timer: 1500
             })
@@ -166,7 +166,7 @@ function getCode(){
         setTimeout(segundos,1000);
        }else{
         codeButton.disabled = false;
-        codeButton.innerHTML = 'Obtener codigo';
+        codeButton.innerHTML = 'Get code';
        }
     }
     segundos();

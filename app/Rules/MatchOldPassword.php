@@ -26,6 +26,6 @@ class MatchOldPassword implements Rule
      */
     public function message()
     {
-        return 'La contraseña anterior no coincide.';
+        return 'The old password does not match.';
     }
 }

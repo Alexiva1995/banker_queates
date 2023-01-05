@@ -31,11 +31,6 @@
                                 <div class="input-group input-group-merge form-password-toggle shadow-none">
                                     <input type="text" class="form-control form-control-merge" id="code_pin" name="code_pin" placeholder="Enter the code"/>
                         <a class="btn input-group-btn btn-primary cursor-pointer border-end input-group-text border-top border-bottom" id="codeButton" onclick="getCode();">Get Code</a>
-                                    @error('current_password')
-                                        <span class="invalid-feedback d-block" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
                                 </div>
                             </div>
                         </div>

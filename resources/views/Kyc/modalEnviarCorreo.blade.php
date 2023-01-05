@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-sm" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel"><strong> Por favor valide su identidad </strong></h5>
+          <h5 class="modal-title" id="exampleModalLabel"><strong>Please validate your identity</strong></h5>
           <button type="button" class="close btn btn-danger" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -18,7 +18,7 @@
             <div class="input-group">
                 <input type="text" name="codigoCorreo" value="" class="form-control Codigocorreo" placeholder="ingrese el codigo" aria-label="Recipient's username" aria-describedby="basic-addon2" required>
                 <div class="input-group-append">
-                  <button class="btn btn-outline-primary" type="button" onclick="sendCodeEmailUpdate()">Obtener codigo</button>
+                  <button class="btn btn-outline-primary" type="button" onclick="sendCodeEmailUpdate()">Get code</button>
                 </div>
 
             </div>

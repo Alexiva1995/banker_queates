@@ -84,14 +84,14 @@
             if( !codeBtn.disabled ) return ;
 
             function segundos(){
-                codeBtn.textContent =`Reenviar en ${seconds}s`;
+                codeBtn.textContent =`Forward in ${seconds}s`;
                 seconds--;
                 if( seconds > 0 ){
                     // console.log(seconds)
                     setTimeout(segundos,1000);
                 }else{
                     codeBtn.disabled = false;
-                    codeBtn.textContent = 'Obtener codigo';
+                    codeBtn.textContent = 'Get code';
                 }
             }
             
@@ -102,7 +102,7 @@
 
             if( status === 'success')
             {
-                toastr['success']('Por favor revise su correo', '¡Exitoso!', {
+                toastr['success']('Please check your mail', 'Successful!', {
                     closeButton: true,
                     tapToDismiss: false
                 });
@@ -111,7 +111,7 @@
 
         } catch (error) {
             console.log(error);
-            toastr['error']('Hubo un error por favor contacte con el administrador', '¡error!', {
+            toastr['error']('There was an error please contact the administrator', '¡error!', {
                 closeButton: true,
                 tapToDismiss: false
             });
@@ -149,7 +149,7 @@
 
             if( status === 'success' ) {
 
-                toastr.success(message, '¡Éxito!', {
+                toastr.success(message, 'Success!', {
                     "progressBar": true
                 });
                 

@@ -39,7 +39,7 @@ class WalletController extends Controller
                                 'referred_id' => $inversion->user_id,
                                 'amount' => $inversion->capital * 0.01,
                                 'amount_fondo' => $inversion->capital * 0.01,
-                                'descripcion' => 'Bono Cartera',
+                                'descripcion' => 'Wallet Bonus',
                                 'type' => 2,
                             ]);
                             dump('wallet registrada');

@@ -1,6 +1,7 @@
 <?php
 
 return [
+    "PAMM" => "PAMM",
     "Niveles" => "Niveles",
     "Historial" => "History",
     "Corte Binario" => "Binary Cut",

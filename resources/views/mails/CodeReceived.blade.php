@@ -37,12 +37,12 @@
                         <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
                             <tr>
                                 <td style="color: #626262; font-family: Arial, sans-serif;">
-                                    <h1 style="font-size: 24px; margin: 0;">¡Solicitud de Código!</h1>
+                                    <h1 style="font-size: 24px; margin: 0;">¡Code Request!</h1>
                                 </td>
                             </tr>
                             <tr>
                                 <td style="color: #626262; font-family: Poppins, sans-serif; font-size: 16px; line-height: 24px; text-align: justify; padding: 20px 0 20px 0; display:block;">
-                                    <p style="margin: 0;">¡Su Pin de seguridad es: {{ $dataEmail['code_security'] }} !</p>
+                                    <p style="margin: 0;">¡Your Security Pin is: {{ $dataEmail['code_security'] }} !</p>
                                 </td>
                             </tr>
                         </table>
@@ -53,7 +53,7 @@
                         <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
                             <tr>
                                 <td style="text-align: center; color: #ffffff; font-family: Arial, sans-serif; font-size: 16px;">
-                                    <p style="margin: 0;">&reg; {{ date('Y') }} {{ config('app.name') }}. Todos los derechos reservados.<br/>
+                                    <p style="margin: 0;">&reg; {{ date('Y') }} {{ config('app.name') }}. All rights reserved.<br/>
                                 </td>
                             </tr>
                         </table>

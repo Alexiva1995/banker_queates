@@ -61,15 +61,15 @@
                         <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
                             <tr>
                                 <td>
-                                    <h1 style="font-size: 24px; margin: 0;">¡ HOLA {{ $user->username }} !</h1>
+                                    <h1 style="font-size: 24px; margin: 0;">¡ Hello {{ $user->username }} !</h1>
                                 </td>
                             </tr>
                             <tr>
                                 <td style="font-size: 16px; line-height: 24px; padding: 0px 0 0px 0; display:block; margin-top: 10px;">
-                                    <p style="margin: 0;">Tu solicitud de retiro por</p>
+                                    <p style="margin: 0;">Your withdrawal request by</p>
                                     <p style="margin: 0;">{{ $amount }} USD</p>
-                                    <p style="margin: 0;">a la Wallet {{ $user->decryptWallet() }}</p>
-                                    <p style="margin: 0;">fue recibida con exito</p>
+                                    <p style="margin: 0;">to the Wallet {{ $user->decryptWallet() }}</p>
+                                    <p style="margin: 0;">was successfully received</p>
                                 </td>
                             </tr>
                             {{-- <tr>
@@ -93,7 +93,7 @@
                         <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
                             <tr>
                                 <td style="text-align: center; color: #ffffff; font-family: Arial, sans-serif; font-size: 16px;">
-                                    <p style="margin: 0;">&reg; {{ date('Y') }} {{ config('app.name') }}. Todos los derechos reservados.<br/>
+                                    <p style="margin: 0;">&reg; {{ date('Y') }} {{ config('app.name') }}. All rights reserved.<br/>
                                 </td>
                             </tr>
                         </table>

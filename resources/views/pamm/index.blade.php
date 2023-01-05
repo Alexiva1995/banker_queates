@@ -59,82 +59,8 @@
             <div class="card-content p-50">
                 <div class="card-header p-0">
                     <h4 class="fw-700">Commissions</h4>
-                    @if(auth()->user()->admin == 1)
-                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button"
-                        aria-expanded="false" aria-controls="collapseExample">
-                        Filters
-                    </a>
-                    @endif
                 </div>
                 <div class="card-body card-dashboard p-0">
-                    @if(auth()->user()->admin == 1)
-                    <div class="collapse" id="collapseExample">
-                        <form action="{{ route('reports.comision.filter') }}" method="POST" class="mt-2">
-                            @csrf
-                            <div class="row">
-                                <div class="mb-2 col-md-4 col-sm-6">
-                                    <label for="user_id" class="form-label">ID User</label>
-                                    <input type="number" class="form-control" id="user_id" name="user_id" 
-                                    @if($user_id != null) value="{{$user_id}}" @endif">
-                                </div>
-                                <div class="mb-2 col-md-4 col-sm-6">
-                                    <label for="user_name" class="form-label">User</label>
-                                    <input type="text" class="form-control" id="user_name" name="user_name"
-                                    @if($user_name != null) value="{{$user_name}}" @endif>
-                                </div>
-                                <div class="mb-2 col-md-4 col-sm-12">
-                                    <label for="user_name" class="form-label">Commission rate</label>
-                                    <select class="form-select" name="comission_type[]" id="comission_type" multiple
-                                        aria-label="Default select example">
-                                        <option value="0" {{ in_array('0', $comission_type) ? "selected" : null }}
-                                        >MLM PAMM</option>
-                                        <option value="1" {{ in_array('1', $comission_type) ? "selected" : null }}>Binary</option>
-                                        <option value="2" {{ in_array('2', $comission_type) ? "selected" : null }}>Assigned</option>
-                                    </select>
-                                </div>
-
-                                <div class="mb-2 col-md-4 col-sm-12">
-                                    <label for="buyer_id" class="form-label">ID Referred</label>
-                                    <input type="number" class="form-control" id="buyer_id" name="buyer_id"
-                                    @if($buyer_id != null) value="{{$buyer_id}}" @endif>
-                                </div>
-                                <div class="mb-2 col-md-4 col-sm-12">
-                                    <label for="buyer_name" class="form-label">Referred</label>
-                                    <input type="text" class="form-control" id="buyer_name" name="buyer_name"
-                                    @if($buyer_name != null) value="{{$buyer_name}}" @endif>
-                                </div>
-                                <div class="mb-2 col-md-4 col-sm-12">
-                                    <label for="comission_status" class="form-label">Commission Status</label>
-                                    <select class="form-select" name="comission_status[]" id="comission_status"
-                                        aria-label="Default select example" multiple>
-                                        <option value="0" {{ in_array('0', $comission_status) ? "selected" : null }}>Available</option>
-                                        <option value="1" {{ in_array('1', $comission_status) ? "selected" : null }}>Requested</option>
-                                        <option value="2" {{ in_array('2', $comission_status) ? "selected" : null }}>Paid</option>
-                                        <option value="3" {{ in_array('3', $comission_status) ? "selected" : null }}>Canceled</option>
-                                    </select>
-                                </div>
-
-                                <div class="mb-2 col-md-6 col-sm-12">
-                                    <label for="date_from" class="form-label">From</label>
-                                    <input type="date" class="form-control" id="date_from" name="date_from"
-                                    @if($date_from != null) value="{{ $date_from }}"  @endif>
-                                </div>
-                                <div class="mb-2 col-md-6 col-sm-12">
-                                    <label for="date_to" class="form-label">Until</label>
-                                    <input type="date" class="form-control" id="date_to" name="date_to"
-                                    @if($date_to != null) value="{{ $date_to }}"  @endif>
-                                </div>
-
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">Search</button>
-                                    <a class="btn btn-info" href="{{route('reports.comision')}}">Clear Filters</a>
-                                    {{-- <a class="btn btn-info" id="btn_clear">Limpiar filtros</a> --}}
-                                </div>
-
-                            </div>
-                        </form>
-                    </div>
-                    @endif
                     <div class="table-responsive">
                         <table class="table w-100 nowrap scroll-horizontal-vertical myTable table-striped w-100">
                             <thead class="">
@@ -142,10 +68,6 @@
                                     <th class="fw-600">ID</th>
                                     <th class="fw-600">User</th>
                                     <th class="fw-600">ID User</th>
-                                    @if(Auth::user()->admin == 1)
-                                    <th class="fw-600">Referred</th>
-                                    <th class="fw-600">ID <br />Referred</th>
-                                    @endif
                                     <th class="fw-600">Amount</th>
                                     <th class="fw-600">Status</th>
                                     <th class="fw-600">Type</th>
@@ -156,10 +78,6 @@
                                 @foreach ($wallets as $key => $wallet)
                                 <tr>
                                     <td class="fw-600 text-center">{{$wallet->id}}</td>
-                                    @if(Auth::user()->admin == 1)
-                                    <td class="text-center">{{$wallet->user->name}}</td>
-                                    <td class="text-center">{{$wallet->user->id}}</td>
-                                    @endif
                                     <td class="fw-300 text-center">{{$wallet->buyer->name ?? '--'}}</td>
                                     <td class="fw-300 text-center">{{$wallet->buyer->id ?? '--'}}</td>
                                     <td class="fw-300 text-end">{{number_format($wallet->amount,2)}}</td>
@@ -213,6 +131,22 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection
 
 
@@ -236,15 +170,10 @@
 @section('page-script')
 <script>
      // Initialize multiple select on your regular select
-    $("#comission_type").multipleSelect({
-        filter: false
-    });
-
-    $("#comission_status").multipleSelect({
-        filter: false
-    });
-
     //datataables ordenes
+    $( document ).ready(function() {
+        $('#exampleModalCenter').modal('show')
+    });
     $('.myTable').DataTable({
         responsive: false,
         order: [
