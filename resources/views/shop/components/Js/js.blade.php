@@ -1,30 +1,15 @@
 <script>
     function pay(packageID){
-        let montoSys = document.getElementById('montoSystem'+packageID);
-        
-        let montoCrypt = document.getElementById('montoCrypto'+packageID);
-        
-        if(montoSys.disabled == true){
-            montoSys = [];
-        }else{
-            montoSys = montoSys.value; 
-        }
-
-        if(montoCrypt.disabled == true){
-            montoCrypt = [];
-        }else{
-            montoCrypt = montoCrypt.value;
-        }
-
+        let montoSys = document.getElementById('montoSystem'+packageID).value;
+        let ID =  document.getElementById('id'+packageID).value;
+       
         axios.post('{{route("shop.transactionCompra")}}', {
         montoSystem: montoSys,
-        montoCrypto: montoCrypt,
-        id : document.getElementById('id'+packageID).value
+        id : ID
     })
     .then(function (response) {
         notification(response.data.value);
-
-        setTimeout( reload,2000);
+        setTimeout( reload,1500);
     })
     .catch(function (error) {
         console.log(error);

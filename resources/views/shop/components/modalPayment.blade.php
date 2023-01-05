@@ -15,35 +15,11 @@
                         >Buy License</h5>
                     </div>
                     <div class="col-sm-12">
-                        <ul class="nav nav-tabs d-flex justify-content-center" id="myTab{{ $package->id }}" role="tablist">
-                            <li class="nav-item" role="presentation">
-                              <button class="nav-link active " id="crypto{{ $package->id }}-tab" data-bs-toggle="tab" data-bs-target="#crypto{{ $package->id }}" type="button" role="tab" aria-controls="crypto{{ $package->id }}" aria-selected="true" style="font-family: 'Poppins';
-                              font-style: normal;
-                              font-weight: 700;
-                              font-size: 18px;
-                              line-height: 27px;" onclick="tipo('cripto', {{ $package->id }})">Cryptocurrency</button>
-                            </li>
-    
-                            <li class="nav-item" role="presentation">
-                              <button class="nav-link " id="System{{ $package->id }}-tab" data-bs-toggle="tab" data-bs-target="#System{{ $package->id }}" type="button" role="tab" aria-controls="System{{ $package->id }}" aria-selected="false" style="font-family: 'Poppins';
-                              font-style: normal;
-                              font-weight: 700;
-                              font-size: 18px;
-                              line-height: 27px;" onclick="tipo('system', {{ $package->id }})">System Salance</button>
-                            </li>
-                            
-                          </ul>
-                          
-                          <input  id="id{{ $package->id }}" type="hidden" class="form-control"   style="border-color: #05A5E9; border: 1px solid #05A5E9;" 
-                          value="{{ $package->id }}">
-
-                          <div class="tab-content" id="myTabContent{{ $package->id }}">
-                            {{-- Seccion para pagar con crypto monedas ------}}
-                            @include('shop.components.sections.crypto')
-                            
-                            {{-- Seccion para pagar con saldo del sistema --}}
-                            @include('shop.components.sections.system')
-                          </div>
+                        <label for="basic-url" class="form-label" style="font-weight: 500; font-size: 14px; line-height: 18px; color: #544E67;">
+                            Available balance:</label>
+                        <div class="input-group">
+                          <p name="saldo_disponible_system" type="text" class="form-control"   style="border-color: #05A5E9; border: 1px solid #05A5E9;">USD {{ $generalAvailable }}</p>
+                        </div>
                     </div>
                     <div class="col-sm-12">
                         <div class="row">
@@ -63,13 +39,17 @@
                 </div>
     
               <div class="d-grid gap-2 mt-2">
-                <button class="btn btn-primary" onclick="pay({{$package->id}})" type="button" style="font-family: 'Poppins'; font-style: normal; font-weight: 600; font-size: 20px; line-height: 30px;"
+                <button class="btn btn-primary" type="button" style="font-family: 'Poppins'; font-style: normal; font-weight: 600; font-size: 20px; line-height: 30px;"
                 >
-                Acquire Package</button>
+                acquire with cryptocurrency</button>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#secondModal{{$package->id}}"type="button" style="font-family: 'Poppins'; font-style: normal; font-weight: 600; font-size: 20px; line-height: 30px;"
+                  >
+                  purchase with balance</button>
               </div>
             </div>
             </form>
       </div>
     </div>
   </div>
+  @include('shop.components.sections.secondModal')
   @include('shop.components.Js.js')
