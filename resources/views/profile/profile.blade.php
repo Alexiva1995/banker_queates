@@ -267,40 +267,6 @@
                                                 </div>
                                                 
                                             </div>
-                                            
-                                            <div class="row" style="margin-top: 3%;">
-
-                                                <div class="col-sm-6">
-                                                    <label for="gender" class=" fw-500">
-                                                        Sex 
-                                                        <span class="text-danger">*</span>
-                                                    </label>
-                                                    <div class="input-group mb-1">
-                                                        <select class=" form-select" name="gender">
-                                                            <option disabled {{$user->gender == null ? 'selected' : ' ' }}>Select your gender</option>
-                                                            <option value="0" {{$user->gender == '0' ? 'selected' : ' ' }}>Male</option>
-                                                            <option value="1" {{$user->gender == '1' ? 'selected' : ' ' }}>Female</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-6">
-                                                    <label for="" class=" fw-500">Phone <label
-                                                            style="color: red;">*</label></label>
-                                                    <div class="input-group mb-1">
-                                                        <input type="enum" name="phone"
-                                                            class="form-control   @error('phone') is-invalid @enderror "
-                                                            placeholder="3107658734" value="{{ $user->phone }}">
-                                                        @error('phone')
-                                                            <span class="invalid-feedback d-block" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
                                             <div class="row" style="margin-top: 3%;">
                                                     
                                                 <div class="col-sm-6">
