@@ -77,7 +77,7 @@ class TiendaController extends Controller
     }
 
     public function transactionCompra(Request $request)
-    {
+    { 
         $user = Auth::user();
         $monto_a_pagar_system = $request->montoSystem;
         $monto_a_pagar_crypto = $request->montoCrypto;
@@ -86,13 +86,14 @@ class TiendaController extends Controller
             'monto_a_pagar_crypto'=>$monto_a_pagar_crypto
         ];
         $saldo = WalletComission::where([['user_id', $user->id], ['status', '0']])->get();
-        
+        $inversion = Investment::where('user_id',$user->id)->where('status','1')->first();
         $tipo = 0;
 
         $saldo_total = $saldo->sum('amount_available');
          
         if(isset($monto_a_pagar_system)&& !empty($monto_a_pagar_system)){
-
+            
+            $monto_a_pagar_system = $monto_a_pagar_system - $inversion->invested;
             if ($saldo_total >= $monto_a_pagar_system  ){
                 $Monto_a_retirar = $monto_a_pagar_system;
                 $data_liquidation = [
@@ -100,6 +101,7 @@ class TiendaController extends Controller
                     'amount_gross' => $Monto_a_retirar,
                     'amount_net' => $Monto_a_retirar ,
                     'amount_fee' => 0,
+                    'description' => 'Upgrade',
                     'type' => $tipo
                 ];
                 $liquidacion = Liquidation::create($data_liquidation);
@@ -149,14 +151,16 @@ class TiendaController extends Controller
                                                   'msj'=>'Upgrade processed correctly']]);
             }else{
                 return response()->json(['value' =>  ['status'=>'error',
-                                                      'msj'=>'insufficient balance to Upgradeo']]);
+                                                      'msj'=>'Insufficient balance to Upgrade']]);
             }
             
         }
         if(isset($monto_a_pagar_crypto)&& !empty($monto_a_pagar_crypto)){
-            return response()->json(['value' =>  'crypto']);
+            return response()->json(['value' =>  ['status'=>'otro_if',
+                                                    'msj'=>'Insufficient balance to Upgrade']]);
         }
-
+        return response()->json(['value' =>  ['status'=>'otro_if',
+        'msj'=>'Insufficient balance to Upgrade']]);
     }
 
     /**
