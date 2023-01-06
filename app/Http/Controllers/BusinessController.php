@@ -90,4 +90,9 @@ class BusinessController extends Controller{
         $wallets = WalletComission::all();
         return view('pamm.index', compact('wallets'));
     }
+    public function downloadLPOA() {
+        $file = public_path()."/files/LPOA_BANKER_QUOTES.pdf";
+        $headers = array('Content-Type: application/pdf',);
+        return response()->download($file, 'LPOA_BANKER_QUOTES.pdf',$headers);
+    }
 } 
