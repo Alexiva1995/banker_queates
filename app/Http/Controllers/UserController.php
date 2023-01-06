@@ -19,6 +19,7 @@ use Illuminate\Validation\Rule;
 use App\Mail\CodeEmail;
 use App\Mail\CodeSeccurity;
 use App\Models\Investment;
+use App\Models\LogRank;
 use App\Models\Pin;
 use App\Models\PinSecurity;
 use App\Models\Wallet;
@@ -720,8 +721,14 @@ class UserController extends Controller
         return back()->with('error', 'An error happened');
     }
 
-    public function rankHistory(){
-        return 'rank history';
+    public function rankHistory(Request $request){
+        $id = Auth::id();
+        $data = [
+            'user_id'=>$id,
+            'range'=>$request->newRank_id
+        ];
+        Log::info($data);
+        LogRank::created($data);
     }
     public function assinRank(Request $request,$id){
         $user = User::where('id',$id)->first();

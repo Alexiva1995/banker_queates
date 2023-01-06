@@ -74,11 +74,13 @@ data-textdirection="{{ env('MIX_CONTENT_DIRECTION') === 'rtl' ? 'rtl' : 'ltr' }}
   .then(function (response) {
     //console.log(response.data.value);
     let newRank_id = response.data.value.rank_id;
-
+    console.log(newRank_id);
     if(response.data.value.status == 'success'){
+      logRank(newRank_id);
       setTimeout(notification , 1000, newRank_id);
     }else{
       setTimeout(verificarRango , 5000);
+      
     }
   })
   .catch(function (error) {
@@ -102,6 +104,18 @@ data-textdirection="{{ env('MIX_CONTENT_DIRECTION') === 'rtl' ? 'rtl' : 'ltr' }}
     function rotacionImg(){
         let img = document.getElementById("rangoimg");
         img.style.transform = "rotateY(360deg)"
+    }
+
+    function logRank(newRank_id){
+      axios.post('{{route("user.rank.hisotry")}}', {
+      newRank: newRank_id,
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
     }
 </script>
 <!-- BEGIN: Body-->
