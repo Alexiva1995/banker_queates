@@ -55,14 +55,9 @@
                 "url": "user-rank-history",
                 "name": "Rank History",
                 "icon": "circle",
-                "slug": "user.rank.hisotry"
-            },
-            {
-                "url": "user-assign-range",
-                "name": "assign range",
-                "icon": "circle",
-                "slug": "user.assign.range"
+                "slug": "user.rank.hisotry.admin"
             }
+            
         ]
         },
         {

@@ -728,6 +728,20 @@ class UserController extends Controller
         ];
         LogRank::create($data);
     }
+    public function rankHistoryIndex(Request $request){
+        $rangeHistoy = LogRank::all();
+
+        $rankName =[
+            '1'=>'Consultant',
+            '2'=>'Qualified Consultant',
+            '3'=>'Sapphire',
+            '4'=>'Ruby',
+            '5'=>'Ruby',
+            '6'=>'Diamond',
+        ];
+
+        return view('user.adminRankHistory',compact('rangeHistoy','rankName'));
+    }
     public function assinRank(Request $request,$id){
         $user = User::where('id',$id)->first();
         $user->range_id = $request->newRank;

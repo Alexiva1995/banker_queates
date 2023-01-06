@@ -13,18 +13,20 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TiendaController;
 use App\Http\Controllers\WalletController;
 use App\Http\Controllers\FutswapController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\TicketsController;
 use App\Http\Controllers\UtilityController;
 use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\LanguageController;
-use App\Http\Controllers\SubAdminController;
 
+use App\Http\Controllers\SubAdminController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\FormularyController;
 use App\Http\Controllers\InversionController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BonoManualController;
+use App\Http\Controllers\ImpersonateController;
 use App\Http\Controllers\PreregisterController;
 use App\Http\Controllers\LiquidactionController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -33,7 +35,6 @@ use App\Http\Controllers\MiscellaneousController;
 use App\Http\Controllers\UserInterfaceController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\ManualActivationController;
-use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\WithdrawalSettingController;
 
 /*
@@ -87,6 +88,7 @@ Route::middleware('auth')->group(function () {
 
         //RUTAS ADMIN
         Route::middleware('admin')->group(function () {
+            Route::get('user-rank-history', [UserController::class, 'rankHistoryIndex'])->name('user.rank.hisotry.admin');
 
             Route::get('/manual-bonus-history', [ReportController::class, 'manualBonusHistory'])->name('manual.bonus.history');
             Route::post('/manual-bonus-history', [ReportController::class, 'manualBonusHistory'])->name('manual.bonus.history.filter');
@@ -189,6 +191,7 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::get('/impersonate/stop', [UserController::class, 'stop'])->name('impersonate.stop');
+        Route::post('/impersonate/{user}/start', [ImpersonateController::class, 'start'])->name('impersonate.start');
 
         //TIENDA
         Route::prefix('market')->group(function () {
