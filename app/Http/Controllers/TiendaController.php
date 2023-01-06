@@ -42,7 +42,8 @@ class TiendaController extends Controller
     public function marketLicences(Request $request)
     {
         $order = Order::where([['user_id', Auth::id()], ['status', '0']])->first();
-
+        $paymentWallet = WalletPayment::where('id','3')->first();
+       
         $investments = Investment::where([['user_id', Auth::id()], ['status', '1']])->with('order')->get();
         $licenses = LicensePackage::orderBy('amount', 'ASC')->get();
         
@@ -63,7 +64,7 @@ class TiendaController extends Controller
                 }
             }
         }
-        return view('shop.index', compact('order', 'investments', 'licenses','generalAvailable'));
+        return view('shop.index', compact('order', 'investments', 'licenses','generalAvailable','paymentWallet'));
     }
 
     public function transaction(Request $request)
@@ -81,10 +82,7 @@ class TiendaController extends Controller
         $user = Auth::user();
         $monto_a_pagar_system = $request->montoSystem;
         $monto_a_pagar_crypto = $request->montoCrypto;
-        $data = [
-            'monto_a_pagar_system'=>$monto_a_pagar_system,
-            'monto_a_pagar_crypto'=>$monto_a_pagar_crypto
-        ];
+        
         $saldo = WalletComission::where([['user_id', $user->id], ['status', '0']])->get();
         $inversion = Investment::where('user_id',$user->id)->where('status','1')->first();
         $tipo = 0;
@@ -161,6 +159,18 @@ class TiendaController extends Controller
         }
         return response()->json(['value' =>  ['status'=>'otro_if',
         'msj'=>'Insufficient balance to Upgrade']]);
+    }
+
+    public function transactionCompraCrypto(Request $request){
+        if(isset($request->hash) && !empty($request->hash)){
+            $this->procesarOrden($request);
+            return response()->json(['value' =>  ['status'=>'success',
+                                                  'msj'=>'Order created successfully']]);
+         }else{
+            return response()->json(['value' =>  ['status'=>'error',
+                                                  'msj'=>'the Hash is required']]);
+         }
+        
     }
 
     /**

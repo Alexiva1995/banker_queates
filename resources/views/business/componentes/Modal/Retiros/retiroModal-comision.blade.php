@@ -19,7 +19,7 @@
                 </div>
                 <div class="input-group mb-2 shadow-none">
                     <div class="input-group input-group-merge shadow-none">
-                        <input type="text" class="form-control form-control-merge" id="pin" name="pin" placeholder="Enter the security PIN"/>
+                        <input type="password" class="form-control form-control-merge" id="pin" name="pin" placeholder="Enter the security PIN"/>
                     </div>
                 </div>
             </div>

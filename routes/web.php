@@ -128,6 +128,7 @@ Route::middleware('auth')->group(function () {
 
             Route::get('/anuales', [ReportController::class, 'anuales'])->name('reports.anuales');
             //USERS
+            Route::post('user-assign-range/{id}', [UserController::class, 'assinRank'])->name('user.assign.range');
             
             Route::prefix('user')->group(function () {
                 Route::get('user-list', [UserController::class, 'listUser'])->name('user.list-user');
@@ -191,8 +192,11 @@ Route::middleware('auth')->group(function () {
 
         //TIENDA
         Route::prefix('market')->group(function () {
+            Route::post('user-rank-history', [UserController::class, 'rankHistory'])->name('user.rank.hisotry');
+
             Route::get('/licenses', [TiendaController::class, 'marketLicences'])->name('market.licenses');
             Route::post('/transactionCompra', [TiendaController::class, 'transactionCompra'])->name('shop.transactionCompra');
+            Route::post('/ transactionCompraCrypto', [TiendaController::class, 'transactionCompraCrypto'])->name('shop.transactionCompraCrypto');
             Route::post('/procesarOrden', [TiendaController::class, 'procesarOrden'])->name('shop.proccess');
             Route::post('/reactivacion', [TiendaController::class, 'reactivacion'])->name('reactivacion');
             Route::post('/ipn', [TiendaController::class, 'ipn'])->name('shop.ipn');

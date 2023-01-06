@@ -200,5 +200,7 @@ return [
     "Binario" => "Binary",
     "Buscar referido" => "Buscar referido",
     "Arbol de Referidos" => "Referral Tree",
-    "Red multinivel"=>"Red multinivel"
+    "Red multinivel"=>"Red multinivel",
+    "Rank History"=>"Rank History",
+    "assign range"=>"assign range",
 ];

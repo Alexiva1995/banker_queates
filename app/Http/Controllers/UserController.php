@@ -19,6 +19,7 @@ use Illuminate\Validation\Rule;
 use App\Mail\CodeEmail;
 use App\Mail\CodeSeccurity;
 use App\Models\Investment;
+use App\Models\LogRank;
 use App\Models\Pin;
 use App\Models\PinSecurity;
 use App\Models\Wallet;
@@ -267,7 +268,6 @@ class UserController extends Controller
         $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['email', 'max:255', Rule::unique('users')->ignore($user->id, 'id')],
-            'phone' => 'required',
             'last_name' => 'required',
             'countrie_id' => 'required'
         ]);
@@ -292,7 +292,6 @@ class UserController extends Controller
 */
         $user->name = $data['name'];
         $user->last_name = $data['last_name'];
-        $user->phone = $data['phone'];
         $user->prefix_id = $data['countrie_id'];
         
         if ($request->has('email')) $user->email = $data['email'];
@@ -720,5 +719,22 @@ class UserController extends Controller
             return back()->with('success', 'Updated data!');
         }
         return back()->with('error', 'An error happened');
+    }
+
+    public function rankHistory(Request $request){
+        $id = Auth::id();
+        $data = [
+            'user_id'=>$id,
+            'range'=>$request->newRank_id
+        ];
+        Log::info($data);
+        LogRank::created($data);
+    }
+    public function assinRank(Request $request,$id){
+        $user = User::where('id',$id)->first();
+        $user->range_id = $request->newRank;
+        $user->update();
+
+        return back()->with('success', 'Range Changed');
     }
 }
