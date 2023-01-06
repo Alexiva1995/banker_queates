@@ -697,7 +697,6 @@ class UserController extends Controller
     public function verificarRango(){
         if(session()->has('rango')){
             $rango = session('rango');
-            Log::info('rango guadardo en variable de sesion '. $rango);
             return $rango;
         }else{
             return null;
@@ -725,10 +724,9 @@ class UserController extends Controller
         $id = Auth::id();
         $data = [
             'user_id'=>$id,
-            'range'=>$request->newRank_id
+            'range'=>$request->newRank
         ];
-        Log::info($data);
-        LogRank::created($data);
+        LogRank::create($data);
     }
     public function assinRank(Request $request,$id){
         $user = User::where('id',$id)->first();
