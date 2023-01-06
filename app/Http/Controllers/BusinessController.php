@@ -96,15 +96,21 @@ class BusinessController extends Controller{
         return response()->download($file, 'LPOA_BANKER_QUOTES.pdf',$headers);
     }
     public function savePamm(Request $request) {
-        dd($request->hasFile('pdf'));
+        $request->validate([
+            'pdf' => "required|mimes:pdf|max:2000",
+            'account_number' => "required"
+        ]);
         if ($request->hasFile('pdf')) {
-            $file = $request->hasFile('pdf');
-            $nombre = "LPOA".Auth::user()->id;
-            $ruta = public_path().'files/' . $nombre;
-            dd($file);
-                copy($file, $ruta);
-                return back()->with('succees', 'Archivo subido exitosamente');
-            
+            $file = $request->file('pdf');
+            $nombre = "LPOA_".Auth::user()->id.".".$file->guessExtension();
+            $ruta = public_path("files/LPOA/".$nombre);
+            copy($file, $ruta);
+            $user = Auth::user();
+            $user->whizfx->update([
+                'lpoa_file' => $nombre,
+                'account_id' => $request->account_number
+            ]);
+            return back()->with('success', 'Archivo subido exitosamente');   
         }
     }
 } 
