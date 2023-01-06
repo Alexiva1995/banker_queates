@@ -39,7 +39,7 @@
                 </div>
     
               <div class="d-grid gap-2 mt-2">
-                <button class="btn btn-primary" type="button" style="font-family: 'Poppins'; font-style: normal; font-weight: 600; font-size: 20px; line-height: 30px;"
+                <button class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#cryptoModal{{$package->id}}" type="button" style="font-family: 'Poppins'; font-style: normal; font-weight: 600; font-size: 20px; line-height: 30px;"
                 >
                 acquire with cryptocurrency</button>
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#secondModal{{$package->id}}"type="button" style="font-family: 'Poppins'; font-style: normal; font-weight: 600; font-size: 20px; line-height: 30px;"
@@ -51,5 +51,6 @@
       </div>
     </div>
   </div>
+  @include('shop.components.sections.cryptoModal')
   @include('shop.components.sections.secondModal')
   @include('shop.components.Js.js')

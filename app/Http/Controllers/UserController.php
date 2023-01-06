@@ -267,7 +267,6 @@ class UserController extends Controller
         $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['email', 'max:255', Rule::unique('users')->ignore($user->id, 'id')],
-            'phone' => 'required',
             'last_name' => 'required',
             'countrie_id' => 'required'
         ]);
@@ -292,7 +291,6 @@ class UserController extends Controller
 */
         $user->name = $data['name'];
         $user->last_name = $data['last_name'];
-        $user->phone = $data['phone'];
         $user->prefix_id = $data['countrie_id'];
         
         if ($request->has('email')) $user->email = $data['email'];
@@ -720,5 +718,16 @@ class UserController extends Controller
             return back()->with('success', 'Updated data!');
         }
         return back()->with('error', 'An error happened');
+    }
+
+    public function rankHistory(){
+        return 'rank history';
+    }
+    public function assinRank(Request $request,$id){
+        $user = User::where('id',$id)->first();
+        $user->range_id = $request->newRank;
+        $user->update();
+
+        return back()->with('success', 'Range Changed');
     }
 }

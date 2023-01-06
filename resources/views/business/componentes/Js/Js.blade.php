@@ -154,7 +154,7 @@
                 });
                 
                 setTimeout(() => {
-                    reload();
+                    redirect();
                 }, 1500);
 
             } else {
@@ -170,8 +170,8 @@
         });
     }
 
-    function reload(){
-        window.location.reload();
+    function redirect(){
+        window.location.href ='{{route("wallet.index")}}';
     }
 
 

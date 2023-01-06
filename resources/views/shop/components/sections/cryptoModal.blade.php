@@ -1,4 +1,4 @@
-<div class="modal fade" id="secondModal{{$package->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="background-color: rgba(1, 37, 37, 0.651)">
+<div class="modal fade" id="cryptoModal{{$package->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="background-color: rgba(1, 37, 37, 0.651)">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -37,37 +37,27 @@
                     </div>
                 </div>
 
-                @if (isset($investments[0]))
-                <div class="col-sm-12">
+                <div class="col-sm-12 mb-1">
                     <label for="basic-url" class="form-label" style="font-weight: 500; font-size: 14px; line-height: 18px; color: #544E67;">
-                        Your license:</label>
+                        Hash:</label>
                     <div class="input-group ">
-                      <p type="number" class="form-control"   style="border-color: #05A5E9; border: 1px solid #05A5E9;" 
-                        value="{{ $investments[0]->invested}}">{{ $investments[0]->invested}} USDT</p>
+                      <input type="text" id="hash{{$package->id}}" name="hash" class="form-control"   style="border-color: #05A5E9; border: 1px solid #05A5E9;" 
+                        value="" >
                     </div>
                 </div>
 
-                @endif
-                
-
-                <div class="col-sm-12">
+                <div class="col-sm-12 mb-1">
                     <label for="basic-url" class="form-label" style="font-weight: 500; font-size: 14px; line-height: 18px; color: #544E67;">
-                        Total amount to be debited:</label>
+                        wallet address to pay:</label>
                     <div class="input-group ">
-                        <input  id="saldoSystem{{ $package->id }}" type="hidden" class="form-control"  style="border-color: #05A5E9; border: 1px solid #05A5E9;" 
-                        value="system" disabled>
-                    @if (isset($investments[0]))
-                    <p type="number" class="form-control"   style="border-color: #05A5E9; border: 1px solid #05A5E9; background: #BFC7CD; " 
-                        value="{{ $package->amount }}">{{ $package->amount - $investments[0]->invested }} USDT</p>
-                    @else
-                    <p type="number" class="form-control"   style="border-color: #05A5E9; border: 1px solid #05A5E9; background: #BFC7CD; " 
-                    value="{{ $package->amount }}">{{ $package->amount}} USDT</p>
-                    @endif
+                      <p  class="form-control"   style="border-color: #05A5E9; border: 1px solid #05A5E9;" 
+                        >{{$paymentWallet->wallet}}</p>
                     </div>
                 </div>
+
             </div>
             <div class="d-grid gap-2 mt-2">
-                  <button class="btn btn-primary" onclick="pay({{$package->id}},'no_hash')" type="button" style="font-family: 'Poppins'; font-style: normal; font-weight: 600; font-size: 20px; line-height: 30px;"
+                  <button class="btn btn-primary" onclick="payCrypto({{$package->id}},'hash')" type="button" style="font-family: 'Poppins'; font-style: normal; font-weight: 600; font-size: 20px; line-height: 30px;"
                     >
                     Confirm Payment</button>
               </div>

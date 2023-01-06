@@ -180,16 +180,13 @@
                                             <td>{{ $user->padre->id }}</td>
                                             <!--<td>{{ $user->countrie !== null ? $user->countrie->name : '-' }}</td>-->
 
-                                            <!--<td>
-                                       {{-- <form action="{{route('user.start', $user)}}" method="POST" class="btn">
-                                        @csrf --}}
-                                            <a href="{{ route('user.user-view', ['id' => $user->id]) }}" class="btn btn-outline-secondary p-75">
-                                                <i data-feather='eye' class="text-gray"></i>
-                                            </a>
-
-                                        {{-- </form> --}}
-                                    </td>-->
+                                            <td>
+                                                <a class="btn btn-outline-primary">
+                                                    <i class=" fa-solid fa-medal" style="font-size: 1.5rem" data-bs-toggle="modal" data-bs-target="#rankModal{{ $user->id }}"></i>
+                                                </a>
+                                            </td>
                                             @include('user.components.referred')
+                                            @include('user.components.editRankModal')
                                         </tr>
                                     @endforeach
                                 </tbody>
