@@ -21,7 +21,7 @@ class ImpersonateController extends Controller
 
         Auth::login($user); 
 
-        return redirect()->route('home')->with('msj-success','Has iniciado seccion en otra cuenta');
+        return redirect()->route('dashboard.index')->with('msj-success','Has iniciado seccion en otra cuenta');
 
     }
 
