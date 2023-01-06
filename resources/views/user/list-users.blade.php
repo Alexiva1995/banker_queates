@@ -181,8 +181,8 @@
                                             <!--<td>{{ $user->countrie !== null ? $user->countrie->name : '-' }}</td>-->
 
                                             <td>
-                                                <a class="btn btn-outline-primary">
-                                                    <i class=" fa-solid fa-medal" style="font-size: 1.5rem" data-bs-toggle="modal" data-bs-target="#rankModal{{ $user->id }}"></i>
+                                                <a class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#rankModal{{ $user->id }}">
+                                                    <i class=" fa-solid fa-medal" style="font-size: 1.5rem" ></i>
                                                 </a>
                                             </td>
                                             @include('user.components.referred')

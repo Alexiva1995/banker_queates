@@ -37,6 +37,7 @@
             </div>
 
             <div class="col-sm-6">
+              <h1 class="text-center">{{$user->name}}</h1>
               <div class="square-active d-flex justify-content-center align-items-center">
                 @if ($user->range_id != null)
                 <img src="{{ asset('images/ensignRanges/'.$user->range_id .'.png') }}" height="130" width="170">
