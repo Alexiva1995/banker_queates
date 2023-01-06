@@ -344,6 +344,7 @@ Route::group(['prefix' => 'tickets'], function () {
 });
 //Pamm
 Route::get('pamm',  [BusinessController::class, 'pamm'])->name('pamm');
+Route::post('save/pamm',  [BusinessController::class, 'savePamm'])->name('savePamm');
 Route::get('download/lpoa',  [BusinessController::class, 'downloadLPOA'])->name('downloadLPOA');
 //ruta para redireccionar a la vista del QR
 Route::get('member',  [FutswapController::class, 'redirect'])->name('member');

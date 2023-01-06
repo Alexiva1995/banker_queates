@@ -15,10 +15,12 @@ class CreateWhizfxTable extends Migration
     {
         Schema::create('whizfx', function (Blueprint $table) {
             $table->id();
-            $table->integer('account_id')->nullable();
+            $table->integer('account_id')->nullable()->unique();
             $table->integer('customer_id')->nullable();
             $table->double('balance')->nullable();
             $table->integer('kyc_percentage')->nullable();
+            $table->string('lpoa_file')->nullable();
+            $table->enum('status', [0, 1])->default(0)->comment('0 - inactivo, 1 - activo');
             $table->timestamps();
         });
     }

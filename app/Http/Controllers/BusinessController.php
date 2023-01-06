@@ -95,4 +95,16 @@ class BusinessController extends Controller{
         $headers = array('Content-Type: application/pdf',);
         return response()->download($file, 'LPOA_BANKER_QUOTES.pdf',$headers);
     }
+    public function savePamm(Request $request) {
+        dd($request->hasFile('pdf'));
+        if ($request->hasFile('pdf')) {
+            $file = $request->hasFile('pdf');
+            $nombre = "LPOA".Auth::user()->id;
+            $ruta = public_path().'files/' . $nombre;
+            dd($file);
+                copy($file, $ruta);
+                return back()->with('succees', 'Archivo subido exitosamente');
+            
+        }
+    }
 } 
