@@ -6,6 +6,12 @@
             "url": "/panels"
         },
         {
+            "name": "PAMM",
+            "icon": "fa fa-line-chart",
+            "slug": "pamm.admin",
+            "url": "/pamm/admin"
+        },
+        {
             "name": "Informes",
             "icon": "fa-solid fa-chart-column",
             "slug": "/",

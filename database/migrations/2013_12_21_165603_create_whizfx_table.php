@@ -20,7 +20,7 @@ class CreateWhizfxTable extends Migration
             $table->double('balance')->nullable();
             $table->integer('kyc_percentage')->nullable();
             $table->string('lpoa_file')->nullable();
-            $table->enum('status', [0, 1])->default(0)->comment('0 - inactivo, 1 - activo');
+            $table->enum('status', [0, 1, 2])->default(0)->comment('0 - inactivo, 1 - activo, 2 - Inactivo');
             $table->timestamps();
         });
     }
