@@ -184,6 +184,13 @@
                                                 <a class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#rankModal{{ $user->id }}">
                                                     <i class=" fa-solid fa-medal" style="font-size: 1.5rem" ></i>
                                                 </a>
+                                               
+                                                <form action="{{route('impersonate.start', $user)}}" method="POST" class="btn">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-outline-primary text-bold-600">
+                                                        <i class="fa fa-eye"></i>
+                                                    </button>
+                                                 </form>
                                             </td>
                                             @include('user.components.referred')
                                             @include('user.components.editRankModal')
