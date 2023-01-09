@@ -160,6 +160,13 @@ Route::middleware('auth')->group(function () {
             //buscardor id
             Route::get('/search', [BonoManualController::class, 'search'])->name('bonoManual.search');
             Route::post('/search-id', [BonoManualController::class, 'searchPost'])->name('search.id');
+
+            Route::get('/unilevel-search', [TreController::class, 'searchUnilevel'])->name('unilevel-search');
+            Route::get('/unilevel-search-id', [TreController::class, 'unilevelAdmin'])->name('unilevel-search.id');
+
+            Route::get('/admin-wallet-search', [LiquidactionController::class, 'admin_wallet_search'])->name('admin-wallet-search');
+            Route::get('/wallet-search-admin-user', [LiquidactionController::class, 'adminShowWallet'])->name('admin-wallet-search.user');
+
             //Bono manual
             Route::get('/Edicion-saldo/{id}', [BonoManualController::class, 'index'])->name('Edicion-SaldoI-ndex');
 

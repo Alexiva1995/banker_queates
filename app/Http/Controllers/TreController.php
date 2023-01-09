@@ -485,4 +485,23 @@ class TreController extends Controller
         abort(403, "Ocurrio un error, contacte con el administrador");
       }
     }
+    public function searchUnilevel(){
+
+        return view('user.unilevel.unilevel');
+    }
+    public function unilevelAdmin(Request $request)
+    {
+        $user = $request->user;
+        $direct_childres = User::where('buyer_id', $user)->orWhere('email', $user)->get();
+       
+        if($direct_childres != null && !empty($direct_childres) && isset($direct_childres) && count($direct_childres) > 0 ){
+            $referals_childrens =  $this->getChildren($direct_childres, 1);
+            $lastLevelActive = Level::where('status', 1)->orderBy('id', 'desc')->first();
+            return view('unilevel.index', compact('referals_childrens', 'lastLevelActive'));
+
+        }else{
+            return back()->with('error', 'User does not exist please check');
+
+        }
+    }
 }

@@ -203,4 +203,5 @@ return [
     "Red multinivel"=>"Red multinivel",
     "Rank History"=>"Rank History",
     "assign range"=>"assign range",
+    "Wallet User"=>"Wallet User",
 ];

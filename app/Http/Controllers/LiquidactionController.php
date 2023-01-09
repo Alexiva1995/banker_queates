@@ -1091,4 +1091,59 @@ class LiquidactionController extends Controller
     {
         return Excel::download(new LiquidationsExport, 'LiquidationsPending.csv');
     }
+    
+    public function admin_wallet_search(){
+        return view('user.showAdminWallet.buscador');
+    }
+    public function adminShowWallet(Request $request){
+       
+        $user = User::where('id',$request->user)->orWhere('email',$request->user)->first();
+        if($user != null && !empty($user) && isset($user)  ){
+
+            $userGraP = User::findOrFail(Auth::user()->id);
+
+        //vista licencias
+        $licencias  = WalletComission::where([['user_id', $user->id], ['type', 1]])->get();
+        $licenciasTotal = $licencias->sum('amount');
+        $licenciasAvailable = $licencias->where('status', 0)->sum('amount_available');
+
+        //vista general
+        $general =  WalletComission::where('user_id', $user->id)->get();
+        $generalTotal = $general->sum('amount');
+        $generalAvailable =  $general->where('status', 0)->sum('amount_available');
+        $balancEdition = Liquidation::where('user_id', $user->id)->get();
+
+        //vista mlm
+
+        $mlm =  WalletComission::where([['user_id', $user->id], ['type', 0]])->get();
+        $mlmTotal = $mlm->sum('amount');
+        $mlmAvailable =  $mlm->where('status', 0)->sum('amount_available');
+
+        $daysRemaining = 0;
+        if ($user->investment) {
+            $date1 = Carbon::parse($user->investment->expiration_date);
+            $daysRemaining = $date1->diffInDays(today()->format('Y-m-d'));
+        }
+        $user_packages = $userGraP->getActivePackages();
+        return view('user.showAdminWallet.index', compact(
+            'user_packages',
+            'balancEdition',
+            'licencias',
+            'licenciasTotal',
+            'licenciasAvailable',
+            'general',
+            'generalTotal',
+            'generalAvailable',
+            'mlm',
+            'mlmTotal',
+            'mlmAvailable',
+            'daysRemaining'
+        ));
+        }else{
+            return back()->with('error', 'User does not exist please check');
+
+        }
+        
+    
+    }
 }
