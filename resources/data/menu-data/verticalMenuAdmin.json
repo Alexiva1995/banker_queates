@@ -68,6 +68,12 @@
                 "name": "Wallet User",
                 "icon": "circle",
                 "slug": "admin-wallet-search"
+            },
+            {
+                "url": "/admin-dashboard-search",
+                "name": "Dashboar User",
+                "icon": "circle",
+                "slug": "buscadorAdminaDashboar"
             }
         ]
         },

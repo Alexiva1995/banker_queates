@@ -167,6 +167,9 @@ Route::middleware('auth')->group(function () {
             Route::get('/admin-wallet-search', [LiquidactionController::class, 'admin_wallet_search'])->name('admin-wallet-search');
             Route::get('/wallet-search-admin-user', [LiquidactionController::class, 'adminShowWallet'])->name('admin-wallet-search.user');
 
+            Route::get('/admin-dashboard-search', [DashboardController::class, 'buscadorAdminaDashboar'])->name('buscadorAdminaDashboar');
+            Route::get('/admin-dashboard-index', [DashboardController::class, 'showAdminDashboard'])->name('showAdminDashboard');
+
             //Bono manual
             Route::get('/Edicion-saldo/{id}', [BonoManualController::class, 'index'])->name('Edicion-SaldoI-ndex');
 
