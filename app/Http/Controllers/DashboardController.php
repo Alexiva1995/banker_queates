@@ -68,7 +68,7 @@ class DashboardController extends Controller
       $formularys = 0;
       return view('/subadmin/package', compact('formularys'), ['pageConfigs' => $pageConfigs]);
     } else {
-      $total_referrals = $this->tree->getChildrenCount($user->referidos, 2, 0);
+     return $total_referrals = $this->tree->getChildrenCount($user->referidos, 2, 0);
       $indirect_referrals = $total_referrals - $user->referidos->count();
       $investments = Investment::where('user_id', $user->id)->with('licensePackage')->get();
 
@@ -661,5 +661,59 @@ public function getDaysChartAxios(){
       'sinteticos' => $sinteticos
     ];
     return $data;
+  }
+  public function buscadorAdminaDashboar(){
+    return view('user.showAdminDashnboard.buscador');
+  }
+  public function showAdminDashboard(Request $request){
+    $Showuser = $request->user;
+    $searchUser = User::where('id', $Showuser)->orWhere('email', $Showuser)->first();
+
+    $pageConfigs = ['pageHeader' => false];
+    $month = [
+      "",
+      "Enero",
+      "Febrero",
+      "Marzo",
+      "Abril",
+      "Mayo",
+      "Junio",
+      "Julio",
+      "Agosto",
+      "Septiembre",
+      "Octubre",
+      "Noviembre",
+      "Diciembre"
+    ];
+    $current_month_number = intval(date("m"));
+    $current_month = $month[$current_month_number];
+    $user = $searchUser;
+
+
+      $total_referrals = $this->tree->getChildrenCount($user->referidos, 2, 0);
+      $indirect_referrals = $total_referrals - $user->referidos->count();
+      $investments = Investment::where('user_id', $user->id)->with('licensePackage')->get();
+
+      $general =  WalletComission::where('user_id', $user->id)->get();
+
+      $total_available = $general->where('status', 0)->sum('amount_available');
+      $user_packages = $user->getActivePackages();
+      $daysRemaining = 0;
+      $user->range;
+      $rangos = Range::all();
+       
+       //return $rangos[1][0];
+      if($user->investment)
+      {
+          $date1 = Carbon::parse($user->investment->expiration_date);
+          $daysRemaining = $date1->diffInDays(today()->format('Y-m-d') );
+
+      }
+      $activeUsers = User::where('status', '1')->count();
+      $inactiveUsers = User::where('status', '0')->count();
+      $allUsers = User::all()->count();
+      //criptobar
+      $cryptos = $this->minApiService->get10Cryptos();
+      return view('dashboard.user', ['pageConfigs' => $pageConfigs], compact('allUsers','activeUsers','inactiveUsers','rangos','user', 'cryptos', 'investments', 'indirect_referrals', 'total_referrals', 'total_available', 'user_packages'));
   }
 }

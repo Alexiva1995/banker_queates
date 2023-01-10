@@ -56,8 +56,25 @@
                 "name": "Rank History",
                 "icon": "circle",
                 "slug": "user.rank.hisotry.admin"
+            },
+            {
+                "url": "/unilevel-search",
+                "name": "unilevel",
+                "icon": "circle",
+                "slug": "unilevel-search"
+            },
+            {
+                "url": "/admin-wallet-search",
+                "name": "Wallet User",
+                "icon": "circle",
+                "slug": "admin-wallet-search"
+            },
+            {
+                "url": "/admin-dashboard-search",
+                "name": "Dashboar User",
+                "icon": "circle",
+                "slug": "buscadorAdminaDashboar"
             }
-            
         ]
         },
         {
