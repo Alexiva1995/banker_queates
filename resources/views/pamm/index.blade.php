@@ -76,6 +76,8 @@
                                         <th class="fw-600">Date</th>
                                         <th class="fw-600">Symbol</th>
                                         <th class="fw-600">Type</th>
+                                        <th class="fw-600">Order</th>
+                                        <th class="fw-600">Volume</th>
                                         <th class="fw-600">Price</th>
                                         <th class="fw-600">Profit</th>
                                     </tr>
@@ -88,6 +90,8 @@
                                                     <td class="fw-600 text-center">{{ $account->transactTime }}</td>
                                                     <td class="fw-300 text-center">{{ $account->symbol }}</td>
                                                     <td class="fw-300 text-center">{{ $account->type }}</td>
+                                                    <td class="fw-300 text-center">{{ $account->order }}</td>
+                                                    <td class="fw-300 text-center">{{ $account->volumen }}</td>
                                                     <td class="fw-300 text-center">{{ $account->requestedPrice }}</td>
                                                     <td class="fw-300 text-center">{{ $account->trader_profit }}</td>
                                                 </tr>
@@ -199,10 +203,24 @@
         // Initialize multiple select on your regular select
         //datataables ordenes
         $(document).ready(function() {
-            @if ($user->whizfx)
-                @if ($user->whizfx->lpoa_file == null || $user->whizfx->status == '2')
-                    $('#exampleModalCenter').modal('show')
+            @if ($user->hasActiveLicense())
+                @if ($user->whizfx)
+                    @if ($user->whizfx->lpoa_file == null || $user->whizfx->status == '2')
+                        $('#exampleModalCenter').modal('show')
+                    @endif
                 @endif
+            @else 
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Does not have a license',
+                    text: 'You must have an active license to enter',
+                    confirmButtonText: 'Get License',
+                }).then((result) => {
+  /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                        // window.location.href={!!route('market.licenses')!!}
+                    } 
+                })
             @endif
         });
         $('.myTable').DataTable({

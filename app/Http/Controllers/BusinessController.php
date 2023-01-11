@@ -102,13 +102,15 @@ class BusinessController extends Controller{
                 ])->get("{$url}");
             $response = $response->object();
             foreach ($response->orders->data as $account) {
-                if($account->account->id == $user->whizfx->account_id) {
+                if($account->account->serveraccount->serveraccount == $user->whizfx->account_id) {
                     $object = new stdClass;
                     $object->transactTime = $account->transactTime;
-                    $object->symbol = $account->transactTime;
+                    $object->symbol = $account->symbol;
                     $object->type = $account->type;
-                    $object->requestedPrice = $account->requestedPrice;
+                    $object->volumen = $account->quantity / 100000;
+                    $object->order = $account->side;
                     $object->trader_profit = $account->trader_profit;
+                    $object->requestedPrice = $account->requestedPrice;
                     $data->push($object);
                 }
             }
