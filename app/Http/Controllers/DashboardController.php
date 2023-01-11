@@ -68,7 +68,7 @@ class DashboardController extends Controller
       $formularys = 0;
       return view('/subadmin/package', compact('formularys'), ['pageConfigs' => $pageConfigs]);
     } else {
-     return $total_referrals = $this->tree->getChildrenCount($user->referidos, 2, 0);
+      $total_referrals = $this->tree->getChildrenCount($user->referidos, 2, 0);
       $indirect_referrals = $total_referrals - $user->referidos->count();
       $investments = Investment::where('user_id', $user->id)->with('licensePackage')->get();
 
