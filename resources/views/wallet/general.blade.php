@@ -66,7 +66,7 @@
             </div>
             <div class="col-sm-3">
                 <div class="p-2 entrada-bloc ">
-                    <a href="{{route('solicitudesRetiros')}}" class="btn btn-primary float-end w-100" style="margin-bottom:6%;">Request Withdrawal</a>
+                    <a href="{{  auth()->user()->admin != 1 ? route('solicitudesRetiros'): '' }}" class="btn btn-primary float-end w-100" style="margin-bottom:6%;">Request Withdrawal</a>
                     <a type="button" data-bs-toggle="modal" data-bs-target="#modalWallet" class="btn btn-primary float-end w-100" style="margin-bottom:5%">
                         <span style="font-size: 14px; font-weight: 500;">
                             {{ auth()->user()->wallet != null ? 'Change Wallet' : 'Link Wallet'}}
@@ -139,7 +139,6 @@
                         </table>
                     </div>
                 </div>
-                @include('business.componentes.Modal.Retiros.setWalletModal')
             </div>
         </div>
         <div class="col-sm-6">
@@ -199,7 +198,11 @@
                         </table>
                     </div>
                 </div>
+                @if(auth()->user()->admin == 1 )
+                @else
                 @include('business.componentes.Modal.Retiros.setWalletModal')
+                @endif
+
             </div>
     
 

@@ -80,7 +80,6 @@
                                     class=""></i>Security Pin
                             </button> 
                             @if (Auth::user()->admin != 1)
-                                {{-- <button class="nav-link" id="nav-auth-tab" data-bs-toggle="tab" data-bs-target="#nav-auth" type="button" role="tab" aria-controls="nav-auth" aria-selected="false" style="padding-inline-end:10%;"><i data-feather='git-commit'></i>Configurar Authenticator</button> --}}
                             @endif
                         </div>
                     </nav>
@@ -90,19 +89,19 @@
                                 aria-labelledby="nav-home-tab">
                                 <div class="card-body p-0">
                                     <h3 class="mt-1 fw-600">Profile details</h3>
-                                    <div class="d-flex align-items-center">
+                                    <div class="d-flex justify-content-start">
                                     @if (Auth::user()->range_id != null)
-                                        <img class="ms-1 rounded rounded-circle"
+                                        <img class=" rounded rounded-circle"
                                             src="{{ asset('images/ensignRanges/' . Auth::user()->range_id . '.png') }}"
                                             alt="Avatar" width="140px" height="110px" data-toggle="modal"
                                             data-target="#fotos">
                                         <div>
-                                        <h3 class="mb-2 fw-600">{{Auth::user()->name}} {{Auth::user()->last_name}}</h3>
+                                        <h3 class="ms-2 fw-600">{{Auth::user()->name}} {{Auth::user()->last_name}}</h3>
                                     
-                                        <h4 style="color: #9892AA;">Range {{Auth::user()->range->name}}</h4>
+                                        <h4 class="ms-2" style="color: #9892AA;">Range {{Auth::user()->range->name}}</h4>
                                         </div>
                                     @else
-                                        <img class="ms-2 rounded rounded-circle"
+                                        <img class=" rounded rounded-circle"
                                         src="{{ asset('images/ensignRanges/0.png') }}"
                                         alt="Avatar" width="110px" height="110px" data-toggle="modal"
                                         data-target="#fotos">
@@ -112,55 +111,7 @@
                                     </div>
                                         @endif
                                     </div>
-                                    <!--<div class="row col-lg-12 col-md-12 col-sm-12">
-                                        <div class="col-lg-3 col-md-4 col-sm-4">
-                                            <div class="p-1 pe-0 pb-0">
-                                                    <div class="card image rounded-circle alert alert-primary">
-                                                        <div class="card-body">
-                                                            <div class="d-flex justify-content-center"
-                                                                style="margin-top: 15px;">
-                                                                <a><svg width="31" height="37" viewBox="0 0 31 37"
-                                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path
-                                                                            d="M6.125 10C6.125 4.82233 10.3223 0.625 15.5 0.625C20.6777 0.625 24.875 4.82233 24.875 10C24.875 15.1777 20.6777 19.375 15.5 19.375C10.3223 19.375 6.125 15.1777 6.125 10ZM15.5 15.625C18.6066 15.625 21.125 13.1066 21.125 10C21.125 6.8934 18.6066 4.375 15.5 4.375C12.3934 4.375 9.875 6.8934 9.875 10C9.875 13.1066 12.3934 15.625 15.5 15.625Z"
-                                                                            fill="#05A5E9" />
-                                                                        <path
-                                                                            d="M4.8934 25.6434C2.08035 28.4564 0.5 32.2718 0.5 36.25H4.25C4.25 33.2663 5.43526 30.4048 7.54505 28.295C9.65483 26.1853 12.5163 25 15.5 25C18.4837 25 21.3452 26.1853 23.455 28.295C25.5647 30.4048 26.75 33.2663 26.75 36.25H30.5C30.5 32.2718 28.9196 28.4564 26.1066 25.6434C23.2936 22.8304 19.4782 21.25 15.5 21.25C11.5218 21.25 7.70644 22.8304 4.8934 25.6434Z"
-                                                                            fill="#05A5E9" />
-                                                                    </svg>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                
-                                            </div>
-                                        </div>
-                                        <div
-                                            class="col-lg-9 col-md-8 col-sm-8 p-1 pt-md-1 pt-sm-0 text-md-start text-sm-end">
-                                            <div class="h4 mt-1 text-white fw-bold">
-                                                @if ($user->photo == null)
-                                                    <button class="btn btn-primary subir-foto me-1 mb-sm-1 pb-sm-1 mb-50"
-                                                        id="btnModalphoto">
-                                                        Subir foto
-                                                    </button>
-                                                @else
-                                                    <button class="btn btn-primary subir-foto me-1 mb-sm-1 pb-sm-1 mb-50"
-                                                        id="btnModalphoto">
-                                                        Subir foto
-                                                    </button>
-                                                    <form class="d-inline" method="POST"
-                                                        action="{{ route('photo.delete') }}">
-                                                        @csrf
-                                                        <button class="btn btn-outline-danger mb-sm-1 me-1 mb-50">
-                                                            Remover
-                                                        </button>
-                                                    </form>
-                                                @endif
-                                            </div>
-                                            <p class="d-flex justify-content-start">JPG o PNG permitidos. Tamaño
-                                                máximo 800kB.</p>
-                                        </div>
-                                    </div>-->
+                                   
                                     <div class="mt-2 card-body" style="margin-top: -4%;">
                                         <form method="POST" action="{{ route('profile.update') }}"
                                             enctype="multipart/form-data" novalidate>
@@ -267,40 +218,6 @@
                                                 </div>
                                                 
                                             </div>
-                                            
-                                            <div class="row" style="margin-top: 3%;">
-
-                                                <div class="col-sm-6">
-                                                    <label for="gender" class=" fw-500">
-                                                        Sex 
-                                                        <span class="text-danger">*</span>
-                                                    </label>
-                                                    <div class="input-group mb-1">
-                                                        <select class=" form-select" name="gender">
-                                                            <option disabled {{$user->gender == null ? 'selected' : ' ' }}>Select your gender</option>
-                                                            <option value="0" {{$user->gender == '0' ? 'selected' : ' ' }}>Male</option>
-                                                            <option value="1" {{$user->gender == '1' ? 'selected' : ' ' }}>Female</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-sm-6">
-                                                    <label for="" class=" fw-500">Phone <label
-                                                            style="color: red;">*</label></label>
-                                                    <div class="input-group mb-1">
-                                                        <input type="enum" name="phone"
-                                                            class="form-control   @error('phone') is-invalid @enderror "
-                                                            placeholder="3107658734" value="{{ $user->phone }}">
-                                                        @error('phone')
-                                                            <span class="invalid-feedback d-block" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
                                             <div class="row" style="margin-top: 3%;">
                                                     
                                                 <div class="col-sm-6">

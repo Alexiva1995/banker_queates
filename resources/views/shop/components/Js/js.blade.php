@@ -1,36 +1,36 @@
 <script>
-    function pay(packageID){
-        let montoSys = document.getElementById('montoSystem'+packageID);
+    function pay(packageID,HASH){
+        let montoSys = document.getElementById('montoSystem'+packageID).value;
+        let ID =  document.getElementById('id'+packageID).value;
         
-        let montoCrypt = document.getElementById('montoCrypto'+packageID);
-        
-        if(montoSys.disabled == true){
-            montoSys = [];
-        }else{
-            montoSys = montoSys.value; 
-        }
-
-        if(montoCrypt.disabled == true){
-            montoCrypt = [];
-        }else{
-            montoCrypt = montoCrypt.value;
-        }
-
         axios.post('{{route("shop.transactionCompra")}}', {
         montoSystem: montoSys,
-        montoCrypto: montoCrypt,
-        id : document.getElementById('id'+packageID).value
+        id : ID,
     })
     .then(function (response) {
         notification(response.data.value);
-
-        setTimeout( reload,2000);
+        setTimeout( reload,1500);
     })
     .catch(function (error) {
         console.log(error);
     });
 }
-
+function payCrypto(packageID,HASH){
+        let ID =  document.getElementById('id'+packageID).value;
+        let Hash = document.getElementById('hash'+packageID).value;
+        
+        axios.post('{{route("shop.transactionCompraCrypto")}}', {
+        id : ID,
+        hash:Hash,
+    })
+    .then(function (response) {
+        notification(response.data.value);
+        //setTimeout( reload,1500);
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+}
 function tipo(tipo,packageID){
     let montoSystem = document.getElementById('montoSystem'+packageID);
     let montoCrypto = document.getElementById('montoCrypto'+packageID);
