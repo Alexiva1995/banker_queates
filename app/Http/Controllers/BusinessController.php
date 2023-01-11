@@ -2,18 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Formulary;
 use App\Models\Inversion;
-use App\Models\WalletComission;
-use App\Models\Rentabilidad;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\View;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Log_rentabilidad;
-use Illuminate\Support\Carbon;
 use App\Models\Member;
 use App\Models\MembershipType;
+use App\Models\Rentabilidad;
+use App\Models\WalletComission;
+use App\Models\Whizfx;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Models\Formulary;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\View;
+use Illuminate\Database\Eloquent\Collection;
+use stdClass;
+
 
 class BusinessController extends Controller{
     // Inversiones
@@ -87,12 +92,67 @@ class BusinessController extends Controller{
         return view('business.rentabilidad', compact('rentabilidades'));
     }
     public function pamm() {
-        $wallets = WalletComission::all();
-        return view('pamm.index', compact('wallets'));
+        $user = Auth::user();
+        $data = new Collection();
+        if ($user->whizfx_id) {
+            $url = config('services.api_whizfx.base_url');
+            $url = $url . 'accounts/history';
+            $response = Http::withHeaders([
+                'auth' => config('services.api_whizfx.x-token'),
+                ])->get("{$url}");
+            $response = $response->object();
+            foreach ($response->orders->data as $account) {
+                if($account->account->serveraccount->serveraccount == $user->whizfx->account_id) {
+                    $object = new stdClass;
+                    $object->transactTime = $account->transactTime;
+                    $object->symbol = $account->symbol;
+                    $object->type = $account->type;
+                    $object->volumen = $account->quantity / 100000;
+                    $object->order = $account->side;
+                    $object->trader_profit = $account->trader_profit;
+                    $object->requestedPrice = $account->requestedPrice;
+                    $data->push($object);
+                }
+            }
+        }
+        return view('pamm.index', compact('data', 'user'));
+    }
+    public function pammAdmin() {
+        $usersWhizfx = Whizfx::where('lpoa_file', '!=', null)->get();
+        return view('pamm.admin', compact('usersWhizfx'));
     }
     public function downloadLPOA() {
         $file = public_path()."/files/LPOA_BANKER_QUOTES.pdf";
         $headers = array('Content-Type: application/pdf',);
         return response()->download($file, 'LPOA_BANKER_QUOTES.pdf',$headers);
+    }
+    public function downloadLpoaAdmin(Request $request) {
+        $ruta = public_path("files/LPOA/".$request->name);
+        $headers = array('Content-Type: application/pdf',);
+        return response()->download($ruta, $request->name,$headers);
+    }
+    public function changePammStatus(Request $request) {
+        $whizfx = Whizfx::where('id', $request->id)->first();
+        $whizfx->status = $request->status;
+        $whizfx->save();
+        return back()->with('success', 'Status has been updated');
+    }
+    public function savePamm(Request $request) {
+        $request->validate([
+            'pdf' => "required|mimes:pdf|max:2000",
+            'account_number' => "required"
+        ]);
+        if ($request->hasFile('pdf')) {
+            $file = $request->file('pdf');
+            $nombre = "LPOA_".Auth::user()->id.".".$file->guessExtension();
+            $ruta = public_path("files/LPOA/".$nombre);
+            copy($file, $ruta);
+            $user = Auth::user();
+            $user->whizfx->update([
+                'lpoa_file' => $nombre,
+                'account_id' => $request->account_number
+            ]);
+            return back()->with('success', 'Archivo subido exitosamente');   
+        }
     }
 } 

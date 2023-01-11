@@ -361,7 +361,11 @@ Route::group(['prefix' => 'tickets'], function () {
 });
 //Pamm
 Route::get('pamm',  [BusinessController::class, 'pamm'])->name('pamm');
+Route::get('pamm/admin',  [BusinessController::class, 'pammAdmin'])->name('pamm.admin');
+Route::post('save/pamm',  [BusinessController::class, 'savePamm'])->name('savePamm');
 Route::get('download/lpoa',  [BusinessController::class, 'downloadLPOA'])->name('downloadLPOA');
+Route::post('pamm/status',  [BusinessController::class, 'changePammStatus'])->name('whizfx.cambiarStatus');
+Route::post('download/lpoa/admin',  [BusinessController::class, 'downloadLpoaAdmin'])->name('download.lpoa.admin');
 //ruta para redireccionar a la vista del QR
 Route::get('member',  [FutswapController::class, 'redirect'])->name('member');
 //ruta para redirecionar al QR cuando la orden fue cancelada
